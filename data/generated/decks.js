@@ -1006,15 +1006,6 @@ window.DEBATE_DECKS = {
         "tags": []
       },
       {
-        "name": "求生毯",
-        "lore": "保暖、反光、防潮，輕便但易破。",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_求生毯.png",
-        "image": "",
-        "rarity": "A",
-        "tags": []
-      },
-      {
         "name": "塑膠水管",
         "lore": "導水、吹氣、連接裝置，創意空間很大。",
         "icon": "",
