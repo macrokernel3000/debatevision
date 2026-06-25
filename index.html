@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DebateVision 辯語視界</title>
+    <link rel="stylesheet" href="./styles/main.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="top-bar">
+        <div>
+          <p class="eyebrow">DebateVision</p>
+          <h1 id="app-title">辯語視界</h1>
+          <p class="tagline">Every Thought Begins with a Question. <span>思想始於思考</span></p>
+        </div>
+        <button class="menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="gameNav">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </header>
+
+      <nav class="game-nav" id="gameNav" aria-label="選擇玩法"></nav>
+
+      <section class="stage-panel" aria-labelledby="app-title">
+        <div class="stage-copy">
+          <p class="eyebrow">Activity Engine</p>
+          <h2 id="activityTitle">異境求生</h2>
+          <p class="lead" id="activityLead">先抽環境，再抽物品。學生要說明這個物品在該環境中如何救命、突破困境或製造優勢。</p>
+        </div>
+
+        <div class="scene-select" aria-label="選擇活動場景">
+          <div class="scene-preview" id="scenePreview">
+            <span class="scene-badge" id="sceneBadge">環境 × 物品</span>
+            <div class="scene-emblem" id="sceneEmblem">◆</div>
+            <h2 id="sceneTitle">殭屍末日</h2>
+            <p id="sceneDescription">選擇玩法後抽出本輪組合，讓學生用提問、比較和說服完成挑戰。</p>
+          </div>
+          <div class="scene-track" id="modeGrid"></div>
+        </div>
+      </section>
+
+      <section class="control-band" aria-label="抽卡控制台">
+        <div class="selector-row">
+          <label class="field">
+            <span id="primaryDeckLabel">主要詞庫</span>
+            <select id="deckSelect"></select>
+          </label>
+
+          <label class="field" id="secondaryDeckField">
+            <span id="secondaryDeckLabel">環境詞庫</span>
+            <select id="secondaryDeckSelect"></select>
+          </label>
+
+          <label class="field">
+            <span>抽取數量</span>
+            <input id="drawCount" type="number" min="1" max="6" value="1" />
+          </label>
+
+          <p class="control-note" id="controlNote">詞庫來自 CSV；改完後雙擊更新詞庫即可同步。</p>
+        </div>
+
+        <div class="machine" aria-live="polite">
+          <div class="reel" id="reel">
+            <span class="reel-icon">?</span>
+            <span class="reel-text">準備抽卡</span>
+          </div>
+          <button class="primary-action" id="drawButton" type="button">抽出求生組合</button>
+        </div>
+      </section>
+
+      <section class="play-area" aria-label="活動卡牌與提示">
+        <div class="cards-zone">
+          <div class="section-head">
+            <p class="eyebrow">Drawn Cards</p>
+            <h2>本輪卡牌</h2>
+          </div>
+          <div class="card-grid" id="cardGrid"></div>
+        </div>
+
+        <aside class="coach-panel">
+          <div class="section-head">
+            <p class="eyebrow">Coach Kit</p>
+            <h2>教練提示</h2>
+          </div>
+          <div id="promptList" class="prompt-list"></div>
+          <div class="round-box">
+            <h3>回合流程</h3>
+            <ol id="roundFlow"></ol>
+          </div>
+        </aside>
+      </section>
+
+      <section class="library-band" aria-label="詞庫預覽">
+        <div class="section-head">
+          <p class="eyebrow">Lexicon</p>
+          <h2>詞庫預覽</h2>
+        </div>
+        <div class="library-tools" id="libraryTools"></div>
+        <div class="token-cloud" id="tokenCloud"></div>
+      </section>
+    </main>
+
+    <script src="./js/generated-lexicons.js"></script>
+    <script src="./js/modes.js"></script>
+    <script src="./js/icons.js"></script>
+    <script src="./js/app.js"></script>
+  </body>
+</html>
