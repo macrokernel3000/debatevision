@@ -1,0 +1,36 @@
+{
+  "id": "importance-duel",
+  "order": 3,
+  "title": "誰更重要",
+  "icon": "VS",
+  "tone": "gold",
+  "track": "物品 × 物品",
+  "primaryDeck": "items",
+  "secondaryDeck": "",
+  "primaryLabel": "物品卡",
+  "secondaryLabel": "",
+  "drawLabel": "抽出對決物品",
+  "cardMode": "importanceDuel",
+  "fixedCount": 2,
+  "description": "刻意不給場景，直接抽兩個物品。學生要建立比較標準，說明誰更重要。",
+  "prompts": [
+    [
+      "建立標準",
+      "你要用什麼標準比較重要性？生存、交換、長期、短期？"
+    ],
+    [
+      "正反互攻",
+      "支持 A 的人要指出 B 的限制；支持 B 的人也要反擊 A。"
+    ],
+    [
+      "重新定義",
+      "如果標準改變，結果會不會翻盤？"
+    ]
+  ],
+  "flow": [
+    "抽 2 個物品",
+    "左右兩方各 30 秒建立標準",
+    "互相質疑一次",
+    "觀眾投票：誰的比較標準更合理"
+  ]
+}

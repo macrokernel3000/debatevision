@@ -1,0 +1,36 @@
+{
+  "id": "item-survival",
+  "order": 1,
+  "title": "異境求生",
+  "icon": "◆",
+  "tone": "danger",
+  "track": "異境 × 物品",
+  "primaryDeck": "items",
+  "secondaryDeck": "worlds",
+  "primaryLabel": "物品卡",
+  "secondaryLabel": "異境卡",
+  "drawLabel": "抽出求生組合",
+  "cardMode": "itemEnvironment",
+  "description": "先抽異境，再抽物品。學生要說明這個物品在該環境中如何救命、突破困境或製造優勢。",
+  "prompts": [
+    [
+      "環境限制",
+      "這個異境最麻煩的生存條件是什麼？"
+    ],
+    [
+      "物品用途",
+      "這個物品在此異境中至少能怎麼使用一次？"
+    ],
+    [
+      "質疑挑戰",
+      "其他人可以攻擊：不適用、太慢、太危險、資源不足。"
+    ]
+  ],
+  "flow": [
+    "抽 1 個異境",
+    "抽 1 到 6 個物品",
+    "每位學生 45 秒提出用途",
+    "同學質疑後回應",
+    "投票選出最有說服力的生存方案"
+  ]
+}

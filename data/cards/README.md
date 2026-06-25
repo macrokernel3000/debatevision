@@ -1,0 +1,25 @@
+# Cards
+
+這裡放 DebateVision 的所有牌組 CSV。
+
+每一個 CSV 是一個牌組，例如：
+
+- `異境卡.csv`
+- `場地卡.csv`
+- `物品卡.csv`
+- `職業卡.csv`
+- `生物卡.csv`
+
+新增牌組時，新增一個 CSV 即可。請使用相同欄位：
+
+```csv
+牌組ID,牌組名稱,牌組圖示,卡牌名稱,說明,卡牌圖示,圖片,稀有度,標籤
+```
+
+`卡牌圖示` 建議只填 icon id，例如 `item_hammer`，不要填完整路徑。
+
+完整規格見：
+
+```text
+docs/Card_Data_Specification.md
+```

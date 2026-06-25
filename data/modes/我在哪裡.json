@@ -1,0 +1,37 @@
+{
+  "id": "where-am-i",
+  "order": 4,
+  "title": "我在哪裡",
+  "icon": "?",
+  "tone": "cosmos",
+  "track": "秘密場地",
+  "primaryDeck": "locations",
+  "secondaryDeck": "",
+  "primaryLabel": "場地卡",
+  "secondaryLabel": "",
+  "drawLabel": "秘密抽出場景",
+  "cardMode": "secretPlace",
+  "fixedCount": 1,
+  "description": "系統先秘密抽出一個場地。學生只能用問題推理位置，最後老師往下滑公布答案。",
+  "prompts": [
+    [
+      "只能提問",
+      "學生不能直接猜答案，必須先問可判斷場地特徵的問題。"
+    ],
+    [
+      "教師回覆",
+      "教師可以回答：是、不是、不一定、接近了。"
+    ],
+    [
+      "最後公布",
+      "老師往下滑後公布原來在哪裡，再討論哪些問題最有效。"
+    ]
+  ],
+  "flow": [
+    "按下秘密抽場地",
+    "學生輪流問問題",
+    "教師只給有限回答",
+    "累積線索後開放猜測",
+    "往下滑公布答案"
+  ]
+}
