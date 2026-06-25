@@ -1,0 +1,36 @@
+# macOS / Finder
+.DS_Store
+**/.DS_Store
+
+# Local preview / editor noise
+*.log
+*.tmp
+*.temp
+*~
+.vscode/
+.idea/
+
+# Dependency folders, if future tooling uses them
+node_modules/
+.cache/
+.parcel-cache/
+.vite/
+dist/
+build/
+
+# Local backup bundles
+*.zip
+*.tar
+*.tar.gz
+
+# Personal scratch files
+tmp/
+scratch/
+local/
+
+# Keep these generated files tracked.
+# GitHub Pages needs them because the site is static.
+!data/generated/
+!data/generated/decks.js
+!data/generated/modes.js
+
