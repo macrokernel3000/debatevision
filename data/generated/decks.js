@@ -1000,7 +1000,7 @@ window.DEBATE_DECKS = {
         "name": "百科全書",
         "lore": "你該知道的應有盡有，但知識也有重量。",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_百科全書.png",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -1009,7 +1009,7 @@ window.DEBATE_DECKS = {
         "name": "求生毯",
         "lore": "保暖、反光、防潮，輕便但易破。",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_求生毯.png",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -1018,7 +1018,7 @@ window.DEBATE_DECKS = {
         "name": "塑膠水管",
         "lore": "導水、吹氣、連接裝置，創意空間很大。",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_塑膠水管.png",
         "image": "",
         "rarity": "C",
         "tags": []
@@ -1027,7 +1027,7 @@ window.DEBATE_DECKS = {
         "name": "小型鎖頭",
         "lore": "保護資源與封鎖入口，但鑰匙要保管好。",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_小型鎖頭.png",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -1036,7 +1036,7 @@ window.DEBATE_DECKS = {
         "name": "軍用乾糧",
         "lore": "快速補充能量，口味單調但不需烹調。",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_軍用乾糧.png",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -1045,7 +1045,7 @@ window.DEBATE_DECKS = {
         "name": "布條",
         "lore": "包紮、標記、綁定都能用，材質決定強度。",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_布條.png",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -1054,7 +1054,7 @@ window.DEBATE_DECKS = {
         "name": "磁鐵",
         "lore": "尋找金屬、固定小物、做簡易實驗，需創意使用。",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_磁鐵.png",
         "image": "",
         "rarity": "C",
         "tags": []
@@ -1063,7 +1063,7 @@ window.DEBATE_DECKS = {
         "name": "小風扇",
         "lore": "散熱、排煙、測風向，電力是最大限制。",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_小風扇.png",
         "image": "",
         "rarity": "C",
         "tags": []
@@ -1072,7 +1072,7 @@ window.DEBATE_DECKS = {
         "name": "伸縮棍",
         "lore": "防身與探路都能用，但需要距離控制。",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_伸縮棍.png",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -1081,7 +1081,7 @@ window.DEBATE_DECKS = {
         "name": "船槳",
         "lore": "遇到水域價值暴增，陸地上或許有妙用。",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_船槳.png",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -1090,7 +1090,7 @@ window.DEBATE_DECKS = {
         "name": "冰箱",
         "lore": "保存藥品與食物，重量是個挑戰。",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_冰箱.png",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -1099,7 +1099,7 @@ window.DEBATE_DECKS = {
         "name": "舊手機",
         "lore": "可照明、錄音、儲存資料，沒有網路也不是廢物。",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_舊手機.png",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -1108,7 +1108,7 @@ window.DEBATE_DECKS = {
         "name": "密碼鎖箱",
         "lore": "保護重要物資，但開錯時也會拖慢行動。",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_密碼鎖箱.png",
         "image": "",
         "rarity": "C",
         "tags": []
@@ -1117,7 +1117,7 @@ window.DEBATE_DECKS = {
         "name": "紙牌",
         "lore": "看似娛樂品，其實能維持士氣、抽籤與設計暗號。",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_紙牌.png",
         "image": "",
         "rarity": "C",
         "tags": []
@@ -1126,7 +1126,7 @@ window.DEBATE_DECKS = {
         "name": "小型投影機",
         "lore": "可教學、誘導、製造影像假象，但耗電高。",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_小型投影機.png",
         "image": "",
         "rarity": "C",
         "tags": []
@@ -1135,7 +1135,7 @@ window.DEBATE_DECKS = {
         "name": "滑輪組",
         "lore": "能省力搬運重物，需要繩索與固定點配合。",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_滑輪組.png",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -1144,7 +1144,7 @@ window.DEBATE_DECKS = {
         "name": "微型顯微鏡",
         "lore": "能檢查未知物質，對生存直接性較低。",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_微型顯微鏡.png",
         "image": "",
         "rarity": "C",
         "tags": []
@@ -1153,7 +1153,7 @@ window.DEBATE_DECKS = {
         "name": "衛生紙",
         "lore": "清潔、引火、包裹都能用，濕掉就大幅失效。",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_衛生紙.png",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -1162,7 +1162,7 @@ window.DEBATE_DECKS = {
         "name": "折疊桌",
         "lore": "可作平台、盾牌、臨時擔架，但體積不小。",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_折疊桌.png",
         "image": "",
         "rarity": "B",
         "tags": []
