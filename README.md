@@ -99,6 +99,27 @@ data/generated/modes.js
 
 `data/generated/` 是自動產物，不手動修改。
 
+## 上傳 GitHub
+
+改完詞彙後，最容易忘記的是 `data/generated/`。線上版是靜態網站，所以除了 CSV 和圖片，也要上傳：
+
+```text
+data/generated/decks.js
+data/generated/modes.js
+```
+
+上傳前可以雙擊：
+
+```text
+scripts/上傳前檢查.command
+```
+
+更多說明見：
+
+```text
+docs/GitHub_Upload_Guide.md
+```
+
 ## 規格文件
 
 開始擴充前先讀：
