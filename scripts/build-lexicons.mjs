@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const cardsDir = resolve(root, "data", "cards");
 const modesDir = resolve(root, "data", "modes");
+const modeContentPath = resolve(root, "data", "content", "玩法文案.csv");
 const generatedDir = resolve(root, "data", "generated");
 const fallbackCsvPath = resolve(root, "docs", "archive", "legacy", "總詞庫備份.csv");
 
@@ -31,7 +32,20 @@ const headerAliases = {
   "稀有度": "rarity",
   "rarity": "rarity",
   "標籤": "tags",
-  "tags": "tags"
+  "tags": "tags",
+  "玩法ID": "mode_id",
+  "玩法代號": "mode_id",
+  "mode_id": "mode_id",
+  "欄位": "field",
+  "field": "field",
+  "序號": "order",
+  "順序": "order",
+  "order": "order",
+  "標題": "title",
+  "title": "title",
+  "內容": "content",
+  "文字": "content",
+  "content": "content"
 };
 
 function parseCsv(text) {
@@ -108,7 +122,7 @@ function readCardRows() {
 }
 
 function assetPathFor(item) {
-  const rawIcon = (item.icon || "").trim().replace(/\s+/g, "");
+  const rawIcon = (item.icon || "").replace(/[\r\n\t]+/g, "").trim();
   const icon = rawIcon.replace(/\.(svg|png|webp|jpe?g)$/i, "");
   const explicitExtension = rawIcon.match(/\.(svg|png|webp|jpe?g)$/i)?.[0]?.toLowerCase() || "";
   if (!icon) return "";
@@ -168,11 +182,89 @@ function buildDecks() {
 function buildModes() {
   if (!existsSync(modesDir)) return [];
 
-  return readdirSync(modesDir)
+  const modes = readdirSync(modesDir)
     .filter((file) => extname(file).toLowerCase() === ".json")
     .sort()
     .map((file) => JSON.parse(readFileSync(join(modesDir, file), "utf8")))
     .sort((a, b) => (a.order || 999) - (b.order || 999));
+
+  return applyModeContent(modes);
+}
+
+function fieldKey(value) {
+  const clean = (value || "").trim();
+  const aliases = {
+    "玩法名稱": "title",
+    "名稱": "title",
+    "title": "title",
+    "活動軌道": "track",
+    "玩法分類": "track",
+    "track": "track",
+    "描述": "description",
+    "玩法描述": "description",
+    "說明": "description",
+    "description": "description",
+    "按鈕文字": "drawLabel",
+    "抽卡按鈕": "drawLabel",
+    "drawLabel": "drawLabel",
+    "教練提示": "prompt",
+    "提示": "prompt",
+    "prompt": "prompt",
+    "回合流程": "flow",
+    "流程": "flow",
+    "flow": "flow"
+  };
+  return aliases[clean] || clean;
+}
+
+function sortRows(rows) {
+  return [...rows].sort((a, b) => (Number(a.order) || 999) - (Number(b.order) || 999));
+}
+
+function applyModeContent(modes) {
+  if (!existsSync(modeContentPath)) return modes;
+
+  const rows = csvObjects(readFileSync(modeContentPath, "utf8")).filter((row) => row.mode_id && row.field);
+  const rowsByMode = Map.groupBy
+    ? Map.groupBy(rows, (row) => row.mode_id.trim())
+    : rows.reduce((map, row) => {
+      const key = row.mode_id.trim();
+      map.set(key, [...(map.get(key) || []), row]);
+      return map;
+    }, new Map());
+
+  return modes.map((mode) => {
+    const contentRows = rowsByMode.get(mode.id) || [];
+    if (!contentRows.length) return mode;
+
+    const nextMode = { ...mode };
+    const prompts = [];
+    const flow = [];
+
+    for (const row of sortRows(contentRows)) {
+      const field = fieldKey(row.field);
+      const content = (row.content || "").trim();
+      const title = (row.title || "").trim();
+      if (!content && !title) continue;
+
+      if (["title", "track", "description", "drawLabel"].includes(field)) {
+        nextMode[field] = content || title;
+      }
+
+      if (field === "prompt") {
+        prompts.push([title || `提示 ${prompts.length + 1}`, content]);
+      }
+
+      if (field === "flow") {
+        flow.push(content || title);
+      }
+    }
+
+    if (prompts.length) nextMode.prompts = prompts;
+    if (flow.length) nextMode.flow = flow;
+
+    return nextMode;
+  });
 }
 
 mkdirSync(generatedDir, { recursive: true });

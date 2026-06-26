@@ -440,14 +440,13 @@ h1 {
   box-shadow: 0 12px 26px rgba(25, 24, 20, 0.14);
 }
 
-.reel::before {
-  content: "";
+.reel-scene-image {
   position: absolute;
   inset: 0;
-  z-index: -2;
-  background-image: var(--scene-image);
-  background-position: center;
-  background-size: cover;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   opacity: 0;
 }
 
@@ -455,17 +454,19 @@ h1 {
   content: "";
   position: absolute;
   inset: 0;
-  z-index: -1;
+  z-index: 1;
   background:
-    linear-gradient(90deg, rgba(0, 0, 0, 0.06) 0 18%, rgba(0, 0, 0, 0.62) 18%),
-    linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.5));
+    linear-gradient(90deg, rgba(0, 0, 0, 0.05) 0 18%, rgba(0, 0, 0, 0.48) 18%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.34));
 }
 
-.reel.has-scene-image::before {
+.reel.has-scene-image .reel-scene-image {
   opacity: 1;
 }
 
 .reel-scene-mark {
+  position: relative;
+  z-index: 2;
   display: grid;
   height: 100%;
   place-items: center;
@@ -476,6 +477,8 @@ h1 {
 }
 
 .reel-scene-copy {
+  position: relative;
+  z-index: 2;
   display: grid;
   gap: 7px;
   min-width: 0;

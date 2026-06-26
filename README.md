@@ -72,6 +72,26 @@ items,物品卡,□,鐵錘,可以敲擊。,item_hammer,,普通,工具
 assets/icons/items/item_hammer.svg
 ```
 
+## 修改網站文字
+
+玩法描述、教練提示、回合流程可以直接改：
+
+```text
+data/content/玩法文案.csv
+```
+
+改完後雙擊：
+
+```text
+更新詞庫.command
+```
+
+詳細說明見：
+
+```text
+docs/Website_Text_CSV_Guide.md
+```
+
 ## 新增玩法
 
 新增一個 JSON：

@@ -157,11 +157,12 @@ function sceneImageFor(card) {
 
 function renderReelCard(card = currentStageCard, spinningName = "") {
   const title = spinningName || card?.name || "準備抽卡";
-  const subtitle = card?.lore || "抽出後，這裡會顯示本輪異境。未來可直接套用 16:9 場景圖。";
+  const subtitle = card?.lore || "抽出後，這裡會顯示本輪異境。";
   const image = sceneImageFor(card);
   reel.classList.toggle("has-scene-image", Boolean(image));
-  reel.style.setProperty("--scene-image", image ? `url("${image}")` : "none");
+  reel.style.removeProperty("--scene-image");
   reel.innerHTML = `
+    ${image ? `<img class="reel-scene-image" src="${image}" alt="${title} 場景圖" />` : ""}
     <div class="reel-scene-mark">${card ? activeMode.icon : "?"}</div>
     <div class="reel-scene-copy">
       <span>${activeMode.secondaryLabel || activeMode.track || "Scene Card"}</span>

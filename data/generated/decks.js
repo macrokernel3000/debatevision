@@ -1318,7 +1318,7 @@ window.DEBATE_DECKS = {
         "name": "殭屍末日",
         "lore": "城市秩序崩潰，街道危險且資源有限，任何聲響都可能帶來麻煩。",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/worlds/worlds_Zombie.png",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -1331,7 +1331,7 @@ window.DEBATE_DECKS = {
         "name": "神秘星球",
         "lore": "空氣、重力與生物都不確定，探索者必須先判斷未知規則。",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/worlds/worlds_mysteryplanet.png",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -1344,7 +1344,7 @@ window.DEBATE_DECKS = {
         "name": "遠古叢林",
         "lore": "潮濕、茂密、野生動物多，方向感與補給管理會被嚴重考驗。",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/worlds/worlds_jungle.png",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -1357,7 +1357,7 @@ window.DEBATE_DECKS = {
         "name": "炙熱沙漠",
         "lore": "高溫、缺水、日夜溫差大，水源與遮蔽比力量更重要。",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/worlds/worlds_desert .png",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -1370,7 +1370,7 @@ window.DEBATE_DECKS = {
         "name": "無人島",
         "lore": "四面環海，資源有限，必須同時處理求生、訊號與長期等待。",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/worlds/worlds_uninhabited island.png",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -1383,7 +1383,7 @@ window.DEBATE_DECKS = {
         "name": "極地冰原",
         "lore": "低溫、強風、視線受阻，保暖與移動效率決定生死。",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/worlds/worlds_jungle.png",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -1396,7 +1396,7 @@ window.DEBATE_DECKS = {
         "name": "地下洞穴",
         "lore": "黑暗、狹窄、路線複雜，照明與方向判斷是核心問題。",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/worlds/worlds_cave.png",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -1409,7 +1409,7 @@ window.DEBATE_DECKS = {
         "name": "廢棄醫院",
         "lore": "物資可能豐富，但空間複雜且心理壓力很高。",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/worlds/worlds_hospital.png",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -1422,7 +1422,7 @@ window.DEBATE_DECKS = {
         "name": "暴雨山區",
         "lore": "道路濕滑、落石與失溫風險高，移動與避難都很困難。",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/worlds/worlds_Villa.png",
         "image": "",
         "rarity": "B",
         "tags": [
@@ -1435,7 +1435,7 @@ window.DEBATE_DECKS = {
         "name": "太空船",
         "lore": "空間封閉、氧氣有限，任何小故障都可能變成大危機。",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/worlds/worlds_space shuttle.png",
         "image": "",
         "rarity": "B",
         "tags": [
@@ -1461,7 +1461,7 @@ window.DEBATE_DECKS = {
         "name": "火山邊緣",
         "lore": "高溫、毒氣與地形不穩，撤離速度與判斷非常重要。",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/worlds/worlds_Ring of Fire.png",
         "image": "",
         "rarity": "B",
         "tags": [
@@ -1474,7 +1474,7 @@ window.DEBATE_DECKS = {
         "name": "中世紀城堡",
         "lore": "厚牆、密道與階級秩序並存，防守容易但資訊流動慢。",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/worlds/worlds_castle.png",
         "image": "",
         "rarity": "B",
         "tags": [
@@ -1500,7 +1500,7 @@ window.DEBATE_DECKS = {
         "name": "巨型迷宮",
         "lore": "路線混亂、出口未知，記錄與團隊分工會比速度更可靠。",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/worlds/worlds_maze.png",
         "image": "",
         "rarity": "B",
         "tags": [

@@ -21,6 +21,7 @@ data/generated/modes.js
 
 ```text
 data/cards/*.csv
+data/content/玩法文案.csv
 data/generated/decks.js
 data/generated/modes.js
 assets/icons/
@@ -35,6 +36,7 @@ assets/backgrounds/
 
 ```text
 data/modes/*.json
+data/content/玩法文案.csv
 data/generated/modes.js
 data/generated/decks.js
 ```
@@ -68,4 +70,3 @@ local/
 ## 最重要的一句話
 
 只要你改過詞彙，請記得：CSV 要上傳，`data/generated/` 也要上傳。
-
