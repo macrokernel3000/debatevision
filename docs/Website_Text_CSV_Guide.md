@@ -9,7 +9,7 @@ data/content/玩法文案.csv
 改完後雙擊：
 
 ```text
-更新詞庫.command
+網站更新.command
 ```
 
 網站會重新產生：
@@ -26,6 +26,7 @@ data/generated/modes.js
 
 - `玩法ID`：對應玩法，例如 `item-survival`、`role-survival`。
 - `欄位`：可以填 `玩法描述`、`教練提示`、`回合流程`。
+- `欄位`：也可以填 `玩法背景`，用來換上方玩法首頁大圖。
 - `序號`：顯示順序。
 - `標題`：教練提示的小標題。玩法描述與流程可以留空。
 - `內容`：實際顯示文字。
@@ -65,3 +66,28 @@ data/modes/*.json
 ```
 
 這些比較像網站規則，不是普通文字。
+
+## 玩法首頁背景圖
+
+像「我在哪裡」上方的大圖，請放在：
+
+```text
+assets/backgrounds/modes/
+```
+
+再到對應的 `data/modes/*.json` 裡設定：
+然後在 `data/content/玩法文案.csv` 新增或修改：
+
+```text
+where-am-i,玩法背景,1,,../assets/backgrounds/modes/where-am-i.png
+```
+
+其他玩法也可以加同樣欄位；如果 `內容` 留空，就會顯示原本內建背景。
+
+也可以到對應的 `data/modes/*.json` 裡設定：
+
+```json
+"image": "../assets/backgrounds/modes/where-am-i.png"
+```
+
+新手建議優先改 CSV。這種圖片是玩法首頁背景，不是卡牌圖示。

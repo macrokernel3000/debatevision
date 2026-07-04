@@ -39,7 +39,7 @@ data/modes/
 - `secondaryDeck`：第二抽選牌組，可空字串。
 - `cardMode`：網站渲染與抽選邏輯。
 - `fixedCount`：固定抽卡數，例如 `2`。
-- `image / backgroundImage`：玩法選擇區的大背景圖，可留空。建議使用橫向 16:9 圖。
+- `image / backgroundImage`：玩法選擇區的大背景圖，可留空。建議使用橫向圖，放在 `assets/backgrounds/modes/`。
 - `prompts`：教練提示。
 - `flow`：回合流程。
 

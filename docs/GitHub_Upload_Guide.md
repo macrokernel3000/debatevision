@@ -5,7 +5,7 @@
 改完 CSV 或 JSON 後，先雙擊：
 
 ```text
-scripts/更新詞庫.command
+網站更新.command
 ```
 
 它會重新產生網站真正讀取的資料：
@@ -51,6 +51,7 @@ index.html
 scripts/
 docs/
 README.md
+網站更新.command
 ```
 
 ## 不需要上傳

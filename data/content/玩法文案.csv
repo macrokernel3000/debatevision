@@ -1,14 +1,15 @@
 玩法ID,欄位,序號,標題,內容
-item-survival,玩法描述,1,,先抽異境，再抽物品。學生要說明這個物品在該環境中如何救命、突破困境或製造優勢。
-item-survival,教練提示,1,環境限制,這個異境最麻煩的生存條件是什麼？
-item-survival,教練提示,2,物品用途,這個物品在此異境中至少能怎麼使用一次？
-item-survival,教練提示,3,質疑挑戰,其他人可以攻擊：不適用、太慢、太危險、資源不足。
-item-survival,回合流程,1,,抽 1 個異境
-item-survival,回合流程,2,,抽 1 到 6 個物品
-item-survival,回合流程,3,,每位學生 45 秒提出用途
-item-survival,回合流程,4,,同學質疑後回應
-item-survival,回合流程,5,,投票選出最有說服力的生存方案
+item-survival,玩法描述,1,,每一個異境都潛藏危機，請用抽出的道具告訴眾人，我們該如何脫離險境？
+item-survival,玩法背景,1,,../assets/backgrounds/modes/item-survival.png
+item-survival,教練提示,1,環境限制,這個異境最令人擔憂的生存條件是什麼？
+item-survival,教練提示,2,物品極限,如果物品是永久使用，確實可以降低難度，但如果道具有數量限制或壽命極限呢？
+item-survival,教練提示,3,局部有效,不是每一個道具都能讓我們能完整走到最後，但如果有一個很小卻明確的用途，那也令人讚賞。
+item-survival,回合流程,1,,選 1 到 6 個物品，抽1個異境
+item-survival,回合流程,2,,思考異境特色及物品功能
+item-survival,回合流程,3,,每位學生提出30 秒內容
+item-survival,回合流程,4,,共同討論，分組合作
 role-survival,玩法描述,1,,同一個危機異境中，每位學生抽職業，說服大家自己最值得留下來。
+role-survival,玩法背景,1,,../assets/backgrounds/modes/role-survival.png
 role-survival,教練提示,1,留下理由,你的職業在這個環境中有什麼不可替代價值？
 role-survival,教練提示,2,比較標準,觀眾不是投喜歡誰，而是投誰更能提高群體存活率。
 role-survival,教練提示,3,反駁方向,攻擊別人的理由時，要比較必要性、立即性、替代性。
@@ -18,6 +19,7 @@ role-survival,回合流程,3,,每人 45 秒辯護
 role-survival,回合流程,4,,觀眾提問或互相反駁
 role-survival,回合流程,5,,逐輪淘汰直到最後留下者
 importance-duel,玩法描述,1,,刻意不給場景，直接抽兩個物品。學生要建立比較標準，說明誰更重要。
+importance-duel,玩法背景,1,,../assets/backgrounds/modes/importance-duel.png
 importance-duel,教練提示,1,建立標準,你要用什麼標準比較重要性？生存、交換、長期、短期？
 importance-duel,教練提示,2,正反互攻,支持 A 的人要指出 B 的限制；支持 B 的人也要反擊 A。
 importance-duel,教練提示,3,重新定義,如果標準改變，結果會不會翻盤？
@@ -25,12 +27,13 @@ importance-duel,回合流程,1,,抽 2 個物品
 importance-duel,回合流程,2,,左右兩方各 30 秒建立標準
 importance-duel,回合流程,3,,互相質疑一次
 importance-duel,回合流程,4,,觀眾投票：誰的比較標準更合理
-where-am-i,玩法描述,1,,系統先秘密抽出一個場地。學生只能用問題推理位置，最後老師往下滑公布答案。
+where-am-i,玩法描述,1,,系統先秘密抽出一個場地。學生從候選位置中提問推理，最後老師點選選項公布結果。
+where-am-i,玩法背景,1,,../assets/backgrounds/modes/where-am-i.png
 where-am-i,教練提示,1,只能提問,學生不能直接猜答案，必須先問可判斷場地特徵的問題。
 where-am-i,教練提示,2,教師回覆,教師可以回答：是、不是、不一定、接近了。
-where-am-i,教練提示,3,最後公布,老師往下滑後公布原來在哪裡，再討論哪些問題最有效。
+where-am-i,教練提示,3,最後公布,老師逐一點選候選位置，公布不是這裡或就是這裡，再討論哪些問題最有效。
 where-am-i,回合流程,1,,按下秘密抽場地
 where-am-i,回合流程,2,,學生輪流問問題
 where-am-i,回合流程,3,,教師只給有限回答
 where-am-i,回合流程,4,,累積線索後開放猜測
-where-am-i,回合流程,5,,往下滑公布答案
+where-am-i,回合流程,5,,點選候選位置公布結果

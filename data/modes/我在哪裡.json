@@ -5,6 +5,7 @@
   "icon": "?",
   "tone": "cosmos",
   "track": "秘密場地",
+  "image": "../assets/backgrounds/modes/where-am-i.png",
   "primaryDeck": "locations",
   "secondaryDeck": "",
   "primaryLabel": "場地卡",
@@ -12,7 +13,7 @@
   "drawLabel": "秘密抽出場景",
   "cardMode": "secretPlace",
   "fixedCount": 1,
-  "description": "系統先秘密抽出一個場地。學生只能用問題推理位置，最後老師往下滑公布答案。",
+  "description": "系統先秘密抽出一個場地。學生從候選位置中提問推理，最後老師點選選項公布結果。",
   "prompts": [
     [
       "只能提問",
@@ -24,7 +25,7 @@
     ],
     [
       "最後公布",
-      "老師往下滑後公布原來在哪裡，再討論哪些問題最有效。"
+      "老師逐一點選候選位置，公布不是這裡或就是這裡，再討論哪些問題最有效。"
     ]
   ],
   "flow": [
@@ -32,6 +33,6 @@
     "學生輪流問問題",
     "教師只給有限回答",
     "累積線索後開放猜測",
-    "往下滑公布答案"
+    "點選候選位置公布結果"
   ]
 }

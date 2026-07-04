@@ -12,28 +12,28 @@ window.DEBATE_MODES = [
     "secondaryLabel": "異境卡",
     "drawLabel": "抽出求生組合",
     "cardMode": "itemEnvironment",
-    "description": "先抽異境，再抽物品。學生要說明這個物品在該環境中如何救命、突破困境或製造優勢。",
+    "description": "每一個異境都潛藏危機，請用抽出的道具告訴眾人，我們該如何脫離險境？",
     "prompts": [
       [
         "環境限制",
-        "這個異境最麻煩的生存條件是什麼？"
+        "這個異境最令人擔憂的生存條件是什麼？"
       ],
       [
-        "物品用途",
-        "這個物品在此異境中至少能怎麼使用一次？"
+        "物品極限",
+        "如果物品是永久使用，確實可以降低難度，但如果道具有數量限制或壽命極限呢？"
       ],
       [
-        "質疑挑戰",
-        "其他人可以攻擊：不適用、太慢、太危險、資源不足。"
+        "局部有效",
+        "不是每一個道具都能讓我們能完整走到最後，但如果有一個很小卻明確的用途，那也令人讚賞。"
       ]
     ],
     "flow": [
-      "抽 1 個異境",
-      "抽 1 到 6 個物品",
-      "每位學生 45 秒提出用途",
-      "同學質疑後回應",
-      "投票選出最有說服力的生存方案"
-    ]
+      "選 1 到 6 個物品，抽1個異境",
+      "思考異境特色及物品功能",
+      "每位學生提出30 秒內容",
+      "共同討論，分組合作"
+    ],
+    "image": "../assets/backgrounds/modes/item-survival.png"
   },
   {
     "id": "role-survival",
@@ -69,7 +69,8 @@ window.DEBATE_MODES = [
       "每人 45 秒辯護",
       "觀眾提問或互相反駁",
       "逐輪淘汰直到最後留下者"
-    ]
+    ],
+    "image": "../assets/backgrounds/modes/role-survival.png"
   },
   {
     "id": "importance-duel",
@@ -105,7 +106,8 @@ window.DEBATE_MODES = [
       "左右兩方各 30 秒建立標準",
       "互相質疑一次",
       "觀眾投票：誰的比較標準更合理"
-    ]
+    ],
+    "image": "../assets/backgrounds/modes/importance-duel.png"
   },
   {
     "id": "where-am-i",
@@ -114,6 +116,7 @@ window.DEBATE_MODES = [
     "icon": "?",
     "tone": "cosmos",
     "track": "秘密場地",
+    "image": "../assets/backgrounds/modes/where-am-i.png",
     "primaryDeck": "locations",
     "secondaryDeck": "",
     "primaryLabel": "場地卡",
@@ -121,7 +124,7 @@ window.DEBATE_MODES = [
     "drawLabel": "秘密抽出場景",
     "cardMode": "secretPlace",
     "fixedCount": 1,
-    "description": "系統先秘密抽出一個場地。學生只能用問題推理位置，最後老師往下滑公布答案。",
+    "description": "系統先秘密抽出一個場地。學生從候選位置中提問推理，最後老師點選選項公布結果。",
     "prompts": [
       [
         "只能提問",
@@ -133,7 +136,7 @@ window.DEBATE_MODES = [
       ],
       [
         "最後公布",
-        "老師往下滑後公布原來在哪裡，再討論哪些問題最有效。"
+        "老師逐一點選候選位置，公布不是這裡或就是這裡，再討論哪些問題最有效。"
       ]
     ],
     "flow": [
@@ -141,7 +144,7 @@ window.DEBATE_MODES = [
       "學生輪流問問題",
       "教師只給有限回答",
       "累積線索後開放猜測",
-      "往下滑公布答案"
+      "點選候選位置公布結果"
     ]
   }
 ];

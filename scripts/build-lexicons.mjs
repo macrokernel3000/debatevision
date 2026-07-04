@@ -6,6 +6,7 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const cardsDir = resolve(root, "data", "cards");
 const modesDir = resolve(root, "data", "modes");
 const modeContentPath = resolve(root, "data", "content", "玩法文案.csv");
+const imageLayoutsDir = resolve(root, "data", "image-layouts");
 const generatedDir = resolve(root, "data", "generated");
 const fallbackCsvPath = resolve(root, "docs", "archive", "legacy", "總詞庫備份.csv");
 
@@ -151,6 +152,15 @@ function assetPathFor(item) {
   return `../assets/icons/${item.deck_id}/${icon}.svg`;
 }
 
+function imageIdFor(item) {
+  const raw = (item.image || item.icon || "")
+    .replace(/[\r\n\t]+/g, "")
+    .trim()
+    .split(/[\\/]/)
+    .pop() || "";
+  return raw.replace(/\.(svg|png|webp|jpe?g)$/i, "");
+}
+
 function buildDecks() {
   const decks = {};
 
@@ -164,10 +174,12 @@ function buildDecks() {
     };
 
     const iconAsset = assetPathFor(item);
+    const imageId = imageIdFor(item);
 
     decks[item.deck_id].cards.push({
       name: item.name,
       lore: item.description,
+      imageId,
       icon: iconAsset ? "" : item.icon,
       iconAsset,
       image: item.image,
@@ -191,6 +203,22 @@ function buildModes() {
   return applyModeContent(modes);
 }
 
+function buildImageLayouts() {
+  const layouts = {};
+  if (!existsSync(imageLayoutsDir)) return layouts;
+
+  for (const file of readdirSync(imageLayoutsDir).filter((name) => extname(name).toLowerCase() === ".json").sort()) {
+    const deckId = file.replace(/\.json$/i, "");
+    try {
+      layouts[deckId] = JSON.parse(readFileSync(join(imageLayoutsDir, file), "utf8"));
+    } catch (error) {
+      console.warn(`略過無法讀取的圖片設定 ${file}: ${error.message}`);
+    }
+  }
+
+  return layouts;
+}
+
 function fieldKey(value) {
   const clean = (value || "").trim();
   const aliases = {
@@ -207,6 +235,11 @@ function fieldKey(value) {
     "按鈕文字": "drawLabel",
     "抽卡按鈕": "drawLabel",
     "drawLabel": "drawLabel",
+    "玩法背景": "image",
+    "背景圖": "image",
+    "首頁背景": "image",
+    "image": "image",
+    "backgroundImage": "backgroundImage",
     "教練提示": "prompt",
     "提示": "prompt",
     "prompt": "prompt",
@@ -225,13 +258,11 @@ function applyModeContent(modes) {
   if (!existsSync(modeContentPath)) return modes;
 
   const rows = csvObjects(readFileSync(modeContentPath, "utf8")).filter((row) => row.mode_id && row.field);
-  const rowsByMode = Map.groupBy
-    ? Map.groupBy(rows, (row) => row.mode_id.trim())
-    : rows.reduce((map, row) => {
-      const key = row.mode_id.trim();
-      map.set(key, [...(map.get(key) || []), row]);
-      return map;
-    }, new Map());
+  const rowsByMode = new Map();
+  for (const row of rows) {
+    const key = row.mode_id.trim();
+    rowsByMode.set(key, [...(rowsByMode.get(key) || []), row]);
+  }
 
   return modes.map((mode) => {
     const contentRows = rowsByMode.get(mode.id) || [];
@@ -247,7 +278,7 @@ function applyModeContent(modes) {
       const title = (row.title || "").trim();
       if (!content && !title) continue;
 
-      if (["title", "track", "description", "drawLabel"].includes(field)) {
+      if (["title", "track", "description", "drawLabel", "image", "backgroundImage"].includes(field)) {
         nextMode[field] = content || title;
       }
 
@@ -271,6 +302,7 @@ mkdirSync(generatedDir, { recursive: true });
 
 const decks = buildDecks();
 const modes = buildModes();
+const imageLayouts = buildImageLayouts();
 
 writeFileSync(
   resolve(generatedDir, "decks.js"),
@@ -284,5 +316,12 @@ writeFileSync(
   "utf8"
 );
 
+writeFileSync(
+  resolve(generatedDir, "image-layouts.js"),
+  `window.DEBATE_IMAGE_LAYOUTS = ${JSON.stringify(imageLayouts, null, 2)};\n`,
+  "utf8"
+);
+
 console.log(`已更新 ${resolve(generatedDir, "decks.js")}`);
 console.log(`已更新 ${resolve(generatedDir, "modes.js")}`);
+console.log(`已更新 ${resolve(generatedDir, "image-layouts.js")}`);

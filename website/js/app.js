@@ -1,6 +1,11 @@
 const decks = window.DEBATE_DECKS;
 const modes = window.DEBATE_MODES;
+const savedImageLayouts = window.DEBATE_IMAGE_LAYOUTS || {};
 const { iconFor } = window;
+
+const DEFAULT_IMAGE_LAYOUT = { scale: 1, x: 0, y: 0, rotate: 0 };
+const EDIT_MODE = new URLSearchParams(window.location.search).get("edit") === "1";
+const EDIT_STORAGE_KEY = "debatevision-image-layouts-draft";
 
 let activeMode = modes[0];
 let activeLibrary = activeMode.primaryDeck;
@@ -10,6 +15,9 @@ let isDrawing = false;
 let lastSecretCard = null;
 let currentStageCard = null;
 let selectedCardKeysByDeck = {};
+let imageLayouts = mergeImageLayouts(savedImageLayouts, readDraftLayouts());
+let selectedEditCard = null;
+let selectedEditTarget = null;
 
 const gameNav = document.querySelector("#gameNav");
 const modeGrid = document.querySelector("#modeGrid");
@@ -37,6 +45,95 @@ const sceneBadge = document.querySelector("#sceneBadge");
 const sceneTitle = document.querySelector("#sceneTitle");
 const sceneDescription = document.querySelector("#sceneDescription");
 const controlNote = document.querySelector("#controlNote");
+
+function readDraftLayouts() {
+  if (!EDIT_MODE) return {};
+  try {
+    return JSON.parse(window.localStorage.getItem(EDIT_STORAGE_KEY) || "{}");
+  } catch {
+    return {};
+  }
+}
+
+function mergeImageLayouts(baseLayouts, draftLayouts) {
+  const merged = JSON.parse(JSON.stringify(baseLayouts || {}));
+  for (const [deckId, layouts] of Object.entries(draftLayouts || {})) {
+    merged[deckId] = { ...(merged[deckId] || {}), ...(layouts || {}) };
+  }
+  return merged;
+}
+
+function saveDraftLayouts() {
+  if (!EDIT_MODE) return;
+  window.localStorage.setItem(EDIT_STORAGE_KEY, JSON.stringify(imageLayouts));
+}
+
+function editTargetForCard(card) {
+  if (!card?.deckId || !card?.imageId) return null;
+  return {
+    group: card.deckId,
+    id: card.imageId,
+    name: card.name,
+    label: card.deckLabel,
+    cardKey: cardKey(card)
+  };
+}
+
+function editTargetForMode(mode = activeMode) {
+  return {
+    group: "modes",
+    id: mode.id,
+    name: mode.title,
+    label: "活動大圖",
+    cardKey: ""
+  };
+}
+
+function layoutForTarget(target) {
+  if (!target?.group || !target?.id) return { ...DEFAULT_IMAGE_LAYOUT };
+  return {
+    ...DEFAULT_IMAGE_LAYOUT,
+    ...((imageLayouts[target.group] || {})[target.id] || {})
+  };
+}
+
+function minScaleForTarget(target) {
+  return target?.group === "modes" || target?.group === "worlds" || target?.group === "locations" ? 1 : 0.5;
+}
+
+function setLayoutForTarget(target, nextLayout) {
+  if (!target?.group || !target?.id) return;
+  imageLayouts[target.group] ||= {};
+  const minScale = minScaleForTarget(target);
+  imageLayouts[target.group][target.id] = {
+    scale: Math.max(minScale, Number(nextLayout.scale) || DEFAULT_IMAGE_LAYOUT.scale),
+    x: Number(nextLayout.x) || DEFAULT_IMAGE_LAYOUT.x,
+    y: Number(nextLayout.y) || DEFAULT_IMAGE_LAYOUT.y,
+    rotate: Number(nextLayout.rotate) || DEFAULT_IMAGE_LAYOUT.rotate
+  };
+  saveDraftLayouts();
+}
+
+function layoutFor(card) {
+  return layoutForTarget(editTargetForCard(card));
+}
+
+function setLayoutFor(card, nextLayout) {
+  setLayoutForTarget(editTargetForCard(card), nextLayout);
+}
+
+function imageStyleForTarget(target) {
+  const layout = layoutForTarget(target);
+  return `--image-scale:${layout.scale}; --image-x:${layout.x}px; --image-y:${layout.y}px; --image-rotate:${layout.rotate}deg;`;
+}
+
+function imageStyleFor(card) {
+  return imageStyleForTarget(editTargetForCard(card));
+}
+
+function exportableLayouts(deckId = "items") {
+  return imageLayouts[deckId] || {};
+}
 
 function normalizeCard(raw, deckId) {
   const card = typeof raw === "object" ? raw : { name: raw[0], lore: raw[1] };
@@ -140,14 +237,31 @@ function renderActivity() {
   scenePreview.dataset.tone = activeMode.tone;
   const modeImage = activeMode.image || activeMode.backgroundImage || "";
   scenePreview.classList.toggle("has-mode-image", Boolean(modeImage));
-  scenePreview.style.setProperty("--mode-image", modeImage ? `url("${modeImage}")` : "none");
+  scenePreview.style.removeProperty("--mode-image");
+  const currentImage = scenePreview.querySelector(".scene-preview-image");
+  const modeTarget = editTargetForMode(activeMode);
+  const modeImageAttributes = `style="${imageStyleForTarget(modeTarget)}" data-edit-group="${modeTarget.group}" data-edit-id="${modeTarget.id}" data-edit-name="${modeTarget.name}"`;
+  if (modeImage) {
+    if (currentImage) {
+      currentImage.src = modeImage;
+      currentImage.alt = `${activeMode.title} 玩法背景`;
+      currentImage.setAttribute("style", imageStyleForTarget(modeTarget));
+      currentImage.dataset.editGroup = modeTarget.group;
+      currentImage.dataset.editId = modeTarget.id;
+      currentImage.dataset.editName = modeTarget.name;
+    } else {
+      scenePreview.insertAdjacentHTML("afterbegin", `<img class="scene-preview-image" src="${modeImage}" alt="${activeMode.title} 玩法背景" ${modeImageAttributes} />`);
+    }
+  } else {
+    currentImage?.remove();
+  }
   sceneEmblem.textContent = activeMode.icon;
   sceneBadge.textContent = activeMode.track;
   sceneTitle.textContent = activeMode.title;
   sceneDescription.textContent = activeMode.description;
   drawButton.textContent = activeMode.drawLabel;
   controlNote.textContent = activeMode.cardMode === "secretPlace"
-    ? "此玩法會秘密抽出場景；老師往下滑後再公布答案。"
+    ? "此玩法會秘密抽出場景；老師可逐一點選候選位置公布結果。"
     : "牌組已依玩法固定；下方抽選池可取消本局不想抽到的卡。";
 }
 
@@ -159,10 +273,14 @@ function renderReelCard(card = currentStageCard, spinningName = "") {
   const title = spinningName || card?.name || "準備抽卡";
   const subtitle = card?.lore || "抽出後，這裡會顯示本輪異境。";
   const image = sceneImageFor(card);
+  const target = editTargetForCard(card);
+  const editAttributes = target
+    ? `style="${imageStyleForTarget(target)}" data-edit-group="${target.group}" data-edit-id="${target.id}" data-edit-name="${target.name}" data-card-key="${target.cardKey}"`
+    : "";
   reel.classList.toggle("has-scene-image", Boolean(image));
   reel.style.removeProperty("--scene-image");
   reel.innerHTML = `
-    ${image ? `<img class="reel-scene-image" src="${image}" alt="${title} 場景圖" />` : ""}
+    ${image ? `<img class="reel-scene-image" src="${image}" alt="${title} 場景圖" ${editAttributes} />` : ""}
     <div class="reel-scene-mark">${card ? activeMode.icon : "?"}</div>
     <div class="reel-scene-copy">
       <span>${activeMode.secondaryLabel || activeMode.track || "Scene Card"}</span>
@@ -232,15 +350,21 @@ function renderTokenCloud() {
 }
 
 function cardMarkup(card, extraClass = "") {
+  const layoutStyle = imageStyleFor(card);
+  const target = editTargetForCard(card);
+  const isSelected = EDIT_MODE && selectedEditTarget && selectedEditTarget.group === target?.group && selectedEditTarget.id === target?.id;
+  const imageEditAttributes = target
+    ? `style="${layoutStyle}" data-edit-group="${target.group}" data-edit-id="${target.id}" data-edit-name="${target.name}" data-card-key="${target.cardKey}"`
+    : `style="${layoutStyle}"`;
   const imageMarkup = card.image
-    ? `<img src="${card.image}" alt="${card.name} 卡圖" />`
+    ? `<img src="${card.image}" alt="${card.name} 卡圖" ${imageEditAttributes} />`
     : card.iconAsset
-      ? `<img src="${card.iconAsset}" alt="${card.name} 圖示" />`
+      ? `<img src="${card.iconAsset}" alt="${card.name} 圖示" ${imageEditAttributes} />`
       : `<span>${iconFor(card)}</span>`;
   const typeText = card.deckId === "items" ? card.deckLabel : `${card.deckLabel} · ${card.rarity || "C"}`;
 
   return `
-    <article class="battle-card ${extraClass}" data-rarity="${card.rarity || "C"}">
+    <article class="battle-card ${extraClass} ${isSelected ? "is-edit-selected" : ""}" data-rarity="${card.rarity || "C"}" data-card-key="${cardKey(card)}" data-deck-id="${card.deckId}" data-image-id="${card.imageId || ""}">
       <div class="card-title">
         <h3>${card.name}</h3>
         <span class="card-type">${typeText}</span>
@@ -250,6 +374,174 @@ function cardMarkup(card, extraClass = "") {
       <ul class="card-hooks">${card.hooks.map((hook) => `<li>${hook}</li>`).join("")}</ul>
     </article>
   `;
+}
+
+function findCardByKey(key) {
+  for (const deckId of Object.keys(decks)) {
+    const card = cardsFrom(deckId).find((candidate) => cardKey(candidate) === key);
+    if (card) return card;
+  }
+  return null;
+}
+
+function visibleCards() {
+  return [...cardGrid.querySelectorAll(".battle-card[data-card-key]")]
+    .map((element) => findCardByKey(element.dataset.cardKey))
+    .filter(Boolean);
+}
+
+function selectEditTarget(target) {
+  if (!target) return;
+  selectedEditTarget = target;
+  selectedEditCard = target.cardKey ? findCardByKey(target.cardKey) : null;
+  cardGrid.querySelectorAll(".battle-card").forEach((element) => {
+    element.classList.toggle("is-edit-selected", element.dataset.cardKey === target.cardKey);
+  });
+  document.querySelectorAll(".scene-preview-image, .reel-scene-image").forEach((element) => {
+    element.classList.toggle("is-edit-selected", element.dataset.editGroup === target.group && element.dataset.editId === target.id);
+  });
+  updateEditPanel();
+}
+
+function selectEditCard(card) {
+  selectEditTarget(editTargetForCard(card));
+}
+
+function updateVisibleImages(target) {
+  const layoutStyle = imageStyleForTarget(target);
+  document.querySelectorAll(`[data-edit-group="${target.group}"][data-edit-id="${target.id}"]`).forEach((image) => {
+    image.setAttribute("style", layoutStyle);
+  });
+}
+
+function ensureEditPanel() {
+  if (!EDIT_MODE) return;
+  document.body.classList.add("is-edit-mode");
+  document.body.insertAdjacentHTML("beforeend", `
+    <aside class="image-editor-panel" id="imageEditorPanel" aria-label="圖片微調器">
+      <div class="image-editor-head">
+        <div>
+          <p class="eyebrow">Edit Mode</p>
+          <h2>圖片微調器</h2>
+        </div>
+        <button class="editor-mini-button" id="editorPickFirst" type="button">選第一張</button>
+      </div>
+      <p class="editor-selected" id="editorSelected">先抽卡，再點一張卡牌圖片。</p>
+      <div class="editor-controls">
+        <label>縮放 <input id="editScale" type="range" min="0.5" max="2" step="0.01" value="1" /></label>
+        <label>左右 <input id="editX" type="range" min="-120" max="120" step="1" value="0" /></label>
+        <label>上下 <input id="editY" type="range" min="-120" max="120" step="1" value="0" /></label>
+        <label>旋轉 <input id="editRotate" type="range" min="-30" max="30" step="1" value="0" /></label>
+      </div>
+      <div class="editor-nudges" aria-label="方向微調">
+        <button type="button" data-nudge="up">上</button>
+        <button type="button" data-nudge="down">下</button>
+        <button type="button" data-nudge="left">左</button>
+        <button type="button" data-nudge="right">右</button>
+        <button type="button" data-scale="up">放大</button>
+        <button type="button" data-scale="down">縮小</button>
+      </div>
+      <div class="editor-actions">
+        <button id="resetImageLayout" type="button">重設這張</button>
+        <button id="exportImageLayout" type="button">匯出 JSON</button>
+      </div>
+      <p class="editor-file-hint" id="editorFileHint">匯出後貼到 data/image-layouts/items.json</p>
+      <p class="editor-status" id="editorStatus">編輯模式只會先預覽；匯出 JSON 後仍需貼回檔案。</p>
+      <textarea id="editorExportText" readonly spellcheck="false" aria-label="匯出的圖片設定"></textarea>
+    </aside>
+  `);
+
+  document.querySelector("#editorPickFirst").addEventListener("click", () => {
+    const [firstCard] = visibleCards().filter((card) => card.imageId);
+    if (firstCard) selectEditCard(firstCard);
+    else selectEditTarget(editTargetForMode(activeMode));
+  });
+
+  for (const id of ["editScale", "editX", "editY", "editRotate"]) {
+    document.querySelector(`#${id}`).addEventListener("input", applyEditorInputs);
+  }
+
+  document.querySelector(".editor-nudges").addEventListener("click", (event) => {
+    const button = event.target.closest("button");
+    if (!button || !selectedEditTarget) return;
+    const layout = layoutForTarget(selectedEditTarget);
+    if (button.dataset.nudge === "up") layout.y -= 2;
+    if (button.dataset.nudge === "down") layout.y += 2;
+    if (button.dataset.nudge === "left") layout.x -= 2;
+    if (button.dataset.nudge === "right") layout.x += 2;
+    if (button.dataset.scale === "up") layout.scale = Math.min(2, Number((layout.scale + 0.02).toFixed(2)));
+    if (button.dataset.scale === "down") layout.scale = Math.max(minScaleForTarget(selectedEditTarget), Number((layout.scale - 0.02).toFixed(2)));
+    setLayoutForTarget(selectedEditTarget, layout);
+    updateVisibleImages(selectedEditTarget);
+    updateEditPanel();
+  });
+
+  document.querySelector("#resetImageLayout").addEventListener("click", () => {
+    if (!selectedEditTarget) return;
+    setLayoutForTarget(selectedEditTarget, DEFAULT_IMAGE_LAYOUT);
+    updateVisibleImages(selectedEditTarget);
+    updateEditPanel();
+  });
+
+  document.querySelector("#exportImageLayout").addEventListener("click", exportCurrentDeckLayout);
+}
+
+function updateEditPanel() {
+  if (!EDIT_MODE) return;
+  const selectedLabel = document.querySelector("#editorSelected");
+  const fileHint = document.querySelector("#editorFileHint");
+  const exportText = document.querySelector("#editorExportText");
+  const status = document.querySelector("#editorStatus");
+
+  if (!selectedEditTarget) {
+    selectedLabel.textContent = "點活動大圖、抽卡機異境圖，或下方卡牌圖片。";
+    fileHint.textContent = "匯出後貼到 data/image-layouts/items.json";
+    status.textContent = "編輯模式只會先預覽；匯出 JSON 後仍需貼回檔案。";
+    return;
+  }
+
+  const layout = layoutForTarget(selectedEditTarget);
+  const scaleInput = document.querySelector("#editScale");
+  const minScale = minScaleForTarget(selectedEditTarget);
+  scaleInput.min = String(minScale);
+  if (Number(layout.scale) < minScale) {
+    layout.scale = minScale;
+    setLayoutForTarget(selectedEditTarget, layout);
+    updateVisibleImages(selectedEditTarget);
+  }
+  scaleInput.value = layout.scale;
+  document.querySelector("#editX").value = layout.x;
+  document.querySelector("#editY").value = layout.y;
+  document.querySelector("#editRotate").value = layout.rotate;
+  selectedLabel.textContent = `${selectedEditTarget.label}：${selectedEditTarget.name}（${selectedEditTarget.id}）`;
+  fileHint.textContent = `匯出後貼到 data/image-layouts/${selectedEditTarget.group}.json`;
+  exportText.value = JSON.stringify(exportableLayouts(selectedEditTarget.group), null, 2);
+}
+
+function applyEditorInputs() {
+  if (!EDIT_MODE || !selectedEditTarget) return;
+  const layout = {
+    scale: Number(document.querySelector("#editScale").value),
+    x: Number(document.querySelector("#editX").value),
+    y: Number(document.querySelector("#editY").value),
+    rotate: Number(document.querySelector("#editRotate").value)
+  };
+  setLayoutForTarget(selectedEditTarget, layout);
+  updateVisibleImages(selectedEditTarget);
+  updateEditPanel();
+  document.querySelector("#editorStatus").textContent = "本頁預覽已更新；要永久保存，請按「匯出 JSON」再貼回檔案。";
+}
+
+function exportCurrentDeckLayout() {
+  const group = selectedEditTarget?.group || "items";
+  const text = JSON.stringify(exportableLayouts(group), null, 2);
+  const output = document.querySelector("#editorExportText");
+  output.value = text;
+  output.focus();
+  output.select();
+  navigator.clipboard?.writeText(text).catch(() => {});
+  const targetFile = `data/image-layouts/${group}.json`;
+  document.querySelector("#editorStatus").textContent = `JSON 已產生並嘗試複製；請貼到 ${targetFile} 後再執行網站更新。`;
 }
 
 function renderEmptyState() {
@@ -291,9 +583,12 @@ function renderSecretPlace(card, revealed = false) {
           <p class="eyebrow">答案公布</p>
           <h2>原來我們在：${card.name}</h2>
         </div>
-        ${cardMarkup(card, "environment-card")}
+        <div class="secret-place-options">
+          ${placeOptionsMarkup(card.name, true)}
+        </div>
       </div>
     `;
+    bindSecretPlaceOptions(card);
     return;
   }
 
@@ -301,26 +596,50 @@ function renderSecretPlace(card, revealed = false) {
     <div class="secret-board">
       <div class="secret-banner">
         <p class="eyebrow">已經抽出場景</p>
-        <h2>答案先不要讓學生看到</h2>
-        <p>學生可以問：這裡有水嗎？這裡是室內嗎？這裡危險來自人還是自然？</p>
+        <h2>答案已抽選完畢</h2>
+        <p>請從下方選項提問與推理，最後點選選項公布結果。</p>
       </div>
-      <div class="question-grid">
-        ${[
-          "這裡有水嗎？",
-          "這裡很熱或很冷嗎？",
-          "這裡是室內嗎？",
-          "這裡能找到食物嗎？",
-          "這裡有人類建築嗎？",
-          "這裡最大的危險會移動嗎？",
-          "我們需要照明嗎？",
-          "這裡容易迷路嗎？"
-        ].map((question) => `<span>${question}</span>`).join("")}
+      <div class="secret-place-options">
+        ${placeOptionsMarkup(card.name, false)}
       </div>
-      <button class="reveal-action" id="revealButton" type="button">往下滑後公布答案</button>
     </div>
   `;
 
-  document.querySelector("#revealButton").addEventListener("click", () => renderSecretPlace(card, true), { once: true });
+  bindSecretPlaceOptions(card);
+}
+
+function placeOptionsMarkup(answerName, revealed) {
+  return cardsFrom(activeLibrary).map((place) => {
+    const isAnswer = place.name === answerName;
+    const stateClass = revealed && isAnswer ? "is-correct" : "";
+    const stateText = revealed && isAnswer ? "<span>就是這裡</span>" : "";
+    return `
+      <button class="secret-place-option ${stateClass}" data-place="${place.name}" type="button">
+        <strong>${place.name}</strong>
+        ${stateText}
+      </button>
+    `;
+  }).join("");
+}
+
+function bindSecretPlaceOptions(answerCard) {
+  const options = cardGrid.querySelector(".secret-place-options");
+  if (!options) return;
+
+  options.addEventListener("click", (event) => {
+    const option = event.target.closest(".secret-place-option");
+    if (!option) return;
+
+    if (option.dataset.place === answerCard.name) {
+      option.classList.add("is-correct");
+      option.innerHTML = `<strong>${answerCard.name}</strong><span>就是這裡</span>`;
+      cardGrid.querySelector(".secret-banner h2").textContent = `答案公布：${answerCard.name}`;
+      return;
+    }
+
+    option.classList.add("is-wrong");
+    if (!option.querySelector("span")) option.insertAdjacentHTML("beforeend", "<span>不是這裡</span>");
+  });
 }
 
 function drawResult() {
@@ -355,7 +674,12 @@ function drawResult() {
   if (activeMode.cardMode === "secretPlace") {
     lastSecretCard = pickFrom(activeLibrary, 1)[0];
     if (!lastSecretCard) return renderPoolWarning();
-    currentStageCard = lastSecretCard;
+    currentStageCard = {
+      name: "答案已抽選完畢",
+      lore: "請從下方選項提問與推理。",
+      icon: activeMode.icon,
+      deckLabel: activeMode.primaryLabel
+    };
     renderSecretPlace(lastSecretCard, false);
     markDrawn([lastSecretCard]);
     return [lastSecretCard];
@@ -390,7 +714,7 @@ function spinDraw() {
       renderReelCard(null, "抽選池不足");
     } else {
       const first = selected[0];
-      if (activeMode.cardMode === "secretPlace") renderReelCard(first, "場景已抽出");
+      if (activeMode.cardMode === "secretPlace") renderReelCard(currentStageCard);
       else if (!activeSecondaryLibrary) renderReelCard(first);
     }
     reel.classList.remove("is-spinning");
@@ -407,9 +731,12 @@ function setMode(modeId) {
   activePreview = activeMode.secondaryDeck || activeMode.primaryDeck;
   lastSecretCard = null;
   currentStageCard = null;
+  selectedEditCard = null;
+  selectedEditTarget = null;
   for (const deckId of activeDeckIds()) ensureDeckSelection(deckId);
   renderAll();
   renderEmptyState();
+  updateEditPanel();
 }
 
 function renderAll() {
@@ -451,6 +778,41 @@ tokenCloud.addEventListener("change", (event) => {
   renderAll();
 });
 
+cardGrid.addEventListener("click", (event) => {
+  if (!EDIT_MODE) return;
+  const cardElement = event.target.closest(".battle-card[data-card-key]");
+  if (!cardElement) return;
+  const card = findCardByKey(cardElement.dataset.cardKey);
+  if (card?.imageId) selectEditCard(card);
+});
+
+scenePreview.addEventListener("click", (event) => {
+  if (!EDIT_MODE) return;
+  const image = scenePreview.querySelector(".scene-preview-image[data-edit-group]");
+  if (!image) return;
+  selectEditTarget({
+    group: image.dataset.editGroup,
+    id: image.dataset.editId,
+    name: image.dataset.editName,
+    label: "活動大圖",
+    cardKey: ""
+  });
+});
+
+reel.addEventListener("click", (event) => {
+  if (!EDIT_MODE) return;
+  const image = reel.querySelector(".reel-scene-image[data-edit-group]");
+  if (!image) return;
+  const card = findCardByKey(image.dataset.cardKey);
+  selectEditTarget(card ? editTargetForCard(card) : {
+    group: image.dataset.editGroup,
+    id: image.dataset.editId,
+    name: image.dataset.editName,
+    label: "抽卡機圖片",
+    cardKey: ""
+  });
+});
+
 selectAllCards.addEventListener("click", () => {
   setDeckSelection(activePreview, true);
   renderAll();
@@ -466,4 +828,5 @@ resetActivePool.addEventListener("click", () => {
   renderAll();
 });
 
+ensureEditPanel();
 setMode(activeMode.id);
