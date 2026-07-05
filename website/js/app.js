@@ -14,7 +14,8 @@ let activePreview = activeMode.secondaryDeck || activeMode.primaryDeck;
 let isDrawing = false;
 let lastSecretCard = null;
 let currentStageCard = null;
-let selectedCardKeysByDeck = {};
+let secretRevealed = false;
+let selectedCardKeysByScope = {};
 let imageLayouts = mergeImageLayouts(savedImageLayouts, readDraftLayouts());
 let selectedEditCard = null;
 let selectedEditTarget = null;
@@ -142,11 +143,14 @@ function normalizeCard(raw, deckId) {
     deckId,
     deckLabel: decks[deckId].label,
     deckIcon: decks[deckId].icon,
-    hooks: buildHooks(card.name, deckId)
+    hooks: buildHooks(card.name, deckId, card.rarity)
   };
 }
 
-function buildHooks(name, deckId) {
+function buildHooks(name, deckId, rarity = "") {
+  if (deckId === "items" && rarity === "N") {
+    return [`說明 ${name} 滿足哪一種需求。`, `找出最可能購買 ${name} 的對象。`, "包裝一個讓人願意掏錢的故事。"];
+  }
   if (deckId === "items") {
     return [`提出 ${name} 的一個用途。`, `說明 ${name} 的限制與補救。`, "比較它和另一件物品誰更有價值。"];
   }
@@ -167,24 +171,67 @@ function cardKey(card) {
   return `${card.deckId}::${card.name}`;
 }
 
+function selectionScope(deckId) {
+  return `${activeMode.id}::${deckId}`;
+}
+
+function selectedKeysForDeck(deckId) {
+  ensureDeckSelection(deckId);
+  return selectedCardKeysByScope[selectionScope(deckId)] || new Set();
+}
+
+function defaultRaritiesFor(deckId) {
+  const defaults = activeMode.defaultRarities;
+  if (Array.isArray(defaults)) return defaults;
+  if (defaults && Array.isArray(defaults[deckId])) return defaults[deckId];
+  return null;
+}
+
+function defaultCardsForDeck(deckId) {
+  const cards = cardsFrom(deckId);
+  const defaultRarities = defaultRaritiesFor(deckId);
+  if (!defaultRarities) return cards;
+  const allowed = new Set(defaultRarities);
+  return cards.filter((card) => allowed.has(card.rarity || "C"));
+}
+
+function rarityOrder(rarity) {
+  const order = { A: 1, B: 2, C: 3, N: 4 };
+  return order[rarity] || 99;
+}
+
+function raritiesFrom(deckId) {
+  return [...new Set(cardsFrom(deckId).map((card) => card.rarity || "C"))]
+    .sort((a, b) => rarityOrder(a) - rarityOrder(b) || a.localeCompare(b));
+}
+
 function ensureDeckSelection(deckId) {
-  if (!deckId || selectedCardKeysByDeck[deckId]) return;
-  selectedCardKeysByDeck[deckId] = new Set(cardsFrom(deckId).map((card) => cardKey(card)));
+  if (!deckId) return;
+  const scope = selectionScope(deckId);
+  if (selectedCardKeysByScope[scope]) return;
+  selectedCardKeysByScope[scope] = new Set(defaultCardsForDeck(deckId).map((card) => cardKey(card)));
 }
 
 function setDeckSelection(deckId, checked) {
   if (!deckId) return;
-  selectedCardKeysByDeck[deckId] = new Set(checked ? cardsFrom(deckId).map((card) => cardKey(card)) : []);
+  selectedCardKeysByScope[selectionScope(deckId)] = new Set(checked ? cardsFrom(deckId).map((card) => cardKey(card)) : []);
+}
+
+function setCardsSelection(deckId, cards, checked) {
+  if (!deckId) return;
+  const selectedKeys = selectedKeysForDeck(deckId);
+  for (const card of cards) {
+    if (checked) selectedKeys.add(cardKey(card));
+    else selectedKeys.delete(cardKey(card));
+  }
 }
 
 function selectedCount(deckId) {
-  ensureDeckSelection(deckId);
-  return selectedCardKeysByDeck[deckId]?.size || 0;
+  return selectedKeysForDeck(deckId).size;
 }
 
 function selectedCardsFrom(deckId) {
-  ensureDeckSelection(deckId);
-  const selectedKeys = selectedCardKeysByDeck[deckId] || new Set();
+  const selectedKeys = selectedKeysForDeck(deckId);
   return cardsFrom(deckId).filter((card) => selectedKeys.has(cardKey(card)));
 }
 
@@ -196,8 +243,7 @@ function resetModeSelections() {
 
 function markDrawn(cards) {
   for (const card of cards) {
-    ensureDeckSelection(card.deckId);
-    selectedCardKeysByDeck[card.deckId].delete(cardKey(card));
+    selectedKeysForDeck(card.deckId).delete(cardKey(card));
   }
 }
 
@@ -336,17 +382,51 @@ function renderLibraryTools() {
 function renderTokenCloud() {
   ensureDeckSelection(activePreview);
   const deck = decks[activePreview];
-  tokenCloud.innerHTML = deck.cards.map((card) => {
-    const normalized = normalizeCard(card, activePreview);
-    const key = cardKey(normalized);
-    const checked = selectedCardKeysByDeck[activePreview].has(key);
+  const cards = deck.cards.map((card) => normalizeCard(card, activePreview));
+  const rarities = raritiesFrom(activePreview);
+  const selectedKeys = selectedKeysForDeck(activePreview);
+
+  if (rarities.length <= 1) {
+    tokenCloud.innerHTML = cards.map((normalized) => tokenMarkup(normalized, selectedKeys.has(cardKey(normalized)))).join("");
+    return;
+  }
+
+  tokenCloud.innerHTML = rarities.map((rarity) => {
+    const groupCards = cards.filter((card) => (card.rarity || "C") === rarity);
+    const selectedInGroup = groupCards.filter((card) => selectedKeys.has(cardKey(card))).length;
     return `
-      <label class="token ${checked ? "" : "is-disabled"}">
-        <input type="checkbox" data-card-key="${key}" ${checked ? "checked" : ""} />
-        <span>${iconFor(normalized)} ${normalized.name}</span>
-      </label>
+      <section class="token-rarity-section" data-rarity="${rarity}">
+        <div class="token-rarity-head">
+          <h3>${rarity} 卡 <span>${selectedInGroup}/${groupCards.length}</span></h3>
+          <div class="token-rarity-actions">
+            <button type="button" data-rarity="${rarity}" data-rarity-action="select">全選 ${rarity}</button>
+            <button type="button" data-rarity="${rarity}" data-rarity-action="clear">取消 ${rarity}</button>
+          </div>
+        </div>
+        <div class="token-rarity-cloud">
+          ${groupCards.map((card) => tokenMarkup(card, selectedKeys.has(cardKey(card)))).join("")}
+        </div>
+      </section>
     `;
   }).join("");
+}
+
+function tokenMarkup(card, checked) {
+  const key = cardKey(card);
+  return `
+    <label class="token ${checked ? "" : "is-disabled"}">
+      <input type="checkbox" data-card-key="${key}" ${checked ? "checked" : ""} />
+      <span class="token-label">${tokenIconMarkup(card)}<span>${card.name}</span></span>
+    </label>
+  `;
+}
+
+function tokenIconMarkup(card) {
+  const image = card.iconAsset || card.image || "";
+  if (image) {
+    return `<img class="token-thumb" src="${image}" alt="" aria-hidden="true" />`;
+  }
+  return `<span class="token-symbol" aria-hidden="true">${iconFor(card)}</span>`;
 }
 
 function cardMarkup(card, extraClass = "") {
@@ -576,12 +656,14 @@ function renderDuel(cards) {
 }
 
 function renderSecretPlace(card, revealed = false) {
+  secretRevealed = revealed;
   if (revealed) {
     cardGrid.innerHTML = `
       <div class="secret-board is-revealed">
         <div class="secret-banner">
           <p class="eyebrow">答案公布</p>
           <h2>原來我們在：${card.name}</h2>
+          <p>可以回頭檢查：哪些問題最早把範圍縮小？哪些問題其實不夠精準？</p>
         </div>
         <div class="secret-place-options">
           ${placeOptionsMarkup(card.name, true)}
@@ -598,6 +680,7 @@ function renderSecretPlace(card, revealed = false) {
         <p class="eyebrow">已經抽出場景</p>
         <h2>答案已抽選完畢</h2>
         <p>請從下方選項提問與推理，最後點選選項公布結果。</p>
+        <button class="reveal-action" data-reveal-secret type="button">直接公布答案</button>
       </div>
       <div class="secret-place-options">
         ${placeOptionsMarkup(card.name, false)}
@@ -609,12 +692,23 @@ function renderSecretPlace(card, revealed = false) {
 }
 
 function placeOptionsMarkup(answerName, revealed) {
+  ensureDeckSelection(activeLibrary);
+  const activeKeys = selectedKeysForDeck(activeLibrary);
   return cardsFrom(activeLibrary).map((place) => {
     const isAnswer = place.name === answerName;
-    const stateClass = revealed && isAnswer ? "is-correct" : "";
-    const stateText = revealed && isAnswer ? "<span>就是這裡</span>" : "";
+    const inPool = activeKeys.has(cardKey(place)) || isAnswer;
+    const stateClass = [
+      revealed && isAnswer ? "is-correct" : "",
+      !inPool ? "is-out-of-pool" : ""
+    ].filter(Boolean).join(" ");
+    const stateText = revealed && isAnswer
+      ? "<span>就是這裡</span>"
+      : !inPool
+        ? "<span>不在此次卡池</span>"
+        : "";
     return `
-      <button class="secret-place-option ${stateClass}" data-place="${place.name}" type="button">
+      <button class="secret-place-option ${stateClass}" data-place="${place.name}" type="button" ${inPool ? "" : "disabled"}>
+        ${tokenIconMarkup(place)}
         <strong>${place.name}</strong>
         ${stateText}
       </button>
@@ -628,18 +722,24 @@ function bindSecretPlaceOptions(answerCard) {
 
   options.addEventListener("click", (event) => {
     const option = event.target.closest(".secret-place-option");
-    if (!option) return;
+    if (!option || option.disabled) return;
 
     if (option.dataset.place === answerCard.name) {
-      option.classList.add("is-correct");
-      option.innerHTML = `<strong>${answerCard.name}</strong><span>就是這裡</span>`;
-      cardGrid.querySelector(".secret-banner h2").textContent = `答案公布：${answerCard.name}`;
+      renderSecretPlace(answerCard, true);
       return;
     }
 
     option.classList.add("is-wrong");
     if (!option.querySelector("span")) option.insertAdjacentHTML("beforeend", "<span>不是這裡</span>");
   });
+
+  const revealButton = cardGrid.querySelector("[data-reveal-secret]");
+  revealButton?.addEventListener("click", () => renderSecretPlace(answerCard, true));
+}
+
+function refreshSecretPlaceBoard() {
+  if (activeMode.cardMode !== "secretPlace" || !lastSecretCard) return;
+  renderSecretPlace(lastSecretCard, secretRevealed);
 }
 
 function drawResult() {
@@ -674,6 +774,7 @@ function drawResult() {
   if (activeMode.cardMode === "secretPlace") {
     lastSecretCard = pickFrom(activeLibrary, 1)[0];
     if (!lastSecretCard) return renderPoolWarning();
+    secretRevealed = false;
     currentStageCard = {
       name: "答案已抽選完畢",
       lore: "請從下方選項提問與推理。",
@@ -681,7 +782,6 @@ function drawResult() {
       deckLabel: activeMode.primaryLabel
     };
     renderSecretPlace(lastSecretCard, false);
-    markDrawn([lastSecretCard]);
     return [lastSecretCard];
   }
 
@@ -731,6 +831,7 @@ function setMode(modeId) {
   activePreview = activeMode.secondaryDeck || activeMode.primaryDeck;
   lastSecretCard = null;
   currentStageCard = null;
+  secretRevealed = false;
   selectedEditCard = null;
   selectedEditTarget = null;
   for (const deckId of activeDeckIds()) ensureDeckSelection(deckId);
@@ -771,11 +872,23 @@ tokenCloud.addEventListener("change", (event) => {
   if (!checkbox) return;
   ensureDeckSelection(activePreview);
   if (checkbox.checked) {
-    selectedCardKeysByDeck[activePreview].add(checkbox.dataset.cardKey);
+    selectedKeysForDeck(activePreview).add(checkbox.dataset.cardKey);
   } else {
-    selectedCardKeysByDeck[activePreview].delete(checkbox.dataset.cardKey);
+    selectedKeysForDeck(activePreview).delete(checkbox.dataset.cardKey);
   }
   renderAll();
+  refreshSecretPlaceBoard();
+});
+
+tokenCloud.addEventListener("click", (event) => {
+  const button = event.target.closest("[data-rarity-action]");
+  if (!button) return;
+  const rarity = button.dataset.rarity;
+  const checked = button.dataset.rarityAction === "select";
+  const cards = cardsFrom(activePreview).filter((card) => (card.rarity || "C") === rarity);
+  setCardsSelection(activePreview, cards, checked);
+  renderAll();
+  refreshSecretPlaceBoard();
 });
 
 cardGrid.addEventListener("click", (event) => {
@@ -816,16 +929,19 @@ reel.addEventListener("click", (event) => {
 selectAllCards.addEventListener("click", () => {
   setDeckSelection(activePreview, true);
   renderAll();
+  refreshSecretPlaceBoard();
 });
 
 clearCards.addEventListener("click", () => {
   setDeckSelection(activePreview, false);
   renderAll();
+  refreshSecretPlaceBoard();
 });
 
 resetActivePool.addEventListener("click", () => {
   resetModeSelections();
   renderAll();
+  refreshSecretPlaceBoard();
 });
 
 ensureEditPanel();

@@ -9,6 +9,13 @@
   "secondaryDeck": "",
   "primaryLabel": "物品卡",
   "secondaryLabel": "",
+  "defaultRarities": {
+    "items": [
+      "A",
+      "B",
+      "C"
+    ]
+  },
   "drawLabel": "抽出對決物品",
   "cardMode": "importanceDuel",
   "fixedCount": 2,

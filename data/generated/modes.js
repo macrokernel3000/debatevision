@@ -10,6 +10,13 @@ window.DEBATE_MODES = [
     "secondaryDeck": "worlds",
     "primaryLabel": "物品卡",
     "secondaryLabel": "異境卡",
+    "defaultRarities": {
+      "items": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
     "drawLabel": "抽出求生組合",
     "cardMode": "itemEnvironment",
     "description": "每一個異境都潛藏危機，請用抽出的道具告訴眾人，我們該如何脫離險境？",
@@ -83,6 +90,13 @@ window.DEBATE_MODES = [
     "secondaryDeck": "",
     "primaryLabel": "物品卡",
     "secondaryLabel": "",
+    "defaultRarities": {
+      "items": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
     "drawLabel": "抽出對決物品",
     "cardMode": "importanceDuel",
     "fixedCount": 2,
@@ -110,8 +124,50 @@ window.DEBATE_MODES = [
     "image": "../assets/backgrounds/modes/importance-duel.png"
   },
   {
-    "id": "where-am-i",
+    "id": "sales-command",
     "order": 4,
+    "title": "銷售密令",
+    "icon": "$",
+    "tone": "gold",
+    "track": "需求 × 故事",
+    "primaryDeck": "items",
+    "secondaryDeck": "",
+    "primaryLabel": "N 卡",
+    "secondaryLabel": "",
+    "defaultRarities": {
+      "items": [
+        "N"
+      ]
+    },
+    "drawLabel": "抽出銷售商品",
+    "cardMode": "salesPitch",
+    "fixedCount": 1,
+    "description": "學生抽出一個普通商品，先判斷它滿足什麼需求，再決定賣給誰，最後包裝成有說服力的銷售故事。",
+    "prompts": [
+      [
+        "需求洞察",
+        "這個商品解決的是方便、安全、面子、紀念、效率、陪伴，還是其他需求？"
+      ],
+      [
+        "目標客群",
+        "誰最可能需要它？請說明年齡、情境、痛點與購買理由。"
+      ],
+      [
+        "故事包裝",
+        "如果不能只介紹功能，你要怎麼用故事讓它變得值得買？"
+      ]
+    ],
+    "flow": [
+      "抽 1 張 N 卡商品",
+      "30 秒找出核心需求",
+      "30 秒決定目標客群",
+      "45 秒完成銷售提案",
+      "同學提問：價格、替代品、可信度"
+    ]
+  },
+  {
+    "id": "where-am-i",
+    "order": 5,
     "title": "我在哪裡",
     "icon": "?",
     "tone": "cosmos",

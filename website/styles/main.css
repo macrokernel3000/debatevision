@@ -652,6 +652,7 @@ h1 {
 .secret-banner {
   min-height: 180px;
   display: grid;
+  gap: 10px;
   align-content: center;
   border: 2px dashed var(--line);
   border-radius: 8px;
@@ -689,15 +690,16 @@ h1 {
 
 .secret-place-options {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   gap: 10px;
 }
 
 .secret-place-option {
   min-height: 70px;
   display: grid;
-  gap: 6px;
-  align-content: center;
+  grid-template-columns: 34px 1fr;
+  gap: 6px 10px;
+  align-items: center;
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 12px;
@@ -707,11 +709,20 @@ h1 {
   cursor: pointer;
 }
 
+.secret-place-option .token-thumb,
+.secret-place-option .token-symbol {
+  grid-row: 1 / span 2;
+  width: 34px;
+  height: 34px;
+  flex-basis: 34px;
+}
+
 .secret-place-option strong {
   font-size: 1.05rem;
 }
 
 .secret-place-option span {
+  grid-column: 2;
   color: var(--muted);
   font-size: 0.88rem;
   font-weight: 900;
@@ -738,7 +749,26 @@ h1 {
   color: var(--teal);
 }
 
+.secret-place-option.is-out-of-pool,
+.secret-place-option:disabled {
+  border-style: dashed;
+  background: rgba(101, 101, 101, 0.06);
+  color: rgba(23, 23, 23, 0.38);
+  cursor: not-allowed;
+  opacity: 0.56;
+}
+
+.secret-place-option.is-out-of-pool .token-thumb,
+.secret-place-option.is-out-of-pool .token-symbol,
+.secret-place-option:disabled .token-thumb,
+.secret-place-option:disabled .token-symbol {
+  filter: grayscale(1);
+  opacity: 0.56;
+}
+
 .reveal-action {
+  justify-self: center;
+  width: min(100%, 420px);
   min-height: 56px;
   border: 0;
   border-radius: 8px;
@@ -948,6 +978,62 @@ h1 {
   gap: 8px;
 }
 
+.token-rarity-section {
+  width: 100%;
+  display: grid;
+  gap: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.62);
+}
+
+.token-rarity-section + .token-rarity-section {
+  margin-top: 6px;
+}
+
+.token-rarity-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.token-rarity-head h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.token-rarity-head h3 span {
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.token-rarity-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.token-rarity-actions button {
+  min-height: 30px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0 10px;
+  background: #fff;
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.token-rarity-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
 .token {
   display: inline-flex;
   min-height: 34px;
@@ -967,6 +1053,35 @@ h1 {
   width: 16px;
   height: 16px;
   accent-color: var(--teal);
+}
+
+.token-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.token-thumb,
+.token-symbol {
+  flex: 0 0 22px;
+  width: 22px;
+  height: 22px;
+}
+
+.token-thumb {
+  border: 1px solid rgba(45, 40, 31, 0.18);
+  border-radius: 5px;
+  background: #f7efe1;
+  object-fit: contain;
+  padding: 2px;
+}
+
+.token-symbol {
+  display: inline-grid;
+  place-items: center;
+  color: #4a4740;
+  font-size: 1rem;
+  font-weight: 900;
 }
 
 .token.is-disabled {

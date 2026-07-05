@@ -9,6 +9,13 @@
   "secondaryDeck": "worlds",
   "primaryLabel": "物品卡",
   "secondaryLabel": "異境卡",
+  "defaultRarities": {
+    "items": [
+      "A",
+      "B",
+      "C"
+    ]
+  },
   "drawLabel": "抽出求生組合",
   "cardMode": "itemEnvironment",
   "description": "先抽異境，再抽物品。學生要說明這個物品在該環境中如何救命、突破困境或製造優勢。",

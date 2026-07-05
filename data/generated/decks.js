@@ -6,9 +6,9 @@ window.DEBATE_DECKS = {
       {
         "name": "舞台戲劇院",
         "lore": "燈光、布景與後台通道交錯，適合表演、偽裝與臨場發揮，但觀眾與時間壓力會放大失誤。",
-        "imageId": "",
+        "imageId": "location_stage_theater",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/locations/location_stage_theater.svg",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -18,9 +18,9 @@ window.DEBATE_DECKS = {
       {
         "name": "工地",
         "lore": "建材、機具與未完成結構很多，能找到大量臨時工具，但噪音、墜落與安全風險很高。",
-        "imageId": "",
+        "imageId": "location_construction_site",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/locations/location_construction_site.svg",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -30,9 +30,9 @@ window.DEBATE_DECKS = {
       {
         "name": "潛水艇",
         "lore": "空間狹窄、氧氣有限、艙室分明，團隊溝通與維修能力會直接影響生存。",
-        "imageId": "",
+        "imageId": "location_submarine",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/locations/location_submarine.svg",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -42,9 +42,9 @@ window.DEBATE_DECKS = {
       {
         "name": "飛機",
         "lore": "高度、座位、行李與機組規則限制行動，任何混亂都必須在狹小通道中快速處理。",
-        "imageId": "",
+        "imageId": "location_airplane",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/locations/location_airplane.svg",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -54,9 +54,9 @@ window.DEBATE_DECKS = {
       {
         "name": "體育場",
         "lore": "空間廣大、座位階梯多、出入口集中，適合群眾行動與追逐，也容易造成擁擠。",
-        "imageId": "",
+        "imageId": "location_stadium",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/locations/location_stadium.svg",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -66,9 +66,9 @@ window.DEBATE_DECKS = {
       {
         "name": "圖書館",
         "lore": "資訊、安靜與規則感很強，適合查找線索與藏身，但聲音與破壞行為很容易被注意。",
-        "imageId": "",
+        "imageId": "location_library",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/locations/location_library.svg",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -78,9 +78,9 @@ window.DEBATE_DECKS = {
       {
         "name": "太空站",
         "lore": "微重力、設備精密、資源封閉，任何小錯誤都可能連鎖成系統危機。",
-        "imageId": "",
+        "imageId": "location_space_station",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/locations/location_space_station.svg",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -90,9 +90,9 @@ window.DEBATE_DECKS = {
       {
         "name": "馬戲團",
         "lore": "帳篷、動物、道具與表演者混雜，充滿創意解法，也充滿不可預測的變數。",
-        "imageId": "",
+        "imageId": "location_circus",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/locations/location_circus.svg",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -102,9 +102,9 @@ window.DEBATE_DECKS = {
       {
         "name": "動物園",
         "lore": "不同動物與區域設施形成天然關卡，能借助生物特性，也必須處理安全隔離。",
-        "imageId": "",
+        "imageId": "location_zoo",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/locations/location_zoo.svg",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -114,9 +114,9 @@ window.DEBATE_DECKS = {
       {
         "name": "大賣場",
         "lore": "物資豐富、貨架密集、動線複雜，選擇很多但容易迷路或因爭奪資源失控。",
-        "imageId": "",
+        "imageId": "location_hypermarket",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/locations/location_hypermarket.svg",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -126,9 +126,9 @@ window.DEBATE_DECKS = {
       {
         "name": "警察局",
         "lore": "有秩序、紀錄、拘留空間與防護裝備，適合建立規則，但也容易引發權力衝突。",
-        "imageId": "",
+        "imageId": "location_police_station",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/locations/location_police_station.svg",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -138,9 +138,9 @@ window.DEBATE_DECKS = {
       {
         "name": "電影攝影棚",
         "lore": "布景、道具、燈光與假場景很多，適合製造假象與拍攝證據，但真實與虛構容易混淆。",
-        "imageId": "",
+        "imageId": "location_film_studio",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/locations/location_film_studio.svg",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -150,9 +150,9 @@ window.DEBATE_DECKS = {
       {
         "name": "海盜船",
         "lore": "甲板、船艙、繩索與海上限制並存，行動要考慮風浪、空間與團隊紀律。",
-        "imageId": "",
+        "imageId": "location_pirate_ship",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/locations/location_pirate_ship.svg",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -162,9 +162,9 @@ window.DEBATE_DECKS = {
       {
         "name": "沙灘",
         "lore": "視野開闊、水陸交界明顯，適合尋找漂流物與訊號，但遮蔽少、曝曬強。",
-        "imageId": "",
+        "imageId": "location_beach",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/locations/location_beach.svg",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -174,9 +174,9 @@ window.DEBATE_DECKS = {
       {
         "name": "廚藝學校",
         "lore": "食材、刀具、火源與教室設備齊全，適合資源轉換，但安全與衛生問題不能忽略。",
-        "imageId": "",
+        "imageId": "location_culinary_school",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/locations/location_culinary_school.svg",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -186,9 +186,9 @@ window.DEBATE_DECKS = {
       {
         "name": "天堂",
         "lore": "規則可能過於美好或不合常理，適合討論願望、代價與價值選擇。",
-        "imageId": "",
+        "imageId": "location_heaven",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/locations/location_heaven.svg",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -198,9 +198,9 @@ window.DEBATE_DECKS = {
       {
         "name": "監獄",
         "lore": "高牆、鎖、監控與固定作息形成強限制，逃脫、秩序與信任是主要挑戰。",
-        "imageId": "",
+        "imageId": "location_prison",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/locations/location_prison.svg",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -210,9 +210,9 @@ window.DEBATE_DECKS = {
       {
         "name": "學校",
         "lore": "教室、操場、辦公室與器材室提供多樣資源，熟悉的空間也可能暴露固定思維。",
-        "imageId": "",
+        "imageId": "location_school",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/locations/location_school.svg",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -222,9 +222,9 @@ window.DEBATE_DECKS = {
       {
         "name": "夜市",
         "lore": "人潮、攤位、食物與聲音密集，適合交易與打聽消息，但混亂會降低判斷。",
-        "imageId": "",
+        "imageId": "location_night_market",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/locations/location_night_market.svg",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -234,9 +234,9 @@ window.DEBATE_DECKS = {
       {
         "name": "農場",
         "lore": "土地、動物、工具與季節節奏明顯，適合長期生存，但短期防禦與交通較弱。",
-        "imageId": "",
+        "imageId": "location_farm",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/locations/location_farm.svg",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -246,9 +246,9 @@ window.DEBATE_DECKS = {
       {
         "name": "戰場",
         "lore": "危險、資源破碎、資訊混亂，任何行動都要在風險與目標之間取捨。",
-        "imageId": "",
+        "imageId": "location_battlefield",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/locations/location_battlefield.svg",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -258,9 +258,9 @@ window.DEBATE_DECKS = {
       {
         "name": "育嬰室",
         "lore": "嬰兒、照護物資與安靜需求形成特殊限制，保護弱小與降低噪音是核心任務。",
-        "imageId": "",
+        "imageId": "location_nursery",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/locations/location_nursery.svg",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -270,9 +270,9 @@ window.DEBATE_DECKS = {
       {
         "name": "實驗室",
         "lore": "儀器、藥品與未知樣本很多，適合研究與驗證，也可能因誤操作造成危險。",
-        "imageId": "",
+        "imageId": "location_laboratory",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/locations/location_laboratory.svg",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -282,9 +282,9 @@ window.DEBATE_DECKS = {
       {
         "name": "競技場",
         "lore": "規則明確、觀眾壓力高、勝負導向強，適合設計對抗策略與臨場辯護。",
-        "imageId": "",
+        "imageId": "location_arena",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/locations/location_arena.svg",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -294,9 +294,9 @@ window.DEBATE_DECKS = {
       {
         "name": "紡織廠",
         "lore": "布料、線材、機械與流水線資源豐富，可製作防護與陷阱，但機械風險高。",
-        "imageId": "",
+        "imageId": "location_textile_factory",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/locations/location_textile_factory.svg",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -306,9 +306,9 @@ window.DEBATE_DECKS = {
       {
         "name": "公園廣場",
         "lore": "開放、公共、可聚集，適合宣傳、協商與觀察人群，但缺乏天然防護。",
-        "imageId": "",
+        "imageId": "location_park_square",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/locations/location_park_square.svg",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -318,9 +318,9 @@ window.DEBATE_DECKS = {
       {
         "name": "博物館",
         "lore": "展品、歷史資訊與保全系統並存，適合查證與解謎，但破壞代價很高。",
-        "imageId": "",
+        "imageId": "location_museum",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/locations/location_museum.svg",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -330,9 +330,9 @@ window.DEBATE_DECKS = {
       {
         "name": "月球基地",
         "lore": "低重力、氧氣與能源受限，行動要依賴設備，任何外出都需要精密計畫。",
-        "imageId": "",
+        "imageId": "location_moon_base",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/locations/location_moon_base.svg",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -342,9 +342,9 @@ window.DEBATE_DECKS = {
       {
         "name": "罐頭工廠",
         "lore": "食物加工、金屬容器與機械設備集中，適合補給與製作工具，但噪音和衛生風險高。",
-        "imageId": "",
+        "imageId": "location_cannery",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/locations/location_cannery.svg",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -354,9 +354,9 @@ window.DEBATE_DECKS = {
       {
         "name": "商業大樓",
         "lore": "樓層、電梯、辦公設備與人際階層複雜，適合取得資訊，也容易被動線困住。",
-        "imageId": "",
+        "imageId": "location_office_tower",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/locations/location_office_tower.svg",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -1278,6 +1278,656 @@ window.DEBATE_DECKS = {
         "image": "",
         "rarity": "B",
         "tags": []
+      },
+      {
+        "name": "相冊",
+        "lore": "收藏回憶、整理人生片段，適合賣給重視紀念感或家庭關係的人。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "戒指",
+        "lore": "象徵承諾、身份與品味，真正販售的是意義而不只是金屬。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "鉛筆",
+        "lore": "便宜、可修改、低壓力，適合包裝成創作與練習的起點。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "皮衣",
+        "lore": "強烈風格與保護感並存，能賣給想展現態度的人。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "香水",
+        "lore": "把氣味變成記憶與自我形象，適合主打場合、魅力與辨識度。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "咖啡杯",
+        "lore": "日常陪伴感很強，適合包裝成工作儀式或送禮選擇。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "項鍊",
+        "lore": "接近心口的飾品，適合主打紀念、祝福與個人風格。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "帆布袋",
+        "lore": "輕便、環保、可印圖案，能賣給學生、通勤者與品牌支持者。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "太陽眼鏡",
+        "lore": "遮陽之外也是造型，適合賣給在意照片與外出形象的人。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "絨毛玩具",
+        "lore": "提供陪伴與安慰，適合兒童、粉絲或需要情緒支持的人。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "旅行枕",
+        "lore": "解決移動中的疲勞，適合賣給通勤族、旅人與出差者。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "陶瓷碗",
+        "lore": "日常吃飯工具，也能被包裝成溫度、質感與餐桌美學。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "木梳",
+        "lore": "功能簡單但有自然質感，可賣給重視養護與手感的人。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "鑰匙圈",
+        "lore": "小而常見，適合主打紀念、識別與低門檻送禮。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "明信片",
+        "lore": "把一句話變成可保存的心意，適合觀光、祝福與收藏情境。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "圍巾",
+        "lore": "保暖之外也能搭配造型，適合主打關心與季節禮物。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "電動牙刷",
+        "lore": "把清潔效率與健康感放大，適合賣給懶得仔細刷牙的人。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "桌曆",
+        "lore": "每天都會被看到，適合賣給需要提醒、規劃與品牌曝光的人。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "花瓶",
+        "lore": "不只是容器，而是讓空間有主題，適合賣給佈置愛好者。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "盆栽",
+        "lore": "提供生命感與陪伴，適合賣給想改善桌面或心情的人。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "便當盒",
+        "lore": "控制飲食與節省花費，適合賣給學生、上班族與健身族群。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "保溫杯",
+        "lore": "讓飲品保持溫度，賣點可以是照顧自己與減少外帶浪費。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "皮夾",
+        "lore": "整理金錢與證件，也展示成熟、秩序與個人品味。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "名片夾",
+        "lore": "讓第一印象更正式，適合賣給業務、新鮮人與創業者。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "手工皂",
+        "lore": "清潔之外有香味、成分與手作故事，適合主打天然與送禮。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "髮夾",
+        "lore": "小物能快速改變造型，適合賣給需要方便整理頭髮的人。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "帽T",
+        "lore": "舒適、休閒、有團體識別感，適合班服、社團或品牌周邊。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "球鞋",
+        "lore": "移動、運動與造型三合一，適合主打舒適和自我風格。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "桌燈",
+        "lore": "提供專注與安全感，適合賣給讀書、工作或夜間創作者。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "靠枕",
+        "lore": "改善坐姿與休息感，適合賣給長時間坐著的人。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "拼圖",
+        "lore": "提供挑戰、專注與完成感，適合家庭、情侶與紓壓族群。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "棋盤",
+        "lore": "創造面對面互動，適合賣給家庭、社團與策略遊戲愛好者。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "茶包",
+        "lore": "低成本創造放鬆時刻，適合賣給需要休息儀式的人。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "果醬",
+        "lore": "把普通吐司變成有風味的早餐，適合主打手作與幸福感。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "巧克力",
+        "lore": "快速提供獎勵、安慰與心意，適合節慶與告白情境。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "餅乾禮盒",
+        "lore": "容易分享與送禮，適合主打體面、方便與節慶氣氛。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "貼紙包",
+        "lore": "便宜但能表達個性，適合學生、手帳族與粉絲社群。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "手帳",
+        "lore": "把生活變得有計畫，適合賣給想自律或記錄成長的人。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "鋼筆",
+        "lore": "書寫儀式感強，適合賣給重視質感、簽名與收藏的人。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "畫框",
+        "lore": "讓作品或照片變得正式，適合賣給想保存重要畫面的人。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "唱片",
+        "lore": "賣的是音樂品味與收藏感，適合復古愛好者與粉絲。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "耳機",
+        "lore": "創造私人聲音空間，適合通勤、讀書與需要專注的人。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "行李箱",
+        "lore": "承載移動與旅行期待，適合賣給旅人、學生與出差族。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "鬧鐘",
+        "lore": "把起床變成明確承諾，適合賣給想改善作息的人。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "毛毯",
+        "lore": "提供溫暖與安全感，適合居家、露營與禮物情境。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "餐墊",
+        "lore": "保護桌面也建立餐桌風格，適合賣給重視生活感的人。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "皮革筆袋",
+        "lore": "整理文具並展現質感，適合學生、上班族與手作愛好者。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "香氛卡片",
+        "lore": "小小一張就能改變空間氣味，適合放在衣櫃、書桌或禮物中。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "折疊購物袋",
+        "lore": "把臨時購物變得方便又環保，適合通勤者、市場採買者與旅行者。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "金屬書籤",
+        "lore": "讓閱讀進度變得精緻可保存，適合送給學生、讀者與文具收藏者。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
       }
     ]
   },
