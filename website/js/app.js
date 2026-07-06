@@ -688,6 +688,7 @@ function renderSecretPlace(card, revealed = false) {
           <p class="eyebrow">答案公布</p>
           <h2>原來我們在：${card.name}</h2>
           <p>可以回頭檢查：哪些問題最早把範圍縮小？哪些問題其實不夠精準？</p>
+          <button class="reveal-action restart-action" data-restart-secret type="button">再來一場</button>
         </div>
         <div class="secret-place-options">
           ${placeOptionsMarkup(card, true, places)}
@@ -834,6 +835,17 @@ function bindSecretPlaceOptions(answerCard) {
     updateSecretAnswerState();
     if (lastSecretCard) renderSecretPlace(lastSecretCard, true);
   });
+
+  const restartButton = cardGrid.querySelector("[data-restart-secret]");
+  restartButton?.addEventListener("click", restartSecretPlaceRound);
+}
+
+function restartSecretPlaceRound() {
+  secretAnswerIndex = "";
+  secretShowAnswerNumber = false;
+  secretRevealed = false;
+  lastSecretCard = null;
+  renderSecretPlace(null, false);
 }
 
 function refreshSecretPlaceBoard() {

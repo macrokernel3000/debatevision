@@ -857,6 +857,11 @@ h1 {
   cursor: not-allowed;
 }
 
+.restart-action {
+  margin-top: 8px;
+  background: var(--ink);
+}
+
 .battle-card {
   min-height: 310px;
   display: grid;
