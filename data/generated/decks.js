@@ -1282,9 +1282,9 @@ window.DEBATE_DECKS = {
       {
         "name": "相冊",
         "lore": "收藏回憶、整理人生片段，適合賣給重視紀念感或家庭關係的人。",
-        "imageId": "",
+        "imageId": "item_相冊",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_相冊.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1295,9 +1295,9 @@ window.DEBATE_DECKS = {
       {
         "name": "戒指",
         "lore": "象徵承諾、身份與品味，真正販售的是意義而不只是金屬。",
-        "imageId": "",
+        "imageId": "item_戒指",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_戒指.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1308,9 +1308,9 @@ window.DEBATE_DECKS = {
       {
         "name": "鉛筆",
         "lore": "便宜、可修改、低壓力，適合包裝成創作與練習的起點。",
-        "imageId": "",
+        "imageId": "item_鉛筆",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_鉛筆.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1321,9 +1321,9 @@ window.DEBATE_DECKS = {
       {
         "name": "皮衣",
         "lore": "強烈風格與保護感並存，能賣給想展現態度的人。",
-        "imageId": "",
+        "imageId": "item_皮衣",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_皮衣.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1334,9 +1334,9 @@ window.DEBATE_DECKS = {
       {
         "name": "香水",
         "lore": "把氣味變成記憶與自我形象，適合主打場合、魅力與辨識度。",
-        "imageId": "",
+        "imageId": "item_香水",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_香水.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1347,9 +1347,9 @@ window.DEBATE_DECKS = {
       {
         "name": "咖啡杯",
         "lore": "日常陪伴感很強，適合包裝成工作儀式或送禮選擇。",
-        "imageId": "",
+        "imageId": "item_咖啡杯",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_咖啡杯.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1360,9 +1360,9 @@ window.DEBATE_DECKS = {
       {
         "name": "項鍊",
         "lore": "接近心口的飾品，適合主打紀念、祝福與個人風格。",
-        "imageId": "",
+        "imageId": "item_項鍊",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_項鍊.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1373,9 +1373,9 @@ window.DEBATE_DECKS = {
       {
         "name": "帆布袋",
         "lore": "輕便、環保、可印圖案，能賣給學生、通勤者與品牌支持者。",
-        "imageId": "",
+        "imageId": "item_帆布袋",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_帆布袋.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1386,9 +1386,9 @@ window.DEBATE_DECKS = {
       {
         "name": "太陽眼鏡",
         "lore": "遮陽之外也是造型，適合賣給在意照片與外出形象的人。",
-        "imageId": "",
+        "imageId": "item_太陽眼鏡",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_太陽眼鏡.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1399,9 +1399,9 @@ window.DEBATE_DECKS = {
       {
         "name": "絨毛玩具",
         "lore": "提供陪伴與安慰，適合兒童、粉絲或需要情緒支持的人。",
-        "imageId": "",
+        "imageId": "item_絨毛玩具",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_絨毛玩具.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1412,9 +1412,9 @@ window.DEBATE_DECKS = {
       {
         "name": "旅行枕",
         "lore": "解決移動中的疲勞，適合賣給通勤族、旅人與出差者。",
-        "imageId": "",
+        "imageId": "item_旅行枕",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_旅行枕.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1425,9 +1425,9 @@ window.DEBATE_DECKS = {
       {
         "name": "陶瓷碗",
         "lore": "日常吃飯工具，也能被包裝成溫度、質感與餐桌美學。",
-        "imageId": "",
+        "imageId": "item_陶瓷碗",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_陶瓷碗.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1438,9 +1438,9 @@ window.DEBATE_DECKS = {
       {
         "name": "木梳",
         "lore": "功能簡單但有自然質感，可賣給重視養護與手感的人。",
-        "imageId": "",
+        "imageId": "item_木梳",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_木梳.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1451,9 +1451,9 @@ window.DEBATE_DECKS = {
       {
         "name": "鑰匙圈",
         "lore": "小而常見，適合主打紀念、識別與低門檻送禮。",
-        "imageId": "",
+        "imageId": "item_鑰匙圈",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_鑰匙圈.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1464,9 +1464,9 @@ window.DEBATE_DECKS = {
       {
         "name": "明信片",
         "lore": "把一句話變成可保存的心意，適合觀光、祝福與收藏情境。",
-        "imageId": "",
+        "imageId": "item_明信片",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_明信片.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1477,9 +1477,9 @@ window.DEBATE_DECKS = {
       {
         "name": "圍巾",
         "lore": "保暖之外也能搭配造型，適合主打關心與季節禮物。",
-        "imageId": "",
+        "imageId": "item_圍巾",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_圍巾.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1490,9 +1490,9 @@ window.DEBATE_DECKS = {
       {
         "name": "電動牙刷",
         "lore": "把清潔效率與健康感放大，適合賣給懶得仔細刷牙的人。",
-        "imageId": "",
+        "imageId": "item_電動牙刷",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_電動牙刷.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1503,9 +1503,9 @@ window.DEBATE_DECKS = {
       {
         "name": "桌曆",
         "lore": "每天都會被看到，適合賣給需要提醒、規劃與品牌曝光的人。",
-        "imageId": "",
+        "imageId": "item_桌曆",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_桌曆.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1516,9 +1516,9 @@ window.DEBATE_DECKS = {
       {
         "name": "花瓶",
         "lore": "不只是容器，而是讓空間有主題，適合賣給佈置愛好者。",
-        "imageId": "",
+        "imageId": "item_花瓶",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_花瓶.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1529,9 +1529,9 @@ window.DEBATE_DECKS = {
       {
         "name": "盆栽",
         "lore": "提供生命感與陪伴，適合賣給想改善桌面或心情的人。",
-        "imageId": "",
+        "imageId": "item_盆栽",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_盆栽.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1542,9 +1542,9 @@ window.DEBATE_DECKS = {
       {
         "name": "便當盒",
         "lore": "控制飲食與節省花費，適合賣給學生、上班族與健身族群。",
-        "imageId": "",
+        "imageId": "item_便當盒",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_便當盒.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1555,9 +1555,9 @@ window.DEBATE_DECKS = {
       {
         "name": "保溫杯",
         "lore": "讓飲品保持溫度，賣點可以是照顧自己與減少外帶浪費。",
-        "imageId": "",
+        "imageId": "item_保溫杯",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_保溫杯.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1568,9 +1568,9 @@ window.DEBATE_DECKS = {
       {
         "name": "皮夾",
         "lore": "整理金錢與證件，也展示成熟、秩序與個人品味。",
-        "imageId": "",
+        "imageId": "item_皮夾",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_皮夾.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1581,9 +1581,9 @@ window.DEBATE_DECKS = {
       {
         "name": "名片夾",
         "lore": "讓第一印象更正式，適合賣給業務、新鮮人與創業者。",
-        "imageId": "",
+        "imageId": "item_名片夾",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_名片夾.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1594,9 +1594,9 @@ window.DEBATE_DECKS = {
       {
         "name": "手工皂",
         "lore": "清潔之外有香味、成分與手作故事，適合主打天然與送禮。",
-        "imageId": "",
+        "imageId": "item_手工皂",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_手工皂.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1607,9 +1607,9 @@ window.DEBATE_DECKS = {
       {
         "name": "髮夾",
         "lore": "小物能快速改變造型，適合賣給需要方便整理頭髮的人。",
-        "imageId": "",
+        "imageId": "item_髮夾",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_髮夾.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1620,9 +1620,9 @@ window.DEBATE_DECKS = {
       {
         "name": "帽T",
         "lore": "舒適、休閒、有團體識別感，適合班服、社團或品牌周邊。",
-        "imageId": "",
+        "imageId": "item_帽T",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_帽T.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1633,9 +1633,9 @@ window.DEBATE_DECKS = {
       {
         "name": "球鞋",
         "lore": "移動、運動與造型三合一，適合主打舒適和自我風格。",
-        "imageId": "",
+        "imageId": "item_球鞋",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_球鞋.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1646,9 +1646,9 @@ window.DEBATE_DECKS = {
       {
         "name": "桌燈",
         "lore": "提供專注與安全感，適合賣給讀書、工作或夜間創作者。",
-        "imageId": "",
+        "imageId": "item_桌燈",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_桌燈.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1659,9 +1659,9 @@ window.DEBATE_DECKS = {
       {
         "name": "靠枕",
         "lore": "改善坐姿與休息感，適合賣給長時間坐著的人。",
-        "imageId": "",
+        "imageId": "item_靠枕",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_靠枕.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1672,9 +1672,9 @@ window.DEBATE_DECKS = {
       {
         "name": "拼圖",
         "lore": "提供挑戰、專注與完成感，適合家庭、情侶與紓壓族群。",
-        "imageId": "",
+        "imageId": "item_拼圖",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_拼圖.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1685,9 +1685,9 @@ window.DEBATE_DECKS = {
       {
         "name": "棋盤",
         "lore": "創造面對面互動，適合賣給家庭、社團與策略遊戲愛好者。",
-        "imageId": "",
+        "imageId": "item_棋盤",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_棋盤.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1698,9 +1698,9 @@ window.DEBATE_DECKS = {
       {
         "name": "茶包",
         "lore": "低成本創造放鬆時刻，適合賣給需要休息儀式的人。",
-        "imageId": "",
+        "imageId": "item_茶包",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_茶包.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1711,9 +1711,9 @@ window.DEBATE_DECKS = {
       {
         "name": "果醬",
         "lore": "把普通吐司變成有風味的早餐，適合主打手作與幸福感。",
-        "imageId": "",
+        "imageId": "item_果醬",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_果醬.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1724,9 +1724,9 @@ window.DEBATE_DECKS = {
       {
         "name": "巧克力",
         "lore": "快速提供獎勵、安慰與心意，適合節慶與告白情境。",
-        "imageId": "",
+        "imageId": "item_巧克力",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_巧克力.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1737,9 +1737,9 @@ window.DEBATE_DECKS = {
       {
         "name": "餅乾禮盒",
         "lore": "容易分享與送禮，適合主打體面、方便與節慶氣氛。",
-        "imageId": "",
+        "imageId": "item_餅乾禮盒",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_餅乾禮盒.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1750,9 +1750,9 @@ window.DEBATE_DECKS = {
       {
         "name": "貼紙包",
         "lore": "便宜但能表達個性，適合學生、手帳族與粉絲社群。",
-        "imageId": "",
+        "imageId": "item_貼紙包",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_貼紙包.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1763,9 +1763,9 @@ window.DEBATE_DECKS = {
       {
         "name": "手帳",
         "lore": "把生活變得有計畫，適合賣給想自律或記錄成長的人。",
-        "imageId": "",
+        "imageId": "item_手帳",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_手帳.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1776,9 +1776,9 @@ window.DEBATE_DECKS = {
       {
         "name": "鋼筆",
         "lore": "書寫儀式感強，適合賣給重視質感、簽名與收藏的人。",
-        "imageId": "",
+        "imageId": "item_鋼筆",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_鋼筆.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1789,9 +1789,9 @@ window.DEBATE_DECKS = {
       {
         "name": "畫框",
         "lore": "讓作品或照片變得正式，適合賣給想保存重要畫面的人。",
-        "imageId": "",
+        "imageId": "item_畫框",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_畫框.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1802,9 +1802,9 @@ window.DEBATE_DECKS = {
       {
         "name": "唱片",
         "lore": "賣的是音樂品味與收藏感，適合復古愛好者與粉絲。",
-        "imageId": "",
+        "imageId": "item_唱片",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_唱片.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1815,9 +1815,9 @@ window.DEBATE_DECKS = {
       {
         "name": "耳機",
         "lore": "創造私人聲音空間，適合通勤、讀書與需要專注的人。",
-        "imageId": "",
+        "imageId": "item_耳機",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_耳機.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1828,9 +1828,9 @@ window.DEBATE_DECKS = {
       {
         "name": "行李箱",
         "lore": "承載移動與旅行期待，適合賣給旅人、學生與出差族。",
-        "imageId": "",
+        "imageId": "item_行李箱",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_行李箱.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1841,9 +1841,9 @@ window.DEBATE_DECKS = {
       {
         "name": "鬧鐘",
         "lore": "把起床變成明確承諾，適合賣給想改善作息的人。",
-        "imageId": "",
+        "imageId": "item_鬧鐘",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_鬧鐘.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1854,9 +1854,9 @@ window.DEBATE_DECKS = {
       {
         "name": "毛毯",
         "lore": "提供溫暖與安全感，適合居家、露營與禮物情境。",
-        "imageId": "",
+        "imageId": "item_毛毯",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_毛毯.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1867,9 +1867,9 @@ window.DEBATE_DECKS = {
       {
         "name": "餐墊",
         "lore": "保護桌面也建立餐桌風格，適合賣給重視生活感的人。",
-        "imageId": "",
+        "imageId": "item_餐墊",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_餐墊.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1880,9 +1880,9 @@ window.DEBATE_DECKS = {
       {
         "name": "皮革筆袋",
         "lore": "整理文具並展現質感，適合學生、上班族與手作愛好者。",
-        "imageId": "",
+        "imageId": "item_皮革筆袋",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_皮革筆袋.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1893,9 +1893,9 @@ window.DEBATE_DECKS = {
       {
         "name": "香氛卡片",
         "lore": "小小一張就能改變空間氣味，適合放在衣櫃、書桌或禮物中。",
-        "imageId": "",
+        "imageId": "item_香氛卡片",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_香氛卡片.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1906,9 +1906,9 @@ window.DEBATE_DECKS = {
       {
         "name": "折疊購物袋",
         "lore": "把臨時購物變得方便又環保，適合通勤者、市場採買者與旅行者。",
-        "imageId": "",
+        "imageId": "item_折疊購物袋",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_折疊購物袋.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1919,9 +1919,9 @@ window.DEBATE_DECKS = {
       {
         "name": "金屬書籤",
         "lore": "讓閱讀進度變得精緻可保存，適合送給學生、讀者與文具收藏者。",
-        "imageId": "",
+        "imageId": "item_金屬書籤",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/items/item_金屬書籤.svg",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -2106,8 +2106,8 @@ window.DEBATE_DECKS = {
         "lore": "城市秩序崩潰，街道危險且資源有限，任何聲響都可能帶來麻煩。",
         "imageId": "worlds_Zombie",
         "icon": "",
-        "iconAsset": "../assets/icons/worlds/worlds_Zombie.png",
-        "image": "",
+        "iconAsset": "../assets/icons/worlds/world_icon_zombie.svg",
+        "image": "../assets/icons/worlds/worlds_Zombie.png",
         "rarity": "A",
         "tags": [
           "危機",
@@ -2120,8 +2120,8 @@ window.DEBATE_DECKS = {
         "lore": "空氣、重力與生物都不確定，探索者必須先判斷未知規則。",
         "imageId": "worlds_mysteryplanet",
         "icon": "",
-        "iconAsset": "../assets/icons/worlds/worlds_mysteryplanet.png",
-        "image": "",
+        "iconAsset": "../assets/icons/worlds/world_icon_mystery_planet.svg",
+        "image": "../assets/icons/worlds/worlds_mysteryplanet.png",
         "rarity": "A",
         "tags": [
           "科幻",
@@ -2134,8 +2134,8 @@ window.DEBATE_DECKS = {
         "lore": "潮濕、茂密、野生動物多，方向感與補給管理會被嚴重考驗。",
         "imageId": "worlds_jungle",
         "icon": "",
-        "iconAsset": "../assets/icons/worlds/worlds_jungle.png",
-        "image": "",
+        "iconAsset": "../assets/icons/worlds/world_icon_jungle.svg",
+        "image": "../assets/icons/worlds/worlds_jungle.png",
         "rarity": "A",
         "tags": [
           "自然",
@@ -2148,8 +2148,8 @@ window.DEBATE_DECKS = {
         "lore": "高溫、缺水、日夜溫差大，水源與遮蔽比力量更重要。",
         "imageId": "worlds_desert ",
         "icon": "",
-        "iconAsset": "../assets/icons/worlds/worlds_desert .png",
-        "image": "",
+        "iconAsset": "../assets/icons/worlds/world_icon_desert.svg",
+        "image": "../assets/icons/worlds/worlds_desert .png",
         "rarity": "A",
         "tags": [
           "乾旱",
@@ -2162,8 +2162,8 @@ window.DEBATE_DECKS = {
         "lore": "四面環海，資源有限，必須同時處理求生、訊號與長期等待。",
         "imageId": "worlds_uninhabited island",
         "icon": "",
-        "iconAsset": "../assets/icons/worlds/worlds_uninhabited island.png",
-        "image": "",
+        "iconAsset": "../assets/icons/worlds/world_icon_island.svg",
+        "image": "../assets/icons/worlds/worlds_uninhabited island.png",
         "rarity": "A",
         "tags": [
           "海島",
@@ -2176,8 +2176,8 @@ window.DEBATE_DECKS = {
         "lore": "低溫、強風、視線受阻，保暖與移動效率決定生死。",
         "imageId": "worlds_jungle",
         "icon": "",
-        "iconAsset": "../assets/icons/worlds/worlds_jungle.png",
-        "image": "",
+        "iconAsset": "../assets/icons/worlds/world_icon_ice.svg",
+        "image": "../assets/icons/worlds/worlds_jungle.png",
         "rarity": "A",
         "tags": [
           "寒冷",
@@ -2190,8 +2190,8 @@ window.DEBATE_DECKS = {
         "lore": "黑暗、狹窄、路線複雜，照明與方向判斷是核心問題。",
         "imageId": "worlds_cave",
         "icon": "",
-        "iconAsset": "../assets/icons/worlds/worlds_cave.png",
-        "image": "",
+        "iconAsset": "../assets/icons/worlds/world_icon_cave.svg",
+        "image": "../assets/icons/worlds/worlds_cave.png",
         "rarity": "A",
         "tags": [
           "黑暗",
@@ -2204,8 +2204,8 @@ window.DEBATE_DECKS = {
         "lore": "物資可能豐富，但空間複雜且心理壓力很高。",
         "imageId": "worlds_hospital",
         "icon": "",
-        "iconAsset": "../assets/icons/worlds/worlds_hospital.png",
-        "image": "",
+        "iconAsset": "../assets/icons/worlds/world_icon_hospital.svg",
+        "image": "../assets/icons/worlds/worlds_hospital.png",
         "rarity": "A",
         "tags": [
           "城市",
@@ -2218,8 +2218,8 @@ window.DEBATE_DECKS = {
         "lore": "道路濕滑、落石與失溫風險高，移動與避難都很困難。",
         "imageId": "worlds_Villa",
         "icon": "",
-        "iconAsset": "../assets/icons/worlds/worlds_Villa.png",
-        "image": "",
+        "iconAsset": "../assets/icons/worlds/world_icon_rain_mountain.svg",
+        "image": "../assets/icons/worlds/worlds_Villa.png",
         "rarity": "B",
         "tags": [
           "山地",
@@ -2232,8 +2232,8 @@ window.DEBATE_DECKS = {
         "lore": "空間封閉、氧氣有限，任何小故障都可能變成大危機。",
         "imageId": "worlds_space shuttle",
         "icon": "",
-        "iconAsset": "../assets/icons/worlds/worlds_space shuttle.png",
-        "image": "",
+        "iconAsset": "../assets/icons/worlds/world_icon_spaceship.svg",
+        "image": "../assets/icons/worlds/worlds_space shuttle.png",
         "rarity": "B",
         "tags": [
           "科幻",
@@ -2246,8 +2246,8 @@ window.DEBATE_DECKS = {
         "lore": "高壓、缺氧、撤離困難，外部環境本身就是威脅。",
         "imageId": "worlds_Underwater",
         "icon": "",
-        "iconAsset": "../assets/icons/worlds/worlds_Underwater.png",
-        "image": "",
+        "iconAsset": "../assets/icons/worlds/world_icon_undersea_base.svg",
+        "image": "../assets/icons/worlds/worlds_Underwater.png",
         "rarity": "B",
         "tags": [
           "海洋",
@@ -2260,8 +2260,8 @@ window.DEBATE_DECKS = {
         "lore": "高溫、毒氣與地形不穩，撤離速度與判斷非常重要。",
         "imageId": "worlds_Ring of Fire",
         "icon": "",
-        "iconAsset": "../assets/icons/worlds/worlds_Ring of Fire.png",
-        "image": "",
+        "iconAsset": "../assets/icons/worlds/world_icon_volcano.svg",
+        "image": "../assets/icons/worlds/worlds_Ring of Fire.png",
         "rarity": "B",
         "tags": [
           "高溫",
@@ -2274,8 +2274,8 @@ window.DEBATE_DECKS = {
         "lore": "厚牆、密道與階級秩序並存，防守容易但資訊流動慢。",
         "imageId": "worlds_castle",
         "icon": "",
-        "iconAsset": "../assets/icons/worlds/worlds_castle.png",
-        "image": "",
+        "iconAsset": "../assets/icons/worlds/world_icon_castle.svg",
+        "image": "../assets/icons/worlds/worlds_castle.png",
         "rarity": "B",
         "tags": [
           "歷史",
@@ -2288,8 +2288,8 @@ window.DEBATE_DECKS = {
         "lore": "科技高度發達，但監控、能源與系統故障都會影響行動。",
         "imageId": "worlds_FutureCity",
         "icon": "",
-        "iconAsset": "../assets/icons/worlds/worlds_FutureCity.png",
-        "image": "",
+        "iconAsset": "../assets/icons/worlds/world_icon_future_city.svg",
+        "image": "../assets/icons/worlds/worlds_FutureCity.png",
         "rarity": "B",
         "tags": [
           "城市",
@@ -2302,8 +2302,8 @@ window.DEBATE_DECKS = {
         "lore": "路線混亂、出口未知，記錄與團隊分工會比速度更可靠。",
         "imageId": "worlds_maze",
         "icon": "",
-        "iconAsset": "../assets/icons/worlds/worlds_maze.png",
-        "image": "",
+        "iconAsset": "../assets/icons/worlds/world_icon_maze.svg",
+        "image": "../assets/icons/worlds/worlds_maze.png",
         "rarity": "B",
         "tags": [
           "推理",
@@ -2316,8 +2316,8 @@ window.DEBATE_DECKS = {
         "lore": "熟悉空間變得陌生，教室、操場與器材室都似乎有靈魂。",
         "imageId": "worlds_Abandoned Campus",
         "icon": "",
-        "iconAsset": "../assets/icons/worlds/worlds_Abandoned Campus.png",
-        "image": "",
+        "iconAsset": "../assets/icons/worlds/world_icon_haunted_school.svg",
+        "image": "../assets/icons/worlds/worlds_Abandoned Campus.png",
         "rarity": "A",
         "tags": [
           "日常",
@@ -2330,8 +2330,8 @@ window.DEBATE_DECKS = {
         "lore": "資源粗糙、衝突明確，策略與士氣會影響存活。",
         "imageId": "worlds_Ancient battlefield",
         "icon": "",
-        "iconAsset": "../assets/icons/worlds/worlds_Ancient battlefield.png",
-        "image": "",
+        "iconAsset": "../assets/icons/worlds/world_icon_battlefield.svg",
+        "image": "../assets/icons/worlds/worlds_Ancient battlefield.png",
         "rarity": "A",
         "tags": [
           "歷史",
@@ -2344,8 +2344,8 @@ window.DEBATE_DECKS = {
         "lore": "空間巨大且漂浮海上，資源、階層與撤離問題交錯。",
         "imageId": "worlds_Cruise ship",
         "icon": "",
-        "iconAsset": "../assets/icons/worlds/worlds_Cruise ship.png",
-        "image": "",
+        "iconAsset": "../assets/icons/worlds/world_icon_cruise.svg",
+        "image": "../assets/icons/worlds/worlds_Cruise ship.png",
         "rarity": "B",
         "tags": [
           "海洋",
@@ -2358,8 +2358,8 @@ window.DEBATE_DECKS = {
         "lore": "高空、科技、交通斷層並存，墜落與能源是最大威脅。",
         "imageId": "worlds_CloudCity",
         "icon": "",
-        "iconAsset": "../assets/icons/worlds/worlds_CloudCity.png",
-        "image": "",
+        "iconAsset": "../assets/icons/worlds/world_icon_cloud_city.svg",
+        "image": "../assets/icons/worlds/worlds_CloudCity.png",
         "rarity": "B",
         "tags": [
           "科幻",
@@ -2372,8 +2372,8 @@ window.DEBATE_DECKS = {
         "lore": "未知物質、封鎖門與安全規範混在一起，知識與冷靜很重要。",
         "imageId": "worlds_laboratory",
         "icon": "",
-        "iconAsset": "../assets/icons/worlds/worlds_laboratory.png",
-        "image": "",
+        "iconAsset": "../assets/icons/worlds/world_icon_lab.svg",
+        "image": "../assets/icons/worlds/worlds_laboratory.png",
         "rarity": "A",
         "tags": [
           "科學",
@@ -2386,8 +2386,8 @@ window.DEBATE_DECKS = {
         "lore": "空間極小、物資有限、方向難控，任何物品都要發揮最大價值。",
         "imageId": "worlds_Raft",
         "icon": "",
-        "iconAsset": "../assets/icons/worlds/worlds_Raft.png",
-        "image": "",
+        "iconAsset": "../assets/icons/worlds/world_icon_raft.svg",
+        "image": "../assets/icons/worlds/worlds_Raft.png",
         "rarity": "A",
         "tags": [
           "水域",

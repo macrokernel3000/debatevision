@@ -48,6 +48,7 @@ data/modes/
 - `itemEnvironment`：環境 + 物品。
 - `roleEnvironment`：環境 + 職業。
 - `importanceDuel`：兩張物品對決。
+- `salesPitch`：抽 1 張物品，練需求、客群、銷售故事。
 - `secretPlace`：秘密場地推理。
 
 如果新增玩法只是在更換牌組，可以只新增 JSON。若需要全新抽選或呈現方式，才需要改 `website/js/app.js`。
@@ -59,3 +60,23 @@ data/modes/
 `itemEnvironment` 與 `roleEnvironment` 會把 `secondaryDeck` 當作獨立異境區，每次只抽 1 張；`primaryDeck` 則是本局主要抽選池，例如物品卡或職業卡。
 
 `importanceDuel` 不需要異境區，會直接從主要牌組抽出兩張進行比較。
+
+## 新增玩法時必須同步文案 CSV
+
+新增或改玩法 JSON 後，必須同步更新：
+
+```text
+data/content/玩法文案.csv
+```
+
+至少要加入：
+
+- `玩法描述`
+- `教練提示`
+- `回合流程`
+
+如果有玩法大圖，也可以加：
+
+- `玩法背景`
+
+JSON 是規則，CSV 是老師容易修改的前台文字。兩者缺一不可。

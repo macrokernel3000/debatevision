@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 88 88" role="img" aria-label="林 icon">
+  <rect width="88" height="88" rx="18" fill="#f7efe1"/>
+  <rect x="7" y="7" width="74" height="74" rx="15" fill="#fffaf0" stroke="#2b2b2b" stroke-width="3"/>
+  <circle cx="44" cy="42" r="25" fill="#5d4bb0" opacity="0.16"/>
+  <path d="M23 62h42M29 68h30" fill="none" stroke="#5d4bb0" stroke-width="5" stroke-linecap="round"/>
+  <path d="M26 27c8-8 28-8 36 0M30 21c7-5 21-5 28 0" fill="none" stroke="#117a73" stroke-width="4" stroke-linecap="round" opacity="0.72"/>
+  <text x="44" y="54" text-anchor="middle" font-family="Arial, 'PingFang TC', 'Noto Sans TC', sans-serif" font-size="28" font-weight="900" fill="#171717">林</text>
+</svg>

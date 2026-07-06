@@ -152,6 +152,37 @@ function assetPathFor(item) {
   return `../assets/icons/${item.deck_id}/${icon}.svg`;
 }
 
+function imagePathFor(item) {
+  const rawImage = (item.image || "").replace(/[\r\n\t]+/g, "").trim();
+  if (!rawImage) return "";
+  if (/^(https?:|data:|\.{0,2}\/)/i.test(rawImage)) return rawImage;
+
+  const image = rawImage.replace(/\.(svg|png|webp|jpe?g)$/i, "");
+  const explicitExtension = rawImage.match(/\.(svg|png|webp|jpe?g)$/i)?.[0]?.toLowerCase() || "";
+  const imageDir = resolve(root, "assets", "icons", item.deck_id);
+  const extensions = explicitExtension
+    ? [explicitExtension, ...[".png", ".webp", ".jpg", ".jpeg", ".svg"].filter((extension) => extension !== explicitExtension)]
+    : [".png", ".webp", ".jpg", ".jpeg", ".svg"];
+  const directBase = resolve(imageDir, image);
+
+  for (const extension of extensions) {
+    const directPath = `${directBase}${extension}`;
+    if (existsSync(directPath)) {
+      return `../assets/icons/${item.deck_id}/${image}${extension}`;
+    }
+  }
+
+  if (existsSync(imageDir)) {
+    const expectedNames = extensions.map((extension) => `${image}${extension}`.toLowerCase());
+    const match = readdirSync(imageDir).find((file) => expectedNames.includes(file.toLowerCase()));
+    if (match) {
+      return `../assets/icons/${item.deck_id}/${match}`;
+    }
+  }
+
+  return rawImage;
+}
+
 function imageIdFor(item) {
   const raw = (item.image || item.icon || "")
     .replace(/[\r\n\t]+/g, "")
@@ -175,6 +206,7 @@ function buildDecks() {
 
     const iconAsset = assetPathFor(item);
     const imageId = imageIdFor(item);
+    const image = imagePathFor(item);
 
     decks[item.deck_id].cards.push({
       name: item.name,
@@ -182,7 +214,7 @@ function buildDecks() {
       imageId,
       icon: iconAsset ? "" : item.icon,
       iconAsset,
-      image: item.image,
+      image,
       rarity: item.rarity || "C",
       tags: item.tags ? item.tags.split("|").map((tag) => tag.trim()).filter(Boolean) : []
     });

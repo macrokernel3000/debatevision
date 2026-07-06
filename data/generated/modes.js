@@ -132,7 +132,7 @@ window.DEBATE_MODES = [
     "track": "需求 × 故事",
     "primaryDeck": "items",
     "secondaryDeck": "",
-    "primaryLabel": "N 卡",
+    "primaryLabel": "物品卡",
     "secondaryLabel": "",
     "defaultRarities": {
       "items": [
@@ -158,7 +158,7 @@ window.DEBATE_MODES = [
       ]
     ],
     "flow": [
-      "抽 1 張 N 卡商品",
+      "抽 1 張物品卡商品",
       "30 秒找出核心需求",
       "30 秒決定目標客群",
       "45 秒完成銷售提案",

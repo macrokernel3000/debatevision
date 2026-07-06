@@ -205,6 +205,10 @@ function raritiesFrom(deckId) {
     .sort((a, b) => rarityOrder(a) - rarityOrder(b) || a.localeCompare(b));
 }
 
+function rarityDisplayName(rarity) {
+  return rarity === "N" ? "道具卡" : `${rarity} 卡`;
+}
+
 function ensureDeckSelection(deckId) {
   if (!deckId) return;
   const scope = selectionScope(deckId);
@@ -394,13 +398,14 @@ function renderTokenCloud() {
   tokenCloud.innerHTML = rarities.map((rarity) => {
     const groupCards = cards.filter((card) => (card.rarity || "C") === rarity);
     const selectedInGroup = groupCards.filter((card) => selectedKeys.has(cardKey(card))).length;
+    const rarityLabel = rarityDisplayName(rarity);
     return `
       <section class="token-rarity-section" data-rarity="${rarity}">
         <div class="token-rarity-head">
-          <h3>${rarity} 卡 <span>${selectedInGroup}/${groupCards.length}</span></h3>
+          <h3>${rarityLabel} <span>${selectedInGroup}/${groupCards.length}</span></h3>
           <div class="token-rarity-actions">
-            <button type="button" data-rarity="${rarity}" data-rarity-action="select">全選 ${rarity}</button>
-            <button type="button" data-rarity="${rarity}" data-rarity-action="clear">取消 ${rarity}</button>
+            <button type="button" data-rarity="${rarity}" data-rarity-action="select">全選 ${rarityLabel}</button>
+            <button type="button" data-rarity="${rarity}" data-rarity-action="clear">取消 ${rarityLabel}</button>
           </div>
         </div>
         <div class="token-rarity-cloud">
@@ -422,7 +427,7 @@ function tokenMarkup(card, checked) {
 }
 
 function tokenIconMarkup(card) {
-  const image = card.iconAsset || card.image || "";
+  const image = card.iconAsset || "";
   if (image) {
     return `<img class="token-thumb" src="${image}" alt="" aria-hidden="true" />`;
   }

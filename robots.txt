@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /debatevision/
+
+Sitemap: https://macrokernel3000.github.io/debatevision/sitemap.xml

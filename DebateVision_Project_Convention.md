@@ -1,5 +1,11 @@
 # DebateVision Project Convention v1.0
 
+所有 AI、Codex、GPT、協作者開始前，請先讀：
+
+```text
+AI_START_HERE.md
+```
+
 本專案採用三層架構：
 
 - `data/`：內容資料。使用者與 GPT 主要修改這裡。
@@ -12,6 +18,7 @@
 
 每次擴充 DebateVision 時，請先讀：
 
+- `AI_START_HERE.md`
 - `docs/Project_Convention.md`
 - `docs/Icon_Style_Guide.md`
 - `docs/Card_Data_Specification.md`
@@ -45,11 +52,21 @@ DebateVision/
 ## 核心規則
 
 - 新增卡牌內容：改 `data/cards/*.csv`。
-- 新增圖片：放 `assets/icons/{deck_id}/` 或其他 `assets/` 子資料夾。
-- 新增玩法：新增 `data/modes/*.json`。
+- 新增圖片：小圖示放 `assets/icons/{deck_id}/`；大圖放適合的 `assets/` 子資料夾。
+- 新增玩法：新增 `data/modes/*.json`，並同步更新 `data/content/玩法文案.csv`。
 - 改網站互動：改 `website/js/`。
 - 改畫面：改 `website/styles/`。
 - 不手動改 `data/generated/`，它由腳本產生。
+
+## 新增玩法固定流程
+
+新增玩法時至少要完成：
+
+1. `data/modes/*.json`：玩法規則。
+2. `data/content/玩法文案.csv`：玩法描述、教練提示、回合流程、必要時玩法背景。
+3. `網站更新.command` 或 `node scripts/build-lexicons.mjs`：更新 `data/generated/`。
+
+如果玩法使用新卡牌分類，例如只抽某種稀有度，也要在 JSON 裡明確設定，避免新卡污染舊玩法。
 
 ## 發布規則
 

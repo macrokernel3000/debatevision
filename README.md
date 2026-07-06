@@ -4,6 +4,16 @@ Every Thought Begins with a Question. 思想始於思考。
 
 DebateVision 是一個思辨教育活動網站。它用牌組、情境、角色、問題與抽卡機制，快速產生課堂討論、口語表達與辯論暖身活動。
 
+## AI 與協作者請先讀
+
+請先讀：
+
+```text
+AI_START_HERE.md
+```
+
+它是本專案的第一入口，說明新增卡牌、玩法、文案、圖片時應該遵守的固定流程。
+
 ## 使用方式
 
 更新並開啟網站：
@@ -125,6 +135,12 @@ docs/Image_Layout_Editor_Guide.md
 data/modes/新玩法.json
 ```
 
+並且同步新增同一個 `玩法ID` 的文案：
+
+```text
+data/content/玩法文案.csv
+```
+
 如果只是更換抽哪些牌組，不需要改網站程式。若需要全新的抽選或卡牌呈現方式，才改 `website/js/app.js`。
 
 ## 更新資料
@@ -167,6 +183,22 @@ data/generated/image-layouts.js
 docs/GitHub_Upload_Guide.md
 ```
 
+## Google 搜尋收錄
+
+正式網址：
+
+```text
+https://macrokernel3000.github.io/debatevision/website/
+```
+
+本專案已放入基本 SEO 資訊、`sitemap.xml` 與 `robots.txt`。但要讓 Google 更快知道這個網站，仍需要到 Google Search Console 驗證網站、提交 sitemap，並用網址檢查要求建立索引。
+
+操作清單見：
+
+```text
+docs/Google_Search_Checklist.md
+```
+
 ## 規格文件
 
 開始擴充前先讀：
@@ -176,3 +208,4 @@ docs/GitHub_Upload_Guide.md
 - `docs/Card_Data_Specification.md`
 - `docs/Game_Mode_Specification.md`
 - `docs/Image_Layout_Editor_Guide.md`
+- `docs/Google_Search_Checklist.md`
