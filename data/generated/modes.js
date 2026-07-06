@@ -40,7 +40,12 @@ window.DEBATE_MODES = [
       "每位學生提出30 秒內容",
       "共同討論，分組合作"
     ],
-    "image": "../assets/backgrounds/modes/item-survival.png"
+    "image": "../assets/backgrounds/modes/item-survival.png",
+    "cardHooks": [
+      "提出 {name} 在這個異境中的一個救命用途。",
+      "說明 {name} 在此環境中的限制與補救。",
+      "回應一個同學對 {name} 的質疑。"
+    ]
   },
   {
     "id": "role-survival",
@@ -77,7 +82,12 @@ window.DEBATE_MODES = [
       "觀眾提問或互相反駁",
       "逐輪淘汰直到最後留下者"
     ],
-    "image": "../assets/backgrounds/modes/role-survival.png"
+    "image": "../assets/backgrounds/modes/role-survival.png",
+    "cardHooks": [
+      "說明 {name} 在這個異境中的不可替代價值。",
+      "承認 {name} 的一個弱點，並提出化解方式。",
+      "用一句話說服大家留下 {name}。"
+    ]
   },
   {
     "id": "importance-duel",
@@ -121,7 +131,12 @@ window.DEBATE_MODES = [
       "互相質疑一次",
       "觀眾投票：誰的比較標準更合理"
     ],
-    "image": "../assets/backgrounds/modes/importance-duel.png"
+    "image": "../assets/backgrounds/modes/importance-duel.png",
+    "cardHooks": [
+      "建立比較標準，說明 {name} 為什麼更重要。",
+      "指出另一件物品相較於 {name} 的限制。",
+      "如果比較標準改變，說明 {name} 是否仍有優勢。"
+    ]
   },
   {
     "id": "sales-command",
@@ -164,7 +179,12 @@ window.DEBATE_MODES = [
       "45 秒完成銷售提案",
       "同學提問：價格、替代品、可信度"
     ],
-    "image": "../assets/backgrounds/modes/sales-command.png"
+    "image": "../assets/backgrounds/modes/sales-command.png",
+    "cardHooks": [
+      "說明 {name} 滿足哪一種需求。",
+      "找出最可能購買 {name} 的對象。",
+      "包裝一個讓人願意掏錢買 {name} 的故事。"
+    ]
   },
   {
     "id": "where-am-i",
@@ -178,10 +198,10 @@ window.DEBATE_MODES = [
     "secondaryDeck": "",
     "primaryLabel": "場地卡",
     "secondaryLabel": "",
-    "drawLabel": "開啟秘密選號",
+    "drawLabel": "選定藏身處",
     "cardMode": "secretPlace",
     "fixedCount": 1,
-    "description": "系統列出本局啟用的場地編號，老師用隱藏輸入設定答案。學生從候選位置中提問推理，最後老師公布結果。",
+    "description": "系統列出本局啟用的場地編號，用隱藏輸入設定答案。學生從候選位置中提問推理，最後公布結果。",
     "prompts": [
       [
         "只能提問",
@@ -193,16 +213,20 @@ window.DEBATE_MODES = [
       ],
       [
         "最後公布",
-        "老師先輸入秘密編號，再逐一點選候選位置，公布不是這裡或就是這裡。"
+        "先輸入秘密編號，再逐一點選候選位置，公布不是這裡或就是這裡。"
       ]
     ],
     "flow": [
-      "按下開啟秘密選號",
-      "老師輸入秘密編號，必要時勾選顯示編號確認",
+      "輸入秘密編號，必要時勾選顯示編號確認",
       "學生輪流問問題",
       "教師只給有限回答",
       "累積線索後開放猜測",
       "點選候選位置公布結果"
+    ],
+    "cardHooks": [
+      "觀察 {name} 可能透露的環境線索。",
+      "設計一個能排除或確認 {name} 的問題。",
+      "思考哪些提問能最快縮小到 {name}。"
     ]
   }
 ];

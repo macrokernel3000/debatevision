@@ -24,6 +24,7 @@ let selectedEditTarget = null;
 
 const gameNav = document.querySelector("#gameNav");
 const modeGrid = document.querySelector("#modeGrid");
+const controlBand = document.querySelector(".control-band");
 const deckSelect = document.querySelector("#deckSelect");
 const primaryDeckField = document.querySelector("#primaryDeckField");
 const secondaryDeckSelect = document.querySelector("#secondaryDeckSelect");
@@ -150,6 +151,10 @@ function normalizeCard(raw, deckId) {
 }
 
 function buildHooks(name, deckId, rarity = "") {
+  if (Array.isArray(activeMode.cardHooks) && activeMode.cardHooks.length) {
+    return activeMode.cardHooks.map((hook) => fillCardHookTemplate(hook, name));
+  }
+
   if (deckId === "items" && rarity === "N") {
     return [`說明 ${name} 滿足哪一種需求。`, `找出最可能購買 ${name} 的對象。`, "包裝一個讓人願意掏錢的故事。"];
   }
@@ -163,6 +168,13 @@ function buildHooks(name, deckId, rarity = "") {
     return ["說明這個環境最關鍵的限制。", "列出學生可以追問的線索。", "思考哪些資源在這裡會變得重要。"];
   }
   return ["把特性連回當前玩法。", "回答一個尖銳質疑。", "提出最終投票標準。"];
+}
+
+function fillCardHookTemplate(template, name) {
+  return String(template || "")
+    .replaceAll("{name}", name)
+    .replaceAll("{{name}}", name)
+    .replaceAll("卡牌名稱", name);
 }
 
 function cardsFrom(deckId) {
@@ -312,8 +324,9 @@ function renderActivity() {
   sceneTitle.textContent = activeMode.title;
   sceneDescription.textContent = activeMode.description;
   drawButton.textContent = activeMode.drawLabel;
+  controlBand.hidden = activeMode.cardMode === "secretPlace";
   controlNote.textContent = activeMode.cardMode === "secretPlace"
-    ? "此玩法會列出目前啟用的場地編號；老師用隱藏輸入設定答案。"
+    ? "此玩法會列出目前啟用的場地編號；用隱藏輸入設定答案。"
     : "牌組已依玩法固定；下方抽選池可取消本局不想抽到的卡。";
 }
 
@@ -690,14 +703,14 @@ function renderSecretPlace(card, revealed = false) {
   const hasValidAnswer = Number.isInteger(chosenNumber) && chosenNumber >= 1 && chosenNumber <= total;
   const statusText = hasValidAnswer
     ? "答案已設定。投影時可保持隱藏。"
-    : `請老師輸入 1-${total || 0} 的秘密編號。`;
+    : `請輸入 1-${total || 0} 的秘密編號。`;
 
   cardGrid.innerHTML = `
     <div class="secret-board">
       <div class="secret-banner">
-        <p class="eyebrow">老師秘密設定</p>
-        <h2>答案先不要讓學生看到</h2>
-        <p>下方會依目前啟用的場地排出 1-${total} 號。老師輸入秘密編號後，學生只會看到候選場地。</p>
+        <p class="eyebrow">秘密場地</p>
+        <h2>請選定藏身處</h2>
+        <p>下方會依目前啟用的場地排出 1-${total} 號。輸入秘密編號後，即可開始活動。</p>
         <div class="secret-teacher-panel">
           <label class="secret-answer-field">
             <span>秘密編號</span>
@@ -776,7 +789,7 @@ function updateSecretAnswerState() {
     return;
   }
 
-  status.textContent = `請老師輸入 1-${total || 0} 的秘密編號。`;
+  status.textContent = `請輸入 1-${total || 0} 的秘密編號。`;
   revealButton.disabled = true;
 }
 
@@ -803,7 +816,7 @@ function bindSecretPlaceOptions(answerCard) {
 
     if (!lastSecretCard) {
       const status = cardGrid.querySelector("#secretAnswerStatus");
-      if (status) status.textContent = "請老師先輸入秘密編號，再開始公布。";
+      if (status) status.textContent = "請先輸入秘密編號，再開始公布。";
       return;
     }
 
@@ -824,7 +837,7 @@ function bindSecretPlaceOptions(answerCard) {
 }
 
 function refreshSecretPlaceBoard() {
-  if (activeMode.cardMode !== "secretPlace" || !lastSecretCard) return;
+  if (activeMode.cardMode !== "secretPlace") return;
   renderSecretPlace(lastSecretCard, secretRevealed);
 }
 
@@ -864,7 +877,7 @@ function drawResult() {
     secretRevealed = false;
     currentStageCard = {
       name: "秘密選號已開啟",
-      lore: `目前有 ${places.length} 個場地候選，請老師輸入秘密編號。`,
+      lore: `目前有 ${places.length} 個場地候選，請輸入秘密編號。`,
       icon: activeMode.icon,
       deckLabel: activeMode.primaryLabel
     };
@@ -929,7 +942,8 @@ function setMode(modeId) {
   selectedEditTarget = null;
   for (const deckId of activeDeckIds()) ensureDeckSelection(deckId);
   renderAll();
-  renderEmptyState();
+  if (activeMode.cardMode === "secretPlace") renderSecretPlace(null, false);
+  else renderEmptyState();
   updateEditPanel();
 }
 

@@ -275,6 +275,11 @@ function fieldKey(value) {
     "教練提示": "prompt",
     "提示": "prompt",
     "prompt": "prompt",
+    "卡牌任務": "cardHook",
+    "卡牌提示": "cardHook",
+    "卡詞": "cardHook",
+    "cardHook": "cardHook",
+    "cardHooks": "cardHook",
     "回合流程": "flow",
     "流程": "flow",
     "flow": "flow"
@@ -302,6 +307,7 @@ function applyModeContent(modes) {
 
     const nextMode = { ...mode };
     const prompts = [];
+    const cardHooks = [];
     const flow = [];
 
     for (const row of sortRows(contentRows)) {
@@ -318,12 +324,17 @@ function applyModeContent(modes) {
         prompts.push([title || `提示 ${prompts.length + 1}`, content]);
       }
 
+      if (field === "cardHook") {
+        cardHooks.push(content || title);
+      }
+
       if (field === "flow") {
         flow.push(content || title);
       }
     }
 
     if (prompts.length) nextMode.prompts = prompts;
+    if (cardHooks.length) nextMode.cardHooks = cardHooks;
     if (flow.length) nextMode.flow = flow;
 
     return nextMode;
