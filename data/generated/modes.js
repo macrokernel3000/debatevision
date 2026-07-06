@@ -163,7 +163,8 @@ window.DEBATE_MODES = [
       "30 秒決定目標客群",
       "45 秒完成銷售提案",
       "同學提問：價格、替代品、可信度"
-    ]
+    ],
+    "image": "../assets/backgrounds/modes/sales-command.png"
   },
   {
     "id": "where-am-i",
@@ -177,10 +178,10 @@ window.DEBATE_MODES = [
     "secondaryDeck": "",
     "primaryLabel": "場地卡",
     "secondaryLabel": "",
-    "drawLabel": "秘密抽出場景",
+    "drawLabel": "開啟秘密選號",
     "cardMode": "secretPlace",
     "fixedCount": 1,
-    "description": "系統先秘密抽出一個場地。學生從候選位置中提問推理，最後老師點選選項公布結果。",
+    "description": "系統列出本局啟用的場地編號，老師用隱藏輸入設定答案。學生從候選位置中提問推理，最後老師公布結果。",
     "prompts": [
       [
         "只能提問",
@@ -192,11 +193,12 @@ window.DEBATE_MODES = [
       ],
       [
         "最後公布",
-        "老師逐一點選候選位置，公布不是這裡或就是這裡，再討論哪些問題最有效。"
+        "老師先輸入秘密編號，再逐一點選候選位置，公布不是這裡或就是這裡。"
       ]
     ],
     "flow": [
-      "按下秘密抽場地",
+      "按下開啟秘密選號",
+      "老師輸入秘密編號，必要時勾選顯示編號確認",
       "學生輪流問問題",
       "教師只給有限回答",
       "累積線索後開放猜測",

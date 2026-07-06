@@ -15,6 +15,8 @@ let isDrawing = false;
 let lastSecretCard = null;
 let currentStageCard = null;
 let secretRevealed = false;
+let secretAnswerIndex = "";
+let secretShowAnswerNumber = false;
 let selectedCardKeysByScope = {};
 let imageLayouts = mergeImageLayouts(savedImageLayouts, readDraftLayouts());
 let selectedEditCard = null;
@@ -311,7 +313,7 @@ function renderActivity() {
   sceneDescription.textContent = activeMode.description;
   drawButton.textContent = activeMode.drawLabel;
   controlNote.textContent = activeMode.cardMode === "secretPlace"
-    ? "此玩法會秘密抽出場景；老師可逐一點選候選位置公布結果。"
+    ? "此玩法會列出目前啟用的場地編號；老師用隱藏輸入設定答案。"
     : "牌組已依玩法固定；下方抽選池可取消本局不想抽到的卡。";
 }
 
@@ -662,7 +664,11 @@ function renderDuel(cards) {
 
 function renderSecretPlace(card, revealed = false) {
   secretRevealed = revealed;
-  if (revealed) {
+  const places = selectedCardsFrom(activeLibrary);
+  if (!revealed) card = secretCardFromIndex(secretAnswerIndex);
+  lastSecretCard = card || null;
+
+  if (revealed && card) {
     cardGrid.innerHTML = `
       <div class="secret-board is-revealed">
         <div class="secret-banner">
@@ -671,7 +677,7 @@ function renderSecretPlace(card, revealed = false) {
           <p>可以回頭檢查：哪些問題最早把範圍縮小？哪些問題其實不夠精準？</p>
         </div>
         <div class="secret-place-options">
-          ${placeOptionsMarkup(card.name, true)}
+          ${placeOptionsMarkup(card, true, places)}
         </div>
       </div>
     `;
@@ -679,46 +685,112 @@ function renderSecretPlace(card, revealed = false) {
     return;
   }
 
+  const total = places.length;
+  const chosenNumber = Number(secretAnswerIndex);
+  const hasValidAnswer = Number.isInteger(chosenNumber) && chosenNumber >= 1 && chosenNumber <= total;
+  const statusText = hasValidAnswer
+    ? "答案已設定。投影時可保持隱藏。"
+    : `請老師輸入 1-${total || 0} 的秘密編號。`;
+
   cardGrid.innerHTML = `
     <div class="secret-board">
       <div class="secret-banner">
-        <p class="eyebrow">已經抽出場景</p>
-        <h2>答案已抽選完畢</h2>
-        <p>請從下方選項提問與推理，最後點選選項公布結果。</p>
-        <button class="reveal-action" data-reveal-secret type="button">直接公布答案</button>
+        <p class="eyebrow">老師秘密設定</p>
+        <h2>答案先不要讓學生看到</h2>
+        <p>下方會依目前啟用的場地排出 1-${total} 號。老師輸入秘密編號後，學生只會看到候選場地。</p>
+        <div class="secret-teacher-panel">
+          <label class="secret-answer-field">
+            <span>秘密編號</span>
+            <input
+              id="secretAnswerIndex"
+              type="${secretShowAnswerNumber ? "text" : "password"}"
+              inputmode="numeric"
+              pattern="[0-9]*"
+              min="1"
+              max="${total}"
+              value="${secretAnswerIndex}"
+              placeholder="1-${total || 0}"
+              autocomplete="off"
+            />
+          </label>
+          <label class="secret-show-toggle">
+            <input id="secretShowAnswerNumber" type="checkbox" ${secretShowAnswerNumber ? "checked" : ""} />
+            <span>顯示編號</span>
+          </label>
+          <p class="secret-answer-status" id="secretAnswerStatus">${statusText}</p>
+        </div>
+        <button class="reveal-action" data-reveal-secret type="button" ${hasValidAnswer ? "" : "disabled"}>直接公布答案</button>
       </div>
       <div class="secret-place-options">
-        ${placeOptionsMarkup(card.name, false)}
+        ${placeOptionsMarkup(card, false, places)}
       </div>
     </div>
   `;
 
   bindSecretPlaceOptions(card);
+  bindSecretAnswerControls();
 }
 
-function placeOptionsMarkup(answerName, revealed) {
-  ensureDeckSelection(activeLibrary);
-  const activeKeys = selectedKeysForDeck(activeLibrary);
-  return cardsFrom(activeLibrary).map((place) => {
-    const isAnswer = place.name === answerName;
-    const inPool = activeKeys.has(cardKey(place)) || isAnswer;
+function placeOptionsMarkup(answerCard, revealed, places = selectedCardsFrom(activeLibrary)) {
+  return places.map((place, index) => {
+    const isAnswer = answerCard && cardKey(place) === cardKey(answerCard);
     const stateClass = [
       revealed && isAnswer ? "is-correct" : "",
-      !inPool ? "is-out-of-pool" : ""
     ].filter(Boolean).join(" ");
     const stateText = revealed && isAnswer
       ? "<span>就是這裡</span>"
-      : !inPool
-        ? "<span>不在此次卡池</span>"
-        : "";
+      : "";
     return `
-      <button class="secret-place-option ${stateClass}" data-place="${place.name}" type="button" ${inPool ? "" : "disabled"}>
+      <button class="secret-place-option ${stateClass}" data-place="${place.name}" type="button">
+        <b class="secret-place-number">${index + 1}</b>
         ${tokenIconMarkup(place)}
         <strong>${place.name}</strong>
         ${stateText}
       </button>
     `;
   }).join("");
+}
+
+function secretCardFromIndex(indexValue) {
+  const places = selectedCardsFrom(activeLibrary);
+  const index = Number(indexValue);
+  if (!Number.isInteger(index) || index < 1 || index > places.length) return null;
+  return places[index - 1];
+}
+
+function updateSecretAnswerState() {
+  const input = cardGrid.querySelector("#secretAnswerIndex");
+  const status = cardGrid.querySelector("#secretAnswerStatus");
+  const revealButton = cardGrid.querySelector("[data-reveal-secret]");
+  if (!input) return;
+
+  secretAnswerIndex = input.value.replace(/[^\d]/g, "");
+  if (input.value !== secretAnswerIndex) input.value = secretAnswerIndex;
+  lastSecretCard = secretCardFromIndex(secretAnswerIndex);
+  secretRevealed = false;
+
+  const total = selectedCardsFrom(activeLibrary).length;
+  if (lastSecretCard) {
+    status.textContent = "答案已設定。投影時可保持隱藏。";
+    revealButton.disabled = false;
+    return;
+  }
+
+  status.textContent = `請老師輸入 1-${total || 0} 的秘密編號。`;
+  revealButton.disabled = true;
+}
+
+function bindSecretAnswerControls() {
+  const input = cardGrid.querySelector("#secretAnswerIndex");
+  const showToggle = cardGrid.querySelector("#secretShowAnswerNumber");
+  if (!input) return;
+
+  input.addEventListener("input", updateSecretAnswerState);
+  showToggle?.addEventListener("change", () => {
+    secretShowAnswerNumber = showToggle.checked;
+    input.type = secretShowAnswerNumber ? "text" : "password";
+    input.focus();
+  });
 }
 
 function bindSecretPlaceOptions(answerCard) {
@@ -729,8 +801,14 @@ function bindSecretPlaceOptions(answerCard) {
     const option = event.target.closest(".secret-place-option");
     if (!option || option.disabled) return;
 
-    if (option.dataset.place === answerCard.name) {
-      renderSecretPlace(answerCard, true);
+    if (!lastSecretCard) {
+      const status = cardGrid.querySelector("#secretAnswerStatus");
+      if (status) status.textContent = "請老師先輸入秘密編號，再開始公布。";
+      return;
+    }
+
+    if (option.dataset.place === lastSecretCard.name) {
+      renderSecretPlace(lastSecretCard, true);
       return;
     }
 
@@ -739,7 +817,10 @@ function bindSecretPlaceOptions(answerCard) {
   });
 
   const revealButton = cardGrid.querySelector("[data-reveal-secret]");
-  revealButton?.addEventListener("click", () => renderSecretPlace(answerCard, true));
+  revealButton?.addEventListener("click", () => {
+    updateSecretAnswerState();
+    if (lastSecretCard) renderSecretPlace(lastSecretCard, true);
+  });
 }
 
 function refreshSecretPlaceBoard() {
@@ -777,17 +858,18 @@ function drawResult() {
   }
 
   if (activeMode.cardMode === "secretPlace") {
-    lastSecretCard = pickFrom(activeLibrary, 1)[0];
-    if (!lastSecretCard) return renderPoolWarning();
+    const places = selectedCardsFrom(activeLibrary);
+    if (!places.length) return renderPoolWarning();
+    lastSecretCard = secretCardFromIndex(secretAnswerIndex);
     secretRevealed = false;
     currentStageCard = {
-      name: "答案已抽選完畢",
-      lore: "請從下方選項提問與推理。",
+      name: "秘密選號已開啟",
+      lore: `目前有 ${places.length} 個場地候選，請老師輸入秘密編號。`,
       icon: activeMode.icon,
       deckLabel: activeMode.primaryLabel
     };
     renderSecretPlace(lastSecretCard, false);
-    return [lastSecretCard];
+    return [currentStageCard];
   }
 
   const cards = pickFrom(activeLibrary, count);
@@ -807,6 +889,10 @@ function spinDraw() {
   const reelPool = activeSecondaryLibrary ? selectedCardsFrom(activeSecondaryLibrary) : selectedCardsFrom(activeLibrary);
 
   const spinTimer = window.setInterval(() => {
+    if (activeMode.cardMode === "secretPlace") {
+      renderReelCard(null, "秘密選號中");
+      return;
+    }
     const card = reelPool[Math.floor(Math.random() * reelPool.length)];
     if (!card) return;
     renderReelCard(null, card.name);
@@ -837,6 +923,8 @@ function setMode(modeId) {
   lastSecretCard = null;
   currentStageCard = null;
   secretRevealed = false;
+  secretAnswerIndex = "";
+  secretShowAnswerNumber = false;
   selectedEditCard = null;
   selectedEditTarget = null;
   for (const deckId of activeDeckIds()) ensureDeckSelection(deckId);

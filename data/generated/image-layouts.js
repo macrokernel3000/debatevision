@@ -24,6 +24,12 @@ window.DEBATE_IMAGE_LAYOUTS = {
       "x": -120,
       "y": -104,
       "rotate": 0
+    },
+    "sales-command": {
+      "scale": 1,
+      "x": -120,
+      "y": -78,
+      "rotate": 0
     }
   },
   "worlds": {}
