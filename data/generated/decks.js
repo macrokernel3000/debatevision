@@ -9,6 +9,7 @@ window.DEBATE_DECKS = {
         "imageId": "location_stage_theater",
         "icon": "",
         "iconAsset": "../assets/icons/locations/location_stage_theater.svg",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -21,6 +22,7 @@ window.DEBATE_DECKS = {
         "imageId": "location_construction_site",
         "icon": "",
         "iconAsset": "../assets/icons/locations/location_construction_site.svg",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -33,6 +35,7 @@ window.DEBATE_DECKS = {
         "imageId": "location_submarine",
         "icon": "",
         "iconAsset": "../assets/icons/locations/location_submarine.svg",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -45,6 +48,7 @@ window.DEBATE_DECKS = {
         "imageId": "location_airplane",
         "icon": "",
         "iconAsset": "../assets/icons/locations/location_airplane.svg",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -57,6 +61,7 @@ window.DEBATE_DECKS = {
         "imageId": "location_stadium",
         "icon": "",
         "iconAsset": "../assets/icons/locations/location_stadium.svg",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -69,6 +74,7 @@ window.DEBATE_DECKS = {
         "imageId": "location_library",
         "icon": "",
         "iconAsset": "../assets/icons/locations/location_library.svg",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -81,6 +87,7 @@ window.DEBATE_DECKS = {
         "imageId": "location_space_station",
         "icon": "",
         "iconAsset": "../assets/icons/locations/location_space_station.svg",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -93,6 +100,7 @@ window.DEBATE_DECKS = {
         "imageId": "location_circus",
         "icon": "",
         "iconAsset": "../assets/icons/locations/location_circus.svg",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -105,6 +113,7 @@ window.DEBATE_DECKS = {
         "imageId": "location_zoo",
         "icon": "",
         "iconAsset": "../assets/icons/locations/location_zoo.svg",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -117,6 +126,7 @@ window.DEBATE_DECKS = {
         "imageId": "location_hypermarket",
         "icon": "",
         "iconAsset": "../assets/icons/locations/location_hypermarket.svg",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -129,6 +139,7 @@ window.DEBATE_DECKS = {
         "imageId": "location_police_station",
         "icon": "",
         "iconAsset": "../assets/icons/locations/location_police_station.svg",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -141,6 +152,7 @@ window.DEBATE_DECKS = {
         "imageId": "location_film_studio",
         "icon": "",
         "iconAsset": "../assets/icons/locations/location_film_studio.svg",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -153,6 +165,7 @@ window.DEBATE_DECKS = {
         "imageId": "location_pirate_ship",
         "icon": "",
         "iconAsset": "../assets/icons/locations/location_pirate_ship.svg",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -165,6 +178,7 @@ window.DEBATE_DECKS = {
         "imageId": "location_beach",
         "icon": "",
         "iconAsset": "../assets/icons/locations/location_beach.svg",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -177,6 +191,7 @@ window.DEBATE_DECKS = {
         "imageId": "location_culinary_school",
         "icon": "",
         "iconAsset": "../assets/icons/locations/location_culinary_school.svg",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -189,6 +204,7 @@ window.DEBATE_DECKS = {
         "imageId": "location_heaven",
         "icon": "",
         "iconAsset": "../assets/icons/locations/location_heaven.svg",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -201,6 +217,7 @@ window.DEBATE_DECKS = {
         "imageId": "location_prison",
         "icon": "",
         "iconAsset": "../assets/icons/locations/location_prison.svg",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -213,6 +230,7 @@ window.DEBATE_DECKS = {
         "imageId": "location_school",
         "icon": "",
         "iconAsset": "../assets/icons/locations/location_school.svg",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -225,6 +243,7 @@ window.DEBATE_DECKS = {
         "imageId": "location_night_market",
         "icon": "",
         "iconAsset": "../assets/icons/locations/location_night_market.svg",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -237,6 +256,7 @@ window.DEBATE_DECKS = {
         "imageId": "location_farm",
         "icon": "",
         "iconAsset": "../assets/icons/locations/location_farm.svg",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -249,6 +269,7 @@ window.DEBATE_DECKS = {
         "imageId": "location_battlefield",
         "icon": "",
         "iconAsset": "../assets/icons/locations/location_battlefield.svg",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -261,6 +282,7 @@ window.DEBATE_DECKS = {
         "imageId": "location_nursery",
         "icon": "",
         "iconAsset": "../assets/icons/locations/location_nursery.svg",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -273,6 +295,7 @@ window.DEBATE_DECKS = {
         "imageId": "location_laboratory",
         "icon": "",
         "iconAsset": "../assets/icons/locations/location_laboratory.svg",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -285,6 +308,7 @@ window.DEBATE_DECKS = {
         "imageId": "location_arena",
         "icon": "",
         "iconAsset": "../assets/icons/locations/location_arena.svg",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -297,6 +321,7 @@ window.DEBATE_DECKS = {
         "imageId": "location_textile_factory",
         "icon": "",
         "iconAsset": "../assets/icons/locations/location_textile_factory.svg",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -309,6 +334,7 @@ window.DEBATE_DECKS = {
         "imageId": "location_park_square",
         "icon": "",
         "iconAsset": "../assets/icons/locations/location_park_square.svg",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -321,6 +347,7 @@ window.DEBATE_DECKS = {
         "imageId": "location_museum",
         "icon": "",
         "iconAsset": "../assets/icons/locations/location_museum.svg",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -333,6 +360,7 @@ window.DEBATE_DECKS = {
         "imageId": "location_moon_base",
         "icon": "",
         "iconAsset": "../assets/icons/locations/location_moon_base.svg",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -345,6 +373,7 @@ window.DEBATE_DECKS = {
         "imageId": "location_cannery",
         "icon": "",
         "iconAsset": "../assets/icons/locations/location_cannery.svg",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -357,6 +386,7 @@ window.DEBATE_DECKS = {
         "imageId": "location_office_tower",
         "icon": "",
         "iconAsset": "../assets/icons/locations/location_office_tower.svg",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -375,6 +405,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_鐵錘",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_鐵錘.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -385,6 +416,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_手槍",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_手槍.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -395,6 +427,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_網子",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_網子.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -405,6 +438,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_水壺",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_水壺.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -415,6 +449,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_手電筒",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_手電筒.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -425,6 +460,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_繩索",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_繩索.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -435,6 +471,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_急救包",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_急救包.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -445,6 +482,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_打火機",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_打火機.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -455,6 +493,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_太陽能充電板",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_太陽能充電板.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -465,6 +504,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_平底鍋",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_平底鍋.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -475,6 +515,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_收音機",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_收音機.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -485,6 +526,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_濾水器",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_濾水器.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -495,6 +537,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_地圖",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_地圖.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -505,6 +548,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_雨衣",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_雨衣.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -515,6 +559,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_瑞士刀",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_瑞士刀.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -525,6 +570,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_罐頭",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_罐頭.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -535,6 +581,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_膠帶",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_膠帶.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -545,6 +592,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_防毒面具",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_防毒面具.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -555,6 +603,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_擴音器",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_擴音器.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -565,6 +614,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_雨傘",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_雨傘.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -575,6 +625,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_鏟子",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_鏟子.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -585,6 +636,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_筆記本",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_筆記本.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -595,6 +647,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_哨子",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_哨子.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -605,6 +658,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_保溫毯",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_保溫毯.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -615,6 +669,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_釣魚線",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_釣魚線.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -625,6 +680,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_安全帽",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_安全帽.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -635,6 +691,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_酒精",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_酒精.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -645,6 +702,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_鏡子",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_鏡子.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -655,6 +713,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_行動電源",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_行動電源.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -665,6 +724,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_睡袋",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_睡袋.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -675,6 +735,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_防水袋",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_防水袋.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -685,6 +746,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_撬棍",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_撬棍.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -695,6 +757,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_蠟燭",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_蠟燭.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -705,6 +768,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_肥皂",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_肥皂.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -715,6 +779,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_背包",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_背包.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -725,6 +790,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_鋁箔紙",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_鋁箔紙.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -735,6 +801,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_口罩",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_口罩.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -745,6 +812,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_手套",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_手套.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -755,6 +823,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_保鮮膜",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_保鮮膜.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -765,6 +834,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_彈珠",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_彈珠.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "C",
         "tags": []
@@ -775,6 +845,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_粉筆",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_粉筆.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -785,6 +856,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_垃圾袋",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_垃圾袋.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -795,6 +867,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_小刀",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_小刀.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -805,6 +878,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_罐頭開罐器",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_罐頭開罐器.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -815,6 +889,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_小型無人機",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_小型無人機.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -825,6 +900,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_手錶",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_手錶.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -835,6 +911,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_折疊椅",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_折疊椅.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "C",
         "tags": []
@@ -845,6 +922,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_滅火器",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_滅火器.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -855,6 +933,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_滑板",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_滑板.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "C",
         "tags": []
@@ -865,6 +944,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_熱水瓶",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_熱水瓶.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -875,6 +955,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_捕鼠夾",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_捕鼠夾.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "C",
         "tags": []
@@ -885,6 +966,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_望遠鏡頭",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_望遠鏡頭.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -895,6 +977,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_雨鞋",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_雨鞋.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -905,6 +988,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_空玻璃瓶",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_空玻璃瓶.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -915,6 +999,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_醫療手冊",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_醫療手冊.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -925,6 +1010,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_小鏡頭攝影機",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_小鏡頭攝影機.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -935,6 +1021,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_折疊梯",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_折疊梯.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -945,6 +1032,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_防水火柴",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_防水火柴.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -955,6 +1043,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_胡椒噴霧",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_胡椒噴霧.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -965,6 +1054,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_指南旗",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_指南旗.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -975,6 +1065,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_折疊水桶",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_折疊水桶.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -985,6 +1076,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_衛星電話",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_衛星電話.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -995,6 +1087,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_手搖發電機",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_手搖發電機.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -1005,6 +1098,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_夜視鏡",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_夜視鏡.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -1015,6 +1109,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_防彈背心",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_防彈背心.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -1025,6 +1120,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_迷你瓦斯爐",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_迷你瓦斯爐.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -1035,6 +1131,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_折疊鋸",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_折疊鋸.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -1045,6 +1142,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_醫療夾板",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_醫療夾板.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -1055,6 +1153,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_反光背心",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_反光背心.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -1065,6 +1164,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_針線包",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_針線包.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -1075,6 +1175,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_防水筆",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_防水筆.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -1085,6 +1186,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_鋼杯",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_鋼杯.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -1095,6 +1197,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_小型濾網",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_小型濾網.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -1105,6 +1208,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_百科全書",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_百科全書.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -1115,6 +1219,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_塑膠水管",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_塑膠水管.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "C",
         "tags": []
@@ -1125,6 +1230,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_小型鎖頭",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_小型鎖頭.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -1135,6 +1241,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_軍用乾糧",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_軍用乾糧.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -1145,6 +1252,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_布條",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_布條.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -1155,6 +1263,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_磁鐵",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_磁鐵.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "C",
         "tags": []
@@ -1165,6 +1274,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_小風扇",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_小風扇.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "C",
         "tags": []
@@ -1175,6 +1285,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_伸縮棍",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_伸縮棍.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -1185,6 +1296,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_船槳",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_船槳.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -1195,6 +1307,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_冰箱",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_冰箱.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -1205,6 +1318,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_舊手機",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_舊手機.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -1215,6 +1329,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_密碼鎖箱",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_密碼鎖箱.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "C",
         "tags": []
@@ -1225,6 +1340,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_紙牌",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_紙牌.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "C",
         "tags": []
@@ -1235,6 +1351,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_小型投影機",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_小型投影機.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "C",
         "tags": []
@@ -1245,6 +1362,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_滑輪組",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_滑輪組.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -1255,6 +1373,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_微型顯微鏡",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_微型顯微鏡.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "C",
         "tags": []
@@ -1265,6 +1384,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_衛生紙",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_衛生紙.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -1275,6 +1395,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_折疊桌",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_折疊桌.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
@@ -1284,7 +1405,8 @@ window.DEBATE_DECKS = {
         "lore": "收藏回憶、整理人生片段，適合賣給重視紀念感或家庭關係的人。",
         "imageId": "item_相冊",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_相冊.svg",
+        "iconAsset": "../assets/icons/items/item_相冊.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1297,7 +1419,8 @@ window.DEBATE_DECKS = {
         "lore": "象徵承諾、身份與品味，真正販售的是意義而不只是金屬。",
         "imageId": "item_戒指",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_戒指.svg",
+        "iconAsset": "../assets/icons/items/item_戒指.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1310,7 +1433,8 @@ window.DEBATE_DECKS = {
         "lore": "便宜、可修改、低壓力，適合包裝成創作與練習的起點。",
         "imageId": "item_鉛筆",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_鉛筆.svg",
+        "iconAsset": "../assets/icons/items/item_鉛筆.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1323,7 +1447,8 @@ window.DEBATE_DECKS = {
         "lore": "強烈風格與保護感並存，能賣給想展現態度的人。",
         "imageId": "item_皮衣",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_皮衣.svg",
+        "iconAsset": "../assets/icons/items/item_皮衣.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1336,7 +1461,8 @@ window.DEBATE_DECKS = {
         "lore": "把氣味變成記憶與自我形象，適合主打場合、魅力與辨識度。",
         "imageId": "item_香水",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_香水.svg",
+        "iconAsset": "../assets/icons/items/item_香水.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1349,7 +1475,8 @@ window.DEBATE_DECKS = {
         "lore": "日常陪伴感很強，適合包裝成工作儀式或送禮選擇。",
         "imageId": "item_咖啡杯",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_咖啡杯.svg",
+        "iconAsset": "../assets/icons/items/item_咖啡杯.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1362,7 +1489,8 @@ window.DEBATE_DECKS = {
         "lore": "接近心口的飾品，適合主打紀念、祝福與個人風格。",
         "imageId": "item_項鍊",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_項鍊.svg",
+        "iconAsset": "../assets/icons/items/item_項鍊.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1375,7 +1503,8 @@ window.DEBATE_DECKS = {
         "lore": "輕便、環保、可印圖案，能賣給學生、通勤者與品牌支持者。",
         "imageId": "item_帆布袋",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_帆布袋.svg",
+        "iconAsset": "../assets/icons/items/item_帆布袋.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1388,7 +1517,8 @@ window.DEBATE_DECKS = {
         "lore": "遮陽之外也是造型，適合賣給在意照片與外出形象的人。",
         "imageId": "item_太陽眼鏡",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_太陽眼鏡.svg",
+        "iconAsset": "../assets/icons/items/item_太陽眼鏡.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1402,6 +1532,7 @@ window.DEBATE_DECKS = {
         "imageId": "item_絨毛玩具",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_絨毛玩具.svg",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1414,7 +1545,8 @@ window.DEBATE_DECKS = {
         "lore": "解決移動中的疲勞，適合賣給通勤族、旅人與出差者。",
         "imageId": "item_旅行枕",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_旅行枕.svg",
+        "iconAsset": "../assets/icons/items/item_旅行枕.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1427,7 +1559,8 @@ window.DEBATE_DECKS = {
         "lore": "日常吃飯工具，也能被包裝成溫度、質感與餐桌美學。",
         "imageId": "item_陶瓷碗",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_陶瓷碗.svg",
+        "iconAsset": "../assets/icons/items/item_陶瓷碗.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1440,7 +1573,8 @@ window.DEBATE_DECKS = {
         "lore": "功能簡單但有自然質感，可賣給重視養護與手感的人。",
         "imageId": "item_木梳",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_木梳.svg",
+        "iconAsset": "../assets/icons/items/item_木梳.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1453,7 +1587,8 @@ window.DEBATE_DECKS = {
         "lore": "小而常見，適合主打紀念、識別與低門檻送禮。",
         "imageId": "item_鑰匙圈",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_鑰匙圈.svg",
+        "iconAsset": "../assets/icons/items/item_鑰匙圈.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1466,7 +1601,8 @@ window.DEBATE_DECKS = {
         "lore": "把一句話變成可保存的心意，適合觀光、祝福與收藏情境。",
         "imageId": "item_明信片",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_明信片.svg",
+        "iconAsset": "../assets/icons/items/item_明信片.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1479,7 +1615,8 @@ window.DEBATE_DECKS = {
         "lore": "保暖之外也能搭配造型，適合主打關心與季節禮物。",
         "imageId": "item_圍巾",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_圍巾.svg",
+        "iconAsset": "../assets/icons/items/item_圍巾.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1492,7 +1629,8 @@ window.DEBATE_DECKS = {
         "lore": "把清潔效率與健康感放大，適合賣給懶得仔細刷牙的人。",
         "imageId": "item_電動牙刷",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_電動牙刷.svg",
+        "iconAsset": "../assets/icons/items/item_電動牙刷.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1505,7 +1643,8 @@ window.DEBATE_DECKS = {
         "lore": "每天都會被看到，適合賣給需要提醒、規劃與品牌曝光的人。",
         "imageId": "item_桌曆",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_桌曆.svg",
+        "iconAsset": "../assets/icons/items/item_桌曆.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1518,7 +1657,8 @@ window.DEBATE_DECKS = {
         "lore": "不只是容器，而是讓空間有主題，適合賣給佈置愛好者。",
         "imageId": "item_花瓶",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_花瓶.svg",
+        "iconAsset": "../assets/icons/items/item_花瓶.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1531,7 +1671,8 @@ window.DEBATE_DECKS = {
         "lore": "提供生命感與陪伴，適合賣給想改善桌面或心情的人。",
         "imageId": "item_盆栽",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_盆栽.svg",
+        "iconAsset": "../assets/icons/items/item_盆栽.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1544,7 +1685,8 @@ window.DEBATE_DECKS = {
         "lore": "控制飲食與節省花費，適合賣給學生、上班族與健身族群。",
         "imageId": "item_便當盒",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_便當盒.svg",
+        "iconAsset": "../assets/icons/items/item_便當盒.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1557,7 +1699,8 @@ window.DEBATE_DECKS = {
         "lore": "讓飲品保持溫度，賣點可以是照顧自己與減少外帶浪費。",
         "imageId": "item_保溫杯",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_保溫杯.svg",
+        "iconAsset": "../assets/icons/items/item_保溫杯.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1570,7 +1713,8 @@ window.DEBATE_DECKS = {
         "lore": "整理金錢與證件，也展示成熟、秩序與個人品味。",
         "imageId": "item_皮夾",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_皮夾.svg",
+        "iconAsset": "../assets/icons/items/item_皮夾.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1583,7 +1727,8 @@ window.DEBATE_DECKS = {
         "lore": "讓第一印象更正式，適合賣給業務、新鮮人與創業者。",
         "imageId": "item_名片夾",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_名片夾.svg",
+        "iconAsset": "../assets/icons/items/item_名片夾.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1596,7 +1741,8 @@ window.DEBATE_DECKS = {
         "lore": "清潔之外有香味、成分與手作故事，適合主打天然與送禮。",
         "imageId": "item_手工皂",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_手工皂.svg",
+        "iconAsset": "../assets/icons/items/item_手工皂.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1609,7 +1755,8 @@ window.DEBATE_DECKS = {
         "lore": "小物能快速改變造型，適合賣給需要方便整理頭髮的人。",
         "imageId": "item_髮夾",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_髮夾.svg",
+        "iconAsset": "../assets/icons/items/item_髮夾.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1622,7 +1769,8 @@ window.DEBATE_DECKS = {
         "lore": "舒適、休閒、有團體識別感，適合班服、社團或品牌周邊。",
         "imageId": "item_帽T",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_帽T.svg",
+        "iconAsset": "../assets/icons/items/item_帽T.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1635,7 +1783,8 @@ window.DEBATE_DECKS = {
         "lore": "移動、運動與造型三合一，適合主打舒適和自我風格。",
         "imageId": "item_球鞋",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_球鞋.svg",
+        "iconAsset": "../assets/icons/items/item_球鞋.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1648,7 +1797,8 @@ window.DEBATE_DECKS = {
         "lore": "提供專注與安全感，適合賣給讀書、工作或夜間創作者。",
         "imageId": "item_桌燈",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_桌燈.svg",
+        "iconAsset": "../assets/icons/items/item_桌燈.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1661,7 +1811,8 @@ window.DEBATE_DECKS = {
         "lore": "改善坐姿與休息感，適合賣給長時間坐著的人。",
         "imageId": "item_靠枕",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_靠枕.svg",
+        "iconAsset": "../assets/icons/items/item_靠枕.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1674,7 +1825,8 @@ window.DEBATE_DECKS = {
         "lore": "提供挑戰、專注與完成感，適合家庭、情侶與紓壓族群。",
         "imageId": "item_拼圖",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_拼圖.svg",
+        "iconAsset": "../assets/icons/items/item_拼圖.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1687,7 +1839,8 @@ window.DEBATE_DECKS = {
         "lore": "創造面對面互動，適合賣給家庭、社團與策略遊戲愛好者。",
         "imageId": "item_棋盤",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_棋盤.svg",
+        "iconAsset": "../assets/icons/items/item_棋盤.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1700,7 +1853,8 @@ window.DEBATE_DECKS = {
         "lore": "低成本創造放鬆時刻，適合賣給需要休息儀式的人。",
         "imageId": "item_茶包",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_茶包.svg",
+        "iconAsset": "../assets/icons/items/item_茶包.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1713,7 +1867,8 @@ window.DEBATE_DECKS = {
         "lore": "把普通吐司變成有風味的早餐，適合主打手作與幸福感。",
         "imageId": "item_果醬",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_果醬.svg",
+        "iconAsset": "../assets/icons/items/item_果醬.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1726,7 +1881,8 @@ window.DEBATE_DECKS = {
         "lore": "快速提供獎勵、安慰與心意，適合節慶與告白情境。",
         "imageId": "item_巧克力",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_巧克力.svg",
+        "iconAsset": "../assets/icons/items/item_巧克力.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1739,7 +1895,8 @@ window.DEBATE_DECKS = {
         "lore": "容易分享與送禮，適合主打體面、方便與節慶氣氛。",
         "imageId": "item_餅乾禮盒",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_餅乾禮盒.svg",
+        "iconAsset": "../assets/icons/items/item_餅乾禮盒.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1752,7 +1909,8 @@ window.DEBATE_DECKS = {
         "lore": "便宜但能表達個性，適合學生、手帳族與粉絲社群。",
         "imageId": "item_貼紙包",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_貼紙包.svg",
+        "iconAsset": "../assets/icons/items/item_貼紙包.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1765,7 +1923,8 @@ window.DEBATE_DECKS = {
         "lore": "把生活變得有計畫，適合賣給想自律或記錄成長的人。",
         "imageId": "item_手帳",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_手帳.svg",
+        "iconAsset": "../assets/icons/items/item_手帳.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1778,7 +1937,8 @@ window.DEBATE_DECKS = {
         "lore": "書寫儀式感強，適合賣給重視質感、簽名與收藏的人。",
         "imageId": "item_鋼筆",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_鋼筆.svg",
+        "iconAsset": "../assets/icons/items/item_鋼筆.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1791,7 +1951,8 @@ window.DEBATE_DECKS = {
         "lore": "讓作品或照片變得正式，適合賣給想保存重要畫面的人。",
         "imageId": "item_畫框",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_畫框.svg",
+        "iconAsset": "../assets/icons/items/item_畫框.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1804,7 +1965,8 @@ window.DEBATE_DECKS = {
         "lore": "賣的是音樂品味與收藏感，適合復古愛好者與粉絲。",
         "imageId": "item_唱片",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_唱片.svg",
+        "iconAsset": "../assets/icons/items/item_唱片.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1817,7 +1979,8 @@ window.DEBATE_DECKS = {
         "lore": "創造私人聲音空間，適合通勤、讀書與需要專注的人。",
         "imageId": "item_耳機",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_耳機.svg",
+        "iconAsset": "../assets/icons/items/item_耳機.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1830,7 +1993,8 @@ window.DEBATE_DECKS = {
         "lore": "承載移動與旅行期待，適合賣給旅人、學生與出差族。",
         "imageId": "item_行李箱",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_行李箱.svg",
+        "iconAsset": "../assets/icons/items/item_行李箱.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1843,7 +2007,8 @@ window.DEBATE_DECKS = {
         "lore": "把起床變成明確承諾，適合賣給想改善作息的人。",
         "imageId": "item_鬧鐘",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_鬧鐘.svg",
+        "iconAsset": "../assets/icons/items/item_鬧鐘.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1856,7 +2021,8 @@ window.DEBATE_DECKS = {
         "lore": "提供溫暖與安全感，適合居家、露營與禮物情境。",
         "imageId": "item_毛毯",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_毛毯.svg",
+        "iconAsset": "../assets/icons/items/item_毛毯.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1869,7 +2035,8 @@ window.DEBATE_DECKS = {
         "lore": "保護桌面也建立餐桌風格，適合賣給重視生活感的人。",
         "imageId": "item_餐墊",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_餐墊.svg",
+        "iconAsset": "../assets/icons/items/item_餐墊.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1882,7 +2049,8 @@ window.DEBATE_DECKS = {
         "lore": "整理文具並展現質感，適合學生、上班族與手作愛好者。",
         "imageId": "item_皮革筆袋",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_皮革筆袋.svg",
+        "iconAsset": "../assets/icons/items/item_皮革筆袋.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1895,7 +2063,8 @@ window.DEBATE_DECKS = {
         "lore": "小小一張就能改變空間氣味，適合放在衣櫃、書桌或禮物中。",
         "imageId": "item_香氛卡片",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_香氛卡片.svg",
+        "iconAsset": "../assets/icons/items/item_香氛卡片.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1908,7 +2077,8 @@ window.DEBATE_DECKS = {
         "lore": "把臨時購物變得方便又環保，適合通勤者、市場採買者與旅行者。",
         "imageId": "item_折疊購物袋",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_折疊購物袋.svg",
+        "iconAsset": "../assets/icons/items/item_折疊購物袋.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1921,7 +2091,8 @@ window.DEBATE_DECKS = {
         "lore": "讓閱讀進度變得精緻可保存，適合送給學生、讀者與文具收藏者。",
         "imageId": "item_金屬書籤",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_金屬書籤.svg",
+        "iconAsset": "../assets/icons/items/item_金屬書籤.png",
+        "tokenIcon": "",
         "image": "",
         "rarity": "N",
         "tags": [
@@ -1941,6 +2112,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -1951,6 +2123,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -1961,6 +2134,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -1971,6 +2145,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -1981,6 +2156,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -1991,6 +2167,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2001,6 +2178,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2011,6 +2189,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2021,6 +2200,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2031,6 +2211,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2041,6 +2222,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2051,6 +2233,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2061,6 +2244,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2071,6 +2255,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2081,6 +2266,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2091,6 +2277,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2107,6 +2294,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_Zombie",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_zombie.svg",
+        "tokenIcon": "",
         "image": "../assets/icons/worlds/worlds_Zombie.png",
         "rarity": "A",
         "tags": [
@@ -2121,6 +2309,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_mysteryplanet",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_mystery_planet.svg",
+        "tokenIcon": "",
         "image": "../assets/icons/worlds/worlds_mysteryplanet.png",
         "rarity": "A",
         "tags": [
@@ -2135,6 +2324,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_jungle",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_jungle.svg",
+        "tokenIcon": "",
         "image": "../assets/icons/worlds/worlds_jungle.png",
         "rarity": "A",
         "tags": [
@@ -2149,6 +2339,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_desert ",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_desert.svg",
+        "tokenIcon": "",
         "image": "../assets/icons/worlds/worlds_desert .png",
         "rarity": "A",
         "tags": [
@@ -2163,6 +2354,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_uninhabited island",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_island.svg",
+        "tokenIcon": "",
         "image": "../assets/icons/worlds/worlds_uninhabited island.png",
         "rarity": "A",
         "tags": [
@@ -2177,6 +2369,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_jungle",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_ice.svg",
+        "tokenIcon": "",
         "image": "../assets/icons/worlds/worlds_jungle.png",
         "rarity": "A",
         "tags": [
@@ -2191,6 +2384,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_cave",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_cave.svg",
+        "tokenIcon": "",
         "image": "../assets/icons/worlds/worlds_cave.png",
         "rarity": "A",
         "tags": [
@@ -2205,6 +2399,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_hospital",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_hospital.svg",
+        "tokenIcon": "",
         "image": "../assets/icons/worlds/worlds_hospital.png",
         "rarity": "A",
         "tags": [
@@ -2219,6 +2414,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_Villa",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_rain_mountain.svg",
+        "tokenIcon": "",
         "image": "../assets/icons/worlds/worlds_Villa.png",
         "rarity": "B",
         "tags": [
@@ -2233,6 +2429,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_space shuttle",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_spaceship.svg",
+        "tokenIcon": "",
         "image": "../assets/icons/worlds/worlds_space shuttle.png",
         "rarity": "B",
         "tags": [
@@ -2247,6 +2444,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_Underwater",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_undersea_base.svg",
+        "tokenIcon": "",
         "image": "../assets/icons/worlds/worlds_Underwater.png",
         "rarity": "B",
         "tags": [
@@ -2261,6 +2459,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_Ring of Fire",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_volcano.svg",
+        "tokenIcon": "",
         "image": "../assets/icons/worlds/worlds_Ring of Fire.png",
         "rarity": "B",
         "tags": [
@@ -2275,6 +2474,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_castle",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_castle.svg",
+        "tokenIcon": "",
         "image": "../assets/icons/worlds/worlds_castle.png",
         "rarity": "B",
         "tags": [
@@ -2289,6 +2489,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_FutureCity",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_future_city.svg",
+        "tokenIcon": "",
         "image": "../assets/icons/worlds/worlds_FutureCity.png",
         "rarity": "B",
         "tags": [
@@ -2303,6 +2504,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_maze",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_maze.svg",
+        "tokenIcon": "",
         "image": "../assets/icons/worlds/worlds_maze.png",
         "rarity": "B",
         "tags": [
@@ -2317,6 +2519,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_Abandoned Campus",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_haunted_school.svg",
+        "tokenIcon": "",
         "image": "../assets/icons/worlds/worlds_Abandoned Campus.png",
         "rarity": "A",
         "tags": [
@@ -2331,6 +2534,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_Ancient battlefield",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_battlefield.svg",
+        "tokenIcon": "",
         "image": "../assets/icons/worlds/worlds_Ancient battlefield.png",
         "rarity": "A",
         "tags": [
@@ -2345,6 +2549,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_Cruise ship",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_cruise.svg",
+        "tokenIcon": "",
         "image": "../assets/icons/worlds/worlds_Cruise ship.png",
         "rarity": "B",
         "tags": [
@@ -2359,6 +2564,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_CloudCity",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_cloud_city.svg",
+        "tokenIcon": "",
         "image": "../assets/icons/worlds/worlds_CloudCity.png",
         "rarity": "B",
         "tags": [
@@ -2373,6 +2579,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_laboratory",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_lab.svg",
+        "tokenIcon": "",
         "image": "../assets/icons/worlds/worlds_laboratory.png",
         "rarity": "A",
         "tags": [
@@ -2387,6 +2594,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_Raft",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_raft.svg",
+        "tokenIcon": "",
         "image": "../assets/icons/worlds/worlds_Raft.png",
         "rarity": "A",
         "tags": [
@@ -2407,6 +2615,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "✚",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2417,6 +2626,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "⚙",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2427,6 +2637,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "◍",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2437,6 +2648,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "✎",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2447,6 +2659,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "▲",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2457,6 +2670,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "☘",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2467,6 +2681,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "§",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2477,6 +2692,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "♡",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2487,6 +2703,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "✦",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2497,6 +2714,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "{}",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2507,6 +2725,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "▧",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2517,6 +2736,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "✚",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2527,6 +2747,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "◆",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2537,6 +2758,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "文",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2547,6 +2769,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "☘",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2557,6 +2780,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "✦",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2567,6 +2791,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "△",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2577,6 +2802,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "$",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2587,6 +2813,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "◈",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2597,6 +2824,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "↯",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2607,6 +2835,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "○",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2617,6 +2846,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "○",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2627,6 +2857,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "○",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2637,6 +2868,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
+        "tokenIcon": "○",
         "image": "",
         "rarity": "A",
         "tags": []

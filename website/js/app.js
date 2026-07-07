@@ -442,6 +442,9 @@ function tokenMarkup(card, checked) {
 }
 
 function tokenIconMarkup(card) {
+  if (card.tokenIcon) {
+    return `<span class="token-symbol" aria-hidden="true">${card.tokenIcon}</span>`;
+  }
   const image = card.iconAsset || "";
   if (image) {
     return `<img class="token-thumb" src="${image}" alt="" aria-hidden="true" />`;

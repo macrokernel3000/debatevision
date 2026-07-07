@@ -28,6 +28,11 @@ const headerAliases = {
   "卡牌圖示": "icon",
   "圖示": "icon",
   "icon": "icon",
+  "抽選池圖示": "token_icon",
+  "抽選圖示": "token_icon",
+  "小圖示": "token_icon",
+  "token_icon": "token_icon",
+  "tokenIcon": "token_icon",
   "圖片": "image",
   "image": "image",
   "稀有度": "rarity",
@@ -130,8 +135,8 @@ function assetPathFor(item) {
 
   const iconDir = resolve(root, "assets", "icons", item.deck_id);
   const extensions = explicitExtension
-    ? [explicitExtension, ...[".svg", ".png", ".webp", ".jpg", ".jpeg"].filter((extension) => extension !== explicitExtension)]
-    : [".svg", ".png", ".webp", ".jpg", ".jpeg"];
+    ? [explicitExtension, ...[".png", ".webp", ".jpg", ".jpeg", ".svg"].filter((extension) => extension !== explicitExtension)]
+    : [".png", ".webp", ".jpg", ".jpeg", ".svg"];
   const directBase = resolve(iconDir, icon);
 
   for (const extension of extensions) {
@@ -149,7 +154,7 @@ function assetPathFor(item) {
     }
   }
 
-  return `../assets/icons/${item.deck_id}/${icon}.svg`;
+  return "";
 }
 
 function imagePathFor(item) {
@@ -214,6 +219,7 @@ function buildDecks() {
       imageId,
       icon: iconAsset ? "" : item.icon,
       iconAsset,
+      tokenIcon: item.token_icon || "",
       image,
       rarity: item.rarity || "C",
       tags: item.tags ? item.tags.split("|").map((tag) => tag.trim()).filter(Boolean) : []

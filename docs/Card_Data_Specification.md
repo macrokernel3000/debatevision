@@ -23,13 +23,13 @@ data/cards/
 支援中文欄位與英文欄位。建議使用中文欄位：
 
 ```csv
-牌組ID,牌組名稱,牌組圖示,卡牌名稱,說明,卡牌圖示,圖片,稀有度,標籤
+牌組ID,牌組名稱,牌組圖示,卡牌名稱,說明,卡牌圖示,抽選池圖示,圖片,稀有度,標籤
 ```
 
 對應英文欄位：
 
 ```csv
-deck_id,deck_label,deck_icon,name,description,icon,image,rarity,tags
+deck_id,deck_label,deck_icon,name,description,icon,token_icon,image,rarity,tags
 ```
 
 ## 欄位說明
@@ -39,7 +39,8 @@ deck_id,deck_label,deck_icon,name,description,icon,image,rarity,tags
 - `牌組圖示 / deck_icon`：沒有單張圖示時的預設符號。
 - `卡牌名稱 / name`：卡牌名稱。
 - `說明 / description`：卡牌文字。
-- `卡牌圖示 / icon`：icon id，例如 `item_hammer` 或 `item_捕鼠夾`。可以不填副檔名；若已經填成 `item_捕鼠夾.png`，網站也會自動辨識。
+- `卡牌圖示 / icon`：抽出卡牌上的主要圖示。建議填圖片 id，例如 `item_hammer` 或 `item_捕鼠夾`。可以不填副檔名；若已經填成 `item_捕鼠夾.png`，網站也會自動辨識。若找不到同名圖片，會當成文字或符號顯示。
+- `抽選池圖示 / token_icon`：底下抽選池的小符號。可以直接填文字、符號或 emoji，例如 `✚`、`♡`、`文`、`🧠`。留空時會優先使用卡牌圖片；沒有圖片時使用網站內建符號或牌組圖示。
 - `圖片 / image`：特殊圖片路徑。一般物品卡可留空；異境卡、場地卡建議可放 16:9 橫向場景圖。
 - `稀有度 / rarity`：固定使用 `A`、`B`、`C`。建議 `A` 是最特別、`B` 是中階、`C` 是常見。留空時網站會當作 `C`。
 - `標籤 / tags`：用 `|` 分隔。
