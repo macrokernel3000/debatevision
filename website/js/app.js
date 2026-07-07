@@ -1,6 +1,7 @@
 const decks = window.DEBATE_DECKS;
 const modes = window.DEBATE_MODES;
 const savedImageLayouts = window.DEBATE_IMAGE_LAYOUTS || {};
+const uiTexts = window.DEBATE_UI_TEXTS || {};
 const modeLifecycle = window.DEBATE_MODE_LIFECYCLE || {};
 const { iconFor } = window;
 
@@ -22,6 +23,54 @@ let selectedCardKeysByScope = {};
 let imageLayouts = mergeImageLayouts(savedImageLayouts, readDraftLayouts());
 let selectedEditCard = null;
 let selectedEditTarget = null;
+
+const defaultUiTexts = {
+  "section.drawn.eyebrow": "Drawn Cards",
+  "section.drawn.title": "本輪卡牌",
+  "section.coach.eyebrow": "Coach Kit",
+  "section.coach.title": "教練提示",
+  "section.flow.title": "回合流程",
+  "section.library.eyebrow": "Lexicon",
+  "section.library.title": "本局抽選池",
+  "button.pool.selectAll": "全選目前牌組",
+  "button.pool.clear": "取消目前牌組",
+  "button.pool.reset": "重置本玩法",
+  "label.drawCount": "抽取數量",
+  "control.note.default": "牌組已依玩法固定；下方抽選池可取消本局不想抽到的卡。",
+  "reel.ready.title": "準備抽卡",
+  "reel.ready.subtitle": "抽出後，這裡會顯示本輪異境。",
+  "empty.default": "{drawLabel}。<br />下方抽選池可以控制本局哪些卡會被抽到。",
+  "warning.pool": "本局抽選池不夠了。<br />請在下方抽選池重新勾選卡牌，或按「重置本玩法」。",
+  "secret.result.eyebrow": "答案公布",
+  "secret.result.title": "原來我們在：{name}",
+  "secret.result.body": "可以回頭檢查：哪些問題最早把範圍縮小？哪些問題其實不夠精準？",
+  "secret.restart": "再來一場",
+  "secret.setup.eyebrow": "秘密詞條",
+  "secret.setup.title": "請選定藏身處",
+  "secret.setup.body": "下方會依目前啟用的「{deckLabel}」排出 1-{total} 號。輸入秘密編號後，即可開始活動。",
+  "secret.answer.label": "秘密編號",
+  "secret.showNumber": "顯示編號",
+  "secret.reveal": "直接公布答案",
+  "secret.correct": "就是這裡",
+  "secret.wrong": "不是這裡",
+  "secret.status.set": "答案已設定。投影時可保持隱藏。",
+  "secret.status.prompt": "請輸入 1-{total} 的秘密編號。",
+  "secret.status.needAnswer": "請先輸入秘密編號，再開始公布。"
+};
+
+function uiText(key, vars = {}) {
+  let text = uiTexts[key] || defaultUiTexts[key] || key;
+  for (const [name, value] of Object.entries(vars)) {
+    text = text.replaceAll(`{${name}}`, value);
+  }
+  return text;
+}
+
+function renderStaticUiText() {
+  document.querySelectorAll("[data-ui-text]").forEach((element) => {
+    element.textContent = uiText(element.dataset.uiText);
+  });
+}
 
 const gameNav = document.querySelector("#gameNav");
 const modeGrid = document.querySelector("#modeGrid");
@@ -261,8 +310,18 @@ function selectedCardsFrom(deckId) {
   return cardsFrom(deckId).filter((card) => selectedKeys.has(cardKey(card)));
 }
 
+function availableDeckIdsForMode(mode = activeMode) {
+  if (mode.cardMode === "secretPlace") {
+    const ids = Array.isArray(mode.availableDecks) && mode.availableDecks.length
+      ? mode.availableDecks
+      : Object.keys(decks);
+    return ids.filter((deckId) => decks[deckId]);
+  }
+  return [mode.secondaryDeck, mode.primaryDeck].filter(Boolean);
+}
+
 function resetModeSelections() {
-  for (const deckId of [activeMode.secondaryDeck, activeMode.primaryDeck].filter(Boolean)) {
+  for (const deckId of availableDeckIdsForMode()) {
     setDeckSelection(deckId, true);
   }
 }
@@ -335,7 +394,7 @@ function renderActivity() {
   controlBand.hidden = activeMode.cardMode === "secretPlace";
   controlNote.textContent = activeMode.cardMode === "secretPlace"
     ? lifecycleFor().setup
-    : "牌組已依玩法固定；下方抽選池可取消本局不想抽到的卡。";
+    : uiText("control.note.default");
 }
 
 function sceneImageFor(card) {
@@ -343,8 +402,8 @@ function sceneImageFor(card) {
 }
 
 function renderReelCard(card = currentStageCard, spinningName = "") {
-  const title = spinningName || card?.name || "準備抽卡";
-  const subtitle = card?.lore || "抽出後，這裡會顯示本輪異境。";
+  const title = spinningName || card?.name || uiText("reel.ready.title");
+  const subtitle = card?.lore || uiText("reel.ready.subtitle");
   const image = sceneImageFor(card);
   const target = editTargetForCard(card);
   const editAttributes = target
@@ -394,7 +453,7 @@ function renderPrompts() {
 }
 
 function activeDeckIds() {
-  return [activeMode.secondaryDeck, activeMode.primaryDeck].filter(Boolean);
+  return availableDeckIdsForMode();
 }
 
 function renderLibraryTools() {
@@ -656,11 +715,11 @@ function exportCurrentDeckLayout() {
 }
 
 function renderEmptyState() {
-  cardGrid.innerHTML = `<div class="empty-state">${activeMode.drawLabel}。<br />下方抽選池可以控制本局哪些卡會被抽到。</div>`;
+  cardGrid.innerHTML = `<div class="empty-state">${uiText("empty.default", { drawLabel: activeMode.drawLabel })}</div>`;
 }
 
 function renderPoolWarning() {
-  cardGrid.innerHTML = `<div class="empty-state">本局抽選池不夠了。<br />請在下方抽選池重新勾選卡牌，或按「重置本玩法」。</div>`;
+  cardGrid.innerHTML = `<div class="empty-state">${uiText("warning.pool")}</div>`;
   return [];
 }
 
@@ -689,6 +748,7 @@ function renderDuel(cards) {
 function renderSecretPlace(card, revealed = false) {
   secretRevealed = revealed;
   const places = selectedCardsFrom(activeLibrary);
+  const deckLabel = decks[activeLibrary]?.label || activeMode.primaryLabel || "詞庫";
   if (!revealed) card = secretCardFromIndex(secretAnswerIndex);
   lastSecretCard = card || null;
 
@@ -696,10 +756,10 @@ function renderSecretPlace(card, revealed = false) {
     cardGrid.innerHTML = `
       <div class="secret-board is-revealed">
         <div class="secret-banner">
-          <p class="eyebrow">答案公布</p>
-          <h2>原來我們在：${card.name}</h2>
-          <p>可以回頭檢查：哪些問題最早把範圍縮小？哪些問題其實不夠精準？</p>
-          <button class="reveal-action restart-action" data-restart-secret type="button">再來一場</button>
+          <p class="eyebrow">${uiText("secret.result.eyebrow")}</p>
+          <h2>${uiText("secret.result.title", { name: card.name })}</h2>
+          <p>${uiText("secret.result.body")}</p>
+          <button class="reveal-action restart-action" data-restart-secret type="button">${uiText("secret.restart")}</button>
         </div>
         <div class="secret-place-options">
           ${placeOptionsMarkup(card, true, places)}
@@ -714,18 +774,18 @@ function renderSecretPlace(card, revealed = false) {
   const chosenNumber = Number(secretAnswerIndex);
   const hasValidAnswer = Number.isInteger(chosenNumber) && chosenNumber >= 1 && chosenNumber <= total;
   const statusText = hasValidAnswer
-    ? "答案已設定。投影時可保持隱藏。"
-    : `請輸入 1-${total || 0} 的秘密編號。`;
+    ? uiText("secret.status.set")
+    : uiText("secret.status.prompt", { total: total || 0 });
 
   cardGrid.innerHTML = `
     <div class="secret-board">
       <div class="secret-banner">
-        <p class="eyebrow">秘密場地</p>
-        <h2>請選定藏身處</h2>
-        <p>下方會依目前啟用的場地排出 1-${total} 號。輸入秘密編號後，即可開始活動。</p>
+        <p class="eyebrow">${uiText("secret.setup.eyebrow")}</p>
+        <h2>${uiText("secret.setup.title")}</h2>
+        <p>${uiText("secret.setup.body", { total, deckLabel })}</p>
         <div class="secret-teacher-panel">
           <label class="secret-answer-field">
-            <span>秘密編號</span>
+            <span>${uiText("secret.answer.label")}</span>
             <input
               id="secretAnswerIndex"
               type="${secretShowAnswerNumber ? "text" : "password"}"
@@ -740,11 +800,11 @@ function renderSecretPlace(card, revealed = false) {
           </label>
           <label class="secret-show-toggle">
             <input id="secretShowAnswerNumber" type="checkbox" ${secretShowAnswerNumber ? "checked" : ""} />
-            <span>顯示編號</span>
+            <span>${uiText("secret.showNumber")}</span>
           </label>
           <p class="secret-answer-status" id="secretAnswerStatus">${statusText}</p>
         </div>
-        <button class="reveal-action" data-reveal-secret type="button" ${hasValidAnswer ? "" : "disabled"}>直接公布答案</button>
+        <button class="reveal-action" data-reveal-secret type="button" ${hasValidAnswer ? "" : "disabled"}>${uiText("secret.reveal")}</button>
       </div>
       <div class="secret-place-options">
         ${placeOptionsMarkup(card, false, places)}
@@ -763,10 +823,10 @@ function placeOptionsMarkup(answerCard, revealed, places = selectedCardsFrom(act
       revealed && isAnswer ? "is-correct" : "",
     ].filter(Boolean).join(" ");
     const stateText = revealed && isAnswer
-      ? "<span>就是這裡</span>"
+      ? `<span>${uiText("secret.correct")}</span>`
       : "";
     return `
-      <button class="secret-place-option ${stateClass}" data-place="${place.name}" type="button">
+      <button class="secret-place-option ${stateClass}" data-card-key="${cardKey(place)}" type="button">
         <b class="secret-place-number">${index + 1}</b>
         ${tokenIconMarkup(place)}
         <strong>${place.name}</strong>
@@ -796,12 +856,12 @@ function updateSecretAnswerState() {
 
   const total = selectedCardsFrom(activeLibrary).length;
   if (lastSecretCard) {
-    status.textContent = "答案已設定。投影時可保持隱藏。";
+    status.textContent = uiText("secret.status.set");
     revealButton.disabled = false;
     return;
   }
 
-  status.textContent = `請輸入 1-${total || 0} 的秘密編號。`;
+  status.textContent = uiText("secret.status.prompt", { total: total || 0 });
   revealButton.disabled = true;
 }
 
@@ -828,17 +888,17 @@ function bindSecretPlaceOptions(answerCard) {
 
     if (!lastSecretCard) {
       const status = cardGrid.querySelector("#secretAnswerStatus");
-      if (status) status.textContent = "請先輸入秘密編號，再開始公布。";
+      if (status) status.textContent = uiText("secret.status.needAnswer");
       return;
     }
 
-    if (option.dataset.place === lastSecretCard.name) {
+    if (option.dataset.cardKey === cardKey(lastSecretCard)) {
       renderSecretPlace(lastSecretCard, true);
       return;
     }
 
     option.classList.add("is-wrong");
-    if (!option.querySelector("span")) option.insertAdjacentHTML("beforeend", "<span>不是這裡</span>");
+    if (!option.querySelector("span")) option.insertAdjacentHTML("beforeend", `<span>${uiText("secret.wrong")}</span>`);
   });
 
   const revealButton = cardGrid.querySelector("[data-reveal-secret]");
@@ -857,6 +917,13 @@ function restartSecretPlaceRound() {
   secretRevealed = false;
   lastSecretCard = null;
   renderSecretPlace(null, false);
+}
+
+function resetSecretPlaceState() {
+  if (activeMode.cardMode !== "secretPlace") return;
+  secretAnswerIndex = "";
+  secretRevealed = false;
+  lastSecretCard = null;
 }
 
 function refreshSecretPlaceBoard() {
@@ -900,9 +967,9 @@ function drawResult() {
     secretRevealed = false;
     currentStageCard = {
       name: "秘密選號已開啟",
-      lore: `目前有 ${places.length} 個場地候選，請輸入秘密編號。`,
+      lore: `目前有 ${places.length} 個「${decks[activeLibrary]?.label || "詞庫"}」候選，請輸入秘密編號。`,
       icon: activeMode.icon,
-      deckLabel: activeMode.primaryLabel
+      deckLabel: decks[activeLibrary]?.label || activeMode.primaryLabel
     };
     renderSecretPlace(lastSecretCard, false);
     return [currentStageCard];
@@ -994,7 +1061,12 @@ libraryTools.addEventListener("click", (event) => {
   const chip = event.target.closest("[data-preview]");
   if (!chip) return;
   activePreview = chip.dataset.preview;
+  if (activeMode.cardMode === "secretPlace") {
+    activeLibrary = activePreview;
+    resetSecretPlaceState();
+  }
   renderAll();
+  refreshSecretPlaceBoard();
 });
 
 tokenCloud.addEventListener("change", (event) => {
@@ -1006,6 +1078,7 @@ tokenCloud.addEventListener("change", (event) => {
   } else {
     selectedKeysForDeck(activePreview).delete(checkbox.dataset.cardKey);
   }
+  resetSecretPlaceState();
   renderAll();
   refreshSecretPlaceBoard();
 });
@@ -1017,6 +1090,7 @@ tokenCloud.addEventListener("click", (event) => {
   const checked = button.dataset.rarityAction === "select";
   const cards = cardsFrom(activePreview).filter((card) => (card.rarity || "C") === rarity);
   setCardsSelection(activePreview, cards, checked);
+  resetSecretPlaceState();
   renderAll();
   refreshSecretPlaceBoard();
 });
@@ -1058,21 +1132,25 @@ reel.addEventListener("click", (event) => {
 
 selectAllCards.addEventListener("click", () => {
   setDeckSelection(activePreview, true);
+  resetSecretPlaceState();
   renderAll();
   refreshSecretPlaceBoard();
 });
 
 clearCards.addEventListener("click", () => {
   setDeckSelection(activePreview, false);
+  resetSecretPlaceState();
   renderAll();
   refreshSecretPlaceBoard();
 });
 
 resetActivePool.addEventListener("click", () => {
   resetModeSelections();
+  resetSecretPlaceState();
   renderAll();
   refreshSecretPlaceBoard();
 });
 
 ensureEditPanel();
+renderStaticUiText();
 setMode(activeMode.id);

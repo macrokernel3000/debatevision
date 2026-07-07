@@ -191,20 +191,27 @@ window.DEBATE_MODES = [
     "title": "我在哪裡",
     "icon": "?",
     "tone": "cosmos",
-    "track": "秘密場地",
+    "track": "秘密詞條",
     "image": "../assets/backgrounds/modes/where-am-i.png",
     "primaryDeck": "locations",
+    "availableDecks": [
+      "locations",
+      "worlds",
+      "items",
+      "roles",
+      "creatures"
+    ],
     "secondaryDeck": "",
-    "primaryLabel": "場地卡",
+    "primaryLabel": "任意詞庫",
     "secondaryLabel": "",
-    "drawLabel": "選定藏身處",
+    "drawLabel": "開啟秘密選號",
     "cardMode": "secretPlace",
     "fixedCount": 1,
-    "description": "系統列出本局啟用的場地編號，用隱藏輸入設定答案。學生從候選位置中提問推理，最後公布結果。",
+    "description": "選定任一詞庫後，系統列出本局啟用的候選編號，用隱藏輸入設定答案。學生只能提問推理，最後公布結果。",
     "prompts": [
       [
         "只能提問",
-        "學生不能直接猜答案，必須先問可判斷場地特徵的問題。"
+        "學生不能直接猜答案，必須先問可判斷詞條特徵的問題。"
       ],
       [
         "教師回覆",
@@ -212,15 +219,16 @@ window.DEBATE_MODES = [
       ],
       [
         "最後公布",
-        "先輸入秘密編號，再逐一點選候選位置，公布不是這裡或就是這裡。"
+        "先輸入秘密編號，再逐一點選候選詞條，公布不是這裡或就是這裡。"
       ]
     ],
     "flow": [
+      "選定本局詞庫與候選範圍",
       "輸入秘密編號，必要時勾選顯示編號確認",
       "學生輪流問問題",
       "教師只給有限回答",
       "累積線索後開放猜測",
-      "點選候選位置公布結果"
+      "點選候選詞條公布結果"
     ],
     "cardHooks": [
       "觀察 {name} 可能透露的環境線索。",

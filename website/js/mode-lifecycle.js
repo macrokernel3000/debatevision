@@ -30,8 +30,8 @@ window.DEBATE_MODE_LIFECYCLE = {
     restart: "抽新商品，或要求同一商品改賣給不同族群。"
   },
   "where-am-i": {
-    setup: "輸入秘密編號，選定藏身處。",
-    active: "學生只能用問題推理位置。",
+    setup: "選定詞庫與秘密編號。",
+    active: "學生只能用問題推理答案。",
     result: "逐一公布不是這裡或就是這裡。",
     restart: "按再來一場，重新輸入秘密編號。"
   }

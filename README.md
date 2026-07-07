@@ -101,6 +101,12 @@ assets/icons/items/item_hammer.svg
 data/content/玩法文案.csv
 ```
 
+通用介面文字可以直接改：
+
+```text
+data/content/介面文字.csv
+```
+
 改完後雙擊：
 
 ```text
@@ -169,6 +175,7 @@ data/content/玩法文案.csv
 data/generated/decks.js
 data/generated/modes.js
 data/generated/image-layouts.js
+data/generated/ui-texts.js
 ```
 
 `data/generated/` 是自動產物，不手動修改。
@@ -181,6 +188,7 @@ data/generated/image-layouts.js
 data/generated/decks.js
 data/generated/modes.js
 data/generated/image-layouts.js
+data/generated/ui-texts.js
 ```
 
 上傳前可以雙擊：

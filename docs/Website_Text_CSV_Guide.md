@@ -6,6 +6,12 @@
 data/content/玩法文案.csv
 ```
 
+網站上的通用介面文字可以在這裡修改：
+
+```text
+data/content/介面文字.csv
+```
+
 改完後雙擊：
 
 ```text
@@ -16,6 +22,7 @@ data/content/玩法文案.csv
 
 ```text
 data/generated/modes.js
+data/generated/ui-texts.js
 ```
 
 ## 欄位說明
@@ -127,3 +134,53 @@ where-am-i,玩法背景,1,,../assets/backgrounds/modes/where-am-i.png
 ```
 
 新手建議優先改 CSV。這種圖片是玩法首頁背景，不是卡牌圖示。
+
+## 介面文字
+
+`介面文字.csv` 用來修改不是某一個玩法專屬、但會出現在網站上的文字。
+
+欄位：
+
+```text
+文字ID,內容,說明
+```
+
+例如：
+
+```text
+section.drawn.title,本輪卡牌,本輪卡牌標題
+secret.restart,再來一場,我在哪裡重開按鈕
+secret.reveal,直接公布答案,我在哪裡公布按鈕
+```
+
+可以改的常見文字包含：
+
+- `本輪卡牌`
+- `教練提示`
+- `回合流程`
+- `本局抽選池`
+- `全選目前牌組`
+- `取消目前牌組`
+- `重置本玩法`
+- `再來一場`
+- `直接公布答案`
+
+部分文字支援占位符：
+
+```text
+{name}
+{total}
+{drawLabel}
+```
+
+例如：
+
+```text
+secret.result.title,原來我們在：{name},我在哪裡公布答案標題
+```
+
+抽到 `監獄` 時會顯示：
+
+```text
+原來我們在：監獄
+```

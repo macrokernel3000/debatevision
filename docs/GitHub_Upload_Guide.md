@@ -13,6 +13,8 @@
 ```text
 data/generated/decks.js
 data/generated/modes.js
+data/generated/image-layouts.js
+data/generated/ui-texts.js
 ```
 
 ## 改詞彙後需要上傳
@@ -22,8 +24,11 @@ data/generated/modes.js
 ```text
 data/cards/*.csv
 data/content/玩法文案.csv
+data/content/介面文字.csv
 data/generated/decks.js
 data/generated/modes.js
+data/generated/image-layouts.js
+data/generated/ui-texts.js
 assets/icons/
 assets/backgrounds/
 ```
@@ -37,8 +42,11 @@ assets/backgrounds/
 ```text
 data/modes/*.json
 data/content/玩法文案.csv
+data/content/介面文字.csv
 data/generated/modes.js
 data/generated/decks.js
+data/generated/image-layouts.js
+data/generated/ui-texts.js
 ```
 
 ## 改畫面或程式後需要上傳

@@ -1,0 +1,32 @@
+文字ID,內容,說明
+section.drawn.eyebrow,Drawn Cards,本輪卡牌英文小標
+section.drawn.title,本輪卡牌,本輪卡牌標題
+section.coach.eyebrow,Coach Kit,教練提示英文小標
+section.coach.title,教練提示,教練提示標題
+section.flow.title,回合流程,回合流程標題
+section.library.eyebrow,Lexicon,抽選池英文小標
+section.library.title,本局抽選池,抽選池標題
+button.pool.selectAll,全選目前牌組,抽選池全選按鈕
+button.pool.clear,取消目前牌組,抽選池取消按鈕
+button.pool.reset,重置本玩法,抽選池重置按鈕
+label.drawCount,抽取數量,抽取數量欄位
+control.note.default,牌組已依玩法固定；下方抽選池可取消本局不想抽到的卡。,一般玩法控制提示
+reel.ready.title,準備抽卡,抽卡機預設標題
+reel.ready.subtitle,抽出後，這裡會顯示本輪異境。,抽卡機預設說明
+empty.default,{drawLabel}。<br />下方抽選池可以控制本局哪些卡會被抽到。,還沒抽卡時的提示
+warning.pool,本局抽選池不夠了。<br />請在下方抽選池重新勾選卡牌，或按「重置本玩法」。,
+secret.result.eyebrow,答案公布,我在哪裡公布答案小標
+secret.result.title,原來我們在：{name},我在哪裡公布答案標題
+secret.result.body,可以回頭檢查：哪些問題最早把範圍縮小？哪些問題其實不夠精準？,我在哪裡公布答案說明
+secret.restart,再來一場,我在哪裡重開按鈕
+secret.setup.eyebrow,秘密詞條,我在哪裡設定小標
+secret.setup.title,請選定藏身處,我在哪裡設定標題
+secret.setup.body,下方會依目前啟用的「{deckLabel}」排出 1-{total} 號。輸入秘密編號後，即可開始活動。,我在哪裡設定說明
+secret.answer.label,秘密編號,我在哪裡輸入欄位標籤
+secret.showNumber,顯示編號,我在哪裡顯示編號
+secret.reveal,直接公布答案,我在哪裡公布按鈕
+secret.correct,就是這裡,我在哪裡正確答案
+secret.wrong,不是這裡,我在哪裡錯誤答案
+secret.status.set,答案已設定。投影時可保持隱藏。,我在哪裡已設定提示
+secret.status.prompt,請輸入 1-{total} 的秘密編號。,我在哪裡尚未輸入提示
+secret.status.needAnswer,請先輸入秘密編號，再開始公布。,我在哪裡點選前提示

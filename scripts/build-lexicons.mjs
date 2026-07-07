@@ -6,6 +6,7 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const cardsDir = resolve(root, "data", "cards");
 const modesDir = resolve(root, "data", "modes");
 const modeContentPath = resolve(root, "data", "content", "玩法文案.csv");
+const uiContentPath = resolve(root, "data", "content", "介面文字.csv");
 const imageLayoutsDir = resolve(root, "data", "image-layouts");
 const generatedDir = resolve(root, "data", "generated");
 const fallbackCsvPath = resolve(root, "docs", "archive", "legacy", "總詞庫備份.csv");
@@ -42,6 +43,9 @@ const headerAliases = {
   "玩法ID": "mode_id",
   "玩法代號": "mode_id",
   "mode_id": "mode_id",
+  "文字ID": "key",
+  "文字代號": "key",
+  "key": "key",
   "欄位": "field",
   "field": "field",
   "序號": "order",
@@ -51,7 +55,11 @@ const headerAliases = {
   "title": "title",
   "內容": "content",
   "文字": "content",
-  "content": "content"
+  "content": "content",
+  "介面文字": "text",
+  "text": "text",
+  "備註": "note",
+  "note": "note"
 };
 
 function parseCsv(text) {
@@ -347,11 +355,25 @@ function applyModeContent(modes) {
   });
 }
 
+function buildUiTexts() {
+  if (!existsSync(uiContentPath)) return {};
+
+  const texts = {};
+  for (const row of csvObjects(readFileSync(uiContentPath, "utf8"))) {
+    const key = (row.key || "").trim();
+    const value = (row.content || row.text || "").trim();
+    if (!key) continue;
+    texts[key] = value;
+  }
+  return texts;
+}
+
 mkdirSync(generatedDir, { recursive: true });
 
 const decks = buildDecks();
 const modes = buildModes();
 const imageLayouts = buildImageLayouts();
+const uiTexts = buildUiTexts();
 
 writeFileSync(
   resolve(generatedDir, "decks.js"),
@@ -371,6 +393,13 @@ writeFileSync(
   "utf8"
 );
 
+writeFileSync(
+  resolve(generatedDir, "ui-texts.js"),
+  `window.DEBATE_UI_TEXTS = ${JSON.stringify(uiTexts, null, 2)};\n`,
+  "utf8"
+);
+
 console.log(`已更新 ${resolve(generatedDir, "decks.js")}`);
 console.log(`已更新 ${resolve(generatedDir, "modes.js")}`);
 console.log(`已更新 ${resolve(generatedDir, "image-layouts.js")}`);
+console.log(`已更新 ${resolve(generatedDir, "ui-texts.js")}`);
