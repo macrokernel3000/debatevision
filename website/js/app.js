@@ -1,6 +1,7 @@
 const decks = window.DEBATE_DECKS;
 const modes = window.DEBATE_MODES;
 const savedImageLayouts = window.DEBATE_IMAGE_LAYOUTS || {};
+const modeLifecycle = window.DEBATE_MODE_LIFECYCLE || {};
 const { iconFor } = window;
 
 const DEFAULT_IMAGE_LAYOUT = { scale: 1, x: 0, y: 0, rotate: 0 };
@@ -133,6 +134,13 @@ function imageStyleForTarget(target) {
 
 function imageStyleFor(card) {
   return imageStyleForTarget(editTargetForCard(card));
+}
+
+function lifecycleFor(mode = activeMode) {
+  return {
+    ...(modeLifecycle.default || {}),
+    ...(modeLifecycle[mode?.id] || {})
+  };
 }
 
 function exportableLayouts(deckId = "items") {
@@ -326,7 +334,7 @@ function renderActivity() {
   drawButton.textContent = activeMode.drawLabel;
   controlBand.hidden = activeMode.cardMode === "secretPlace";
   controlNote.textContent = activeMode.cardMode === "secretPlace"
-    ? "此玩法會列出目前啟用的場地編號；用隱藏輸入設定答案。"
+    ? lifecycleFor().setup
     : "牌組已依玩法固定；下方抽選池可取消本局不想抽到的卡。";
 }
 

@@ -30,6 +30,18 @@ http://127.0.0.1:5178/website/
 
 根目錄 `index.html` 會自動導向 `website/`。
 
+老師手冊頁：
+
+```text
+website/pages/teacher-manual.html
+```
+
+本機預覽時可開啟：
+
+```text
+http://127.0.0.1:5178/website/pages/teacher-manual.html
+```
+
 ## 專案結構
 
 ```text
@@ -203,6 +215,8 @@ docs/Google_Search_Checklist.md
 
 開始擴充前先讀：
 
+- `docs/DebateVision_v1_5_Roadmap.md`
+- `docs/Teacher_Manual.md`
 - `docs/Project_Convention.md`
 - `docs/Icon_Style_Guide.md`
 - `docs/Card_Data_Specification.md`

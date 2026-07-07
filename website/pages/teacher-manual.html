@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>老師使用手冊｜辯語視界 DebateVision</title>
+    <link rel="stylesheet" href="../styles/main.css" />
+    <style>
+      body {
+        background: #f7f3eb;
+      }
+
+      .manual-shell {
+        width: min(100% - 32px, 980px);
+        margin: 0 auto;
+        padding: 32px 0 64px;
+      }
+
+      .manual-header,
+      .manual-section {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+        padding: 24px;
+        margin-bottom: 18px;
+      }
+
+      .manual-header h1 {
+        font-size: clamp(2rem, 6vw, 4rem);
+      }
+
+      .manual-section h2 {
+        margin-bottom: 14px;
+        font-size: clamp(1.5rem, 3vw, 2.4rem);
+      }
+
+      .manual-section h3 {
+        margin-top: 18px;
+        margin-bottom: 8px;
+        font-size: 1.05rem;
+      }
+
+      .manual-section p,
+      .manual-section li {
+        line-height: 1.8;
+        color: var(--muted);
+        font-weight: 700;
+      }
+
+      .manual-section code {
+        font-weight: 900;
+      }
+
+      .manual-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 18px;
+      }
+
+      .manual-nav a {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 8px 12px;
+        color: var(--ink);
+        text-decoration: none;
+        font-weight: 900;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="manual-shell">
+      <header class="manual-header">
+        <p class="eyebrow">DebateVision</p>
+        <h1>老師使用手冊</h1>
+        <p>這份頁面給備課與上課控制使用，不是給學生投影閱讀。</p>
+        <nav class="manual-nav" aria-label="手冊導覽">
+          <a href="../">回到活動網站</a>
+          <a href="#flow">通用節奏</a>
+          <a href="#modes">玩法速查</a>
+          <a href="#edit">修改內容</a>
+        </nav>
+      </header>
+
+      <section class="manual-section" id="flow">
+        <h2>通用節奏</h2>
+        <ol>
+          <li>設定：選玩法、確認卡池、調整抽取數量。</li>
+          <li>抽取或選定：產生本局題目。</li>
+          <li>表達與追問：學生說明，其他人質疑或補充。</li>
+          <li>收束：公布答案、比較標準、投票或整理有效說法。</li>
+        </ol>
+      </section>
+
+      <section class="manual-section" id="modes">
+        <h2>玩法速查</h2>
+
+        <h3>異境求生</h3>
+        <p>先抽異境，再抽物品。學生要說明物品如何救命、突破困境或製造優勢。</p>
+
+        <h3>存席辯護</h3>
+        <p>抽異境與職業。學生要說服大家自己的職業最值得留下。</p>
+
+        <h3>誰更重要</h3>
+        <p>抽兩張物品。學生建立比較標準，說明哪一張更重要。</p>
+
+        <h3>銷售密令</h3>
+        <p>抽 1 到 6 張商品卡。學生分析需求、客群與銷售故事。</p>
+
+        <h3>我在哪裡</h3>
+        <p>輸入秘密編號後開始。學生用提問推理位置，最後公布答案。</p>
+      </section>
+
+      <section class="manual-section" id="edit">
+        <h2>修改內容</h2>
+        <ul>
+          <li>改玩法文字：<code>data/content/玩法文案.csv</code></li>
+          <li>改卡牌內容：<code>data/cards/*.csv</code></li>
+          <li>改抽選池小符號：修改卡牌 CSV 的 <code>抽選池圖示</code></li>
+          <li>改抽出卡牌的大圖示：修改卡牌 CSV 的 <code>卡牌圖示</code></li>
+          <li>改玩法背景：在玩法文案 CSV 新增或修改 <code>玩法背景</code></li>
+        </ul>
+        <p>修改後雙擊 <code>網站更新.command</code>，再重新整理網站。</p>
+      </section>
+    </main>
+  </body>
+</html>

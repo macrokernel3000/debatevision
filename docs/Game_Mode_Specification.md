@@ -42,13 +42,31 @@ data/modes/
 - `image / backgroundImage`：玩法選擇區的大背景圖，可留空。建議使用橫向圖，放在 `assets/backgrounds/modes/`。
 - `prompts`：教練提示。
 - `flow`：回合流程。
+- `cardHooks`：抽出卡牌下方的任務句。通常由 `data/content/玩法文案.csv` 的 `卡牌任務` 產生，不建議手動寫在 JSON。
+
+## 玩法生命週期
+
+每個玩法都應該清楚設計四個階段：
+
+- `setup`：開始前設定，例如選卡池、抽取數量、秘密編號。
+- `active`：活動進行中，學生正在說明、提問或說服。
+- `result`：公布答案、抽出卡牌、完成比較或投票。
+- `restart`：再來一場，不需要重新整理網頁。
+
+目前生命週期文字先放在：
+
+```text
+website/js/mode-lifecycle.js
+```
+
+未來若需要讓老師自行改這些狀態文字，可以再移到 CSV。
 
 ## 目前支援的 cardMode
 
 - `itemEnvironment`：環境 + 物品。
 - `roleEnvironment`：環境 + 職業。
 - `importanceDuel`：兩張物品對決。
-- `salesPitch`：抽 1 張物品，練需求、客群、銷售故事。
+- `salesPitch`：抽 1 到 6 張物品，練需求、客群、銷售故事。
 - `secretPlace`：秘密場地推理。
 
 如果新增玩法只是在更換牌組，可以只新增 JSON。若需要全新抽選或呈現方式，才需要改 `website/js/app.js`。
