@@ -1531,7 +1531,7 @@ window.DEBATE_DECKS = {
         "lore": "提供陪伴與安慰，適合兒童、粉絲或需要情緒支持的人。",
         "imageId": "item_絨毛玩具",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_絨毛玩具.svg",
+        "iconAsset": "../assets/icons/items/item_絨毛玩具.png",
         "tokenIcon": "",
         "image": "",
         "rarity": "N",
