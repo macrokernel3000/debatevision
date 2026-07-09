@@ -65,7 +65,7 @@ website/js/mode-lifecycle.js
 
 - `itemEnvironment`：環境 + 物品。
 - `roleEnvironment`：環境 + 職業。
-- `importanceDuel`：兩張卡牌對決。目前預設使用名人卡，也可未來改成其他主要牌組。
+- `importanceDuel`：兩張卡牌對決。可以透過 `availableDecks` 讓老師在同一玩法中切換要比較的牌組。
 - `salesPitch`：抽 1 到 6 張物品，練需求、客群、銷售故事。
 - `secretPlace`：秘密詞條推理。推理解密使用這個模式，可從可用詞庫中選擇候選卡。
 
@@ -77,7 +77,7 @@ website/js/mode-lifecycle.js
 
 `itemEnvironment` 與 `roleEnvironment` 會把 `secondaryDeck` 當作獨立異境區，每次只抽 1 張；`primaryDeck` 則是本局主要抽選池，例如物品卡或職業卡。
 
-`importanceDuel` 不需要異境區，會直接從主要牌組抽出兩張進行比較。目前 `誰更重要` 的主要牌組是 `celebrities`，也就是名人卡。
+`importanceDuel` 不需要異境區，會直接從主要牌組抽出兩張進行比較。目前 `誰更重要` 的預設主要牌組是 `celebrities`，也就是名人卡；但它也設定了 `availableDecks`，所以老師可切換成物品卡、異境卡、場地卡、職業卡或生物卡。
 
 `secretPlace` 會把 `availableDecks` 當作老師可切換的候選詞庫。例如推理解密可以同一套玩法切換名人卡、場地卡、異境卡、物品卡、職業卡或生物卡。
 

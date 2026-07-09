@@ -24,18 +24,19 @@ role-survival,回合流程,2,,每位學生抽 1 個職業
 role-survival,回合流程,3,,每人 45 秒辯護
 role-survival,回合流程,4,,觀眾提問或互相反駁
 role-survival,回合流程,5,,逐輪淘汰直到最後留下者
-importance-duel,玩法描述,1,,刻意不給場景，直接抽兩位名人。學生要建立比較標準，說明誰更重要。
+importance-duel,玩法描述,1,,刻意不給場景，直接抽兩張卡牌。預設使用名人卡，也可以切換成物品、異境、場地、職業或生物來比較誰更重要。
 importance-duel,玩法背景,1,,../assets/backgrounds/modes/importance-duel.png
-importance-duel,教練提示,1,建立標準,你要用什麼標準比較重要性？影響力、創造力、勇氣、貢獻、知名度？
+importance-duel,教練提示,1,建立標準,你要用什麼標準比較重要性？影響力、實用性、稀缺性、急迫性、創造力、貢獻度？
 importance-duel,教練提示,2,正反互攻,支持 A 的人要指出 B 的限制；支持 B 的人也要反擊 A 的弱點。
 importance-duel,教練提示,3,重新定義,如果標準改變，結果會不會翻盤？
 importance-duel,卡牌任務,1,,建立比較標準，說明 {name} 為什麼更重要。
-importance-duel,卡牌任務,2,,指出另一位名人相較於 {name} 的限制。
+importance-duel,卡牌任務,2,,指出另一張卡牌相較於 {name} 的限制。
 importance-duel,卡牌任務,3,,如果比較標準改變，說明 {name} 是否仍有優勢。
-importance-duel,回合流程,1,,抽 2 位名人
-importance-duel,回合流程,2,,左右兩方各 30 秒建立標準
-importance-duel,回合流程,3,,互相質疑一次
-importance-duel,回合流程,4,,觀眾投票：誰的比較標準更合理
+importance-duel,回合流程,1,,選定本局要比較的詞庫
+importance-duel,回合流程,2,,抽 2 張卡牌
+importance-duel,回合流程,3,,左右兩方各 30 秒建立標準
+importance-duel,回合流程,4,,互相質疑一次
+importance-duel,回合流程,5,,觀眾投票：誰的比較標準更合理
 where-am-i,玩法名稱,1,,推理解密
 where-am-i,玩法描述,1,,選定任一詞庫後，系統列出本局啟用的候選編號，用隱藏輸入設定答案。學生只能提問推理，最後公布結果。
 where-am-i,玩法背景,1,,../assets/backgrounds/modes/where-am-i.png

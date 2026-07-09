@@ -199,12 +199,12 @@ window.DEBATE_DECKS = {
         ]
       },
       {
-        "name": "埃及豔后",
-        "lore": "古埃及托勒密王朝的女王並以政治手腕聞名",
+        "name": "亞里斯多德",
+        "lore": "古希臘哲學家，研究哲學、邏輯、倫理與自然科學，對思想影響深遠",
         "imageId": "♛",
         "icon": "♛",
         "iconAsset": "",
-        "tokenIcon": "埃",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": [
@@ -379,12 +379,12 @@ window.DEBATE_DECKS = {
         ]
       },
       {
-        "name": "張忠謀",
-        "lore": "創辦台積電並影響全球半導體產業的企業家",
+        "name": "秦始皇",
+        "lore": "中國首位完成統一的皇帝，建立中央集權制度，推動多項制度改革",
         "imageId": "◆",
         "icon": "◆",
         "iconAsset": "",
-        "tokenIcon": "張",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": [
@@ -409,12 +409,12 @@ window.DEBATE_DECKS = {
         ]
       },
       {
-        "name": "海倫凱勒",
-        "lore": "克服視聽障礙並成為作家與倡議者的人物",
+        "name": "梵谷",
+        "lore": "荷蘭後印象派畫家，創作風格鮮明，作品對現代藝術影響深遠",
         "imageId": "✦",
         "icon": "✦",
         "iconAsset": "",
-        "tokenIcon": "海",
+        "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": [

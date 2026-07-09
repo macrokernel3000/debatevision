@@ -311,13 +311,15 @@ function selectedCardsFrom(deckId) {
 }
 
 function availableDeckIdsForMode(mode = activeMode) {
-  if (mode.cardMode === "secretPlace") {
-    const ids = Array.isArray(mode.availableDecks) && mode.availableDecks.length
-      ? mode.availableDecks
-      : Object.keys(decks);
-    return ids.filter((deckId) => decks[deckId]);
+  if (Array.isArray(mode.availableDecks) && mode.availableDecks.length) {
+    return mode.availableDecks.filter((deckId) => decks[deckId]);
   }
+  if (mode.cardMode === "secretPlace") return Object.keys(decks);
   return [mode.secondaryDeck, mode.primaryDeck].filter(Boolean);
+}
+
+function shouldSwitchPrimaryDeckWithPreview(mode = activeMode) {
+  return Array.isArray(mode.availableDecks) && mode.availableDecks.length && !mode.secondaryDeck;
 }
 
 function resetModeSelections() {
@@ -434,7 +436,7 @@ function renderDeckControls() {
   drawCount.disabled = Boolean(fixed);
 
   const primaryTotal = cardsFrom(activeLibrary).length;
-  const primaryText = `${activeMode.primaryLabel || decks[activeLibrary]?.label}：${selectedCount(activeLibrary)} / ${primaryTotal} 張可抽`;
+  const primaryText = `${decks[activeLibrary]?.label || activeMode.primaryLabel}：${selectedCount(activeLibrary)} / ${primaryTotal} 張可抽`;
   const secondaryText = activeSecondaryLibrary
     ? `${activeMode.secondaryLabel || decks[activeSecondaryLibrary]?.label}：固定抽 1 張，${selectedCount(activeSecondaryLibrary)} / ${cardsFrom(activeSecondaryLibrary).length} 張可抽`
     : "";
@@ -1061,7 +1063,7 @@ libraryTools.addEventListener("click", (event) => {
   const chip = event.target.closest("[data-preview]");
   if (!chip) return;
   activePreview = chip.dataset.preview;
-  if (activeMode.cardMode === "secretPlace") {
+  if (shouldSwitchPrimaryDeckWithPreview()) {
     activeLibrary = activePreview;
     resetSecretPlaceState();
   }

@@ -95,10 +95,18 @@ window.DEBATE_MODES = [
     "title": "誰更重要",
     "icon": "VS",
     "tone": "gold",
-    "track": "名人 × 名人",
+    "track": "卡牌 × 卡牌",
     "primaryDeck": "celebrities",
+    "availableDecks": [
+      "celebrities",
+      "items",
+      "worlds",
+      "locations",
+      "roles",
+      "creatures"
+    ],
     "secondaryDeck": "",
-    "primaryLabel": "名人卡",
+    "primaryLabel": "比較卡",
     "secondaryLabel": "",
     "defaultRarities": {
       "celebrities": [
@@ -107,14 +115,14 @@ window.DEBATE_MODES = [
         "C"
       ]
     },
-    "drawLabel": "抽出對決名人",
+    "drawLabel": "抽出對決卡牌",
     "cardMode": "importanceDuel",
     "fixedCount": 2,
-    "description": "刻意不給場景，直接抽兩位名人。學生要建立比較標準，說明誰更重要。",
+    "description": "刻意不給場景，直接抽兩張卡牌。預設使用名人卡，也可以切換成物品、異境、場地、職業或生物來比較誰更重要。",
     "prompts": [
       [
         "建立標準",
-        "你要用什麼標準比較重要性？影響力、創造力、勇氣、貢獻、知名度？"
+        "你要用什麼標準比較重要性？影響力、實用性、稀缺性、急迫性、創造力、貢獻度？"
       ],
       [
         "正反互攻",
@@ -126,7 +134,8 @@ window.DEBATE_MODES = [
       ]
     ],
     "flow": [
-      "抽 2 位名人",
+      "選定本局要比較的詞庫",
+      "抽 2 張卡牌",
       "左右兩方各 30 秒建立標準",
       "互相質疑一次",
       "觀眾投票：誰的比較標準更合理"
@@ -134,7 +143,7 @@ window.DEBATE_MODES = [
     "image": "../assets/backgrounds/modes/importance-duel.png",
     "cardHooks": [
       "建立比較標準，說明 {name} 為什麼更重要。",
-      "指出另一位名人相較於 {name} 的限制。",
+      "指出另一張卡牌相較於 {name} 的限制。",
       "如果比較標準改變，說明 {name} 是否仍有優勢。"
     ]
   },
