@@ -17,6 +17,7 @@ data/cards/
 - `物品卡.csv`
 - `職業卡.csv`
 - `生物卡.csv`
+- `名人卡.csv`
 
 ## 欄位
 
@@ -34,7 +35,7 @@ deck_id,deck_label,deck_icon,name,description,icon,token_icon,image,rarity,tags
 
 ## 欄位說明
 
-- `牌組ID / deck_id`：程式用 ID，例如 `items`。
+- `牌組ID / deck_id`：程式用 ID，例如 `items`、`celebrities`。
 - `牌組名稱 / deck_label`：畫面顯示名稱，例如 `物品卡`。
 - `牌組圖示 / deck_icon`：沒有單張圖示時的預設符號。
 - `卡牌名稱 / name`：卡牌名稱。
@@ -76,3 +77,10 @@ worlds,異境卡,◎,殭屍末日,城市秩序崩潰,,../assets/backgrounds/worl
 新增一個 CSV 到 `data/cards/`，使用相同欄位。只要 `deck_id` 是新的，網站會自動把它當作新類別讀入。
 
 新增牌組不需要改網站程式。只有玩法想指定這個牌組時，才需要修改或新增 `data/modes/*.json`。
+
+例如名人卡使用：
+
+```text
+deck_id = celebrities
+deck_label = 名人卡
+```

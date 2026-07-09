@@ -81,7 +81,7 @@ DebateVision/
 data/cards/*.csv
 ```
 
-CSV 只負責內容。圖片欄位可以留空；`icon` 欄位建議只填 icon id，例如：
+CSV 只負責內容。每一個 CSV 是獨立牌組，例如 `物品卡.csv`、`異境卡.csv`、`職業卡.csv`、`名人卡.csv`。圖片欄位可以留空；`icon` 欄位建議只填 icon id，例如：
 
 ```csv
 items,物品卡,□,鐵錘,可以敲擊。,item_hammer,,普通,工具

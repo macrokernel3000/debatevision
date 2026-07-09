@@ -1,4 +1,460 @@
 window.DEBATE_DECKS = {
+  "celebrities": {
+    "label": "名人卡",
+    "icon": "★",
+    "cards": [
+      {
+        "name": "愛因斯坦",
+        "lore": "提出相對論並改變人類理解時間與空間的物理學家",
+        "imageId": "🧠",
+        "icon": "🧠",
+        "iconAsset": "",
+        "tokenIcon": "E",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "科學",
+          "物理",
+          "思想"
+        ]
+      },
+      {
+        "name": "牛頓",
+        "lore": "建立運動定律與萬有引力概念的科學家",
+        "imageId": "🍎",
+        "icon": "🍎",
+        "iconAsset": "",
+        "tokenIcon": "N",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "科學",
+          "物理",
+          "數學"
+        ]
+      },
+      {
+        "name": "居禮夫人",
+        "lore": "研究放射性並兩度獲得諾貝爾獎的科學家",
+        "imageId": "⚗",
+        "icon": "⚗",
+        "iconAsset": "",
+        "tokenIcon": "C",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "科學",
+          "化學",
+          "女性"
+        ]
+      },
+      {
+        "name": "達文西",
+        "lore": "兼具藝術與科學想像力的文藝復興代表人物",
+        "imageId": "🎨",
+        "icon": "🎨",
+        "iconAsset": "",
+        "tokenIcon": "達",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "藝術",
+          "發明",
+          "文藝復興"
+        ]
+      },
+      {
+        "name": "莎士比亞",
+        "lore": "創作多部經典戲劇與詩作的英國文學家",
+        "imageId": "✒",
+        "icon": "✒",
+        "iconAsset": "",
+        "tokenIcon": "莎",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "文學",
+          "戲劇",
+          "語言"
+        ]
+      },
+      {
+        "name": "莫札特",
+        "lore": "創作大量古典音樂作品的作曲家",
+        "imageId": "🎼",
+        "icon": "🎼",
+        "iconAsset": "",
+        "tokenIcon": "莫",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "音樂",
+          "古典",
+          "創作"
+        ]
+      },
+      {
+        "name": "貝多芬",
+        "lore": "在聽力衰退後仍創作重要作品的作曲家",
+        "imageId": "🎹",
+        "icon": "🎹",
+        "iconAsset": "",
+        "tokenIcon": "貝",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "音樂",
+          "意志",
+          "古典"
+        ]
+      },
+      {
+        "name": "孔子",
+        "lore": "影響東亞思想與教育傳統的思想家",
+        "imageId": "文",
+        "icon": "文",
+        "iconAsset": "",
+        "tokenIcon": "孔",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "思想",
+          "教育",
+          "文化"
+        ]
+      },
+      {
+        "name": "甘地",
+        "lore": "以非暴力抗爭推動印度獨立運動的領袖",
+        "imageId": "☮",
+        "icon": "☮",
+        "iconAsset": "",
+        "tokenIcon": "甘",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "政治",
+          "和平",
+          "社會運動"
+        ]
+      },
+      {
+        "name": "曼德拉",
+        "lore": "反對種族隔離並成為南非總統的人權領袖",
+        "imageId": "⚖",
+        "icon": "⚖",
+        "iconAsset": "",
+        "tokenIcon": "曼",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "人權",
+          "政治",
+          "領導"
+        ]
+      },
+      {
+        "name": "金恩博士",
+        "lore": "推動美國民權運動並發表重要演說的牧師與領袖",
+        "imageId": "☮",
+        "icon": "☮",
+        "iconAsset": "",
+        "tokenIcon": "金",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "人權",
+          "演說",
+          "社會運動"
+        ]
+      },
+      {
+        "name": "林肯",
+        "lore": "領導美國南北戰爭並推動廢除奴隸制度的總統",
+        "imageId": "⚖",
+        "icon": "⚖",
+        "iconAsset": "",
+        "tokenIcon": "林",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "政治",
+          "歷史",
+          "領導"
+        ]
+      },
+      {
+        "name": "拿破崙",
+        "lore": "改變歐洲政治格局並擅長軍事指揮的法國領袖",
+        "imageId": "♜",
+        "icon": "♜",
+        "iconAsset": "",
+        "tokenIcon": "拿",
+        "image": "",
+        "rarity": "B",
+        "tags": [
+          "軍事",
+          "政治",
+          "歷史"
+        ]
+      },
+      {
+        "name": "埃及豔后",
+        "lore": "古埃及托勒密王朝的女王並以政治手腕聞名",
+        "imageId": "♛",
+        "icon": "♛",
+        "iconAsset": "",
+        "tokenIcon": "埃",
+        "image": "",
+        "rarity": "B",
+        "tags": [
+          "歷史",
+          "政治",
+          "古文明"
+        ]
+      },
+      {
+        "name": "特蕾莎修女",
+        "lore": "長期照顧貧困與弱勢者的慈善工作者",
+        "imageId": "✚",
+        "icon": "✚",
+        "iconAsset": "",
+        "tokenIcon": "德",
+        "image": "",
+        "rarity": "B",
+        "tags": [
+          "慈善",
+          "宗教",
+          "服務"
+        ]
+      },
+      {
+        "name": "愛迪生",
+        "lore": "推動電燈與留聲機等發明商業化的發明家",
+        "imageId": "💡",
+        "icon": "💡",
+        "iconAsset": "",
+        "tokenIcon": "愛",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "發明",
+          "科技",
+          "商業"
+        ]
+      },
+      {
+        "name": "賈伯斯",
+        "lore": "推動個人電腦與智慧型手機設計風格的企業家",
+        "imageId": "⌘",
+        "icon": "⌘",
+        "iconAsset": "",
+        "tokenIcon": "賈",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "科技",
+          "設計",
+          "商業"
+        ]
+      },
+      {
+        "name": "比爾蓋茲",
+        "lore": "共同創辦微軟並投入公共衛生慈善工作的企業家",
+        "imageId": "▣",
+        "icon": "▣",
+        "iconAsset": "",
+        "tokenIcon": "比",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "科技",
+          "商業",
+          "慈善"
+        ]
+      },
+      {
+        "name": "馬拉拉",
+        "lore": "倡議女性教育權並獲得諾貝爾和平獎的行動者",
+        "imageId": "📘",
+        "icon": "📘",
+        "iconAsset": "",
+        "tokenIcon": "馬",
+        "image": "",
+        "rarity": "B",
+        "tags": [
+          "教育",
+          "人權",
+          "青年"
+        ]
+      },
+      {
+        "name": "梅西",
+        "lore": "以控球與進攻能力聞名的足球員",
+        "imageId": "⚽",
+        "icon": "⚽",
+        "iconAsset": "",
+        "tokenIcon": "梅",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "運動",
+          "足球",
+          "團隊"
+        ]
+      },
+      {
+        "name": "麥可喬丹",
+        "lore": "帶領芝加哥公牛多次奪冠的籃球員",
+        "imageId": "🏀",
+        "icon": "🏀",
+        "iconAsset": "",
+        "tokenIcon": "喬",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "運動",
+          "籃球",
+          "競爭"
+        ]
+      },
+      {
+        "name": "大谷翔平",
+        "lore": "兼具投球與打擊能力的棒球員",
+        "imageId": "⚾",
+        "icon": "⚾",
+        "iconAsset": "",
+        "tokenIcon": "谷",
+        "image": "",
+        "rarity": "B",
+        "tags": [
+          "運動",
+          "棒球",
+          "突破"
+        ]
+      },
+      {
+        "name": "泰勒絲",
+        "lore": "以詞曲創作與巡演影響力聞名的流行音樂人",
+        "imageId": "♪",
+        "icon": "♪",
+        "iconAsset": "",
+        "tokenIcon": "泰",
+        "image": "",
+        "rarity": "B",
+        "tags": [
+          "音樂",
+          "流行",
+          "創作"
+        ]
+      },
+      {
+        "name": "宮崎駿",
+        "lore": "創作多部動畫電影並建立獨特想像世界的導演",
+        "imageId": "🎬",
+        "icon": "🎬",
+        "iconAsset": "",
+        "tokenIcon": "宮",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "動畫",
+          "電影",
+          "創作"
+        ]
+      },
+      {
+        "name": "李安",
+        "lore": "以跨文化電影作品獲得國際肯定的導演",
+        "imageId": "🎞",
+        "icon": "🎞",
+        "iconAsset": "",
+        "tokenIcon": "李",
+        "image": "",
+        "rarity": "B",
+        "tags": [
+          "電影",
+          "台灣",
+          "文化"
+        ]
+      },
+      {
+        "name": "張忠謀",
+        "lore": "創辦台積電並影響全球半導體產業的企業家",
+        "imageId": "◆",
+        "icon": "◆",
+        "iconAsset": "",
+        "tokenIcon": "張",
+        "image": "",
+        "rarity": "B",
+        "tags": [
+          "科技",
+          "台灣",
+          "產業"
+        ]
+      },
+      {
+        "name": "珍古德",
+        "lore": "長期研究黑猩猩並推動保育教育的動物行為學家",
+        "imageId": "🌿",
+        "icon": "🌿",
+        "iconAsset": "",
+        "tokenIcon": "珍",
+        "image": "",
+        "rarity": "B",
+        "tags": [
+          "科學",
+          "保育",
+          "動物"
+        ]
+      },
+      {
+        "name": "海倫凱勒",
+        "lore": "克服視聽障礙並成為作家與倡議者的人物",
+        "imageId": "✦",
+        "icon": "✦",
+        "iconAsset": "",
+        "tokenIcon": "海",
+        "image": "",
+        "rarity": "B",
+        "tags": [
+          "教育",
+          "生命",
+          "倡議"
+        ]
+      },
+      {
+        "name": "達爾文",
+        "lore": "提出演化論並影響現代生物學的自然學家",
+        "imageId": "🌱",
+        "icon": "🌱",
+        "iconAsset": "",
+        "tokenIcon": "達爾",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "科學",
+          "生物",
+          "演化"
+        ]
+      },
+      {
+        "name": "霍金",
+        "lore": "研究黑洞與宇宙並向大眾推廣科學的物理學家",
+        "imageId": "★",
+        "icon": "★",
+        "iconAsset": "",
+        "tokenIcon": "霍",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "科學",
+          "宇宙",
+          "知識"
+        ]
+      }
+    ]
+  },
   "locations": {
     "label": "場地卡",
     "icon": "⌖",
@@ -2612,9 +3068,9 @@ window.DEBATE_DECKS = {
       {
         "name": "醫生",
         "lore": "能處理受傷、判斷感染風險，是災後隊伍的安全保障。",
-        "imageId": "",
+        "imageId": "roles_醫生",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/roles/roles_醫生.png",
         "tokenIcon": "✚",
         "image": "",
         "rarity": "A",
@@ -2622,10 +3078,10 @@ window.DEBATE_DECKS = {
       },
       {
         "name": "工程師",
-        "lore": "能修設備、搭結構、找替代方案，但需要工具與材料。",
-        "imageId": "",
+        "lore": "能設計設備、基本維修、懂得找替代方案。",
+        "imageId": "roles_工程師",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/roles/roles_工程師.png",
         "tokenIcon": "⚙",
         "image": "",
         "rarity": "A",
@@ -2633,10 +3089,10 @@ window.DEBATE_DECKS = {
       },
       {
         "name": "廚師",
-        "lore": "能管理食物與士氣，把有限資源變成可持續補給。",
-        "imageId": "",
+        "lore": "能管理食物與士氣，快速處理有限資源，提供可持續補給。",
+        "imageId": "roles_廚師",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/roles/roles_廚師.png",
         "tokenIcon": "◍",
         "image": "",
         "rarity": "A",
@@ -2645,9 +3101,9 @@ window.DEBATE_DECKS = {
       {
         "name": "老師",
         "lore": "能組織學習、分配任務、穩定孩子與團隊秩序。",
-        "imageId": "",
+        "imageId": "roles_老師",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/roles/roles_老師.png",
         "tokenIcon": "✎",
         "image": "",
         "rarity": "A",
@@ -2656,9 +3112,9 @@ window.DEBATE_DECKS = {
       {
         "name": "消防員",
         "lore": "熟悉救援、火場與危機處理，體能和紀律都強。",
-        "imageId": "",
+        "imageId": "roles_消防員",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/roles/roles_消防員.png",
         "tokenIcon": "▲",
         "image": "",
         "rarity": "A",
@@ -2666,10 +3122,10 @@ window.DEBATE_DECKS = {
       },
       {
         "name": "農夫",
-        "lore": "懂種植、土地與季節，是長期生存的重要角色。",
-        "imageId": "",
+        "lore": "懂種植、土地與季節，農業將成為文明的前提。",
+        "imageId": "roles_農夫",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/roles/roles_農夫.png",
         "tokenIcon": "☘",
         "image": "",
         "rarity": "A",
@@ -2678,9 +3134,9 @@ window.DEBATE_DECKS = {
       {
         "name": "律師",
         "lore": "擅長規則、談判與權利防守，能處理團隊衝突。",
-        "imageId": "",
+        "imageId": "roles_律師",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/roles/roles_律師.png",
         "tokenIcon": "§",
         "image": "",
         "rarity": "A",
@@ -2688,10 +3144,10 @@ window.DEBATE_DECKS = {
       },
       {
         "name": "心理師",
-        "lore": "能處理恐懼、衝突與崩潰，讓團隊不被壓力瓦解。",
-        "imageId": "",
+        "lore": "能處理恐懼、衝突與崩潰，讓人不被壓力瓦解。",
+        "imageId": "roles_心理師",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/roles/roles_心理師.png",
         "tokenIcon": "♡",
         "image": "",
         "rarity": "A",
@@ -2699,10 +3155,10 @@ window.DEBATE_DECKS = {
       },
       {
         "name": "記者",
-        "lore": "能查證、提問、傳播真相，但可能帶來外部壓力。",
-        "imageId": "",
+        "lore": "能查證、提問、蒐集訊息，為了傳播真相可以深入險境。",
+        "imageId": "roles_記者",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/roles/roles_記者.png",
         "tokenIcon": "✦",
         "image": "",
         "rarity": "A",
@@ -2710,10 +3166,10 @@ window.DEBATE_DECKS = {
       },
       {
         "name": "程式設計師",
-        "lore": "能處理系統、資料與自動化，但離開電力會受限。",
-        "imageId": "",
+        "lore": "能處理系統、資料與自動化，擁有良好的邏輯設計能力。",
+        "imageId": "roles_程式設計師",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/roles/roles_程式設計師.png",
         "tokenIcon": "{}",
         "image": "",
         "rarity": "A",
@@ -2721,21 +3177,21 @@ window.DEBATE_DECKS = {
       },
       {
         "name": "建築師",
-        "lore": "能設計安全空間與避難所，需有人力實作。",
-        "imageId": "",
+        "lore": "能設計安全空間與避難所，對於建材狀態瞭若指掌。",
+        "imageId": "roles_建築師",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/roles/roles_建築師.png",
         "tokenIcon": "▧",
         "image": "",
         "rarity": "A",
         "tags": []
       },
       {
-        "name": "護士",
+        "name": "護理師",
         "lore": "照護細節強，能長時間維持傷患狀態。",
-        "imageId": "",
+        "imageId": "roles_護理師",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/roles/roles_護理師.png",
         "tokenIcon": "✚",
         "image": "",
         "rarity": "A",
@@ -2743,10 +3199,10 @@ window.DEBATE_DECKS = {
       },
       {
         "name": "警察",
-        "lore": "維持秩序與風險判斷，但權威也可能引發反感。",
-        "imageId": "",
+        "lore": "維持秩序與風險判斷，身體素質佳也理解武器使用規範。",
+        "imageId": "roles_警察",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/roles/roles_警察.png",
         "tokenIcon": "◆",
         "image": "",
         "rarity": "A",
@@ -2754,10 +3210,10 @@ window.DEBATE_DECKS = {
       },
       {
         "name": "翻譯員",
-        "lore": "跨語言溝通很關鍵，尤其面對陌生族群或外星文明。",
-        "imageId": "",
+        "lore": "跨語言溝通很關鍵，面對陌生族群或外星文明適應力強。",
+        "imageId": "roles_翻譯員",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/roles/roles_翻譯員.png",
         "tokenIcon": "文",
         "image": "",
         "rarity": "A",
@@ -2766,9 +3222,9 @@ window.DEBATE_DECKS = {
       {
         "name": "植物學家",
         "lore": "能辨識可食植物與毒物，對探索環境很有幫助。",
-        "imageId": "",
+        "imageId": "roles_植物學家",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/roles/roles_植物學家.png",
         "tokenIcon": "☘",
         "image": "",
         "rarity": "A",
@@ -2777,9 +3233,9 @@ window.DEBATE_DECKS = {
       {
         "name": "天文學家",
         "lore": "理解星象與宇宙環境，適合太空任務但生活技能需補強。",
-        "imageId": "",
+        "imageId": "roles_天文學家",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/roles/roles_天文學家.png",
         "tokenIcon": "✦",
         "image": "",
         "rarity": "A",
@@ -2788,9 +3244,9 @@ window.DEBATE_DECKS = {
       {
         "name": "機師",
         "lore": "操控載具與判斷天候，危機中能帶領移動。",
-        "imageId": "",
+        "imageId": "roles_機師",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/roles/roles_機師.png",
         "tokenIcon": "△",
         "image": "",
         "rarity": "A",
@@ -2798,10 +3254,10 @@ window.DEBATE_DECKS = {
       },
       {
         "name": "商人",
-        "lore": "擅長交換、談判、資源配置，但需要被信任。",
-        "imageId": "",
+        "lore": "擅長交換、談判、資源配置，還有錢。",
+        "imageId": "roles_商人",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/roles/roles_商人.png",
         "tokenIcon": "$",
         "image": "",
         "rarity": "A",
@@ -2809,10 +3265,10 @@ window.DEBATE_DECKS = {
       },
       {
         "name": "藝術家",
-        "lore": "提供想像力、記錄與士氣，不是立即求生但能保存文明。",
-        "imageId": "",
+        "lore": "提供想像力與紀錄，創造力將可留下文明。",
+        "imageId": "roles_藝術家",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/roles/roles_藝術家.png",
         "tokenIcon": "◈",
         "image": "",
         "rarity": "A",
@@ -2821,9 +3277,9 @@ window.DEBATE_DECKS = {
       {
         "name": "運動員",
         "lore": "體能、毅力與競爭心強，可執行高風險任務。",
-        "imageId": "",
+        "imageId": "roles_運動員",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/roles/roles_運動員.png",
         "tokenIcon": "↯",
         "image": "",
         "rarity": "A",
@@ -2831,10 +3287,10 @@ window.DEBATE_DECKS = {
       },
       {
         "name": "導遊",
-        "lore": "擅長帶隊、說明與安排行程，在陌生地很有價值。",
-        "imageId": "",
+        "lore": "擅長帶隊、說明與安排行程，對於體力及探索很有信心。",
+        "imageId": "roles_導遊",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/roles/roles_導遊.png",
         "tokenIcon": "○",
         "image": "",
         "rarity": "A",
@@ -2842,10 +3298,10 @@ window.DEBATE_DECKS = {
       },
       {
         "name": "科學家",
-        "lore": "能提出假設、測試未知風險，但需要時間。",
-        "imageId": "",
+        "lore": "能提出假設、測試未知風險，不會被神秘迷惑。",
+        "imageId": "roles_科學家",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/roles/roles_科學家.png",
         "tokenIcon": "○",
         "image": "",
         "rarity": "A",
@@ -2853,10 +3309,10 @@ window.DEBATE_DECKS = {
       },
       {
         "name": "水電工",
-        "lore": "修復基礎設施的實務能力強，非常接地氣。",
-        "imageId": "",
+        "lore": "修復基礎設施的實務能力強，就能完成基本管路。",
+        "imageId": "roles_水電工",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/roles/roles_水電工.png",
         "tokenIcon": "○",
         "image": "",
         "rarity": "A",
@@ -2865,9 +3321,9 @@ window.DEBATE_DECKS = {
       {
         "name": "社工",
         "lore": "擅長照顧弱勢、協調資源、降低內部衝突。",
-        "imageId": "",
+        "imageId": "roles_社工",
         "icon": "",
-        "iconAsset": "",
+        "iconAsset": "../assets/icons/roles/roles_社工.png",
         "tokenIcon": "○",
         "image": "",
         "rarity": "A",

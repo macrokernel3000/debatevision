@@ -112,7 +112,7 @@ data/modes/*.json
 
 ## 玩法首頁背景圖
 
-像「我在哪裡」上方的大圖，請放在：
+像「推理解密」上方的大圖，請放在：
 
 ```text
 assets/backgrounds/modes/
@@ -149,8 +149,8 @@ where-am-i,玩法背景,1,,../assets/backgrounds/modes/where-am-i.png
 
 ```text
 section.drawn.title,本輪卡牌,本輪卡牌標題
-secret.restart,再來一場,我在哪裡重開按鈕
-secret.reveal,直接公布答案,我在哪裡公布按鈕
+secret.restart,再來一場,推理解密重開按鈕
+secret.reveal,直接公布答案,推理解密公布按鈕
 ```
 
 可以改的常見文字包含：
@@ -176,11 +176,11 @@ secret.reveal,直接公布答案,我在哪裡公布按鈕
 例如：
 
 ```text
-secret.result.title,原來我們在：{name},我在哪裡公布答案標題
+secret.result.title,原來答案是：{name},推理解密公布答案標題
 ```
 
 抽到 `監獄` 時會顯示：
 
 ```text
-原來我們在：監獄
+原來答案是：監獄
 ```

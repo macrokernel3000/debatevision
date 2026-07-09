@@ -18,10 +18,10 @@ window.DEBATE_MODE_LIFECYCLE = {
     restart: "換異境、換職業，或保留其中一邊再辯一次。"
   },
   "importance-duel": {
-    setup: "確認本局可抽的物品卡。",
-    active: "建立比較標準，說明哪件物品更重要。",
+    setup: "確認本局可抽的名人卡。",
+    active: "建立比較標準，說明哪位名人更重要。",
     result: "觀眾投票時說明採用的比較標準。",
-    restart: "再抽兩張物品，或保留一張當擂主。"
+    restart: "再抽兩位名人，或保留一位當擂主。"
   },
   "sales-command": {
     setup: "選擇要抽 1 到 6 張商品卡。",
@@ -30,9 +30,9 @@ window.DEBATE_MODE_LIFECYCLE = {
     restart: "抽新商品，或要求同一商品改賣給不同族群。"
   },
   "where-am-i": {
-    setup: "選定詞庫與秘密編號。",
+    setup: "推理解密：選定詞庫與秘密編號。",
     active: "學生只能用問題推理答案。",
-    result: "逐一公布不是這裡或就是這裡。",
+    result: "逐一公布不是這個或就是這個。",
     restart: "按再來一場，重新輸入秘密編號。"
   }
 };

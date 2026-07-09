@@ -95,30 +95,30 @@ window.DEBATE_MODES = [
     "title": "誰更重要",
     "icon": "VS",
     "tone": "gold",
-    "track": "物品 × 物品",
-    "primaryDeck": "items",
+    "track": "名人 × 名人",
+    "primaryDeck": "celebrities",
     "secondaryDeck": "",
-    "primaryLabel": "物品卡",
+    "primaryLabel": "名人卡",
     "secondaryLabel": "",
     "defaultRarities": {
-      "items": [
+      "celebrities": [
         "A",
         "B",
         "C"
       ]
     },
-    "drawLabel": "抽出對決物品",
+    "drawLabel": "抽出對決名人",
     "cardMode": "importanceDuel",
     "fixedCount": 2,
-    "description": "刻意不給場景，直接抽兩個物品。學生要建立比較標準，說明誰更重要。",
+    "description": "刻意不給場景，直接抽兩位名人。學生要建立比較標準，說明誰更重要。",
     "prompts": [
       [
         "建立標準",
-        "你要用什麼標準比較重要性？生存、交換、長期、短期？"
+        "你要用什麼標準比較重要性？影響力、創造力、勇氣、貢獻、知名度？"
       ],
       [
         "正反互攻",
-        "支持 A 的人要指出 B 的限制；支持 B 的人也要反擊 A。"
+        "支持 A 的人要指出 B 的限制；支持 B 的人也要反擊 A 的弱點。"
       ],
       [
         "重新定義",
@@ -126,7 +126,7 @@ window.DEBATE_MODES = [
       ]
     ],
     "flow": [
-      "抽 2 個物品",
+      "抽 2 位名人",
       "左右兩方各 30 秒建立標準",
       "互相質疑一次",
       "觀眾投票：誰的比較標準更合理"
@@ -134,7 +134,7 @@ window.DEBATE_MODES = [
     "image": "../assets/backgrounds/modes/importance-duel.png",
     "cardHooks": [
       "建立比較標準，說明 {name} 為什麼更重要。",
-      "指出另一件物品相較於 {name} 的限制。",
+      "指出另一位名人相較於 {name} 的限制。",
       "如果比較標準改變，說明 {name} 是否仍有優勢。"
     ]
   },
@@ -188,7 +188,7 @@ window.DEBATE_MODES = [
   {
     "id": "where-am-i",
     "order": 5,
-    "title": "我在哪裡",
+    "title": "推理解密",
     "icon": "?",
     "tone": "cosmos",
     "track": "秘密詞條",
@@ -199,7 +199,8 @@ window.DEBATE_MODES = [
       "worlds",
       "items",
       "roles",
-      "creatures"
+      "creatures",
+      "celebrities"
     ],
     "secondaryDeck": "",
     "primaryLabel": "任意詞庫",
@@ -219,7 +220,7 @@ window.DEBATE_MODES = [
       ],
       [
         "最後公布",
-        "先輸入秘密編號，再逐一點選候選詞條，公布不是這裡或就是這裡。"
+        "先輸入秘密編號，再逐一點選候選詞條，公布不是這個或就是這個。"
       ]
     ],
     "flow": [
