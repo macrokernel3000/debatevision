@@ -9,7 +9,7 @@ window.DEBATE_DECKS = {
         "imageId": "🧠",
         "icon": "🧠",
         "iconAsset": "",
-        "tokenIcon": "E",
+        "tokenIcon": "🧠",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -24,7 +24,7 @@ window.DEBATE_DECKS = {
         "imageId": "🍎",
         "icon": "🍎",
         "iconAsset": "",
-        "tokenIcon": "N",
+        "tokenIcon": "🍎",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -36,10 +36,10 @@ window.DEBATE_DECKS = {
       {
         "name": "居禮夫人",
         "lore": "研究放射性並兩度獲得諾貝爾獎的科學家",
-        "imageId": "⚗",
-        "icon": "⚗",
+        "imageId": "⚛️",
+        "icon": "⚛️",
         "iconAsset": "",
-        "tokenIcon": "C",
+        "tokenIcon": "⚛️",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -54,7 +54,7 @@ window.DEBATE_DECKS = {
         "imageId": "🎨",
         "icon": "🎨",
         "iconAsset": "",
-        "tokenIcon": "達",
+        "tokenIcon": "🎨",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -66,10 +66,10 @@ window.DEBATE_DECKS = {
       {
         "name": "莎士比亞",
         "lore": "創作多部經典戲劇與詩作的英國文學家",
-        "imageId": "✒",
-        "icon": "✒",
+        "imageId": "🎭",
+        "icon": "🎭",
         "iconAsset": "",
-        "tokenIcon": "莎",
+        "tokenIcon": "🎭",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -84,7 +84,7 @@ window.DEBATE_DECKS = {
         "imageId": "🎼",
         "icon": "🎼",
         "iconAsset": "",
-        "tokenIcon": "莫",
+        "tokenIcon": "🎼",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -99,7 +99,7 @@ window.DEBATE_DECKS = {
         "imageId": "🎹",
         "icon": "🎹",
         "iconAsset": "",
-        "tokenIcon": "貝",
+        "tokenIcon": "🎹",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -111,10 +111,10 @@ window.DEBATE_DECKS = {
       {
         "name": "孔子",
         "lore": "影響東亞思想與教育傳統的思想家",
-        "imageId": "文",
-        "icon": "文",
+        "imageId": "📜",
+        "icon": "📜",
         "iconAsset": "",
-        "tokenIcon": "孔",
+        "tokenIcon": "📜",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -126,10 +126,10 @@ window.DEBATE_DECKS = {
       {
         "name": "甘地",
         "lore": "以非暴力抗爭推動印度獨立運動的領袖",
-        "imageId": "☮",
-        "icon": "☮",
+        "imageId": "☮️",
+        "icon": "☮️",
         "iconAsset": "",
-        "tokenIcon": "甘",
+        "tokenIcon": "☮️",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -141,10 +141,10 @@ window.DEBATE_DECKS = {
       {
         "name": "曼德拉",
         "lore": "反對種族隔離並成為南非總統的人權領袖",
-        "imageId": "⚖",
-        "icon": "⚖",
+        "imageId": "🕊️",
+        "icon": "🕊️",
         "iconAsset": "",
-        "tokenIcon": "曼",
+        "tokenIcon": "🕊️",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -156,10 +156,10 @@ window.DEBATE_DECKS = {
       {
         "name": "金恩博士",
         "lore": "推動美國民權運動並發表重要演說的牧師與領袖",
-        "imageId": "☮",
-        "icon": "☮",
+        "imageId": "✊",
+        "icon": "✊",
         "iconAsset": "",
-        "tokenIcon": "金",
+        "tokenIcon": "✊",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -171,10 +171,10 @@ window.DEBATE_DECKS = {
       {
         "name": "林肯",
         "lore": "領導美國南北戰爭並推動廢除奴隸制度的總統",
-        "imageId": "⚖",
-        "icon": "⚖",
+        "imageId": "🎩",
+        "icon": "🎩",
         "iconAsset": "",
-        "tokenIcon": "林",
+        "tokenIcon": "🎩",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -186,10 +186,10 @@ window.DEBATE_DECKS = {
       {
         "name": "拿破崙",
         "lore": "改變歐洲政治格局並擅長軍事指揮的法國領袖",
-        "imageId": "♜",
-        "icon": "♜",
+        "imageId": "👑",
+        "icon": "👑",
         "iconAsset": "",
-        "tokenIcon": "拿",
+        "tokenIcon": "👑",
         "image": "",
         "rarity": "B",
         "tags": [
@@ -201,10 +201,10 @@ window.DEBATE_DECKS = {
       {
         "name": "亞里斯多德",
         "lore": "古希臘哲學家，研究哲學、邏輯、倫理與自然科學，對思想影響深遠",
-        "imageId": "♛",
-        "icon": "♛",
+        "imageId": "📚",
+        "icon": "📚",
         "iconAsset": "",
-        "tokenIcon": "",
+        "tokenIcon": "📚",
         "image": "",
         "rarity": "B",
         "tags": [
@@ -216,10 +216,10 @@ window.DEBATE_DECKS = {
       {
         "name": "特蕾莎修女",
         "lore": "長期照顧貧困與弱勢者的慈善工作者",
-        "imageId": "✚",
-        "icon": "✚",
+        "imageId": "❤️",
+        "icon": "❤️",
         "iconAsset": "",
-        "tokenIcon": "德",
+        "tokenIcon": "❤️",
         "image": "",
         "rarity": "B",
         "tags": [
@@ -234,7 +234,7 @@ window.DEBATE_DECKS = {
         "imageId": "💡",
         "icon": "💡",
         "iconAsset": "",
-        "tokenIcon": "愛",
+        "tokenIcon": "💡",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -246,10 +246,10 @@ window.DEBATE_DECKS = {
       {
         "name": "賈伯斯",
         "lore": "推動個人電腦與智慧型手機設計風格的企業家",
-        "imageId": "⌘",
-        "icon": "⌘",
+        "imageId": "📱",
+        "icon": "📱",
         "iconAsset": "",
-        "tokenIcon": "賈",
+        "tokenIcon": "📱",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -261,10 +261,10 @@ window.DEBATE_DECKS = {
       {
         "name": "比爾蓋茲",
         "lore": "共同創辦微軟並投入公共衛生慈善工作的企業家",
-        "imageId": "▣",
-        "icon": "▣",
+        "imageId": "💻",
+        "icon": "💻",
         "iconAsset": "",
-        "tokenIcon": "比",
+        "tokenIcon": "💻",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -276,10 +276,10 @@ window.DEBATE_DECKS = {
       {
         "name": "馬拉拉",
         "lore": "倡議女性教育權並獲得諾貝爾和平獎的行動者",
-        "imageId": "📘",
-        "icon": "📘",
+        "imageId": "📖",
+        "icon": "📖",
         "iconAsset": "",
-        "tokenIcon": "馬",
+        "tokenIcon": "📖",
         "image": "",
         "rarity": "B",
         "tags": [
@@ -294,7 +294,7 @@ window.DEBATE_DECKS = {
         "imageId": "⚽",
         "icon": "⚽",
         "iconAsset": "",
-        "tokenIcon": "梅",
+        "tokenIcon": "⚽",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -309,7 +309,7 @@ window.DEBATE_DECKS = {
         "imageId": "🏀",
         "icon": "🏀",
         "iconAsset": "",
-        "tokenIcon": "喬",
+        "tokenIcon": "🏀",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -324,7 +324,7 @@ window.DEBATE_DECKS = {
         "imageId": "⚾",
         "icon": "⚾",
         "iconAsset": "",
-        "tokenIcon": "谷",
+        "tokenIcon": "⚾",
         "image": "",
         "rarity": "B",
         "tags": [
@@ -336,10 +336,10 @@ window.DEBATE_DECKS = {
       {
         "name": "泰勒絲",
         "lore": "以詞曲創作與巡演影響力聞名的流行音樂人",
-        "imageId": "♪",
-        "icon": "♪",
+        "imageId": "🎤",
+        "icon": "🎤",
         "iconAsset": "",
-        "tokenIcon": "泰",
+        "tokenIcon": "🎤",
         "image": "",
         "rarity": "B",
         "tags": [
@@ -351,10 +351,10 @@ window.DEBATE_DECKS = {
       {
         "name": "宮崎駿",
         "lore": "創作多部動畫電影並建立獨特想像世界的導演",
-        "imageId": "🎬",
-        "icon": "🎬",
+        "imageId": "🐉",
+        "icon": "🐉",
         "iconAsset": "",
-        "tokenIcon": "宮",
+        "tokenIcon": "🐉",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -366,10 +366,10 @@ window.DEBATE_DECKS = {
       {
         "name": "李安",
         "lore": "以跨文化電影作品獲得國際肯定的導演",
-        "imageId": "🎞",
-        "icon": "🎞",
+        "imageId": "🎬",
+        "icon": "🎬",
         "iconAsset": "",
-        "tokenIcon": "李",
+        "tokenIcon": "🎬",
         "image": "",
         "rarity": "B",
         "tags": [
@@ -381,10 +381,10 @@ window.DEBATE_DECKS = {
       {
         "name": "秦始皇",
         "lore": "中國首位完成統一的皇帝，建立中央集權制度，推動多項制度改革",
-        "imageId": "◆",
-        "icon": "◆",
+        "imageId": "🏯",
+        "icon": "🏯",
         "iconAsset": "",
-        "tokenIcon": "",
+        "tokenIcon": "🏯",
         "image": "",
         "rarity": "B",
         "tags": [
@@ -396,10 +396,10 @@ window.DEBATE_DECKS = {
       {
         "name": "珍古德",
         "lore": "長期研究黑猩猩並推動保育教育的動物行為學家",
-        "imageId": "🌿",
-        "icon": "🌿",
+        "imageId": "🦍",
+        "icon": "🦍",
         "iconAsset": "",
-        "tokenIcon": "珍",
+        "tokenIcon": "🦍",
         "image": "",
         "rarity": "B",
         "tags": [
@@ -411,10 +411,10 @@ window.DEBATE_DECKS = {
       {
         "name": "梵谷",
         "lore": "荷蘭後印象派畫家，創作風格鮮明，作品對現代藝術影響深遠",
-        "imageId": "✦",
-        "icon": "✦",
+        "imageId": "🌻",
+        "icon": "🌻",
         "iconAsset": "",
-        "tokenIcon": "",
+        "tokenIcon": "🌻",
         "image": "",
         "rarity": "B",
         "tags": [
@@ -426,10 +426,10 @@ window.DEBATE_DECKS = {
       {
         "name": "達爾文",
         "lore": "提出演化論並影響現代生物學的自然學家",
-        "imageId": "🌱",
-        "icon": "🌱",
+        "imageId": "🐒",
+        "icon": "🐒",
         "iconAsset": "",
-        "tokenIcon": "達爾",
+        "tokenIcon": "🐒",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -441,10 +441,10 @@ window.DEBATE_DECKS = {
       {
         "name": "霍金",
         "lore": "研究黑洞與宇宙並向大眾推廣科學的物理學家",
-        "imageId": "★",
-        "icon": "★",
+        "imageId": "🌌",
+        "icon": "🌌",
         "iconAsset": "",
-        "tokenIcon": "霍",
+        "tokenIcon": "🌌",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -2568,7 +2568,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
-        "tokenIcon": "",
+        "tokenIcon": "🐶",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2579,7 +2579,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
-        "tokenIcon": "",
+        "tokenIcon": "🐱",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2590,7 +2590,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
-        "tokenIcon": "",
+        "tokenIcon": "🐼",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2601,7 +2601,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
-        "tokenIcon": "",
+        "tokenIcon": "🐘",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2612,7 +2612,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
-        "tokenIcon": "",
+        "tokenIcon": "🦅",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2623,7 +2623,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
-        "tokenIcon": "",
+        "tokenIcon": "🐙",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2634,7 +2634,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
-        "tokenIcon": "",
+        "tokenIcon": "🐝",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2645,7 +2645,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
-        "tokenIcon": "",
+        "tokenIcon": "🐪",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2656,7 +2656,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
-        "tokenIcon": "",
+        "tokenIcon": "🐬",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2667,7 +2667,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
-        "tokenIcon": "",
+        "tokenIcon": "🐢",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2678,7 +2678,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
-        "tokenIcon": "",
+        "tokenIcon": "🐺",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2689,7 +2689,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
-        "tokenIcon": "",
+        "tokenIcon": "🐧",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2700,7 +2700,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
-        "tokenIcon": "",
+        "tokenIcon": "🐴",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2711,7 +2711,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
-        "tokenIcon": "",
+        "tokenIcon": "🐿️",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2722,7 +2722,7 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
-        "tokenIcon": "",
+        "tokenIcon": "🦉",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2733,7 +2733,139 @@ window.DEBATE_DECKS = {
         "imageId": "",
         "icon": "",
         "iconAsset": "",
-        "tokenIcon": "",
+        "tokenIcon": "🦘",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "獅子",
+        "lore": "力量驚人、擅長震懾對手，適合正面突破，但耐力不算突出。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "tokenIcon": "🦁",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "長頸鹿",
+        "lore": "身高優勢明顯，能觀察遠方環境，但近距離行動較不靈活。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "tokenIcon": "🦒",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "犀牛",
+        "lore": "防禦力極高，能突破障礙物，只是轉向速度較慢。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "tokenIcon": "🦏",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "河馬",
+        "lore": "能長時間待在水中，適合守衛河域，但離水後行動效率下降。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "tokenIcon": "🦛",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "樹懶",
+        "lore": "耐心十足、善於隱蔽，適合潛伏任務，只是行動速度偏慢。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "tokenIcon": "🦥",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "水獺",
+        "lore": "擅長游泳與使用工具，水陸皆有一定適應力，但依賴水域環境。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "tokenIcon": "🦦",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "鸚鵡",
+        "lore": "模仿能力強、善於傳遞訊息，適合交流與偵查，但戰鬥能力有限。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "tokenIcon": "🦜",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "孔雀",
+        "lore": "華麗外表容易吸引注意，適合展示或誘敵，但飛行距離有限。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "tokenIcon": "🦚",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "天鵝",
+        "lore": "飛行與游泳能力兼具，適合長距離遷徙，只是起飛需要空間。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "tokenIcon": "🦢",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "蜥蜴",
+        "lore": "適應力強、善於攀爬與躲藏，適合探索狹小空間，但體型較小。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "tokenIcon": "🦎",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "鯊魚",
+        "lore": "游泳速度驚人，適合水域追擊，但無法長時間離開水中。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "tokenIcon": "🦈",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "蝴蝶",
+        "lore": "飛行靈活、善於授粉與探索，適合快速搜尋，但身體相當脆弱。",
+        "imageId": "",
+        "icon": "",
+        "iconAsset": "",
+        "tokenIcon": "🦋",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -2750,7 +2882,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_Zombie",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_zombie.svg",
-        "tokenIcon": "",
+        "tokenIcon": "🧟",
         "image": "../assets/icons/worlds/worlds_Zombie.png",
         "rarity": "A",
         "tags": [
@@ -2765,7 +2897,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_mysteryplanet",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_mystery_planet.svg",
-        "tokenIcon": "",
+        "tokenIcon": "🪐",
         "image": "../assets/icons/worlds/worlds_mysteryplanet.png",
         "rarity": "A",
         "tags": [
@@ -2780,7 +2912,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_jungle",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_jungle.svg",
-        "tokenIcon": "",
+        "tokenIcon": "🌴",
         "image": "../assets/icons/worlds/worlds_jungle.png",
         "rarity": "A",
         "tags": [
@@ -2795,7 +2927,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_desert ",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_desert.svg",
-        "tokenIcon": "",
+        "tokenIcon": "🏜️",
         "image": "../assets/icons/worlds/worlds_desert .png",
         "rarity": "A",
         "tags": [
@@ -2810,7 +2942,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_uninhabited island",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_island.svg",
-        "tokenIcon": "",
+        "tokenIcon": "🏝️",
         "image": "../assets/icons/worlds/worlds_uninhabited island.png",
         "rarity": "A",
         "tags": [
@@ -2825,7 +2957,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_jungle",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_ice.svg",
-        "tokenIcon": "",
+        "tokenIcon": "🧊",
         "image": "../assets/icons/worlds/worlds_jungle.png",
         "rarity": "A",
         "tags": [
@@ -2840,7 +2972,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_cave",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_cave.svg",
-        "tokenIcon": "",
+        "tokenIcon": "🕳️",
         "image": "../assets/icons/worlds/worlds_cave.png",
         "rarity": "A",
         "tags": [
@@ -2855,7 +2987,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_hospital",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_hospital.svg",
-        "tokenIcon": "",
+        "tokenIcon": "🏥",
         "image": "../assets/icons/worlds/worlds_hospital.png",
         "rarity": "A",
         "tags": [
@@ -2870,7 +3002,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_Villa",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_rain_mountain.svg",
-        "tokenIcon": "",
+        "tokenIcon": "⛈️",
         "image": "../assets/icons/worlds/worlds_Villa.png",
         "rarity": "B",
         "tags": [
@@ -2885,7 +3017,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_space shuttle",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_spaceship.svg",
-        "tokenIcon": "",
+        "tokenIcon": "🚀",
         "image": "../assets/icons/worlds/worlds_space shuttle.png",
         "rarity": "B",
         "tags": [
@@ -2900,7 +3032,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_Underwater",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_undersea_base.svg",
-        "tokenIcon": "",
+        "tokenIcon": "🌊",
         "image": "../assets/icons/worlds/worlds_Underwater.png",
         "rarity": "B",
         "tags": [
@@ -2915,7 +3047,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_Ring of Fire",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_volcano.svg",
-        "tokenIcon": "",
+        "tokenIcon": "🌋",
         "image": "../assets/icons/worlds/worlds_Ring of Fire.png",
         "rarity": "B",
         "tags": [
@@ -2930,7 +3062,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_castle",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_castle.svg",
-        "tokenIcon": "",
+        "tokenIcon": "🏰",
         "image": "../assets/icons/worlds/worlds_castle.png",
         "rarity": "B",
         "tags": [
@@ -2945,7 +3077,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_FutureCity",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_future_city.svg",
-        "tokenIcon": "",
+        "tokenIcon": "🌆",
         "image": "../assets/icons/worlds/worlds_FutureCity.png",
         "rarity": "B",
         "tags": [
@@ -2960,7 +3092,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_maze",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_maze.svg",
-        "tokenIcon": "",
+        "tokenIcon": "🌀",
         "image": "../assets/icons/worlds/worlds_maze.png",
         "rarity": "B",
         "tags": [
@@ -2975,7 +3107,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_Abandoned Campus",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_haunted_school.svg",
-        "tokenIcon": "",
+        "tokenIcon": "👻",
         "image": "../assets/icons/worlds/worlds_Abandoned Campus.png",
         "rarity": "A",
         "tags": [
@@ -2990,7 +3122,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_Ancient battlefield",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_battlefield.svg",
-        "tokenIcon": "",
+        "tokenIcon": "⚔️",
         "image": "../assets/icons/worlds/worlds_Ancient battlefield.png",
         "rarity": "A",
         "tags": [
@@ -3005,7 +3137,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_Cruise ship",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_cruise.svg",
-        "tokenIcon": "",
+        "tokenIcon": "🛳️",
         "image": "../assets/icons/worlds/worlds_Cruise ship.png",
         "rarity": "B",
         "tags": [
@@ -3020,7 +3152,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_CloudCity",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_cloud_city.svg",
-        "tokenIcon": "",
+        "tokenIcon": "☁️",
         "image": "../assets/icons/worlds/worlds_CloudCity.png",
         "rarity": "B",
         "tags": [
@@ -3035,7 +3167,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_laboratory",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_lab.svg",
-        "tokenIcon": "",
+        "tokenIcon": "🧪",
         "image": "../assets/icons/worlds/worlds_laboratory.png",
         "rarity": "A",
         "tags": [
@@ -3050,7 +3182,7 @@ window.DEBATE_DECKS = {
         "imageId": "worlds_Raft",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_raft.svg",
-        "tokenIcon": "",
+        "tokenIcon": "🛶",
         "image": "../assets/icons/worlds/worlds_Raft.png",
         "rarity": "A",
         "tags": [
@@ -3066,12 +3198,23 @@ window.DEBATE_DECKS = {
     "icon": "○",
     "cards": [
       {
+        "name": "軍人",
+        "lore": "服從紀律、聽從指令，強壯且專業。",
+        "imageId": "roles_軍人",
+        "icon": "roles_軍人.png",
+        "iconAsset": "",
+        "tokenIcon": "🪖",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
         "name": "醫生",
         "lore": "能處理受傷、判斷感染風險，是災後隊伍的安全保障。",
         "imageId": "roles_醫生",
         "icon": "",
         "iconAsset": "../assets/icons/roles/roles_醫生.png",
-        "tokenIcon": "✚",
+        "tokenIcon": "🩺",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -3082,7 +3225,7 @@ window.DEBATE_DECKS = {
         "imageId": "roles_工程師",
         "icon": "",
         "iconAsset": "../assets/icons/roles/roles_工程師.png",
-        "tokenIcon": "⚙",
+        "tokenIcon": "⚙️",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -3093,7 +3236,7 @@ window.DEBATE_DECKS = {
         "imageId": "roles_廚師",
         "icon": "",
         "iconAsset": "../assets/icons/roles/roles_廚師.png",
-        "tokenIcon": "◍",
+        "tokenIcon": "👨‍🍳",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -3104,7 +3247,7 @@ window.DEBATE_DECKS = {
         "imageId": "roles_老師",
         "icon": "",
         "iconAsset": "../assets/icons/roles/roles_老師.png",
-        "tokenIcon": "✎",
+        "tokenIcon": "🍎",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -3115,7 +3258,7 @@ window.DEBATE_DECKS = {
         "imageId": "roles_消防員",
         "icon": "",
         "iconAsset": "../assets/icons/roles/roles_消防員.png",
-        "tokenIcon": "▲",
+        "tokenIcon": "🚒",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -3126,7 +3269,7 @@ window.DEBATE_DECKS = {
         "imageId": "roles_農夫",
         "icon": "",
         "iconAsset": "../assets/icons/roles/roles_農夫.png",
-        "tokenIcon": "☘",
+        "tokenIcon": "🌾",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -3137,7 +3280,7 @@ window.DEBATE_DECKS = {
         "imageId": "roles_律師",
         "icon": "",
         "iconAsset": "../assets/icons/roles/roles_律師.png",
-        "tokenIcon": "§",
+        "tokenIcon": "⚖️",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -3148,7 +3291,7 @@ window.DEBATE_DECKS = {
         "imageId": "roles_心理師",
         "icon": "",
         "iconAsset": "../assets/icons/roles/roles_心理師.png",
-        "tokenIcon": "♡",
+        "tokenIcon": "🧠",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -3159,7 +3302,7 @@ window.DEBATE_DECKS = {
         "imageId": "roles_記者",
         "icon": "",
         "iconAsset": "../assets/icons/roles/roles_記者.png",
-        "tokenIcon": "✦",
+        "tokenIcon": "📰",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -3170,7 +3313,7 @@ window.DEBATE_DECKS = {
         "imageId": "roles_程式設計師",
         "icon": "",
         "iconAsset": "../assets/icons/roles/roles_程式設計師.png",
-        "tokenIcon": "{}",
+        "tokenIcon": "💻",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -3181,7 +3324,7 @@ window.DEBATE_DECKS = {
         "imageId": "roles_建築師",
         "icon": "",
         "iconAsset": "../assets/icons/roles/roles_建築師.png",
-        "tokenIcon": "▧",
+        "tokenIcon": "📐",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -3192,7 +3335,7 @@ window.DEBATE_DECKS = {
         "imageId": "roles_護理師",
         "icon": "",
         "iconAsset": "../assets/icons/roles/roles_護理師.png",
-        "tokenIcon": "✚",
+        "tokenIcon": "💉",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -3203,7 +3346,7 @@ window.DEBATE_DECKS = {
         "imageId": "roles_警察",
         "icon": "",
         "iconAsset": "../assets/icons/roles/roles_警察.png",
-        "tokenIcon": "◆",
+        "tokenIcon": "👮",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -3214,7 +3357,7 @@ window.DEBATE_DECKS = {
         "imageId": "roles_翻譯員",
         "icon": "",
         "iconAsset": "../assets/icons/roles/roles_翻譯員.png",
-        "tokenIcon": "文",
+        "tokenIcon": "🌐",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -3225,7 +3368,7 @@ window.DEBATE_DECKS = {
         "imageId": "roles_植物學家",
         "icon": "",
         "iconAsset": "../assets/icons/roles/roles_植物學家.png",
-        "tokenIcon": "☘",
+        "tokenIcon": "🌿",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -3236,7 +3379,7 @@ window.DEBATE_DECKS = {
         "imageId": "roles_天文學家",
         "icon": "",
         "iconAsset": "../assets/icons/roles/roles_天文學家.png",
-        "tokenIcon": "✦",
+        "tokenIcon": "🔭",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -3247,7 +3390,7 @@ window.DEBATE_DECKS = {
         "imageId": "roles_機師",
         "icon": "",
         "iconAsset": "../assets/icons/roles/roles_機師.png",
-        "tokenIcon": "△",
+        "tokenIcon": "✈️",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -3258,7 +3401,7 @@ window.DEBATE_DECKS = {
         "imageId": "roles_商人",
         "icon": "",
         "iconAsset": "../assets/icons/roles/roles_商人.png",
-        "tokenIcon": "$",
+        "tokenIcon": "💼",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -3269,7 +3412,7 @@ window.DEBATE_DECKS = {
         "imageId": "roles_藝術家",
         "icon": "",
         "iconAsset": "../assets/icons/roles/roles_藝術家.png",
-        "tokenIcon": "◈",
+        "tokenIcon": "🎨",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -3280,7 +3423,7 @@ window.DEBATE_DECKS = {
         "imageId": "roles_運動員",
         "icon": "",
         "iconAsset": "../assets/icons/roles/roles_運動員.png",
-        "tokenIcon": "↯",
+        "tokenIcon": "🏅",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -3291,7 +3434,7 @@ window.DEBATE_DECKS = {
         "imageId": "roles_導遊",
         "icon": "",
         "iconAsset": "../assets/icons/roles/roles_導遊.png",
-        "tokenIcon": "○",
+        "tokenIcon": "🗺️",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -3302,7 +3445,7 @@ window.DEBATE_DECKS = {
         "imageId": "roles_科學家",
         "icon": "",
         "iconAsset": "../assets/icons/roles/roles_科學家.png",
-        "tokenIcon": "○",
+        "tokenIcon": "🔬",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -3313,7 +3456,7 @@ window.DEBATE_DECKS = {
         "imageId": "roles_水電工",
         "icon": "",
         "iconAsset": "../assets/icons/roles/roles_水電工.png",
-        "tokenIcon": "○",
+        "tokenIcon": "🔧",
         "image": "",
         "rarity": "A",
         "tags": []
@@ -3324,7 +3467,7 @@ window.DEBATE_DECKS = {
         "imageId": "roles_社工",
         "icon": "",
         "iconAsset": "../assets/icons/roles/roles_社工.png",
-        "tokenIcon": "○",
+        "tokenIcon": "🤝",
         "image": "",
         "rarity": "A",
         "tags": []
