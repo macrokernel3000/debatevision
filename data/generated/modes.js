@@ -5,10 +5,18 @@ window.DEBATE_MODES = [
     "title": "異境求生",
     "icon": "◆",
     "tone": "danger",
-    "track": "異境 × 物品",
+    "track": "異境 × 卡牌",
     "primaryDeck": "items",
+    "variantDecks": [
+      "items",
+      "roles"
+    ],
+    "variantLabels": {
+      "items": "道具",
+      "roles": "職業"
+    },
     "secondaryDeck": "worlds",
-    "primaryLabel": "物品卡",
+    "primaryLabel": "求生卡",
     "secondaryLabel": "異境卡",
     "defaultRarities": {
       "items": [
@@ -19,15 +27,15 @@ window.DEBATE_MODES = [
     },
     "drawLabel": "抽出求生組合",
     "cardMode": "itemEnvironment",
-    "description": "每一個異境都潛藏危機，請用抽出的道具告訴眾人，我們該如何脫離險境？",
+    "description": "每一個異境都潛藏危機，請用抽出的道具或職業告訴眾人，我們該如何脫離險境？",
     "prompts": [
       [
         "環境限制",
         "這個異境最令人擔憂的生存條件是什麼？"
       ],
       [
-        "物品極限",
-        "如果物品是永久使用，確實可以降低難度，但如果道具有數量限制或壽命極限呢？"
+        "卡牌極限",
+        "如果道具或職業能力看似強大，它的限制、代價或替代方案是什麼？"
       ],
       [
         "局部有效",
@@ -35,8 +43,8 @@ window.DEBATE_MODES = [
       ]
     ],
     "flow": [
-      "選 1 到 6 個物品，抽1個異境",
-      "思考異境特色及物品功能",
+      "選擇本局抽道具或職業，再抽 1 個異境",
+      "思考異境特色及卡牌功能",
       "每位學生提出30 秒內容",
       "共同討論，分組合作"
     ],
@@ -53,18 +61,18 @@ window.DEBATE_MODES = [
     "title": "存席辯護",
     "icon": "◉",
     "tone": "sky",
-    "track": "異境 × 職業",
+    "track": "職業辯護",
     "primaryDeck": "roles",
-    "secondaryDeck": "worlds",
+    "secondaryDeck": "",
     "primaryLabel": "職業卡",
-    "secondaryLabel": "異境卡",
-    "drawLabel": "抽出留席戰場",
-    "cardMode": "roleEnvironment",
-    "description": "同一個危機異境中，每位學生抽職業，說服大家自己最值得留下來。",
+    "secondaryLabel": "",
+    "drawLabel": "抽出辯護身份",
+    "cardMode": "roleDefense",
+    "description": "單純抽出一個或多個職業，學生要說服大家自己最值得留下來。",
     "prompts": [
       [
         "留下理由",
-        "你的職業在這個環境中有什麼不可替代價值？"
+        "你的職業有什麼不可替代價值？"
       ],
       [
         "比較標準",
@@ -76,15 +84,15 @@ window.DEBATE_MODES = [
       ]
     ],
     "flow": [
-      "抽 1 個異境",
-      "每位學生抽 1 個職業",
+      "抽 1 到 6 個職業",
+      "每位學生準備自己的留下理由",
       "每人 45 秒辯護",
       "觀眾提問或互相反駁",
       "逐輪淘汰直到最後留下者"
     ],
     "image": "../assets/backgrounds/modes/role-survival.png",
     "cardHooks": [
-      "說明 {name} 在這個異境中的不可替代價值。",
+      "說明 {name} 的不可替代價值。",
       "承認 {name} 的一個弱點，並提出化解方式。",
       "用一句話說服大家留下 {name}。"
     ]
@@ -100,6 +108,7 @@ window.DEBATE_MODES = [
     "availableDecks": [
       "celebrities",
       "items",
+      "needs",
       "worlds",
       "locations",
       "roles",
@@ -118,7 +127,7 @@ window.DEBATE_MODES = [
     "drawLabel": "抽出對決卡牌",
     "cardMode": "importanceDuel",
     "fixedCount": 2,
-    "description": "刻意不給場景，直接抽兩張卡牌。預設使用名人卡，也可以切換成物品、異境、場地、職業或生物來比較誰更重要。",
+    "description": "刻意不給場景，直接抽兩張卡牌。預設使用名人卡，也可以切換成物品、需求、異境、場地、職業或生物來比較誰更重要。",
     "prompts": [
       [
         "建立標準",
@@ -155,17 +164,17 @@ window.DEBATE_MODES = [
     "tone": "gold",
     "track": "需求 × 故事",
     "primaryDeck": "items",
-    "secondaryDeck": "",
+    "secondaryDeck": "needs",
     "primaryLabel": "物品卡",
-    "secondaryLabel": "",
+    "secondaryLabel": "需求卡",
     "defaultRarities": {
       "items": [
         "N"
       ]
     },
-    "drawLabel": "抽出銷售商品",
+    "drawLabel": "抽出銷售題目",
     "cardMode": "salesPitch",
-    "description": "學生抽出一個普通商品，先判斷它滿足什麼需求，再決定賣給誰，最後包裝成有說服力的銷售故事。",
+    "description": "可以單獨抽商品、單獨抽需求，或抽出商品加需求。學生要找出需求、對象與故事，把平凡東西說成值得購買的選擇。",
     "prompts": [
       [
         "需求洞察",
@@ -181,7 +190,7 @@ window.DEBATE_MODES = [
       ]
     ],
     "flow": [
-      "抽 1 到 6 張物品卡商品",
+      "選擇商品、需求或商品加需求",
       "30 秒找出核心需求",
       "30 秒決定目標客群",
       "45 秒完成銷售提案",
@@ -207,6 +216,7 @@ window.DEBATE_MODES = [
       "locations",
       "worlds",
       "items",
+      "needs",
       "roles",
       "creatures",
       "celebrities"

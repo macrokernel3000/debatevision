@@ -856,33 +856,11 @@ window.DEBATE_DECKS = {
     "icon": "□",
     "cards": [
       {
-        "name": "鐵錘",
-        "lore": "沉重可靠，能破壞門鎖、固定木板，也可能因為太吵引來危險。",
-        "imageId": "item_鐵錘",
+        "name": "手搖發電機",
+        "lore": "不用靠天氣也能供電，但需要體力與時間。",
+        "imageId": "item_手搖發電機",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_鐵錘.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "A",
-        "tags": []
-      },
-      {
-        "name": "手槍",
-        "lore": "精準有效，只可惜你只有 7 發子彈，每一次開火都要說得出代價。",
-        "imageId": "item_手槍",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_手槍.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "A",
-        "tags": []
-      },
-      {
-        "name": "網子",
-        "lore": "能捕捉、阻擋、拖曳，也能做臨時吊床，但怕刀割與火燒。",
-        "imageId": "item_網子",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_網子.png",
+        "iconAsset": "../assets/icons/items/item_手搖發電機.png",
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
@@ -900,66 +878,99 @@ window.DEBATE_DECKS = {
         "tags": []
       },
       {
-        "name": "手電筒",
-        "lore": "黑暗中的眼睛，也能發出求救訊號，但電池有限。",
-        "imageId": "item_手電筒",
+        "name": "睡袋",
+        "lore": "保暖與休息品質提高，但佔空間。",
+        "imageId": "item_睡袋",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_手電筒.png",
+        "iconAsset": "../assets/icons/items/item_睡袋.png",
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
       },
       {
-        "name": "繩索",
-        "lore": "攀爬、固定、救援都能用，前提是你會打結。",
-        "imageId": "item_繩索",
+        "name": "膠帶",
+        "lore": "修補、固定、封口都能做，是臨時解法之王。",
+        "imageId": "item_膠帶",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_繩索.png",
+        "iconAsset": "../assets/icons/items/item_膠帶.png",
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
       },
       {
-        "name": "急救包",
-        "lore": "處理傷口與感染風險，是隊伍續命工具，但內容物會耗盡。",
-        "imageId": "item_急救包",
+        "name": "小型無人機",
+        "lore": "偵查快速安全，但電量、噪音與操控都是問題。",
+        "imageId": "item_小型無人機",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_急救包.png",
+        "iconAsset": "../assets/icons/items/item_小型無人機.png",
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
       },
       {
-        "name": "打火機",
-        "lore": "能生火、消毒、嚇阻，也可能暴露位置或引發火災。",
-        "imageId": "item_打火機",
+        "name": "小刀",
+        "lore": "切割能力直接明確，但距離短也有安全風險。",
+        "imageId": "item_小刀",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_打火機.png",
+        "iconAsset": "../assets/icons/items/item_小刀.png",
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
         "tags": []
       },
       {
-        "name": "太陽能充電板",
-        "lore": "替通訊設備續命，晴天很好用，陰雨天就尷尬。",
-        "imageId": "item_太陽能充電板",
+        "name": "垃圾袋",
+        "lore": "可當雨披、水袋、收納袋，是被低估的生存道具。",
+        "imageId": "item_垃圾袋",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_太陽能充電板.png",
+        "iconAsset": "../assets/icons/items/item_垃圾袋.png",
         "tokenIcon": "",
         "image": "",
-        "rarity": "B",
+        "rarity": "A",
         "tags": []
       },
       {
-        "name": "平底鍋",
-        "lore": "能煮食也能防身，聲音響亮到很有存在感。",
-        "imageId": "item_平底鍋",
+        "name": "夜視鏡",
+        "lore": "夜間優勢明顯，但電力與視野限制要考慮。",
+        "imageId": "item_夜視鏡",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_平底鍋.png",
+        "iconAsset": "../assets/icons/items/item_夜視鏡.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "瑞士刀",
+        "lore": "小型多功能工具，能切、撬、修，只是每項能力都不是最強。",
+        "imageId": "item_瑞士刀",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_瑞士刀.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "軍用乾糧",
+        "lore": "快速補充能量，口味單調但不需烹調。",
+        "imageId": "item_軍用乾糧",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_軍用乾糧.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "濾水器",
+        "lore": "把髒水變成可飲用資源，是長期生存神器，但濾芯有限。",
+        "imageId": "item_濾水器",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_濾水器.png",
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
@@ -977,14 +988,476 @@ window.DEBATE_DECKS = {
         "tags": []
       },
       {
-        "name": "濾水器",
-        "lore": "把髒水變成可飲用資源，是長期生存神器，但濾芯有限。",
-        "imageId": "item_濾水器",
+        "name": "防彈背心",
+        "lore": "提高防護，但沉重且不能保護全身。",
+        "imageId": "item_防彈背心",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_濾水器.png",
+        "iconAsset": "../assets/icons/items/item_防彈背心.png",
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "繩索",
+        "lore": "攀爬、固定、救援都能用，前提是你會打結。",
+        "imageId": "item_繩索",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_繩索.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "防水火柴",
+        "lore": "比普通火柴可靠，仍然要省著用。",
+        "imageId": "item_防水火柴",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_防水火柴.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "衛星電話",
+        "lore": "求救神器，但訊號、電力與權限都可能卡住。",
+        "imageId": "item_衛星電話",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_衛星電話.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "鐵錘",
+        "lore": "沉重可靠，能破壞門鎖、固定木板，也可能因為太吵引來危險。",
+        "imageId": "item_鐵錘",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_鐵錘.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "酒精",
+        "lore": "消毒、助燃、交換資源都可用，但保存不慎會危險。",
+        "imageId": "item_酒精",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_酒精.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "罐頭",
+        "lore": "立即補充熱量，保存期長，但吃完就只剩空罐。",
+        "imageId": "item_罐頭",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_罐頭.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "手槍",
+        "lore": "精準有效，但只有 7 發子彈，每一次開火都要說得出代價。",
+        "imageId": "item_手槍",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_手槍.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "鋼杯",
+        "lore": "能喝水、煮水、量取物品，簡單但耐用。",
+        "imageId": "item_鋼杯",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_鋼杯.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "鏟子",
+        "lore": "能挖掘、築壕、防身，缺點是笨重。",
+        "imageId": "item_鏟子",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_鏟子.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "網子",
+        "lore": "能捕捉、阻擋、拖曳，也能做臨時吊床，但怕刀割與火燒。",
+        "imageId": "item_網子",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_網子.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "迷你瓦斯爐",
+        "lore": "能煮水煮食，燃料有限且要通風。",
+        "imageId": "item_迷你瓦斯爐",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_迷你瓦斯爐.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "平底鍋",
+        "lore": "能煮食也能防身，聲音響亮到很有存在感。",
+        "imageId": "item_平底鍋",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_平底鍋.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "打火機",
+        "lore": "能生火、消毒、嚇阻，也可能暴露位置或引發火災。",
+        "imageId": "item_打火機",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_打火機.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "滅火器",
+        "lore": "能處理火災也可短暫阻擋敵人，但用完就空。",
+        "imageId": "item_滅火器",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_滅火器.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "急救包",
+        "lore": "處理傷口與感染風險，是隊伍續命工具，但內容物會耗盡。",
+        "imageId": "item_急救包",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_急救包.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "折疊鋸",
+        "lore": "處理木材與障礙好用，但速度不快。",
+        "imageId": "item_折疊鋸",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_折疊鋸.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "背包",
+        "lore": "讓資源能被帶走，但裝越多越拖慢速度。",
+        "imageId": "item_背包",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_背包.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "折疊梯",
+        "lore": "跨越高度障礙，但重量和展開時間是問題。",
+        "imageId": "item_折疊梯",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_折疊梯.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "保溫毯",
+        "lore": "輕巧保暖，也能反光求救，但很容易破。",
+        "imageId": "item_保溫毯",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_保溫毯.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "胡椒噴霧",
+        "lore": "近距離防身有效，但風向錯了可能害到自己。",
+        "imageId": "item_胡椒噴霧",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_胡椒噴霧.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "撬棍",
+        "lore": "開門、拆箱、防身都實用，但看起來很有攻擊性。",
+        "imageId": "item_撬棍",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_撬棍.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "伸縮棍",
+        "lore": "防身與探路都能用，但需要距離控制。",
+        "imageId": "item_伸縮棍",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_伸縮棍.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "防毒面具",
+        "lore": "面對煙霧或未知氣體很珍貴，但濾罐壽命有限。",
+        "imageId": "item_防毒面具",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_防毒面具.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "手電筒",
+        "lore": "黑暗中的眼睛，也能發出求救訊號，但電池有限。",
+        "imageId": "item_手電筒",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_手電筒.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "A",
+        "tags": []
+      },
+      {
+        "name": "哨子",
+        "lore": "低成本求救工具，聲音穿透力強，但不能亂吹。",
+        "imageId": "item_哨子",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_哨子.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "B",
+        "tags": []
+      },
+      {
+        "name": "百科全書",
+        "lore": "你該知道的應有盡有，但知識也有重量。",
+        "imageId": "item_百科全書",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_百科全書.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "B",
+        "tags": []
+      },
+      {
+        "name": "冰箱",
+        "lore": "保存藥品與食物，重量是個挑戰。",
+        "imageId": "item_冰箱",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_冰箱.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "B",
+        "tags": []
+      },
+      {
+        "name": "鋁箔紙",
+        "lore": "保溫、反光、包裹食物，輕巧但脆弱。",
+        "imageId": "item_鋁箔紙",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_鋁箔紙.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "B",
+        "tags": []
+      },
+      {
+        "name": "熱水瓶",
+        "lore": "保溫與儲水兼具，也能提供心理安定感。",
+        "imageId": "item_熱水瓶",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_熱水瓶.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "B",
+        "tags": []
+      },
+      {
+        "name": "小型鎖頭",
+        "lore": "保護資源與封鎖入口，但鑰匙要保管好。",
+        "imageId": "item_小型鎖頭",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_小型鎖頭.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "B",
+        "tags": []
+      },
+      {
+        "name": "防水袋",
+        "lore": "保護重要物資，不能直接解決危機但能降低損失。",
+        "imageId": "item_防水袋",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_防水袋.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "B",
+        "tags": []
+      },
+      {
+        "name": "手套",
+        "lore": "保護雙手，讓人敢搬尖銳物，但會降低觸感。",
+        "imageId": "item_手套",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_手套.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "B",
+        "tags": []
+      },
+      {
+        "name": "安全帽",
+        "lore": "保護頭部，適合穿越倒塌建築，但保護範圍有限。",
+        "imageId": "item_安全帽",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_安全帽.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "B",
+        "tags": []
+      },
+      {
+        "name": "針線包",
+        "lore": "修補裝備與衣物，細小卻能延長資源壽命。",
+        "imageId": "item_針線包",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_針線包.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "B",
+        "tags": []
+      },
+      {
+        "name": "布條",
+        "lore": "包紮、標記、綁定都能用，材質決定強度。",
+        "imageId": "item_布條",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_布條.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "B",
+        "tags": []
+      },
+      {
+        "name": "鏡子",
+        "lore": "反光求救、觀察轉角，也能製造心理壓力。",
+        "imageId": "item_鏡子",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_鏡子.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "B",
+        "tags": []
+      },
+      {
+        "name": "折疊桌",
+        "lore": "可作平台、盾牌、臨時擔架，但體積不小。",
+        "imageId": "item_折疊桌",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_折疊桌.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "B",
+        "tags": []
+      },
+      {
+        "name": "舊手機",
+        "lore": "可照明、錄音、儲存資料，沒有網路也不是廢物。",
+        "imageId": "item_舊手機",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_舊手機.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "B",
+        "tags": []
+      },
+      {
+        "name": "空玻璃瓶",
+        "lore": "可裝水、製造聲響、當容器，也容易碎。",
+        "imageId": "item_空玻璃瓶",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_空玻璃瓶.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "B",
+        "tags": []
+      },
+      {
+        "name": "罐頭開罐器",
+        "lore": "在罐頭很多時是神器，在罐頭很少時像是裝飾。",
+        "imageId": "item_罐頭開罐器",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_罐頭開罐器.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "B",
+        "tags": []
+      },
+      {
+        "name": "保鮮膜",
+        "lore": "封存食物、包紮、隔水，創意用法很多。",
+        "imageId": "item_保鮮膜",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_保鮮膜.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "B",
+        "tags": []
+      },
+      {
+        "name": "醫療手冊",
+        "lore": "把知識帶在身上，但讀懂與操作仍需冷靜。",
+        "imageId": "item_醫療手冊",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_醫療手冊.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "B",
         "tags": []
       },
       {
@@ -1010,209 +1483,55 @@ window.DEBATE_DECKS = {
         "tags": []
       },
       {
-        "name": "瑞士刀",
-        "lore": "小型多功能工具，能切、撬、修，只是每項能力都不是最強。",
-        "imageId": "item_瑞士刀",
+        "name": "反光背心",
+        "lore": "救援時醒目，躲避危險時反而麻煩。",
+        "imageId": "item_反光背心",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_瑞士刀.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "A",
-        "tags": []
-      },
-      {
-        "name": "罐頭",
-        "lore": "立即補充熱量，保存期長，但吃完就只剩空罐。",
-        "imageId": "item_罐頭",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_罐頭.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "A",
-        "tags": []
-      },
-      {
-        "name": "膠帶",
-        "lore": "修補、固定、封口都能做，是臨時解法之王。",
-        "imageId": "item_膠帶",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_膠帶.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "A",
-        "tags": []
-      },
-      {
-        "name": "防毒面具",
-        "lore": "面對煙霧或未知氣體很珍貴，但濾罐壽命有限。",
-        "imageId": "item_防毒面具",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_防毒面具.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "A",
-        "tags": []
-      },
-      {
-        "name": "擴音器",
-        "lore": "能指揮群眾或製造聲東擊西，但也會暴露位置。",
-        "imageId": "item_擴音器",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_擴音器.png",
+        "iconAsset": "../assets/icons/items/item_反光背心.png",
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
       },
       {
-        "name": "雨傘",
-        "lore": "遮雨、遮陽、當簡易盾牌，面對強風就不太可靠。",
-        "imageId": "item_雨傘",
+        "name": "手錶",
+        "lore": "時間就是金錢，對吧？",
+        "imageId": "item_手錶",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_雨傘.png",
+        "iconAsset": "../assets/icons/items/item_手錶.png",
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
       },
       {
-        "name": "鏟子",
-        "lore": "能挖掘、築壕、防身，缺點是笨重。",
-        "imageId": "item_鏟子",
+        "name": "太陽能充電板",
+        "lore": "替通訊設備續命，晴天很好用，陰雨天就尷尬。",
+        "imageId": "item_太陽能充電板",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_鏟子.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "A",
-        "tags": []
-      },
-      {
-        "name": "筆記本",
-        "lore": "記錄線索、分配任務、保存證據，但怕水怕火。",
-        "imageId": "item_筆記本",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_筆記本.png",
+        "iconAsset": "../assets/icons/items/item_太陽能充電板.png",
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
       },
       {
-        "name": "哨子",
-        "lore": "低成本求救工具，聲音穿透力強，但不能亂吹。",
-        "imageId": "item_哨子",
+        "name": "粉筆",
+        "lore": "標記路線與訊息，簡單便宜但遇水就消失。",
+        "imageId": "item_粉筆",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_哨子.png",
+        "iconAsset": "../assets/icons/items/item_粉筆.png",
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
       },
       {
-        "name": "保溫毯",
-        "lore": "輕巧保暖，也能反光求救，但很容易破。",
-        "imageId": "item_保溫毯",
+        "name": "衛生紙",
+        "lore": "清潔、引火、包裹都能用，濕掉就大幅失效。",
+        "imageId": "item_衛生紙",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_保溫毯.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "A",
-        "tags": []
-      },
-      {
-        "name": "釣魚線",
-        "lore": "能釣魚、綁線、設陷阱，但需要耐心與技巧。",
-        "imageId": "item_釣魚線",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_釣魚線.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "B",
-        "tags": []
-      },
-      {
-        "name": "安全帽",
-        "lore": "保護頭部，適合穿越倒塌建築，但保護範圍有限。",
-        "imageId": "item_安全帽",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_安全帽.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "B",
-        "tags": []
-      },
-      {
-        "name": "酒精",
-        "lore": "消毒、助燃、交換資源都可用，但保存不慎會危險。",
-        "imageId": "item_酒精",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_酒精.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "A",
-        "tags": []
-      },
-      {
-        "name": "鏡子",
-        "lore": "反光求救、觀察轉角，也能製造心理壓力。",
-        "imageId": "item_鏡子",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_鏡子.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "B",
-        "tags": []
-      },
-      {
-        "name": "行動電源",
-        "lore": "讓手機多活一段時間，但電量終究會歸零。",
-        "imageId": "item_行動電源",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_行動電源.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "B",
-        "tags": []
-      },
-      {
-        "name": "睡袋",
-        "lore": "保暖與休息品質提高，但佔空間。",
-        "imageId": "item_睡袋",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_睡袋.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "A",
-        "tags": []
-      },
-      {
-        "name": "防水袋",
-        "lore": "保護重要物資，不能直接解決危機但能降低損失。",
-        "imageId": "item_防水袋",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_防水袋.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "B",
-        "tags": []
-      },
-      {
-        "name": "撬棍",
-        "lore": "開門、拆箱、防身都實用，但看起來很有攻擊性。",
-        "imageId": "item_撬棍",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_撬棍.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "A",
-        "tags": []
-      },
-      {
-        "name": "蠟燭",
-        "lore": "照明與計時工具，不需電池，但怕風也怕水。",
-        "imageId": "item_蠟燭",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_蠟燭.png",
+        "iconAsset": "../assets/icons/items/item_衛生紙.png",
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
@@ -1230,231 +1549,11 @@ window.DEBATE_DECKS = {
         "tags": []
       },
       {
-        "name": "背包",
-        "lore": "讓資源能被帶走，但裝越多越拖慢速度。",
-        "imageId": "item_背包",
+        "name": "蠟燭",
+        "lore": "照明與計時工具，不需電池，但怕風也怕水。",
+        "imageId": "item_蠟燭",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_背包.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "A",
-        "tags": []
-      },
-      {
-        "name": "鋁箔紙",
-        "lore": "保溫、反光、包裹食物，輕巧但脆弱。",
-        "imageId": "item_鋁箔紙",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_鋁箔紙.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "B",
-        "tags": []
-      },
-      {
-        "name": "口罩",
-        "lore": "阻隔灰塵與飛沫，有基本防護但不是萬能。",
-        "imageId": "item_口罩",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_口罩.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "B",
-        "tags": []
-      },
-      {
-        "name": "手套",
-        "lore": "保護雙手，讓人敢搬尖銳物，但會降低觸感。",
-        "imageId": "item_手套",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_手套.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "B",
-        "tags": []
-      },
-      {
-        "name": "保鮮膜",
-        "lore": "封存食物、包紮、隔水，創意用法很多。",
-        "imageId": "item_保鮮膜",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_保鮮膜.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "B",
-        "tags": []
-      },
-      {
-        "name": "彈珠",
-        "lore": "能製造滑倒陷阱或分散注意，但效果不穩定。",
-        "imageId": "item_彈珠",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_彈珠.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "C",
-        "tags": []
-      },
-      {
-        "name": "粉筆",
-        "lore": "標記路線與訊息，簡單便宜但遇水就消失。",
-        "imageId": "item_粉筆",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_粉筆.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "B",
-        "tags": []
-      },
-      {
-        "name": "垃圾袋",
-        "lore": "可當雨披、水袋、收納袋，是被低估的生存道具。",
-        "imageId": "item_垃圾袋",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_垃圾袋.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "A",
-        "tags": []
-      },
-      {
-        "name": "小刀",
-        "lore": "切割能力直接明確，但距離短也有安全風險。",
-        "imageId": "item_小刀",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_小刀.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "A",
-        "tags": []
-      },
-      {
-        "name": "罐頭開罐器",
-        "lore": "在罐頭很多時是神器，在罐頭很少時像是裝飾。",
-        "imageId": "item_罐頭開罐器",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_罐頭開罐器.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "B",
-        "tags": []
-      },
-      {
-        "name": "小型無人機",
-        "lore": "偵查快速安全，但電量、噪音與操控都是問題。",
-        "imageId": "item_小型無人機",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_小型無人機.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "A",
-        "tags": []
-      },
-      {
-        "name": "手錶",
-        "lore": "時間就是金錢，對吧？",
-        "imageId": "item_手錶",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_手錶.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "B",
-        "tags": []
-      },
-      {
-        "name": "折疊椅",
-        "lore": "休息、墊高、阻擋都可用，但不算關鍵裝備。",
-        "imageId": "item_折疊椅",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_折疊椅.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "C",
-        "tags": []
-      },
-      {
-        "name": "滅火器",
-        "lore": "能處理火災也可短暫阻擋敵人，但用完就空。",
-        "imageId": "item_滅火器",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_滅火器.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "A",
-        "tags": []
-      },
-      {
-        "name": "滑板",
-        "lore": "平地移動快速，也能搬運物資，但地形限制很大。",
-        "imageId": "item_滑板",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_滑板.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "C",
-        "tags": []
-      },
-      {
-        "name": "熱水瓶",
-        "lore": "保溫與儲水兼具，也能提供心理安定感。",
-        "imageId": "item_熱水瓶",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_熱水瓶.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "B",
-        "tags": []
-      },
-      {
-        "name": "捕鼠夾",
-        "lore": "可設陷阱、捕小動物，但需要精準擺放。",
-        "imageId": "item_捕鼠夾",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_捕鼠夾.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "C",
-        "tags": []
-      },
-      {
-        "name": "望遠鏡頭",
-        "lore": "觀察距離大幅提升，但缺少相機時用途變窄。",
-        "imageId": "item_望遠鏡頭",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_望遠鏡頭.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "B",
-        "tags": []
-      },
-      {
-        "name": "雨鞋",
-        "lore": "穿越積水與泥地安全，行動聲音較明顯。",
-        "imageId": "item_雨鞋",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_雨鞋.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "B",
-        "tags": []
-      },
-      {
-        "name": "空玻璃瓶",
-        "lore": "可裝水、製造聲響、當容器，也容易碎。",
-        "imageId": "item_空玻璃瓶",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_空玻璃瓶.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "B",
-        "tags": []
-      },
-      {
-        "name": "醫療手冊",
-        "lore": "把知識帶在身上，但讀懂與操作仍需冷靜。",
-        "imageId": "item_醫療手冊",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_醫療手冊.png",
+        "iconAsset": "../assets/icons/items/item_蠟燭.png",
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
@@ -1472,127 +1571,6 @@ window.DEBATE_DECKS = {
         "tags": []
       },
       {
-        "name": "折疊梯",
-        "lore": "跨越高度障礙，但重量和展開時間是問題。",
-        "imageId": "item_折疊梯",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_折疊梯.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "A",
-        "tags": []
-      },
-      {
-        "name": "防水火柴",
-        "lore": "比普通火柴可靠，仍然要省著用。",
-        "imageId": "item_防水火柴",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_防水火柴.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "A",
-        "tags": []
-      },
-      {
-        "name": "胡椒噴霧",
-        "lore": "近距離防身有效，但風向錯了可能害到自己。",
-        "imageId": "item_胡椒噴霧",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_胡椒噴霧.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "A",
-        "tags": []
-      },
-      {
-        "name": "指南旗",
-        "lore": "集合與標記位置清楚，但會暴露行蹤。",
-        "imageId": "item_指南旗",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_指南旗.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "B",
-        "tags": []
-      },
-      {
-        "name": "折疊水桶",
-        "lore": "能運水與收納，沒水源時價值下降。",
-        "imageId": "item_折疊水桶",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_折疊水桶.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "B",
-        "tags": []
-      },
-      {
-        "name": "衛星電話",
-        "lore": "求救神器，但訊號、電力與權限都可能卡住。",
-        "imageId": "item_衛星電話",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_衛星電話.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "A",
-        "tags": []
-      },
-      {
-        "name": "手搖發電機",
-        "lore": "不用靠天氣也能供電，但需要體力與時間。",
-        "imageId": "item_手搖發電機",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_手搖發電機.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "A",
-        "tags": []
-      },
-      {
-        "name": "夜視鏡",
-        "lore": "夜間優勢明顯，但電力與視野限制要考慮。",
-        "imageId": "item_夜視鏡",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_夜視鏡.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "A",
-        "tags": []
-      },
-      {
-        "name": "防彈背心",
-        "lore": "提高防護，但沉重且不能保護全身。",
-        "imageId": "item_防彈背心",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_防彈背心.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "A",
-        "tags": []
-      },
-      {
-        "name": "迷你瓦斯爐",
-        "lore": "能煮水煮食，燃料有限且要通風。",
-        "imageId": "item_迷你瓦斯爐",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_迷你瓦斯爐.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "A",
-        "tags": []
-      },
-      {
-        "name": "折疊鋸",
-        "lore": "處理木材與障礙好用，但速度不快。",
-        "imageId": "item_折疊鋸",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_折疊鋸.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "A",
-        "tags": []
-      },
-      {
         "name": "醫療夾板",
         "lore": "穩定骨折傷勢，關鍵時刻能讓隊友移動。",
         "imageId": "item_醫療夾板",
@@ -1604,22 +1582,11 @@ window.DEBATE_DECKS = {
         "tags": []
       },
       {
-        "name": "反光背心",
-        "lore": "救援時醒目，躲避危險時反而麻煩。",
-        "imageId": "item_反光背心",
+        "name": "雨鞋",
+        "lore": "穿越積水與泥地安全，行動聲音較明顯。",
+        "imageId": "item_雨鞋",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_反光背心.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "B",
-        "tags": []
-      },
-      {
-        "name": "針線包",
-        "lore": "修補裝備與衣物，細小卻能延長資源壽命。",
-        "imageId": "item_針線包",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_針線包.png",
+        "iconAsset": "../assets/icons/items/item_雨鞋.png",
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
@@ -1637,113 +1604,80 @@ window.DEBATE_DECKS = {
         "tags": []
       },
       {
-        "name": "鋼杯",
-        "lore": "能喝水、煮水、量取物品，簡單但耐用。",
-        "imageId": "item_鋼杯",
+        "name": "擴音器",
+        "lore": "能指揮群眾或製造聲東擊西，但也會暴露位置。",
+        "imageId": "item_擴音器",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_鋼杯.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "A",
-        "tags": []
-      },
-      {
-        "name": "小型濾網",
-        "lore": "過濾雜質或捕捉小物，不能處理細菌病毒。",
-        "imageId": "item_小型濾網",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_小型濾網.png",
+        "iconAsset": "../assets/icons/items/item_擴音器.png",
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
       },
       {
-        "name": "百科全書",
-        "lore": "你該知道的應有盡有，但知識也有重量。",
-        "imageId": "item_百科全書",
+        "name": "滑輪組",
+        "lore": "能省力搬運重物，需要繩索與固定點配合。",
+        "imageId": "item_滑輪組",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_百科全書.png",
+        "iconAsset": "../assets/icons/items/item_滑輪組.png",
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
       },
       {
-        "name": "塑膠水管",
-        "lore": "導水、吹氣、連接裝置，創意空間很大。",
-        "imageId": "item_塑膠水管",
+        "name": "折疊水桶",
+        "lore": "能運水與收納，沒水源時價值下降。",
+        "imageId": "item_折疊水桶",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_塑膠水管.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "C",
-        "tags": []
-      },
-      {
-        "name": "小型鎖頭",
-        "lore": "保護資源與封鎖入口，但鑰匙要保管好。",
-        "imageId": "item_小型鎖頭",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_小型鎖頭.png",
+        "iconAsset": "../assets/icons/items/item_折疊水桶.png",
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
       },
       {
-        "name": "軍用乾糧",
-        "lore": "快速補充能量，口味單調但不需烹調。",
-        "imageId": "item_軍用乾糧",
+        "name": "釣魚線",
+        "lore": "能釣魚、綁線、設陷阱，但需要耐心與技巧。",
+        "imageId": "item_釣魚線",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_軍用乾糧.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "A",
-        "tags": []
-      },
-      {
-        "name": "布條",
-        "lore": "包紮、標記、綁定都能用，材質決定強度。",
-        "imageId": "item_布條",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_布條.png",
+        "iconAsset": "../assets/icons/items/item_釣魚線.png",
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
       },
       {
-        "name": "磁鐵",
-        "lore": "尋找金屬、固定小物、做簡易實驗，需創意使用。",
-        "imageId": "item_磁鐵",
+        "name": "望遠鏡頭",
+        "lore": "觀察距離大幅提升，但缺少相機時用途變窄。",
+        "imageId": "item_望遠鏡頭",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_磁鐵.png",
+        "iconAsset": "../assets/icons/items/item_望遠鏡頭.png",
         "tokenIcon": "",
         "image": "",
-        "rarity": "C",
+        "rarity": "B",
         "tags": []
       },
       {
-        "name": "小風扇",
-        "lore": "散熱、排煙、測風向，電力是最大限制。",
-        "imageId": "item_小風扇",
+        "name": "筆記本",
+        "lore": "記錄線索、分配任務、保存證據，但怕水怕火。",
+        "imageId": "item_筆記本",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_小風扇.png",
+        "iconAsset": "../assets/icons/items/item_筆記本.png",
         "tokenIcon": "",
         "image": "",
-        "rarity": "C",
+        "rarity": "B",
         "tags": []
       },
       {
-        "name": "伸縮棍",
-        "lore": "防身與探路都能用，但需要距離控制。",
-        "imageId": "item_伸縮棍",
+        "name": "行動電源",
+        "lore": "讓手機多活一段時間，但電量終究會歸零。",
+        "imageId": "item_行動電源",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_伸縮棍.png",
+        "iconAsset": "../assets/icons/items/item_行動電源.png",
         "tokenIcon": "",
         "image": "",
-        "rarity": "A",
+        "rarity": "B",
         "tags": []
       },
       {
@@ -1758,25 +1692,58 @@ window.DEBATE_DECKS = {
         "tags": []
       },
       {
-        "name": "冰箱",
-        "lore": "保存藥品與食物，重量是個挑戰。",
-        "imageId": "item_冰箱",
+        "name": "小型濾網",
+        "lore": "過濾雜質或捕捉小物，不能處理細菌病毒。",
+        "imageId": "item_小型濾網",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_冰箱.png",
+        "iconAsset": "../assets/icons/items/item_小型濾網.png",
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
         "tags": []
       },
       {
-        "name": "舊手機",
-        "lore": "可照明、錄音、儲存資料，沒有網路也不是廢物。",
-        "imageId": "item_舊手機",
+        "name": "雨傘",
+        "lore": "遮雨、遮陽、當簡易盾牌，面對強風就不太可靠。",
+        "imageId": "item_雨傘",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_舊手機.png",
+        "iconAsset": "../assets/icons/items/item_雨傘.png",
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
+        "tags": []
+      },
+      {
+        "name": "口罩",
+        "lore": "阻隔灰塵與飛沫，有基本防護但不是萬能。",
+        "imageId": "item_口罩",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_口罩.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "B",
+        "tags": []
+      },
+      {
+        "name": "指南旗",
+        "lore": "集合與標記位置清楚，但會暴露行蹤。",
+        "imageId": "item_指南旗",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_指南旗.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "B",
+        "tags": []
+      },
+      {
+        "name": "折疊椅",
+        "lore": "休息、墊高、阻擋都可用，但不算關鍵裝備。",
+        "imageId": "item_折疊椅",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_折疊椅.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "C",
         "tags": []
       },
       {
@@ -1785,17 +1752,6 @@ window.DEBATE_DECKS = {
         "imageId": "item_密碼鎖箱",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_密碼鎖箱.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "C",
-        "tags": []
-      },
-      {
-        "name": "紙牌",
-        "lore": "看似娛樂品，其實能維持士氣、抽籤與設計暗號。",
-        "imageId": "item_紙牌",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_紙牌.png",
         "tokenIcon": "",
         "image": "",
         "rarity": "C",
@@ -1813,14 +1769,69 @@ window.DEBATE_DECKS = {
         "tags": []
       },
       {
-        "name": "滑輪組",
-        "lore": "能省力搬運重物，需要繩索與固定點配合。",
-        "imageId": "item_滑輪組",
+        "name": "捕鼠夾",
+        "lore": "可設陷阱、捕小動物，但需要精準擺放。",
+        "imageId": "item_捕鼠夾",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_滑輪組.png",
+        "iconAsset": "../assets/icons/items/item_捕鼠夾.png",
         "tokenIcon": "",
         "image": "",
-        "rarity": "B",
+        "rarity": "C",
+        "tags": []
+      },
+      {
+        "name": "磁鐵",
+        "lore": "尋找金屬、固定小物、做簡易實驗，需創意使用。",
+        "imageId": "item_磁鐵",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_磁鐵.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "C",
+        "tags": []
+      },
+      {
+        "name": "塑膠水管",
+        "lore": "導水、吹氣、連接裝置，創意空間很大。",
+        "imageId": "item_塑膠水管",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_塑膠水管.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "C",
+        "tags": []
+      },
+      {
+        "name": "滑板",
+        "lore": "平地移動快速，也能搬運物資，但地形限制很大。",
+        "imageId": "item_滑板",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_滑板.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "C",
+        "tags": []
+      },
+      {
+        "name": "小風扇",
+        "lore": "散熱、排煙、測風向，電力是最大限制。",
+        "imageId": "item_小風扇",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_小風扇.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "C",
+        "tags": []
+      },
+      {
+        "name": "紙牌",
+        "lore": "看似娛樂品，其實能維持士氣、抽籤與設計暗號。",
+        "imageId": "item_紙牌",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_紙牌.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "C",
         "tags": []
       },
       {
@@ -1835,33 +1846,22 @@ window.DEBATE_DECKS = {
         "tags": []
       },
       {
-        "name": "衛生紙",
-        "lore": "清潔、引火、包裹都能用，濕掉就大幅失效。",
-        "imageId": "item_衛生紙",
+        "name": "彈珠",
+        "lore": "能製造滑倒陷阱或分散注意，但效果不穩定。",
+        "imageId": "item_彈珠",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_衛生紙.png",
+        "iconAsset": "../assets/icons/items/item_彈珠.png",
         "tokenIcon": "",
         "image": "",
-        "rarity": "B",
+        "rarity": "C",
         "tags": []
       },
       {
-        "name": "折疊桌",
-        "lore": "可作平台、盾牌、臨時擔架，但體積不小。",
-        "imageId": "item_折疊桌",
+        "name": "花瓶",
+        "lore": "不只是容器，而是讓空間有主題，適合賣給佈置愛好者。",
+        "imageId": "item_花瓶",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_折疊桌.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "B",
-        "tags": []
-      },
-      {
-        "name": "相冊",
-        "lore": "收藏回憶、整理人生片段，適合賣給重視紀念感或家庭關係的人。",
-        "imageId": "item_相冊",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_相冊.png",
+        "iconAsset": "../assets/icons/items/item_花瓶.png",
         "tokenIcon": "",
         "image": "",
         "rarity": "N",
@@ -1871,11 +1871,11 @@ window.DEBATE_DECKS = {
         ]
       },
       {
-        "name": "戒指",
-        "lore": "象徵承諾、身份與品味，真正販售的是意義而不只是金屬。",
-        "imageId": "item_戒指",
+        "name": "茶包",
+        "lore": "低成本創造放鬆時刻，適合賣給需要休息儀式的人。",
+        "imageId": "item_茶包",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_戒指.png",
+        "iconAsset": "../assets/icons/items/item_茶包.png",
         "tokenIcon": "",
         "image": "",
         "rarity": "N",
@@ -1899,11 +1899,207 @@ window.DEBATE_DECKS = {
         ]
       },
       {
+        "name": "貼紙包",
+        "lore": "便宜但能表達個性，適合學生、手帳族與粉絲社群。",
+        "imageId": "item_貼紙包",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_貼紙包.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "圍巾",
+        "lore": "保暖之外也能搭配造型，適合主打關心與季節禮物。",
+        "imageId": "item_圍巾",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_圍巾.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "餐墊",
+        "lore": "保護桌面也建立餐桌風格，適合賣給重視生活感的人。",
+        "imageId": "item_餐墊",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_餐墊.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "耳機",
+        "lore": "創造私人聲音空間，適合通勤、讀書與需要專注的人。",
+        "imageId": "item_耳機",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_耳機.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "棋盤",
+        "lore": "創造面對面互動，適合賣給家庭、社團與策略遊戲愛好者。",
+        "imageId": "item_棋盤",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_棋盤.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "木梳",
+        "lore": "功能簡單但有自然質感，可賣給重視養護與手感的人。",
+        "imageId": "item_木梳",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_木梳.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "餅乾禮盒",
+        "lore": "容易分享與送禮，適合主打體面、方便與節慶氣氛。",
+        "imageId": "item_餅乾禮盒",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_餅乾禮盒.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "香氛卡片",
+        "lore": "小小一張就能改變空間氣味，適合放在衣櫃、書桌或禮物中。",
+        "imageId": "item_香氛卡片",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_香氛卡片.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "髮夾",
+        "lore": "小物能快速改變造型，適合賣給需要方便整理頭髮的人。",
+        "imageId": "item_髮夾",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_髮夾.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "鑰匙圈",
+        "lore": "小而常見，適合主打紀念、識別與低門檻送禮。",
+        "imageId": "item_鑰匙圈",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_鑰匙圈.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
         "name": "皮衣",
         "lore": "強烈風格與保護感並存，能賣給想展現態度的人。",
         "imageId": "item_皮衣",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_皮衣.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "巧克力",
+        "lore": "快速提供獎勵、安慰與心意，適合節慶與告白情境。",
+        "imageId": "item_巧克力",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_巧克力.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "行李箱",
+        "lore": "承載移動與旅行期待，適合賣給旅人、學生與出差族。",
+        "imageId": "item_行李箱",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_行李箱.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "明信片",
+        "lore": "把一句話變成可保存的心意，適合觀光、祝福與收藏情境。",
+        "imageId": "item_明信片",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_明信片.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "果醬",
+        "lore": "把普通吐司變成有風味的早餐，適合主打手作與幸福感。",
+        "imageId": "item_果醬",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_果醬.png",
         "tokenIcon": "",
         "image": "",
         "rarity": "N",
@@ -1927,11 +2123,53 @@ window.DEBATE_DECKS = {
         ]
       },
       {
-        "name": "咖啡杯",
-        "lore": "日常陪伴感很強，適合包裝成工作儀式或送禮選擇。",
-        "imageId": "item_咖啡杯",
+        "name": "電動牙刷",
+        "lore": "把清潔效率與健康感放大，適合賣給懶得仔細刷牙的人。",
+        "imageId": "item_電動牙刷",
         "icon": "",
-        "iconAsset": "../assets/icons/items/item_咖啡杯.png",
+        "iconAsset": "../assets/icons/items/item_電動牙刷.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "手帳",
+        "lore": "把生活變得有計畫，適合賣給想自律或記錄成長的人。",
+        "imageId": "item_手帳",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_手帳.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "折疊購物袋",
+        "lore": "把臨時購物變得方便又環保，適合通勤者、市場採買者與旅行者。",
+        "imageId": "item_折疊購物袋",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_折疊購物袋.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "鬧鐘",
+        "lore": "把起床變成明確承諾，適合賣給想改善作息的人。",
+        "imageId": "item_鬧鐘",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_鬧鐘.png",
         "tokenIcon": "",
         "image": "",
         "rarity": "N",
@@ -1946,6 +2184,342 @@ window.DEBATE_DECKS = {
         "imageId": "item_項鍊",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_項鍊.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "便當盒",
+        "lore": "控制飲食與節省花費，適合賣給學生、上班族與健身族群。",
+        "imageId": "item_便當盒",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_便當盒.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "桌燈",
+        "lore": "提供專注與安全感，適合賣給讀書、工作或夜間創作者。",
+        "imageId": "item_桌燈",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_桌燈.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "拼圖",
+        "lore": "提供挑戰、專注與完成感，適合家庭、情侶與紓壓族群。",
+        "imageId": "item_拼圖",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_拼圖.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "毛毯",
+        "lore": "提供溫暖與安全感，適合居家、露營與禮物情境。",
+        "imageId": "item_毛毯",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_毛毯.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "盆栽",
+        "lore": "提供生命感與陪伴，適合賣給想改善桌面或心情的人。",
+        "imageId": "item_盆栽",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_盆栽.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "絨毛玩具",
+        "lore": "提供陪伴與安慰，適合兒童、粉絲或需要情緒支持的人。",
+        "imageId": "item_絨毛玩具",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_絨毛玩具.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "相冊",
+        "lore": "收藏回憶、整理人生片段，適合賣給重視紀念感或家庭關係的人。",
+        "imageId": "item_相冊",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_相冊.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "靠枕",
+        "lore": "改善坐姿與休息感，適合賣給長時間坐著的人。",
+        "imageId": "item_靠枕",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_靠枕.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "皮革筆袋",
+        "lore": "整理文具並展現質感，適合學生、上班族與手作愛好者。",
+        "imageId": "item_皮革筆袋",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_皮革筆袋.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "皮夾",
+        "lore": "整理金錢與證件，也展示成熟、秩序與個人品味。",
+        "imageId": "item_皮夾",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_皮夾.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "陶瓷碗",
+        "lore": "日常吃飯工具，也能被包裝成溫度、質感與餐桌美學。",
+        "imageId": "item_陶瓷碗",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_陶瓷碗.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "咖啡杯",
+        "lore": "日常陪伴感很強，適合包裝成工作儀式或送禮選擇。",
+        "imageId": "item_咖啡杯",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_咖啡杯.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "鋼筆",
+        "lore": "書寫儀式感強，適合賣給重視質感、簽名與收藏的人。",
+        "imageId": "item_鋼筆",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_鋼筆.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "桌曆",
+        "lore": "每天都會被看到，適合賣給需要提醒、規劃與品牌曝光的人。",
+        "imageId": "item_桌曆",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_桌曆.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "手工皂",
+        "lore": "清潔之外有香味、成分與手作故事，適合主打天然與送禮。",
+        "imageId": "item_手工皂",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_手工皂.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "球鞋",
+        "lore": "移動、運動與造型三合一，適合主打舒適和自我風格。",
+        "imageId": "item_球鞋",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_球鞋.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "帽T",
+        "lore": "舒適、休閒、有團體識別感，適合班服、社團或品牌周邊。",
+        "imageId": "item_帽T",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_帽T.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "旅行枕",
+        "lore": "解決移動中的疲勞，適合賣給通勤族、旅人與出差者。",
+        "imageId": "item_旅行枕",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_旅行枕.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "畫框",
+        "lore": "讓作品或照片變得正式，適合賣給想保存重要畫面的人。",
+        "imageId": "item_畫框",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_畫框.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "名片夾",
+        "lore": "讓第一印象更正式，適合賣給業務、新鮮人與創業者。",
+        "imageId": "item_名片夾",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_名片夾.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "金屬書籤",
+        "lore": "讓閱讀進度變得精緻可保存，適合送給學生、讀者與文具收藏者。",
+        "imageId": "item_金屬書籤",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_金屬書籤.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "保溫杯",
+        "lore": "讓飲品保持溫度，賣點可以是照顧自己與減少外帶浪費。",
+        "imageId": "item_保溫杯",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_保溫杯.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "戒指",
+        "lore": "象徵承諾、身份與品味，真正販售的是意義而不只是金屬。",
+        "imageId": "item_戒指",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_戒指.png",
+        "tokenIcon": "",
+        "image": "",
+        "rarity": "N",
+        "tags": [
+          "銷售",
+          "N卡"
+        ]
+      },
+      {
+        "name": "唱片",
+        "lore": "賣的是音樂品味與收藏感，適合復古愛好者與粉絲。",
+        "imageId": "item_唱片",
+        "icon": "",
+        "iconAsset": "../assets/icons/items/item_唱片.png",
         "tokenIcon": "",
         "image": "",
         "rarity": "N",
@@ -1974,580 +2548,6 @@ window.DEBATE_DECKS = {
         "imageId": "item_太陽眼鏡",
         "icon": "",
         "iconAsset": "../assets/icons/items/item_太陽眼鏡.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "絨毛玩具",
-        "lore": "提供陪伴與安慰，適合兒童、粉絲或需要情緒支持的人。",
-        "imageId": "item_絨毛玩具",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_絨毛玩具.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "旅行枕",
-        "lore": "解決移動中的疲勞，適合賣給通勤族、旅人與出差者。",
-        "imageId": "item_旅行枕",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_旅行枕.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "陶瓷碗",
-        "lore": "日常吃飯工具，也能被包裝成溫度、質感與餐桌美學。",
-        "imageId": "item_陶瓷碗",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_陶瓷碗.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "木梳",
-        "lore": "功能簡單但有自然質感，可賣給重視養護與手感的人。",
-        "imageId": "item_木梳",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_木梳.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "鑰匙圈",
-        "lore": "小而常見，適合主打紀念、識別與低門檻送禮。",
-        "imageId": "item_鑰匙圈",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_鑰匙圈.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "明信片",
-        "lore": "把一句話變成可保存的心意，適合觀光、祝福與收藏情境。",
-        "imageId": "item_明信片",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_明信片.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "圍巾",
-        "lore": "保暖之外也能搭配造型，適合主打關心與季節禮物。",
-        "imageId": "item_圍巾",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_圍巾.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "電動牙刷",
-        "lore": "把清潔效率與健康感放大，適合賣給懶得仔細刷牙的人。",
-        "imageId": "item_電動牙刷",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_電動牙刷.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "桌曆",
-        "lore": "每天都會被看到，適合賣給需要提醒、規劃與品牌曝光的人。",
-        "imageId": "item_桌曆",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_桌曆.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "花瓶",
-        "lore": "不只是容器，而是讓空間有主題，適合賣給佈置愛好者。",
-        "imageId": "item_花瓶",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_花瓶.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "盆栽",
-        "lore": "提供生命感與陪伴，適合賣給想改善桌面或心情的人。",
-        "imageId": "item_盆栽",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_盆栽.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "便當盒",
-        "lore": "控制飲食與節省花費，適合賣給學生、上班族與健身族群。",
-        "imageId": "item_便當盒",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_便當盒.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "保溫杯",
-        "lore": "讓飲品保持溫度，賣點可以是照顧自己與減少外帶浪費。",
-        "imageId": "item_保溫杯",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_保溫杯.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "皮夾",
-        "lore": "整理金錢與證件，也展示成熟、秩序與個人品味。",
-        "imageId": "item_皮夾",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_皮夾.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "名片夾",
-        "lore": "讓第一印象更正式，適合賣給業務、新鮮人與創業者。",
-        "imageId": "item_名片夾",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_名片夾.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "手工皂",
-        "lore": "清潔之外有香味、成分與手作故事，適合主打天然與送禮。",
-        "imageId": "item_手工皂",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_手工皂.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "髮夾",
-        "lore": "小物能快速改變造型，適合賣給需要方便整理頭髮的人。",
-        "imageId": "item_髮夾",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_髮夾.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "帽T",
-        "lore": "舒適、休閒、有團體識別感，適合班服、社團或品牌周邊。",
-        "imageId": "item_帽T",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_帽T.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "球鞋",
-        "lore": "移動、運動與造型三合一，適合主打舒適和自我風格。",
-        "imageId": "item_球鞋",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_球鞋.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "桌燈",
-        "lore": "提供專注與安全感，適合賣給讀書、工作或夜間創作者。",
-        "imageId": "item_桌燈",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_桌燈.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "靠枕",
-        "lore": "改善坐姿與休息感，適合賣給長時間坐著的人。",
-        "imageId": "item_靠枕",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_靠枕.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "拼圖",
-        "lore": "提供挑戰、專注與完成感，適合家庭、情侶與紓壓族群。",
-        "imageId": "item_拼圖",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_拼圖.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "棋盤",
-        "lore": "創造面對面互動，適合賣給家庭、社團與策略遊戲愛好者。",
-        "imageId": "item_棋盤",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_棋盤.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "茶包",
-        "lore": "低成本創造放鬆時刻，適合賣給需要休息儀式的人。",
-        "imageId": "item_茶包",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_茶包.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "果醬",
-        "lore": "把普通吐司變成有風味的早餐，適合主打手作與幸福感。",
-        "imageId": "item_果醬",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_果醬.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "巧克力",
-        "lore": "快速提供獎勵、安慰與心意，適合節慶與告白情境。",
-        "imageId": "item_巧克力",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_巧克力.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "餅乾禮盒",
-        "lore": "容易分享與送禮，適合主打體面、方便與節慶氣氛。",
-        "imageId": "item_餅乾禮盒",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_餅乾禮盒.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "貼紙包",
-        "lore": "便宜但能表達個性，適合學生、手帳族與粉絲社群。",
-        "imageId": "item_貼紙包",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_貼紙包.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "手帳",
-        "lore": "把生活變得有計畫，適合賣給想自律或記錄成長的人。",
-        "imageId": "item_手帳",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_手帳.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "鋼筆",
-        "lore": "書寫儀式感強，適合賣給重視質感、簽名與收藏的人。",
-        "imageId": "item_鋼筆",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_鋼筆.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "畫框",
-        "lore": "讓作品或照片變得正式，適合賣給想保存重要畫面的人。",
-        "imageId": "item_畫框",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_畫框.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "唱片",
-        "lore": "賣的是音樂品味與收藏感，適合復古愛好者與粉絲。",
-        "imageId": "item_唱片",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_唱片.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "耳機",
-        "lore": "創造私人聲音空間，適合通勤、讀書與需要專注的人。",
-        "imageId": "item_耳機",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_耳機.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "行李箱",
-        "lore": "承載移動與旅行期待，適合賣給旅人、學生與出差族。",
-        "imageId": "item_行李箱",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_行李箱.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "鬧鐘",
-        "lore": "把起床變成明確承諾，適合賣給想改善作息的人。",
-        "imageId": "item_鬧鐘",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_鬧鐘.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "毛毯",
-        "lore": "提供溫暖與安全感，適合居家、露營與禮物情境。",
-        "imageId": "item_毛毯",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_毛毯.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "餐墊",
-        "lore": "保護桌面也建立餐桌風格，適合賣給重視生活感的人。",
-        "imageId": "item_餐墊",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_餐墊.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "皮革筆袋",
-        "lore": "整理文具並展現質感，適合學生、上班族與手作愛好者。",
-        "imageId": "item_皮革筆袋",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_皮革筆袋.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "香氛卡片",
-        "lore": "小小一張就能改變空間氣味，適合放在衣櫃、書桌或禮物中。",
-        "imageId": "item_香氛卡片",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_香氛卡片.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "折疊購物袋",
-        "lore": "把臨時購物變得方便又環保，適合通勤者、市場採買者與旅行者。",
-        "imageId": "item_折疊購物袋",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_折疊購物袋.png",
-        "tokenIcon": "",
-        "image": "",
-        "rarity": "N",
-        "tags": [
-          "銷售",
-          "N卡"
-        ]
-      },
-      {
-        "name": "金屬書籤",
-        "lore": "讓閱讀進度變得精緻可保存，適合送給學生、讀者與文具收藏者。",
-        "imageId": "item_金屬書籤",
-        "icon": "",
-        "iconAsset": "../assets/icons/items/item_金屬書籤.png",
         "tokenIcon": "",
         "image": "",
         "rarity": "N",
@@ -3471,6 +3471,312 @@ window.DEBATE_DECKS = {
         "image": "",
         "rarity": "A",
         "tags": []
+      }
+    ]
+  },
+  "needs": {
+    "label": "需求卡",
+    "icon": "◇",
+    "cards": [
+      {
+        "name": "懶惰",
+        "lore": "想少花力氣、少做步驟、把麻煩交給工具或服務處理。",
+        "imageId": "🛋️",
+        "icon": "🛋️",
+        "iconAsset": "",
+        "tokenIcon": "🛋️",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "心理",
+          "便利",
+          "動機"
+        ]
+      },
+      {
+        "name": "競技",
+        "lore": "想贏過別人、證明實力、在比較中獲得刺激與成就感。",
+        "imageId": "🏆",
+        "icon": "🏆",
+        "iconAsset": "",
+        "tokenIcon": "🏆",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "競爭",
+          "成就",
+          "遊戲"
+        ]
+      },
+      {
+        "name": "歸屬",
+        "lore": "想被接納、加入群體、感覺自己不是孤單一個人。",
+        "imageId": "🤝",
+        "icon": "🤝",
+        "iconAsset": "",
+        "tokenIcon": "🤝",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "關係",
+          "群體",
+          "情感"
+        ]
+      },
+      {
+        "name": "榮譽",
+        "lore": "想被尊重、被看見、被承認自己做了一件值得驕傲的事。",
+        "imageId": "🎖️",
+        "icon": "🎖️",
+        "iconAsset": "",
+        "tokenIcon": "🎖️",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "尊重",
+          "地位",
+          "成就"
+        ]
+      },
+      {
+        "name": "紀念",
+        "lore": "想保存一段經驗、關係或重要時刻，讓它未來還能被想起。",
+        "imageId": "📷",
+        "icon": "📷",
+        "iconAsset": "",
+        "tokenIcon": "📷",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "記憶",
+          "情感",
+          "收藏"
+        ]
+      },
+      {
+        "name": "擁有",
+        "lore": "想把某樣東西變成自己的，透過所有權得到安心或滿足。",
+        "imageId": "🔑",
+        "icon": "🔑",
+        "iconAsset": "",
+        "tokenIcon": "🔑",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "所有權",
+          "安全",
+          "慾望"
+        ]
+      },
+      {
+        "name": "安全",
+        "lore": "想降低風險、避免損失、讓自己或重要的人不受傷害。",
+        "imageId": "🛡️",
+        "icon": "🛡️",
+        "iconAsset": "",
+        "tokenIcon": "🛡️",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "風險",
+          "保護",
+          "安心"
+        ]
+      },
+      {
+        "name": "便利",
+        "lore": "想讓生活更快、更簡單、更少等待，最好不用重新學太多東西。",
+        "imageId": "⚡",
+        "icon": "⚡",
+        "iconAsset": "",
+        "tokenIcon": "⚡",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "效率",
+          "生活",
+          "工具"
+        ]
+      },
+      {
+        "name": "美感",
+        "lore": "想讓物品、空間或自己看起來更好，並從好看中得到愉悅。",
+        "imageId": "✨",
+        "icon": "✨",
+        "iconAsset": "",
+        "tokenIcon": "✨",
+        "image": "",
+        "rarity": "B",
+        "tags": [
+          "審美",
+          "設計",
+          "愉悅"
+        ]
+      },
+      {
+        "name": "陪伴",
+        "lore": "想有人或某物能待在身邊，降低孤單感並提供情緒支持。",
+        "imageId": "💬",
+        "icon": "💬",
+        "iconAsset": "",
+        "tokenIcon": "💬",
+        "image": "",
+        "rarity": "B",
+        "tags": [
+          "情感",
+          "關係",
+          "支持"
+        ]
+      },
+      {
+        "name": "成長",
+        "lore": "想變得更厲害、更成熟，或看見自己持續進步的證據。",
+        "imageId": "🌱",
+        "icon": "🌱",
+        "iconAsset": "",
+        "tokenIcon": "🌱",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "學習",
+          "進步",
+          "自我"
+        ]
+      },
+      {
+        "name": "探索",
+        "lore": "想接觸未知、打開新經驗，滿足好奇心與冒險感。",
+        "imageId": "🧭",
+        "icon": "🧭",
+        "iconAsset": "",
+        "tokenIcon": "🧭",
+        "image": "",
+        "rarity": "B",
+        "tags": [
+          "好奇",
+          "冒險",
+          "未知"
+        ]
+      },
+      {
+        "name": "控制",
+        "lore": "想掌握局面、減少不確定，讓事情按照自己的計畫前進。",
+        "imageId": "🎛️",
+        "icon": "🎛️",
+        "iconAsset": "",
+        "tokenIcon": "🎛️",
+        "image": "",
+        "rarity": "B",
+        "tags": [
+          "秩序",
+          "掌控",
+          "計畫"
+        ]
+      },
+      {
+        "name": "表達",
+        "lore": "想把自己的想法、風格、立場或情緒讓別人看見。",
+        "imageId": "🎤",
+        "icon": "🎤",
+        "iconAsset": "",
+        "tokenIcon": "🎤",
+        "image": "",
+        "rarity": "B",
+        "tags": [
+          "自我",
+          "溝通",
+          "風格"
+        ]
+      },
+      {
+        "name": "省錢",
+        "lore": "想用更低成本得到結果，或避免未來多花不必要的錢。",
+        "imageId": "💰",
+        "icon": "💰",
+        "iconAsset": "",
+        "tokenIcon": "💰",
+        "image": "",
+        "rarity": "B",
+        "tags": [
+          "價格",
+          "成本",
+          "理性"
+        ]
+      },
+      {
+        "name": "效率",
+        "lore": "想在同樣時間內完成更多事，減少浪費與重複勞動。",
+        "imageId": "⏱️",
+        "icon": "⏱️",
+        "iconAsset": "",
+        "tokenIcon": "⏱️",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "時間",
+          "生產力",
+          "速度"
+        ]
+      },
+      {
+        "name": "身分",
+        "lore": "想透過選擇、物品或行為說明自己是怎樣的人。",
+        "imageId": "🪪",
+        "icon": "🪪",
+        "iconAsset": "",
+        "tokenIcon": "🪪",
+        "image": "",
+        "rarity": "B",
+        "tags": [
+          "認同",
+          "社會",
+          "形象"
+        ]
+      },
+      {
+        "name": "放鬆",
+        "lore": "想暫時卸下壓力，讓身體或心理從緊繃中恢復。",
+        "imageId": "🌙",
+        "icon": "🌙",
+        "iconAsset": "",
+        "tokenIcon": "🌙",
+        "image": "",
+        "rarity": "B",
+        "tags": [
+          "休息",
+          "療癒",
+          "壓力"
+        ]
+      },
+      {
+        "name": "驚喜",
+        "lore": "想獲得意料之外的新鮮感，讓平凡經驗變得值得記住。",
+        "imageId": "🎁",
+        "icon": "🎁",
+        "iconAsset": "",
+        "tokenIcon": "🎁",
+        "image": "",
+        "rarity": "C",
+        "tags": [
+          "新奇",
+          "情緒",
+          "體驗"
+        ]
+      },
+      {
+        "name": "公平",
+        "lore": "想讓付出與回報合理，避免有人被佔便宜或被不當對待。",
+        "imageId": "⚖️",
+        "icon": "⚖️",
+        "iconAsset": "",
+        "tokenIcon": "⚖️",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "正義",
+          "規則",
+          "社會"
+        ]
       }
     ]
   }

@@ -6,17 +6,17 @@
   "tone": "gold",
   "track": "需求 × 故事",
   "primaryDeck": "items",
-  "secondaryDeck": "",
+  "secondaryDeck": "needs",
   "primaryLabel": "物品卡",
-  "secondaryLabel": "",
+  "secondaryLabel": "需求卡",
   "defaultRarities": {
     "items": [
       "N"
     ]
   },
-  "drawLabel": "抽出銷售商品",
+  "drawLabel": "抽出銷售題目",
   "cardMode": "salesPitch",
-  "description": "學生抽出一個普通商品，先判斷它滿足什麼需求，再決定賣給誰，最後包裝成有說服力的銷售故事。",
+  "description": "可以單獨抽商品、單獨抽需求，或抽出商品加需求。學生要找出需求、對象與故事，把平凡東西說成值得購買的選擇。",
   "prompts": [
     [
       "需求洞察",
@@ -32,7 +32,7 @@
     ]
   ],
   "flow": [
-    "抽 1 到 6 張物品卡商品",
+    "選擇商品、需求或商品加需求",
     "30 秒找出核心需求",
     "30 秒決定目標客群",
     "45 秒完成銷售提案",

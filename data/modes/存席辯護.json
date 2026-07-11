@@ -4,18 +4,18 @@
   "title": "存席辯護",
   "icon": "◉",
   "tone": "sky",
-  "track": "異境 × 職業",
+  "track": "職業辯護",
   "primaryDeck": "roles",
-  "secondaryDeck": "worlds",
+  "secondaryDeck": "",
   "primaryLabel": "職業卡",
-  "secondaryLabel": "異境卡",
-  "drawLabel": "抽出留席戰場",
-  "cardMode": "roleEnvironment",
-  "description": "同一個危機異境中，每位學生抽職業，說服大家自己最值得留下來。",
+  "secondaryLabel": "",
+  "drawLabel": "抽出辯護身份",
+  "cardMode": "roleDefense",
+  "description": "單純抽出一個或多個職業，學生要說服大家自己最值得留下來。之後可再加入新的情境限制。",
   "prompts": [
     [
       "留下理由",
-      "你的職業在這個環境中有什麼不可替代價值？"
+      "你的職業有什麼不可替代價值？"
     ],
     [
       "比較標準",
@@ -27,8 +27,7 @@
     ]
   ],
   "flow": [
-    "抽 1 個異境",
-    "每位學生抽 1 個職業",
+    "抽 1 到 6 個職業",
     "每人 45 秒辯護",
     "觀眾提問或互相反駁",
     "逐輪淘汰直到最後留下者"

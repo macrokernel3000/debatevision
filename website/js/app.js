@@ -19,6 +19,7 @@ let currentStageCard = null;
 let secretRevealed = false;
 let secretAnswerIndex = "";
 let secretShowAnswerNumber = false;
+let salesVariant = "item";
 let selectedCardKeysByScope = {};
 let imageLayouts = mergeImageLayouts(savedImageLayouts, readDraftLayouts());
 let selectedEditCard = null;
@@ -208,6 +209,10 @@ function normalizeCard(raw, deckId) {
 }
 
 function buildHooks(name, deckId, rarity = "") {
+  if (activeMode.cardMode === "salesPitch" && deckId === "needs") {
+    return [`說明「${name}」常出現在哪些生活情境。`, `找出能滿足「${name}」的商品或服務。`, `包裝一個讓人願意為「${name}」付錢的故事。`];
+  }
+
   if (Array.isArray(activeMode.cardHooks) && activeMode.cardHooks.length) {
     return activeMode.cardHooks.map((hook) => fillCardHookTemplate(hook, name));
   }
@@ -314,12 +319,32 @@ function availableDeckIdsForMode(mode = activeMode) {
   if (Array.isArray(mode.availableDecks) && mode.availableDecks.length) {
     return mode.availableDecks.filter((deckId) => decks[deckId]);
   }
+  if (Array.isArray(mode.variantDecks) && mode.variantDecks.length) {
+    return [mode.secondaryDeck, ...mode.variantDecks].filter((deckId) => deckId && decks[deckId]);
+  }
+  if (mode.cardMode === "salesPitch") {
+    return [mode.primaryDeck, mode.secondaryDeck].filter(Boolean);
+  }
   if (mode.cardMode === "secretPlace") return Object.keys(decks);
   return [mode.secondaryDeck, mode.primaryDeck].filter(Boolean);
 }
 
 function shouldSwitchPrimaryDeckWithPreview(mode = activeMode) {
   return Array.isArray(mode.availableDecks) && mode.availableDecks.length && !mode.secondaryDeck;
+}
+
+function primaryVariantDeckIds(mode = activeMode) {
+  if (Array.isArray(mode.variantDecks) && mode.variantDecks.length) {
+    return mode.variantDecks.filter((deckId) => decks[deckId]);
+  }
+  if (mode.cardMode === "importanceDuel" && Array.isArray(mode.availableDecks)) {
+    return mode.availableDecks.filter((deckId) => decks[deckId]);
+  }
+  return [];
+}
+
+function variantLabel(deckId) {
+  return activeMode.variantLabels?.[deckId] || (decks[deckId]?.label || deckId).replace(/卡$/, "");
 }
 
 function resetModeSelections() {
@@ -438,12 +463,37 @@ function renderDeckControls() {
   const primaryTotal = cardsFrom(activeLibrary).length;
   const primaryText = `${decks[activeLibrary]?.label || activeMode.primaryLabel}：${selectedCount(activeLibrary)} / ${primaryTotal} 張可抽`;
   const secondaryText = activeSecondaryLibrary
-    ? `${activeMode.secondaryLabel || decks[activeSecondaryLibrary]?.label}：固定抽 1 張，${selectedCount(activeSecondaryLibrary)} / ${cardsFrom(activeSecondaryLibrary).length} 張可抽`
+    ? activeMode.cardMode === "salesPitch"
+      ? `${activeMode.secondaryLabel || decks[activeSecondaryLibrary]?.label}：${selectedCount(activeSecondaryLibrary)} / ${cardsFrom(activeSecondaryLibrary).length} 張可抽`
+      : `${activeMode.secondaryLabel || decks[activeSecondaryLibrary]?.label}：固定抽 1 張，${selectedCount(activeSecondaryLibrary)} / ${cardsFrom(activeSecondaryLibrary).length} 張可抽`
+    : "";
+  const salesTools = activeMode.cardMode === "salesPitch"
+    ? `
+      <div class="sales-variant-tools" role="group" aria-label="銷售密令抽法">
+        <button type="button" class="${salesVariant === "item" ? "is-active" : ""}" data-sales-variant="item">商品</button>
+        <button type="button" class="${salesVariant === "need" ? "is-active" : ""}" data-sales-variant="need">需求</button>
+        <button type="button" class="${salesVariant === "combo" ? "is-active" : ""}" data-sales-variant="combo">商品 + 需求</button>
+      </div>
+    `
+    : "";
+  const primaryVariantDecks = primaryVariantDeckIds();
+  const primaryVariantTools = primaryVariantDecks.length
+    ? `
+      <div class="sales-variant-tools" role="group" aria-label="${activeMode.title}抽選類型">
+        ${primaryVariantDecks.map((deckId) => `
+          <button type="button" class="${activeLibrary === deckId ? "is-active" : ""}" data-primary-variant="${deckId}">
+            ${variantLabel(deckId)}
+          </button>
+        `).join("")}
+      </div>
+    `
     : "";
 
   fixedPools.innerHTML = `
     <span>${primaryText}</span>
     ${secondaryText ? `<span>${secondaryText}</span>` : ""}
+    ${primaryVariantTools}
+    ${salesTools}
   `;
 }
 
@@ -737,6 +787,25 @@ function renderCombo(environment, cards, label) {
   `;
 }
 
+function renderSalesPitch(items = [], needs = []) {
+  if (items.length && needs.length) {
+    const pairCount = Math.max(items.length, needs.length);
+    cardGrid.innerHTML = Array.from({ length: pairCount }, (_, index) => `
+      <section class="sales-pair">
+        <div class="sales-pair-head">銷售組合 ${index + 1}</div>
+        <div class="sales-pair-cards">
+          ${items[index] ? cardMarkup(items[index], "sales-card") : ""}
+          ${needs[index] ? cardMarkup(needs[index], "sales-card") : ""}
+        </div>
+      </section>
+    `).join("");
+    return;
+  }
+
+  const cards = [...items, ...needs];
+  cardGrid.innerHTML = cards.map((card) => cardMarkup(card)).join("");
+}
+
 function renderDuel(cards) {
   cardGrid.innerHTML = `
     <div class="duel-board">
@@ -977,11 +1046,29 @@ function drawResult() {
     return [currentStageCard];
   }
 
+  if (activeMode.cardMode === "salesPitch") {
+    const items = salesVariant === "need" ? [] : pickFrom(activeLibrary, count);
+    const needs = salesVariant === "item" ? [] : pickFrom(activeSecondaryLibrary, count);
+    if ((salesVariant !== "need" && items.length < count) || (salesVariant !== "item" && needs.length < count)) return renderPoolWarning();
+    renderSalesPitch(items, needs);
+    markDrawn([...items, ...needs]);
+    return [...items, ...needs];
+  }
+
   const cards = pickFrom(activeLibrary, count);
   if (cards.length < count) return renderPoolWarning();
   cardGrid.innerHTML = cards.map((card) => cardMarkup(card)).join("");
   markDrawn(cards);
   return cards;
+}
+
+function reelPoolForActiveMode() {
+  if (activeMode.cardMode === "salesPitch") {
+    if (salesVariant === "need") return selectedCardsFrom(activeSecondaryLibrary);
+    if (salesVariant === "combo") return [...selectedCardsFrom(activeLibrary), ...selectedCardsFrom(activeSecondaryLibrary)];
+    return selectedCardsFrom(activeLibrary);
+  }
+  return activeSecondaryLibrary ? selectedCardsFrom(activeSecondaryLibrary) : selectedCardsFrom(activeLibrary);
 }
 
 function spinDraw() {
@@ -991,7 +1078,7 @@ function spinDraw() {
   drawButton.disabled = true;
   reel.classList.add("is-spinning");
 
-  const reelPool = activeSecondaryLibrary ? selectedCardsFrom(activeSecondaryLibrary) : selectedCardsFrom(activeLibrary);
+    const reelPool = reelPoolForActiveMode();
 
   const spinTimer = window.setInterval(() => {
     if (activeMode.cardMode === "secretPlace") {
@@ -1011,6 +1098,7 @@ function spinDraw() {
     } else {
       const first = selected[0];
       if (activeMode.cardMode === "secretPlace") renderReelCard(currentStageCard);
+      else if (activeMode.cardMode === "salesPitch") renderReelCard(first);
       else if (!activeSecondaryLibrary) renderReelCard(first);
     }
     reel.classList.remove("is-spinning");
@@ -1024,12 +1112,13 @@ function setMode(modeId) {
   activeMode = modes.find((mode) => mode.id === modeId) || activeMode;
   activeLibrary = activeMode.primaryDeck;
   activeSecondaryLibrary = activeMode.secondaryDeck || "";
-  activePreview = activeMode.secondaryDeck || activeMode.primaryDeck;
+  activePreview = activeMode.cardMode === "salesPitch" ? activeMode.primaryDeck : activeMode.secondaryDeck || activeMode.primaryDeck;
   lastSecretCard = null;
   currentStageCard = null;
   secretRevealed = false;
   secretAnswerIndex = "";
   secretShowAnswerNumber = false;
+  salesVariant = "item";
   selectedEditCard = null;
   selectedEditTarget = null;
   for (const deckId of activeDeckIds()) ensureDeckSelection(deckId);
@@ -1069,6 +1158,21 @@ libraryTools.addEventListener("click", (event) => {
   }
   renderAll();
   refreshSecretPlaceBoard();
+});
+
+fixedPools.addEventListener("click", (event) => {
+  const primaryButton = event.target.closest("[data-primary-variant]");
+  if (primaryButton) {
+    activeLibrary = primaryButton.dataset.primaryVariant;
+    activePreview = activeLibrary;
+    renderAll();
+    return;
+  }
+
+  const button = event.target.closest("[data-sales-variant]");
+  if (!button) return;
+  salesVariant = button.dataset.salesVariant;
+  renderAll();
 });
 
 tokenCloud.addEventListener("change", (event) => {

@@ -18,6 +18,7 @@ data/cards/
 - `職業卡.csv`
 - `生物卡.csv`
 - `名人卡.csv`
+- `需求卡.csv`
 
 ## 欄位
 
@@ -84,3 +85,12 @@ worlds,異境卡,◎,殭屍末日,城市秩序崩潰,,../assets/backgrounds/worl
 deck_id = celebrities
 deck_label = 名人卡
 ```
+
+例如需求卡使用：
+
+```text
+deck_id = needs
+deck_label = 需求卡
+```
+
+需求卡可用於銷售、比較、推理或任何需要「人為什麼想要某物」的玩法。它應該保持獨立牌組，不要直接混入物品卡。

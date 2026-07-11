@@ -4,10 +4,15 @@
   "title": "異境求生",
   "icon": "◆",
   "tone": "danger",
-  "track": "異境 × 物品",
+  "track": "異境 × 卡牌",
   "primaryDeck": "items",
+  "variantDecks": ["items", "roles"],
+  "variantLabels": {
+    "items": "道具",
+    "roles": "職業"
+  },
   "secondaryDeck": "worlds",
-  "primaryLabel": "物品卡",
+  "primaryLabel": "求生卡",
   "secondaryLabel": "異境卡",
   "defaultRarities": {
     "items": [
@@ -18,7 +23,7 @@
   },
   "drawLabel": "抽出求生組合",
   "cardMode": "itemEnvironment",
-  "description": "先抽異境，再抽物品。學生要說明這個物品在該環境中如何救命、突破困境或製造優勢。",
+  "description": "先抽異境，再選擇抽道具或職業。學生要說明這張卡在該環境中如何救命、突破困境或製造優勢。",
   "prompts": [
     [
       "環境限制",
@@ -35,7 +40,7 @@
   ],
   "flow": [
     "抽 1 個異境",
-    "抽 1 到 6 個物品",
+    "選擇本局抽道具或職業",
     "每位學生 45 秒提出用途",
     "同學質疑後回應",
     "投票選出最有說服力的生存方案"

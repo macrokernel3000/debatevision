@@ -1,30 +1,30 @@
 玩法ID,欄位,序號,標題,內容
-item-survival,玩法描述,1,,每一個異境都潛藏危機，請用抽出的道具告訴眾人，我們該如何脫離險境？
+item-survival,玩法描述,1,,每一個異境都潛藏危機，請告訴眾人，我們該如何脫離險境？
 item-survival,玩法背景,1,,../assets/backgrounds/modes/item-survival.png
 item-survival,教練提示,1,環境限制,這個異境最令人擔憂的生存條件是什麼？
-item-survival,教練提示,2,物品極限,如果物品是永久使用，確實可以降低難度，但如果道具有數量限制或壽命極限呢？
+item-survival,教練提示,2,卡牌極限,如果道具或職業能力看似強大，它的限制、代價或替代方案是什麼？
 item-survival,教練提示,3,局部有效,不是每一個道具都能讓我們能完整走到最後，但如果有一個很小卻明確的用途，那也令人讚賞。
 item-survival,卡牌任務,1,,提出 {name} 在這個異境中的一個救命用途。
 item-survival,卡牌任務,2,,說明 {name} 在此環境中的限制與補救。
 item-survival,卡牌任務,3,,回應一個同學對 {name} 的質疑。
-item-survival,回合流程,1,,選 1 到 6 個物品，抽1個異境
-item-survival,回合流程,2,,思考異境特色及物品功能
+item-survival,回合流程,1,,選擇本局抽道具或職業，再抽 1 個異境
+item-survival,回合流程,2,,思考異境特色及卡牌功能
 item-survival,回合流程,3,,每位學生提出30 秒內容
 item-survival,回合流程,4,,共同討論，分組合作
-role-survival,玩法描述,1,,同一個危機異境中，每位學生抽職業，說服大家自己最值得留下來。
+role-survival,玩法描述,1,,單純抽出一個或多個職業，學生要說服大家自己最值得留下來。
 role-survival,玩法背景,1,,../assets/backgrounds/modes/role-survival.png
-role-survival,教練提示,1,留下理由,你的職業在這個環境中有什麼不可替代價值？
+role-survival,教練提示,1,留下理由,你的職業有什麼不可替代價值？
 role-survival,教練提示,2,比較標準,觀眾不是投喜歡誰，而是投誰更能提高群體存活率。
 role-survival,教練提示,3,反駁方向,攻擊別人的理由時，要比較必要性、立即性、替代性。
-role-survival,卡牌任務,1,,說明 {name} 在這個異境中的不可替代價值。
+role-survival,卡牌任務,1,,說明 {name} 的不可替代價值。
 role-survival,卡牌任務,2,,承認 {name} 的一個弱點，並提出化解方式。
 role-survival,卡牌任務,3,,用一句話說服大家留下 {name}。
-role-survival,回合流程,1,,抽 1 個異境
-role-survival,回合流程,2,,每位學生抽 1 個職業
+role-survival,回合流程,1,,抽 1 到 6 個職業
+role-survival,回合流程,2,,每位學生準備自己的留下理由
 role-survival,回合流程,3,,每人 45 秒辯護
 role-survival,回合流程,4,,觀眾提問或互相反駁
 role-survival,回合流程,5,,逐輪淘汰直到最後留下者
-importance-duel,玩法描述,1,,刻意不給場景，直接抽兩張卡牌。預設使用名人卡，也可以切換成物品、異境、場地、職業或生物來比較誰更重要。
+importance-duel,玩法描述,1,,直接抽兩張卡牌進行比較。
 importance-duel,玩法背景,1,,../assets/backgrounds/modes/importance-duel.png
 importance-duel,教練提示,1,建立標準,你要用什麼標準比較重要性？影響力、實用性、稀缺性、急迫性、創造力、貢獻度？
 importance-duel,教練提示,2,正反互攻,支持 A 的人要指出 B 的限制；支持 B 的人也要反擊 A 的弱點。
@@ -52,15 +52,16 @@ where-am-i,回合流程,3,,學生輪流問問題
 where-am-i,回合流程,4,,教師只給有限回答
 where-am-i,回合流程,5,,累積線索後開放猜測
 where-am-i,回合流程,6,,點選候選詞條公布結果
-sales-command,玩法描述,1,,學生抽出一個普通商品，先判斷它滿足什麼需求，再決定賣給誰，最後包裝成有說服力的銷售故事。
+sales-command,玩法描述,1,,可以單獨抽商品、單獨抽需求，或抽出商品加需求。學生要找出需求、對象與故事，把平凡東西說成值得購買的選擇。
 sales-command,玩法背景,1,,../assets/backgrounds/modes/sales-command.png
+sales-command,按鈕文字,1,,抽出銷售題目
 sales-command,教練提示,1,需求洞察,這個商品解決的是方便、安全、面子、紀念、效率、陪伴，還是其他需求？
 sales-command,教練提示,2,目標客群,誰最可能需要它？請說明年齡、情境、痛點與購買理由。
 sales-command,教練提示,3,故事包裝,如果不能只介紹功能，你要怎麼用故事讓它變得值得買？
 sales-command,卡牌任務,1,,說明 {name} 滿足哪一種需求。
 sales-command,卡牌任務,2,,找出最可能購買 {name} 的對象。
 sales-command,卡牌任務,3,,包裝一個讓人願意掏錢買 {name} 的故事。
-sales-command,回合流程,1,,抽 1 到 6 張物品卡商品
+sales-command,回合流程,1,,選擇商品、需求或商品加需求
 sales-command,回合流程,2,,30 秒找出核心需求
 sales-command,回合流程,3,,30 秒決定目標客群
 sales-command,回合流程,4,,45 秒完成銷售提案

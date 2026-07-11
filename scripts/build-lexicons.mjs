@@ -121,6 +121,18 @@ function csvObjects(text) {
   return records.map((record) => Object.fromEntries(cleanHeaders.map((header, index) => [header, record[index] || ""])));
 }
 
+function csvCardObjects(text) {
+  const rows = parseCsv(text);
+  const [headers = [], ...records] = rows;
+  const cleanHeaders = headers.map((header) => normalizeHeader(header));
+  const hasHeader = cleanHeaders.includes("deck_id") && cleanHeaders.includes("name");
+  const cardHeaders = ["deck_id", "deck_label", "deck_icon", "name", "description", "icon", "token_icon", "image", "rarity", "tags"];
+  const dataRows = hasHeader ? records : rows;
+  const activeHeaders = hasHeader ? cleanHeaders : cardHeaders;
+
+  return dataRows.map((record) => Object.fromEntries(activeHeaders.map((header, index) => [header, record[index] || ""])));
+}
+
 function readCardRows() {
   if (existsSync(cardsDir)) {
     const csvFiles = readdirSync(cardsDir)
@@ -128,11 +140,11 @@ function readCardRows() {
       .sort();
 
     if (csvFiles.length) {
-      return csvFiles.flatMap((file) => csvObjects(readFileSync(join(cardsDir, file), "utf8")));
+      return csvFiles.flatMap((file) => csvCardObjects(readFileSync(join(cardsDir, file), "utf8")));
     }
   }
 
-  return csvObjects(readFileSync(fallbackCsvPath, "utf8"));
+  return csvCardObjects(readFileSync(fallbackCsvPath, "utf8"));
 }
 
 function assetPathFor(item) {

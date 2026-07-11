@@ -7,7 +7,7 @@
   "track": "秘密詞條",
   "image": "../assets/backgrounds/modes/where-am-i.png",
   "primaryDeck": "locations",
-  "availableDecks": ["locations", "worlds", "items", "roles", "creatures", "celebrities"],
+  "availableDecks": ["locations", "worlds", "items", "needs", "roles", "creatures", "celebrities"],
   "secondaryDeck": "",
   "primaryLabel": "任意詞庫",
   "secondaryLabel": "",

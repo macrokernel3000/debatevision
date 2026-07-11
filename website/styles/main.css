@@ -423,6 +423,56 @@ h1 {
   font-weight: 900;
 }
 
+.sales-variant-tools {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+}
+
+.sales-variant-tools button {
+  min-height: 30px;
+  border: 0;
+  border-radius: 999px;
+  padding: 0 12px;
+  background: transparent;
+  color: var(--muted);
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.sales-variant-tools button.is-active {
+  background: var(--ink);
+  color: #fff;
+}
+
+.sales-pair {
+  display: grid;
+  gap: 12px;
+}
+
+.sales-pair-head {
+  color: var(--muted);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.sales-pair-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+@media (max-width: 720px) {
+  .sales-pair-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
 .toggle-field {
   display: flex;
   align-items: center;
