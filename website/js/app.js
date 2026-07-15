@@ -5,7 +5,7 @@ const uiTexts = window.DEBATE_UI_TEXTS || {};
 const modeLifecycle = window.DEBATE_MODE_LIFECYCLE || {};
 const { iconFor } = window;
 
-const DEFAULT_IMAGE_LAYOUT = { scale: 1, x: 0, y: 0, rotate: 0 };
+const DEFAULT_IMAGE_LAYOUT = { scale: 1, x: 0, y: 0, rotate: 0, overlay: 0.28 };
 const EDIT_MODE = new URLSearchParams(window.location.search).get("edit") === "1";
 const EDIT_STORAGE_KEY = "debatevision-image-layouts-draft";
 const HISTORY_STORAGE_KEY = "debatevision-draw-history";
@@ -22,6 +22,7 @@ let secretRevealed = false;
 let secretAnswerIndex = "";
 let secretShowAnswerNumber = false;
 let salesVariant = "item";
+let lockEnvironment = false;
 let selectedCardKeysByScope = {};
 let imageLayouts = mergeImageLayouts(savedImageLayouts, readDraftLayouts());
 let drawHistoryByMode = readDrawHistory();
@@ -180,7 +181,8 @@ function setLayoutForTarget(target, nextLayout) {
     scale: Math.max(minScale, Number(nextLayout.scale) || DEFAULT_IMAGE_LAYOUT.scale),
     x: Number(nextLayout.x) || DEFAULT_IMAGE_LAYOUT.x,
     y: Number(nextLayout.y) || DEFAULT_IMAGE_LAYOUT.y,
-    rotate: Number(nextLayout.rotate) || DEFAULT_IMAGE_LAYOUT.rotate
+    rotate: Number(nextLayout.rotate) || DEFAULT_IMAGE_LAYOUT.rotate,
+    overlay: Math.min(0.8, Math.max(0, Number.isFinite(Number(nextLayout.overlay)) ? Number(nextLayout.overlay) : DEFAULT_IMAGE_LAYOUT.overlay))
   };
   saveDraftLayouts();
 }
@@ -195,7 +197,7 @@ function setLayoutFor(card, nextLayout) {
 
 function imageStyleForTarget(target) {
   const layout = layoutForTarget(target);
-  return `--image-scale:${layout.scale}; --image-x:${layout.x}px; --image-y:${layout.y}px; --image-rotate:${layout.rotate}deg;`;
+  return `--image-scale:${layout.scale}; --image-x:${layout.x}px; --image-y:${layout.y}px; --image-rotate:${layout.rotate}deg; --overlay-strength:${layout.overlay};`;
 }
 
 function imageStyleFor(card) {
@@ -483,15 +485,19 @@ function renderActivity() {
   scenePreview.dataset.tone = activeMode.tone;
   const modeImage = activeMode.image || activeMode.backgroundImage || "";
   scenePreview.classList.toggle("has-mode-image", Boolean(modeImage));
-  scenePreview.style.removeProperty("--mode-image");
   const currentImage = scenePreview.querySelector(".scene-preview-image");
   const modeTarget = editTargetForMode(activeMode);
-  const modeImageAttributes = `style="${imageStyleForTarget(modeTarget)}" data-edit-group="${modeTarget.group}" data-edit-id="${modeTarget.id}" data-edit-name="${modeTarget.name}"`;
+  const modeStyle = imageStyleForTarget(modeTarget);
+  scenePreview.setAttribute("style", modeStyle);
+  scenePreview.dataset.editGroup = modeTarget.group;
+  scenePreview.dataset.editId = modeTarget.id;
+  scenePreview.dataset.editName = modeTarget.name;
+  const modeImageAttributes = `style="${modeStyle}" data-edit-group="${modeTarget.group}" data-edit-id="${modeTarget.id}" data-edit-name="${modeTarget.name}"`;
   if (modeImage) {
     if (currentImage) {
       currentImage.src = modeImage;
       currentImage.alt = `${activeMode.title} 玩法背景`;
-      currentImage.setAttribute("style", imageStyleForTarget(modeTarget));
+      currentImage.setAttribute("style", modeStyle);
       currentImage.dataset.editGroup = modeTarget.group;
       currentImage.dataset.editId = modeTarget.id;
       currentImage.dataset.editName = modeTarget.name;
@@ -521,11 +527,21 @@ function renderReelCard(card = currentStageCard, spinningName = "") {
   const subtitle = card?.lore || uiText("reel.ready.subtitle");
   const image = sceneImageFor(card);
   const target = editTargetForCard(card);
+  const reelStyle = target ? imageStyleForTarget(target) : "";
   const editAttributes = target
-    ? `style="${imageStyleForTarget(target)}" data-edit-group="${target.group}" data-edit-id="${target.id}" data-edit-name="${target.name}" data-card-key="${target.cardKey}"`
+    ? `style="${reelStyle}" data-edit-group="${target.group}" data-edit-id="${target.id}" data-edit-name="${target.name}" data-card-key="${target.cardKey}"`
     : "";
   reel.classList.toggle("has-scene-image", Boolean(image));
-  reel.style.removeProperty("--scene-image");
+  reel.setAttribute("style", reelStyle);
+  if (target) {
+    reel.dataset.editGroup = target.group;
+    reel.dataset.editId = target.id;
+    reel.dataset.editName = target.name;
+  } else {
+    delete reel.dataset.editGroup;
+    delete reel.dataset.editId;
+    delete reel.dataset.editName;
+  }
   reel.innerHTML = `
     ${image ? `<img class="reel-scene-image" src="${image}" alt="${title} 場景圖" ${editAttributes} />` : ""}
     <div class="reel-scene-mark">${card ? activeMode.icon : "?"}</div>
@@ -576,11 +592,20 @@ function renderDeckControls() {
       </div>
     `
     : "";
+  const environmentLockTool = activeMode.cardMode === "itemEnvironment"
+    ? `
+      <label class="environment-lock-toggle">
+        <input type="checkbox" data-lock-environment ${lockEnvironment ? "checked" : ""} />
+        <span>鎖定異境</span>
+      </label>
+    `
+    : "";
 
   fixedPools.innerHTML = `
     <span>${primaryText}</span>
     ${secondaryText ? `<span>${secondaryText}</span>` : ""}
     ${primaryVariantTools}
+    ${environmentLockTool}
     ${salesTools}
   `;
 }
@@ -742,6 +767,7 @@ function ensureEditPanel() {
         <label>左右 <input id="editX" type="range" min="-120" max="120" step="1" value="0" /></label>
         <label>上下 <input id="editY" type="range" min="-120" max="120" step="1" value="0" /></label>
         <label>旋轉 <input id="editRotate" type="range" min="-30" max="30" step="1" value="0" /></label>
+        <label>蒙版 <input id="editOverlay" type="range" min="0" max="0.8" step="0.01" value="0.28" /></label>
       </div>
       <div class="editor-nudges" aria-label="方向微調">
         <button type="button" data-nudge="up">上</button>
@@ -767,7 +793,7 @@ function ensureEditPanel() {
     else selectEditTarget(editTargetForMode(activeMode));
   });
 
-  for (const id of ["editScale", "editX", "editY", "editRotate"]) {
+  for (const id of ["editScale", "editX", "editY", "editRotate", "editOverlay"]) {
     document.querySelector(`#${id}`).addEventListener("input", applyEditorInputs);
   }
 
@@ -823,6 +849,7 @@ function updateEditPanel() {
   document.querySelector("#editX").value = layout.x;
   document.querySelector("#editY").value = layout.y;
   document.querySelector("#editRotate").value = layout.rotate;
+  document.querySelector("#editOverlay").value = layout.overlay;
   selectedLabel.textContent = `${selectedEditTarget.label}：${selectedEditTarget.name}（${selectedEditTarget.id}）`;
   fileHint.textContent = `匯出後貼到 data/image-layouts/${selectedEditTarget.group}.json`;
   exportText.value = JSON.stringify(exportableLayouts(selectedEditTarget.group), null, 2);
@@ -834,7 +861,8 @@ function applyEditorInputs() {
     scale: Number(document.querySelector("#editScale").value),
     x: Number(document.querySelector("#editX").value),
     y: Number(document.querySelector("#editY").value),
-    rotate: Number(document.querySelector("#editRotate").value)
+    rotate: Number(document.querySelector("#editRotate").value),
+    overlay: Number(document.querySelector("#editOverlay").value)
   };
   setLayoutForTarget(selectedEditTarget, layout);
   updateVisibleImages(selectedEditTarget);
@@ -1095,11 +1123,14 @@ function drawResult() {
   const count = activeMode.fixedCount || Math.max(1, Math.min(6, Number(drawCount.value) || 1));
 
   if (activeMode.cardMode === "itemEnvironment") {
-    const environment = pickFrom(activeSecondaryLibrary, 1)[0];
+    const lockedEnvironment = lockEnvironment && currentStageCard?.deckId === activeSecondaryLibrary
+      ? currentStageCard
+      : null;
+    const environment = lockedEnvironment || pickFrom(activeSecondaryLibrary, 1)[0];
     const cards = pickFrom(activeLibrary, count);
     if (!environment || cards.length < count) return renderPoolWarning();
     renderCombo(environment, cards, "本輪異境");
-    markDrawn([environment, ...cards]);
+    markDrawn(lockedEnvironment ? cards : [environment, ...cards]);
     return [environment, ...cards];
   }
 
@@ -1160,14 +1191,43 @@ function reelPoolForActiveMode() {
   return activeSecondaryLibrary ? selectedCardsFrom(activeSecondaryLibrary) : selectedCardsFrom(activeLibrary);
 }
 
+function shouldSkipReelAnimation() {
+  return activeMode.cardMode === "itemEnvironment"
+    && lockEnvironment
+    && currentStageCard?.deckId === activeSecondaryLibrary;
+}
+
+function finishDraw(selected) {
+  if (!selected.length) {
+    renderReelCard(null, "抽選池不足");
+  } else {
+    rememberDraw(selected);
+    const first = selected[0];
+    if (activeMode.cardMode === "secretPlace") renderReelCard(currentStageCard);
+    else if (activeMode.cardMode === "salesPitch") renderReelCard(first);
+    else if (shouldSkipReelAnimation()) renderReelCard(currentStageCard);
+    else if (!activeSecondaryLibrary) renderReelCard(first);
+  }
+  reel.classList.remove("is-spinning");
+  isDrawing = false;
+  drawButton.disabled = false;
+  renderAll();
+}
+
 function spinDraw() {
   if (isDrawing) return;
 
   isDrawing = true;
   drawButton.disabled = true;
+
+  if (shouldSkipReelAnimation()) {
+    finishDraw(drawResult());
+    return;
+  }
+
   reel.classList.add("is-spinning");
 
-    const reelPool = reelPoolForActiveMode();
+  const reelPool = reelPoolForActiveMode();
 
   const spinTimer = window.setInterval(() => {
     if (activeMode.cardMode === "secretPlace") {
@@ -1181,20 +1241,7 @@ function spinDraw() {
 
   window.setTimeout(() => {
     window.clearInterval(spinTimer);
-    const selected = drawResult();
-    if (!selected.length) {
-      renderReelCard(null, "抽選池不足");
-    } else {
-      rememberDraw(selected);
-      const first = selected[0];
-      if (activeMode.cardMode === "secretPlace") renderReelCard(currentStageCard);
-      else if (activeMode.cardMode === "salesPitch") renderReelCard(first);
-      else if (!activeSecondaryLibrary) renderReelCard(first);
-    }
-    reel.classList.remove("is-spinning");
-    isDrawing = false;
-    drawButton.disabled = false;
-    renderAll();
+    finishDraw(drawResult());
   }, 1000);
 }
 
@@ -1209,6 +1256,7 @@ function setMode(modeId) {
   secretAnswerIndex = "";
   secretShowAnswerNumber = false;
   salesVariant = "item";
+  lockEnvironment = false;
   selectedEditCard = null;
   selectedEditTarget = null;
   for (const deckId of activeDeckIds()) ensureDeckSelection(deckId);
@@ -1263,6 +1311,13 @@ fixedPools.addEventListener("click", (event) => {
   const button = event.target.closest("[data-sales-variant]");
   if (!button) return;
   salesVariant = button.dataset.salesVariant;
+  renderAll();
+});
+
+fixedPools.addEventListener("change", (event) => {
+  const checkbox = event.target.closest("[data-lock-environment]");
+  if (!checkbox) return;
+  lockEnvironment = checkbox.checked;
   renderAll();
 });
 

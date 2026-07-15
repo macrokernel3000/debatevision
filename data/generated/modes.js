@@ -67,7 +67,7 @@ window.DEBATE_MODES = [
     "secondaryLabel": "",
     "drawLabel": "抽出辯護身份",
     "cardMode": "roleDefense",
-    "description": "單純抽出一個或多個職業，學生要說服大家自己最值得留下來。",
+    "description": "抽出一個或多個職業，請說服大家自己是最值得留下來的。",
     "prompts": [
       [
         "留下理由",
@@ -172,7 +172,7 @@ window.DEBATE_MODES = [
     },
     "drawLabel": "抽出銷售題目",
     "cardMode": "salesPitch",
-    "description": "可以單獨抽商品、單獨抽需求，或抽出商品加需求。學生要找出需求、對象與故事，把平凡東西說成值得購買的選擇。",
+    "description": "向我賣出一支筆？快找出需求、產品與故事，把平凡加諸價值，讓他人意識到內在的需求。",
     "prompts": [
       [
         "需求洞察",
@@ -225,7 +225,7 @@ window.DEBATE_MODES = [
     "drawLabel": "開啟秘密選號",
     "cardMode": "secretPlace",
     "fixedCount": 1,
-    "description": "選定任一詞庫後，系統列出本局啟用的候選編號，用隱藏輸入設定答案。學生只能提問推理，最後公布結果。",
+    "description": "所有卡片都被編號，請靠是非題推理出關鍵機密。",
     "prompts": [
       [
         "只能提問",

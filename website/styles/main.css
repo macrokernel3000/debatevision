@@ -134,6 +134,7 @@ h1 {
 .scene-preview {
   position: relative;
   isolation: isolate;
+  --overlay-strength: 0.28;
   display: grid;
   align-content: end;
   min-height: 260px;
@@ -207,9 +208,9 @@ h1 {
 .scene-preview.has-mode-image::before {
   z-index: 1;
   background:
-    linear-gradient(90deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.22)),
-    linear-gradient(180deg, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.48));
-  opacity: 1;
+    linear-gradient(90deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.7)),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 1));
+  opacity: var(--overlay-strength, 0.28);
 }
 
 .scene-preview.has-mode-image::after {
@@ -449,6 +450,27 @@ h1 {
   color: #fff;
 }
 
+.environment-lock-toggle {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px 12px;
+  background: #fff;
+  color: var(--ink);
+  font-size: 0.9rem;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.environment-lock-toggle input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--teal);
+}
+
 .sales-pair {
   display: grid;
   gap: 12px;
@@ -499,6 +521,7 @@ h1 {
 .reel {
   position: relative;
   isolation: isolate;
+  --overlay-strength: 0.28;
   min-height: 156px;
   height: clamp(156px, 19vw, 224px);
   display: grid;
@@ -533,8 +556,9 @@ h1 {
   inset: 0;
   z-index: 1;
   background:
-    linear-gradient(90deg, rgba(0, 0, 0, 0.26) 0, rgba(0, 0, 0, 0.42) 26%, rgba(0, 0, 0, 0.56) 100%),
-    linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.34));
+    linear-gradient(90deg, rgba(0, 0, 0, 0.55) 0, rgba(0, 0, 0, 0.8) 26%, rgba(0, 0, 0, 1) 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.72));
+  opacity: var(--overlay-strength, 0.28);
 }
 
 .reel.has-scene-image .reel-scene-image {

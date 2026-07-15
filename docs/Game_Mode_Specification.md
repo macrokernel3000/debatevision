@@ -78,6 +78,8 @@ website/js/mode-lifecycle.js
 
 `itemEnvironment` 與 `roleEnvironment` 會把 `secondaryDeck` 當作獨立異境區，每次只抽 1 張；`primaryDeck` 則是本局主要抽選池。若設定 `variantDecks`，前台會顯示切換按鈕，讓老師改抽不同主牌組。
 
+`itemEnvironment` 在前台支援「鎖定異境」。勾選後會沿用目前的 `secondaryDeck` 卡，只重抽主要卡；若尚未有目前異境，第一次仍會先抽出異境。
+
 `importanceDuel` 不需要異境區，會直接從主要牌組抽出兩張進行比較。目前 `誰更重要` 的預設主要牌組是 `celebrities`，也就是名人卡；但它也設定了 `availableDecks`，所以老師可切換成物品卡、需求卡、異境卡、場地卡、職業卡或生物卡。
 
 `secretPlace` 會把 `availableDecks` 當作老師可切換的候選詞庫。例如推理解密可以同一套玩法切換名人卡、場地卡、異境卡、物品卡、需求卡、職業卡或生物卡。
