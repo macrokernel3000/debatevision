@@ -1021,6 +1021,67 @@ h1 {
   margin-top: 18px;
 }
 
+.history-panel {
+  margin-top: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.draw-history {
+  display: grid;
+  gap: 10px;
+}
+
+.history-empty {
+  min-height: 74px;
+  display: grid;
+  place-items: center;
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.history-item {
+  display: grid;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+  background: #fff;
+}
+
+.history-item-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+  color: var(--ink);
+  font-weight: 900;
+}
+
+.history-item-head span {
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.history-card-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.history-card-list span {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px 10px;
+  background: rgba(248, 245, 239, 0.9);
+  font-size: 0.88rem;
+  font-weight: 800;
+}
+
 .prompt-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));

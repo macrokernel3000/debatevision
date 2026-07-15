@@ -27,7 +27,7 @@ window.DEBATE_MODES = [
     },
     "drawLabel": "抽出求生組合",
     "cardMode": "itemEnvironment",
-    "description": "每一個異境都潛藏危機，請用抽出的道具或職業告訴眾人，我們該如何脫離險境？",
+    "description": "每一個異境都潛藏危機，請告訴眾人，我們該如何脫離險境？",
     "prompts": [
       [
         "環境限制",
@@ -50,9 +50,8 @@ window.DEBATE_MODES = [
     ],
     "image": "../assets/backgrounds/modes/item-survival.png",
     "cardHooks": [
-      "提出 {name} 在這個異境中的一個救命用途。",
-      "說明 {name} 在此環境中的限制與補救。",
-      "回應一個同學對 {name} 的質疑。"
+      "提出 {name} 在這個異境中的一個用途。",
+      "比較 {name} 與其他選擇的差異與優缺點"
     ]
   },
   {
@@ -76,10 +75,10 @@ window.DEBATE_MODES = [
       ],
       [
         "比較標準",
-        "觀眾不是投喜歡誰，而是投誰更能提高群體存活率。"
+        "觀眾要考量誰更能提高群體存活率。"
       ],
       [
-        "反駁方向",
+        "提示 3",
         "攻擊別人的理由時，要比較必要性、立即性、替代性。"
       ]
     ],
@@ -93,8 +92,7 @@ window.DEBATE_MODES = [
     "image": "../assets/backgrounds/modes/role-survival.png",
     "cardHooks": [
       "說明 {name} 的不可替代價值。",
-      "承認 {name} 的一個弱點，並提出化解方式。",
-      "用一句話說服大家留下 {name}。"
+      "說服大家留下 {name}效益最高。"
     ]
   },
   {
@@ -127,7 +125,7 @@ window.DEBATE_MODES = [
     "drawLabel": "抽出對決卡牌",
     "cardMode": "importanceDuel",
     "fixedCount": 2,
-    "description": "刻意不給場景，直接抽兩張卡牌。預設使用名人卡，也可以切換成物品、需求、異境、場地、職業或生物來比較誰更重要。",
+    "description": "直接抽兩張卡牌進行比較。",
     "prompts": [
       [
         "建立標準",

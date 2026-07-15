@@ -8,6 +8,8 @@ const { iconFor } = window;
 const DEFAULT_IMAGE_LAYOUT = { scale: 1, x: 0, y: 0, rotate: 0 };
 const EDIT_MODE = new URLSearchParams(window.location.search).get("edit") === "1";
 const EDIT_STORAGE_KEY = "debatevision-image-layouts-draft";
+const HISTORY_STORAGE_KEY = "debatevision-draw-history";
+const HISTORY_LIMIT = 10;
 
 let activeMode = modes[0];
 let activeLibrary = activeMode.primaryDeck;
@@ -22,6 +24,7 @@ let secretShowAnswerNumber = false;
 let salesVariant = "item";
 let selectedCardKeysByScope = {};
 let imageLayouts = mergeImageLayouts(savedImageLayouts, readDraftLayouts());
+let drawHistoryByMode = readDrawHistory();
 let selectedEditCard = null;
 let selectedEditTarget = null;
 
@@ -87,6 +90,7 @@ const drawCount = document.querySelector("#drawCount");
 const drawButton = document.querySelector("#drawButton");
 const reel = document.querySelector("#reel");
 const cardGrid = document.querySelector("#cardGrid");
+const drawHistory = document.querySelector("#drawHistory");
 const promptList = document.querySelector("#promptList");
 const roundFlow = document.querySelector("#roundFlow");
 const libraryTools = document.querySelector("#libraryTools");
@@ -108,6 +112,18 @@ function readDraftLayouts() {
   } catch {
     return {};
   }
+}
+
+function readDrawHistory() {
+  try {
+    return JSON.parse(window.localStorage.getItem(HISTORY_STORAGE_KEY) || "{}");
+  } catch {
+    return {};
+  }
+}
+
+function saveDrawHistory() {
+  window.localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(drawHistoryByMode));
 }
 
 function mergeImageLayouts(baseLayouts, draftLayouts) {
@@ -357,6 +373,78 @@ function markDrawn(cards) {
   for (const card of cards) {
     selectedKeysForDeck(card.deckId).delete(cardKey(card));
   }
+}
+
+function historyScope() {
+  return activeMode.id;
+}
+
+function historyVariantLabel() {
+  if (activeMode.cardMode === "salesPitch") {
+    return { item: "商品", need: "需求", combo: "商品 + 需求" }[salesVariant] || "";
+  }
+  if (activeMode.cardMode === "secretPlace") return decks[activeLibrary]?.label || "";
+  const variantDecks = primaryVariantDeckIds();
+  if (variantDecks.length) return variantLabel(activeLibrary);
+  if (activeMode.cardMode === "importanceDuel") return decks[activeLibrary]?.label || "";
+  return "";
+}
+
+function cardHistoryLabel(card) {
+  const deckLabel = card.deckLabel || decks[card.deckId]?.label || "卡牌";
+  return `${deckLabel}：${card.name}`;
+}
+
+function rememberDraw(cards, options = {}) {
+  if (!Array.isArray(cards) || !cards.length) return;
+  if (activeMode.cardMode === "secretPlace" && !options.includeSecret) return;
+  const scope = historyScope();
+  const entry = {
+    modeId: activeMode.id,
+    modeTitle: activeMode.title,
+    variant: historyVariantLabel(),
+    time: new Date().toISOString(),
+    cards: cards.map((card) => ({
+      name: card.name,
+      deckId: card.deckId,
+      deckLabel: card.deckLabel || decks[card.deckId]?.label || "",
+      rarity: card.rarity || ""
+    }))
+  };
+  drawHistoryByMode[scope] = [entry, ...(drawHistoryByMode[scope] || [])].slice(0, HISTORY_LIMIT);
+  saveDrawHistory();
+  renderDrawHistory();
+}
+
+function rememberSecretAnswer(card) {
+  if (!card) return;
+  rememberDraw([card], { includeSecret: true });
+}
+
+function historyTitle(index) {
+  const numerals = ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十"];
+  return `第${numerals[index] || index + 1}場`;
+}
+
+function renderDrawHistory() {
+  if (!drawHistory) return;
+  const entries = [...(drawHistoryByMode[historyScope()] || []).slice(0, HISTORY_LIMIT)].reverse();
+  if (!entries.length) {
+    drawHistory.innerHTML = `<div class="history-empty">抽卡後會在這裡保留最近十場紀錄。</div>`;
+    return;
+  }
+
+  drawHistory.innerHTML = entries.map((entry, index) => `
+    <article class="history-item">
+      <div class="history-item-head">
+        <strong>${historyTitle(index)}</strong>
+        ${entry.variant ? `<span>${entry.variant}</span>` : ""}
+      </div>
+      <div class="history-card-list">
+        ${entry.cards.map((card) => `<span>${cardHistoryLabel(card)}</span>`).join("")}
+      </div>
+    </article>
+  `).join("");
 }
 
 function pickFrom(deckId, count) {
@@ -824,6 +912,7 @@ function renderSecretPlace(card, revealed = false) {
   lastSecretCard = card || null;
 
   if (revealed && card) {
+    rememberSecretAnswer(card);
     cardGrid.innerHTML = `
       <div class="secret-board is-revealed">
         <div class="secret-banner">
@@ -1096,6 +1185,7 @@ function spinDraw() {
     if (!selected.length) {
       renderReelCard(null, "抽選池不足");
     } else {
+      rememberDraw(selected);
       const first = selected[0];
       if (activeMode.cardMode === "secretPlace") renderReelCard(currentStageCard);
       else if (activeMode.cardMode === "salesPitch") renderReelCard(first);
@@ -1135,6 +1225,7 @@ function renderAll() {
   renderPrompts();
   renderLibraryTools();
   renderTokenCloud();
+  renderDrawHistory();
   if (!isDrawing) renderReelCard();
 }
 
