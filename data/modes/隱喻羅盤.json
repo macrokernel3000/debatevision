@@ -1,0 +1,38 @@
+{
+  "id": "metaphor-compass",
+  "order": 6,
+  "title": "隱喻羅盤",
+  "icon": "◇",
+  "tone": "cosmos",
+  "track": "概念 × 關係 × 概念",
+  "primaryDeck": "concepts",
+  "secondaryDeck": "relations",
+  "metaphorDecks": ["concepts", "needs"],
+  "primaryLabel": "概念卡",
+  "secondaryLabel": "關係卡",
+  "drawLabel": "抽出隱喻命題",
+  "cardMode": "metaphorCompass",
+  "fixedCount": 2,
+  "description": "抽出兩張概念卡與一張關係卡，組成一句看似奇怪卻值得辯護的隱喻命題。",
+  "prompts": [
+    [
+      "重新定義",
+      "先解釋兩個概念在這句話中各自代表什麼。"
+    ],
+    [
+      "找到角度",
+      "不要只證明字面相等，而是找到能讓關係成立的比較角度。"
+    ],
+    [
+      "反向挑戰",
+      "如果有人不同意，最可能攻擊哪個詞或哪個關係？"
+    ]
+  ],
+  "flow": [
+    "抽 2 張概念卡與 1 張關係卡",
+    "組成「A 關係 C」命題",
+    "30 秒定義兩個概念",
+    "45 秒提出一個可成立的解釋角度",
+    "同學提出反例或改寫命題"
+  ]
+}

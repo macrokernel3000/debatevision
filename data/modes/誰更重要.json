@@ -6,7 +6,7 @@
   "tone": "gold",
   "track": "卡牌 × 卡牌",
   "primaryDeck": "celebrities",
-  "availableDecks": ["celebrities", "items", "needs", "worlds", "locations", "roles", "creatures"],
+  "availableDecks": ["celebrities", "items", "needs", "concepts", "worlds", "locations", "roles", "creatures"],
   "secondaryDeck": "",
   "primaryLabel": "比較卡",
   "secondaryLabel": "",
@@ -20,7 +20,7 @@
   "drawLabel": "抽出對決卡牌",
   "cardMode": "importanceDuel",
   "fixedCount": 2,
-  "description": "刻意不給場景，直接抽兩張卡牌。預設使用名人卡，也可以切換成物品、需求、異境、場地、職業或生物來比較誰更重要。",
+  "description": "刻意不給場景，直接抽兩張卡牌。預設使用名人卡，也可以切換成物品、需求、概念、異境、場地、職業或生物來比較誰更重要。",
   "prompts": [
     [
       "建立標準",

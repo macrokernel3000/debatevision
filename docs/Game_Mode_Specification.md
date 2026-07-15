@@ -69,6 +69,7 @@ website/js/mode-lifecycle.js
 - `importanceDuel`：兩張卡牌對決。可以透過 `availableDecks` 讓老師在同一玩法中切換要比較的牌組。
 - `salesPitch`：可抽商品、需求，或商品 + 需求，練需求、客群、銷售故事。
 - `secretPlace`：秘密詞條推理。推理解密使用這個模式，可從可用詞庫中選擇候選卡。
+- `metaphorCompass`：抽 2 張概念卡與 1 張關係卡，組成「A 關係 C」的隱喻命題。
 
 如果新增玩法只是在更換牌組，可以只新增 JSON。若需要全新抽選或呈現方式，才需要改 `website/js/app.js`。
 
@@ -80,9 +81,15 @@ website/js/mode-lifecycle.js
 
 `itemEnvironment` 在前台支援「鎖定異境」。勾選後會沿用目前的 `secondaryDeck` 卡，只重抽主要卡；若尚未有目前異境，第一次仍會先抽出異境。
 
-`importanceDuel` 不需要異境區，會直接從主要牌組抽出兩張進行比較。目前 `誰更重要` 的預設主要牌組是 `celebrities`，也就是名人卡；但它也設定了 `availableDecks`，所以老師可切換成物品卡、需求卡、異境卡、場地卡、職業卡或生物卡。
+`importanceDuel` 不需要異境區，會直接從主要牌組抽出兩張進行比較。目前 `誰更重要` 的預設主要牌組是 `celebrities`，也就是名人卡；但它也設定了 `availableDecks`，所以老師可切換成物品卡、需求卡、概念卡、異境卡、場地卡、職業卡或生物卡。
 
 `secretPlace` 會把 `availableDecks` 當作老師可切換的候選詞庫。例如推理解密可以同一套玩法切換名人卡、場地卡、異境卡、物品卡、需求卡、職業卡或生物卡。
+
+`metaphorCompass` 預設使用 `concepts` 作為 `primaryDeck`，使用 `relations` 作為 `secondaryDeck`。前台會固定抽 2 張概念卡與 1 張關係卡，並用專用版型顯示成一句命題。
+
+`metaphorCompass` 可設定 `metaphorDecks`，讓前綴與後綴分別從不同牌組抽取。目前隱喻羅盤設定為 `["concepts", "needs"]`，所以老師可以選擇「概念卡 → 概念卡」、「概念卡 → 需求卡」、「需求卡 → 概念卡」或「需求卡 → 需求卡」。
+
+`metaphorCompass` 支援三個前台鎖定狀態：前綴、介係、後綴。鎖定後會沿用上一輪對應位置的卡牌，只重抽未鎖定的位置。第一輪尚未抽出命題前，鎖定按鈕會保持不可用。
 
 ## 新增玩法時必須同步文案 CSV
 

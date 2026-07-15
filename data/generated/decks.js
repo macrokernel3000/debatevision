@@ -851,6 +851,402 @@ window.DEBATE_DECKS = {
       }
     ]
   },
+  "concepts": {
+    "label": "概念卡",
+    "icon": "◇",
+    "cards": [
+      {
+        "name": "正義",
+        "lore": "關於公平、權利與應得結果的抽象判準。",
+        "imageId": "⚖️",
+        "icon": "⚖️",
+        "iconAsset": "",
+        "tokenIcon": "⚖️",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "價值",
+          "社會",
+          "判斷"
+        ]
+      },
+      {
+        "name": "自律",
+        "lore": "能約束自己、持續行動，不只靠外在提醒。",
+        "imageId": "🧭",
+        "icon": "🧭",
+        "iconAsset": "",
+        "tokenIcon": "🧭",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "習慣",
+          "意志",
+          "行動"
+        ]
+      },
+      {
+        "name": "溫柔",
+        "lore": "在力量與界線之中仍願意保護他人的態度。",
+        "imageId": "🕯️",
+        "icon": "🕯️",
+        "iconAsset": "",
+        "tokenIcon": "🕯️",
+        "image": "",
+        "rarity": "B",
+        "tags": [
+          "情感",
+          "關係",
+          "態度"
+        ]
+      },
+      {
+        "name": "選擇",
+        "lore": "在多種可能之間承擔方向與後果。",
+        "imageId": "↔️",
+        "icon": "↔️",
+        "iconAsset": "",
+        "tokenIcon": "↔️",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "判斷",
+          "自由",
+          "責任"
+        ]
+      },
+      {
+        "name": "失敗",
+        "lore": "目標沒有達成，但也暴露新的學習線索。",
+        "imageId": "↯",
+        "icon": "↯",
+        "iconAsset": "",
+        "tokenIcon": "↯",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "挫折",
+          "學習",
+          "反思"
+        ]
+      },
+      {
+        "name": "知識",
+        "lore": "被理解、整理、驗證後能幫助判斷的內容。",
+        "imageId": "📘",
+        "icon": "📘",
+        "iconAsset": "",
+        "tokenIcon": "📘",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "學習",
+          "理解",
+          "判斷"
+        ]
+      },
+      {
+        "name": "成長",
+        "lore": "能力、眼界或心態逐步變大的過程。",
+        "imageId": "🌱",
+        "icon": "🌱",
+        "iconAsset": "",
+        "tokenIcon": "🌱",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "學習",
+          "改變",
+          "生命"
+        ]
+      },
+      {
+        "name": "俐落",
+        "lore": "清楚、乾淨、少浪費，讓事情順利完成。",
+        "imageId": "✦",
+        "icon": "✦",
+        "iconAsset": "",
+        "tokenIcon": "✦",
+        "image": "",
+        "rarity": "B",
+        "tags": [
+          "效率",
+          "風格",
+          "清楚"
+        ]
+      },
+      {
+        "name": "信念",
+        "lore": "即使遇到壓力仍願意維持的核心相信。",
+        "imageId": "◆",
+        "icon": "◆",
+        "iconAsset": "",
+        "tokenIcon": "◆",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "價值",
+          "堅持",
+          "判斷"
+        ]
+      },
+      {
+        "name": "努力",
+        "lore": "願意投入時間與心力，讓結果有改變的行動。",
+        "imageId": "🔥",
+        "icon": "🔥",
+        "iconAsset": "",
+        "tokenIcon": "🔥",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "行動",
+          "意志",
+          "成果"
+        ]
+      },
+      {
+        "name": "諒解",
+        "lore": "理解他人的處境，並重新調整評價與反應。",
+        "imageId": "🤲",
+        "icon": "🤲",
+        "iconAsset": "",
+        "tokenIcon": "🤲",
+        "image": "",
+        "rarity": "B",
+        "tags": [
+          "關係",
+          "同理",
+          "修復"
+        ]
+      },
+      {
+        "name": "藝術",
+        "lore": "用形式、感受與想像重新呈現世界。",
+        "imageId": "🎨",
+        "icon": "🎨",
+        "iconAsset": "",
+        "tokenIcon": "🎨",
+        "image": "",
+        "rarity": "B",
+        "tags": [
+          "創作",
+          "感受",
+          "表達"
+        ]
+      },
+      {
+        "name": "財富",
+        "lore": "可累積、交換或支配資源的能力。",
+        "imageId": "💰",
+        "icon": "💰",
+        "iconAsset": "",
+        "tokenIcon": "💰",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "資源",
+          "交換",
+          "權力"
+        ]
+      },
+      {
+        "name": "武器",
+        "lore": "能造成影響、保護自己或改變局勢的力量。",
+        "imageId": "⚔️",
+        "icon": "⚔️",
+        "iconAsset": "",
+        "tokenIcon": "⚔️",
+        "image": "",
+        "rarity": "B",
+        "tags": [
+          "力量",
+          "防衛",
+          "改變"
+        ]
+      },
+      {
+        "name": "複雜",
+        "lore": "由多種因素交織而成，不能只用單一答案處理。",
+        "imageId": "🧩",
+        "icon": "🧩",
+        "iconAsset": "",
+        "tokenIcon": "🧩",
+        "image": "",
+        "rarity": "B",
+        "tags": [
+          "系統",
+          "問題",
+          "理解"
+        ]
+      },
+      {
+        "name": "熟練",
+        "lore": "經過練習後能穩定、快速且準確地完成。",
+        "imageId": "🎯",
+        "icon": "🎯",
+        "iconAsset": "",
+        "tokenIcon": "🎯",
+        "image": "",
+        "rarity": "B",
+        "tags": [
+          "技能",
+          "練習",
+          "穩定"
+        ]
+      },
+      {
+        "name": "幽默",
+        "lore": "用意外角度讓人放鬆、理解或重新看事情。",
+        "imageId": "☺",
+        "icon": "☺",
+        "iconAsset": "",
+        "tokenIcon": "☺",
+        "image": "",
+        "rarity": "C",
+        "tags": [
+          "表達",
+          "情緒",
+          "角度"
+        ]
+      },
+      {
+        "name": "友情",
+        "lore": "在互相信任與支持中形成的關係。",
+        "imageId": "🤝",
+        "icon": "🤝",
+        "iconAsset": "",
+        "tokenIcon": "🤝",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "關係",
+          "信任",
+          "支持"
+        ]
+      },
+      {
+        "name": "勇氣",
+        "lore": "知道有風險仍願意面對或行動。",
+        "imageId": "🛡️",
+        "icon": "🛡️",
+        "iconAsset": "",
+        "tokenIcon": "🛡️",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "風險",
+          "行動",
+          "意志"
+        ]
+      },
+      {
+        "name": "生活",
+        "lore": "日常選擇、關係與習慣組成的整體經驗。",
+        "imageId": "🏠",
+        "icon": "🏠",
+        "iconAsset": "",
+        "tokenIcon": "🏠",
+        "image": "",
+        "rarity": "B",
+        "tags": [
+          "日常",
+          "經驗",
+          "習慣"
+        ]
+      },
+      {
+        "name": "歡樂",
+        "lore": "讓人感到明亮、放鬆或想分享的情緒狀態。",
+        "imageId": "☀️",
+        "icon": "☀️",
+        "iconAsset": "",
+        "tokenIcon": "☀️",
+        "image": "",
+        "rarity": "C",
+        "tags": [
+          "情緒",
+          "分享",
+          "愉悅"
+        ]
+      },
+      {
+        "name": "精密",
+        "lore": "細節安排準確，誤差被控制到很小。",
+        "imageId": "⚙️",
+        "icon": "⚙️",
+        "iconAsset": "",
+        "tokenIcon": "⚙️",
+        "image": "",
+        "rarity": "B",
+        "tags": [
+          "細節",
+          "準確",
+          "技術"
+        ]
+      },
+      {
+        "name": "運氣",
+        "lore": "非完全由自己控制，卻影響結果的偶然因素。",
+        "imageId": "🎲",
+        "icon": "🎲",
+        "iconAsset": "",
+        "tokenIcon": "🎲",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "偶然",
+          "結果",
+          "不確定"
+        ]
+      },
+      {
+        "name": "競爭",
+        "lore": "在比較中爭取有限資源、位置或認可。",
+        "imageId": "🏁",
+        "icon": "🏁",
+        "iconAsset": "",
+        "tokenIcon": "🏁",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "比較",
+          "成就",
+          "資源"
+        ]
+      },
+      {
+        "name": "愛",
+        "lore": "願意珍惜、照顧或承擔另一個人事物的重要情感。",
+        "imageId": "❤️",
+        "icon": "❤️",
+        "iconAsset": "",
+        "tokenIcon": "❤️",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "情感",
+          "關係",
+          "價值"
+        ]
+      },
+      {
+        "name": "成功",
+        "lore": "目標被達成並被自己或他人承認為有價值的狀態。",
+        "imageId": "🏆",
+        "icon": "🏆",
+        "iconAsset": "",
+        "tokenIcon": "🏆",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "成果",
+          "目標",
+          "認可"
+        ]
+      }
+    ]
+  },
   "items": {
     "label": "物品卡",
     "icon": "□",
@@ -3118,7 +3514,7 @@ window.DEBATE_DECKS = {
       },
       {
         "name": "古代戰場",
-        "lore": "資源粗糙、衝突明確，策略與士氣會影響存活。",
+        "lore": "資源粗糙、衝突不斷，該注意己方的策略與士氣。",
         "imageId": "worlds_Ancient battlefield",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_battlefield.svg",
@@ -3148,7 +3544,7 @@ window.DEBATE_DECKS = {
       },
       {
         "name": "雲端城市",
-        "lore": "高空、科技、交通斷層並存，墜落與能源是最大威脅。",
+        "lore": "稀薄的空氣與神秘科技，氣候的影響被嚴重放大。",
         "imageId": "worlds_CloudCity",
         "icon": "",
         "iconAsset": "../assets/icons/worlds/world_icon_cloud_city.svg",
@@ -3185,6 +3581,51 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🛶",
         "image": "../assets/icons/worlds/worlds_Raft.png",
         "rarity": "A",
+        "tags": [
+          "水域",
+          "求生",
+          "限制"
+        ]
+      },
+      {
+        "name": "天星隕落",
+        "lore": "最後的倒數時刻，有什麼能夠讓我們活著？或者更快樂？",
+        "imageId": "worlds_meteorite",
+        "icon": "world_icon_meteorite",
+        "iconAsset": "",
+        "tokenIcon": "🪨",
+        "image": "../assets/icons/worlds/worlds_meteorite.png",
+        "rarity": "A",
+        "tags": [
+          "危機",
+          "城市",
+          "倒數"
+        ]
+      },
+      {
+        "name": "原始部落",
+        "lore": "鼓聲、敵意、人多勢眾，逃跑或者戰鬥還是和解都有機會。",
+        "imageId": "worlds_Clans",
+        "icon": "world_icon_Clans",
+        "iconAsset": "",
+        "tokenIcon": "✪",
+        "image": "worlds_Clans",
+        "rarity": "B",
+        "tags": [
+          "水域",
+          "求生",
+          "限制"
+        ]
+      },
+      {
+        "name": "遊戲世界",
+        "lore": "劍與魔法降臨，無數任務與魔王等著玩家挑戰。",
+        "imageId": "worlds_game",
+        "icon": "world_icon_game",
+        "iconAsset": "",
+        "tokenIcon": "🎮",
+        "image": "worlds_game",
+        "rarity": "B",
         "tags": [
           "水域",
           "求生",
@@ -3471,6 +3912,325 @@ window.DEBATE_DECKS = {
         "image": "",
         "rarity": "A",
         "tags": []
+      }
+    ]
+  },
+  "relations": {
+    "label": "關係卡",
+    "icon": "→",
+    "cards": [
+      {
+        "name": "就是",
+        "lore": "A 可以被理解成 C，兩者在某個角度上幾乎等同。",
+        "imageId": "=",
+        "icon": "=",
+        "iconAsset": "",
+        "tokenIcon": "=",
+        "image": "",
+        "rarity": "C",
+        "tags": [
+          "等同",
+          "本質",
+          "比喻"
+        ]
+      },
+      {
+        "name": "等於",
+        "lore": "A 與 C 在某個定義或脈絡下可以視為相同。",
+        "imageId": "=",
+        "icon": "=",
+        "iconAsset": "",
+        "tokenIcon": "=",
+        "image": "",
+        "rarity": "C",
+        "tags": [
+          "等同",
+          "本質",
+          "定義"
+        ]
+      },
+      {
+        "name": "導致",
+        "lore": "A 會引發、造成或把事情推向 C。",
+        "imageId": "⇒",
+        "icon": "⇒",
+        "iconAsset": "",
+        "tokenIcon": "⇒",
+        "image": "",
+        "rarity": "C",
+        "tags": [
+          "因果",
+          "結果",
+          "推動"
+        ]
+      },
+      {
+        "name": "來自",
+        "lore": "A 的來源、基礎或前提可以追溯到 C。",
+        "imageId": "←",
+        "icon": "←",
+        "iconAsset": "",
+        "tokenIcon": "←",
+        "image": "",
+        "rarity": "C",
+        "tags": [
+          "來源",
+          "因果",
+          "前提"
+        ]
+      },
+      {
+        "name": "促進",
+        "lore": "A 讓 C 變得更快、更強或更容易形成。",
+        "imageId": "↗",
+        "icon": "↗",
+        "iconAsset": "",
+        "tokenIcon": "↗",
+        "image": "",
+        "rarity": "C",
+        "tags": [
+          "增強",
+          "因果",
+          "推進"
+        ]
+      },
+      {
+        "name": "勝於",
+        "lore": "A 在某個標準下比 C 更值得優先考慮。",
+        "imageId": ">",
+        "icon": ">",
+        "iconAsset": "",
+        "tokenIcon": ">",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "比較",
+          "優先",
+          "標準"
+        ]
+      },
+      {
+        "name": "不如",
+        "lore": "A 在某個標準下比 C 更不值得優先考慮。",
+        "imageId": "<",
+        "icon": "<",
+        "iconAsset": "",
+        "tokenIcon": "<",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "比較",
+          "取捨",
+          "標準"
+        ]
+      },
+      {
+        "name": "定義",
+        "lore": "A 決定了 C 的核心邊界或真正意義。",
+        "imageId": "⌁",
+        "icon": "⌁",
+        "iconAsset": "",
+        "tokenIcon": "⌁",
+        "image": "",
+        "rarity": "B",
+        "tags": [
+          "定義",
+          "邊界",
+          "判準"
+        ]
+      },
+      {
+        "name": "代表",
+        "lore": "A 可以作為 C 的典型象徵或具體呈現。",
+        "imageId": "◈",
+        "icon": "◈",
+        "iconAsset": "",
+        "tokenIcon": "◈",
+        "image": "",
+        "rarity": "B",
+        "tags": [
+          "定義",
+          "象徵",
+          "意義"
+        ]
+      },
+      {
+        "name": "幫助",
+        "lore": "A 會支持、推動或讓 C 更容易發生。",
+        "imageId": "＋",
+        "icon": "＋",
+        "iconAsset": "",
+        "tokenIcon": "＋",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "功能",
+          "支持",
+          "推動"
+        ]
+      },
+      {
+        "name": "補足",
+        "lore": "A 彌補 C 的不足，讓整體更完整。",
+        "imageId": "⊕",
+        "icon": "⊕",
+        "iconAsset": "",
+        "tokenIcon": "⊕",
+        "image": "",
+        "rarity": "C",
+        "tags": [
+          "功能",
+          "互補",
+          "完整"
+        ]
+      },
+      {
+        "name": "支持",
+        "lore": "A 提供 C 所需要的力量、資源或依靠。",
+        "imageId": "▲",
+        "icon": "▲",
+        "iconAsset": "",
+        "tokenIcon": "▲",
+        "image": "",
+        "rarity": "C",
+        "tags": [
+          "功能",
+          "支援",
+          "力量"
+        ]
+      },
+      {
+        "name": "阻礙",
+        "lore": "A 讓 C 更難實現或發展。",
+        "imageId": "⊥",
+        "icon": "⊥",
+        "iconAsset": "",
+        "tokenIcon": "⊥",
+        "image": "",
+        "rarity": "C",
+        "tags": [
+          "對立",
+          "阻止",
+          "衝突"
+        ]
+      },
+      {
+        "name": "削弱",
+        "lore": "A 讓 C 的效果、力量或影響降低。",
+        "imageId": "↘",
+        "icon": "↘",
+        "iconAsset": "",
+        "tokenIcon": "↘",
+        "image": "",
+        "rarity": "C",
+        "tags": [
+          "對立",
+          "減弱",
+          "影響"
+        ]
+      },
+      {
+        "name": "破壞",
+        "lore": "A 直接損害或瓦解 C。",
+        "imageId": "✕",
+        "icon": "✕",
+        "iconAsset": "",
+        "tokenIcon": "✕",
+        "image": "",
+        "rarity": "C",
+        "tags": [
+          "對立",
+          "破壞",
+          "衝突"
+        ]
+      },
+      {
+        "name": "需要",
+        "lore": "A 的成立必須依靠 C。",
+        "imageId": "✓",
+        "icon": "✓",
+        "iconAsset": "",
+        "tokenIcon": "✓",
+        "image": "",
+        "rarity": "C",
+        "tags": [
+          "條件",
+          "前提",
+          "依賴"
+        ]
+      },
+      {
+        "name": "依賴",
+        "lore": "A 長期仰賴 C 才能存在或運作。",
+        "imageId": "⛓",
+        "icon": "⛓",
+        "iconAsset": "",
+        "tokenIcon": "⛓",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "條件",
+          "依存",
+          "前提"
+        ]
+      },
+      {
+        "name": "就像",
+        "lore": "A 與 C 在某些特質上十分相似。",
+        "imageId": "≈",
+        "icon": "≈",
+        "iconAsset": "",
+        "tokenIcon": "≈",
+        "image": "",
+        "rarity": "B",
+        "tags": [
+          "象徵",
+          "相似",
+          "隱喻"
+        ]
+      },
+      {
+        "name": "象徵",
+        "lore": "A 能代表或喚起 C 的意涵。",
+        "imageId": "★",
+        "icon": "★",
+        "iconAsset": "",
+        "tokenIcon": "★",
+        "image": "",
+        "rarity": "B",
+        "tags": [
+          "象徵",
+          "意涵",
+          "代表"
+        ]
+      },
+      {
+        "name": "映照",
+        "lore": "A 能反映出 C 的本質或狀態。",
+        "imageId": "◐",
+        "icon": "◐",
+        "iconAsset": "",
+        "tokenIcon": "◐",
+        "image": "",
+        "rarity": "B",
+        "tags": [
+          "象徵",
+          "反映",
+          "隱喻"
+        ]
+      },
+      {
+        "name": "改變",
+        "lore": "描述A如何讓C產生轉變或演化。",
+        "imageId": "↜",
+        "icon": "↜",
+        "iconAsset": "",
+        "tokenIcon": "↜",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "變化"
+        ]
       }
     ]
   },
@@ -3776,6 +4536,21 @@ window.DEBATE_DECKS = {
           "正義",
           "規則",
           "社會"
+        ]
+      },
+      {
+        "name": "成就",
+        "lore": "想完成困難目標，證明自己做得到，並獲得進步感或肯定。",
+        "imageId": "🏅",
+        "icon": "🏅",
+        "iconAsset": "",
+        "tokenIcon": "🏅",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "成果",
+          "自我",
+          "肯定"
         ]
       }
     ]

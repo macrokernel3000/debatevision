@@ -30,6 +30,13 @@ window.DEBATE_IMAGE_LAYOUTS = {
       "x": -120,
       "y": -78,
       "rotate": 0
+    },
+    "metaphor-compass": {
+      "scale": 1,
+      "x": -80,
+      "y": -120,
+      "rotate": 0,
+      "overlay": 0.28
     }
   },
   "worlds": {}

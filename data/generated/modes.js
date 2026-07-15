@@ -107,6 +107,7 @@ window.DEBATE_MODES = [
       "celebrities",
       "items",
       "needs",
+      "concepts",
       "worlds",
       "locations",
       "roles",
@@ -125,7 +126,7 @@ window.DEBATE_MODES = [
     "drawLabel": "抽出對決卡牌",
     "cardMode": "importanceDuel",
     "fixedCount": 2,
-    "description": "直接抽兩張卡牌進行比較。",
+    "description": "直接抽兩張卡牌進行比較。可以切換名人、物品、需求、概念、異境、場地、職業或生物。",
     "prompts": [
       [
         "建立標準",
@@ -252,6 +253,49 @@ window.DEBATE_MODES = [
       "觀察 {name} 可能透露的環境線索。",
       "設計一個能排除或確認 {name} 的問題。",
       "思考哪些提問能最快縮小到 {name}。"
+    ]
+  },
+  {
+    "id": "metaphor-compass",
+    "order": 6,
+    "title": "隱喻羅盤",
+    "icon": "◇",
+    "tone": "cosmos",
+    "track": "概念 × 關係 × 概念",
+    "primaryDeck": "concepts",
+    "secondaryDeck": "relations",
+    "metaphorDecks": [
+      "concepts",
+      "needs"
+    ],
+    "primaryLabel": "概念卡",
+    "secondaryLabel": "關係卡",
+    "drawLabel": "抽出隱喻命題",
+    "cardMode": "metaphorCompass",
+    "fixedCount": 2,
+    "description": "前綴與後綴可以選擇概念卡或需求卡，再搭配一張關係卡，組成一句看似奇怪卻值得辯護的隱喻命題。",
+    "prompts": [
+      [
+        "重新定義",
+        "先解釋兩個概念在這句話中各自代表什麼。"
+      ],
+      [
+        "找到角度",
+        "不要只證明字面相等，而是找到能讓關係成立的比較角度。"
+      ]
+    ],
+    "flow": [
+      "選擇前綴與後綴要使用概念卡或需求卡",
+      "抽出前綴、關係卡與後綴",
+      "組成「A 關係 C」命題",
+      "30 秒定義兩端詞語",
+      "45 秒提出一個可成立的解釋角度",
+      "可鎖定前綴、介係或後綴，再重抽其他位置練習變化"
+    ],
+    "image": "../assets/backgrounds/modes/metaphor-compass.png",
+    "cardHooks": [
+      "定義 {name} 在這句命題中的意思。",
+      "替 {name} 找一個具體例子。"
     ]
   }
 ];
