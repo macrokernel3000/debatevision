@@ -625,11 +625,12 @@ function renderModeButtons() {
 function renderActivityMenu() {
   if (!activityMenuPanel) return;
   activityMenuPanel.innerHTML = modes.map((mode) => `
-    <button class="activity-menu-item ${mode.id === activeMode.id ? "is-active" : ""}" data-menu-mode="${mode.id}" type="button" role="menuitem">
+    <button class="activity-menu-item ${mode.id === activeMode.id ? "is-active" : ""}" data-menu-mode="${mode.id}" data-palette="${modeCardMeta(mode).palette}" type="button" role="menuitem">
       <span class="activity-menu-item-icon">${mode.icon}</span>
-      <span>
+      <span class="activity-menu-copy">
         <strong>${mode.title}</strong>
         <small>${modeCardMeta(mode).menuLabel}</small>
+        <em>${mode.controlRule || mode.description || ""}</em>
       </span>
     </button>
   `).join("");

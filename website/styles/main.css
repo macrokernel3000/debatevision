@@ -102,24 +102,72 @@ input {
 }
 
 .activity-menu-item {
+  --menu-a: #4d4d4d;
+  --menu-b: #1f1f1f;
+  --menu-accent: #111;
   width: 100%;
   display: grid;
   grid-template-columns: 44px 1fr;
   gap: 10px;
   align-items: center;
-  border: 1px solid var(--line);
+  border: 1px solid color-mix(in srgb, var(--menu-a), white 54%);
   border-radius: 8px;
   padding: 10px;
-  background: #fff;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--menu-a), white 84%), #fff 54%),
+    #fff;
   color: var(--ink);
   text-align: left;
   cursor: pointer;
 }
 
 .activity-menu-item.is-active {
-  border-color: var(--ink);
-  background: #171717;
+  border-color: color-mix(in srgb, var(--menu-accent), white 12%);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--menu-a), black 8%), color-mix(in srgb, var(--menu-b), black 4%));
   color: #fff;
+}
+
+.activity-menu-item[data-palette="red"] {
+  --menu-a: #9e352f;
+  --menu-b: #54201e;
+  --menu-accent: #b7362c;
+}
+
+.activity-menu-item[data-palette="teal"] {
+  --menu-a: #166f73;
+  --menu-b: #133f4d;
+  --menu-accent: #117a73;
+}
+
+.activity-menu-item[data-palette="gold"] {
+  --menu-a: #ad7418;
+  --menu-b: #5f3e12;
+  --menu-accent: #c79022;
+}
+
+.activity-menu-item[data-palette="brown"] {
+  --menu-a: #79512f;
+  --menu-b: #3d2a1f;
+  --menu-accent: #7a5532;
+}
+
+.activity-menu-item[data-palette="purple"] {
+  --menu-a: #5b4382;
+  --menu-b: #32294f;
+  --menu-accent: #6651a6;
+}
+
+.activity-menu-item[data-palette="earth"] {
+  --menu-a: #83551d;
+  --menu-b: #4b3116;
+  --menu-accent: #946326;
+}
+
+.activity-menu-item[data-palette="cyan"] {
+  --menu-a: #0f6f83;
+  --menu-b: #123c53;
+  --menu-accent: #117d93;
 }
 
 .activity-menu-item-icon {
@@ -134,7 +182,8 @@ input {
 }
 
 .activity-menu-item strong,
-.activity-menu-item small {
+.activity-menu-item small,
+.activity-menu-item em {
   display: block;
 }
 
@@ -146,8 +195,18 @@ input {
 .activity-menu-item small {
   margin-top: 2px;
   color: currentColor;
-  opacity: 0.68;
+  opacity: 0.7;
   font-weight: 900;
+}
+
+.activity-menu-item em {
+  margin-top: 5px;
+  color: currentColor;
+  font-size: 0.8rem;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 1.35;
+  opacity: 0.72;
 }
 
 .top-bar h1 {
