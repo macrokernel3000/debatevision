@@ -332,6 +332,7 @@ window.DEBATE_MODES = [
       "從各卡池中直接勾選本場卡牌",
       "可跨卡池加入或刪除卡牌",
       "按下儲存成這場，形成本局活動卡牌"
-    ]
+    ],
+    "image": "../assets/backgrounds/modes/card-dictionary.png"
   }
 ];
