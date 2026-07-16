@@ -9,6 +9,7 @@ const DEFAULT_IMAGE_LAYOUT = { scale: 1, x: 0, y: 0, rotate: 0, overlay: 0.28 };
 const EDIT_MODE = new URLSearchParams(window.location.search).get("edit") === "1";
 const EDIT_STORAGE_KEY = "debatevision-image-layouts-draft";
 const HISTORY_STORAGE_KEY = "debatevision-draw-history";
+const TIMER_STORAGE_KEY = "debatevision-floating-timer";
 const HISTORY_LIMIT = 10;
 
 let activeMode = modes[0];
@@ -30,6 +31,8 @@ let currentMetaphorCards = null;
 let selectedCardKeysByScope = {};
 let imageLayouts = mergeImageLayouts(savedImageLayouts, readDraftLayouts());
 let drawHistoryByMode = readDrawHistory();
+let timerState = readTimerState();
+let timerInterval = null;
 let selectedEditCard = null;
 let selectedEditTarget = null;
 
@@ -151,6 +154,25 @@ function readDrawHistory() {
 
 function saveDrawHistory() {
   window.localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(drawHistoryByMode));
+}
+
+function readTimerState() {
+  try {
+    return {
+      elapsed: 0,
+      running: false,
+      startedAt: 0,
+      collapsed: false,
+      hidden: false,
+      ...JSON.parse(window.localStorage.getItem(TIMER_STORAGE_KEY) || "{}")
+    };
+  } catch {
+    return { elapsed: 0, running: false, startedAt: 0, collapsed: false, hidden: false };
+  }
+}
+
+function saveTimerState() {
+  window.localStorage.setItem(TIMER_STORAGE_KEY, JSON.stringify(timerSnapshot()));
 }
 
 function mergeImageLayouts(baseLayouts, draftLayouts) {
@@ -1137,6 +1159,123 @@ function exportCurrentDeckLayout() {
   document.querySelector("#editorStatus").textContent = `JSON 已產生並嘗試複製；請貼到 ${targetFile} 後再執行網站更新。`;
 }
 
+function timerSnapshot() {
+  const elapsed = timerState.running
+    ? timerState.elapsed + Math.max(0, Date.now() - timerState.startedAt)
+    : timerState.elapsed;
+  return {
+    elapsed,
+    running: timerState.running,
+    startedAt: timerState.running ? timerState.startedAt : 0,
+    collapsed: timerState.collapsed,
+    hidden: timerState.hidden
+  };
+}
+
+function formatTimer(ms) {
+  const totalSeconds = Math.floor(ms / 1000);
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+  const pairs = hours > 0 ? [hours, minutes, seconds] : [minutes, seconds];
+  return pairs.map((value) => String(value).padStart(2, "0")).join(":");
+}
+
+function ensureFloatingTimer() {
+  if (document.querySelector("#floatingTimer")) return;
+  document.body.insertAdjacentHTML("beforeend", `
+    <aside class="floating-timer ${timerState.collapsed ? "is-collapsed" : ""}" id="floatingTimer" aria-label="課堂計時器">
+      <button class="timer-launcher" id="timerLauncher" type="button" aria-label="打開計時器">⏱ <span id="timerLauncherText">00:00</span></button>
+      <div class="timer-panel" id="timerPanel">
+        <div class="timer-head">
+          <div>
+            <p class="eyebrow">Class Timer</p>
+            <h2>課堂計時</h2>
+          </div>
+          <div class="timer-window-actions">
+            <button id="timerCollapse" type="button" aria-label="收合計時器">收合</button>
+            <button id="timerHide" type="button" aria-label="關閉計時器">關閉</button>
+          </div>
+        </div>
+        <div class="timer-display" id="timerDisplay" aria-live="polite">00:00</div>
+        <div class="timer-actions">
+          <button id="timerToggle" type="button">開始</button>
+          <button id="timerReset" type="button">重設</button>
+        </div>
+      </div>
+    </aside>
+  `);
+
+  document.querySelector("#timerLauncher").addEventListener("click", () => {
+    timerState.hidden = false;
+    timerState.collapsed = false;
+    saveTimerState();
+    updateTimerUi();
+  });
+
+  document.querySelector("#timerCollapse").addEventListener("click", () => {
+    timerState.collapsed = true;
+    saveTimerState();
+    updateTimerUi();
+  });
+
+  document.querySelector("#timerHide").addEventListener("click", () => {
+    timerState.hidden = true;
+    timerState.collapsed = true;
+    saveTimerState();
+    updateTimerUi();
+  });
+
+  document.querySelector("#timerToggle").addEventListener("click", toggleTimer);
+  document.querySelector("#timerReset").addEventListener("click", resetTimer);
+  updateTimerUi();
+  refreshTimerInterval();
+}
+
+function toggleTimer() {
+  if (timerState.running) {
+    timerState.elapsed = timerSnapshot().elapsed;
+    timerState.running = false;
+    timerState.startedAt = 0;
+  } else {
+    timerState.running = true;
+    timerState.startedAt = Date.now();
+  }
+  saveTimerState();
+  refreshTimerInterval();
+  updateTimerUi();
+}
+
+function resetTimer() {
+  timerState.elapsed = 0;
+  timerState.running = false;
+  timerState.startedAt = 0;
+  saveTimerState();
+  refreshTimerInterval();
+  updateTimerUi();
+}
+
+function refreshTimerInterval() {
+  if (timerInterval) {
+    window.clearInterval(timerInterval);
+    timerInterval = null;
+  }
+  if (!timerState.running) return;
+  timerInterval = window.setInterval(updateTimerUi, 250);
+}
+
+function updateTimerUi() {
+  const timer = document.querySelector("#floatingTimer");
+  if (!timer) return;
+  const elapsedText = formatTimer(timerSnapshot().elapsed);
+  timer.classList.toggle("is-collapsed", timerState.collapsed);
+  timer.classList.toggle("is-hidden", timerState.hidden);
+  timer.classList.toggle("is-running", timerState.running);
+  document.querySelector("#timerDisplay").textContent = elapsedText;
+  document.querySelector("#timerLauncherText").textContent = elapsedText;
+  document.querySelector("#timerToggle").textContent = timerState.running ? "暫停" : "開始";
+}
+
 function renderEmptyState() {
   cardGrid.innerHTML = `<div class="empty-state">${uiText("empty.default", { drawLabel: activeMode.drawLabel })}</div>`;
 }
@@ -1780,5 +1919,6 @@ resetActivePool.addEventListener("click", () => {
 });
 
 ensureEditPanel();
+ensureFloatingTimer();
 renderStaticUiText();
 setMode(activeMode.id);
