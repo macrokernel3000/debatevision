@@ -283,7 +283,7 @@ function normalizeCard(raw, deckId) {
   };
 }
 
-function buildHooks(name, deckId, rarity = "") {
+function buildHooks(name, deckId, rarity = "", context = {}) {
   if (activeMode.cardMode === "metaphorCompass") {
     if (metaphorVariant === "concrete") {
       if (deckId === "relations") {
@@ -302,7 +302,7 @@ function buildHooks(name, deckId, rarity = "") {
   }
 
   if (Array.isArray(activeMode.cardHooks) && activeMode.cardHooks.length) {
-    return activeMode.cardHooks.map((hook) => fillCardHookTemplate(hook, name));
+    return activeMode.cardHooks.map((hook) => fillCardHookTemplate(hook, name, { ...context, deckId, rarity }));
   }
 
   if (deckId === "items" && rarity === "N") {
@@ -320,11 +320,36 @@ function buildHooks(name, deckId, rarity = "") {
   return ["把特性連回當前玩法。", "回答一個尖銳質疑。", "提出最終投票標準。"];
 }
 
-function fillCardHookTemplate(template, name) {
-  return String(template || "")
-    .replaceAll("{name}", name)
-    .replaceAll("{{name}}", name)
-    .replaceAll("卡牌名稱", name);
+function fillCardHookTemplate(template, name, context = {}) {
+  const values = {
+    name,
+    card: name,
+    role: context.role || context.roleName || name,
+    roleName: context.roleName || context.role || name,
+    mission: context.mission || context.missionName || "",
+    missionName: context.missionName || context.mission || "",
+    environment: context.environment || context.environmentName || "",
+    environmentName: context.environmentName || context.environment || "",
+    item: context.item || context.itemName || (context.deckId === "items" ? name : ""),
+    itemName: context.itemName || context.item || (context.deckId === "items" ? name : ""),
+    profession: context.profession || context.professionName || (context.deckId === "roles" ? name : ""),
+    professionName: context.professionName || context.profession || (context.deckId === "roles" ? name : ""),
+    "卡牌名稱": name,
+    "角色": context.role || context.roleName || name,
+    "任務": context.mission || context.missionName || "",
+    "異境": context.environment || context.environmentName || "",
+    "環境": context.environment || context.environmentName || "",
+    "道具": context.item || context.itemName || (context.deckId === "items" ? name : ""),
+    "物品": context.item || context.itemName || (context.deckId === "items" ? name : ""),
+    "職業": context.profession || context.professionName || (context.deckId === "roles" ? name : "")
+  };
+  let text = String(template || "");
+  for (const [key, value] of Object.entries(values)) {
+    text = text
+      .replaceAll(`{${key}}`, value)
+      .replaceAll(`{{${key}}}`, value);
+  }
+  return text;
 }
 
 function cardsFrom(deckId) {
@@ -1484,6 +1509,20 @@ function renderPoolWarning() {
   return [];
 }
 
+function cardWithEnvironmentHooks(card, environment) {
+  return {
+    ...card,
+    hooks: buildHooks(card.name, card.deckId, card.rarity, {
+      environment: environment?.name || "",
+      environmentName: environment?.name || "",
+      item: card.deckId === "items" ? card.name : "",
+      itemName: card.deckId === "items" ? card.name : "",
+      profession: card.deckId === "roles" ? card.name : "",
+      professionName: card.deckId === "roles" ? card.name : ""
+    })
+  };
+}
+
 function renderCombo(environment, cards, label) {
   currentStageCard = environment;
   renderReelCard(environment);
@@ -1785,8 +1824,8 @@ function drawResult() {
       if (!environment || itemPool.length < itemNeed || rolePool.length < roleNeed) return renderPoolWarning();
       const groups = Array.from({ length: survivalGroupCount }, (_, index) => ({
         index: index + 1,
-        items: pickFromPool(itemPool, survivalItemCount),
-        roles: pickFromPool(rolePool, survivalRoleCount)
+        items: pickFromPool(itemPool, survivalItemCount).map((card) => cardWithEnvironmentHooks(card, environment)),
+        roles: pickFromPool(rolePool, survivalRoleCount).map((card) => cardWithEnvironmentHooks(card, environment))
       }));
       const drawnCards = [environment, ...groups.flatMap((group) => [...group.items, ...group.roles])];
       renderSurvivalBattle(environment, groups);
@@ -1798,7 +1837,7 @@ function drawResult() {
       ? currentStageCard
       : null;
     const environment = lockedEnvironment || pickFrom(activeSecondaryLibrary, 1)[0];
-    const cards = pickFrom(activeLibrary, count);
+    const cards = pickFrom(activeLibrary, count).map((card) => cardWithEnvironmentHooks(card, environment));
     if (!environment || cards.length < count) return renderPoolWarning();
     renderCombo(environment, cards, "本輪異境");
     markDrawn(lockedEnvironment ? cards : [environment, ...cards]);
@@ -1867,7 +1906,15 @@ function drawResult() {
 
   if (activeMode.cardMode === "summonMission") {
     const mission = pickFrom(activeSecondaryLibrary, 1)[0];
-    const cards = pickFrom(activeLibrary, count);
+    const cards = pickFrom(activeLibrary, count).map((card) => ({
+      ...card,
+      hooks: buildHooks(card.name, card.deckId, card.rarity, {
+        mission: mission?.name || "",
+        missionName: mission?.name || "",
+        role: card.name,
+        roleName: card.name
+      })
+    }));
     if (!mission || cards.length < count) return renderPoolWarning();
     renderCombo(mission, cards, "本輪任務");
     markDrawn([mission, ...cards]);
