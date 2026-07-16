@@ -856,6 +856,36 @@ window.DEBATE_DECKS = {
     "icon": "◇",
     "cards": [
       {
+        "name": "孤獨",
+        "lore": "一個人面對世界，也可能因此更了解自己。",
+        "imageId": "🚶",
+        "icon": "🚶",
+        "iconAsset": "",
+        "tokenIcon": "🚶",
+        "image": "",
+        "rarity": "A",
+        "tags": [
+          "關係",
+          "信任",
+          "支持"
+        ]
+      },
+      {
+        "name": "團結",
+        "lore": "彼此理解、擁有一致的目標。",
+        "imageId": "🫂",
+        "icon": "🫂",
+        "iconAsset": "",
+        "tokenIcon": "🫂",
+        "image": "",
+        "rarity": "B",
+        "tags": [
+          "關係",
+          "信任",
+          "支持"
+        ]
+      },
+      {
         "name": "正義",
         "lore": "關於公平、權利與應得結果的抽象判準。",
         "imageId": "⚖️",

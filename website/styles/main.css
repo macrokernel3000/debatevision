@@ -455,6 +455,32 @@ h1 {
   color: #fff;
 }
 
+.metaphor-variant-tools {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+}
+
+.metaphor-variant-tools button {
+  min-height: 30px;
+  border: 0;
+  border-radius: 999px;
+  padding: 0 12px;
+  background: transparent;
+  color: var(--muted);
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.metaphor-variant-tools button.is-active {
+  background: var(--violet);
+  color: #fff;
+}
+
 .metaphor-lock-tools {
   display: inline-flex;
   flex-wrap: wrap;
@@ -491,6 +517,18 @@ h1 {
   color: #fff;
   font: inherit;
   cursor: pointer;
+}
+
+.metaphor-fixed-text {
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0 12px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 0.86rem;
+  font-weight: 900;
 }
 
 .environment-lock-toggle {

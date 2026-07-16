@@ -66,20 +66,20 @@ sales-command,回合流程,2,,30 秒找出核心需求
 sales-command,回合流程,3,,30 秒決定目標客群
 sales-command,回合流程,4,,45 秒完成銷售提案
 sales-command,回合流程,5,,同學提問：價格、替代品、可信度
-metaphor-compass,玩法描述,1,,前綴與後綴可以選擇概念卡或需求卡，再搭配一張關係卡，組成一句看似奇怪卻值得辯護的隱喻命題。
+metaphor-compass,玩法描述,1,,先用「人生就像巧克力」練習具體比喻，再進階到「正義導致歡樂」這類抽象命題。
 metaphor-compass,玩法背景,1,,../assets/backgrounds/modes/metaphor-compass.png
 metaphor-compass,按鈕文字,1,,抽出隱喻命題
-metaphor-compass,教練提示,1,重新定義,先解釋兩個概念在這句話中各自代表什麼。
-metaphor-compass,教練提示,2,找到角度,不要只證明字面相等，而是找到能讓關係成立的比較角度。
+metaphor-compass,教練提示,1,入門比喻,具體版先問：人生和這個後綴詞哪裡像？
+metaphor-compass,教練提示,2,進階命題,抽象版再問：這兩個詞中間的關係為什麼成立？
 metaphor-compass,教練提示,,,
 metaphor-compass,卡牌任務,1,,定義 {name} 在這句命題中的意思。
 metaphor-compass,卡牌任務,2,,替 {name} 找一個具體例子。
 metaphor-compass,卡牌任務,,,
-metaphor-compass,回合流程,1,,選擇前綴與後綴要使用概念卡或需求卡
-metaphor-compass,回合流程,2,,抽出前綴、關係卡與後綴
-metaphor-compass,回合流程,3,,組成「A 關係 C」命題
-metaphor-compass,回合流程,4,,30 秒定義兩端詞語
-metaphor-compass,回合流程,5,,45 秒提出一個可成立的解釋角度
+metaphor-compass,回合流程,1,,選擇具體版、抽象版或自由版
+metaphor-compass,回合流程,2,,具體版固定「人生」「就像」，只抽物品或動物作為後綴
+metaphor-compass,回合流程,3,,抽象版抽前綴、關係卡與後綴，組成「A 關係 C」命題
+metaphor-compass,回合流程,4,,自由版前綴與後綴可選任意詞庫，中間維持關係卡
+metaphor-compass,回合流程,5,,30 秒找相似點或定義兩端詞語
 metaphor-compass,回合流程,6,,可鎖定前綴、介係或後綴，再重抽其他位置練習變化
 card-dictionary,玩法背景,1,,../assets/backgrounds/modes/card-dictionary.png
 card-dictionary,玩法描述,1,,瀏覽目前所有卡片類型，勾選卡池後直接挑選本場要用的卡，讓老師自由發明活動。

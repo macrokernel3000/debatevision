@@ -261,35 +261,49 @@ window.DEBATE_MODES = [
     "title": "隱喻羅盤",
     "icon": "◇",
     "tone": "cosmos",
-    "track": "概念 × 關係 × 概念",
+    "track": "比喻 × 關係 × 命題",
     "primaryDeck": "concepts",
     "secondaryDeck": "relations",
+    "metaphorConcreteDecks": [
+      "items",
+      "creatures"
+    ],
     "metaphorDecks": [
       "concepts",
       "needs"
+    ],
+    "metaphorFreeDecks": [
+      "worlds",
+      "creatures",
+      "items",
+      "roles",
+      "locations",
+      "celebrities",
+      "needs",
+      "concepts"
     ],
     "primaryLabel": "概念卡",
     "secondaryLabel": "關係卡",
     "drawLabel": "抽出隱喻命題",
     "cardMode": "metaphorCompass",
     "fixedCount": 2,
-    "description": "前綴與後綴可以選擇概念卡或需求卡，再搭配一張關係卡，組成一句看似奇怪卻值得辯護的隱喻命題。",
+    "description": "先用「人生就像巧克力」練習具體比喻，再進階到「正義導致歡樂」這類抽象命題。",
     "prompts": [
       [
-        "重新定義",
-        "先解釋兩個概念在這句話中各自代表什麼。"
+        "入門比喻",
+        "具體版先問：人生和這個後綴詞哪裡像？"
       ],
       [
-        "找到角度",
-        "不要只證明字面相等，而是找到能讓關係成立的比較角度。"
+        "進階命題",
+        "抽象版再問：這兩個詞中間的關係為什麼成立？"
       ]
     ],
     "flow": [
-      "選擇前綴與後綴要使用概念卡或需求卡",
-      "抽出前綴、關係卡與後綴",
-      "組成「A 關係 C」命題",
-      "30 秒定義兩端詞語",
-      "45 秒提出一個可成立的解釋角度",
+      "選擇具體版、抽象版或自由版",
+      "具體版固定「人生」「就像」，只抽物品或動物作為後綴",
+      "抽象版抽前綴、關係卡與後綴，組成「A 關係 C」命題",
+      "自由版前綴與後綴可選任意詞庫，中間維持關係卡",
+      "30 秒找相似點或定義兩端詞語",
       "可鎖定前綴、介係或後綴，再重抽其他位置練習變化"
     ],
     "image": "../assets/backgrounds/modes/metaphor-compass.png",

@@ -24,6 +24,7 @@ let secretAnswerIndex = "";
 let secretShowAnswerNumber = false;
 let salesVariant = "item";
 let lockEnvironment = false;
+let metaphorVariant = "concrete";
 let metaphorPrefixDeck = "";
 let metaphorSuffixDeck = "";
 let metaphorLocks = { prefix: false, relation: false, suffix: false };
@@ -276,6 +277,12 @@ function normalizeCard(raw, deckId) {
 
 function buildHooks(name, deckId, rarity = "") {
   if (activeMode.cardMode === "metaphorCompass") {
+    if (metaphorVariant === "concrete") {
+      if (deckId === "relations") {
+        return [`說明「${name}」要求的是相似、象徵還是聯想。`, "找出比喻最容易被質疑的地方。", "嘗試換一個更精準的比喻關係。"];
+      }
+      return [`找出「人生」和「${name}」的一個相似點。`, `替「人生就像${name}」找一個生活例子。`, `說明這個比喻的限制或例外。`];
+    }
     if (deckId === "relations") {
       return [`說明「${name}」讓兩個概念形成什麼關係。`, `找出這個關係最容易被質疑的地方。`, `嘗試把這個關係換成生活中的例子。`];
     }
@@ -393,7 +400,7 @@ function availableDeckIdsForMode(mode = activeMode) {
     return mode.availableDecks.filter((deckId) => decks[deckId]);
   }
   if (mode.cardMode === "metaphorCompass") {
-    return [mode.secondaryDeck, ...(mode.metaphorDecks || [mode.primaryDeck])].filter((deckId) => deckId && decks[deckId]);
+    return [mode.secondaryDeck, ...metaphorAllDeckOptions(mode)].filter((deckId) => deckId && decks[deckId]);
   }
   if (Array.isArray(mode.variantDecks) && mode.variantDecks.length) {
     return [mode.secondaryDeck, ...mode.variantDecks].filter((deckId) => deckId && decks[deckId]);
@@ -444,9 +451,11 @@ function historyVariantLabel() {
     return { item: "商品", need: "需求", combo: "商品 + 需求" }[salesVariant] || "";
   }
   if (activeMode.cardMode === "metaphorCompass") {
+    const variantLabel = metaphorVariantLabel();
     const prefixLabel = decks[metaphorPrefixDeck]?.label || "";
     const suffixLabel = decks[metaphorSuffixDeck]?.label || "";
-    return prefixLabel && suffixLabel ? `${prefixLabel} → ${suffixLabel}` : "";
+    if (metaphorVariant === "concrete") return `${variantLabel}：人生 → ${suffixLabel}`;
+    return prefixLabel && suffixLabel ? `${variantLabel}：${prefixLabel} → ${suffixLabel}` : variantLabel;
   }
   if (activeMode.cardMode === "secretPlace") return decks[activeLibrary]?.label || "";
   const variantDecks = primaryVariantDeckIds();
@@ -632,6 +641,96 @@ function renderReelCard(card = currentStageCard, spinningName = "") {
   `;
 }
 
+function metaphorVariantLabel(value = metaphorVariant) {
+  return {
+    concrete: "具體版",
+    abstract: "抽象版",
+    free: "自由版"
+  }[value] || "隱喻";
+}
+
+function metaphorAllDeckOptions(mode = activeMode) {
+  const base = [
+    ...(mode.metaphorConcreteDecks || []),
+    ...(mode.metaphorDecks || []),
+    ...(mode.metaphorFreeDecks || [])
+  ];
+  if (!base.length) return [mode.primaryDeck];
+  return [...new Set(base)].filter((deckId) => deckId && decks[deckId]);
+}
+
+function metaphorDeckOptions(part = "prefix") {
+  if (metaphorVariant === "concrete") {
+    return part === "suffix" ? metaphorConcreteDeckOptions() : [];
+  }
+  if (metaphorVariant === "free") return metaphorFreeDeckOptions();
+  return metaphorAbstractDeckOptions();
+}
+
+function metaphorConcreteDeckOptions() {
+  return (activeMode.metaphorConcreteDecks || ["items", "creatures"]).filter((deckId) => decks[deckId]);
+}
+
+function metaphorAbstractDeckOptions() {
+  return (activeMode.metaphorDecks || [activeMode.primaryDeck]).filter((deckId) => decks[deckId]);
+}
+
+function metaphorFreeDeckOptions() {
+  return (activeMode.metaphorFreeDecks || Object.keys(decks).filter((deckId) => deckId !== activeMode.secondaryDeck))
+    .filter((deckId) => decks[deckId] && deckId !== activeMode.secondaryDeck);
+}
+
+function fixedMetaphorPrefixCard() {
+  return {
+    name: "人生",
+    lore: "作為比喻句的固定前綴，讓學生先練習從日常物件或生物中找相似點。",
+    icon: "人",
+    tokenIcon: "人",
+    rarity: "C",
+    deckId: "metaphor-fixed",
+    deckLabel: "固定詞",
+    deckIcon: "人",
+    hooks: ["說明人生和後綴詞哪裡相似。", "找出一個具體生活例子。", "補充這個比喻可能不成立的地方。"]
+  };
+}
+
+function fixedMetaphorRelationCard() {
+  const relation = cardsFrom(activeSecondaryLibrary).find((card) => card.name === "就像");
+  return relation || {
+    name: "就像",
+    lore: "A 與 C 在某些特質上十分相似。",
+    icon: "≈",
+    tokenIcon: "≈",
+    rarity: "B",
+    deckId: activeSecondaryLibrary || "relations",
+    deckLabel: decks[activeSecondaryLibrary]?.label || "關係卡",
+    deckIcon: "→",
+    hooks: ["說明兩者相似的角度。", "找一個能讓比喻成立的例子。", "指出這個比喻最容易被質疑的地方。"]
+  };
+}
+
+function syncMetaphorVariantDecks() {
+  if (metaphorVariant === "concrete") {
+    metaphorPrefixDeck = "";
+    metaphorSuffixDeck = metaphorConcreteDeckOptions().includes(metaphorSuffixDeck)
+      ? metaphorSuffixDeck
+      : metaphorConcreteDeckOptions()[0] || "";
+    metaphorLocks = { prefix: true, relation: true, suffix: false };
+    activePreview = metaphorSuffixDeck || activeSecondaryLibrary;
+    return;
+  }
+
+  const options = metaphorDeckOptions("prefix");
+  metaphorPrefixDeck = options.includes(metaphorPrefixDeck) ? metaphorPrefixDeck : options[0] || "";
+  metaphorSuffixDeck = options.includes(metaphorSuffixDeck) ? metaphorSuffixDeck : options[0] || "";
+  metaphorLocks = {
+    prefix: Boolean(metaphorLocks.prefix),
+    relation: Boolean(metaphorLocks.relation),
+    suffix: Boolean(metaphorLocks.suffix)
+  };
+  activePreview = metaphorPrefixDeck || activeSecondaryLibrary;
+}
+
 function renderDeckControls() {
   primaryDeckField.hidden = true;
   secondaryDeckField.hidden = true;
@@ -651,8 +750,13 @@ function renderDeckControls() {
       : `${activeMode.secondaryLabel || decks[activeSecondaryLibrary]?.label}：固定抽 1 張，${selectedCount(activeSecondaryLibrary)} / ${cardsFrom(activeSecondaryLibrary).length} 張可抽`
     : "";
   if (activeMode.cardMode === "metaphorCompass") {
-    primaryText = `前綴：${decks[metaphorPrefixDeck]?.label || ""}，${selectedCount(metaphorPrefixDeck)} / ${cardsFrom(metaphorPrefixDeck).length} 張可抽`;
-    secondaryText = `介係：${decks[activeSecondaryLibrary]?.label || ""}，${selectedCount(activeSecondaryLibrary)} / ${cardsFrom(activeSecondaryLibrary).length} 張可抽`;
+    if (metaphorVariant === "concrete") {
+      primaryText = "前綴：人生（固定）";
+      secondaryText = "介係：就像（固定）";
+    } else {
+      primaryText = `前綴：${decks[metaphorPrefixDeck]?.label || ""}，${selectedCount(metaphorPrefixDeck)} / ${cardsFrom(metaphorPrefixDeck).length} 張可抽`;
+      secondaryText = `介係：${decks[activeSecondaryLibrary]?.label || ""}，${selectedCount(activeSecondaryLibrary)} / ${cardsFrom(activeSecondaryLibrary).length} 張可抽`;
+    }
   }
   const suffixText = activeMode.cardMode === "metaphorCompass"
     ? `後綴：${decks[metaphorSuffixDeck]?.label || ""}，${selectedCount(metaphorSuffixDeck)} / ${cardsFrom(metaphorSuffixDeck).length} 張可抽`
@@ -688,8 +792,15 @@ function renderDeckControls() {
     : "";
   const metaphorLockTool = activeMode.cardMode === "metaphorCompass"
     ? `
+      <div class="metaphor-variant-tools" role="group" aria-label="隱喻羅盤版本">
+        ${["concrete", "abstract", "free"].map((variant) => `
+          <button type="button" class="${metaphorVariant === variant ? "is-active" : ""}" data-metaphor-variant="${variant}">
+            ${metaphorVariantLabel(variant)}
+          </button>
+        `).join("")}
+      </div>
       <div class="metaphor-deck-tools" role="group" aria-label="隱喻羅盤詞庫選擇">
-        ${metaphorDeckSelectMarkup("prefix", "前綴", metaphorPrefixDeck)}
+        ${metaphorVariant === "concrete" ? `<span class="metaphor-fixed-text">人生 就像</span>` : metaphorDeckSelectMarkup("prefix", "前綴", metaphorPrefixDeck)}
         ${metaphorDeckSelectMarkup("suffix", "後綴", metaphorSuffixDeck)}
       </div>
       <div class="metaphor-lock-tools" role="group" aria-label="隱喻羅盤鎖定">
@@ -711,16 +822,12 @@ function renderDeckControls() {
   `;
 }
 
-function metaphorDeckOptions() {
-  return (activeMode.metaphorDecks || [activeMode.primaryDeck]).filter((deckId) => decks[deckId]);
-}
-
 function metaphorDeckSelectMarkup(part, label, value) {
   return `
     <label class="metaphor-deck-select">
       <span>${label}</span>
       <select data-metaphor-deck="${part}">
-        ${metaphorDeckOptions().map((deckId) => `
+        ${metaphorDeckOptions(part).map((deckId) => `
           <option value="${deckId}" ${deckId === value ? "selected" : ""}>${decks[deckId].label}</option>
         `).join("")}
       </select>
@@ -729,6 +836,14 @@ function metaphorDeckSelectMarkup(part, label, value) {
 }
 
 function metaphorLockMarkup(part, label) {
+  if (metaphorVariant === "concrete" && (part === "prefix" || part === "relation")) {
+    return `
+      <label class="environment-lock-toggle is-disabled">
+        <input type="checkbox" data-lock-metaphor="${part}" checked disabled />
+        <span>${label}</span>
+      </label>
+    `;
+  }
   const card = currentMetaphorCards?.[part];
   const expectedDeck = part === "prefix" ? metaphorPrefixDeck : part === "suffix" ? metaphorSuffixDeck : activeSecondaryLibrary;
   const canLock = Boolean(card) && (!expectedDeck || card.deckId === expectedDeck);
@@ -749,6 +864,10 @@ function renderPrompts() {
 }
 
 function activeDeckIds() {
+  if (activeMode.cardMode === "metaphorCompass") {
+    return [activeSecondaryLibrary, ...metaphorDeckOptions("prefix"), ...metaphorDeckOptions("suffix")]
+      .filter((deckId, index, list) => deckId && decks[deckId] && list.indexOf(deckId) === index);
+  }
   return availableDeckIdsForMode();
 }
 
@@ -1329,6 +1448,12 @@ function renderDuel(cards) {
 function renderMetaphorCompass(concepts, relation) {
   const [left, right] = concepts;
   currentMetaphorCards = { prefix: left, relation, suffix: right };
+  const guideTitle = metaphorVariant === "concrete"
+    ? `請解釋：人生為什麼「${relation.name}${right.name}」？`
+    : `請解釋：為什麼「${left.name}${relation.name}${right.name}」可以成立？`;
+  const guideBody = metaphorVariant === "concrete"
+    ? "可以先找相似點，再提出一個生活例子，最後補充這個比喻有哪些限制。"
+    : "可以先重新定義兩個概念，再提出一個具體例子，最後回應可能的反例。";
   cardGrid.innerHTML = `
     <div class="metaphor-board">
       <article class="metaphor-sentence">
@@ -1337,8 +1462,8 @@ function renderMetaphorCompass(concepts, relation) {
         <span>${right.name}</span>
       </article>
       <div class="metaphor-guide">
-        <p>請解釋：為什麼「${left.name}${relation.name}${right.name}」可以成立？</p>
-        <p>可以先重新定義兩個概念，再提出一個具體例子，最後回應可能的反例。</p>
+        <p>${guideTitle}</p>
+        <p>${guideBody}</p>
       </div>
       <div class="metaphor-cards">
         ${cardMarkup(left)}
@@ -1569,8 +1694,10 @@ function drawResult() {
   }
 
   if (activeMode.cardMode === "metaphorCompass") {
-    const lockedPrefix = metaphorLocks.prefix ? currentMetaphorCards?.prefix : null;
-    const lockedRelation = metaphorLocks.relation ? currentMetaphorCards?.relation : null;
+    const fixedPrefix = metaphorVariant === "concrete" ? fixedMetaphorPrefixCard() : null;
+    const fixedRelation = metaphorVariant === "concrete" ? fixedMetaphorRelationCard() : null;
+    const lockedPrefix = fixedPrefix || (metaphorLocks.prefix ? currentMetaphorCards?.prefix : null);
+    const lockedRelation = fixedRelation || (metaphorLocks.relation ? currentMetaphorCards?.relation : null);
     const lockedSuffix = metaphorLocks.suffix ? currentMetaphorCards?.suffix : null;
     const prefix = lockedPrefix || pickFromAvailable(metaphorPrefixDeck, 1)[0];
     const suffixExcludedKeys = new Set(prefix?.deckId === metaphorSuffixDeck ? [cardKey(prefix)] : []);
@@ -1581,7 +1708,7 @@ function drawResult() {
     const relation = lockedRelation || newRelation[0];
     const drawnCards = [prefix, relation, suffix];
     renderMetaphorCompass([prefix, suffix], relation);
-    markDrawn(drawnCards.filter((card) => card !== lockedPrefix && card !== lockedRelation && card !== lockedSuffix));
+    markDrawn(drawnCards.filter((card) => card !== lockedPrefix && card !== lockedRelation && card !== lockedSuffix && card.deckId !== "metaphor-fixed"));
     return drawnCards;
   }
 
@@ -1623,7 +1750,10 @@ function reelPoolForActiveMode() {
     return selectedCardsFrom(activeLibrary);
   }
   if (activeMode.cardMode === "metaphorCompass") {
-    return [...selectedCardsFrom(activeLibrary), ...selectedCardsFrom(activeSecondaryLibrary)];
+    if (metaphorVariant === "concrete") return selectedCardsFrom(metaphorSuffixDeck);
+    const pools = [activeSecondaryLibrary, metaphorPrefixDeck, metaphorSuffixDeck]
+      .filter((deckId, index, list) => deckId && list.indexOf(deckId) === index);
+    return pools.flatMap((deckId) => selectedCardsFrom(deckId));
   }
   return activeSecondaryLibrary ? selectedCardsFrom(activeSecondaryLibrary) : selectedCardsFrom(activeLibrary);
 }
@@ -1695,9 +1825,11 @@ function setMode(modeId) {
   secretShowAnswerNumber = false;
   salesVariant = "item";
   lockEnvironment = false;
-  metaphorPrefixDeck = activeMode.metaphorDecks?.[0] || activeMode.primaryDeck;
-  metaphorSuffixDeck = activeMode.metaphorDecks?.[0] || activeMode.primaryDeck;
-  metaphorLocks = { prefix: false, relation: false, suffix: false };
+  metaphorVariant = "concrete";
+  metaphorPrefixDeck = "";
+  metaphorSuffixDeck = activeMode.metaphorConcreteDecks?.[0] || "items";
+  metaphorLocks = { prefix: true, relation: true, suffix: false };
+  if (activeMode.cardMode === "metaphorCompass") syncMetaphorVariantDecks();
   currentMetaphorCards = null;
   selectedEditCard = null;
   selectedEditTarget = null;
@@ -1744,6 +1876,16 @@ libraryTools.addEventListener("click", (event) => {
 });
 
 fixedPools.addEventListener("click", (event) => {
+  const metaphorVariantButton = event.target.closest("[data-metaphor-variant]");
+  if (metaphorVariantButton) {
+    metaphorVariant = metaphorVariantButton.dataset.metaphorVariant;
+    currentMetaphorCards = null;
+    syncMetaphorVariantDecks();
+    renderAll();
+    renderEmptyState();
+    return;
+  }
+
   const primaryButton = event.target.closest("[data-primary-variant]");
   if (primaryButton) {
     activeLibrary = primaryButton.dataset.primaryVariant;
@@ -1762,6 +1904,7 @@ fixedPools.addEventListener("change", (event) => {
   const metaphorDeckSelect = event.target.closest("[data-metaphor-deck]");
   if (metaphorDeckSelect) {
     const part = metaphorDeckSelect.dataset.metaphorDeck;
+    currentMetaphorCards = null;
     if (part === "prefix") {
       metaphorPrefixDeck = metaphorDeckSelect.value;
       metaphorLocks.prefix = false;

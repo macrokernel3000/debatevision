@@ -4,24 +4,26 @@
   "title": "隱喻羅盤",
   "icon": "◇",
   "tone": "cosmos",
-  "track": "概念 × 關係 × 概念",
+  "track": "比喻 × 關係 × 命題",
   "primaryDeck": "concepts",
   "secondaryDeck": "relations",
+  "metaphorConcreteDecks": ["items", "creatures"],
   "metaphorDecks": ["concepts", "needs"],
+  "metaphorFreeDecks": ["worlds", "creatures", "items", "roles", "locations", "celebrities", "needs", "concepts"],
   "primaryLabel": "概念卡",
   "secondaryLabel": "關係卡",
   "drawLabel": "抽出隱喻命題",
   "cardMode": "metaphorCompass",
   "fixedCount": 2,
-  "description": "抽出兩張概念卡與一張關係卡，組成一句看似奇怪卻值得辯護的隱喻命題。",
+  "description": "先用「人生就像……」練習具體比喻，再進階到抽象概念與自由詞庫的關係命題。",
   "prompts": [
     [
       "重新定義",
-      "先解釋兩個概念在這句話中各自代表什麼。"
+      "具體版先找相似點，抽象版再練習重新定義兩端詞語。"
     ],
     [
       "找到角度",
-      "不要只證明字面相等，而是找到能讓關係成立的比較角度。"
+      "不要只證明字面相等，而是找到能讓比喻或關係成立的角度。"
     ],
     [
       "反向挑戰",
@@ -29,9 +31,10 @@
     ]
   ],
   "flow": [
-    "抽 2 張概念卡與 1 張關係卡",
-    "組成「A 關係 C」命題",
-    "30 秒定義兩個概念",
+    "選擇具體版、抽象版或自由版",
+    "具體版固定「人生」「就像」，只抽後綴卡",
+    "抽象版抽前綴、關係卡與後綴，組成「A 關係 C」命題",
+    "30 秒找相似點或定義兩端詞語",
     "45 秒提出一個可成立的解釋角度",
     "同學提出反例或改寫命題"
   ]
