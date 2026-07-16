@@ -13,6 +13,7 @@ const TIMER_STORAGE_KEY = "debatevision-floating-timer";
 const HISTORY_LIMIT = 10;
 
 let activeMode = modes[0];
+let activityMenuOpen = false;
 let activeLibrary = activeMode.primaryDeck;
 let activeSecondaryLibrary = activeMode.secondaryDeck || "";
 let activePreview = activeMode.secondaryDeck || activeMode.primaryDeck;
@@ -91,6 +92,9 @@ function renderStaticUiText() {
 }
 
 const modeGrid = document.querySelector("#modeGrid");
+const activityMenuToggle = document.querySelector("#activityMenuToggle");
+const activityMenu = document.querySelector("#activityMenu");
+const activityMenuPanel = activityMenu?.querySelector(".activity-menu-panel");
 const playArea = document.querySelector(".play-area");
 const controlBand = document.querySelector(".control-band");
 const cardDictionaryPanel = document.querySelector(".card-dictionary-panel");
@@ -615,6 +619,26 @@ function renderModeButtons() {
   `).join("");
 
   modeGrid.innerHTML = markup;
+  renderActivityMenu();
+}
+
+function renderActivityMenu() {
+  if (!activityMenuPanel) return;
+  activityMenuPanel.innerHTML = modes.map((mode) => `
+    <button class="activity-menu-item ${mode.id === activeMode.id ? "is-active" : ""}" data-menu-mode="${mode.id}" type="button" role="menuitem">
+      <span class="activity-menu-item-icon">${mode.icon}</span>
+      <span>
+        <strong>${mode.title}</strong>
+        <small>${modeCardMeta(mode).menuLabel}</small>
+      </span>
+    </button>
+  `).join("");
+}
+
+function setActivityMenu(open) {
+  activityMenuOpen = Boolean(open);
+  if (activityMenu) activityMenu.hidden = !activityMenuOpen;
+  activityMenuToggle?.setAttribute("aria-expanded", activityMenuOpen ? "true" : "false");
 }
 
 function renderActivity() {
@@ -2044,6 +2068,7 @@ function setMode(modeId) {
   else if (activeMode.cardMode === "cardDictionary") renderDictionaryResult([]);
   else renderEmptyState();
   updateEditPanel();
+  setActivityMenu(false);
 }
 
 function renderAll() {
@@ -2065,6 +2090,24 @@ function handleModeClick(event) {
 }
 
 modeGrid.addEventListener("click", handleModeClick);
+activityMenuToggle?.addEventListener("click", () => {
+  setActivityMenu(!activityMenuOpen);
+});
+
+activityMenu?.addEventListener("click", (event) => {
+  if (event.target === activityMenu) {
+    setActivityMenu(false);
+    return;
+  }
+  const button = event.target.closest("[data-menu-mode]");
+  if (!button) return;
+  setMode(button.dataset.menuMode);
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && activityMenuOpen) setActivityMenu(false);
+});
+
 drawButton.addEventListener("click", spinDraw);
 
 libraryTools.addEventListener("click", (event) => {

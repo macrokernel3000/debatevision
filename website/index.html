@@ -43,7 +43,15 @@
           <h1 id="app-title">辯語視界</h1>
           <p class="tagline">Every Thought Begins with a Question. <span>思想始於思考</span></p>
         </div>
+        <button class="activity-menu-toggle" id="activityMenuToggle" type="button" aria-expanded="false" aria-controls="activityMenu">
+          <span aria-hidden="true">☰</span>
+          <span class="sr-only">開啟活動列表</span>
+        </button>
       </header>
+
+      <div class="activity-menu" id="activityMenu" hidden>
+        <div class="activity-menu-panel" role="menu" aria-label="活動列表"></div>
+      </div>
 
       <section class="stage-panel" aria-labelledby="app-title">
         <div class="scene-track" id="modeGrid" aria-label="選擇活動"></div>
