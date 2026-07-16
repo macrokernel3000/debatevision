@@ -16,6 +16,10 @@
   box-sizing: border-box;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
@@ -1289,27 +1293,35 @@ h1 {
 }
 
 .dictionary-strip {
-  display: flex;
-  gap: 12px;
-  overflow-x: auto;
-  padding: 2px 0 12px;
-  scroll-snap-type: x proximity;
+  display: block;
+}
+
+.dictionary-layout {
+  display: grid;
+  grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+}
+
+.dictionary-decks {
+  max-height: 520px;
+  display: grid;
+  gap: 8px;
+  overflow-y: auto;
+  padding-right: 4px;
 }
 
 .dictionary-card {
-  flex: 0 0 min(300px, 82vw);
-  min-height: 152px;
+  min-height: 0;
   display: grid;
-  grid-template-columns: 54px 1fr;
-  gap: 12px;
-  align-items: start;
-  border: 2px solid var(--line);
+  grid-template-columns: 24px 36px 1fr;
+  gap: 10px;
+  align-items: center;
+  border: 1px solid var(--line);
   border-radius: 8px;
-  padding: 14px;
+  padding: 10px;
   background: #fff;
   cursor: pointer;
-  scroll-snap-align: start;
-  box-shadow: 0 10px 22px rgba(25, 24, 20, 0.08);
 }
 
 .dictionary-card.is-selected {
@@ -1318,23 +1330,23 @@ h1 {
 }
 
 .dictionary-card input {
-  width: 22px;
-  height: 22px;
+  width: 18px;
+  height: 18px;
   accent-color: var(--teal);
   align-self: center;
   justify-self: center;
 }
 
 .dictionary-icon {
-  width: 54px;
-  height: 54px;
+  width: 36px;
+  height: 36px;
   display: grid;
   place-items: center;
   border: 2px solid var(--ink);
   border-radius: 50%;
   background: #f6efe2;
   color: var(--ink);
-  font-size: 1.45rem;
+  font-size: 1.05rem;
   font-weight: 1000;
 }
 
@@ -1344,19 +1356,119 @@ h1 {
 }
 
 .dictionary-copy strong {
-  font-size: 1.15rem;
+  font-size: 1rem;
 }
 
 .dictionary-copy span {
   color: var(--teal);
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   font-weight: 900;
 }
 
 .dictionary-copy small {
   color: var(--muted);
-  font-size: 0.9rem;
-  line-height: 1.55;
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.dictionary-workbench {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+
+.dictionary-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 38px;
+  align-items: center;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.dictionary-tabs button {
+  min-height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0 12px;
+  background: #fff;
+  color: var(--ink);
+  font-size: 0.88rem;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.dictionary-tabs button.is-active {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: #fff;
+}
+
+.dictionary-card-picker {
+  max-height: 330px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  overflow-y: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.65);
+}
+
+.dictionary-token {
+  min-height: 36px;
+}
+
+.dictionary-tray {
+  display: grid;
+  gap: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+  background: #fff;
+}
+
+.dictionary-tray-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-weight: 900;
+}
+
+.dictionary-tray-head span {
+  color: var(--teal);
+}
+
+.dictionary-selected-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.dictionary-selected-list button {
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px 10px;
+  background: #f8f5ef;
+  color: var(--ink);
+  font-size: 0.86rem;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.dictionary-selected-list button strong {
+  color: var(--red);
+}
+
+.dictionary-selected-empty {
+  color: var(--muted);
+  font-weight: 800;
 }
 
 .dictionary-actions {
@@ -1398,6 +1510,11 @@ h1 {
   color: var(--muted);
   text-align: center;
   font-weight: 800;
+}
+
+.dictionary-empty.compact {
+  width: 100%;
+  min-height: 150px;
 }
 
 .dictionary-result-head {
@@ -1783,6 +1900,18 @@ h1 {
   .selector-row,
   .machine {
     grid-template-columns: 1fr;
+  }
+
+  .dictionary-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .dictionary-decks {
+    max-height: 300px;
+  }
+
+  .dictionary-card-picker {
+    max-height: 280px;
   }
 
   .reel {

@@ -81,3 +81,13 @@ metaphor-compass,回合流程,3,,組成「A 關係 C」命題
 metaphor-compass,回合流程,4,,30 秒定義兩端詞語
 metaphor-compass,回合流程,5,,45 秒提出一個可成立的解釋角度
 metaphor-compass,回合流程,6,,可鎖定前綴、介係或後綴，再重抽其他位置練習變化
+card-dictionary,玩法描述,1,,瀏覽目前所有卡片類型，勾選卡池後直接挑選本場要用的卡，讓老師自由發明活動。
+card-dictionary,按鈕文字,1,,儲存成這場
+card-dictionary,教練提示,1,自由組合,先選幾個卡池，再挑出本場要使用的卡，請學生把這些卡建立一個共同題目。
+card-dictionary,教練提示,2,學生造規則,可以讓學生自己決定：這些卡要用來比較、說故事、推理，還是辯護？
+card-dictionary,教練提示,3,保留彈性,卡片字典不限制玩法，適合臨時暖身、活動測試或讓學生創作新規則。
+card-dictionary,回合流程,1,,在左側清單查看所有卡池
+card-dictionary,回合流程,2,,勾選本局想使用的卡片類型
+card-dictionary,回合流程,3,,從各卡池中直接勾選本場卡牌
+card-dictionary,回合流程,4,,可跨卡池加入或刪除卡牌
+card-dictionary,回合流程,5,,按下儲存成這場，形成本局活動卡牌

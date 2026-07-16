@@ -83,7 +83,10 @@ function renderStaticUiText() {
 
 const gameNav = document.querySelector("#gameNav");
 const modeGrid = document.querySelector("#modeGrid");
+const playArea = document.querySelector(".play-area");
 const controlBand = document.querySelector(".control-band");
+const cardDictionaryPanel = document.querySelector(".card-dictionary-panel");
+const libraryBand = document.querySelector(".library-band");
 const deckSelect = document.querySelector("#deckSelect");
 const primaryDeckField = document.querySelector("#primaryDeckField");
 const secondaryDeckSelect = document.querySelector("#secondaryDeckSelect");
@@ -114,6 +117,8 @@ const sceneTitle = document.querySelector("#sceneTitle");
 const sceneDescription = document.querySelector("#sceneDescription");
 const controlNote = document.querySelector("#controlNote");
 const dictionaryDeckSelections = new Set();
+const dictionaryCardSelections = new Set();
+let dictionaryActiveDeck = "";
 const deckDictionary = {
   worlds: "特殊的世界觀，適合發揮想像力，需要臨機應變與危機判斷。",
   creatures: "我們的好朋友或者小生命，適合比較特色、建立觀察角度與討論生命關係。",
@@ -560,7 +565,11 @@ function renderActivity() {
   sceneTitle.textContent = activeMode.title;
   sceneDescription.textContent = activeMode.description;
   drawButton.textContent = activeMode.drawLabel;
-  controlBand.hidden = activeMode.cardMode === "secretPlace";
+  const dictionaryMode = activeMode.cardMode === "cardDictionary";
+  controlBand.hidden = activeMode.cardMode === "secretPlace" || dictionaryMode;
+  playArea.hidden = dictionaryMode;
+  libraryBand.hidden = dictionaryMode;
+  cardDictionaryPanel.hidden = !dictionaryMode;
   controlNote.textContent = activeMode.cardMode === "secretPlace"
     ? lifecycleFor().setup
     : uiText("control.note.default");
@@ -774,23 +783,102 @@ function dictionaryDescription(deckId) {
   return deckDictionary[deckId] || `${decks[deckId]?.label || deckId} 詞庫，可用來自行組合臨時活動。`;
 }
 
+function dictionaryCardKey(deckId, cardName) {
+  return `${deckId}::${cardName}`;
+}
+
+function dictionaryCardFromKey(key) {
+  const [deckId, ...nameParts] = String(key).split("::");
+  const name = nameParts.join("::");
+  const rawCard = cardsFrom(deckId).find((card) => card.name === name);
+  return rawCard ? dictionaryNormalizeCard(rawCard, deckId) : null;
+}
+
+function selectedDictionaryCards() {
+  return [...dictionaryCardSelections].map((key) => dictionaryCardFromKey(key)).filter(Boolean);
+}
+
+function ensureDictionaryActiveDeck() {
+  const selectedDecks = [...dictionaryDeckSelections].filter((deckId) => decks[deckId]);
+  if (selectedDecks.includes(dictionaryActiveDeck)) return;
+  dictionaryActiveDeck = selectedDecks[0] || "";
+}
+
 function renderCardDictionary() {
   if (!cardDictionary) return;
-  cardDictionary.innerHTML = dictionaryDeckIds().map((deckId) => {
-    const deck = decks[deckId];
-    const checked = dictionaryDeckSelections.has(deckId);
-    return `
-      <label class="dictionary-card ${checked ? "is-selected" : ""}">
-        <input type="checkbox" data-dictionary-deck="${deckId}" ${checked ? "checked" : ""} />
-        <span class="dictionary-icon">${deck.icon || "□"}</span>
-        <span class="dictionary-copy">
-          <strong>${deck.label}</strong>
-          <span>${deck.cards.length} 張卡</span>
-          <small>${dictionaryDescription(deckId)}</small>
-        </span>
-      </label>
-    `;
-  }).join("");
+  ensureDictionaryActiveDeck();
+  const selectedDecks = [...dictionaryDeckSelections].filter((deckId) => decks[deckId]);
+  const selectedCards = selectedDictionaryCards();
+  const activeCards = dictionaryActiveDeck
+    ? cardsFrom(dictionaryActiveDeck).map((card) => dictionaryNormalizeCard(card, dictionaryActiveDeck))
+    : [];
+
+  cardDictionary.innerHTML = `
+    <div class="dictionary-layout">
+      <div class="dictionary-decks" aria-label="卡片類型">
+        ${dictionaryDeckIds().map((deckId) => dictionaryDeckCardMarkup(deckId)).join("")}
+      </div>
+      <div class="dictionary-workbench">
+        <div class="dictionary-tabs" aria-label="已啟用卡池">
+          ${selectedDecks.length
+            ? selectedDecks.map((deckId) => `
+              <button type="button" class="${deckId === dictionaryActiveDeck ? "is-active" : ""}" data-dictionary-preview="${deckId}">
+                ${decks[deckId].label}
+              </button>
+            `).join("")
+            : `<span>先勾選左側卡片類型。</span>`}
+        </div>
+        <div class="dictionary-card-picker">
+          ${dictionaryActiveDeck
+            ? activeCards.map((card) => dictionaryTokenMarkup(card)).join("")
+            : `<div class="dictionary-empty compact">選擇卡片類型後，這裡會列出可加入本場的卡。</div>`}
+        </div>
+        <div class="dictionary-tray">
+          <div class="dictionary-tray-head">
+            <strong>本場已選</strong>
+            <span>${selectedCards.length} 張</span>
+          </div>
+          <div class="dictionary-selected-list">
+            ${selectedCards.length
+              ? selectedCards.map((card) => `
+                <button type="button" data-remove-dictionary-card="${dictionaryCardKey(card.deckId, card.name)}">
+                  ${tokenIconMarkup(card)}<span>${card.deckLabel}：${card.name}</span><strong>×</strong>
+                </button>
+              `).join("")
+              : `<span class="dictionary-selected-empty">還沒有選卡。可以跨卡池加入多張。</span>`}
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function dictionaryDeckCardMarkup(deckId) {
+  const deck = decks[deckId];
+  const checked = dictionaryDeckSelections.has(deckId);
+  const selectedInDeck = [...dictionaryCardSelections].filter((key) => key.startsWith(`${deckId}::`)).length;
+  return `
+    <label class="dictionary-card ${checked ? "is-selected" : ""}">
+      <input type="checkbox" data-dictionary-deck="${deckId}" ${checked ? "checked" : ""} />
+      <span class="dictionary-icon">${deck.icon || "□"}</span>
+      <span class="dictionary-copy">
+        <strong>${deck.label}</strong>
+        <span>${selectedInDeck ? `已選 ${selectedInDeck} 張 / ` : ""}${deck.cards.length} 張卡</span>
+        <small>${dictionaryDescription(deckId)}</small>
+      </span>
+    </label>
+  `;
+}
+
+function dictionaryTokenMarkup(card) {
+  const key = dictionaryCardKey(card.deckId, card.name);
+  const checked = dictionaryCardSelections.has(key);
+  return `
+    <label class="token dictionary-token ${checked ? "" : "is-disabled"}">
+      <input type="checkbox" data-dictionary-card-key="${key}" ${checked ? "checked" : ""} />
+      <span class="token-label">${tokenIconMarkup(card)}<span>${card.name}</span></span>
+    </label>
+  `;
 }
 
 function dictionaryHooks(card) {
@@ -808,16 +896,16 @@ function dictionaryNormalizeCard(raw, deckId) {
   };
 }
 
-function renderDictionaryResult(cards = []) {
+function renderDictionaryResult(cards = [], saved = false) {
   if (!dictionaryResult) return;
   if (!cards.length) {
-    dictionaryResult.innerHTML = `<div class="dictionary-empty">請先在上方勾選至少一種卡片類型。</div>`;
+    dictionaryResult.innerHTML = `<div class="dictionary-empty">請先在上方勾選卡片類型，並選出本場要使用的卡。</div>`;
     return;
   }
 
   dictionaryResult.innerHTML = `
     <div class="dictionary-result-head">
-      <strong>自由組合</strong>
+      <strong>${saved ? "已儲存本場" : "本場組合"}</strong>
       <span>${cards.map((card) => card.deckLabel).join(" × ")}</span>
     </div>
     <div class="dictionary-result-grid">
@@ -826,15 +914,8 @@ function renderDictionaryResult(cards = []) {
   `;
 }
 
-function drawFromDictionary() {
-  const cards = [...dictionaryDeckSelections]
-    .map((deckId) => {
-      const pool = cardsFrom(deckId);
-      const rawCard = pool[Math.floor(Math.random() * pool.length)];
-      return rawCard ? dictionaryNormalizeCard(rawCard, deckId) : null;
-    })
-    .filter(Boolean);
-  renderDictionaryResult(cards);
+function saveDictionaryRound() {
+  renderDictionaryResult(selectedDictionaryCards(), true);
 }
 
 function tokenMarkup(card, checked) {
@@ -1484,6 +1565,7 @@ function setMode(modeId) {
   for (const deckId of activeDeckIds()) ensureDeckSelection(deckId);
   renderAll();
   if (activeMode.cardMode === "secretPlace") renderSecretPlace(null, false);
+  else if (activeMode.cardMode === "cardDictionary") renderDictionaryResult([]);
   else renderEmptyState();
   updateEditPanel();
 }
@@ -1594,17 +1676,49 @@ tokenCloud.addEventListener("click", (event) => {
 });
 
 cardDictionary?.addEventListener("change", (event) => {
-  const checkbox = event.target.closest("[data-dictionary-deck]");
-  if (!checkbox) return;
-  if (checkbox.checked) dictionaryDeckSelections.add(checkbox.dataset.dictionaryDeck);
-  else dictionaryDeckSelections.delete(checkbox.dataset.dictionaryDeck);
+  const deckCheckbox = event.target.closest("[data-dictionary-deck]");
+  if (deckCheckbox) {
+    const deckId = deckCheckbox.dataset.dictionaryDeck;
+    if (deckCheckbox.checked) {
+      dictionaryDeckSelections.add(deckId);
+      dictionaryActiveDeck = deckId;
+    } else {
+      dictionaryDeckSelections.delete(deckId);
+      for (const key of [...dictionaryCardSelections]) {
+        if (key.startsWith(`${deckId}::`)) dictionaryCardSelections.delete(key);
+      }
+    }
+    renderCardDictionary();
+    return;
+  }
+
+  const cardCheckbox = event.target.closest("[data-dictionary-card-key]");
+  if (!cardCheckbox) return;
+  if (cardCheckbox.checked) dictionaryCardSelections.add(cardCheckbox.dataset.dictionaryCardKey);
+  else dictionaryCardSelections.delete(cardCheckbox.dataset.dictionaryCardKey);
   renderCardDictionary();
 });
 
-drawDictionaryCards?.addEventListener("click", drawFromDictionary);
+cardDictionary?.addEventListener("click", (event) => {
+  const previewButton = event.target.closest("[data-dictionary-preview]");
+  if (previewButton) {
+    dictionaryActiveDeck = previewButton.dataset.dictionaryPreview;
+    renderCardDictionary();
+    return;
+  }
+
+  const removeButton = event.target.closest("[data-remove-dictionary-card]");
+  if (!removeButton) return;
+  dictionaryCardSelections.delete(removeButton.dataset.removeDictionaryCard);
+  renderCardDictionary();
+});
+
+drawDictionaryCards?.addEventListener("click", saveDictionaryRound);
 
 clearDictionaryDecks?.addEventListener("click", () => {
   dictionaryDeckSelections.clear();
+  dictionaryCardSelections.clear();
+  dictionaryActiveDeck = "";
   renderCardDictionary();
   renderDictionaryResult([]);
 });

@@ -70,6 +70,7 @@ website/js/mode-lifecycle.js
 - `salesPitch`：可抽商品、需求，或商品 + 需求，練需求、客群、銷售故事。
 - `secretPlace`：秘密詞條推理。推理解密使用這個模式，可從可用詞庫中選擇候選卡。
 - `metaphorCompass`：抽 2 張概念卡與 1 張關係卡，組成「A 關係 C」的隱喻命題。
+- `cardDictionary`：獨立的自由組合玩法。前台列出所有卡池，老師勾選多個卡池後，從每個卡池各抽一張。
 
 如果新增玩法只是在更換牌組，可以只新增 JSON。若需要全新抽選或呈現方式，才需要改 `website/js/app.js`。
 
