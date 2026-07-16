@@ -420,10 +420,13 @@ function rememberDraw(cards, options = {}) {
   if (!Array.isArray(cards) || !cards.length) return;
   if (activeMode.cardMode === "secretPlace" && !options.includeSecret) return;
   const scope = historyScope();
+  const previousEntries = drawHistoryByMode[scope] || [];
+  const latestRound = Math.max(0, ...previousEntries.map((entry) => Number(entry.roundNumber) || 0));
   const entry = {
     modeId: activeMode.id,
     modeTitle: activeMode.title,
     variant: historyVariantLabel(),
+    roundNumber: latestRound + 1,
     time: new Date().toISOString(),
     cards: cards.map((card) => ({
       name: card.name,
@@ -432,7 +435,7 @@ function rememberDraw(cards, options = {}) {
       rarity: card.rarity || ""
     }))
   };
-  drawHistoryByMode[scope] = [entry, ...(drawHistoryByMode[scope] || [])].slice(0, HISTORY_LIMIT);
+  drawHistoryByMode[scope] = [entry, ...previousEntries].slice(0, HISTORY_LIMIT);
   saveDrawHistory();
   renderDrawHistory();
 }
@@ -449,7 +452,7 @@ function historyTitle(index) {
 
 function renderDrawHistory() {
   if (!drawHistory) return;
-  const entries = [...(drawHistoryByMode[historyScope()] || []).slice(0, HISTORY_LIMIT)].reverse();
+  const entries = [...(drawHistoryByMode[historyScope()] || []).slice(0, HISTORY_LIMIT)];
   if (!entries.length) {
     drawHistory.innerHTML = `<div class="history-empty">抽卡後會在這裡保留最近十場紀錄。</div>`;
     return;
@@ -458,7 +461,7 @@ function renderDrawHistory() {
   drawHistory.innerHTML = entries.map((entry, index) => `
     <article class="history-item">
       <div class="history-item-head">
-        <strong>${historyTitle(index)}</strong>
+        <strong>${historyTitle((Number(entry.roundNumber) || entries.length - index) - 1)}</strong>
         ${entry.variant ? `<span>${entry.variant}</span>` : ""}
       </div>
       <div class="history-card-list">

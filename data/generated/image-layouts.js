@@ -10,8 +10,9 @@ window.DEBATE_IMAGE_LAYOUTS = {
     "role-survival": {
       "scale": 1,
       "x": -120,
-      "y": 0,
-      "rotate": 0
+      "y": -73,
+      "rotate": 0,
+      "overlay": 0.28
     },
     "where-am-i": {
       "scale": 1,
@@ -22,8 +23,9 @@ window.DEBATE_IMAGE_LAYOUTS = {
     "importance-duel": {
       "scale": 1,
       "x": -120,
-      "y": -104,
-      "rotate": 0
+      "y": 1,
+      "rotate": 0,
+      "overlay": 0.28
     },
     "sales-command": {
       "scale": 1,

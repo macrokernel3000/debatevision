@@ -24,7 +24,7 @@ role-survival,回合流程,2,,每位學生準備自己的留下理由
 role-survival,回合流程,3,,每人 45 秒辯護
 role-survival,回合流程,4,,觀眾提問或互相反駁
 role-survival,回合流程,5,,逐輪淘汰直到最後留下者
-importance-duel,玩法描述,1,,直接抽兩張卡牌進行比較。可以切換名人、物品、需求、概念、異境、場地、職業或生物。
+importance-duel,玩法描述,1,,直接抽兩張卡牌進行比較。可以切換不同牌組。
 importance-duel,玩法背景,1,,../assets/backgrounds/modes/importance-duel.png
 importance-duel,教練提示,1,建立標準,你要用什麼標準比較重要性？影響力、實用性、稀缺性、急迫性、創造力、貢獻度？
 importance-duel,教練提示,2,正反互攻,支持 A 的人要指出 B 的限制；支持 B 的人也要反擊 A 的弱點。

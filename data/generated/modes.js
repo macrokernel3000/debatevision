@@ -126,7 +126,7 @@ window.DEBATE_MODES = [
     "drawLabel": "抽出對決卡牌",
     "cardMode": "importanceDuel",
     "fixedCount": 2,
-    "description": "直接抽兩張卡牌進行比較。可以切換名人、物品、需求、概念、異境、場地、職業或生物。",
+    "description": "直接抽兩張卡牌進行比較。可以切換不同牌組。",
     "prompts": [
       [
         "建立標準",
