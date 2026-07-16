@@ -95,6 +95,12 @@ assets/icons/items/item_hammer.svg
 
 ## 修改網站文字
 
+玩法名稱、遊戲選項格右上短句、選項格色系可以直接改：
+
+```text
+data/content/玩法設定.csv
+```
+
 玩法描述、教練提示、回合流程可以直接改：
 
 ```text
@@ -156,6 +162,7 @@ data/modes/新玩法.json
 並且同步新增同一個 `玩法ID` 的文案：
 
 ```text
+data/content/玩法設定.csv
 data/content/玩法文案.csv
 ```
 

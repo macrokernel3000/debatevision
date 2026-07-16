@@ -54,7 +54,9 @@ window.DEBATE_MODES = [
     "cardHooks": [
       "提出 {name} 在這個異境中的一個用途。",
       "比較 {name} 與其他選擇的差異與優缺點"
-    ]
+    ],
+    "menuLabel": "生存 × 對抗",
+    "palette": "red"
   },
   {
     "id": "role-survival",
@@ -91,7 +93,9 @@ window.DEBATE_MODES = [
     "cardHooks": [
       "說明 {name} 的不可替代價值。",
       "說服大家留下 {name}效益最高。"
-    ]
+    ],
+    "menuLabel": "職業 × 辯護",
+    "palette": "teal"
   },
   {
     "id": "importance-duel",
@@ -151,7 +155,9 @@ window.DEBATE_MODES = [
       "建立比較標準，說明 {name} 為什麼更重要。",
       "指出另一張卡牌相較於 {name} 的限制。",
       "如果比較標準改變，說明 {name} 是否仍有優勢。"
-    ]
+    ],
+    "menuLabel": "卡牌 × 比較",
+    "palette": "gold"
   },
   {
     "id": "sales-command",
@@ -198,7 +204,9 @@ window.DEBATE_MODES = [
       "說明 {name} 滿足哪一種需求。",
       "找出最可能購買 {name} 的對象。",
       "包裝一個讓人願意掏錢買 {name} 的故事。"
-    ]
+    ],
+    "menuLabel": "需求 × 故事",
+    "palette": "brown"
   },
   {
     "id": "where-am-i",
@@ -251,7 +259,9 @@ window.DEBATE_MODES = [
       "觀察 {name} 可能透露的環境線索。",
       "設計一個能排除或確認 {name} 的問題。",
       "思考哪些提問能最快縮小到 {name}。"
-    ]
+    ],
+    "menuLabel": "秘密 × 線索",
+    "palette": "purple"
   },
   {
     "id": "metaphor-compass",
@@ -308,11 +318,56 @@ window.DEBATE_MODES = [
     "cardHooks": [
       "定義 {name} 在這句命題中的意思。",
       "替 {name} 找一個具體例子。"
-    ]
+    ],
+    "menuLabel": "比喻 × 命題",
+    "palette": "earth"
+  },
+  {
+    "id": "reality-summon",
+    "order": 7,
+    "title": "現實召喚",
+    "icon": "✦",
+    "tone": "violet",
+    "track": "召喚 × 現實任務",
+    "primaryDeck": "summons",
+    "secondaryDeck": "missions",
+    "primaryLabel": "召喚卡",
+    "secondaryLabel": "任務卡",
+    "drawLabel": "抽出召喚任務",
+    "cardMode": "summonMission",
+    "description": "抽一張現實任務，再召喚角色。學生要把超現實能力轉成合法、可執行、能被質疑也能 defended 的現實方案。",
+    "prompts": [
+      [
+        "現實化",
+        "不要只說能力很強，要說明他在現實制度中怎麼開始行動。"
+      ],
+      [
+        "限制處理",
+        "這個角色最容易被任務卡卡住的弱點是什麼？法律、形象、成本、信任，還是能力限制？"
+      ],
+      [
+        "可辯護方案",
+        "請用一個可被追問的計畫回答：第一步做什麼、找誰合作、如何證明有效。"
+      ]
+    ],
+    "flow": [
+      "抽 1 張任務卡",
+      "抽 1 到 6 張召喚卡",
+      "每位學生選一個角色提出現實方案",
+      "同學追問：是否合法、可行、可持續、是否有更好替代方案",
+      "最後投票：誰最能把能力轉成現實中的成功策略"
+    ],
+    "cardHooks": [
+      "說明 {name} 面對本輪任務時，第一步會怎麼開始。",
+      "指出 {name} 的能力在現實中會遇到哪個限制。",
+      "替 {name} 設計一個合法、可執行、可被檢驗的成功方案。"
+    ],
+    "menuLabel": "召喚 × 任務",
+    "palette": "purple"
   },
   {
     "id": "card-dictionary",
-    "order": 7,
+    "order": 999,
     "title": "卡片字典",
     "icon": "□",
     "tone": "sky",
@@ -345,6 +400,8 @@ window.DEBATE_MODES = [
       "可跨卡池加入或刪除卡牌",
       "按下儲存成這場，形成本局活動卡牌"
     ],
-    "image": "../assets/backgrounds/modes/card-dictionary.png"
+    "image": "../assets/backgrounds/modes/card-dictionary.png",
+    "menuLabel": "卡片 × 組合",
+    "palette": "cyan"
   }
 ];

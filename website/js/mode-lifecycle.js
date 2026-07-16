@@ -34,5 +34,11 @@ window.DEBATE_MODE_LIFECYCLE = {
     active: "學生只能用問題推理答案。",
     result: "逐一公布不是這個或就是這個。",
     restart: "按再來一場，重新輸入秘密編號。"
+  },
+  "reality-summon": {
+    setup: "確認任務卡與召喚卡池。",
+    active: "把召喚角色的能力轉成現實中可執行的方案。",
+    result: "用合法性、可行性、成本與替代方案檢查說服力。",
+    restart: "保留任務重抽角色，或重新抽出一組召喚任務。"
   }
 };

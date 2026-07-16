@@ -6,6 +6,12 @@
 data/content/玩法文案.csv
 ```
 
+網站上的玩法名稱、選項卡右上短句、選項卡色系可以在這裡修改：
+
+```text
+data/content/玩法設定.csv
+```
+
 網站上的通用介面文字可以在這裡修改：
 
 ```text
@@ -26,6 +32,26 @@ data/generated/ui-texts.js
 ```
 
 ## 欄位說明
+
+### 玩法設定
+
+```text
+玩法ID,玩法名稱,選項短句,選項色系
+```
+
+- `玩法ID`：對應玩法，例如 `item-survival`、`importance-duel`。
+- `玩法名稱`：會同步影響最上方玩法選項、玩法大圖標題、遊戲選項格。
+- `選項短句`：遊戲選項格右上角的短句，例如 `生存 × 對抗`。
+- `選項色系`：遊戲選項格顏色，可用 `red`、`teal`、`gold`、`brown`、`purple`、`earth`、`cyan`。
+
+例如：
+
+```text
+item-survival,異境求生,生存 × 對抗,red
+importance-duel,誰更重要,卡牌 × 比較,gold
+```
+
+### 玩法文案
 
 ```text
 玩法ID,欄位,序號,標題,內容

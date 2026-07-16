@@ -6,6 +6,7 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const cardsDir = resolve(root, "data", "cards");
 const modesDir = resolve(root, "data", "modes");
 const modeContentPath = resolve(root, "data", "content", "玩法文案.csv");
+const modeSettingsPath = resolve(root, "data", "content", "玩法設定.csv");
 const uiContentPath = resolve(root, "data", "content", "介面文字.csv");
 const imageLayoutsDir = resolve(root, "data", "image-layouts");
 const generatedDir = resolve(root, "data", "generated");
@@ -56,6 +57,14 @@ const headerAliases = {
   "內容": "content",
   "文字": "content",
   "content": "content",
+  "選項短句": "menu_label",
+  "選單短句": "menu_label",
+  "右上短句": "menu_label",
+  "menu_label": "menu_label",
+  "menuLabel": "menu_label",
+  "選項色系": "palette",
+  "色系": "palette",
+  "palette": "palette",
   "介面文字": "text",
   "text": "text",
   "備註": "note",
@@ -258,7 +267,15 @@ function buildModes() {
     .map((file) => JSON.parse(readFileSync(join(modesDir, file), "utf8")))
     .sort((a, b) => (a.order || 999) - (b.order || 999));
 
-  return applyModeContent(modes);
+  return sortModes(applyModeSettings(applyModeContent(modes)));
+}
+
+function sortModes(modes) {
+  return [...modes].sort((a, b) => {
+    if (a.id === "card-dictionary" && b.id !== "card-dictionary") return 1;
+    if (b.id === "card-dictionary" && a.id !== "card-dictionary") return -1;
+    return (Number(a.order) || 999) - (Number(b.order) || 999);
+  });
 }
 
 function buildImageLayouts() {
@@ -362,6 +379,34 @@ function applyModeContent(modes) {
     if (prompts.length) nextMode.prompts = prompts;
     if (cardHooks.length) nextMode.cardHooks = cardHooks;
     if (flow.length) nextMode.flow = flow;
+
+    return nextMode;
+  });
+}
+
+function applyModeSettings(modes) {
+  if (!existsSync(modeSettingsPath)) return modes;
+
+  const rows = csvObjects(readFileSync(modeSettingsPath, "utf8"));
+  const settingsByMode = new Map();
+  for (const row of rows) {
+    const modeId = (row.mode_id || "").trim();
+    if (!modeId) continue;
+    settingsByMode.set(modeId, row);
+  }
+
+  return modes.map((mode) => {
+    const setting = settingsByMode.get(mode.id);
+    if (!setting) return mode;
+
+    const nextMode = { ...mode };
+    const title = (setting.title || "").trim();
+    const menuLabel = (setting.menu_label || "").trim();
+    const palette = (setting.palette || "").trim();
+
+    if (title) nextMode.title = title;
+    if (menuLabel) nextMode.menuLabel = menuLabel;
+    if (palette) nextMode.palette = palette;
 
     return nextMode;
   });

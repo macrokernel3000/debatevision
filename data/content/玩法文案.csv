@@ -94,3 +94,16 @@ card-dictionary,回合流程,2,,勾選本局想使用的卡片類型
 card-dictionary,回合流程,3,,從各卡池中直接勾選本場卡牌
 card-dictionary,回合流程,4,,可跨卡池加入或刪除卡牌
 card-dictionary,回合流程,5,,按下儲存成這場，形成本局活動卡牌
+reality-summon,玩法描述,1,,抽一張現實任務，再召喚角色。學生要把超現實能力轉成合法、可執行、能被質疑也能 defended 的現實方案。
+reality-summon,按鈕文字,1,,抽出召喚任務
+reality-summon,教練提示,1,現實化,不要只說能力很強，要說明他在現實制度中怎麼開始行動。
+reality-summon,教練提示,2,限制處理,這個角色最容易被任務卡卡住的弱點是什麼？法律、形象、成本、信任，還是能力限制？
+reality-summon,教練提示,3,可辯護方案,請用一個可被追問的計畫回答：第一步做什麼、找誰合作、如何證明有效。
+reality-summon,卡牌任務,1,,說明 {name} 面對本輪任務時，第一步會怎麼開始。
+reality-summon,卡牌任務,2,,指出 {name} 的能力在現實中會遇到哪個限制。
+reality-summon,卡牌任務,3,,替 {name} 設計一個合法、可執行、可被檢驗的成功方案。
+reality-summon,回合流程,1,,抽 1 張任務卡
+reality-summon,回合流程,2,,抽 1 到 6 張召喚卡
+reality-summon,回合流程,3,,每位學生選一個角色提出現實方案
+reality-summon,回合流程,4,,同學追問：是否合法、可行、可持續、是否有更好替代方案
+reality-summon,回合流程,5,,最後投票：誰最能把能力轉成現實中的成功策略

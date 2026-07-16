@@ -137,9 +137,11 @@ const deckDictionary = {
   celebrities: "不同文化、領域與時代的真實人物，適合比較影響力與建立判準。",
   needs: "人們心中的需求與動機，適合銷售、心理洞察與價值連結。",
   concepts: "抽象概念與價值詞，適合隱喻、定義、哲學思考與概念辯護。",
-  relations: "連接兩個詞的關係詞，適合造句、隱喻羅盤與因果比較。"
+  relations: "連接兩個詞的關係詞，適合造句、隱喻羅盤與因果比較。",
+  missions: "現實世界中的具體任務，適合練策略設計、可行性檢查與風險回應。",
+  summons: "被召喚出的角色與身份，適合把特殊能力轉成現實方案並接受質疑。"
 };
-const dictionaryDeckOrder = ["worlds", "creatures", "items", "roles", "locations", "celebrities", "needs", "concepts", "relations"];
+const dictionaryDeckOrder = ["worlds", "creatures", "items", "roles", "locations", "celebrities", "needs", "concepts", "relations", "missions", "summons"];
 
 function readDraftLayouts() {
   if (!EDIT_MODE) return {};
@@ -553,16 +555,22 @@ function pickFromPool(pool, count) {
   return selected;
 }
 
+function modeCardMeta(mode) {
+  return {
+    palette: mode.palette || mode.tone || "cyan",
+    menuLabel: mode.menuLabel || mode.track || ""
+  };
+}
+
 function renderModeButtons() {
   const markup = modes.map((mode) => `
-    <button class="mode-card ${mode.id === activeMode.id ? "is-active" : ""}" data-mode="${mode.id}" data-tone="${mode.tone}" type="button">
+    <button class="mode-card ${mode.id === activeMode.id ? "is-active" : ""}" data-mode="${mode.id}" data-tone="${mode.tone}" data-palette="${modeCardMeta(mode).palette}" type="button">
       <span class="mode-card-top">
         <span class="mode-icon">${mode.icon}</span>
-        <span class="mode-track">${mode.track}</span>
+        <span class="mode-track">${modeCardMeta(mode).menuLabel}</span>
       </span>
       <span class="mode-card-body">
         <strong>${mode.title}</strong>
-        <span>${mode.primaryLabel}${mode.secondaryLabel ? " + " + mode.secondaryLabel : ""}</span>
       </span>
     </button>
   `).join("");
@@ -1855,6 +1863,15 @@ function drawResult() {
     renderSalesPitch(items, needs);
     markDrawn([...items, ...needs]);
     return [...items, ...needs];
+  }
+
+  if (activeMode.cardMode === "summonMission") {
+    const mission = pickFrom(activeSecondaryLibrary, 1)[0];
+    const cards = pickFrom(activeLibrary, count);
+    if (!mission || cards.length < count) return renderPoolWarning();
+    renderCombo(mission, cards, "本輪任務");
+    markDrawn([mission, ...cards]);
+    return [mission, ...cards];
   }
 
   const cards = pickFrom(activeLibrary, count);
