@@ -1,32 +1,34 @@
 玩法ID,欄位,序號,標題,內容
-item-survival,玩法描述,1,,每一個異境都潛藏危機，請告訴眾人，我們該如何脫離險境？
+item-survival,玩法描述,1,,在異境中該如何生存？說服大家或與他人對抗計劃。
 item-survival,玩法背景,1,,../assets/backgrounds/modes/item-survival.png
 item-survival,教練提示,1,環境限制,這個異境最令人擔憂的生存條件是什麼？
-item-survival,教練提示,2,卡牌極限,如果道具或職業能力看似強大，它的限制、代價或替代方案是什麼？
-item-survival,教練提示,3,局部有效,不是每一個道具都能讓我們能完整走到最後，但如果有一個很小卻明確的用途，那也令人讚賞。
+item-survival,教練提示,2,資源分工,請各組說明道具如何搭配職業夥伴。
+item-survival,教練提示,3,局部有效,如果有道具能發揮一個很小卻明確的用途，那也令人讚賞。
 item-survival,卡牌任務,1,,提出 {name} 在這個異境中的一個用途。
 item-survival,卡牌任務,2,,比較 {name} 與其他選擇的差異與優缺點
 item-survival,卡牌任務,,,
-item-survival,回合流程,1,,選擇本局抽道具或職業，再抽 1 個異境
-item-survival,回合流程,2,,思考異境特色及卡牌功能
-item-survival,回合流程,3,,每位學生提出30 秒內容
-item-survival,回合流程,4,,共同討論，分組合作
-role-survival,玩法描述,1,,抽出一個或多個職業，請說服大家自己是最值得留下來的。
+item-survival,回合流程,1,,選擇求生版或對抗版
+item-survival,回合流程,2,,求生版抽 1 個異境，再抽道具或職業
+item-survival,回合流程,3,,對抗版設定組數、每組道具數、每組職業數
+item-survival,回合流程,4,,對抗版所有組別共用同一個異境，但各組拿到不同資源包
+item-survival,回合流程,5,,各組上台說明：我們有哪些道具、有哪些職業夥伴、如何生存
+item-survival,回合流程,6,,同學質疑後投票選出最有說服力的生存方案
+role-survival,玩法描述,1,,請說服大家哪個職業是最值得和我們前往異境的夥伴。
 role-survival,玩法背景,1,,../assets/backgrounds/modes/role-survival.png
-role-survival,教練提示,1,留下理由,你的職業有什麼不可替代價值？
+role-survival,教練提示,1,留下理由,你的職業夥伴有什麼不可替代價值？
 role-survival,教練提示,2,比較標準,觀眾要考量誰更能提高群體存活率。
-role-survival,教練提示,3,,攻擊別人的理由時，要比較必要性、立即性、替代性。
+role-survival,,,,
 role-survival,卡牌任務,1,,說明 {name} 的不可替代價值。
 role-survival,卡牌任務,2,,說服大家留下 {name}效益最高。
 role-survival,卡牌任務,,,
 role-survival,回合流程,1,,抽 1 到 6 個職業
-role-survival,回合流程,2,,每位學生準備自己的留下理由
+role-survival,回合流程,2,,每位職業準備自己的留下理由
 role-survival,回合流程,3,,每人 45 秒辯護
-role-survival,回合流程,4,,觀眾提問或互相反駁
+role-survival,回合流程,4,,互相反駁或提問環節
 role-survival,回合流程,5,,逐輪淘汰直到最後留下者
 importance-duel,玩法描述,1,,直接抽兩張卡牌進行比較。可以切換不同牌組。
 importance-duel,玩法背景,1,,../assets/backgrounds/modes/importance-duel.png
-importance-duel,教練提示,1,建立標準,你要用什麼標準比較重要性？影響力、實用性、稀缺性、急迫性、創造力、貢獻度？
+importance-duel,教練提示,1,建立標準,要用什麼標準比較重要性？影響力、實用性、稀缺性、急迫性、創造力、貢獻度？
 importance-duel,教練提示,2,正反互攻,支持 A 的人要指出 B 的限制；支持 B 的人也要反擊 A 的弱點。
 importance-duel,教練提示,3,重新定義,如果標準改變，結果會不會翻盤？
 importance-duel,卡牌任務,1,,建立比較標準，說明 {name} 為什麼更重要。
@@ -40,16 +42,16 @@ importance-duel,回合流程,5,,觀眾投票：誰的比較標準更合理
 where-am-i,玩法名稱,1,,推理解密
 where-am-i,玩法描述,1,,所有卡片都被編號，請靠是非題推理出關鍵機密。
 where-am-i,玩法背景,1,,../assets/backgrounds/modes/where-am-i.png
-where-am-i,教練提示,1,只能提問,學生不能直接猜答案，必須先問可判斷詞條特徵的問題。
-where-am-i,教練提示,2,教師回覆,教師可以回答：是、不是、不一定、接近了。
+where-am-i,教練提示,1,是非提問,先不急著猜答案，先問五道可判斷特徵的問題。
+where-am-i,教練提示,2,揭秘回覆,揭秘者可以回答：是、不是、不一定、多數時候是⋯⋯
 where-am-i,教練提示,3,最後公布,先輸入秘密編號，再逐一點選候選詞條，公布不是這個或就是這個。
 where-am-i,卡牌任務,1,,觀察 {name} 可能透露的環境線索。
 where-am-i,卡牌任務,2,,設計一個能排除或確認 {name} 的問題。
 where-am-i,卡牌任務,3,,思考哪些提問能最快縮小到 {name}。
 where-am-i,回合流程,1,,選定本局詞庫與候選範圍
 where-am-i,回合流程,2,,輸入秘密編號，必要時勾選顯示編號確認
-where-am-i,回合流程,3,,學生輪流問問題
-where-am-i,回合流程,4,,教師只給有限回答
+where-am-i,回合流程,3,,參與者輪流問問題
+where-am-i,回合流程,4,,揭秘者只給有限回答
 where-am-i,回合流程,5,,累積線索後開放猜測
 where-am-i,回合流程,6,,點選候選詞條公布結果
 sales-command,玩法描述,1,,向我賣出一支筆？快找出需求、產品與故事，把平凡加諸價值，讓他人意識到內在的需求。
@@ -65,18 +67,18 @@ sales-command,回合流程,1,,選擇商品、需求或商品加需求
 sales-command,回合流程,2,,30 秒找出核心需求
 sales-command,回合流程,3,,30 秒決定目標客群
 sales-command,回合流程,4,,45 秒完成銷售提案
-sales-command,回合流程,5,,同學提問：價格、替代品、可信度
-metaphor-compass,玩法描述,1,,先用「人生就像巧克力」練習具體比喻，再進階到「正義導致歡樂」這類抽象命題。
+sales-command,回合流程,5,,參與者提問：價格、替代品、可信度
+metaphor-compass,玩法描述,1,,論述語言關聯性，具體、抽象及自由版可供挑戰。
 metaphor-compass,玩法背景,1,,../assets/backgrounds/modes/metaphor-compass.png
 metaphor-compass,按鈕文字,1,,抽出隱喻命題
-metaphor-compass,教練提示,1,入門比喻,具體版先問：人生和這個後綴詞哪裡像？
-metaphor-compass,教練提示,2,進階命題,抽象版再問：這兩個詞中間的關係為什麼成立？
+metaphor-compass,教練提示,1,入門比喻,具體版：人生和這個後綴詞哪裡像？
+metaphor-compass,教練提示,2,進階命題,抽象版：這兩個詞中間的關係為什麼成立？
 metaphor-compass,教練提示,,,
 metaphor-compass,卡牌任務,1,,定義 {name} 在這句命題中的意思。
 metaphor-compass,卡牌任務,2,,替 {name} 找一個具體例子。
 metaphor-compass,卡牌任務,,,
 metaphor-compass,回合流程,1,,選擇具體版、抽象版或自由版
-metaphor-compass,回合流程,2,,具體版固定「人生」「就像」，只抽物品或動物作為後綴
+metaphor-compass,回合流程,2,,具體版固定「人生就像⋯⋯」，只抽物品或動物作為後綴
 metaphor-compass,回合流程,3,,抽象版抽前綴、關係卡與後綴，組成「A 關係 C」命題
 metaphor-compass,回合流程,4,,自由版前綴與後綴可選任意詞庫，中間維持關係卡
 metaphor-compass,回合流程,5,,30 秒找相似點或定義兩端詞語
@@ -85,8 +87,8 @@ card-dictionary,玩法背景,1,,../assets/backgrounds/modes/card-dictionary.png
 card-dictionary,玩法描述,1,,瀏覽目前所有卡片類型，勾選卡池後直接挑選本場要用的卡，讓老師自由發明活動。
 card-dictionary,按鈕文字,1,,儲存成這場
 card-dictionary,教練提示,1,自由組合,先選幾個卡池，再挑出本場要使用的卡，請學生把這些卡建立一個共同題目。
-card-dictionary,教練提示,2,學生造規則,可以讓學生自己決定：這些卡要用來比較、說故事、推理，還是辯護？
-card-dictionary,教練提示,3,保留彈性,卡片字典不限制玩法，適合臨時暖身、活動測試或讓學生創作新規則。
+card-dictionary,教練提示,2,製造規則,自行決定這些卡要用來比較、說故事、推理，還是辯護？
+card-dictionary,教練提示,3,保留彈性,卡片字典不限制玩法，適合臨時暖身、活動測試或創作新規則。
 card-dictionary,回合流程,1,,在左側清單查看所有卡池
 card-dictionary,回合流程,2,,勾選本局想使用的卡片類型
 card-dictionary,回合流程,3,,從各卡池中直接勾選本場卡牌

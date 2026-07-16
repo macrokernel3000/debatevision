@@ -398,6 +398,11 @@ h1 {
   color: var(--ink);
 }
 
+.field.is-ghost-control {
+  visibility: hidden;
+  pointer-events: none;
+}
+
 .toggle-field,
 .control-note {
   grid-column: 2;
@@ -414,6 +419,24 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+}
+
+.fixed-pools.is-survival-controls {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+
+.survival-control-row,
+.survival-pool-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.survival-control-row {
+  min-height: 48px;
 }
 
 .fixed-pools span {
@@ -463,13 +486,14 @@ h1 {
   border: 1px solid var(--line);
   border-radius: 999px;
   background: #fff;
+  box-shadow: 0 10px 24px rgba(25, 24, 20, 0.06);
 }
 
 .metaphor-variant-tools button {
-  min-height: 30px;
+  min-height: 38px;
   border: 0;
   border-radius: 999px;
-  padding: 0 12px;
+  padding: 0 18px;
   background: transparent;
   color: var(--muted);
   font-weight: 900;
@@ -555,6 +579,40 @@ h1 {
   width: 18px;
   height: 18px;
   accent-color: var(--teal);
+}
+
+.survival-battle-tools {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+}
+
+.survival-number-control {
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding-left: 10px;
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 900;
+}
+
+.survival-number-control input {
+  width: 64px;
+  min-height: 30px;
+  border: 0;
+  border-radius: 999px;
+  padding: 0 8px;
+  background: var(--ink);
+  color: #fff;
+  font: inherit;
+  font-weight: 1000;
+  text-align: center;
 }
 
 .sales-pair {
@@ -782,6 +840,92 @@ h1 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   gap: 14px;
+}
+
+.survival-battle-board {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 16px;
+}
+
+.survival-battle-environment {
+  display: grid;
+  gap: 10px;
+}
+
+.survival-battle-environment .battle-card {
+  max-width: none;
+}
+
+.survival-group-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+.survival-group-card {
+  display: grid;
+  gap: 12px;
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  padding: 14px;
+  background:
+    radial-gradient(circle at 95% 0%, rgba(199, 144, 34, 0.18), transparent 30%),
+    #fff;
+  box-shadow: 0 14px 28px rgba(25, 24, 20, 0.1);
+}
+
+.survival-group-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  border-bottom: 2px solid var(--line);
+  padding-bottom: 8px;
+}
+
+.survival-group-head strong {
+  font-size: 1.35rem;
+}
+
+.survival-group-head span {
+  color: var(--teal);
+  font-size: 0.88rem;
+  font-weight: 900;
+}
+
+.survival-group-section {
+  display: grid;
+  gap: 8px;
+}
+
+.survival-group-section h3 {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.survival-mini-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.survival-resource-pill,
+.survival-mini-list em {
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px 10px;
+  background: #f8f5ef;
+  color: var(--ink);
+  font-size: 0.88rem;
+  font-style: normal;
+  font-weight: 900;
 }
 
 .duel-board {
@@ -1955,13 +2099,11 @@ h1 {
   background: var(--teal);
 }
 
-.floating-timer.is-collapsed .timer-panel,
-.floating-timer.is-hidden .timer-panel {
+.floating-timer.is-collapsed .timer-panel {
   display: none;
 }
 
-.floating-timer.is-collapsed .timer-launcher,
-.floating-timer.is-hidden .timer-launcher {
+.floating-timer.is-collapsed .timer-launcher {
   display: inline-flex;
   align-items: center;
   gap: 8px;

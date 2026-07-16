@@ -23,6 +23,10 @@ let secretRevealed = false;
 let secretAnswerIndex = "";
 let secretShowAnswerNumber = false;
 let salesVariant = "item";
+let survivalVariant = "survival";
+let survivalGroupCount = 3;
+let survivalItemCount = 4;
+let survivalRoleCount = 3;
 let lockEnvironment = false;
 let metaphorVariant = "concrete";
 let metaphorPrefixDeck = "";
@@ -99,6 +103,7 @@ const primaryDeckLabel = document.querySelector("#primaryDeckLabel");
 const secondaryDeckLabel = document.querySelector("#secondaryDeckLabel");
 const fixedPools = document.querySelector("#fixedPools");
 const drawCount = document.querySelector("#drawCount");
+const drawCountField = drawCount.closest(".field");
 const drawButton = document.querySelector("#drawButton");
 const reel = document.querySelector("#reel");
 const cardGrid = document.querySelector("#cardGrid");
@@ -159,16 +164,17 @@ function saveDrawHistory() {
 
 function readTimerState() {
   try {
+    const stored = JSON.parse(window.localStorage.getItem(TIMER_STORAGE_KEY) || "{}");
+    const wasHidden = Boolean(stored.hidden);
     return {
       elapsed: 0,
       running: false,
       startedAt: 0,
-      collapsed: false,
-      hidden: false,
-      ...JSON.parse(window.localStorage.getItem(TIMER_STORAGE_KEY) || "{}")
+      ...stored,
+      collapsed: Boolean(stored.collapsed || wasHidden)
     };
   } catch {
-    return { elapsed: 0, running: false, startedAt: 0, collapsed: false, hidden: false };
+    return { elapsed: 0, running: false, startedAt: 0, collapsed: false };
   }
 }
 
@@ -447,6 +453,11 @@ function historyScope() {
 }
 
 function historyVariantLabel() {
+  if (activeMode.cardMode === "itemEnvironment") {
+    return survivalVariant === "battle"
+      ? `對抗版：${survivalGroupCount} 組`
+      : `求生版：${variantLabel(activeLibrary)}`;
+  }
   if (activeMode.cardMode === "salesPitch") {
     return { item: "商品", need: "需求", combo: "商品 + 需求" }[salesVariant] || "";
   }
@@ -738,9 +749,21 @@ function renderDeckControls() {
   primaryDeckLabel.textContent = activeMode.primaryLabel || "主要詞庫";
   secondaryDeckLabel.textContent = activeMode.secondaryLabel || "第二詞庫";
 
+  const survivalBattleMode = activeMode.cardMode === "itemEnvironment" && survivalVariant === "battle";
+  const survivalMode = activeMode.cardMode === "itemEnvironment";
+  const metaphorMode = activeMode.cardMode === "metaphorCompass";
+  drawCountField.hidden = metaphorMode;
+  drawCountField.classList.toggle("is-ghost-control", survivalBattleMode);
+  drawCountField.setAttribute("aria-hidden", survivalBattleMode ? "true" : "false");
+  controlNote.hidden = metaphorMode;
+  if (survivalBattleMode) {
+    controlNote.textContent = "團隊對抗版：統一異境，可同時抽出多組選項";
+  } else if (!metaphorMode) {
+    controlNote.textContent = uiText("control.note.default");
+  }
   const fixed = activeMode.fixedCount;
   drawCount.value = fixed || Math.min(Math.max(Number(drawCount.value) || 1, 1), 6);
-  drawCount.disabled = Boolean(fixed);
+  drawCount.disabled = Boolean(fixed) || survivalBattleMode;
 
   const primaryTotal = cardsFrom(activeLibrary).length;
   let primaryText = `${decks[activeLibrary]?.label || activeMode.primaryLabel}：${selectedCount(activeLibrary)} / ${primaryTotal} 張可抽`;
@@ -758,8 +781,33 @@ function renderDeckControls() {
       secondaryText = `介係：${decks[activeSecondaryLibrary]?.label || ""}，${selectedCount(activeSecondaryLibrary)} / ${cardsFrom(activeSecondaryLibrary).length} 張可抽`;
     }
   }
+  if (survivalBattleMode) {
+    primaryText = `道具卡：${selectedCount("items")} / ${cardsFrom("items").length} 張可抽`;
+  }
   const suffixText = activeMode.cardMode === "metaphorCompass"
     ? `後綴：${decks[metaphorSuffixDeck]?.label || ""}，${selectedCount(metaphorSuffixDeck)} / ${cardsFrom(metaphorSuffixDeck).length} 張可抽`
+    : "";
+  const survivalRoleText = survivalBattleMode
+    ? `職業卡：${selectedCount("roles")} / ${cardsFrom("roles").length} 張可抽`
+    : "";
+  const survivalVariantTools = activeMode.cardMode === "itemEnvironment"
+    ? `
+      <div class="sales-variant-tools" role="group" aria-label="異境求生版本">
+        <button type="button" class="${survivalVariant === "survival" ? "is-active" : ""}" data-survival-variant="survival">求生版</button>
+        <button type="button" class="${survivalVariant === "battle" ? "is-active" : ""}" data-survival-variant="battle">對抗版</button>
+      </div>
+    `
+    : "";
+  survivalItemCount = Math.min(survivalItemCount, 6);
+  survivalRoleCount = Math.min(survivalRoleCount, 6);
+  const survivalBattleTools = survivalBattleMode
+    ? `
+      <div class="survival-battle-tools" role="group" aria-label="對抗版設定">
+        ${survivalNumberControl("groups", "組數", survivalGroupCount, 1, 8)}
+        ${survivalNumberControl("items", "每組道具", survivalItemCount, 0, 6)}
+        ${survivalNumberControl("roles", "每組職業", survivalRoleCount, 0, 6)}
+      </div>
+    `
     : "";
   const salesTools = activeMode.cardMode === "salesPitch"
     ? `
@@ -771,7 +819,7 @@ function renderDeckControls() {
     `
     : "";
   const primaryVariantDecks = primaryVariantDeckIds();
-  const primaryVariantTools = primaryVariantDecks.length
+  const primaryVariantTools = primaryVariantDecks.length && !survivalBattleMode
     ? `
       <div class="sales-variant-tools" role="group" aria-label="${activeMode.title}抽選類型">
         ${primaryVariantDecks.map((deckId) => `
@@ -782,7 +830,7 @@ function renderDeckControls() {
       </div>
     `
     : "";
-  const environmentLockTool = activeMode.cardMode === "itemEnvironment"
+  const environmentLockTool = activeMode.cardMode === "itemEnvironment" && survivalVariant === "survival"
     ? `
       <label class="environment-lock-toggle">
         <input type="checkbox" data-lock-environment ${lockEnvironment ? "checked" : ""} />
@@ -790,7 +838,7 @@ function renderDeckControls() {
       </label>
     `
     : "";
-  const metaphorLockTool = activeMode.cardMode === "metaphorCompass"
+  const metaphorTool = metaphorMode
     ? `
       <div class="metaphor-variant-tools" role="group" aria-label="隱喻羅盤版本">
         ${["concrete", "abstract", "free"].map((variant) => `
@@ -811,14 +859,45 @@ function renderDeckControls() {
     `
     : "";
 
-  fixedPools.innerHTML = `
+  const poolSummary = `
     <span>${primaryText}</span>
     ${secondaryText ? `<span>${secondaryText}</span>` : ""}
+    ${survivalRoleText ? `<span>${survivalRoleText}</span>` : ""}
     ${suffixText ? `<span>${suffixText}</span>` : ""}
-    ${primaryVariantTools}
-    ${environmentLockTool}
-    ${metaphorLockTool}
-    ${salesTools}
+  `;
+
+  fixedPools.classList.toggle("is-survival-controls", survivalMode);
+  fixedPools.innerHTML = metaphorMode
+    ? `
+      ${metaphorTool}
+      ${poolSummary}
+    `
+    : survivalMode
+      ? `
+        <div class="survival-control-row">
+          ${survivalVariantTools}
+          ${survivalBattleMode ? survivalBattleTools : `${primaryVariantTools}${environmentLockTool}`}
+        </div>
+        <div class="survival-pool-summary">
+          ${poolSummary}
+        </div>
+      `
+    : `
+      ${poolSummary}
+      ${survivalVariantTools}
+      ${primaryVariantTools}
+      ${environmentLockTool}
+      ${survivalBattleTools}
+      ${salesTools}
+    `;
+}
+
+function survivalNumberControl(key, label, value, min, max) {
+  return `
+    <label class="survival-number-control">
+      <span>${label}</span>
+      <input type="number" inputmode="numeric" min="${min}" max="${max}" value="${value}" data-survival-count="${key}" />
+    </label>
   `;
 }
 
@@ -1286,25 +1365,28 @@ function timerSnapshot() {
     elapsed,
     running: timerState.running,
     startedAt: timerState.running ? timerState.startedAt : 0,
-    collapsed: timerState.collapsed,
-    hidden: timerState.hidden
+    collapsed: timerState.collapsed
   };
 }
 
 function formatTimer(ms) {
-  const totalSeconds = Math.floor(ms / 1000);
+  const totalTenths = Math.floor(ms / 100);
+  const tenths = totalTenths % 10;
+  const totalSeconds = Math.floor(totalTenths / 10);
   const hours = Math.floor(totalSeconds / 3600);
   const minutes = Math.floor((totalSeconds % 3600) / 60);
   const seconds = totalSeconds % 60;
-  const pairs = hours > 0 ? [hours, minutes, seconds] : [minutes, seconds];
-  return pairs.map((value) => String(value).padStart(2, "0")).join(":");
+  if (hours > 0) {
+    return `${hours}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}.${tenths}`;
+  }
+  return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}.${tenths}`;
 }
 
 function ensureFloatingTimer() {
   if (document.querySelector("#floatingTimer")) return;
   document.body.insertAdjacentHTML("beforeend", `
     <aside class="floating-timer ${timerState.collapsed ? "is-collapsed" : ""}" id="floatingTimer" aria-label="課堂計時器">
-      <button class="timer-launcher" id="timerLauncher" type="button" aria-label="打開計時器">⏱ <span id="timerLauncherText">00:00</span></button>
+      <button class="timer-launcher" id="timerLauncher" type="button" aria-label="打開計時器">⏱ <span id="timerLauncherText">00:00.0</span></button>
       <div class="timer-panel" id="timerPanel">
         <div class="timer-head">
           <div>
@@ -1313,10 +1395,9 @@ function ensureFloatingTimer() {
           </div>
           <div class="timer-window-actions">
             <button id="timerCollapse" type="button" aria-label="收合計時器">收合</button>
-            <button id="timerHide" type="button" aria-label="關閉計時器">關閉</button>
           </div>
         </div>
-        <div class="timer-display" id="timerDisplay" aria-live="polite">00:00</div>
+        <div class="timer-display" id="timerDisplay" aria-live="polite">00:00.0</div>
         <div class="timer-actions">
           <button id="timerToggle" type="button">開始</button>
           <button id="timerReset" type="button">重設</button>
@@ -1326,20 +1407,12 @@ function ensureFloatingTimer() {
   `);
 
   document.querySelector("#timerLauncher").addEventListener("click", () => {
-    timerState.hidden = false;
     timerState.collapsed = false;
     saveTimerState();
     updateTimerUi();
   });
 
   document.querySelector("#timerCollapse").addEventListener("click", () => {
-    timerState.collapsed = true;
-    saveTimerState();
-    updateTimerUi();
-  });
-
-  document.querySelector("#timerHide").addEventListener("click", () => {
-    timerState.hidden = true;
     timerState.collapsed = true;
     saveTimerState();
     updateTimerUi();
@@ -1380,7 +1453,7 @@ function refreshTimerInterval() {
     timerInterval = null;
   }
   if (!timerState.running) return;
-  timerInterval = window.setInterval(updateTimerUi, 250);
+  timerInterval = window.setInterval(updateTimerUi, 100);
 }
 
 function updateTimerUi() {
@@ -1388,7 +1461,6 @@ function updateTimerUi() {
   if (!timer) return;
   const elapsedText = formatTimer(timerSnapshot().elapsed);
   timer.classList.toggle("is-collapsed", timerState.collapsed);
-  timer.classList.toggle("is-hidden", timerState.hidden);
   timer.classList.toggle("is-running", timerState.running);
   document.querySelector("#timerDisplay").textContent = elapsedText;
   document.querySelector("#timerLauncherText").textContent = elapsedText;
@@ -1411,6 +1483,37 @@ function renderCombo(environment, cards, label) {
     <div class="combo-board">
       <div class="combo-results">
         ${cards.map((card) => cardMarkup(card)).join("")}
+      </div>
+    </div>
+  `;
+}
+
+function renderSurvivalBattle(environment, groups) {
+  currentStageCard = environment;
+  renderReelCard(environment);
+  cardGrid.innerHTML = `
+    <div class="survival-battle-board">
+      <div class="survival-group-grid">
+        ${groups.map((group) => `
+          <section class="survival-group-card">
+            <div class="survival-group-head">
+              <strong>第 ${group.index} 組</strong>
+              <span>${group.items.length} 道具 · ${group.roles.length} 夥伴</span>
+            </div>
+            <div class="survival-group-section">
+              <h3>道具</h3>
+              <div class="survival-mini-list">
+                ${group.items.map((card) => `<span class="survival-resource-pill">${tokenIconMarkup(card)}${card.name}</span>`).join("") || "<em>沒有道具</em>"}
+              </div>
+            </div>
+            <div class="survival-group-section">
+              <h3>夥伴</h3>
+              <div class="survival-mini-list">
+                ${group.roles.map((card) => `<span class="survival-resource-pill">${tokenIconMarkup(card)}${card.name}</span>`).join("") || "<em>沒有職業</em>"}
+              </div>
+            </div>
+          </section>
+        `).join("")}
       </div>
     </div>
   `;
@@ -1665,6 +1768,24 @@ function drawResult() {
   const count = activeMode.fixedCount || Math.max(1, Math.min(6, Number(drawCount.value) || 1));
 
   if (activeMode.cardMode === "itemEnvironment") {
+    if (survivalVariant === "battle") {
+      const environment = pickFrom(activeSecondaryLibrary, 1)[0];
+      const itemPool = selectedCardsFrom("items");
+      const rolePool = selectedCardsFrom("roles");
+      const itemNeed = survivalGroupCount * survivalItemCount;
+      const roleNeed = survivalGroupCount * survivalRoleCount;
+      if (!environment || itemPool.length < itemNeed || rolePool.length < roleNeed) return renderPoolWarning();
+      const groups = Array.from({ length: survivalGroupCount }, (_, index) => ({
+        index: index + 1,
+        items: pickFromPool(itemPool, survivalItemCount),
+        roles: pickFromPool(rolePool, survivalRoleCount)
+      }));
+      const drawnCards = [environment, ...groups.flatMap((group) => [...group.items, ...group.roles])];
+      renderSurvivalBattle(environment, groups);
+      markDrawn(drawnCards);
+      return drawnCards;
+    }
+
     const lockedEnvironment = lockEnvironment && currentStageCard?.deckId === activeSecondaryLibrary
       ? currentStageCard
       : null;
@@ -1824,6 +1945,10 @@ function setMode(modeId) {
   secretAnswerIndex = "";
   secretShowAnswerNumber = false;
   salesVariant = "item";
+  survivalVariant = "survival";
+  survivalGroupCount = 3;
+  survivalItemCount = 4;
+  survivalRoleCount = 3;
   lockEnvironment = false;
   metaphorVariant = "concrete";
   metaphorPrefixDeck = "";
@@ -1876,6 +2001,18 @@ libraryTools.addEventListener("click", (event) => {
 });
 
 fixedPools.addEventListener("click", (event) => {
+  const survivalVariantButton = event.target.closest("[data-survival-variant]");
+  if (survivalVariantButton) {
+    survivalVariant = survivalVariantButton.dataset.survivalVariant;
+    activeLibrary = survivalVariant === "battle" ? "items" : activeLibrary;
+    activePreview = survivalVariant === "battle" ? "items" : activePreview;
+    lockEnvironment = false;
+    currentStageCard = null;
+    renderAll();
+    renderEmptyState();
+    return;
+  }
+
   const metaphorVariantButton = event.target.closest("[data-metaphor-variant]");
   if (metaphorVariantButton) {
     metaphorVariant = metaphorVariantButton.dataset.metaphorVariant;
@@ -1900,7 +2037,30 @@ fixedPools.addEventListener("click", (event) => {
   renderAll();
 });
 
+function handleSurvivalCountInput(event) {
+  const survivalCountInput = event.target.closest("[data-survival-count]");
+  if (!survivalCountInput) return false;
+  const key = survivalCountInput.dataset.survivalCount;
+  const min = Number(survivalCountInput.min) || 0;
+  const max = Number(survivalCountInput.max) || 8;
+  const value = Math.max(min, Math.min(max, Number(survivalCountInput.value) || min));
+  if (key === "groups") survivalGroupCount = value;
+  if (key === "items") survivalItemCount = value;
+  if (key === "roles") survivalRoleCount = value;
+  return true;
+}
+
+fixedPools.addEventListener("input", (event) => {
+  if (!handleSurvivalCountInput(event)) return;
+  renderDeckControls();
+});
+
 fixedPools.addEventListener("change", (event) => {
+  if (handleSurvivalCountInput(event)) {
+    renderAll();
+    return;
+  }
+
   const metaphorDeckSelect = event.target.closest("[data-metaphor-deck]");
   if (metaphorDeckSelect) {
     const part = metaphorDeckSelect.dataset.metaphorDeck;
