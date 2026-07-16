@@ -45,18 +45,8 @@
         </div>
       </header>
 
-      <nav class="game-nav" id="gameNav" aria-label="選擇玩法"></nav>
-
       <section class="stage-panel" aria-labelledby="app-title">
-        <div class="scene-select" aria-label="選擇活動場景">
-          <div class="scene-preview" id="scenePreview">
-            <span class="scene-badge" id="sceneBadge">環境 × 物品</span>
-            <div class="scene-emblem" id="sceneEmblem">◆</div>
-            <h2 id="sceneTitle">殭屍末日</h2>
-            <p id="sceneDescription">選擇玩法後抽出本輪組合，讓學生用提問、比較和說服完成挑戰。</p>
-          </div>
-          <div class="scene-track" id="modeGrid"></div>
-        </div>
+        <div class="scene-track" id="modeGrid" aria-label="選擇活動"></div>
       </section>
 
       <section class="card-dictionary-panel" aria-label="卡片字典">
@@ -102,7 +92,7 @@
             <div class="reel-scene-copy">
               <span>異境卡</span>
               <strong>準備抽卡</strong>
-              <small>抽出後，這裡會顯示本輪異境。</small>
+              <small>抽出後，這裡會顯示本輪結果。</small>
             </div>
           </div>
           <button class="primary-action" id="drawButton" type="button">抽出求生組合</button>
@@ -125,18 +115,6 @@
           <h2>最近十場</h2>
         </div>
         <div class="draw-history" id="drawHistory"></div>
-      </section>
-
-      <section class="coach-panel" aria-label="教練提示">
-        <div class="section-head">
-          <p class="eyebrow" data-ui-text="section.coach.eyebrow">Coach Kit</p>
-          <h2 data-ui-text="section.coach.title">教練提示</h2>
-        </div>
-        <div id="promptList" class="prompt-list"></div>
-        <div class="round-box">
-          <h3 data-ui-text="section.flow.title">回合流程</h3>
-          <ol id="roundFlow"></ol>
-        </div>
       </section>
 
       <section class="library-band" aria-label="詞庫預覽">

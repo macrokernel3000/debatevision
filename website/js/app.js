@@ -55,7 +55,8 @@ const defaultUiTexts = {
   "label.drawCount": "抽取數量",
   "control.note.default": "牌組已依玩法固定；下方抽選池可取消本局不想抽到的卡。",
   "reel.ready.title": "準備抽卡",
-  "reel.ready.subtitle": "抽出後，這裡會顯示本輪異境。",
+  "reel.ready.subtitle": "抽出後，這裡會顯示本輪結果。",
+  "reel.ready.subtitle.environment": "抽出後，這裡會顯示本輪異境。",
   "empty.default": "{drawLabel}。<br />下方抽選池可以控制本局哪些卡會被抽到。",
   "warning.pool": "本局抽選池不夠了。<br />請在下方抽選池重新勾選卡牌，或按「重置本玩法」。",
   "secret.result.eyebrow": "答案公布",
@@ -89,7 +90,6 @@ function renderStaticUiText() {
   });
 }
 
-const gameNav = document.querySelector("#gameNav");
 const modeGrid = document.querySelector("#modeGrid");
 const playArea = document.querySelector(".play-area");
 const controlBand = document.querySelector(".control-band");
@@ -587,9 +587,23 @@ function modeCardMeta(mode) {
   };
 }
 
+function modeCardStyle(mode) {
+  const image = mode.image || mode.backgroundImage || "";
+  if (!image) return "";
+  const resolvedImage = (() => {
+    try {
+      return new URL(image, document.baseURI).href;
+    } catch {
+      return image;
+    }
+  })();
+  const safeImage = resolvedImage.replace(/"/g, "%22").replace(/\)/g, "%29");
+  return ` style="--mode-card-image: url(&quot;${safeImage}&quot;)"`;
+}
+
 function renderModeButtons() {
   const markup = modes.map((mode) => `
-    <button class="mode-card ${mode.id === activeMode.id ? "is-active" : ""}" data-mode="${mode.id}" data-tone="${mode.tone}" data-palette="${modeCardMeta(mode).palette}" type="button">
+    <button class="mode-card ${mode.id === activeMode.id ? "is-active" : ""}" data-mode="${mode.id}" data-tone="${mode.tone}" data-palette="${modeCardMeta(mode).palette}" type="button"${modeCardStyle(mode)}>
       <span class="mode-card-top">
         <span class="mode-icon">${mode.icon}</span>
         <span class="mode-track">${modeCardMeta(mode).menuLabel}</span>
@@ -601,44 +615,40 @@ function renderModeButtons() {
   `).join("");
 
   modeGrid.innerHTML = markup;
-  gameNav.innerHTML = modes.map((mode) => `
-    <button class="nav-item ${mode.id === activeMode.id ? "is-active" : ""}" data-mode="${mode.id}" type="button">
-      <span>${mode.icon}</span>
-      ${mode.title}
-    </button>
-  `).join("");
 }
 
 function renderActivity() {
-  scenePreview.dataset.tone = activeMode.tone;
-  const modeImage = activeMode.image || activeMode.backgroundImage || "";
-  scenePreview.classList.toggle("has-mode-image", Boolean(modeImage));
-  const currentImage = scenePreview.querySelector(".scene-preview-image");
-  const modeTarget = editTargetForMode(activeMode);
-  const modeStyle = imageStyleForTarget(modeTarget);
-  scenePreview.setAttribute("style", modeStyle);
-  scenePreview.dataset.editGroup = modeTarget.group;
-  scenePreview.dataset.editId = modeTarget.id;
-  scenePreview.dataset.editName = modeTarget.name;
-  const modeImageAttributes = `style="${modeStyle}" data-edit-group="${modeTarget.group}" data-edit-id="${modeTarget.id}" data-edit-name="${modeTarget.name}"`;
-  if (modeImage) {
-    if (currentImage) {
-      currentImage.src = modeImage;
-      currentImage.alt = `${activeMode.title} 玩法背景`;
-      currentImage.setAttribute("style", modeStyle);
-      currentImage.dataset.editGroup = modeTarget.group;
-      currentImage.dataset.editId = modeTarget.id;
-      currentImage.dataset.editName = modeTarget.name;
+  if (scenePreview) {
+    scenePreview.dataset.tone = activeMode.tone;
+    const modeImage = activeMode.image || activeMode.backgroundImage || "";
+    scenePreview.classList.toggle("has-mode-image", Boolean(modeImage));
+    const currentImage = scenePreview.querySelector(".scene-preview-image");
+    const modeTarget = editTargetForMode(activeMode);
+    const modeStyle = imageStyleForTarget(modeTarget);
+    scenePreview.setAttribute("style", modeStyle);
+    scenePreview.dataset.editGroup = modeTarget.group;
+    scenePreview.dataset.editId = modeTarget.id;
+    scenePreview.dataset.editName = modeTarget.name;
+    const modeImageAttributes = `style="${modeStyle}" data-edit-group="${modeTarget.group}" data-edit-id="${modeTarget.id}" data-edit-name="${modeTarget.name}"`;
+    if (modeImage) {
+      if (currentImage) {
+        currentImage.src = modeImage;
+        currentImage.alt = `${activeMode.title} 玩法背景`;
+        currentImage.setAttribute("style", modeStyle);
+        currentImage.dataset.editGroup = modeTarget.group;
+        currentImage.dataset.editId = modeTarget.id;
+        currentImage.dataset.editName = modeTarget.name;
+      } else {
+        scenePreview.insertAdjacentHTML("afterbegin", `<img class="scene-preview-image" src="${modeImage}" alt="${activeMode.title} 玩法背景" ${modeImageAttributes} />`);
+      }
     } else {
-      scenePreview.insertAdjacentHTML("afterbegin", `<img class="scene-preview-image" src="${modeImage}" alt="${activeMode.title} 玩法背景" ${modeImageAttributes} />`);
+      currentImage?.remove();
     }
-  } else {
-    currentImage?.remove();
+    sceneEmblem.textContent = activeMode.icon;
+    sceneBadge.textContent = activeMode.track;
+    sceneTitle.textContent = activeMode.title;
+    sceneDescription.textContent = activeMode.description;
   }
-  sceneEmblem.textContent = activeMode.icon;
-  sceneBadge.textContent = activeMode.track;
-  sceneTitle.textContent = activeMode.title;
-  sceneDescription.textContent = activeMode.description;
   drawButton.textContent = activeMode.drawLabel;
   const dictionaryMode = activeMode.cardMode === "cardDictionary";
   controlBand.hidden = activeMode.cardMode === "secretPlace" || dictionaryMode;
@@ -654,9 +664,14 @@ function sceneImageFor(card) {
   return card?.image || card?.iconAsset || "";
 }
 
+function readyReelSubtitle() {
+  if (activeMode.cardMode === "itemEnvironment") return uiText("reel.ready.subtitle.environment");
+  return uiText("reel.ready.subtitle");
+}
+
 function renderReelCard(card = currentStageCard, spinningName = "") {
   const title = spinningName || card?.name || uiText("reel.ready.title");
-  const subtitle = card?.lore || uiText("reel.ready.subtitle");
+  const subtitle = card?.lore || readyReelSubtitle();
   const image = sceneImageFor(card);
   const target = editTargetForCard(card);
   const reelStyle = target ? imageStyleForTarget(target) : "";
@@ -788,11 +803,11 @@ function renderDeckControls() {
   drawCountField.hidden = metaphorMode;
   drawCountField.classList.toggle("is-ghost-control", survivalBattleMode);
   drawCountField.setAttribute("aria-hidden", survivalBattleMode ? "true" : "false");
-  controlNote.hidden = metaphorMode;
+  controlNote.hidden = false;
   if (survivalBattleMode) {
     controlNote.textContent = "團隊對抗版：統一異境，可同時抽出多組選項";
-  } else if (!metaphorMode) {
-    controlNote.textContent = uiText("control.note.default");
+  } else {
+    controlNote.textContent = activeMode.controlRule || uiText("control.note.default");
   }
   const fixed = activeMode.fixedCount;
   drawCount.value = fixed || Math.min(Math.max(Number(drawCount.value) || 1, 1), 6);
@@ -969,6 +984,7 @@ function metaphorLockMarkup(part, label) {
 }
 
 function renderPrompts() {
+  if (!promptList || !roundFlow) return;
   promptList.innerHTML = activeMode.prompts.map(([title, body]) => `
     <div class="prompt-item"><strong>${title}</strong><span>${body}</span></div>
   `).join("");
@@ -2049,7 +2065,6 @@ function handleModeClick(event) {
 }
 
 modeGrid.addEventListener("click", handleModeClick);
-gameNav.addEventListener("click", handleModeClick);
 drawButton.addEventListener("click", spinDraw);
 
 libraryTools.addEventListener("click", (event) => {
@@ -2237,18 +2252,20 @@ cardGrid.addEventListener("click", (event) => {
   if (card?.imageId) selectEditCard(card);
 });
 
-scenePreview.addEventListener("click", (event) => {
-  if (!EDIT_MODE) return;
-  const image = scenePreview.querySelector(".scene-preview-image[data-edit-group]");
-  if (!image) return;
-  selectEditTarget({
-    group: image.dataset.editGroup,
-    id: image.dataset.editId,
-    name: image.dataset.editName,
-    label: "活動大圖",
-    cardKey: ""
+if (scenePreview) {
+  scenePreview.addEventListener("click", (event) => {
+    if (!EDIT_MODE) return;
+    const image = scenePreview.querySelector(".scene-preview-image[data-edit-group]");
+    if (!image) return;
+    selectEditTarget({
+      group: image.dataset.editGroup,
+      id: image.dataset.editId,
+      name: image.dataset.editName,
+      label: "活動大圖",
+      cardKey: ""
+    });
   });
-});
+}
 
 reel.addEventListener("click", (event) => {
   if (!EDIT_MODE) return;

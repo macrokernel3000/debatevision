@@ -50,6 +50,7 @@ window.DEBATE_MODES = [
       "各組上台說明：我們有哪些道具、有哪些職業夥伴、如何生存",
       "同學質疑後投票選出最有說服力的生存方案"
     ],
+    "controlRule": "抽出一個異境，再抽道具或職業，說明如何生存、合作或對抗。",
     "image": "../assets/backgrounds/modes/item-survival.png",
     "cardHooks": [
       "請說明「{name}」在異境「{異境}」中，可以如何創造生存優勢。",
@@ -89,6 +90,7 @@ window.DEBATE_MODES = [
       "互相反駁或提問環節",
       "逐輪淘汰直到最後留下者"
     ],
+    "controlRule": "抽出職業身份，為自己或隊友提出最值得留下的理由。",
     "image": "../assets/backgrounds/modes/role-survival.png",
     "cardHooks": [
       "說明 {name} 的不可替代價值。",
@@ -150,6 +152,7 @@ window.DEBATE_MODES = [
       "互相質疑一次",
       "觀眾投票：誰的比較標準更合理"
     ],
+    "controlRule": "抽出兩張或多張卡牌，建立比較標準，說服大家誰更重要。",
     "image": "../assets/backgrounds/modes/importance-duel.png",
     "cardHooks": [
       "建立比較標準，說明 {name} 為什麼更重要。",
@@ -199,6 +202,7 @@ window.DEBATE_MODES = [
       "45 秒完成銷售提案",
       "參與者提問：價格、替代品、可信度"
     ],
+    "controlRule": "抽出商品與需求，找出目標對象，包裝成一個有說服力的銷售故事。",
     "image": "../assets/backgrounds/modes/sales-command.png",
     "cardHooks": [
       "說明 {name} 滿足哪一種需求。",
@@ -255,6 +259,7 @@ window.DEBATE_MODES = [
       "累積線索後開放猜測",
       "點選候選詞條公布結果"
     ],
+    "controlRule": "先秘密選定答案，再讓學生用問題逐步縮小範圍並推理答案。",
     "cardHooks": [
       "觀察 {name} 可能透露的環境線索。",
       "設計一個能排除或確認 {name} 的問題。",
@@ -314,6 +319,7 @@ window.DEBATE_MODES = [
       "30 秒找相似點或定義兩端詞語",
       "可鎖定前綴、介係或後綴，再重抽其他位置練習變化"
     ],
+    "controlRule": "抽出詞語與關係，組成一句命題，解釋為什麼這個關係可以成立。",
     "image": "../assets/backgrounds/modes/metaphor-compass.png",
     "cardHooks": [
       "定義 {name} 在這句命題中的意思。",
@@ -352,6 +358,7 @@ window.DEBATE_MODES = [
       "誰最能把能力轉成現實中的成功策略"
     ],
     "image": "../assets/backgrounds/modes/reality-summon.png",
+    "controlRule": "抽出角色與任務，說明角色在現實世界中如何完成挑戰。",
     "cardHooks": [
       "請說明「{角色}」在任務「{任務}」時該怎麼做。",
       "別忘了「{角色}」是在現實世界中完成「{任務}」。"

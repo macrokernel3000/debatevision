@@ -307,6 +307,10 @@ function fieldKey(value) {
     "玩法描述": "description",
     "說明": "description",
     "description": "description",
+    "活動規則": "controlRule",
+    "一句規則": "controlRule",
+    "中間提示": "controlRule",
+    "controlRule": "controlRule",
     "按鈕文字": "drawLabel",
     "抽卡按鈕": "drawLabel",
     "drawLabel": "drawLabel",
@@ -359,7 +363,7 @@ function applyModeContent(modes) {
       const title = (row.title || "").trim();
       if (!content && !title) continue;
 
-      if (["title", "track", "description", "drawLabel", "image", "backgroundImage"].includes(field)) {
+      if (["title", "track", "description", "controlRule", "drawLabel", "image", "backgroundImage"].includes(field)) {
         nextMode[field] = content || title;
       }
 
