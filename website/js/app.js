@@ -96,6 +96,10 @@ const drawButton = document.querySelector("#drawButton");
 const reel = document.querySelector("#reel");
 const cardGrid = document.querySelector("#cardGrid");
 const drawHistory = document.querySelector("#drawHistory");
+const cardDictionary = document.querySelector("#cardDictionary");
+const drawDictionaryCards = document.querySelector("#drawDictionaryCards");
+const clearDictionaryDecks = document.querySelector("#clearDictionaryDecks");
+const dictionaryResult = document.querySelector("#dictionaryResult");
 const promptList = document.querySelector("#promptList");
 const roundFlow = document.querySelector("#roundFlow");
 const libraryTools = document.querySelector("#libraryTools");
@@ -109,6 +113,19 @@ const sceneBadge = document.querySelector("#sceneBadge");
 const sceneTitle = document.querySelector("#sceneTitle");
 const sceneDescription = document.querySelector("#sceneDescription");
 const controlNote = document.querySelector("#controlNote");
+const dictionaryDeckSelections = new Set();
+const deckDictionary = {
+  worlds: "特殊的世界觀，適合發揮想像力，需要臨機應變與危機判斷。",
+  creatures: "我們的好朋友或者小生命，適合比較特色、建立觀察角度與討論生命關係。",
+  items: "具體可操作的道具與物件，適合練用途發想、銷售包裝與生存策略。",
+  roles: "不同身份與職業，適合練自我辯護、價值比較與團隊分工。",
+  locations: "各種可能所在位置，適合推理、提問、排除法與情境觀察。",
+  celebrities: "不同文化、領域與時代的真實人物，適合比較影響力與建立判準。",
+  needs: "人們心中的需求與動機，適合銷售、心理洞察與價值連結。",
+  concepts: "抽象概念與價值詞，適合隱喻、定義、哲學思考與概念辯護。",
+  relations: "連接兩個詞的關係詞，適合造句、隱喻羅盤與因果比較。"
+};
+const dictionaryDeckOrder = ["worlds", "creatures", "items", "roles", "locations", "celebrities", "needs", "concepts", "relations"];
 
 function readDraftLayouts() {
   if (!EDIT_MODE) return {};
@@ -744,6 +761,80 @@ function renderTokenCloud() {
       </section>
     `;
   }).join("");
+}
+
+function dictionaryDeckIds() {
+  return [
+    ...dictionaryDeckOrder.filter((deckId) => decks[deckId]),
+    ...Object.keys(decks).filter((deckId) => !dictionaryDeckOrder.includes(deckId))
+  ];
+}
+
+function dictionaryDescription(deckId) {
+  return deckDictionary[deckId] || `${decks[deckId]?.label || deckId} 詞庫，可用來自行組合臨時活動。`;
+}
+
+function renderCardDictionary() {
+  if (!cardDictionary) return;
+  cardDictionary.innerHTML = dictionaryDeckIds().map((deckId) => {
+    const deck = decks[deckId];
+    const checked = dictionaryDeckSelections.has(deckId);
+    return `
+      <label class="dictionary-card ${checked ? "is-selected" : ""}">
+        <input type="checkbox" data-dictionary-deck="${deckId}" ${checked ? "checked" : ""} />
+        <span class="dictionary-icon">${deck.icon || "□"}</span>
+        <span class="dictionary-copy">
+          <strong>${deck.label}</strong>
+          <span>${deck.cards.length} 張卡</span>
+          <small>${dictionaryDescription(deckId)}</small>
+        </span>
+      </label>
+    `;
+  }).join("");
+}
+
+function dictionaryHooks(card) {
+  return [
+    `把「${card.name}」和其他抽出的卡建立一個活動題目。`,
+    `說明「${card.name}」最值得討論的一個特色。`,
+    "請學生提出一個例子、用途、比較標準或反例。"
+  ];
+}
+
+function dictionaryNormalizeCard(raw, deckId) {
+  return {
+    ...normalizeCard(raw, deckId),
+    hooks: dictionaryHooks({ name: raw.name })
+  };
+}
+
+function renderDictionaryResult(cards = []) {
+  if (!dictionaryResult) return;
+  if (!cards.length) {
+    dictionaryResult.innerHTML = `<div class="dictionary-empty">請先在上方勾選至少一種卡片類型。</div>`;
+    return;
+  }
+
+  dictionaryResult.innerHTML = `
+    <div class="dictionary-result-head">
+      <strong>自由組合</strong>
+      <span>${cards.map((card) => card.deckLabel).join(" × ")}</span>
+    </div>
+    <div class="dictionary-result-grid">
+      ${cards.map((card) => cardMarkup(card, "dictionary-drawn-card")).join("")}
+    </div>
+  `;
+}
+
+function drawFromDictionary() {
+  const cards = [...dictionaryDeckSelections]
+    .map((deckId) => {
+      const pool = cardsFrom(deckId);
+      const rawCard = pool[Math.floor(Math.random() * pool.length)];
+      return rawCard ? dictionaryNormalizeCard(rawCard, deckId) : null;
+    })
+    .filter(Boolean);
+  renderDictionaryResult(cards);
 }
 
 function tokenMarkup(card, checked) {
@@ -1405,6 +1496,7 @@ function renderAll() {
   renderLibraryTools();
   renderTokenCloud();
   renderDrawHistory();
+  renderCardDictionary();
   if (!isDrawing) renderReelCard();
 }
 
@@ -1499,6 +1591,22 @@ tokenCloud.addEventListener("click", (event) => {
   resetSecretPlaceState();
   renderAll();
   refreshSecretPlaceBoard();
+});
+
+cardDictionary?.addEventListener("change", (event) => {
+  const checkbox = event.target.closest("[data-dictionary-deck]");
+  if (!checkbox) return;
+  if (checkbox.checked) dictionaryDeckSelections.add(checkbox.dataset.dictionaryDeck);
+  else dictionaryDeckSelections.delete(checkbox.dataset.dictionaryDeck);
+  renderCardDictionary();
+});
+
+drawDictionaryCards?.addEventListener("click", drawFromDictionary);
+
+clearDictionaryDecks?.addEventListener("click", () => {
+  dictionaryDeckSelections.clear();
+  renderCardDictionary();
+  renderDictionaryResult([]);
 });
 
 cardGrid.addEventListener("click", (event) => {

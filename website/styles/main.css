@@ -350,7 +350,8 @@ h1 {
 
 .control-band,
 .library-band,
-.play-area {
+.play-area,
+.card-dictionary-panel {
   margin-top: 18px;
 }
 
@@ -1272,6 +1273,155 @@ h1 {
   margin-top: 8px;
 }
 
+.card-dictionary-panel {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.dictionary-intro {
+  max-width: 48em;
+  margin-bottom: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+  font-weight: 700;
+}
+
+.dictionary-strip {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 2px 0 12px;
+  scroll-snap-type: x proximity;
+}
+
+.dictionary-card {
+  flex: 0 0 min(300px, 82vw);
+  min-height: 152px;
+  display: grid;
+  grid-template-columns: 54px 1fr;
+  gap: 12px;
+  align-items: start;
+  border: 2px solid var(--line);
+  border-radius: 8px;
+  padding: 14px;
+  background: #fff;
+  cursor: pointer;
+  scroll-snap-align: start;
+  box-shadow: 0 10px 22px rgba(25, 24, 20, 0.08);
+}
+
+.dictionary-card.is-selected {
+  border-color: var(--teal);
+  background: linear-gradient(135deg, rgba(17, 122, 115, 0.08), #fff);
+}
+
+.dictionary-card input {
+  width: 22px;
+  height: 22px;
+  accent-color: var(--teal);
+  align-self: center;
+  justify-self: center;
+}
+
+.dictionary-icon {
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: #f6efe2;
+  color: var(--ink);
+  font-size: 1.45rem;
+  font-weight: 1000;
+}
+
+.dictionary-copy {
+  display: grid;
+  gap: 5px;
+}
+
+.dictionary-copy strong {
+  font-size: 1.15rem;
+}
+
+.dictionary-copy span {
+  color: var(--teal);
+  font-size: 0.88rem;
+  font-weight: 900;
+}
+
+.dictionary-copy small {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.dictionary-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 4px 0 14px;
+}
+
+.dictionary-actions button {
+  min-height: 38px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0 14px;
+  background: #fff;
+  color: var(--ink);
+  font-size: 0.9rem;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.dictionary-actions button:first-child {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: #fff;
+}
+
+.dictionary-result {
+  display: grid;
+  gap: 12px;
+}
+
+.dictionary-empty {
+  min-height: 84px;
+  display: grid;
+  place-items: center;
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  color: var(--muted);
+  text-align: center;
+  font-weight: 800;
+}
+
+.dictionary-result-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+  border-left: 5px solid var(--gold);
+  border-radius: 6px;
+  padding: 12px 14px;
+  background: #fff;
+  font-weight: 900;
+}
+
+.dictionary-result-head span {
+  color: var(--muted);
+}
+
+.dictionary-result-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 14px;
+}
+
 .library-tools {
   display: flex;
   flex-wrap: wrap;
@@ -1625,6 +1775,7 @@ h1 {
   .scene-preview,
   .cards-zone,
   .coach-panel,
+  .card-dictionary-panel,
   .library-band {
     padding: 18px;
   }
