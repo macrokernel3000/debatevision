@@ -119,6 +119,8 @@ data/content/介面文字.csv
 網站更新.command
 ```
 
+`網站更新.command` 也會嘗試將活動背景大圖轉成 WebP，網站會優先讀取較小的 `.webp` 圖片，讓手機首次載入更快；原始 PNG 會保留。
+
 詳細說明見：
 
 ```text

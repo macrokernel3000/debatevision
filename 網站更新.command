@@ -4,6 +4,12 @@ cd "$(dirname "$0")"
 URL="http://127.0.0.1:5178/website/"
 
 echo "正在更新辯語思界網站資料..."
+CODEX_PYTHON="/Users/herry/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3"
+if [ -x "$CODEX_PYTHON" ] && [ -f "./scripts/optimize-images.py" ]; then
+  echo "正在最佳化大圖..."
+  "$CODEX_PYTHON" ./scripts/optimize-images.py
+fi
+
 /usr/bin/env node ./scripts/build-lexicons.mjs
 
 echo ""

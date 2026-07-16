@@ -51,7 +51,7 @@ window.DEBATE_MODES = [
       "同學質疑後投票選出最有說服力的生存方案"
     ],
     "controlRule": "抽出一個異境，再抽道具或職業，說明如何生存、合作或對抗。",
-    "image": "../assets/backgrounds/modes/item-survival.png",
+    "image": "../assets/backgrounds/modes/item-survival.webp",
     "cardHooks": [
       "請說明「{name}」在異境「{異境}」中，可以如何創造生存優勢。",
       "比較「{name}」和其他選項，為什麼它在「{異境}」中值得保留？"
@@ -91,7 +91,7 @@ window.DEBATE_MODES = [
       "逐輪淘汰直到最後留下者"
     ],
     "controlRule": "抽出職業身份，為自己或隊友提出最值得留下的理由。",
-    "image": "../assets/backgrounds/modes/role-survival.png",
+    "image": "../assets/backgrounds/modes/role-survival.webp",
     "cardHooks": [
       "說明 {name} 的不可替代價值。",
       "說服大家留下 {name}效益最高。"
@@ -153,7 +153,7 @@ window.DEBATE_MODES = [
       "觀眾投票：誰的比較標準更合理"
     ],
     "controlRule": "抽出兩張或多張卡牌，建立比較標準，說服大家誰更重要。",
-    "image": "../assets/backgrounds/modes/importance-duel.png",
+    "image": "../assets/backgrounds/modes/importance-duel.webp",
     "cardHooks": [
       "建立比較標準，說明 {name} 為什麼更重要。",
       "指出另一張卡牌相較於 {name} 的限制。",
@@ -203,7 +203,7 @@ window.DEBATE_MODES = [
       "參與者提問：價格、替代品、可信度"
     ],
     "controlRule": "抽出商品與需求，找出目標對象，包裝成一個有說服力的銷售故事。",
-    "image": "../assets/backgrounds/modes/sales-command.png",
+    "image": "../assets/backgrounds/modes/sales-command.webp",
     "cardHooks": [
       "說明 {name} 滿足哪一種需求。",
       "找出最可能購買 {name} 的對象。",
@@ -219,7 +219,7 @@ window.DEBATE_MODES = [
     "icon": "?",
     "tone": "cosmos",
     "track": "秘密詞條",
-    "image": "../assets/backgrounds/modes/where-am-i.png",
+    "image": "../assets/backgrounds/modes/where-am-i.webp",
     "primaryDeck": "locations",
     "availableDecks": [
       "locations",
@@ -320,7 +320,7 @@ window.DEBATE_MODES = [
       "可鎖定前綴、介係或後綴，再重抽其他位置練習變化"
     ],
     "controlRule": "抽出詞語與關係，組成一句命題，解釋為什麼這個關係可以成立。",
-    "image": "../assets/backgrounds/modes/metaphor-compass.png",
+    "image": "../assets/backgrounds/modes/metaphor-compass.webp",
     "cardHooks": [
       "定義 {name} 在這句命題中的意思。",
       "替 {name} 找一個具體例子。"
@@ -357,7 +357,7 @@ window.DEBATE_MODES = [
       "每位召喚師選一個角色提出現實方案",
       "誰最能把能力轉成現實中的成功策略"
     ],
-    "image": "../assets/backgrounds/modes/reality-summon.png",
+    "image": "../assets/backgrounds/modes/reality-summon.webp",
     "controlRule": "抽出角色與任務，說明角色在現實世界中如何完成挑戰。",
     "cardHooks": [
       "請說明「{角色}」在任務「{任務}」時該怎麼做。",
@@ -401,7 +401,7 @@ window.DEBATE_MODES = [
       "可跨卡池加入或刪除卡牌",
       "按下儲存成這場，形成本局活動卡牌"
     ],
-    "image": "../assets/backgrounds/modes/card-dictionary.png",
+    "image": "../assets/backgrounds/modes/card-dictionary.webp",
     "menuLabel": "卡片 × 組合",
     "palette": "cyan"
   }
