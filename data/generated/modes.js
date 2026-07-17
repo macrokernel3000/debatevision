@@ -27,7 +27,7 @@ window.DEBATE_MODES = [
     },
     "drawLabel": "抽出求生組合",
     "cardMode": "itemEnvironment",
-    "description": "在異境中該如何生存？說服大家或與他人對抗計劃。",
+    "description": "求生版：用抽到的道具或職業，在異境中盡力生存。冒險版：選出最適格的探險隊前往異境。",
     "prompts": [
       [
         "環境限制",
@@ -43,61 +43,69 @@ window.DEBATE_MODES = [
       ]
     ],
     "flow": [
-      "選擇求生版或對抗版",
-      "求生版抽 1 個異境，再抽道具或職業",
-      "對抗版設定組數、每組道具數、每組職業數",
-      "對抗版所有組別共用同一個異境，但各組拿到不同資源包",
-      "各組上台說明：我們有哪些道具、有哪些職業夥伴、如何生存",
-      "同學質疑後投票選出最有說服力的生存方案"
+      "選擇求生版或冒險版",
+      "求生版抽 1 個異境，再抽道具或職業；也可勾選無異境",
+      "冒險版設定隊伍數，再分別設定每隊會抽到幾張道具、職業、動物、異族、超能、特職",
+      "冒險版所有組別共用同一個異境，但各組拿到不同探險隊",
+      "各組上台說明：我們的探險隊為什麼最適合前往異境",
+      "同學質疑後投票選出最適格的探險隊"
     ],
-    "controlRule": "抽出一個異境，再抽道具或職業，說明如何生存、合作或對抗。",
+    "controlRule": "求生版抽道具或職業來求生；冒險版組成探險隊，比較誰最適合前往異境。",
     "image": "../assets/backgrounds/modes/item-survival.webp",
     "cardHooks": [
       "請說明「{name}」在異境「{異境}」中，可以如何創造生存優勢。",
       "比較「{name}」和其他選項，為什麼它在「{異境}」中值得保留？"
     ],
-    "menuLabel": "生存 × 對抗",
+    "statusRules": {
+      "default": "抽出一個異境，再抽道具或職業，說明如何生存、合作或對抗。",
+      "survival": "求生版：抽出一個異境，再抽道具或職業，說明如何生存、合作或對抗。",
+      "survival_no_environment": "無異境：只抽道具或職業，直接提出可行用途、限制與優勢。",
+      "battle": "冒險版：共同異境下，同時抽出多組探險隊，比較哪一組最適合前往。"
+    },
+    "menuLabel": "生存 × 冒險",
     "palette": "red"
   },
   {
-    "id": "role-survival",
+    "id": "reality-summon",
     "order": 2,
-    "title": "存席辯護",
-    "icon": "◉",
-    "tone": "sky",
-    "track": "職業辯護",
-    "primaryDeck": "roles",
-    "secondaryDeck": "",
-    "primaryLabel": "職業卡",
-    "secondaryLabel": "",
-    "drawLabel": "抽出辯護身份",
-    "cardMode": "roleDefense",
-    "description": "請說服大家哪個職業是最值得和我們前往異境的夥伴。",
+    "title": "現實召喚",
+    "icon": "✦",
+    "tone": "violet",
+    "track": "召喚 × 現實任務",
+    "primaryDeck": "summons",
+    "secondaryDeck": "missions",
+    "primaryLabel": "召喚卡",
+    "secondaryLabel": "任務卡",
+    "drawLabel": "抽出召喚任務",
+    "cardMode": "summonMission",
+    "description": "召喚角色來現實世界，想出最合理又特別的方式完成專屬任務。",
     "prompts": [
       [
-        "留下理由",
-        "你的職業夥伴有什麼不可替代價值？"
+        "現實化",
+        "思考角色在現實制度中怎麼開始行動。"
       ],
       [
-        "比較標準",
-        "觀眾要考量誰更能提高群體存活率。"
+        "辯護方案",
+        "請用一個可被追問的計畫回答：第一步做什麼、找誰合作、如何證明有效。"
       ]
     ],
     "flow": [
-      "抽 1 到 6 個職業",
-      "每位職業準備自己的留下理由",
-      "每人 45 秒辯護",
-      "互相反駁或提問環節",
-      "逐輪淘汰直到最後留下者"
+      "選 1 到 6 張召喚卡，抽 1 張任務卡",
+      "每位召喚師選一個角色提出現實方案",
+      "誰最能把能力轉成現實中的成功策略"
     ],
-    "controlRule": "抽出職業身份，為自己或隊友提出最值得留下的理由。",
-    "image": "../assets/backgrounds/modes/role-survival.webp",
+    "image": "../assets/backgrounds/modes/reality-summon.webp",
+    "controlRule": "抽出角色與任務，說明角色在現實世界中如何完成挑戰。",
     "cardHooks": [
-      "說明 {name} 的不可替代價值。",
-      "說服大家留下 {name}效益最高。"
+      "請說明「{角色}」在任務「{任務}」時該怎麼做。",
+      "別忘了「{角色}」是在現實世界中完成「{任務}」。"
     ],
-    "menuLabel": "職業 × 辯護",
-    "palette": "teal"
+    "statusRules": {
+      "default": "抽出任務與召喚角色，說明角色在現實制度中如何完成挑戰。",
+      "summon": "先抽任務，再召喚角色，把超現實能力轉成可辯護的現實方案。"
+    },
+    "menuLabel": "召喚 × 任務",
+    "palette": "purple"
   },
   {
     "id": "importance-duel",
@@ -159,6 +167,10 @@ window.DEBATE_MODES = [
       "指出另一張卡牌相較於 {name} 的限制。",
       "如果比較標準改變，說明 {name} 是否仍有優勢。"
     ],
+    "statusRules": {
+      "default": "抽出兩張卡牌，建立比較標準，說服大家誰更重要。",
+      "duel": "比較本局選定的卡池，找出真正關鍵的一方。"
+    },
     "menuLabel": "卡牌 × 比較",
     "palette": "gold"
   },
@@ -168,7 +180,7 @@ window.DEBATE_MODES = [
     "title": "銷售密令",
     "icon": "$",
     "tone": "gold",
-    "track": "需求 × 故事",
+    "track": "供需 × 故事 × 目標",
     "primaryDeck": "items",
     "secondaryDeck": "needs",
     "primaryLabel": "物品卡",
@@ -196,11 +208,11 @@ window.DEBATE_MODES = [
       ]
     ],
     "flow": [
-      "選擇商品、需求或商品加需求",
-      "30 秒找出核心需求",
-      "30 秒決定目標客群",
-      "45 秒完成銷售提案",
-      "參與者提問：價格、替代品、可信度"
+      "選擇供需版、故事版或目標版",
+      "供需版先抽需求，再抽商品",
+      "故事版先抽概念或勾選無概念，再抽商品",
+      "目標版先抽目標，再抽商品",
+      "參與者提問：價格、替代品、可信度與真實需求"
     ],
     "controlRule": "抽出商品與需求，找出目標對象，包裝成一個有說服力的銷售故事。",
     "image": "../assets/backgrounds/modes/sales-command.webp",
@@ -209,68 +221,22 @@ window.DEBATE_MODES = [
       "找出最可能購買 {name} 的對象。",
       "包裝一個讓人願意掏錢買 {name} 的故事。"
     ],
-    "menuLabel": "需求 × 故事",
+    "statusRules": {
+      "default": "切換供需、故事或目標，練習把平凡商品說成值得購買的選擇。",
+      "supply": "供需版：先抽需求，再抽商品，說明產品如何滿足客戶的專屬需求。",
+      "story": "故事版：先抽概念，再抽商品，替商品鋪陳一個有記憶點的故事。",
+      "story_no_concept": "無概念故事版：只抽商品，直接把平凡物品包裝成有畫面感的故事。",
+      "target": "目標版：先抽目標，再抽商品，判斷產品該怎麼賣給不同客戶。",
+      "target_creatures": "目標版（生物）：把商品賣給生物角色，找出牠們可能在意的需求。",
+      "target_roles": "目標版（職業）：把商品賣給不同職業，對準工作情境與痛點。",
+      "target_summons": "目標版（異族）：把商品賣給異族角色，從陌生文化或能力限制找賣點。"
+    },
+    "menuLabel": "供需 × 故事 × 目標",
     "palette": "brown"
   },
   {
-    "id": "where-am-i",
-    "order": 5,
-    "title": "推理解密",
-    "icon": "?",
-    "tone": "cosmos",
-    "track": "秘密詞條",
-    "image": "../assets/backgrounds/modes/where-am-i.webp",
-    "primaryDeck": "locations",
-    "availableDecks": [
-      "locations",
-      "worlds",
-      "items",
-      "needs",
-      "roles",
-      "creatures",
-      "celebrities"
-    ],
-    "secondaryDeck": "",
-    "primaryLabel": "任意詞庫",
-    "secondaryLabel": "",
-    "drawLabel": "開啟秘密選號",
-    "cardMode": "secretPlace",
-    "fixedCount": 1,
-    "description": "所有卡片都被編號，請靠是非題推理出關鍵機密。",
-    "prompts": [
-      [
-        "是非提問",
-        "先不急著猜答案，先問五道可判斷特徵的問題。"
-      ],
-      [
-        "揭秘回覆",
-        "揭秘者可以回答：是、不是、不一定、多數時候是⋯⋯"
-      ],
-      [
-        "最後公布",
-        "先輸入秘密編號，再逐一點選候選詞條，公布不是這個或就是這個。"
-      ]
-    ],
-    "flow": [
-      "選定本局詞庫與候選範圍",
-      "輸入秘密編號，必要時勾選顯示編號確認",
-      "參與者輪流問問題",
-      "揭秘者只給有限回答",
-      "累積線索後開放猜測",
-      "點選候選詞條公布結果"
-    ],
-    "controlRule": "先秘密選定答案，再讓學生用問題逐步縮小範圍並推理答案。",
-    "cardHooks": [
-      "觀察 {name} 可能透露的環境線索。",
-      "設計一個能排除或確認 {name} 的問題。",
-      "思考哪些提問能最快縮小到 {name}。"
-    ],
-    "menuLabel": "秘密 × 線索",
-    "palette": "purple"
-  },
-  {
     "id": "metaphor-compass",
-    "order": 6,
+    "order": 5,
     "title": "隱喻羅盤",
     "icon": "◇",
     "tone": "cosmos",
@@ -325,45 +291,72 @@ window.DEBATE_MODES = [
       "定義 {name} 在這句命題中的意思。",
       "替 {name} 找一個具體例子。"
     ],
+    "statusRules": {
+      "default": "抽出詞語與關係，組成一句命題，解釋為什麼這個關係可以成立。",
+      "concrete": "具體版：固定「人生就像」，抽出物品或動物，練習找相似點。",
+      "abstract": "抽象版：抽出前綴、關係與後綴，解釋抽象命題為什麼成立。",
+      "free": "自由版：前綴與後綴可選任意詞庫，中間用關係卡連成命題。"
+    },
     "menuLabel": "比喻 × 命題",
     "palette": "earth"
   },
   {
-    "id": "reality-summon",
-    "order": 7,
-    "title": "現實召喚",
-    "icon": "✦",
-    "tone": "violet",
-    "track": "召喚 × 現實任務",
-    "primaryDeck": "summons",
-    "secondaryDeck": "missions",
-    "primaryLabel": "召喚卡",
-    "secondaryLabel": "任務卡",
-    "drawLabel": "抽出召喚任務",
-    "cardMode": "summonMission",
-    "description": "召喚角色來現實世界，想出最合理又特別的方式完成專屬任務。",
+    "id": "where-am-i",
+    "order": 6,
+    "title": "推理解密",
+    "icon": "?",
+    "tone": "cosmos",
+    "track": "秘密詞條",
+    "image": "../assets/backgrounds/modes/where-am-i.webp",
+    "primaryDeck": "locations",
+    "availableDecks": [
+      "locations",
+      "worlds",
+      "items",
+      "needs",
+      "roles",
+      "creatures",
+      "celebrities"
+    ],
+    "secondaryDeck": "",
+    "primaryLabel": "任意詞庫",
+    "secondaryLabel": "",
+    "drawLabel": "開啟秘密選號",
+    "cardMode": "secretPlace",
+    "fixedCount": 1,
+    "description": "所有卡片都被編號，請靠是非題推理出關鍵機密。",
     "prompts": [
       [
-        "現實化",
-        "思考角色在現實制度中怎麼開始行動。"
+        "是非提問",
+        "先不急著猜答案，先問五道可判斷特徵的問題。"
       ],
       [
-        "辯護方案",
-        "請用一個可被追問的計畫回答：第一步做什麼、找誰合作、如何證明有效。"
+        "揭秘回覆",
+        "揭秘者可以回答：是、不是、不一定、多數時候是⋯⋯"
+      ],
+      [
+        "最後公布",
+        "先輸入秘密編號，再逐一點選候選詞條，公布不是這個或就是這個。"
       ]
     ],
     "flow": [
-      "選 1 到 6 張召喚卡，抽 1 張任務卡",
-      "每位召喚師選一個角色提出現實方案",
-      "誰最能把能力轉成現實中的成功策略"
+      "選定本局詞庫與候選範圍",
+      "輸入秘密編號，必要時勾選顯示編號確認",
+      "參與者輪流問問題",
+      "揭秘者只給有限回答",
+      "累積線索後開放猜測",
+      "點選候選詞條公布結果"
     ],
-    "image": "../assets/backgrounds/modes/reality-summon.webp",
-    "controlRule": "抽出角色與任務，說明角色在現實世界中如何完成挑戰。",
+    "controlRule": "先秘密選定答案，再讓學生用問題逐步縮小範圍並推理答案。",
     "cardHooks": [
-      "請說明「{角色}」在任務「{任務}」時該怎麼做。",
-      "別忘了「{角色}」是在現實世界中完成「{任務}」。"
+      "觀察 {name} 可能透露的環境線索。",
+      "設計一個能排除或確認 {name} 的問題。",
+      "思考哪些提問能最快縮小到 {name}。"
     ],
-    "menuLabel": "召喚 × 任務",
+    "statusRules": {
+      "default": "選定任一詞庫作為秘密答案池，輸入編號後讓學生用問題推理。"
+    },
+    "menuLabel": "秘密 × 線索",
     "palette": "purple"
   },
   {
@@ -402,6 +395,10 @@ window.DEBATE_MODES = [
       "按下儲存成這場，形成本局活動卡牌"
     ],
     "image": "../assets/backgrounds/modes/card-dictionary.webp",
+    "statusRules": {
+      "default": "先選卡池，再直接挑選本場要用的卡，組成自己的臨時活動。",
+      "dictionary": "直接瀏覽所有卡池與卡牌，跨區挑選、刪除或儲存成這一場。"
+    },
     "menuLabel": "卡片 × 組合",
     "palette": "cyan"
   }

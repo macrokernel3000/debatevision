@@ -64,8 +64,8 @@ website/js/mode-lifecycle.js
 ## 目前支援的 cardMode
 
 - `itemEnvironment`：環境 + 主要卡。可用 `variantDecks` 讓老師切換主要卡，例如道具或職業。
-- `roleDefense`：純職業辯護，不自動抽異境。
-- `roleEnvironment`：環境 + 職業。舊模式仍可用，但目前存席辯護已改成純職業抽選。
+- `roleDefense`：純職業辯護，不自動抽異境。舊玩法可用，但目前前台沒有獨立啟用。
+- `roleEnvironment`：環境 + 職業。舊模式仍可用，但目前前台沒有獨立啟用。
 - `importanceDuel`：兩張卡牌對決。可以透過 `availableDecks` 讓老師在同一玩法中切換要比較的牌組。
 - `salesPitch`：可抽商品、需求，或商品 + 需求，練需求、客群、銷售故事。
 - `secretPlace`：秘密詞條推理。推理解密使用這個模式，可從可用詞庫中選擇候選卡。

@@ -311,6 +311,11 @@ function fieldKey(value) {
     "一句規則": "controlRule",
     "中間提示": "controlRule",
     "controlRule": "controlRule",
+    "狀態說明": "statusRule",
+    "版本說明": "statusRule",
+    "狀態提示": "statusRule",
+    "statusRule": "statusRule",
+    "statusRules": "statusRule",
     "按鈕文字": "drawLabel",
     "抽卡按鈕": "drawLabel",
     "drawLabel": "drawLabel",
@@ -356,6 +361,7 @@ function applyModeContent(modes) {
     const prompts = [];
     const cardHooks = [];
     const flow = [];
+    const statusRules = {};
 
     for (const row of sortRows(contentRows)) {
       const field = fieldKey(row.field);
@@ -378,11 +384,17 @@ function applyModeContent(modes) {
       if (field === "flow") {
         flow.push(content || title);
       }
+
+      if (field === "statusRule") {
+        const statusKey = title || "default";
+        statusRules[statusKey] = content || title;
+      }
     }
 
     if (prompts.length) nextMode.prompts = prompts;
     if (cardHooks.length) nextMode.cardHooks = cardHooks;
     if (flow.length) nextMode.flow = flow;
+    if (Object.keys(statusRules).length) nextMode.statusRules = statusRules;
 
     return nextMode;
   });

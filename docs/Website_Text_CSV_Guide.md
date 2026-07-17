@@ -57,7 +57,7 @@ importance-duel,誰更重要,卡牌 × 比較,gold
 玩法ID,欄位,序號,標題,內容
 ```
 
-- `玩法ID`：對應玩法，例如 `item-survival`、`role-survival`。
+- `玩法ID`：對應玩法，例如 `item-survival`、`reality-summon`。
 - `欄位`：可以填 `玩法描述`、`教練提示`、`卡牌任務`、`回合流程`。
 - `欄位`：也可以填 `玩法背景`，用來換上方玩法首頁大圖。
 - `序號`：顯示順序。

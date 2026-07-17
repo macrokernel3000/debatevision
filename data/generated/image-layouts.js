@@ -7,13 +7,6 @@ window.DEBATE_IMAGE_LAYOUTS = {
       "y": -120,
       "rotate": 0
     },
-    "role-survival": {
-      "scale": 1,
-      "x": -120,
-      "y": -73,
-      "rotate": 0,
-      "overlay": 0.28
-    },
     "where-am-i": {
       "scale": 1,
       "x": -120,

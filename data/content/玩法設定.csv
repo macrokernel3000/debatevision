@@ -1,9 +1,8 @@
 玩法ID,玩法名稱,選項短句,選項色系
-item-survival,異境求生,生存 × 對抗,red
-role-survival,存席辯護,職業 × 辯護,teal
-importance-duel,誰更重要,卡牌 × 比較,gold
-sales-command,銷售密令,需求 × 故事,brown
-where-am-i,推理解密,秘密 × 線索,purple
-metaphor-compass,隱喻羅盤,比喻 × 命題,earth
-card-dictionary,卡片字典,卡片 × 組合,cyan
+item-survival,異境求生,生存 × 冒險,red
 reality-summon,現實召喚,召喚 × 任務,purple
+importance-duel,誰更重要,卡牌 × 比較,gold
+sales-command,銷售密令,供需 × 故事 × 目標,brown
+metaphor-compass,隱喻羅盤,比喻 × 命題,earth
+where-am-i,推理解密,秘密 × 線索,purple
+card-dictionary,卡片字典,卡片 × 組合,cyan

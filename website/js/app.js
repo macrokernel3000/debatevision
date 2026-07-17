@@ -23,12 +23,22 @@ let currentStageCard = null;
 let secretRevealed = false;
 let secretAnswerIndex = "";
 let secretShowAnswerNumber = false;
-let salesVariant = "item";
+let salesVariant = "supply";
+let salesNoConcept = false;
+let salesAudienceDeck = "creatures";
+let summonCategorySelection = new Set(["異族", "超能", "特職"]);
 let survivalVariant = "survival";
+let survivalDeckSelection = new Set(["items"]);
 let survivalGroupCount = 3;
 let survivalItemCount = 4;
 let survivalRoleCount = 3;
+let survivalCreatureCount = 0;
+let survivalAlienCount = 0;
+let survivalPowerCount = 0;
+let survivalSpecialistCount = 0;
 let lockEnvironment = false;
+let noEnvironment = false;
+let selectedImportanceDecks = new Set();
 let metaphorVariant = "concrete";
 let metaphorPrefixDeck = "";
 let metaphorSuffixDeck = "";
@@ -108,7 +118,9 @@ const secondaryDeckLabel = document.querySelector("#secondaryDeckLabel");
 const fixedPools = document.querySelector("#fixedPools");
 const drawCount = document.querySelector("#drawCount");
 const drawCountField = drawCount.closest(".field");
+const drawCountLabel = drawCountField.querySelector("[data-ui-text]");
 const drawButton = document.querySelector("#drawButton");
+const quickResetActivePool = document.querySelector("#quickResetActivePool");
 const reel = document.querySelector("#reel");
 const cardGrid = document.querySelector("#cardGrid");
 const drawHistory = document.querySelector("#drawHistory");
@@ -123,6 +135,8 @@ const tokenCloud = document.querySelector("#tokenCloud");
 const selectAllCards = document.querySelector("#selectAllCards");
 const clearCards = document.querySelector("#clearCards");
 const resetActivePool = document.querySelector("#resetActivePool");
+let resetConfirmActive = false;
+let resetConfirmTimer = null;
 const scenePreview = document.querySelector("#scenePreview");
 const sceneEmblem = document.querySelector("#sceneEmblem");
 const sceneBadge = document.querySelector("#sceneBadge");
@@ -414,6 +428,11 @@ function setDeckSelection(deckId, checked) {
   selectedCardKeysByScope[selectionScope(deckId)] = new Set(checked ? cardsFrom(deckId).map((card) => cardKey(card)) : []);
 }
 
+function resetDeckSelectionToDefault(deckId) {
+  if (!deckId) return;
+  selectedCardKeysByScope[selectionScope(deckId)] = new Set(defaultCardsForDeck(deckId).map((card) => cardKey(card)));
+}
+
 function setCardsSelection(deckId, cards, checked) {
   if (!deckId) return;
   const selectedKeys = selectedKeysForDeck(deckId);
@@ -432,6 +451,80 @@ function selectedCardsFrom(deckId) {
   return cardsFrom(deckId).filter((card) => selectedKeys.has(cardKey(card)));
 }
 
+const summonCategories = ["異族", "超能", "特職"];
+
+function summonCategoryLabel(category) {
+  return `${category}卡`;
+}
+
+function selectedSummonCards() {
+  return selectedCardsFrom("summons").filter((card) => summonCategorySelection.has(card.rarity || ""));
+}
+
+function defaultSummonCategorySelection(mode = activeMode) {
+  return mode.cardMode === "salesPitch"
+    ? new Set(["異族"])
+    : new Set(["異族", "超能", "特職"]);
+}
+
+function selectedSalesAudienceCards() {
+  if (salesAudienceDeck === "summons") return selectedSummonCards();
+  return selectedCardsFrom(salesAudienceDeck);
+}
+
+function salesVariantLabel(variant = salesVariant) {
+  return {
+    supply: "供需版",
+    story: "故事版",
+    target: "目標版"
+  }[variant] || "供需版";
+}
+
+function salesVariantRule(variant = salesVariant) {
+  return {
+    supply: "供需版：你的產品如何滿足客戶們的專屬需求？",
+    story: "故事版：先抽概念，再抽商品，替商品鋪陳一個有記憶點的故事。",
+    target: "目標版：先抽目標，再抽商品，判斷產品該怎麼賣給不同客戶。"
+  }[variant] || activeMode.controlRule || uiText("control.note.default");
+}
+
+function modeStatusKey(mode = activeMode) {
+  if (mode.cardMode === "itemEnvironment") {
+    if (survivalVariant === "battle") return "battle";
+    if (noEnvironment) return "survival_no_environment";
+    return "survival";
+  }
+
+  if (mode.cardMode === "salesPitch") {
+    if (salesVariant === "story" && salesNoConcept) return "story_no_concept";
+    if (salesVariant === "target") return `target_${salesAudienceDeck}`;
+    return salesVariant;
+  }
+
+  if (mode.cardMode === "metaphorCompass") return metaphorVariant;
+  if (mode.cardMode === "importanceDuel") return "duel";
+  if (mode.cardMode === "secretPlace") return activeLibrary ? `deck_${activeLibrary}` : "default";
+  if (mode.cardMode === "summonMission") return "summon";
+  if (mode.cardMode === "cardDictionary") return "dictionary";
+  return "default";
+}
+
+function modeStatusText(mode = activeMode) {
+  const rules = mode.statusRules || {};
+  const key = modeStatusKey(mode);
+  const fallbackKey = key.startsWith("target_")
+    ? "target"
+    : key.startsWith("deck_")
+      ? "default"
+      : "";
+  return rules[key]
+    || (fallbackKey ? rules[fallbackKey] : "")
+    || rules.default
+    || mode.controlRule
+    || (mode.cardMode === "salesPitch" ? salesVariantRule() : "")
+    || uiText("control.note.default");
+}
+
 function availableDeckIdsForMode(mode = activeMode) {
   if (Array.isArray(mode.availableDecks) && mode.availableDecks.length) {
     return mode.availableDecks.filter((deckId) => decks[deckId]);
@@ -440,10 +533,12 @@ function availableDeckIdsForMode(mode = activeMode) {
     return [mode.secondaryDeck, ...metaphorAllDeckOptions(mode)].filter((deckId) => deckId && decks[deckId]);
   }
   if (Array.isArray(mode.variantDecks) && mode.variantDecks.length) {
-    return [mode.secondaryDeck, ...mode.variantDecks].filter((deckId) => deckId && decks[deckId]);
+    const survivalExtraDecks = mode.cardMode === "itemEnvironment" ? ["creatures", "summons"] : [];
+    return [mode.secondaryDeck, ...mode.variantDecks, ...survivalExtraDecks]
+      .filter((deckId, index, list) => deckId && decks[deckId] && list.indexOf(deckId) === index);
   }
   if (mode.cardMode === "salesPitch") {
-    return [mode.primaryDeck, mode.secondaryDeck].filter(Boolean);
+    return ["items", "needs", "concepts", "creatures", "roles", "summons"].filter((deckId) => decks[deckId]);
   }
   if (mode.cardMode === "secretPlace") return Object.keys(decks);
   return [mode.secondaryDeck, mode.primaryDeck].filter(Boolean);
@@ -469,8 +564,9 @@ function variantLabel(deckId) {
 
 function resetModeSelections() {
   for (const deckId of availableDeckIdsForMode()) {
-    setDeckSelection(deckId, true);
+    resetDeckSelectionToDefault(deckId);
   }
+  resetImportanceDeckSelection();
 }
 
 function markDrawn(cards) {
@@ -486,11 +582,11 @@ function historyScope() {
 function historyVariantLabel() {
   if (activeMode.cardMode === "itemEnvironment") {
     return survivalVariant === "battle"
-      ? `對抗版：${survivalGroupCount} 組`
-      : `求生版：${variantLabel(activeLibrary)}`;
+      ? `冒險版：${survivalGroupCount} 組`
+      : `求生版：${survivalActiveDeckIds().map((deckId) => variantLabel(deckId)).join(" + ")}`;
   }
   if (activeMode.cardMode === "salesPitch") {
-    return { item: "商品", need: "需求", combo: "商品 + 需求" }[salesVariant] || "";
+    return salesVariantLabel();
   }
   if (activeMode.cardMode === "metaphorCompass") {
     const variantLabel = metaphorVariantLabel();
@@ -500,10 +596,36 @@ function historyVariantLabel() {
     return prefixLabel && suffixLabel ? `${variantLabel}：${prefixLabel} → ${suffixLabel}` : variantLabel;
   }
   if (activeMode.cardMode === "secretPlace") return decks[activeLibrary]?.label || "";
+  if (activeMode.cardMode === "importanceDuel") {
+    return importanceActiveDeckIds().map((deckId) => variantLabel(deckId)).join(" + ");
+  }
   const variantDecks = primaryVariantDeckIds();
   if (variantDecks.length) return variantLabel(activeLibrary);
-  if (activeMode.cardMode === "importanceDuel") return decks[activeLibrary]?.label || "";
   return "";
+}
+
+function resetImportanceDeckSelection(mode = activeMode) {
+  if (mode.cardMode !== "importanceDuel") return;
+  const defaultDeck = mode.primaryDeck && decks[mode.primaryDeck] ? mode.primaryDeck : (mode.availableDecks || []).find((deckId) => decks[deckId]);
+  selectedImportanceDecks = new Set(defaultDeck ? [defaultDeck] : []);
+}
+
+function survivalActiveDeckIds(mode = activeMode) {
+  if (mode.cardMode !== "itemEnvironment" || survivalVariant !== "survival") return [];
+  const available = primaryVariantDeckIds(mode);
+  const selected = available.filter((deckId) => survivalDeckSelection.has(deckId));
+  if (selected.length) return selected;
+  const fallback = mode.primaryDeck && available.includes(mode.primaryDeck) ? mode.primaryDeck : available[0];
+  return fallback ? [fallback] : [];
+}
+
+function importanceActiveDeckIds(mode = activeMode) {
+  if (mode.cardMode !== "importanceDuel") return [];
+  const available = primaryVariantDeckIds(mode);
+  const selected = available.filter((deckId) => selectedImportanceDecks.has(deckId));
+  if (selected.length) return selected;
+  const fallback = mode.primaryDeck && available.includes(mode.primaryDeck) ? mode.primaryDeck : available[0];
+  return fallback ? [fallback] : [];
 }
 
 function cardHistoryLabel(card) {
@@ -630,7 +752,7 @@ function renderActivityMenu() {
       <span class="activity-menu-copy">
         <strong>${mode.title}</strong>
         <small>${modeCardMeta(mode).menuLabel}</small>
-        <em>${mode.controlRule || mode.description || ""}</em>
+        <em>${mode.statusRules?.default || mode.controlRule || mode.description || ""}</em>
       </span>
     </button>
   `).join("");
@@ -682,7 +804,7 @@ function renderActivity() {
   cardDictionaryPanel.hidden = !dictionaryMode;
   controlNote.textContent = activeMode.cardMode === "secretPlace"
     ? lifecycleFor().setup
-    : uiText("control.note.default");
+    : modeStatusText();
 }
 
 function sceneImageFor(card) {
@@ -825,18 +947,26 @@ function renderDeckControls() {
   const survivalBattleMode = activeMode.cardMode === "itemEnvironment" && survivalVariant === "battle";
   const survivalMode = activeMode.cardMode === "itemEnvironment";
   const metaphorMode = activeMode.cardMode === "metaphorCompass";
+  const salesMode = activeMode.cardMode === "salesPitch";
   drawCountField.hidden = metaphorMode;
-  drawCountField.classList.toggle("is-ghost-control", survivalBattleMode);
-  drawCountField.setAttribute("aria-hidden", survivalBattleMode ? "true" : "false");
+  drawCountField.classList.remove("is-ghost-control");
+  drawCountField.setAttribute("aria-hidden", "false");
   controlNote.hidden = false;
-  if (survivalBattleMode) {
-    controlNote.textContent = "團隊對抗版：統一異境，可同時抽出多組選項";
-  } else {
-    controlNote.textContent = activeMode.controlRule || uiText("control.note.default");
-  }
+  controlNote.textContent = modeStatusText();
   const fixed = activeMode.fixedCount;
-  drawCount.value = fixed || Math.min(Math.max(Number(drawCount.value) || 1, 1), 6);
-  drawCount.disabled = Boolean(fixed) || survivalBattleMode;
+  if (survivalBattleMode) {
+    drawCountLabel.textContent = "隊伍數";
+    drawCount.min = "1";
+    drawCount.max = "8";
+    drawCount.value = survivalGroupCount;
+    drawCount.disabled = false;
+  } else {
+    drawCountLabel.textContent = uiText("label.drawCount");
+    drawCount.min = "1";
+    drawCount.max = "6";
+    drawCount.value = fixed || Math.min(Math.max(Number(drawCount.value) || 1, 1), 6);
+    drawCount.disabled = Boolean(fixed);
+  }
 
   const primaryTotal = cardsFrom(activeLibrary).length;
   let primaryText = `${decks[activeLibrary]?.label || activeMode.primaryLabel}：${selectedCount(activeLibrary)} / ${primaryTotal} 張可抽`;
@@ -845,6 +975,13 @@ function renderDeckControls() {
       ? `${activeMode.secondaryLabel || decks[activeSecondaryLibrary]?.label}：${selectedCount(activeSecondaryLibrary)} / ${cardsFrom(activeSecondaryLibrary).length} 張可抽`
       : `${activeMode.secondaryLabel || decks[activeSecondaryLibrary]?.label}：固定抽 1 張，${selectedCount(activeSecondaryLibrary)} / ${cardsFrom(activeSecondaryLibrary).length} 張可抽`
     : "";
+  if (activeMode.cardMode === "importanceDuel") {
+    const activeDeckIds = importanceActiveDeckIds();
+    const totalSelected = activeDeckIds.reduce((sum, deckId) => sum + selectedCount(deckId), 0);
+    const totalCards = activeDeckIds.reduce((sum, deckId) => sum + cardsFrom(deckId).length, 0);
+    primaryText = `已選 ${activeDeckIds.length} 個牌組：${totalSelected} / ${totalCards} 張可抽`;
+    secondaryText = "";
+  }
   if (activeMode.cardMode === "metaphorCompass") {
     if (metaphorVariant === "concrete") {
       primaryText = "前綴：人生（固定）";
@@ -856,6 +993,27 @@ function renderDeckControls() {
   }
   if (survivalBattleMode) {
     primaryText = `道具卡：${selectedCount("items")} / ${cardsFrom("items").length} 張可抽`;
+  } else if (survivalMode) {
+    const activeDeckIds = survivalActiveDeckIds();
+    const totalSelected = activeDeckIds.reduce((sum, deckId) => sum + selectedCount(deckId), 0);
+    const totalCards = activeDeckIds.reduce((sum, deckId) => sum + cardsFrom(deckId).length, 0);
+    primaryText = `已選 ${activeDeckIds.map((deckId) => variantLabel(deckId)).join("、")}：${totalSelected} / ${totalCards} 張可抽`;
+  }
+  if (salesMode) {
+    primaryText = `商品卡：${selectedCount("items")} / ${cardsFrom("items").length} 張可抽`;
+    if (salesVariant === "supply") {
+      secondaryText = `需求卡：固定抽 1 張，${selectedCount("needs")} / ${cardsFrom("needs").length} 張可抽`;
+    } else if (salesVariant === "story") {
+      secondaryText = salesNoConcept
+        ? "概念卡：本輪不抽概念"
+        : `概念卡：固定抽 1 張，${selectedCount("concepts")} / ${cardsFrom("concepts").length} 張可抽`;
+    } else {
+      const audienceCards = selectedSalesAudienceCards();
+      const total = salesAudienceDeck === "summons"
+        ? cardsFrom("summons").filter((card) => summonCategorySelection.has(card.rarity || "")).length
+        : cardsFrom(salesAudienceDeck).length;
+      secondaryText = `${decks[salesAudienceDeck]?.label || "客戶卡"}：固定抽 1 張，${audienceCards.length} / ${total} 張可抽`;
+    }
   }
   const suffixText = activeMode.cardMode === "metaphorCompass"
     ? `後綴：${decks[metaphorSuffixDeck]?.label || ""}，${selectedCount(metaphorSuffixDeck)} / ${cardsFrom(metaphorSuffixDeck).length} 張可抽`
@@ -863,40 +1021,74 @@ function renderDeckControls() {
   const survivalRoleText = survivalBattleMode
     ? `職業卡：${selectedCount("roles")} / ${cardsFrom("roles").length} 張可抽`
     : "";
+  const survivalCreatureText = survivalBattleMode
+    ? `動物卡：${selectedCount("creatures")} / ${cardsFrom("creatures").length} 張可抽`
+    : "";
+  const survivalSummonText = survivalBattleMode
+    ? `召喚卡：${selectedCount("summons")} / ${cardsFrom("summons").length} 張可抽`
+    : "";
   const survivalVariantTools = activeMode.cardMode === "itemEnvironment"
     ? `
-      <div class="sales-variant-tools" role="group" aria-label="異境求生版本">
+      <div class="sales-variant-tools is-survival-variant" role="group" aria-label="異境求生版本">
         <button type="button" class="${survivalVariant === "survival" ? "is-active" : ""}" data-survival-variant="survival">求生版</button>
-        <button type="button" class="${survivalVariant === "battle" ? "is-active" : ""}" data-survival-variant="battle">對抗版</button>
+        <button type="button" class="${survivalVariant === "battle" ? "is-active" : ""}" data-survival-variant="battle">冒險版</button>
       </div>
     `
     : "";
-  survivalItemCount = Math.min(survivalItemCount, 6);
-  survivalRoleCount = Math.min(survivalRoleCount, 6);
+  normalizeSurvivalAllocation();
   const survivalBattleTools = survivalBattleMode
     ? `
-      <div class="survival-battle-tools" role="group" aria-label="對抗版設定">
-        ${survivalNumberControl("groups", "組數", survivalGroupCount, 1, 8)}
-        ${survivalNumberControl("items", "每組道具", survivalItemCount, 0, 6)}
-        ${survivalNumberControl("roles", "每組職業", survivalRoleCount, 0, 6)}
+      <div class="survival-battle-tools" role="group" aria-label="冒險版設定">
+        <div class="survival-battle-row is-resources">
+          ${survivalNumberControl("items", "道具", survivalItemCount, 0, 12)}
+          ${survivalNumberControl("roles", "職業", survivalRoleCount, 0, 12)}
+          ${survivalNumberControl("creatures", "動物", survivalCreatureCount, 0, 12)}
+          ${survivalNumberControl("aliens", "異族", survivalAlienCount, 0, 12)}
+          ${survivalNumberControl("powers", "超能", survivalPowerCount, 0, 12)}
+          ${survivalNumberControl("specialists", "特職", survivalSpecialistCount, 0, 12)}
+        </div>
       </div>
     `
     : "";
   const salesTools = activeMode.cardMode === "salesPitch"
     ? `
-      <div class="sales-variant-tools" role="group" aria-label="銷售密令抽法">
-        <button type="button" class="${salesVariant === "item" ? "is-active" : ""}" data-sales-variant="item">商品</button>
-        <button type="button" class="${salesVariant === "need" ? "is-active" : ""}" data-sales-variant="need">需求</button>
-        <button type="button" class="${salesVariant === "combo" ? "is-active" : ""}" data-sales-variant="combo">商品 + 需求</button>
+      <div class="sales-variant-tools is-sales-variant" role="group" aria-label="銷售密令抽法">
+        <button type="button" class="${salesVariant === "supply" ? "is-active" : ""}" data-sales-variant="supply">供需版</button>
+        <button type="button" class="${salesVariant === "story" ? "is-active" : ""}" data-sales-variant="story">故事版</button>
+        <button type="button" class="${salesVariant === "target" ? "is-active" : ""}" data-sales-variant="target">目標版</button>
+      </div>
+      ${salesVariant === "story" ? `
+        <label class="environment-lock-toggle">
+          <input type="checkbox" data-sales-no-concept ${salesNoConcept ? "checked" : ""} />
+          <span>無概念</span>
+        </label>
+      ` : ""}
+      ${salesVariant === "target" ? `
+        <div class="sales-variant-tools is-sales-variant" role="group" aria-label="目標版客戶類型">
+          <button type="button" class="${salesAudienceDeck === "creatures" ? "is-active" : ""}" data-sales-audience="creatures">生物</button>
+          <button type="button" class="${salesAudienceDeck === "roles" ? "is-active" : ""}" data-sales-audience="roles">職業</button>
+          <button type="button" class="${salesAudienceDeck === "summons" ? "is-active" : ""}" data-sales-audience="summons">異族</button>
+        </div>
+      ` : ""}
+    `
+    : "";
+  const summonCategoryTools = activeMode.cardMode === "summonMission"
+    ? `
+      <div class="sales-variant-tools is-summon-variant" role="group" aria-label="現實召喚分類">
+        ${summonCategories.map((category) => `
+          <button type="button" class="${summonCategorySelection.has(category) ? "is-active" : ""}" data-summon-category="${category}">
+            ${summonCategoryLabel(category)}
+          </button>
+        `).join("")}
       </div>
     `
     : "";
   const primaryVariantDecks = primaryVariantDeckIds();
   const primaryVariantTools = primaryVariantDecks.length && !survivalBattleMode
     ? `
-      <div class="sales-variant-tools" role="group" aria-label="${activeMode.title}抽選類型">
+      <div class="sales-variant-tools ${activeMode.cardMode === "importanceDuel" ? "is-multi-select is-importance-variant" : ""} ${survivalMode ? "is-multi-select is-survival-variant" : ""}" role="group" aria-label="${activeMode.title}抽選類型">
         ${primaryVariantDecks.map((deckId) => `
-          <button type="button" class="${activeLibrary === deckId ? "is-active" : ""}" data-primary-variant="${deckId}">
+          <button type="button" class="${activeMode.cardMode === "importanceDuel" ? (selectedImportanceDecks.has(deckId) ? "is-active" : "is-dimmed") : survivalMode ? (survivalDeckSelection.has(deckId) ? "is-active" : "is-dimmed") : (activeLibrary === deckId ? "is-active" : "")}" data-primary-variant="${deckId}">
             ${variantLabel(deckId)}
           </button>
         `).join("")}
@@ -906,8 +1098,12 @@ function renderDeckControls() {
   const environmentLockTool = activeMode.cardMode === "itemEnvironment" && survivalVariant === "survival"
     ? `
       <label class="environment-lock-toggle">
-        <input type="checkbox" data-lock-environment ${lockEnvironment ? "checked" : ""} />
+        <input type="checkbox" data-lock-environment ${lockEnvironment ? "checked" : ""} ${noEnvironment ? "disabled" : ""} />
         <span>鎖定異境</span>
+      </label>
+      <label class="environment-lock-toggle">
+        <input type="checkbox" data-no-environment ${noEnvironment ? "checked" : ""} />
+        <span>無異境</span>
       </label>
     `
     : "";
@@ -936,6 +1132,8 @@ function renderDeckControls() {
     <span>${primaryText}</span>
     ${secondaryText ? `<span>${secondaryText}</span>` : ""}
     ${survivalRoleText ? `<span>${survivalRoleText}</span>` : ""}
+    ${survivalCreatureText ? `<span>${survivalCreatureText}</span>` : ""}
+    ${survivalSummonText ? `<span>${survivalSummonText}</span>` : ""}
     ${suffixText ? `<span>${suffixText}</span>` : ""}
   `;
 
@@ -962,14 +1160,54 @@ function renderDeckControls() {
       ${environmentLockTool}
       ${survivalBattleTools}
       ${salesTools}
+      ${summonCategoryTools}
     `;
 }
 
+function normalizeSurvivalAllocation() {
+  survivalItemCount = Math.max(0, Math.min(12, survivalItemCount));
+  survivalRoleCount = Math.max(0, Math.min(12, survivalRoleCount));
+  survivalCreatureCount = Math.max(0, Math.min(12, survivalCreatureCount));
+  survivalAlienCount = Math.max(0, Math.min(12, survivalAlienCount));
+  survivalPowerCount = Math.max(0, Math.min(12, survivalPowerCount));
+  survivalSpecialistCount = Math.max(0, Math.min(12, survivalSpecialistCount));
+}
+
+function survivalCountValue(key) {
+  return {
+    groups: survivalGroupCount,
+    items: survivalItemCount,
+    roles: survivalRoleCount,
+    creatures: survivalCreatureCount,
+    aliens: survivalAlienCount,
+    powers: survivalPowerCount,
+    specialists: survivalSpecialistCount
+  }[key] || 0;
+}
+
+function setSurvivalCountValue(key, value) {
+  if (key === "groups") survivalGroupCount = value;
+  if (["items", "roles", "creatures", "aliens", "powers", "specialists"].includes(key)) {
+    if (key === "items") survivalItemCount = value;
+    if (key === "roles") survivalRoleCount = value;
+    if (key === "creatures") survivalCreatureCount = value;
+    if (key === "aliens") survivalAlienCount = value;
+    if (key === "powers") survivalPowerCount = value;
+    if (key === "specialists") survivalSpecialistCount = value;
+  }
+}
+
 function survivalNumberControl(key, label, value, min, max) {
+  const disableMinus = value <= min;
+  const disablePlus = value >= max;
   return `
     <label class="survival-number-control">
       <span>${label}</span>
-      <input type="number" inputmode="numeric" min="${min}" max="${max}" value="${value}" data-survival-count="${key}" />
+      <div class="survival-stepper">
+        <button type="button" data-survival-step="${key}" data-step="-1" ${disableMinus ? "disabled" : ""}>−</button>
+        <input type="text" inputmode="numeric" min="${min}" max="${max}" value="${value}" data-survival-count="${key}" aria-label="${label}" />
+        <button type="button" data-survival-step="${key}" data-step="1" ${disablePlus ? "disabled" : ""}>+</button>
+      </div>
     </label>
   `;
 }
@@ -1551,11 +1789,12 @@ function renderPoolWarning() {
 }
 
 function cardWithEnvironmentHooks(card, environment) {
+  const environmentName = environment?.name || "無異境";
   return {
     ...card,
     hooks: buildHooks(card.name, card.deckId, card.rarity, {
-      environment: environment?.name || "",
-      environmentName: environment?.name || "",
+      environment: environmentName,
+      environmentName,
       item: card.deckId === "items" ? card.name : "",
       itemName: card.deckId === "items" ? card.name : "",
       profession: card.deckId === "roles" ? card.name : "",
@@ -1564,9 +1803,59 @@ function cardWithEnvironmentHooks(card, environment) {
   };
 }
 
+function cardWithSalesNeedHooks(card, need) {
+  const productName = card.name;
+  const needName = need?.name || "本輪需求";
+  return {
+    ...card,
+    hooks: [
+      `說明「${productName}」如何滿足「${needName}」。`,
+      `找出最可能因為「${needName}」而購買「${productName}」的對象。`,
+      `包裝一個讓人願意為「${productName}」付錢的理由。`
+    ]
+  };
+}
+
+function cardWithSalesStoryHooks(card, concept) {
+  const productName = card.name;
+  const conceptName = concept?.name || "";
+  return {
+    ...card,
+    hooks: concept
+      ? [
+        `說一個「${conceptName}的${productName}」故事。`,
+        `說明「${conceptName}」讓「${productName}」變得更有價值的原因。`,
+        `替「${productName}」設計一句能被記住的銷售故事。`
+      ]
+      : [
+        `替「${productName}」說一個有畫面感的故事。`,
+        `說明「${productName}」背後可能代表的情緒、回憶或身份。`,
+        `把「${productName}」包裝成讓人願意購買的選擇。`
+      ]
+  };
+}
+
+function cardWithSalesTargetHooks(card, audience) {
+  const productName = card.name;
+  const audienceName = audience?.name || "本輪目標";
+  return {
+    ...card,
+    hooks: [
+      `說明「${productName}」為什麼適合賣給「${audienceName}」。`,
+      `找出「${audienceName}」可能在意的價格、功能或情緒價值。`,
+      `設計一句能打動「${audienceName}」的銷售主張。`
+    ]
+  };
+}
+
 function renderCombo(environment, cards, label) {
   currentStageCard = environment;
-  renderReelCard(environment);
+  renderReelCard(environment || {
+    name: "無異境",
+    lore: "本輪刻意不抽異境，直接用抽到的卡牌思考可行方案。",
+    icon: activeMode.icon,
+    deckLabel: "本輪設定"
+  });
   cardGrid.innerHTML = `
     <div class="combo-board">
       <div class="combo-results">
@@ -1586,7 +1875,7 @@ function renderSurvivalBattle(environment, groups) {
           <section class="survival-group-card">
             <div class="survival-group-head">
               <strong>第 ${group.index} 組</strong>
-              <span>${group.items.length} 道具 · ${group.roles.length} 夥伴</span>
+              <span>${group.items.length} 道具 · ${group.roles.length} 職業 · ${group.creatures.length} 動物 · ${group.aliens.length} 異族 · ${group.powers.length} 超能 · ${group.specialists.length} 特職</span>
             </div>
             <div class="survival-group-section">
               <h3>道具</h3>
@@ -1595,9 +1884,33 @@ function renderSurvivalBattle(environment, groups) {
               </div>
             </div>
             <div class="survival-group-section">
-              <h3>夥伴</h3>
+              <h3>職業</h3>
               <div class="survival-mini-list">
                 ${group.roles.map((card) => `<span class="survival-resource-pill">${tokenIconMarkup(card)}${card.name}</span>`).join("") || "<em>沒有職業</em>"}
+              </div>
+            </div>
+            <div class="survival-group-section">
+              <h3>動物</h3>
+              <div class="survival-mini-list">
+                ${group.creatures.map((card) => `<span class="survival-resource-pill">${tokenIconMarkup(card)}${card.name}</span>`).join("") || "<em>沒有動物</em>"}
+              </div>
+            </div>
+            <div class="survival-group-section">
+              <h3>異族</h3>
+              <div class="survival-mini-list">
+                ${group.aliens.map((card) => `<span class="survival-resource-pill">${tokenIconMarkup(card)}${card.name}</span>`).join("") || "<em>沒有異族</em>"}
+              </div>
+            </div>
+            <div class="survival-group-section">
+              <h3>超能</h3>
+              <div class="survival-mini-list">
+                ${group.powers.map((card) => `<span class="survival-resource-pill">${tokenIconMarkup(card)}${card.name}</span>`).join("") || "<em>沒有超能</em>"}
+              </div>
+            </div>
+            <div class="survival-group-section">
+              <h3>特職</h3>
+              <div class="survival-mini-list">
+                ${group.specialists.map((card) => `<span class="survival-resource-pill">${tokenIconMarkup(card)}${card.name}</span>`).join("") || "<em>沒有特職</em>"}
               </div>
             </div>
           </section>
@@ -1857,32 +2170,46 @@ function drawResult() {
 
   if (activeMode.cardMode === "itemEnvironment") {
     if (survivalVariant === "battle") {
+      survivalGroupCount = Math.max(1, Math.min(8, Number(drawCount.value) || survivalGroupCount));
       const environment = pickFrom(activeSecondaryLibrary, 1)[0];
       const itemPool = selectedCardsFrom("items");
       const rolePool = selectedCardsFrom("roles");
+      const creaturePool = selectedCardsFrom("creatures");
+      const alienPool = selectedCardsFrom("summons").filter((card) => card.rarity === "異族");
+      const powerPool = selectedCardsFrom("summons").filter((card) => card.rarity === "超能");
+      const specialistPool = selectedCardsFrom("summons").filter((card) => card.rarity === "特職");
       const itemNeed = survivalGroupCount * survivalItemCount;
       const roleNeed = survivalGroupCount * survivalRoleCount;
-      if (!environment || itemPool.length < itemNeed || rolePool.length < roleNeed) return renderPoolWarning();
+      const creatureNeed = survivalGroupCount * survivalCreatureCount;
+      const alienNeed = survivalGroupCount * survivalAlienCount;
+      const powerNeed = survivalGroupCount * survivalPowerCount;
+      const specialistNeed = survivalGroupCount * survivalSpecialistCount;
+      if (!environment || itemPool.length < itemNeed || rolePool.length < roleNeed || creaturePool.length < creatureNeed || alienPool.length < alienNeed || powerPool.length < powerNeed || specialistPool.length < specialistNeed) return renderPoolWarning();
       const groups = Array.from({ length: survivalGroupCount }, (_, index) => ({
         index: index + 1,
         items: pickFromPool(itemPool, survivalItemCount).map((card) => cardWithEnvironmentHooks(card, environment)),
-        roles: pickFromPool(rolePool, survivalRoleCount).map((card) => cardWithEnvironmentHooks(card, environment))
+        roles: pickFromPool(rolePool, survivalRoleCount).map((card) => cardWithEnvironmentHooks(card, environment)),
+        creatures: pickFromPool(creaturePool, survivalCreatureCount).map((card) => cardWithEnvironmentHooks(card, environment)),
+        aliens: pickFromPool(alienPool, survivalAlienCount).map((card) => cardWithEnvironmentHooks(card, environment)),
+        powers: pickFromPool(powerPool, survivalPowerCount).map((card) => cardWithEnvironmentHooks(card, environment)),
+        specialists: pickFromPool(specialistPool, survivalSpecialistCount).map((card) => cardWithEnvironmentHooks(card, environment))
       }));
-      const drawnCards = [environment, ...groups.flatMap((group) => [...group.items, ...group.roles])];
+      const drawnCards = [environment, ...groups.flatMap((group) => [...group.items, ...group.roles, ...group.creatures, ...group.aliens, ...group.powers, ...group.specialists])];
       renderSurvivalBattle(environment, groups);
       markDrawn(drawnCards);
       return drawnCards;
     }
 
-    const lockedEnvironment = lockEnvironment && currentStageCard?.deckId === activeSecondaryLibrary
+    const lockedEnvironment = !noEnvironment && lockEnvironment && currentStageCard?.deckId === activeSecondaryLibrary
       ? currentStageCard
       : null;
-    const environment = lockedEnvironment || pickFrom(activeSecondaryLibrary, 1)[0];
-    const cards = pickFrom(activeLibrary, count).map((card) => cardWithEnvironmentHooks(card, environment));
-    if (!environment || cards.length < count) return renderPoolWarning();
+    const environment = noEnvironment ? null : lockedEnvironment || pickFrom(activeSecondaryLibrary, 1)[0];
+    const survivalPool = survivalActiveDeckIds().flatMap((deckId) => selectedCardsFrom(deckId));
+    const cards = pickFromPool(survivalPool, count).map((card) => cardWithEnvironmentHooks(card, environment));
+    if ((!noEnvironment && !environment) || cards.length < count) return renderPoolWarning();
     renderCombo(environment, cards, "本輪異境");
-    markDrawn(lockedEnvironment ? cards : [environment, ...cards]);
-    return [environment, ...cards];
+    markDrawn(noEnvironment || lockedEnvironment ? cards : [environment, ...cards]);
+    return noEnvironment ? cards : [environment, ...cards];
   }
 
   if (activeMode.cardMode === "roleEnvironment") {
@@ -1895,7 +2222,9 @@ function drawResult() {
   }
 
   if (activeMode.cardMode === "importanceDuel") {
-    const cards = pickFrom(activeLibrary, 2);
+    const activeDeckIds = importanceActiveDeckIds();
+    const pool = activeDeckIds.flatMap((deckId) => selectedCardsFrom(deckId));
+    const cards = pickFromPool(pool, 2);
     if (cards.length < 2) return renderPoolWarning();
     renderDuel(cards);
     markDrawn(cards);
@@ -1937,17 +2266,42 @@ function drawResult() {
   }
 
   if (activeMode.cardMode === "salesPitch") {
-    const items = salesVariant === "need" ? [] : pickFrom(activeLibrary, count);
-    const needs = salesVariant === "item" ? [] : pickFrom(activeSecondaryLibrary, count);
-    if ((salesVariant !== "need" && items.length < count) || (salesVariant !== "item" && needs.length < count)) return renderPoolWarning();
-    renderSalesPitch(items, needs);
-    markDrawn([...items, ...needs]);
-    return [...items, ...needs];
+    if (salesVariant === "supply") {
+      const need = pickFrom("needs", 1)[0];
+      const items = pickFrom("items", count).map((card) => cardWithSalesNeedHooks(card, need));
+      if (!need || items.length < count) return renderPoolWarning();
+      renderCombo(need, items, "本輪需求");
+      markDrawn([need, ...items]);
+      return [need, ...items];
+    }
+
+    if (salesVariant === "story") {
+      const concept = salesNoConcept ? null : pickFrom("concepts", 1)[0];
+      const items = pickFrom("items", count).map((card) => cardWithSalesStoryHooks(card, concept));
+      if ((!salesNoConcept && !concept) || items.length < count) return renderPoolWarning();
+      const stageCard = concept || {
+        name: "無概念",
+        lore: "本輪不抽概念，直接用商品本身編織一個銷售故事。",
+        icon: "$",
+        deckLabel: "故事版"
+      };
+      renderCombo(stageCard, items, "故事主題");
+      if (concept) markDrawn([concept, ...items]);
+      else markDrawn(items);
+      return concept ? [concept, ...items] : items;
+    }
+
+    const audience = pickFromPool([...selectedSalesAudienceCards()], 1)[0];
+    const items = pickFrom("items", count).map((card) => cardWithSalesTargetHooks(card, audience));
+    if (!audience || items.length < count) return renderPoolWarning();
+    renderCombo(audience, items, "本輪目標");
+    markDrawn([audience, ...items]);
+    return [audience, ...items];
   }
 
   if (activeMode.cardMode === "summonMission") {
     const mission = pickFrom(activeSecondaryLibrary, 1)[0];
-    const cards = pickFrom(activeLibrary, count).map((card) => ({
+    const cards = pickFromPool([...selectedSummonCards()], count).map((card) => ({
       ...card,
       hooks: buildHooks(card.name, card.deckId, card.rarity, {
         mission: mission?.name || "",
@@ -1970,10 +2324,22 @@ function drawResult() {
 }
 
 function reelPoolForActiveMode() {
+  if (activeMode.cardMode === "itemEnvironment" && survivalVariant === "survival" && noEnvironment) {
+    return survivalActiveDeckIds().flatMap((deckId) => selectedCardsFrom(deckId));
+  }
+  if (activeMode.cardMode === "itemEnvironment" && survivalVariant === "survival") {
+    return survivalActiveDeckIds().flatMap((deckId) => selectedCardsFrom(deckId));
+  }
+  if (activeMode.cardMode === "importanceDuel") {
+    return importanceActiveDeckIds().flatMap((deckId) => selectedCardsFrom(deckId));
+  }
   if (activeMode.cardMode === "salesPitch") {
-    if (salesVariant === "need") return selectedCardsFrom(activeSecondaryLibrary);
-    if (salesVariant === "combo") return [...selectedCardsFrom(activeLibrary), ...selectedCardsFrom(activeSecondaryLibrary)];
-    return selectedCardsFrom(activeLibrary);
+    if (salesVariant === "supply") return selectedCardsFrom("needs");
+    if (salesVariant === "story") return selectedCardsFrom("items");
+    return selectedCardsFrom("items");
+  }
+  if (activeMode.cardMode === "summonMission") {
+    return selectedSummonCards();
   }
   if (activeMode.cardMode === "metaphorCompass") {
     if (metaphorVariant === "concrete") return selectedCardsFrom(metaphorSuffixDeck);
@@ -2049,12 +2415,22 @@ function setMode(modeId) {
   secretRevealed = false;
   secretAnswerIndex = "";
   secretShowAnswerNumber = false;
-  salesVariant = "item";
+  salesVariant = "supply";
+  salesNoConcept = false;
+  salesAudienceDeck = "creatures";
+  summonCategorySelection = defaultSummonCategorySelection(activeMode);
   survivalVariant = "survival";
+  survivalDeckSelection = new Set(["items"]);
   survivalGroupCount = 3;
   survivalItemCount = 4;
   survivalRoleCount = 3;
+  survivalCreatureCount = 0;
+  survivalAlienCount = 0;
+  survivalPowerCount = 0;
+  survivalSpecialistCount = 0;
   lockEnvironment = false;
+  noEnvironment = false;
+  resetImportanceDeckSelection(activeMode);
   metaphorVariant = "concrete";
   metaphorPrefixDeck = "";
   metaphorSuffixDeck = activeMode.metaphorConcreteDecks?.[0] || "items";
@@ -2110,6 +2486,10 @@ document.addEventListener("keydown", (event) => {
 });
 
 drawButton.addEventListener("click", spinDraw);
+drawCount.addEventListener("input", () => {
+  if (activeMode.cardMode !== "itemEnvironment" || survivalVariant !== "battle") return;
+  survivalGroupCount = Math.max(1, Math.min(8, Number(drawCount.value) || 1));
+});
 
 libraryTools.addEventListener("click", (event) => {
   const chip = event.target.closest("[data-preview]");
@@ -2124,12 +2504,15 @@ libraryTools.addEventListener("click", (event) => {
 });
 
 fixedPools.addEventListener("click", (event) => {
+  if (handleSurvivalStep(event)) return;
+
   const survivalVariantButton = event.target.closest("[data-survival-variant]");
   if (survivalVariantButton) {
     survivalVariant = survivalVariantButton.dataset.survivalVariant;
-    activeLibrary = survivalVariant === "battle" ? "items" : activeLibrary;
-    activePreview = survivalVariant === "battle" ? "items" : activePreview;
+    activeLibrary = "items";
+    activePreview = "items";
     lockEnvironment = false;
+    noEnvironment = false;
     currentStageCard = null;
     renderAll();
     renderEmptyState();
@@ -2148,16 +2531,65 @@ fixedPools.addEventListener("click", (event) => {
 
   const primaryButton = event.target.closest("[data-primary-variant]");
   if (primaryButton) {
-    activeLibrary = primaryButton.dataset.primaryVariant;
+    const deckId = primaryButton.dataset.primaryVariant;
+    if (activeMode.cardMode === "importanceDuel") {
+      if (selectedImportanceDecks.has(deckId) && selectedImportanceDecks.size > 1) {
+        selectedImportanceDecks.delete(deckId);
+      } else {
+        selectedImportanceDecks.add(deckId);
+      }
+      activeLibrary = deckId;
+      activePreview = deckId;
+      renderAll();
+      return;
+    }
+    if (activeMode.cardMode === "itemEnvironment" && survivalVariant === "survival") {
+      if (survivalDeckSelection.has(deckId) && survivalDeckSelection.size > 1) {
+        survivalDeckSelection.delete(deckId);
+      } else {
+        survivalDeckSelection.add(deckId);
+      }
+      activeLibrary = deckId;
+      activePreview = deckId;
+      renderAll();
+      return;
+    }
+    activeLibrary = deckId;
     activePreview = activeLibrary;
     renderAll();
     return;
   }
 
   const button = event.target.closest("[data-sales-variant]");
-  if (!button) return;
-  salesVariant = button.dataset.salesVariant;
+  if (button) {
+    salesVariant = button.dataset.salesVariant;
+    if (salesVariant === "supply") activePreview = "items";
+    if (salesVariant === "story") activePreview = salesNoConcept ? "items" : "concepts";
+    if (salesVariant === "target") activePreview = salesAudienceDeck;
+    renderAll();
+    renderEmptyState();
+    return;
+  }
+
+  const audienceButton = event.target.closest("[data-sales-audience]");
+  if (audienceButton) {
+    salesAudienceDeck = audienceButton.dataset.salesAudience;
+    activePreview = salesAudienceDeck;
+    renderAll();
+    renderEmptyState();
+    return;
+  }
+
+  const summonCategoryButton = event.target.closest("[data-summon-category]");
+  if (!summonCategoryButton) return;
+  const category = summonCategoryButton.dataset.summonCategory;
+  if (summonCategorySelection.has(category)) {
+    if (summonCategorySelection.size > 1) summonCategorySelection.delete(category);
+  } else {
+    summonCategorySelection.add(category);
+  }
   renderAll();
+  renderEmptyState();
 });
 
 function handleSurvivalCountInput(event) {
@@ -2166,10 +2598,25 @@ function handleSurvivalCountInput(event) {
   const key = survivalCountInput.dataset.survivalCount;
   const min = Number(survivalCountInput.min) || 0;
   const max = Number(survivalCountInput.max) || 8;
-  const value = Math.max(min, Math.min(max, Number(survivalCountInput.value) || min));
-  if (key === "groups") survivalGroupCount = value;
-  if (key === "items") survivalItemCount = value;
-  if (key === "roles") survivalRoleCount = value;
+  const cleanValue = String(survivalCountInput.value || "").replace(/[^\d]/g, "");
+  if (survivalCountInput.value !== cleanValue) survivalCountInput.value = cleanValue;
+  const value = Math.max(min, Math.min(max, Number(cleanValue) || min));
+  setSurvivalCountValue(key, value);
+  return true;
+}
+
+function handleSurvivalStep(event) {
+  const button = event.target.closest("[data-survival-step]");
+  if (!button) return false;
+  const key = button.dataset.survivalStep;
+  const step = Number(button.dataset.step) || 0;
+  const input = fixedPools.querySelector(`[data-survival-count="${key}"]`);
+  if (!input) return false;
+  const min = Number(input.min) || 0;
+  const max = Number(input.max) || 8;
+  const nextValue = Math.max(min, Math.min(max, survivalCountValue(key) + step));
+  setSurvivalCountValue(key, nextValue);
+  renderAll();
   return true;
 }
 
@@ -2208,9 +2655,29 @@ fixedPools.addEventListener("change", (event) => {
     return;
   }
 
+  const salesNoConceptCheckbox = event.target.closest("[data-sales-no-concept]");
+  if (salesNoConceptCheckbox) {
+    salesNoConcept = salesNoConceptCheckbox.checked;
+    activePreview = salesNoConcept ? "items" : "concepts";
+    renderAll();
+    renderEmptyState();
+    return;
+  }
+
   const checkbox = event.target.closest("[data-lock-environment]");
-  if (!checkbox) return;
-  lockEnvironment = checkbox.checked;
+  if (checkbox) {
+    lockEnvironment = checkbox.checked;
+    renderAll();
+    return;
+  }
+
+  const noEnvironmentCheckbox = event.target.closest("[data-no-environment]");
+  if (!noEnvironmentCheckbox) return;
+  noEnvironment = noEnvironmentCheckbox.checked;
+  if (noEnvironment) {
+    lockEnvironment = false;
+    currentStageCard = null;
+  }
   renderAll();
 });
 
@@ -2339,12 +2806,37 @@ clearCards.addEventListener("click", () => {
   refreshSecretPlaceBoard();
 });
 
-resetActivePool.addEventListener("click", () => {
+function setResetConfirmState(active) {
+  resetConfirmActive = active;
+  for (const button of [resetActivePool, quickResetActivePool]) {
+    if (!button) continue;
+    button.classList.toggle("is-confirming", active);
+    button.textContent = active ? "再按一次確認" : (button === quickResetActivePool ? "重置卡片" : uiText("button.pool.reset"));
+  }
+  if (resetConfirmTimer) window.clearTimeout(resetConfirmTimer);
+  if (active) {
+    resetConfirmTimer = window.setTimeout(() => setResetConfirmState(false), 2600);
+  }
+}
+
+function resetActiveModeCards() {
   resetModeSelections();
   resetSecretPlaceState();
+  setResetConfirmState(false);
   renderAll();
   refreshSecretPlaceBoard();
-});
+}
+
+function handleResetAction() {
+  if (!resetConfirmActive) {
+    setResetConfirmState(true);
+    return;
+  }
+  resetActiveModeCards();
+}
+
+resetActivePool.addEventListener("click", handleResetAction);
+quickResetActivePool?.addEventListener("click", handleResetAction);
 
 ensureEditPanel();
 ensureFloatingTimer();
