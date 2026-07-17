@@ -1167,7 +1167,6 @@ h1 {
 }
 
 .cards-zone,
-.coach-panel,
 .library-band {
   padding: 22px;
   border: 1px solid var(--line);
@@ -1724,10 +1723,6 @@ h1 {
   line-height: 1.7;
 }
 
-.coach-panel {
-  margin-top: 18px;
-}
-
 .history-panel {
   margin-top: 18px;
   border: 1px solid var(--line);
@@ -1787,45 +1782,6 @@ h1 {
   background: rgba(248, 245, 239, 0.9);
   font-size: 0.88rem;
   font-weight: 800;
-}
-
-.prompt-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 10px;
-}
-
-.prompt-item,
-.round-box {
-  padding: 14px;
-  border-left: 4px solid var(--teal);
-  border-radius: 6px;
-  background: #fff;
-  line-height: 1.65;
-}
-
-.prompt-item strong {
-  display: block;
-  margin-bottom: 4px;
-}
-
-.round-box {
-  margin-top: 14px;
-  border-left-color: var(--gold);
-}
-
-.round-box h3 {
-  margin-bottom: 10px;
-  font-size: 1.05rem;
-}
-
-.round-box ol {
-  margin: 0;
-  padding-left: 20px;
-}
-
-.round-box li + li {
-  margin-top: 8px;
 }
 
 .card-dictionary-panel {
@@ -2528,10 +2484,6 @@ body.is-edit-mode .floating-timer {
     justify-self: center;
   }
 
-  .coach-panel {
-    position: static;
-  }
-
   .secret-teacher-panel {
     grid-template-columns: 1fr;
   }
@@ -2563,6 +2515,10 @@ body.is-edit-mode .floating-timer {
     padding-top: 10px;
   }
 
+  .stage-panel {
+    display: none;
+  }
+
   .tagline span {
     display: block;
     margin-left: 0;
@@ -2571,7 +2527,6 @@ body.is-edit-mode .floating-timer {
 
   .scene-preview,
   .cards-zone,
-  .coach-panel,
   .card-dictionary-panel,
   .library-band {
     padding: 18px;

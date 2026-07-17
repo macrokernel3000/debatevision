@@ -2120,7 +2120,7 @@ window.DEBATE_DECKS = {
         "iconAsset": "",
         "tokenIcon": "🚶",
         "image": "",
-        "rarity": "A",
+        "rarity": "概念",
         "tags": [
           "關係",
           "信任",
@@ -2135,7 +2135,7 @@ window.DEBATE_DECKS = {
         "iconAsset": "",
         "tokenIcon": "🫂",
         "image": "",
-        "rarity": "B",
+        "rarity": "概念",
         "tags": [
           "關係",
           "信任",
@@ -2150,7 +2150,7 @@ window.DEBATE_DECKS = {
         "iconAsset": "",
         "tokenIcon": "⚖️",
         "image": "",
-        "rarity": "A",
+        "rarity": "概念",
         "tags": [
           "價值",
           "社會",
@@ -2165,7 +2165,7 @@ window.DEBATE_DECKS = {
         "iconAsset": "",
         "tokenIcon": "🧭",
         "image": "",
-        "rarity": "A",
+        "rarity": "概念",
         "tags": [
           "習慣",
           "意志",
@@ -2180,7 +2180,7 @@ window.DEBATE_DECKS = {
         "iconAsset": "",
         "tokenIcon": "🕯️",
         "image": "",
-        "rarity": "B",
+        "rarity": "概念",
         "tags": [
           "情感",
           "關係",
@@ -2195,7 +2195,7 @@ window.DEBATE_DECKS = {
         "iconAsset": "",
         "tokenIcon": "↔️",
         "image": "",
-        "rarity": "A",
+        "rarity": "概念",
         "tags": [
           "判斷",
           "自由",
@@ -2210,7 +2210,7 @@ window.DEBATE_DECKS = {
         "iconAsset": "",
         "tokenIcon": "↯",
         "image": "",
-        "rarity": "A",
+        "rarity": "概念",
         "tags": [
           "挫折",
           "學習",
@@ -2225,7 +2225,7 @@ window.DEBATE_DECKS = {
         "iconAsset": "",
         "tokenIcon": "📘",
         "image": "",
-        "rarity": "A",
+        "rarity": "概念",
         "tags": [
           "學習",
           "理解",
@@ -2240,7 +2240,7 @@ window.DEBATE_DECKS = {
         "iconAsset": "",
         "tokenIcon": "🌱",
         "image": "",
-        "rarity": "A",
+        "rarity": "概念",
         "tags": [
           "學習",
           "改變",
@@ -2255,7 +2255,7 @@ window.DEBATE_DECKS = {
         "iconAsset": "",
         "tokenIcon": "✦",
         "image": "",
-        "rarity": "B",
+        "rarity": "概念",
         "tags": [
           "效率",
           "風格",
@@ -2270,7 +2270,7 @@ window.DEBATE_DECKS = {
         "iconAsset": "",
         "tokenIcon": "◆",
         "image": "",
-        "rarity": "A",
+        "rarity": "概念",
         "tags": [
           "價值",
           "堅持",
@@ -2285,7 +2285,7 @@ window.DEBATE_DECKS = {
         "iconAsset": "",
         "tokenIcon": "🔥",
         "image": "",
-        "rarity": "A",
+        "rarity": "概念",
         "tags": [
           "行動",
           "意志",
@@ -2300,7 +2300,7 @@ window.DEBATE_DECKS = {
         "iconAsset": "",
         "tokenIcon": "🤲",
         "image": "",
-        "rarity": "B",
+        "rarity": "概念",
         "tags": [
           "關係",
           "同理",
@@ -2315,7 +2315,7 @@ window.DEBATE_DECKS = {
         "iconAsset": "",
         "tokenIcon": "🎨",
         "image": "",
-        "rarity": "B",
+        "rarity": "概念",
         "tags": [
           "創作",
           "感受",
@@ -2330,7 +2330,7 @@ window.DEBATE_DECKS = {
         "iconAsset": "",
         "tokenIcon": "💰",
         "image": "",
-        "rarity": "A",
+        "rarity": "概念",
         "tags": [
           "資源",
           "交換",
@@ -2345,7 +2345,7 @@ window.DEBATE_DECKS = {
         "iconAsset": "",
         "tokenIcon": "⚔️",
         "image": "",
-        "rarity": "B",
+        "rarity": "概念",
         "tags": [
           "力量",
           "防衛",
@@ -2360,7 +2360,7 @@ window.DEBATE_DECKS = {
         "iconAsset": "",
         "tokenIcon": "🧩",
         "image": "",
-        "rarity": "B",
+        "rarity": "概念",
         "tags": [
           "系統",
           "問題",
@@ -2375,7 +2375,7 @@ window.DEBATE_DECKS = {
         "iconAsset": "",
         "tokenIcon": "🎯",
         "image": "",
-        "rarity": "B",
+        "rarity": "概念",
         "tags": [
           "技能",
           "練習",
@@ -2390,7 +2390,7 @@ window.DEBATE_DECKS = {
         "iconAsset": "",
         "tokenIcon": "☺",
         "image": "",
-        "rarity": "C",
+        "rarity": "概念",
         "tags": [
           "表達",
           "情緒",
@@ -2405,7 +2405,7 @@ window.DEBATE_DECKS = {
         "iconAsset": "",
         "tokenIcon": "🤝",
         "image": "",
-        "rarity": "A",
+        "rarity": "概念",
         "tags": [
           "關係",
           "信任",
@@ -2420,7 +2420,7 @@ window.DEBATE_DECKS = {
         "iconAsset": "",
         "tokenIcon": "🛡️",
         "image": "",
-        "rarity": "A",
+        "rarity": "概念",
         "tags": [
           "風險",
           "行動",
@@ -2435,7 +2435,7 @@ window.DEBATE_DECKS = {
         "iconAsset": "",
         "tokenIcon": "🏠",
         "image": "",
-        "rarity": "B",
+        "rarity": "概念",
         "tags": [
           "日常",
           "經驗",
@@ -2450,7 +2450,7 @@ window.DEBATE_DECKS = {
         "iconAsset": "",
         "tokenIcon": "☀️",
         "image": "",
-        "rarity": "C",
+        "rarity": "概念",
         "tags": [
           "情緒",
           "分享",
@@ -2465,7 +2465,7 @@ window.DEBATE_DECKS = {
         "iconAsset": "",
         "tokenIcon": "⚙️",
         "image": "",
-        "rarity": "B",
+        "rarity": "概念",
         "tags": [
           "細節",
           "準確",
@@ -2480,7 +2480,7 @@ window.DEBATE_DECKS = {
         "iconAsset": "",
         "tokenIcon": "🎲",
         "image": "",
-        "rarity": "A",
+        "rarity": "概念",
         "tags": [
           "偶然",
           "結果",
@@ -2495,7 +2495,7 @@ window.DEBATE_DECKS = {
         "iconAsset": "",
         "tokenIcon": "🏁",
         "image": "",
-        "rarity": "A",
+        "rarity": "概念",
         "tags": [
           "比較",
           "成就",
@@ -2510,7 +2510,7 @@ window.DEBATE_DECKS = {
         "iconAsset": "",
         "tokenIcon": "❤️",
         "image": "",
-        "rarity": "A",
+        "rarity": "概念",
         "tags": [
           "情感",
           "關係",
@@ -2525,11 +2525,326 @@ window.DEBATE_DECKS = {
         "iconAsset": "",
         "tokenIcon": "🏆",
         "image": "",
-        "rarity": "A",
+        "rarity": "概念",
         "tags": [
           "成果",
           "目標",
           "認可"
+        ]
+      },
+      {
+        "name": "懶惰",
+        "lore": "想少花力氣、少做步驟、把麻煩交給工具或服務處理。",
+        "imageId": "🛋️",
+        "icon": "🛋️",
+        "iconAsset": "",
+        "tokenIcon": "🛋️",
+        "image": "",
+        "rarity": "需求",
+        "tags": [
+          "心理",
+          "便利",
+          "動機"
+        ]
+      },
+      {
+        "name": "競技",
+        "lore": "想贏過別人、證明實力、在比較中獲得刺激與成就感。",
+        "imageId": "🏆",
+        "icon": "🏆",
+        "iconAsset": "",
+        "tokenIcon": "🏆",
+        "image": "",
+        "rarity": "需求",
+        "tags": [
+          "競爭",
+          "成就",
+          "遊戲"
+        ]
+      },
+      {
+        "name": "歸屬",
+        "lore": "想被接納、加入群體、感覺自己不是孤單一個人。",
+        "imageId": "🤝",
+        "icon": "🤝",
+        "iconAsset": "",
+        "tokenIcon": "🤝",
+        "image": "",
+        "rarity": "需求",
+        "tags": [
+          "關係",
+          "群體",
+          "情感"
+        ]
+      },
+      {
+        "name": "榮譽",
+        "lore": "想被尊重、被看見、被承認自己做了一件值得驕傲的事。",
+        "imageId": "🎖️",
+        "icon": "🎖️",
+        "iconAsset": "",
+        "tokenIcon": "🎖️",
+        "image": "",
+        "rarity": "需求",
+        "tags": [
+          "尊重",
+          "地位",
+          "成就"
+        ]
+      },
+      {
+        "name": "紀念",
+        "lore": "想保存一段經驗、關係或重要時刻，讓它未來還能被想起。",
+        "imageId": "📷",
+        "icon": "📷",
+        "iconAsset": "",
+        "tokenIcon": "📷",
+        "image": "",
+        "rarity": "需求",
+        "tags": [
+          "記憶",
+          "情感",
+          "收藏"
+        ]
+      },
+      {
+        "name": "擁有",
+        "lore": "想把某樣東西變成自己的，透過所有權得到安心或滿足。",
+        "imageId": "🔑",
+        "icon": "🔑",
+        "iconAsset": "",
+        "tokenIcon": "🔑",
+        "image": "",
+        "rarity": "需求",
+        "tags": [
+          "所有權",
+          "安全",
+          "慾望"
+        ]
+      },
+      {
+        "name": "安全",
+        "lore": "想降低風險、避免損失、讓自己或重要的人不受傷害。",
+        "imageId": "🛡️",
+        "icon": "🛡️",
+        "iconAsset": "",
+        "tokenIcon": "🛡️",
+        "image": "",
+        "rarity": "需求",
+        "tags": [
+          "風險",
+          "保護",
+          "安心"
+        ]
+      },
+      {
+        "name": "便利",
+        "lore": "想讓生活更快、更簡單、更少等待，最好不用重新學太多東西。",
+        "imageId": "⚡",
+        "icon": "⚡",
+        "iconAsset": "",
+        "tokenIcon": "⚡",
+        "image": "",
+        "rarity": "需求",
+        "tags": [
+          "效率",
+          "生活",
+          "工具"
+        ]
+      },
+      {
+        "name": "美感",
+        "lore": "想讓物品、空間或自己看起來更好，並從好看中得到愉悅。",
+        "imageId": "✨",
+        "icon": "✨",
+        "iconAsset": "",
+        "tokenIcon": "✨",
+        "image": "",
+        "rarity": "需求",
+        "tags": [
+          "審美",
+          "設計",
+          "愉悅"
+        ]
+      },
+      {
+        "name": "陪伴",
+        "lore": "想有人或某物能待在身邊，降低孤單感並提供情緒支持。",
+        "imageId": "💬",
+        "icon": "💬",
+        "iconAsset": "",
+        "tokenIcon": "💬",
+        "image": "",
+        "rarity": "需求",
+        "tags": [
+          "情感",
+          "關係",
+          "支持"
+        ]
+      },
+      {
+        "name": "成長",
+        "lore": "想變得更厲害、更成熟，或看見自己持續進步的證據。",
+        "imageId": "🌱",
+        "icon": "🌱",
+        "iconAsset": "",
+        "tokenIcon": "🌱",
+        "image": "",
+        "rarity": "需求",
+        "tags": [
+          "學習",
+          "進步",
+          "自我"
+        ]
+      },
+      {
+        "name": "探索",
+        "lore": "想接觸未知、打開新經驗，滿足好奇心與冒險感。",
+        "imageId": "🧭",
+        "icon": "🧭",
+        "iconAsset": "",
+        "tokenIcon": "🧭",
+        "image": "",
+        "rarity": "需求",
+        "tags": [
+          "好奇",
+          "冒險",
+          "未知"
+        ]
+      },
+      {
+        "name": "控制",
+        "lore": "想掌握局面、減少不確定，讓事情按照自己的計畫前進。",
+        "imageId": "🎛️",
+        "icon": "🎛️",
+        "iconAsset": "",
+        "tokenIcon": "🎛️",
+        "image": "",
+        "rarity": "需求",
+        "tags": [
+          "秩序",
+          "掌控",
+          "計畫"
+        ]
+      },
+      {
+        "name": "表達",
+        "lore": "想把自己的想法、風格、立場或情緒讓別人看見。",
+        "imageId": "🎤",
+        "icon": "🎤",
+        "iconAsset": "",
+        "tokenIcon": "🎤",
+        "image": "",
+        "rarity": "需求",
+        "tags": [
+          "自我",
+          "溝通",
+          "風格"
+        ]
+      },
+      {
+        "name": "省錢",
+        "lore": "想用更低成本得到結果，或避免未來多花不必要的錢。",
+        "imageId": "💰",
+        "icon": "💰",
+        "iconAsset": "",
+        "tokenIcon": "💰",
+        "image": "",
+        "rarity": "需求",
+        "tags": [
+          "價格",
+          "成本",
+          "理性"
+        ]
+      },
+      {
+        "name": "效率",
+        "lore": "想在同樣時間內完成更多事，減少浪費與重複勞動。",
+        "imageId": "⏱️",
+        "icon": "⏱️",
+        "iconAsset": "",
+        "tokenIcon": "⏱️",
+        "image": "",
+        "rarity": "需求",
+        "tags": [
+          "時間",
+          "生產力",
+          "速度"
+        ]
+      },
+      {
+        "name": "身分",
+        "lore": "想透過選擇、物品或行為說明自己是怎樣的人。",
+        "imageId": "🪪",
+        "icon": "🪪",
+        "iconAsset": "",
+        "tokenIcon": "🪪",
+        "image": "",
+        "rarity": "需求",
+        "tags": [
+          "認同",
+          "社會",
+          "形象"
+        ]
+      },
+      {
+        "name": "放鬆",
+        "lore": "想暫時卸下壓力，讓身體或心理從緊繃中恢復。",
+        "imageId": "🌙",
+        "icon": "🌙",
+        "iconAsset": "",
+        "tokenIcon": "🌙",
+        "image": "",
+        "rarity": "需求",
+        "tags": [
+          "休息",
+          "療癒",
+          "壓力"
+        ]
+      },
+      {
+        "name": "驚喜",
+        "lore": "想獲得意料之外的新鮮感，讓平凡經驗變得值得記住。",
+        "imageId": "🎁",
+        "icon": "🎁",
+        "iconAsset": "",
+        "tokenIcon": "🎁",
+        "image": "",
+        "rarity": "需求",
+        "tags": [
+          "新奇",
+          "情緒",
+          "體驗"
+        ]
+      },
+      {
+        "name": "公平",
+        "lore": "想讓付出與回報合理，避免有人被佔便宜或被不當對待。",
+        "imageId": "⚖️",
+        "icon": "⚖️",
+        "iconAsset": "",
+        "tokenIcon": "⚖️",
+        "image": "",
+        "rarity": "需求",
+        "tags": [
+          "正義",
+          "規則",
+          "社會"
+        ]
+      },
+      {
+        "name": "成就",
+        "lore": "想完成困難目標，證明自己做得到，並獲得進步感或肯定。",
+        "imageId": "🏅",
+        "icon": "🏅",
+        "iconAsset": "",
+        "tokenIcon": "🏅",
+        "image": "",
+        "rarity": "需求",
+        "tags": [
+          "成果",
+          "自我",
+          "肯定"
         ]
       }
     ]
@@ -5517,327 +5832,6 @@ window.DEBATE_DECKS = {
         "rarity": "A",
         "tags": [
           "變化"
-        ]
-      }
-    ]
-  },
-  "needs": {
-    "label": "需求卡",
-    "icon": "◇",
-    "cards": [
-      {
-        "name": "懶惰",
-        "lore": "想少花力氣、少做步驟、把麻煩交給工具或服務處理。",
-        "imageId": "🛋️",
-        "icon": "🛋️",
-        "iconAsset": "",
-        "tokenIcon": "🛋️",
-        "image": "",
-        "rarity": "A",
-        "tags": [
-          "心理",
-          "便利",
-          "動機"
-        ]
-      },
-      {
-        "name": "競技",
-        "lore": "想贏過別人、證明實力、在比較中獲得刺激與成就感。",
-        "imageId": "🏆",
-        "icon": "🏆",
-        "iconAsset": "",
-        "tokenIcon": "🏆",
-        "image": "",
-        "rarity": "A",
-        "tags": [
-          "競爭",
-          "成就",
-          "遊戲"
-        ]
-      },
-      {
-        "name": "歸屬",
-        "lore": "想被接納、加入群體、感覺自己不是孤單一個人。",
-        "imageId": "🤝",
-        "icon": "🤝",
-        "iconAsset": "",
-        "tokenIcon": "🤝",
-        "image": "",
-        "rarity": "A",
-        "tags": [
-          "關係",
-          "群體",
-          "情感"
-        ]
-      },
-      {
-        "name": "榮譽",
-        "lore": "想被尊重、被看見、被承認自己做了一件值得驕傲的事。",
-        "imageId": "🎖️",
-        "icon": "🎖️",
-        "iconAsset": "",
-        "tokenIcon": "🎖️",
-        "image": "",
-        "rarity": "A",
-        "tags": [
-          "尊重",
-          "地位",
-          "成就"
-        ]
-      },
-      {
-        "name": "紀念",
-        "lore": "想保存一段經驗、關係或重要時刻，讓它未來還能被想起。",
-        "imageId": "📷",
-        "icon": "📷",
-        "iconAsset": "",
-        "tokenIcon": "📷",
-        "image": "",
-        "rarity": "A",
-        "tags": [
-          "記憶",
-          "情感",
-          "收藏"
-        ]
-      },
-      {
-        "name": "擁有",
-        "lore": "想把某樣東西變成自己的，透過所有權得到安心或滿足。",
-        "imageId": "🔑",
-        "icon": "🔑",
-        "iconAsset": "",
-        "tokenIcon": "🔑",
-        "image": "",
-        "rarity": "A",
-        "tags": [
-          "所有權",
-          "安全",
-          "慾望"
-        ]
-      },
-      {
-        "name": "安全",
-        "lore": "想降低風險、避免損失、讓自己或重要的人不受傷害。",
-        "imageId": "🛡️",
-        "icon": "🛡️",
-        "iconAsset": "",
-        "tokenIcon": "🛡️",
-        "image": "",
-        "rarity": "A",
-        "tags": [
-          "風險",
-          "保護",
-          "安心"
-        ]
-      },
-      {
-        "name": "便利",
-        "lore": "想讓生活更快、更簡單、更少等待，最好不用重新學太多東西。",
-        "imageId": "⚡",
-        "icon": "⚡",
-        "iconAsset": "",
-        "tokenIcon": "⚡",
-        "image": "",
-        "rarity": "A",
-        "tags": [
-          "效率",
-          "生活",
-          "工具"
-        ]
-      },
-      {
-        "name": "美感",
-        "lore": "想讓物品、空間或自己看起來更好，並從好看中得到愉悅。",
-        "imageId": "✨",
-        "icon": "✨",
-        "iconAsset": "",
-        "tokenIcon": "✨",
-        "image": "",
-        "rarity": "B",
-        "tags": [
-          "審美",
-          "設計",
-          "愉悅"
-        ]
-      },
-      {
-        "name": "陪伴",
-        "lore": "想有人或某物能待在身邊，降低孤單感並提供情緒支持。",
-        "imageId": "💬",
-        "icon": "💬",
-        "iconAsset": "",
-        "tokenIcon": "💬",
-        "image": "",
-        "rarity": "B",
-        "tags": [
-          "情感",
-          "關係",
-          "支持"
-        ]
-      },
-      {
-        "name": "成長",
-        "lore": "想變得更厲害、更成熟，或看見自己持續進步的證據。",
-        "imageId": "🌱",
-        "icon": "🌱",
-        "iconAsset": "",
-        "tokenIcon": "🌱",
-        "image": "",
-        "rarity": "A",
-        "tags": [
-          "學習",
-          "進步",
-          "自我"
-        ]
-      },
-      {
-        "name": "探索",
-        "lore": "想接觸未知、打開新經驗，滿足好奇心與冒險感。",
-        "imageId": "🧭",
-        "icon": "🧭",
-        "iconAsset": "",
-        "tokenIcon": "🧭",
-        "image": "",
-        "rarity": "B",
-        "tags": [
-          "好奇",
-          "冒險",
-          "未知"
-        ]
-      },
-      {
-        "name": "控制",
-        "lore": "想掌握局面、減少不確定，讓事情按照自己的計畫前進。",
-        "imageId": "🎛️",
-        "icon": "🎛️",
-        "iconAsset": "",
-        "tokenIcon": "🎛️",
-        "image": "",
-        "rarity": "B",
-        "tags": [
-          "秩序",
-          "掌控",
-          "計畫"
-        ]
-      },
-      {
-        "name": "表達",
-        "lore": "想把自己的想法、風格、立場或情緒讓別人看見。",
-        "imageId": "🎤",
-        "icon": "🎤",
-        "iconAsset": "",
-        "tokenIcon": "🎤",
-        "image": "",
-        "rarity": "B",
-        "tags": [
-          "自我",
-          "溝通",
-          "風格"
-        ]
-      },
-      {
-        "name": "省錢",
-        "lore": "想用更低成本得到結果，或避免未來多花不必要的錢。",
-        "imageId": "💰",
-        "icon": "💰",
-        "iconAsset": "",
-        "tokenIcon": "💰",
-        "image": "",
-        "rarity": "B",
-        "tags": [
-          "價格",
-          "成本",
-          "理性"
-        ]
-      },
-      {
-        "name": "效率",
-        "lore": "想在同樣時間內完成更多事，減少浪費與重複勞動。",
-        "imageId": "⏱️",
-        "icon": "⏱️",
-        "iconAsset": "",
-        "tokenIcon": "⏱️",
-        "image": "",
-        "rarity": "A",
-        "tags": [
-          "時間",
-          "生產力",
-          "速度"
-        ]
-      },
-      {
-        "name": "身分",
-        "lore": "想透過選擇、物品或行為說明自己是怎樣的人。",
-        "imageId": "🪪",
-        "icon": "🪪",
-        "iconAsset": "",
-        "tokenIcon": "🪪",
-        "image": "",
-        "rarity": "B",
-        "tags": [
-          "認同",
-          "社會",
-          "形象"
-        ]
-      },
-      {
-        "name": "放鬆",
-        "lore": "想暫時卸下壓力，讓身體或心理從緊繃中恢復。",
-        "imageId": "🌙",
-        "icon": "🌙",
-        "iconAsset": "",
-        "tokenIcon": "🌙",
-        "image": "",
-        "rarity": "B",
-        "tags": [
-          "休息",
-          "療癒",
-          "壓力"
-        ]
-      },
-      {
-        "name": "驚喜",
-        "lore": "想獲得意料之外的新鮮感，讓平凡經驗變得值得記住。",
-        "imageId": "🎁",
-        "icon": "🎁",
-        "iconAsset": "",
-        "tokenIcon": "🎁",
-        "image": "",
-        "rarity": "C",
-        "tags": [
-          "新奇",
-          "情緒",
-          "體驗"
-        ]
-      },
-      {
-        "name": "公平",
-        "lore": "想讓付出與回報合理，避免有人被佔便宜或被不當對待。",
-        "imageId": "⚖️",
-        "icon": "⚖️",
-        "iconAsset": "",
-        "tokenIcon": "⚖️",
-        "image": "",
-        "rarity": "A",
-        "tags": [
-          "正義",
-          "規則",
-          "社會"
-        ]
-      },
-      {
-        "name": "成就",
-        "lore": "想完成困難目標，證明自己做得到，並獲得進步感或肯定。",
-        "imageId": "🏅",
-        "icon": "🏅",
-        "iconAsset": "",
-        "tokenIcon": "🏅",
-        "image": "",
-        "rarity": "A",
-        "tags": [
-          "成果",
-          "自我",
-          "肯定"
         ]
       }
     ]

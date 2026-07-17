@@ -3,7 +3,16 @@ const modes = window.DEBATE_MODES;
 const savedImageLayouts = window.DEBATE_IMAGE_LAYOUTS || {};
 const uiTexts = window.DEBATE_UI_TEXTS || {};
 const modeLifecycle = window.DEBATE_MODE_LIFECYCLE || {};
+const modeControllers = window.DEBATE_MODE_CONTROLLERS || {};
 const { iconFor } = window;
+
+if (!decks.needs && decks.concepts) {
+  decks.needs = {
+    label: "需求卡",
+    icon: "◇",
+    cards: (decks.concepts.cards || []).filter((card) => (card.rarity || "") === "需求")
+  };
+}
 
 const DEFAULT_IMAGE_LAYOUT = { scale: 1, x: 0, y: 0, rotate: 0, overlay: 0.28 };
 const EDIT_MODE = new URLSearchParams(window.location.search).get("edit") === "1";
@@ -55,9 +64,6 @@ let selectedEditTarget = null;
 const defaultUiTexts = {
   "section.drawn.eyebrow": "Drawn Cards",
   "section.drawn.title": "本輪卡牌",
-  "section.coach.eyebrow": "Coach Kit",
-  "section.coach.title": "教練提示",
-  "section.flow.title": "回合流程",
   "section.library.eyebrow": "Lexicon",
   "section.library.title": "本局抽選池",
   "button.pool.selectAll": "全選目前牌組",
@@ -128,8 +134,6 @@ const cardDictionary = document.querySelector("#cardDictionary");
 const drawDictionaryCards = document.querySelector("#drawDictionaryCards");
 const clearDictionaryDecks = document.querySelector("#clearDictionaryDecks");
 const dictionaryResult = document.querySelector("#dictionaryResult");
-const promptList = document.querySelector("#promptList");
-const roundFlow = document.querySelector("#roundFlow");
 const libraryTools = document.querySelector("#libraryTools");
 const tokenCloud = document.querySelector("#tokenCloud");
 const selectAllCards = document.querySelector("#selectAllCards");
@@ -375,7 +379,7 @@ function cardsFrom(deckId) {
 }
 
 function cardKey(card) {
-  return `${card.deckId}::${card.name}`;
+  return `${card.deckId}::${card.rarity || "C"}::${card.name}`;
 }
 
 function selectionScope(deckId) {
@@ -403,7 +407,7 @@ function defaultCardsForDeck(deckId) {
 }
 
 function rarityOrder(rarity) {
-  const order = { A: 1, B: 2, C: 3, N: 4 };
+  const order = { A: 1, B: 2, C: 3, N: 4, 概念: 5, 需求: 6 };
   return order[rarity] || 99;
 }
 
@@ -413,6 +417,8 @@ function raritiesFrom(deckId) {
 }
 
 function rarityDisplayName(rarity) {
+  if (rarity === "概念") return "概念卡";
+  if (rarity === "需求") return "需求卡";
   return rarity === "N" ? "道具卡" : `${rarity} 卡`;
 }
 
@@ -1246,14 +1252,6 @@ function metaphorLockMarkup(part, label) {
   `;
 }
 
-function renderPrompts() {
-  if (!promptList || !roundFlow) return;
-  promptList.innerHTML = activeMode.prompts.map(([title, body]) => `
-    <div class="prompt-item"><strong>${title}</strong><span>${body}</span></div>
-  `).join("");
-  roundFlow.innerHTML = activeMode.flow.map((item) => `<li>${item}</li>`).join("");
-}
-
 function activeDeckIds() {
   if (activeMode.cardMode === "metaphorCompass") {
     return [activeSecondaryLibrary, ...metaphorDeckOptions("prefix"), ...metaphorDeckOptions("suffix")]
@@ -1920,25 +1918,6 @@ function renderSurvivalBattle(environment, groups) {
   `;
 }
 
-function renderSalesPitch(items = [], needs = []) {
-  if (items.length && needs.length) {
-    const pairCount = Math.max(items.length, needs.length);
-    cardGrid.innerHTML = Array.from({ length: pairCount }, (_, index) => `
-      <section class="sales-pair">
-        <div class="sales-pair-head">銷售組合 ${index + 1}</div>
-        <div class="sales-pair-cards">
-          ${items[index] ? cardMarkup(items[index], "sales-card") : ""}
-          ${needs[index] ? cardMarkup(needs[index], "sales-card") : ""}
-        </div>
-      </section>
-    `).join("");
-    return;
-  }
-
-  const cards = [...items, ...needs];
-  cardGrid.innerHTML = cards.map((card) => cardMarkup(card)).join("");
-}
-
 function renderDuel(cards) {
   cardGrid.innerHTML = `
     <div class="duel-board">
@@ -2165,156 +2144,72 @@ function refreshSecretPlaceBoard() {
   renderSecretPlace(lastSecretCard, secretRevealed);
 }
 
+function createModeContext(count = activeMode.fixedCount || Math.max(1, Math.min(6, Number(drawCount.value) || 1))) {
+  return {
+    count,
+    get activeMode() { return activeMode; },
+    get activeLibrary() { return activeLibrary; },
+    get activeSecondaryLibrary() { return activeSecondaryLibrary; },
+    decks,
+    get drawCountValue() { return Number(drawCount.value) || 1; },
+    get currentStageCard() { return currentStageCard; },
+    set currentStageCard(value) { currentStageCard = value; },
+    get lastSecretCard() { return lastSecretCard; },
+    set lastSecretCard(value) { lastSecretCard = value; },
+    get secretAnswerIndex() { return secretAnswerIndex; },
+    get secretRevealed() { return secretRevealed; },
+    set secretRevealed(value) { secretRevealed = value; },
+    get salesVariant() { return salesVariant; },
+    get salesNoConcept() { return salesNoConcept; },
+    get survivalVariant() { return survivalVariant; },
+    get survivalGroupCount() { return survivalGroupCount; },
+    set survivalGroupCount(value) { survivalGroupCount = value; },
+    get survivalItemCount() { return survivalItemCount; },
+    get survivalRoleCount() { return survivalRoleCount; },
+    get survivalCreatureCount() { return survivalCreatureCount; },
+    get survivalAlienCount() { return survivalAlienCount; },
+    get survivalPowerCount() { return survivalPowerCount; },
+    get survivalSpecialistCount() { return survivalSpecialistCount; },
+    get lockEnvironment() { return lockEnvironment; },
+    get noEnvironment() { return noEnvironment; },
+    get metaphorVariant() { return metaphorVariant; },
+    get metaphorPrefixDeck() { return metaphorPrefixDeck; },
+    get metaphorSuffixDeck() { return metaphorSuffixDeck; },
+    get metaphorLocks() { return metaphorLocks; },
+    get currentMetaphorCards() { return currentMetaphorCards; },
+    cardGrid,
+    buildHooks,
+    cardKey,
+    cardMarkup,
+    cardWithEnvironmentHooks,
+    cardWithSalesNeedHooks,
+    cardWithSalesStoryHooks,
+    cardWithSalesTargetHooks,
+    fixedMetaphorPrefixCard,
+    fixedMetaphorRelationCard,
+    importanceActiveDeckIds,
+    markDrawn,
+    pickFrom,
+    pickFromAvailable,
+    pickFromPool,
+    renderCombo,
+    renderDuel,
+    renderMetaphorCompass,
+    renderPoolWarning,
+    renderSecretPlace,
+    renderSurvivalBattle,
+    secretCardFromIndex,
+    selectedCardsFrom,
+    selectedSalesAudienceCards,
+    selectedSummonCards,
+    survivalActiveDeckIds
+  };
+}
+
 function drawResult() {
   const count = activeMode.fixedCount || Math.max(1, Math.min(6, Number(drawCount.value) || 1));
-
-  if (activeMode.cardMode === "itemEnvironment") {
-    if (survivalVariant === "battle") {
-      survivalGroupCount = Math.max(1, Math.min(8, Number(drawCount.value) || survivalGroupCount));
-      const environment = pickFrom(activeSecondaryLibrary, 1)[0];
-      const itemPool = selectedCardsFrom("items");
-      const rolePool = selectedCardsFrom("roles");
-      const creaturePool = selectedCardsFrom("creatures");
-      const alienPool = selectedCardsFrom("summons").filter((card) => card.rarity === "異族");
-      const powerPool = selectedCardsFrom("summons").filter((card) => card.rarity === "超能");
-      const specialistPool = selectedCardsFrom("summons").filter((card) => card.rarity === "特職");
-      const itemNeed = survivalGroupCount * survivalItemCount;
-      const roleNeed = survivalGroupCount * survivalRoleCount;
-      const creatureNeed = survivalGroupCount * survivalCreatureCount;
-      const alienNeed = survivalGroupCount * survivalAlienCount;
-      const powerNeed = survivalGroupCount * survivalPowerCount;
-      const specialistNeed = survivalGroupCount * survivalSpecialistCount;
-      if (!environment || itemPool.length < itemNeed || rolePool.length < roleNeed || creaturePool.length < creatureNeed || alienPool.length < alienNeed || powerPool.length < powerNeed || specialistPool.length < specialistNeed) return renderPoolWarning();
-      const groups = Array.from({ length: survivalGroupCount }, (_, index) => ({
-        index: index + 1,
-        items: pickFromPool(itemPool, survivalItemCount).map((card) => cardWithEnvironmentHooks(card, environment)),
-        roles: pickFromPool(rolePool, survivalRoleCount).map((card) => cardWithEnvironmentHooks(card, environment)),
-        creatures: pickFromPool(creaturePool, survivalCreatureCount).map((card) => cardWithEnvironmentHooks(card, environment)),
-        aliens: pickFromPool(alienPool, survivalAlienCount).map((card) => cardWithEnvironmentHooks(card, environment)),
-        powers: pickFromPool(powerPool, survivalPowerCount).map((card) => cardWithEnvironmentHooks(card, environment)),
-        specialists: pickFromPool(specialistPool, survivalSpecialistCount).map((card) => cardWithEnvironmentHooks(card, environment))
-      }));
-      const drawnCards = [environment, ...groups.flatMap((group) => [...group.items, ...group.roles, ...group.creatures, ...group.aliens, ...group.powers, ...group.specialists])];
-      renderSurvivalBattle(environment, groups);
-      markDrawn(drawnCards);
-      return drawnCards;
-    }
-
-    const lockedEnvironment = !noEnvironment && lockEnvironment && currentStageCard?.deckId === activeSecondaryLibrary
-      ? currentStageCard
-      : null;
-    const environment = noEnvironment ? null : lockedEnvironment || pickFrom(activeSecondaryLibrary, 1)[0];
-    const survivalPool = survivalActiveDeckIds().flatMap((deckId) => selectedCardsFrom(deckId));
-    const cards = pickFromPool(survivalPool, count).map((card) => cardWithEnvironmentHooks(card, environment));
-    if ((!noEnvironment && !environment) || cards.length < count) return renderPoolWarning();
-    renderCombo(environment, cards, "本輪異境");
-    markDrawn(noEnvironment || lockedEnvironment ? cards : [environment, ...cards]);
-    return noEnvironment ? cards : [environment, ...cards];
-  }
-
-  if (activeMode.cardMode === "roleEnvironment") {
-    const environment = pickFrom(activeSecondaryLibrary, 1)[0];
-    const cards = pickFrom(activeLibrary, count);
-    if (!environment || cards.length < count) return renderPoolWarning();
-    renderCombo(environment, cards, "留席戰場");
-    markDrawn([environment, ...cards]);
-    return [environment, ...cards];
-  }
-
-  if (activeMode.cardMode === "importanceDuel") {
-    const activeDeckIds = importanceActiveDeckIds();
-    const pool = activeDeckIds.flatMap((deckId) => selectedCardsFrom(deckId));
-    const cards = pickFromPool(pool, 2);
-    if (cards.length < 2) return renderPoolWarning();
-    renderDuel(cards);
-    markDrawn(cards);
-    return cards;
-  }
-
-  if (activeMode.cardMode === "metaphorCompass") {
-    const fixedPrefix = metaphorVariant === "concrete" ? fixedMetaphorPrefixCard() : null;
-    const fixedRelation = metaphorVariant === "concrete" ? fixedMetaphorRelationCard() : null;
-    const lockedPrefix = fixedPrefix || (metaphorLocks.prefix ? currentMetaphorCards?.prefix : null);
-    const lockedRelation = fixedRelation || (metaphorLocks.relation ? currentMetaphorCards?.relation : null);
-    const lockedSuffix = metaphorLocks.suffix ? currentMetaphorCards?.suffix : null;
-    const prefix = lockedPrefix || pickFromAvailable(metaphorPrefixDeck, 1)[0];
-    const suffixExcludedKeys = new Set(prefix?.deckId === metaphorSuffixDeck ? [cardKey(prefix)] : []);
-    const suffix = lockedSuffix || pickFromAvailable(metaphorSuffixDeck, 1, suffixExcludedKeys)[0];
-    const newRelation = lockedRelation ? [] : pickFrom(activeSecondaryLibrary, 1);
-    if (!prefix || !suffix || (!lockedRelation && !newRelation.length)) return renderPoolWarning();
-
-    const relation = lockedRelation || newRelation[0];
-    const drawnCards = [prefix, relation, suffix];
-    renderMetaphorCompass([prefix, suffix], relation);
-    markDrawn(drawnCards.filter((card) => card !== lockedPrefix && card !== lockedRelation && card !== lockedSuffix && card.deckId !== "metaphor-fixed"));
-    return drawnCards;
-  }
-
-  if (activeMode.cardMode === "secretPlace") {
-    const places = selectedCardsFrom(activeLibrary);
-    if (!places.length) return renderPoolWarning();
-    lastSecretCard = secretCardFromIndex(secretAnswerIndex);
-    secretRevealed = false;
-    currentStageCard = {
-      name: "秘密選號已開啟",
-      lore: `目前有 ${places.length} 個「${decks[activeLibrary]?.label || "詞庫"}」候選，請輸入秘密編號。`,
-      icon: activeMode.icon,
-      deckLabel: decks[activeLibrary]?.label || activeMode.primaryLabel
-    };
-    renderSecretPlace(lastSecretCard, false);
-    return [currentStageCard];
-  }
-
-  if (activeMode.cardMode === "salesPitch") {
-    if (salesVariant === "supply") {
-      const need = pickFrom("needs", 1)[0];
-      const items = pickFrom("items", count).map((card) => cardWithSalesNeedHooks(card, need));
-      if (!need || items.length < count) return renderPoolWarning();
-      renderCombo(need, items, "本輪需求");
-      markDrawn([need, ...items]);
-      return [need, ...items];
-    }
-
-    if (salesVariant === "story") {
-      const concept = salesNoConcept ? null : pickFrom("concepts", 1)[0];
-      const items = pickFrom("items", count).map((card) => cardWithSalesStoryHooks(card, concept));
-      if ((!salesNoConcept && !concept) || items.length < count) return renderPoolWarning();
-      const stageCard = concept || {
-        name: "無概念",
-        lore: "本輪不抽概念，直接用商品本身編織一個銷售故事。",
-        icon: "$",
-        deckLabel: "故事版"
-      };
-      renderCombo(stageCard, items, "故事主題");
-      if (concept) markDrawn([concept, ...items]);
-      else markDrawn(items);
-      return concept ? [concept, ...items] : items;
-    }
-
-    const audience = pickFromPool([...selectedSalesAudienceCards()], 1)[0];
-    const items = pickFrom("items", count).map((card) => cardWithSalesTargetHooks(card, audience));
-    if (!audience || items.length < count) return renderPoolWarning();
-    renderCombo(audience, items, "本輪目標");
-    markDrawn([audience, ...items]);
-    return [audience, ...items];
-  }
-
-  if (activeMode.cardMode === "summonMission") {
-    const mission = pickFrom(activeSecondaryLibrary, 1)[0];
-    const cards = pickFromPool([...selectedSummonCards()], count).map((card) => ({
-      ...card,
-      hooks: buildHooks(card.name, card.deckId, card.rarity, {
-        mission: mission?.name || "",
-        missionName: mission?.name || "",
-        role: card.name,
-        roleName: card.name
-      })
-    }));
-    if (!mission || cards.length < count) return renderPoolWarning();
-    renderCombo(mission, cards, "本輪任務");
-    markDrawn([mission, ...cards]);
-    return [mission, ...cards];
-  }
+  const controller = modeControllers[activeMode.cardMode];
+  if (controller?.draw) return controller.draw(createModeContext(count));
 
   const cards = pickFrom(activeLibrary, count);
   if (cards.length < count) return renderPoolWarning();
@@ -2324,29 +2219,8 @@ function drawResult() {
 }
 
 function reelPoolForActiveMode() {
-  if (activeMode.cardMode === "itemEnvironment" && survivalVariant === "survival" && noEnvironment) {
-    return survivalActiveDeckIds().flatMap((deckId) => selectedCardsFrom(deckId));
-  }
-  if (activeMode.cardMode === "itemEnvironment" && survivalVariant === "survival") {
-    return survivalActiveDeckIds().flatMap((deckId) => selectedCardsFrom(deckId));
-  }
-  if (activeMode.cardMode === "importanceDuel") {
-    return importanceActiveDeckIds().flatMap((deckId) => selectedCardsFrom(deckId));
-  }
-  if (activeMode.cardMode === "salesPitch") {
-    if (salesVariant === "supply") return selectedCardsFrom("needs");
-    if (salesVariant === "story") return selectedCardsFrom("items");
-    return selectedCardsFrom("items");
-  }
-  if (activeMode.cardMode === "summonMission") {
-    return selectedSummonCards();
-  }
-  if (activeMode.cardMode === "metaphorCompass") {
-    if (metaphorVariant === "concrete") return selectedCardsFrom(metaphorSuffixDeck);
-    const pools = [activeSecondaryLibrary, metaphorPrefixDeck, metaphorSuffixDeck]
-      .filter((deckId, index, list) => deckId && list.indexOf(deckId) === index);
-    return pools.flatMap((deckId) => selectedCardsFrom(deckId));
-  }
+  const controller = modeControllers[activeMode.cardMode];
+  if (controller?.reelPool) return controller.reelPool(createModeContext());
   return activeSecondaryLibrary ? selectedCardsFrom(activeSecondaryLibrary) : selectedCardsFrom(activeLibrary);
 }
 
@@ -2452,7 +2326,6 @@ function renderAll() {
   renderModeButtons();
   renderActivity();
   renderDeckControls();
-  renderPrompts();
   renderLibraryTools();
   renderTokenCloud();
   renderDrawHistory();

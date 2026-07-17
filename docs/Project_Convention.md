@@ -44,6 +44,10 @@ AI_START_HERE.md
 - `website/styles/`：樣式。
 - `website/pages/`：未來多頁面。
 
+新增大型玩法或拆分程式前，請先讀 `docs/Code_Health_Audit.md`。目前 `website/js/app.js` 與 `website/styles/main.css` 是主要需要逐步拆分的檔案。
+
+調整畫面或新增玩法後，請依照 `docs/Responsive_QA_Checklist.md` 檢查手機、平板與桌機版，避免只在桌機寬度看起來正常。
+
 ## 擴充規則
 
 - 新增牌組：新增一個 CSV 到 `data/cards/`。
