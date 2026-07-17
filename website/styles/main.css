@@ -690,13 +690,27 @@ h1 {
 }
 
 .sales-variant-tools.is-summon-variant {
-  border-color: rgba(116, 82, 190, 0.34);
-  box-shadow: 0 8px 18px rgba(116, 82, 190, 0.08);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(76px, 1fr));
+  width: min(100%, 360px);
+  border-radius: 999px;
+  border-color: rgba(102, 81, 166, 0.34);
+  background: #fff;
+  box-shadow: 0 8px 18px rgba(102, 81, 166, 0.08);
+}
+
+.sales-variant-tools.is-summon-variant button {
+  min-width: 0;
+  min-height: 38px;
+  color: var(--ink);
+  background: transparent;
+  border: 0;
 }
 
 .sales-variant-tools.is-summon-variant button.is-active {
-  background: var(--purple);
+  background: var(--violet);
   color: #fff;
+  box-shadow: 0 6px 14px rgba(102, 81, 166, 0.18);
 }
 
 .sales-variant-tools.is-multi-select button {
