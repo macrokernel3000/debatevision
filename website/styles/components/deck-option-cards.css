@@ -1,0 +1,212 @@
+.deck-option-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(92px, 112px));
+  gap: 10px;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.deck-option-card {
+  --deck-accent: #2d2925;
+  --deck-soft: rgba(45, 41, 37, 0.14);
+  position: relative;
+  min-width: 0;
+  min-height: 122px;
+  display: grid;
+  grid-template-rows: 76px auto auto;
+  justify-items: stretch;
+  gap: 5px;
+  padding: 6px;
+  border: 2px solid color-mix(in srgb, var(--deck-accent) 46%, white);
+  border-radius: 16px;
+  background: linear-gradient(160deg, #fff 54%, var(--deck-soft));
+  color: var(--ink);
+  box-shadow: 0 8px 18px rgba(25, 24, 20, 0.08);
+  font: inherit;
+  text-align: center;
+  cursor: pointer;
+  transition: opacity 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+
+.deck-option-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 22px rgba(25, 24, 20, 0.13);
+}
+
+.deck-option-card.is-dimmed {
+  opacity: 0.5;
+}
+
+.deck-option-card.is-active {
+  border-color: var(--deck-accent);
+  box-shadow: 0 0 0 3px var(--deck-soft), 0 10px 22px rgba(25, 24, 20, 0.12);
+}
+
+.deck-option-art {
+  min-width: 0;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  background: var(--deck-soft);
+  color: var(--deck-accent);
+  font-size: 2rem;
+}
+
+.deck-option-art img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+.deck-option-art.is-cover-art img {
+  object-fit: cover;
+}
+
+.deck-option-card > strong {
+  overflow: hidden;
+  color: var(--ink);
+  font-size: 0.82rem;
+  line-height: 1.15;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.deck-option-card > small {
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.deck-option-check {
+  position: absolute;
+  z-index: 1;
+  top: 9px;
+  left: 9px;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border: 2px solid #fff;
+  border-radius: 9px;
+  background: var(--deck-accent);
+  color: #fff;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+  font-weight: 1000;
+}
+
+.deck-option-card.is-dimmed .deck-option-check {
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.deck-option-card.is-amount {
+  min-height: 150px;
+  grid-template-rows: 84px auto auto;
+  cursor: default;
+}
+
+.survival-battle-row.is-resources {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.deck-option-card.is-amount:hover {
+  transform: none;
+}
+
+.deck-option-stepper {
+  display: grid;
+  grid-template-columns: 28px minmax(30px, 1fr) 28px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--deck-accent);
+}
+
+.deck-option-stepper button,
+.deck-option-stepper input {
+  width: 100%;
+  min-width: 0;
+  min-height: 28px;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font: inherit;
+  font-weight: 1000;
+  text-align: center;
+}
+
+.deck-option-stepper button {
+  cursor: pointer;
+}
+
+.deck-option-stepper button:disabled {
+  cursor: not-allowed;
+  opacity: 0.35;
+}
+
+.deck-option-card[data-deck-tone="items"] {
+  --deck-accent: #c84f45;
+  --deck-soft: rgba(200, 79, 69, 0.18);
+}
+
+.deck-option-card[data-deck-tone="roles"] {
+  --deck-accent: #0f8c87;
+  --deck-soft: rgba(15, 140, 135, 0.18);
+}
+
+.deck-option-card[data-deck-tone="worlds"] {
+  --deck-accent: #ad312f;
+  --deck-soft: rgba(173, 49, 47, 0.18);
+}
+
+.deck-option-card[data-deck-tone="locations"],
+.deck-option-card[data-deck-tone="relations"] {
+  --deck-accent: #6c58b6;
+  --deck-soft: rgba(108, 88, 182, 0.18);
+}
+
+.deck-option-card[data-deck-tone="creatures"] {
+  --deck-accent: #2f8f60;
+  --deck-soft: rgba(47, 143, 96, 0.18);
+}
+
+.deck-option-card[data-deck-tone="concepts"] {
+  --deck-accent: #c99524;
+  --deck-soft: rgba(201, 149, 36, 0.19);
+}
+
+.deck-option-card[data-deck-tone="celebrities"] {
+  --deck-accent: #b36b2e;
+  --deck-soft: rgba(179, 107, 46, 0.18);
+}
+
+.deck-option-card[data-deck-tone="summons"] {
+  --deck-accent: #7a5bd2;
+  --deck-soft: rgba(122, 91, 210, 0.2);
+}
+
+.deck-option-card[data-deck-tone="missions"],
+.deck-option-card[data-deck-tone="needs"] {
+  --deck-accent: #5f6f83;
+  --deck-soft: rgba(95, 111, 131, 0.18);
+}
+
+@media (max-width: 900px) and (min-width: 561px) {
+  .deck-option-grid {
+    grid-template-columns: repeat(auto-fit, minmax(84px, 1fr));
+  }
+
+  .deck-option-card {
+    min-height: 112px;
+    grid-template-rows: 68px auto auto;
+  }
+
+  .survival-battle-row.is-resources {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

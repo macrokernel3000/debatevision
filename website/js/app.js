@@ -1,10 +1,9 @@
 const decks = window.DEBATE_DECKS;
 const modes = window.DEBATE_MODES;
-const savedImageLayouts = window.DEBATE_IMAGE_LAYOUTS || {};
-const uiTexts = window.DEBATE_UI_TEXTS || {};
 const modeLifecycle = window.DEBATE_MODE_LIFECYCLE || {};
 const modeControllers = window.DEBATE_MODE_CONTROLLERS || {};
 const { iconFor } = window;
+const { text: uiText, renderStatic: renderStaticUiText } = window.DEBATE_UI_TEXT;
 
 if (!decks.needs && decks.concepts) {
   decks.needs = {
@@ -14,12 +13,27 @@ if (!decks.needs && decks.concepts) {
   };
 }
 
-const DEFAULT_IMAGE_LAYOUT = { scale: 1, x: 0, y: 0, rotate: 0, overlay: 0.28 };
 const EDIT_MODE = new URLSearchParams(window.location.search).get("edit") === "1";
-const EDIT_STORAGE_KEY = "debatevision-image-layouts-draft";
-const HISTORY_STORAGE_KEY = "debatevision-draw-history";
-const TIMER_STORAGE_KEY = "debatevision-floating-timer";
-const HISTORY_LIMIT = 10;
+const historyService = window.DEBATE_HISTORY_SERVICE.create();
+const imageService = window.DEBATE_IMAGE_SERVICE.create({
+  baseLayouts: window.DEBATE_IMAGE_LAYOUTS || {},
+  editMode: EDIT_MODE
+});
+const uiState = window.DEBATE_STATE.create({
+  resetConfirmActive: false,
+  resetConfirmTimer: null,
+  dictionaryActiveDeck: "",
+  mobileEditingDeck: ""
+});
+const DEFAULT_IMAGE_LAYOUT = imageService.defaultLayout;
+const {
+  targetForCard: editTargetForCard,
+  layoutForTarget,
+  minScaleForTarget,
+  setLayoutForTarget,
+  imageStyleForTarget,
+  exportableLayouts
+} = imageService;
 
 let activeMode = modes[0];
 let activityMenuOpen = false;
@@ -54,58 +68,9 @@ let metaphorSuffixDeck = "";
 let metaphorLocks = { prefix: false, relation: false, suffix: false };
 let currentMetaphorCards = null;
 let selectedCardKeysByScope = {};
-let imageLayouts = mergeImageLayouts(savedImageLayouts, readDraftLayouts());
-let drawHistoryByMode = readDrawHistory();
-let timerState = readTimerState();
-let timerInterval = null;
+const drawHistoryByMode = historyService.data;
 let selectedEditCard = null;
 let selectedEditTarget = null;
-
-const defaultUiTexts = {
-  "section.drawn.eyebrow": "Drawn Cards",
-  "section.drawn.title": "本輪卡牌",
-  "section.library.eyebrow": "Lexicon",
-  "section.library.title": "本局抽選池",
-  "button.pool.selectAll": "全選目前牌組",
-  "button.pool.clear": "取消目前牌組",
-  "button.pool.reset": "重置本玩法",
-  "label.drawCount": "抽取數量",
-  "control.note.default": "牌組已依玩法固定；下方抽選池可取消本局不想抽到的卡。",
-  "reel.ready.title": "準備抽卡",
-  "reel.ready.subtitle": "抽出後，這裡會顯示本輪結果。",
-  "reel.ready.subtitle.environment": "抽出後，這裡會顯示本輪異境。",
-  "empty.default": "{drawLabel}。<br />下方抽選池可以控制本局哪些卡會被抽到。",
-  "warning.pool": "本局抽選池不夠了。<br />請在下方抽選池重新勾選卡牌，或按「重置本玩法」。",
-  "secret.result.eyebrow": "答案公布",
-  "secret.result.title": "原來答案是：{name}",
-  "secret.result.body": "可以回頭檢查：哪些問題最早把範圍縮小？哪些問題其實不夠精準？",
-  "secret.restart": "再來一場",
-  "secret.setup.eyebrow": "秘密詞條",
-  "secret.setup.title": "請選定秘密答案",
-  "secret.setup.body": "下方會依目前啟用的「{deckLabel}」排出 1-{total} 號。輸入秘密編號後，即可開始活動。",
-  "secret.answer.label": "秘密編號",
-  "secret.showNumber": "顯示編號",
-  "secret.reveal": "直接公布答案",
-  "secret.correct": "就是這個",
-  "secret.wrong": "不是這個",
-  "secret.status.set": "答案已設定。投影時可保持隱藏。",
-  "secret.status.prompt": "請輸入 1-{total} 的秘密編號。",
-  "secret.status.needAnswer": "請先輸入秘密編號，再開始公布。"
-};
-
-function uiText(key, vars = {}) {
-  let text = uiTexts[key] || defaultUiTexts[key] || key;
-  for (const [name, value] of Object.entries(vars)) {
-    text = text.replaceAll(`{${name}}`, value);
-  }
-  return text;
-}
-
-function renderStaticUiText() {
-  document.querySelectorAll("[data-ui-text]").forEach((element) => {
-    element.textContent = uiText(element.dataset.uiText);
-  });
-}
 
 const modeGrid = document.querySelector("#modeGrid");
 const activityMenuToggle = document.querySelector("#activityMenuToggle");
@@ -154,8 +119,6 @@ const tokenCloud = document.querySelector("#tokenCloud");
 const selectAllCards = document.querySelector("#selectAllCards");
 const clearCards = document.querySelector("#clearCards");
 const resetActivePool = document.querySelector("#resetActivePool");
-let resetConfirmActive = false;
-let resetConfirmTimer = null;
 const scenePreview = document.querySelector("#scenePreview");
 const sceneEmblem = document.querySelector("#sceneEmblem");
 const sceneBadge = document.querySelector("#sceneBadge");
@@ -164,8 +127,6 @@ const sceneDescription = document.querySelector("#sceneDescription");
 const controlNote = document.querySelector("#controlNote");
 const dictionaryDeckSelections = new Set();
 const dictionaryCardSelections = new Set();
-let dictionaryActiveDeck = "";
-let mobileEditingDeck = "";
 const deckDictionary = {
   worlds: "特殊的世界觀，適合發揮想像力，需要臨機應變與危機判斷。",
   creatures: "我們的好朋友或者小生命，適合比較特色、建立觀察角度與討論生命關係。",
@@ -184,119 +145,12 @@ const derivedDeckIds = new Set(["needs"]);
 const hiddenImportanceDecks = new Set([...derivedDeckIds]);
 const hiddenSalesAudienceDecks = new Set(["items", "needs", "concepts", "relations", "missions"]);
 
-function readDraftLayouts() {
-  if (!EDIT_MODE) return {};
-  try {
-    return JSON.parse(window.localStorage.getItem(EDIT_STORAGE_KEY) || "{}");
-  } catch {
-    return {};
-  }
-}
-
-function readDrawHistory() {
-  try {
-    return JSON.parse(window.localStorage.getItem(HISTORY_STORAGE_KEY) || "{}");
-  } catch {
-    return {};
-  }
-}
-
-function saveDrawHistory() {
-  window.localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(drawHistoryByMode));
-}
-
-function readTimerState() {
-  try {
-    const stored = JSON.parse(window.localStorage.getItem(TIMER_STORAGE_KEY) || "{}");
-    const wasHidden = Boolean(stored.hidden);
-    const mobileTimerDefault = window.matchMedia?.("(max-width: 560px)")?.matches;
-    return {
-      elapsed: 0,
-      running: false,
-      startedAt: 0,
-      ...stored,
-      collapsed: Boolean(stored.collapsed || wasHidden || mobileTimerDefault)
-    };
-  } catch {
-    return { elapsed: 0, running: false, startedAt: 0, collapsed: true };
-  }
-}
-
-function saveTimerState() {
-  window.localStorage.setItem(TIMER_STORAGE_KEY, JSON.stringify(timerSnapshot()));
-}
-
-function mergeImageLayouts(baseLayouts, draftLayouts) {
-  const merged = JSON.parse(JSON.stringify(baseLayouts || {}));
-  for (const [deckId, layouts] of Object.entries(draftLayouts || {})) {
-    merged[deckId] = { ...(merged[deckId] || {}), ...(layouts || {}) };
-  }
-  return merged;
-}
-
-function saveDraftLayouts() {
-  if (!EDIT_MODE) return;
-  window.localStorage.setItem(EDIT_STORAGE_KEY, JSON.stringify(imageLayouts));
-}
-
-function editTargetForCard(card) {
-  if (!card?.deckId || !card?.imageId) return null;
-  return {
-    group: card.deckId,
-    id: card.imageId,
-    name: card.name,
-    label: card.deckLabel,
-    cardKey: cardKey(card)
-  };
-}
-
 function editTargetForMode(mode = activeMode) {
-  return {
-    group: "modes",
-    id: mode.id,
-    name: mode.title,
-    label: "活動大圖",
-    cardKey: ""
-  };
-}
-
-function layoutForTarget(target) {
-  if (!target?.group || !target?.id) return { ...DEFAULT_IMAGE_LAYOUT };
-  return {
-    ...DEFAULT_IMAGE_LAYOUT,
-    ...((imageLayouts[target.group] || {})[target.id] || {})
-  };
-}
-
-function minScaleForTarget(target) {
-  return target?.group === "modes" || target?.group === "worlds" || target?.group === "locations" ? 1 : 0.5;
-}
-
-function setLayoutForTarget(target, nextLayout) {
-  if (!target?.group || !target?.id) return;
-  imageLayouts[target.group] ||= {};
-  const minScale = minScaleForTarget(target);
-  imageLayouts[target.group][target.id] = {
-    scale: Math.min(4, Math.max(minScale, Number(nextLayout.scale) || DEFAULT_IMAGE_LAYOUT.scale)),
-    x: Number(nextLayout.x) || DEFAULT_IMAGE_LAYOUT.x,
-    y: Number(nextLayout.y) || DEFAULT_IMAGE_LAYOUT.y,
-    rotate: Number(nextLayout.rotate) || DEFAULT_IMAGE_LAYOUT.rotate,
-    overlay: Math.min(0.8, Math.max(0, Number.isFinite(Number(nextLayout.overlay)) ? Number(nextLayout.overlay) : DEFAULT_IMAGE_LAYOUT.overlay))
-  };
-  saveDraftLayouts();
+  return imageService.targetForMode(mode);
 }
 
 function layoutFor(card) {
   return layoutForTarget(editTargetForCard(card));
-}
-
-function setLayoutFor(card, nextLayout) {
-  setLayoutForTarget(editTargetForCard(card), nextLayout);
-}
-
-function imageStyleForTarget(target) {
-  const layout = layoutForTarget(target);
-  return `--image-scale:${layout.scale}; --image-x:${layout.x}px; --image-y:${layout.y}px; --image-rotate:${layout.rotate}deg; --overlay-strength:${layout.overlay};`;
 }
 
 function imageStyleFor(card) {
@@ -308,10 +162,6 @@ function lifecycleFor(mode = activeMode) {
     ...(modeLifecycle.default || {}),
     ...(modeLifecycle[mode?.id] || {})
   };
-}
-
-function exportableLayouts(deckId = "items") {
-  return imageLayouts[deckId] || {};
 }
 
 function normalizeCard(raw, deckId) {
@@ -858,7 +708,7 @@ function mobileGenericDeckCards() {
 function renderMobileGenericDashboard() {
   const deckCards = mobileGenericDeckCards().map((deck) => ({
     ...deck,
-    cover: mobileDeckCover(deck.deckId)
+    cover: sharedDeckCover(deck.deckId)
   }));
   const fixedCount = Boolean(activeMode.fixedCount || activeMode.cardMode === "metaphorCompass");
   const standardDeckUi = ["salesPitch", "summonMission", "importanceDuel"].includes(activeMode.cardMode);
@@ -918,8 +768,7 @@ function rememberDraw(cards, options = {}) {
       rarity: card.rarity || ""
     }))
   };
-  drawHistoryByMode[scope] = [entry, ...previousEntries].slice(0, HISTORY_LIMIT);
-  saveDrawHistory();
+  historyService.remember(scope, entry);
   renderDrawHistory();
 }
 
@@ -934,7 +783,7 @@ function historyTitle(index) {
 
 function renderDrawHistory() {
   if (!drawHistory) return;
-  const entries = [...(drawHistoryByMode[historyScope()] || []).slice(0, HISTORY_LIMIT)];
+  const entries = historyService.entries(historyScope());
   if (!entries.length) {
     drawHistory.innerHTML = `<div class="history-empty">抽卡後會在這裡保留最近十場紀錄。</div>`;
     return;
@@ -961,8 +810,7 @@ function cardsFromHistoryEntry(entry) {
 }
 
 function restoreHistoryEntry(index, options = {}) {
-  const entries = drawHistoryByMode[historyScope()] || [];
-  const entry = entries[Number(index)];
+  const entry = historyService.entry(historyScope(), index);
   const cards = cardsFromHistoryEntry(entry);
   if (!cards.length) return false;
 
@@ -1010,27 +858,11 @@ function modeCardMeta(mode) {
 }
 
 function modeCardStyle(mode) {
-  const image = mode.image || mode.backgroundImage || "";
-  if (!image) return "";
-  const resolvedImage = (() => {
-    try {
-      return new URL(image, document.baseURI).href;
-    } catch {
-      return image;
-    }
-  })();
-  const safeImage = resolvedImage.replace(/"/g, "%22").replace(/\)/g, "%29");
-  return ` style="--mode-card-image: url(&quot;${safeImage}&quot;)"`;
+  return imageService.modeCardStyle(mode);
 }
 
 function modeImageCssValue(mode) {
-  const image = mode.image || mode.backgroundImage || "";
-  if (!image) return "";
-  try {
-    return `url("${new URL(image, document.baseURI).href.replace(/"/g, "%22")}")`;
-  } catch {
-    return `url("${image.replace(/"/g, "%22")}")`;
-  }
+  return imageService.cssUrl(imageService.imageForMode(mode));
 }
 
 function renderModeButtons() {
@@ -1086,7 +918,7 @@ function renderActivity() {
   }
   if (scenePreview) {
     scenePreview.dataset.tone = activeMode.tone;
-    const modeImage = activeMode.image || activeMode.backgroundImage || "";
+    const modeImage = imageService.imageForMode(activeMode);
     scenePreview.classList.toggle("has-mode-image", Boolean(modeImage));
     const currentImage = scenePreview.querySelector(".scene-preview-image");
     const modeTarget = editTargetForMode(activeMode);
@@ -1098,14 +930,16 @@ function renderActivity() {
     const modeImageAttributes = `style="${modeStyle}" data-edit-group="${modeTarget.group}" data-edit-id="${modeTarget.id}" data-edit-name="${modeTarget.name}"`;
     if (modeImage) {
       if (currentImage) {
+        currentImage.hidden = false;
         currentImage.src = modeImage;
         currentImage.alt = `${activeMode.title} 玩法背景`;
         currentImage.setAttribute("style", modeStyle);
+        currentImage.dataset.imageManaged = "true";
         currentImage.dataset.editGroup = modeTarget.group;
         currentImage.dataset.editId = modeTarget.id;
         currentImage.dataset.editName = modeTarget.name;
       } else {
-        scenePreview.insertAdjacentHTML("afterbegin", `<img class="scene-preview-image" src="${modeImage}" alt="${activeMode.title} 玩法背景" ${modeImageAttributes} />`);
+        scenePreview.insertAdjacentHTML("afterbegin", `<img class="scene-preview-image" src="${modeImage}" alt="${activeMode.title} 玩法背景" ${imageService.managedAttributes(modeImage)} ${modeImageAttributes} />`);
       }
     } else {
       currentImage?.remove();
@@ -1142,13 +976,13 @@ function renderMobileSurvivalDashboard() {
 
   const selectedDecks = survivalDeckCards().map((deck) => ({
     ...deck,
-    cover: mobileDeckCover(deck.deckId)
+    cover: sharedDeckCover(deck.deckId)
   }));
   const environmentDeck = {
     deckId: activeMode.secondaryDeck || "worlds",
     title: "異境卡",
     selected: true,
-    cover: mobileDeckCover(activeMode.secondaryDeck || "worlds")
+    cover: sharedDeckCover(activeMode.secondaryDeck || "worlds")
   };
   const survivalModeActive = survivalVariant === "survival";
   const countLabel = survivalModeActive
@@ -1193,7 +1027,7 @@ function mobileDeckCards(deckId) {
     .filter((card) => !rarity || card.rarity === rarity);
 }
 
-function mobileDeckCover(deckId) {
+function sharedDeckCover(deckId) {
   const coverAssets = {
     items: "../assets/ui/deck-covers/items.jpg",
     "sales:items": "../assets/ui/deck-covers/sales-items.jpg",
@@ -1243,11 +1077,11 @@ function mobileResourceKey(deckId) {
 }
 
 function renderMobileCardModal() {
-  if (!mobileCardModal || !mobileEditingDeck) return;
-  const { baseDeck, rarity } = mobileDeckTarget(mobileEditingDeck);
+  if (!mobileCardModal || !uiState.mobileEditingDeck) return;
+  const { baseDeck, rarity } = mobileDeckTarget(uiState.mobileEditingDeck);
   const deck = decks[baseDeck];
   if (!deck) return;
-  const cards = mobileDeckCards(mobileEditingDeck);
+  const cards = mobileDeckCards(uiState.mobileEditingDeck);
   const selectedKeys = selectedKeysForDeck(baseDeck);
   const label = rarity || deck.label;
   const rarityGroups = (rarity ? [rarity] : raritiesFrom(baseDeck))
@@ -1280,13 +1114,13 @@ function renderMobileCardModal() {
 }
 
 function openMobileCardModal(deckId) {
-  mobileEditingDeck = deckId;
+  uiState.mobileEditingDeck = deckId;
   renderMobileCardModal();
   mobileCardModal.hidden = false;
 }
 
 function closeMobileCardModal() {
-  mobileEditingDeck = "";
+  uiState.mobileEditingDeck = "";
   if (mobileCardModal) mobileCardModal.hidden = true;
 }
 
@@ -1302,7 +1136,7 @@ function showMobileSetup() {
 }
 
 function sceneImageFor(card) {
-  return card?.image || card?.iconAsset || "";
+  return imageService.imageForCard(card);
 }
 
 function readyReelSubtitle() {
@@ -1331,7 +1165,7 @@ function renderReelCard(card = currentStageCard, spinningName = "") {
     delete reel.dataset.editName;
   }
   reel.innerHTML = `
-    ${image ? `<img class="reel-scene-image" src="${image}" alt="${title} 場景圖" ${editAttributes} />` : ""}
+    ${image ? `<img class="reel-scene-image" src="${image}" alt="${title} 場景圖" ${imageService.managedAttributes(image, imageService.fallbackForCard(card))} ${editAttributes} />` : ""}
     <div class="reel-scene-mark">${card ? activeMode.icon : "?"}</div>
     <div class="reel-scene-copy">
       <span>${card?.deckLabel || activeMode.secondaryLabel || activeMode.track || "Scene Card"}</span>
@@ -1559,37 +1393,49 @@ function renderDeckControls() {
         </label>
       ` : ""}
       ${salesVariant === "target" ? `
-        <div class="sales-variant-tools is-sales-variant" role="group" aria-label="目標版客戶類型">
-          ${salesAudienceDeckIds().map((deckId) => `
-            <button type="button" class="${salesAudienceDeck === deckId ? "is-active" : ""}" data-sales-audience="${deckId}">
-              ${deckId === "summons" ? "異族" : variantLabel(deckId)}
-            </button>
-          `).join("")}
-        </div>
+        ${window.DebateVisionDeckOptions.selectGroup(salesAudienceDeckIds().map((deckId) => ({
+          deckId,
+          label: deckId === "summons" ? "異族" : variantLabel(deckId),
+          selected: salesAudienceDeck === deckId,
+          tone: deckTone(deckId),
+          cover: sharedDeckCover(deckId)
+        })), {
+          attribute: "data-sales-audience",
+          ariaLabel: "目標版客戶類型"
+        })}
       ` : ""}
     `
     : "";
   const summonCategoryTools = activeMode.cardMode === "summonMission"
     ? `
-      <div class="sales-variant-tools is-summon-variant" role="group" aria-label="現實召喚分類">
-        ${summonCategories.map((category) => `
-          <button type="button" class="${summonCategorySelection.has(category) ? "is-active" : ""}" data-summon-category="${category}">
-            ${summonCategoryLabel(category)}
-          </button>
-        `).join("")}
-      </div>
+      ${window.DebateVisionDeckOptions.selectGroup(summonCategories.map((category) => ({
+        deckId: `summons:${category}`,
+        value: category,
+        label: summonCategoryLabel(category),
+        selected: summonCategorySelection.has(category),
+        tone: deckTone("summons"),
+        cover: sharedDeckCover(`summons:${category}`)
+      })), {
+        attribute: "data-summon-category",
+        ariaLabel: "現實召喚分類"
+      })}
     `
     : "";
   const primaryVariantDecks = primaryVariantDeckIds();
   const primaryVariantTools = primaryVariantDecks.length && !survivalBattleMode
     ? `
-      <div class="sales-variant-tools ${activeMode.cardMode === "importanceDuel" ? "is-multi-select is-importance-variant" : ""} ${survivalMode ? "is-multi-select is-survival-variant" : ""}" role="group" aria-label="${activeMode.title}抽選類型">
-        ${primaryVariantDecks.map((deckId) => `
-          <button type="button" class="${activeMode.cardMode === "importanceDuel" ? (selectedImportanceDecks.has(deckId) ? "is-active" : "is-dimmed") : survivalMode ? (survivalDeckSelection.has(deckId) ? "is-active" : "is-dimmed") : (activeLibrary === deckId ? "is-active" : "")}" data-primary-variant="${deckId}">
-            ${variantLabel(deckId)}
-          </button>
-        `).join("")}
-      </div>
+      ${window.DebateVisionDeckOptions.selectGroup(primaryVariantDecks.map((deckId) => ({
+        deckId,
+        label: variantLabel(deckId),
+        selected: activeMode.cardMode === "importanceDuel"
+          ? selectedImportanceDecks.has(deckId)
+          : survivalMode ? survivalDeckSelection.has(deckId) : activeLibrary === deckId,
+        tone: deckTone(deckId),
+        cover: sharedDeckCover(deckId)
+      })), {
+        attribute: "data-primary-variant",
+        ariaLabel: `${activeMode.title}抽選類型`
+      })}
     `
     : "";
   const environmentLockTool = activeMode.cardMode === "itemEnvironment" && survivalVariant === "survival"
@@ -1626,12 +1472,12 @@ function renderDeckControls() {
     : "";
 
   const poolSummary = `
-    <span>${primaryText}</span>
-    ${secondaryText ? `<span>${secondaryText}</span>` : ""}
-    ${survivalRoleText ? `<span>${survivalRoleText}</span>` : ""}
-    ${survivalCreatureText ? `<span>${survivalCreatureText}</span>` : ""}
-    ${survivalSummonText ? `<span>${survivalSummonText}</span>` : ""}
-    ${suffixText ? `<span>${suffixText}</span>` : ""}
+    <span class="pool-summary-chip">${primaryText}</span>
+    ${secondaryText ? `<span class="pool-summary-chip">${secondaryText}</span>` : ""}
+    ${survivalRoleText ? `<span class="pool-summary-chip">${survivalRoleText}</span>` : ""}
+    ${survivalCreatureText ? `<span class="pool-summary-chip">${survivalCreatureText}</span>` : ""}
+    ${survivalSummonText ? `<span class="pool-summary-chip">${survivalSummonText}</span>` : ""}
+    ${suffixText ? `<span class="pool-summary-chip">${suffixText}</span>` : ""}
   `;
 
   fixedPools.classList.toggle("is-survival-controls", survivalMode);
@@ -1695,18 +1541,19 @@ function setSurvivalCountValue(key, value) {
 }
 
 function survivalNumberControl(key, label, value, min, max) {
-  const disableMinus = value <= min;
-  const disablePlus = value >= max;
-  return `
-    <label class="survival-number-control">
-      <span>${label}</span>
-      <div class="survival-stepper">
-        <button type="button" data-survival-step="${key}" data-step="-1" ${disableMinus ? "disabled" : ""}>−</button>
-        <input type="text" inputmode="numeric" min="${min}" max="${max}" value="${value}" data-survival-count="${key}" aria-label="${label}" />
-        <button type="button" data-survival-step="${key}" data-step="1" ${disablePlus ? "disabled" : ""}>+</button>
-      </div>
-    </label>
-  `;
+  const deckId = {
+    items: "items",
+    roles: "roles",
+    creatures: "creatures",
+    aliens: "summons:異族",
+    powers: "summons:超能",
+    specialists: "summons:特職"
+  }[key];
+  return window.DebateVisionDeckOptions.amountCard({
+    key, label, value, min, max, deckId,
+    tone: deckTone(deckId),
+    cover: sharedDeckCover(deckId)
+  });
 }
 
 function metaphorDeckSelectMarkup(part, label, value) {
@@ -1818,8 +1665,8 @@ function selectedDictionaryCards() {
 
 function ensureDictionaryActiveDeck() {
   const selectedDecks = [...dictionaryDeckSelections].filter((deckId) => decks[deckId]);
-  if (selectedDecks.includes(dictionaryActiveDeck)) return;
-  dictionaryActiveDeck = selectedDecks[0] || "";
+  if (selectedDecks.includes(uiState.dictionaryActiveDeck)) return;
+  uiState.dictionaryActiveDeck = selectedDecks[0] || "";
 }
 
 function renderCardDictionary() {
@@ -1827,8 +1674,8 @@ function renderCardDictionary() {
   ensureDictionaryActiveDeck();
   const selectedDecks = [...dictionaryDeckSelections].filter((deckId) => decks[deckId]);
   const selectedCards = selectedDictionaryCards();
-  const activeCards = dictionaryActiveDeck
-    ? cardsFrom(dictionaryActiveDeck).map((card) => dictionaryNormalizeCard(card, dictionaryActiveDeck))
+  const activeCards = uiState.dictionaryActiveDeck
+    ? cardsFrom(uiState.dictionaryActiveDeck).map((card) => dictionaryNormalizeCard(card, uiState.dictionaryActiveDeck))
     : [];
 
   cardDictionary.innerHTML = `
@@ -1840,14 +1687,14 @@ function renderCardDictionary() {
         <div class="dictionary-tabs" aria-label="已啟用卡池">
           ${selectedDecks.length
             ? selectedDecks.map((deckId) => `
-              <button type="button" class="${deckId === dictionaryActiveDeck ? "is-active" : ""}" data-dictionary-preview="${deckId}">
+              <button type="button" class="${deckId === uiState.dictionaryActiveDeck ? "is-active" : ""}" data-dictionary-preview="${deckId}">
                 ${decks[deckId].label}
               </button>
             `).join("")
             : `<span>${uiText("mobile.dictionary.deckHeading")}</span>`}
         </div>
         <div class="dictionary-card-picker">
-          ${dictionaryActiveDeck
+          ${uiState.dictionaryActiveDeck
             ? activeCards.map((card) => dictionaryTokenMarkup(card)).join("")
             : `<div class="dictionary-empty compact">${uiText("mobile.dictionary.emptyPicker")}</div>`}
         </div>
@@ -1964,10 +1811,9 @@ function cardMarkup(card, extraClass = "") {
   const imageEditAttributes = target
     ? `style="${layoutStyle}" data-edit-group="${target.group}" data-edit-id="${target.id}" data-edit-name="${target.name}" data-card-key="${target.cardKey}"`
     : `style="${layoutStyle}"`;
-  const imageMarkup = card.image
-    ? `<img src="${card.image}" alt="${card.name} 卡圖" ${imageEditAttributes} />`
-    : card.iconAsset
-      ? `<img src="${card.iconAsset}" alt="${card.name} 圖示" ${imageEditAttributes} />`
+  const image = imageService.imageForCard(card);
+  const imageMarkup = image
+    ? `<img src="${image}" alt="${card.name} 卡圖" ${imageService.managedAttributes(image, imageService.fallbackForCard(card))} ${imageEditAttributes} />`
       : `<span>${iconFor(card)}</span>`;
   const typeText = card.deckId === "items" ? card.deckLabel : `${card.deckLabel} · ${card.rarity || "C"}`;
 
@@ -1986,10 +1832,10 @@ function cardMarkup(card, extraClass = "") {
 
 function openMobileArtPreview(card) {
   if (!mobileArtModal || !mobileArtPreview || !card) return;
-  const image = card.image || card.iconAsset || "";
+  const image = imageService.imageForCard(card);
   if (!image) return;
   mobileArtModalTitle.textContent = card.name;
-  mobileArtPreview.innerHTML = `<img src="${image}" alt="${card.name} 全圖" />`;
+  mobileArtPreview.innerHTML = `<img src="${image}" alt="${card.name} 全圖" ${imageService.managedAttributes(image, imageService.fallbackForCard(card))} />`;
   mobileArtModal.hidden = false;
 }
 
@@ -2186,116 +2032,6 @@ function exportCurrentDeckLayout() {
   navigator.clipboard?.writeText(text).catch(() => {});
   const targetFile = `data/image-layouts/${group}.json`;
   document.querySelector("#editorStatus").textContent = `JSON 已產生並嘗試複製；請貼到 ${targetFile} 後再執行網站更新。`;
-}
-
-function timerSnapshot() {
-  const elapsed = timerState.running
-    ? timerState.elapsed + Math.max(0, Date.now() - timerState.startedAt)
-    : timerState.elapsed;
-  return {
-    elapsed,
-    running: timerState.running,
-    startedAt: timerState.running ? timerState.startedAt : 0,
-    collapsed: timerState.collapsed
-  };
-}
-
-function formatTimer(ms) {
-  const totalTenths = Math.floor(ms / 100);
-  const tenths = totalTenths % 10;
-  const totalSeconds = Math.floor(totalTenths / 10);
-  const hours = Math.floor(totalSeconds / 3600);
-  const minutes = Math.floor((totalSeconds % 3600) / 60);
-  const seconds = totalSeconds % 60;
-  if (hours > 0) {
-    return `${hours}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}.${tenths}`;
-  }
-  return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}.${tenths}`;
-}
-
-function ensureFloatingTimer() {
-  if (document.querySelector("#floatingTimer")) return;
-  document.body.insertAdjacentHTML("beforeend", `
-    <aside class="floating-timer ${timerState.collapsed ? "is-collapsed" : ""}" id="floatingTimer" aria-label="課堂計時器">
-      <button class="timer-launcher" id="timerLauncher" type="button" aria-label="打開計時器">⏱ <span id="timerLauncherText">00:00.0</span></button>
-      <div class="timer-panel" id="timerPanel">
-        <div class="timer-head">
-          <div>
-            <p class="eyebrow">Class Timer</p>
-            <h2>課堂計時</h2>
-          </div>
-          <div class="timer-window-actions">
-            <button id="timerCollapse" type="button" aria-label="收合計時器">收合</button>
-          </div>
-        </div>
-        <div class="timer-display" id="timerDisplay" aria-live="polite">00:00.0</div>
-        <div class="timer-actions">
-          <button id="timerToggle" type="button">開始</button>
-          <button id="timerReset" type="button">重設</button>
-        </div>
-      </div>
-    </aside>
-  `);
-
-  document.querySelector("#timerLauncher").addEventListener("click", () => {
-    timerState.collapsed = false;
-    saveTimerState();
-    updateTimerUi();
-  });
-
-  document.querySelector("#timerCollapse").addEventListener("click", () => {
-    timerState.collapsed = true;
-    saveTimerState();
-    updateTimerUi();
-  });
-
-  document.querySelector("#timerToggle").addEventListener("click", toggleTimer);
-  document.querySelector("#timerReset").addEventListener("click", resetTimer);
-  updateTimerUi();
-  refreshTimerInterval();
-}
-
-function toggleTimer() {
-  if (timerState.running) {
-    timerState.elapsed = timerSnapshot().elapsed;
-    timerState.running = false;
-    timerState.startedAt = 0;
-  } else {
-    timerState.running = true;
-    timerState.startedAt = Date.now();
-  }
-  saveTimerState();
-  refreshTimerInterval();
-  updateTimerUi();
-}
-
-function resetTimer() {
-  timerState.elapsed = 0;
-  timerState.running = false;
-  timerState.startedAt = 0;
-  saveTimerState();
-  refreshTimerInterval();
-  updateTimerUi();
-}
-
-function refreshTimerInterval() {
-  if (timerInterval) {
-    window.clearInterval(timerInterval);
-    timerInterval = null;
-  }
-  if (!timerState.running) return;
-  timerInterval = window.setInterval(updateTimerUi, 100);
-}
-
-function updateTimerUi() {
-  const timer = document.querySelector("#floatingTimer");
-  if (!timer) return;
-  const elapsedText = formatTimer(timerSnapshot().elapsed);
-  timer.classList.toggle("is-collapsed", timerState.collapsed);
-  timer.classList.toggle("is-running", timerState.running);
-  document.querySelector("#timerDisplay").textContent = elapsedText;
-  document.querySelector("#timerLauncherText").textContent = elapsedText;
-  document.querySelector("#timerToggle").textContent = timerState.running ? "暫停" : "開始";
 }
 
 function renderEmptyState() {
@@ -2956,7 +2692,7 @@ window.DebateVisionMobileApi = {
   get metaphorVariant() { return metaphorVariant; },
   set metaphorVariant(value) { metaphorVariant = value; },
   set currentMetaphorCards(value) { currentMetaphorCards = value; },
-  get mobileEditingDeck() { return mobileEditingDeck; },
+  get mobileEditingDeck() { return uiState.mobileEditingDeck; },
   get noEnvironment() { return noEnvironment; },
   set noEnvironment(value) { noEnvironment = value; },
   get salesAudienceDeck() { return salesAudienceDeck; },
@@ -3254,7 +2990,7 @@ cardDictionary?.addEventListener("change", (event) => {
     const deckId = deckCheckbox.dataset.dictionaryDeck;
     if (deckCheckbox.checked) {
       dictionaryDeckSelections.add(deckId);
-      dictionaryActiveDeck = deckId;
+      uiState.dictionaryActiveDeck = deckId;
     } else {
       dictionaryDeckSelections.delete(deckId);
       for (const key of [...dictionaryCardSelections]) {
@@ -3275,7 +3011,7 @@ cardDictionary?.addEventListener("change", (event) => {
 cardDictionary?.addEventListener("click", (event) => {
   const previewButton = event.target.closest("[data-dictionary-preview]");
   if (previewButton) {
-    dictionaryActiveDeck = previewButton.dataset.dictionaryPreview;
+    uiState.dictionaryActiveDeck = previewButton.dataset.dictionaryPreview;
     renderCardDictionary();
     return;
   }
@@ -3291,7 +3027,7 @@ drawDictionaryCards?.addEventListener("click", saveDictionaryRound);
 clearDictionaryDecks?.addEventListener("click", () => {
   dictionaryDeckSelections.clear();
   dictionaryCardSelections.clear();
-  dictionaryActiveDeck = "";
+  uiState.dictionaryActiveDeck = "";
   renderCardDictionary();
   renderDictionaryResult([]);
 });
@@ -3359,15 +3095,15 @@ clearCards.addEventListener("click", () => {
 });
 
 function setResetConfirmState(active) {
-  resetConfirmActive = active;
+  uiState.resetConfirmActive = active;
   for (const button of [resetActivePool, quickResetActivePool]) {
     if (!button) continue;
     button.classList.toggle("is-confirming", active);
     button.textContent = active ? "再按一次確認" : (button === quickResetActivePool ? "重置卡片" : uiText("button.pool.reset"));
   }
-  if (resetConfirmTimer) window.clearTimeout(resetConfirmTimer);
+  if (uiState.resetConfirmTimer) window.clearTimeout(uiState.resetConfirmTimer);
   if (active) {
-    resetConfirmTimer = window.setTimeout(() => setResetConfirmState(false), 2600);
+    uiState.resetConfirmTimer = window.setTimeout(() => setResetConfirmState(false), 2600);
   }
 }
 
@@ -3380,7 +3116,7 @@ function resetActiveModeCards() {
 }
 
 function handleResetAction() {
-  if (!resetConfirmActive) {
+  if (!uiState.resetConfirmActive) {
     setResetConfirmState(true);
     return;
   }
@@ -3391,7 +3127,8 @@ resetActivePool.addEventListener("click", handleResetAction);
 quickResetActivePool?.addEventListener("click", handleResetAction);
 
 ensureEditPanel();
-ensureFloatingTimer();
+imageService.installFallbackHandler();
+window.DEBATE_CLASS_TIMER?.init();
 renderStaticUiText();
 renderMobileHome();
 setMode(activeMode.id);

@@ -12,6 +12,15 @@ fi
 
 /usr/bin/env node ./scripts/build-lexicons.mjs
 
+echo "正在檢查程式架構..."
+if ! /usr/bin/env node ./scripts/check-architecture.mjs; then
+  echo ""
+  echo "架構檢查失敗，網站資料已產生，但程式需要先依提示拆分。"
+  echo "按 Enter 結束。"
+  read
+  exit 1
+fi
+
 echo ""
 echo "網站資料已更新。"
 echo "按 Enter 開啟網站。"

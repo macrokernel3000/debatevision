@@ -8,11 +8,20 @@ Last checked: 2026-07-19
 
 主要檔案大小：
 
-- `website/js/app.js`：約 3200 行。仍是共用核心，但手機事件監聽與手機 HTML 生成已先拆出。
+- `website/js/app.js`：約 3120 行。仍是共用核心，但手機流程、介面文字、歷史、圖片與計時器服務已拆出。
+- `website/js/core/state.js`：建立分域 state；架構檢查禁止增加 `app.js` 頂層可變狀態。
+- `website/js/core/ui-text.js`：generated 文案、預設文案與文字模板替換。
+- `website/js/services/history-service.js`：最近紀錄儲存、十場上限與回放資料。
+- `website/js/services/image-service.js`：圖片選擇、URL、fallback 與 image layout。
+- `website/js/services/timer-service.js`：課堂計時器狀態與持久化。
+- `website/js/components/class-timer.js`：課堂計時器 DOM、事件與顯示。
 - `website/js/mobile-render.js`：手機版畫面生成入口，負責手機活動設定、卡組格、版本切換區與結果頁操作按鈕的 HTML。
 - `website/js/mobile-app.js`：手機版操作流程入口，負責手機模式切換、卡組選擇、手機 modal、結果頁、底部導覽與紀錄展開。
 - `website/styles/main.css`：約 3000 行。保留桌機、平板、共用元件與非手機專屬樣式。
+- `website/styles/tokens.css`：共用顏色、間距、圓角與陰影。
 - `website/styles/mobile.css`：手機版專屬樣式，負責手機首頁、手機活動卡、手機設定區、手機結果頁、手機底部導覽與手機 modal。
+- `website/styles/components/class-timer.css`：計時器在桌機、平板與手機的完整樣式。
+- `website/styles/viewport-boundaries.css`：桌機與手機 DOM 的顯示隔離，固定最後載入。
 - `scripts/build-lexicons.mjs`：約 480 行。負責把 CSV / JSON 轉成網站可讀的 generated 檔，目前大小仍可接受。
 
 目前網站仍是可維護狀態，但如果繼續新增玩法，應該先拆出比較清楚的模組。
@@ -27,6 +36,12 @@ Last checked: 2026-07-19
 - 拆出手機版渲染入口到 `website/js/mobile-render.js`。
 - 拆出手機版事件入口到 `website/js/mobile-app.js`。
 - 拆出手機版視覺規則到 `website/styles/mobile.css`。
+- 拆出介面文字服務到 `website/js/core/ui-text.js`。
+- 拆出課堂計時器到 `website/js/components/class-timer.js` 與對應 component CSS。
+- 拆出歷史、圖片與計時器純邏輯到 `website/js/services/`。
+- 建立 `website/js/core/state.js`，先搬純 UI 暫態與計時器 state；不一次搬動玩法狀態。
+- 抽出 `website/styles/tokens.css`，保持原有視覺數值。
+- 新增 `scripts/check-architecture.mjs`，用行數預算、載入順序與 viewport marker 防止入口檔再次膨脹。
 
 保留：
 
@@ -63,22 +78,21 @@ website/js/modes/
 
 小修採快速維修模式：先精準搜尋、最小修改、最小檢查；只有資料結構、CSV / JSON 或 generated 輸出受影響時才跑完整詞庫更新。
 
-下一步再把 `app.js` 拆成下列區塊：
+後續再把 `app.js` 拆成下列區塊：
 
 ```text
 website/js/core/
-├── state.js          # 全域狀態與模式切換
+├── state.js          # 已完成：分域 state factory；後續逐域搬移
 ├── decks.js          # 卡池、勾選、抽選工具
-├── history.js        # 最近十場紀錄
-├── text.js           # uiText、玩法狀態文字
-└── timer.js          # 浮動計時器
+└── ui-text.js        # 已完成：generated 文案、預設文案與文字模板替換
 
 website/js/components/
 ├── cards.js          # cardMarkup、tokenIconMarkup
 ├── reel.js           # 抽卡機與大黑卡
 ├── pools.js          # 抽選池、篩選按鈕
 ├── activity-menu.js  # 手機活動列表與活動卡
-└── image-editor.js   # ?edit=1 圖片位置編輯器
+├── image-editor.js   # ?edit=1 圖片位置編輯器
+└── class-timer.js    # 已完成：浮動計時器
 
 website/js/modes/
 ├── survival.js       # 異境求生
@@ -164,6 +178,7 @@ CSS 拆檔時要特別小心手機版，不要只在桌機寬度檢查。
 至少執行：
 
 ```bash
+node scripts/check-architecture.mjs
 node --check website/js/app.js
 node --check scripts/build-lexicons.mjs
 node scripts/build-lexicons.mjs

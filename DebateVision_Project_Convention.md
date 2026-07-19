@@ -23,6 +23,7 @@ AI_START_HERE.md
 - `docs/Icon_Style_Guide.md`
 - `docs/Card_Data_Specification.md`
 - `docs/Game_Mode_Specification.md`
+- `docs/Architecture_Guardrails.md`
 
 ## 目前標準結構
 
@@ -57,6 +58,7 @@ DebateVision/
 - 改網站互動：改 `website/js/`。
 - 改畫面：改 `website/styles/`。
 - 不手動改 `data/generated/`，它由腳本產生。
+- 新增功能或重構後執行 `node scripts/check-architecture.mjs`；若超過預算，拆模組，不直接提高上限。
 
 ## 新增玩法固定流程
 

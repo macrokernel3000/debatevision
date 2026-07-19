@@ -1,0 +1,21 @@
+/*
+ * Viewport ownership contract
+ *
+ * Shared and desktop presentation live in main.css.
+ * Phone presentation lives in mobile.css.
+ * This file loads last and prevents either surface from leaking across the
+ * 560px application breakpoint, even if a component's local display rule
+ * changes later.
+ */
+
+@media (max-width: 560px) {
+  [data-ui-surface="desktop"] {
+    display: none !important;
+  }
+}
+
+@media (min-width: 561px) {
+  [data-ui-surface="mobile"] {
+    display: none !important;
+  }
+}

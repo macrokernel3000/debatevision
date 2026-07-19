@@ -1,0 +1,50 @@
+(() => {
+  const generatedTexts = window.DEBATE_UI_TEXTS || {};
+  const defaults = {
+    "section.drawn.eyebrow": "Drawn Cards",
+    "section.drawn.title": "本輪卡牌",
+    "section.library.eyebrow": "Lexicon",
+    "section.library.title": "本局抽選池",
+    "button.pool.selectAll": "全選目前牌組",
+    "button.pool.clear": "取消目前牌組",
+    "button.pool.reset": "重置本玩法",
+    "label.drawCount": "抽取數量",
+    "control.note.default": "牌組已依玩法固定；下方抽選池可取消本局不想抽到的卡。",
+    "reel.ready.title": "準備抽卡",
+    "reel.ready.subtitle": "抽出後，這裡會顯示本輪結果。",
+    "reel.ready.subtitle.environment": "抽出後，這裡會顯示本輪異境。",
+    "empty.default": "{drawLabel}。<br />下方抽選池可以控制本局哪些卡會被抽到。",
+    "warning.pool": "本局抽選池不夠了。<br />請在下方抽選池重新勾選卡牌，或按「重置本玩法」。",
+    "secret.result.eyebrow": "答案公布",
+    "secret.result.title": "原來答案是：{name}",
+    "secret.result.body": "可以回頭檢查：哪些問題最早把範圍縮小？哪些問題其實不夠精準？",
+    "secret.restart": "再來一場",
+    "secret.setup.eyebrow": "秘密詞條",
+    "secret.setup.title": "請選定秘密答案",
+    "secret.setup.body": "下方會依目前啟用的「{deckLabel}」排出 1-{total} 號。輸入秘密編號後，即可開始活動。",
+    "secret.answer.label": "秘密編號",
+    "secret.showNumber": "顯示編號",
+    "secret.reveal": "直接公布答案",
+    "secret.correct": "就是這個",
+    "secret.wrong": "不是這個",
+    "secret.status.set": "答案已設定。投影時可保持隱藏。",
+    "secret.status.prompt": "請輸入 1-{total} 的秘密編號。",
+    "secret.status.needAnswer": "請先輸入秘密編號，再開始公布。"
+  };
+
+  function text(key, vars = {}) {
+    let value = generatedTexts[key] || defaults[key] || key;
+    for (const [name, replacement] of Object.entries(vars)) {
+      value = value.replaceAll(`{${name}}`, replacement);
+    }
+    return value;
+  }
+
+  function renderStatic(root = document) {
+    root.querySelectorAll("[data-ui-text]").forEach((element) => {
+      element.textContent = text(element.dataset.uiText);
+    });
+  }
+
+  window.DEBATE_UI_TEXT = Object.freeze({ text, renderStatic });
+})();

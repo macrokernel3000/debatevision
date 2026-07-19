@@ -2,9 +2,9 @@ window.DEBATE_IMAGE_LAYOUTS = {
   "items": {},
   "modes": {
     "item-survival": {
-      "scale": 1.08,
-      "x": -220,
-      "y": -95,
+      "scale": 1,
+      "x": 0,
+      "y": -157,
       "rotate": 0,
       "overlay": 0
     },

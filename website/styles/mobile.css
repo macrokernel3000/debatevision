@@ -1611,7 +1611,7 @@
     gap: 10px;
   }
 
-  .fixed-pools span,
+  .fixed-pools .pool-summary-chip,
   .sales-variant-tools,
   .metaphor-variant-tools,
   .metaphor-deck-tools,
@@ -1776,43 +1776,6 @@
     min-height: 64px;
     border-radius: 14px;
     background: rgba(255, 255, 255, 0.9);
-  }
-
-  .floating-timer:not(.is-collapsed) {
-    right: 10px;
-    bottom: 10px;
-    left: 10px;
-  }
-
-  .floating-timer:not(.is-collapsed) .timer-panel {
-    width: auto;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 112px;
-    gap: 8px;
-    align-items: stretch;
-    padding: 10px;
-    border-radius: 12px;
-  }
-
-  .floating-timer:not(.is-collapsed) .timer-head {
-    grid-column: 1 / -1;
-    margin-bottom: 8px;
-  }
-
-  .floating-timer:not(.is-collapsed) .timer-display {
-    min-height: 54px;
-    border-radius: 10px;
-    font-size: 2rem;
-  }
-
-  .floating-timer:not(.is-collapsed) .timer-actions {
-    grid-template-columns: 1fr;
-    gap: 6px;
-  }
-
-  .floating-timer:not(.is-collapsed) .timer-actions button {
-    min-height: 24px;
-    font-size: 0.82rem;
   }
 
   .scene-preview {

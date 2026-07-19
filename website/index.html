@@ -33,8 +33,12 @@
         "operatingSystem": "Any"
       }
     </script>
-    <link rel="stylesheet" href="./styles/main.css?v=20260719-2" />
+    <link rel="stylesheet" href="./styles/tokens.css?v=20260719-1" />
+    <link rel="stylesheet" href="./styles/main.css?v=20260719-4" />
+    <link rel="stylesheet" href="./styles/components/class-timer.css?v=20260719-1" />
+    <link rel="stylesheet" href="./styles/components/deck-option-cards.css?v=20260719-1" />
     <link rel="stylesheet" href="./styles/mobile.css?v=20260719-23" />
+    <link rel="stylesheet" href="./styles/viewport-boundaries.css?v=20260719-1" />
   </head>
   <body>
     <main class="app-shell">
@@ -44,17 +48,17 @@
           <p class="eyebrow">DebateVision</p>
           <p class="tagline"><span>思想始於思考</span> Every Thought Begins with a Question.</p>
         </div>
-        <button class="activity-menu-toggle" id="activityMenuToggle" type="button" aria-expanded="false" aria-controls="activityMenu">
+        <button class="activity-menu-toggle" id="activityMenuToggle" data-ui-surface="mobile" type="button" aria-expanded="false" aria-controls="activityMenu">
           <span aria-hidden="true">☰</span>
           <span class="sr-only">開啟活動列表</span>
         </button>
       </header>
 
-      <div class="activity-menu" id="activityMenu" hidden>
+      <div class="activity-menu" id="activityMenu" data-ui-surface="mobile" hidden>
         <div class="activity-menu-panel" role="menu" aria-label="活動列表"></div>
       </div>
 
-      <section class="mobile-home-screen" id="mobileHomeScreen" aria-label="手機版活動首頁">
+      <section class="mobile-home-screen" id="mobileHomeScreen" data-ui-surface="mobile" aria-label="手機版活動首頁">
         <div class="mobile-home-hero">
           <p data-mobile-home-eyebrow>DebateVision</p>
           <h2 data-mobile-home-title>辯語視界</h2>
@@ -63,7 +67,7 @@
         <div class="mobile-home-grid" id="mobileHomeGrid"></div>
       </section>
 
-      <section class="stage-panel" aria-labelledby="app-title">
+      <section class="stage-panel" data-ui-surface="desktop" aria-labelledby="app-title">
         <div class="scene-preview" id="scenePreview">
           <div class="scene-emblem" id="sceneEmblem">◆</div>
           <div class="scene-badge" id="sceneBadge">生存 × 冒險</div>
@@ -90,7 +94,7 @@
       </section>
 
       <section class="control-band" aria-label="抽卡控制台">
-        <div class="mobile-mode-banner" id="mobileModeBanner" aria-hidden="true">
+        <div class="mobile-mode-banner" id="mobileModeBanner" data-ui-surface="mobile" aria-hidden="true">
           <div class="mobile-mode-emblem" id="mobileModeEmblem">◆</div>
           <div class="mobile-mode-copy">
             <p id="mobileModeTrack">生存 × 冒險</p>
@@ -99,7 +103,7 @@
           </div>
         </div>
 
-        <div class="mobile-survival-dashboard" id="mobileSurvivalDashboard" aria-label="手機版活動設定"></div>
+        <div class="mobile-survival-dashboard" id="mobileSurvivalDashboard" data-ui-surface="mobile" aria-label="手機版活動設定"></div>
 
         <div class="selector-row">
           <label class="field" id="primaryDeckField">
@@ -143,7 +147,7 @@
             <p class="eyebrow" data-ui-text="section.drawn.eyebrow">Drawn Cards</p>
             <h2 data-ui-text="section.drawn.title">本輪卡牌</h2>
           </div>
-          <div class="mobile-result-actions" id="mobileResultActions"></div>
+          <div class="mobile-result-actions" id="mobileResultActions" data-ui-surface="mobile"></div>
           <div class="card-grid" id="cardGrid"></div>
         </div>
       </section>
@@ -170,13 +174,13 @@
         <div class="token-cloud" id="tokenCloud"></div>
       </section>
 
-      <nav class="mobile-bottom-nav" aria-label="手機版主選單">
+      <nav class="mobile-bottom-nav" data-ui-surface="mobile" aria-label="手機版主選單">
         <button type="button" data-mobile-nav="home" data-ui-text="mobile.nav.home">首頁</button>
         <button type="button" data-mobile-nav="menu" data-ui-text="mobile.nav.menu">列表</button>
         <button type="button" data-mobile-nav="history" data-ui-text="mobile.nav.history">紀錄</button>
       </nav>
 
-      <div class="mobile-card-modal" id="mobileCardModal" hidden>
+      <div class="mobile-card-modal" id="mobileCardModal" data-ui-surface="mobile" hidden>
         <div class="mobile-card-modal-panel" role="dialog" aria-modal="true" aria-labelledby="mobileCardModalTitle">
           <div class="mobile-card-modal-head">
             <div>
@@ -194,7 +198,7 @@
       </div>
     </div>
 
-    <div class="mobile-art-modal" id="mobileArtModal" hidden>
+    <div class="mobile-art-modal" id="mobileArtModal" data-ui-surface="mobile" hidden>
       <div class="mobile-art-modal-panel" role="dialog" aria-modal="true" aria-labelledby="mobileArtModalTitle">
         <button type="button" data-mobile-art-close>關閉</button>
         <h2 id="mobileArtModalTitle">卡牌圖片</h2>
@@ -215,8 +219,15 @@
     <script src="./js/modes/metaphor-compass.js"></script>
     <script src="./js/modes/secret-place.js"></script>
     <script src="./js/modes/reality-summon.js?v=20260719-1"></script>
+    <script src="./js/core/state.js?v=20260719-1"></script>
+    <script src="./js/core/ui-text.js?v=20260719-1"></script>
+    <script src="./js/services/history-service.js?v=20260719-1"></script>
+    <script src="./js/services/timer-service.js?v=20260719-1"></script>
+    <script src="./js/services/image-service.js?v=20260719-1"></script>
     <script src="./js/mobile-render.js?v=20260719-13"></script>
-    <script src="./js/app.js?v=20260719-15"></script>
+    <script src="./js/components/class-timer.js?v=20260719-2"></script>
+    <script src="./js/components/deck-option-cards.js?v=20260719-1"></script>
+    <script src="./js/app.js?v=20260719-18"></script>
     <script src="./js/mobile-app.js?v=20260719-3"></script>
   </body>
 </html>
