@@ -282,11 +282,11 @@ window.DEBATE_DECKS = {
       {
         "name": "史萊姆",
         "lore": "身體柔軟、可變形、能鑽進狹小空間，也能吸收或包覆物品；弱點是力量與速度有限。",
-        "imageId": "🫧",
+        "imageId": "史萊姆",
         "icon": "🫧",
         "iconAsset": "",
         "tokenIcon": "🫧",
-        "image": "",
+        "image": "../assets/cards/召喚卡/史萊姆.png",
         "rarity": "異族",
         "tags": [
           "異族類",
@@ -297,11 +297,11 @@ window.DEBATE_DECKS = {
       {
         "name": "狼人",
         "lore": "爆發力強、嗅覺敏銳、適合追蹤與保護；弱點是情緒控制與群眾恐懼。",
-        "imageId": "🐺",
+        "imageId": "狼人",
         "icon": "🐺",
         "iconAsset": "",
         "tokenIcon": "🐺",
-        "image": "",
+        "image": "../assets/cards/召喚卡/狼人.png",
         "rarity": "異族",
         "tags": [
           "異族類",
@@ -312,11 +312,11 @@ window.DEBATE_DECKS = {
       {
         "name": "殭屍",
         "lore": "不怕疲累、能長時間執行重複工作，也能製造強烈危機感；弱點是反應慢且容易引發恐慌。",
-        "imageId": "🧟",
+        "imageId": "殭屍",
         "icon": "🧟",
         "iconAsset": "",
         "tokenIcon": "🧟",
-        "image": "",
+        "image": "../assets/cards/召喚卡/殭屍.png",
         "rarity": "異族",
         "tags": [
           "異族類",
@@ -327,11 +327,11 @@ window.DEBATE_DECKS = {
       {
         "name": "獸人",
         "lore": "力量與耐力突出，重視部族榮譽與直接行動；弱點是可能被貼上粗暴、不夠細膩的印象。",
-        "imageId": "🪓",
+        "imageId": "獸人",
         "icon": "🪓",
         "iconAsset": "",
         "tokenIcon": "🪓",
-        "image": "",
+        "image": "../assets/cards/召喚卡/獸人.png",
         "rarity": "異族",
         "tags": [
           "異族類",
@@ -342,11 +342,11 @@ window.DEBATE_DECKS = {
       {
         "name": "巫師",
         "lore": "懂咒語、知識與儀式，能用非典型方式改變局面；弱點是效果需要被驗證，容易被質疑不科學。",
-        "imageId": "🧙",
+        "imageId": "巫師",
         "icon": "🧙",
         "iconAsset": "",
         "tokenIcon": "🧙",
-        "image": "",
+        "image": "../assets/cards/召喚卡/巫師.png",
         "rarity": "異族",
         "tags": [
           "異族類",
@@ -357,11 +357,11 @@ window.DEBATE_DECKS = {
       {
         "name": "外星人",
         "lore": "擁有異星科技與陌生視角，適合解決人類習慣看不見的問題；弱點是溝通與信任成本高。",
-        "imageId": "👽",
+        "imageId": "外星人",
         "icon": "👽",
         "iconAsset": "",
         "tokenIcon": "👽",
-        "image": "",
+        "image": "../assets/cards/召喚卡/外星人.png",
         "rarity": "異族",
         "tags": [
           "異族類",
@@ -372,11 +372,11 @@ window.DEBATE_DECKS = {
       {
         "name": "恐龍",
         "lore": "體型巨大、震撼力強，適合搬運、展示或保護；弱點是空間、食物與安全管理成本極高。",
-        "imageId": "🦖",
+        "imageId": "恐龍",
         "icon": "🦖",
         "iconAsset": "",
         "tokenIcon": "🦖",
-        "image": "",
+        "image": "../assets/cards/召喚卡/恐龍.png",
         "rarity": "異族",
         "tags": [
           "異族類",
@@ -387,11 +387,11 @@ window.DEBATE_DECKS = {
       {
         "name": "哥布林",
         "lore": "機靈、貪小便宜、擅長撿漏與臨時改造；弱點是信用很差，團隊合作容易出問題。",
-        "imageId": "👺",
+        "imageId": "哥布林",
         "icon": "👺",
         "iconAsset": "",
         "tokenIcon": "👺",
-        "image": "",
+        "image": "../assets/cards/召喚卡/哥布林.png",
         "rarity": "異族",
         "tags": [
           "異族類",
@@ -402,11 +402,11 @@ window.DEBATE_DECKS = {
       {
         "name": "巨魔",
         "lore": "身形巨大、皮厚耐打，適合守門、搬運與威嚇；弱點是動作慢，也不容易進入精細場域。",
-        "imageId": "🪨",
+        "imageId": "巨魔",
         "icon": "🪨",
         "iconAsset": "",
         "tokenIcon": "🪨",
-        "image": "",
+        "image": "../assets/cards/召喚卡/巨魔.png",
         "rarity": "異族",
         "tags": [
           "異族類",
@@ -417,11 +417,11 @@ window.DEBATE_DECKS = {
       {
         "name": "妖精",
         "lore": "體型小、速度快、擅長惡作劇與細節操作；弱點是力量有限，也容易把事情搞得更混亂。",
-        "imageId": "🧚",
+        "imageId": "妖精",
         "icon": "🧚",
         "iconAsset": "",
         "tokenIcon": "🧚",
-        "image": "",
+        "image": "../assets/cards/召喚卡/妖精.png",
         "rarity": "異族",
         "tags": [
           "異族類",
@@ -432,11 +432,11 @@ window.DEBATE_DECKS = {
       {
         "name": "龍人",
         "lore": "兼具人形溝通與龍族力量，能震懾也能談判；弱點是驕傲與情緒容易被挑動。",
-        "imageId": "🐉",
+        "imageId": "龍人",
         "icon": "🐉",
         "iconAsset": "",
         "tokenIcon": "🐉",
-        "image": "",
+        "image": "../assets/cards/召喚卡/龍人.png",
         "rarity": "異族",
         "tags": [
           "異族類",
@@ -447,11 +447,11 @@ window.DEBATE_DECKS = {
       {
         "name": "人魚",
         "lore": "適合水域任務、歌聲與魅力溝通；弱點是離開水後行動受限。",
-        "imageId": "🧜",
+        "imageId": "人魚",
         "icon": "🧜",
         "iconAsset": "",
         "tokenIcon": "🧜",
-        "image": "",
+        "image": "../assets/cards/召喚卡/人魚.png",
         "rarity": "異族",
         "tags": [
           "異族類",
@@ -462,11 +462,11 @@ window.DEBATE_DECKS = {
       {
         "name": "半人馬",
         "lore": "移動速度快、體力好，適合巡邏、運輸與戰場支援；弱點是很難適應室內與都市空間。",
-        "imageId": "🏇",
+        "imageId": "半人馬",
         "icon": "🏇",
         "iconAsset": "",
         "tokenIcon": "🏇",
-        "image": "",
+        "image": "../assets/cards/召喚卡/半人馬.png",
         "rarity": "異族",
         "tags": [
           "異族類",
@@ -475,13 +475,13 @@ window.DEBATE_DECKS = {
         ]
       },
       {
-        "name": "吸血族",
+        "name": "吸血鬼",
         "lore": "擅長夜間活動、社交魅力與長期布局；弱點是陽光、信任與道德形象都很麻煩。",
-        "imageId": "🧛",
+        "imageId": "吸血鬼",
         "icon": "🧛",
         "iconAsset": "",
         "tokenIcon": "🧛",
-        "image": "",
+        "image": "../assets/cards/召喚卡/吸血鬼.png",
         "rarity": "異族",
         "tags": [
           "異族類",
@@ -492,11 +492,11 @@ window.DEBATE_DECKS = {
       {
         "name": "樹人",
         "lore": "穩重、耐久、能和自然環境互動；弱點是移動慢，也很怕火災與都市開發。",
-        "imageId": "🌳",
+        "imageId": "樹人",
         "icon": "🌳",
         "iconAsset": "",
         "tokenIcon": "🌳",
-        "image": "",
+        "image": "../assets/cards/召喚卡/樹人.png",
         "rarity": "異族",
         "tags": [
           "異族類",
@@ -507,11 +507,11 @@ window.DEBATE_DECKS = {
       {
         "name": "天使",
         "lore": "帶有神聖形象、治癒與安撫力量，容易取得信任；弱點是道德標準太高，做現實決策時可能被質疑不接地氣。",
-        "imageId": "👼",
+        "imageId": "天使",
         "icon": "👼",
         "iconAsset": "",
         "tokenIcon": "👼",
-        "image": "",
+        "image": "../assets/cards/召喚卡/天使.png",
         "rarity": "異族",
         "tags": [
           "異族類",
@@ -522,11 +522,11 @@ window.DEBATE_DECKS = {
       {
         "name": "樹妖",
         "lore": "能和植物、森林與土地互動，適合環境、隱蔽與修復任務；弱點是離開自然環境後能力受限。",
-        "imageId": "🌿",
+        "imageId": "樹妖",
         "icon": "🌿",
         "iconAsset": "",
         "tokenIcon": "🌿",
-        "image": "",
+        "image": "../assets/cards/召喚卡/樹妖.png",
         "rarity": "異族",
         "tags": [
           "異族類",
@@ -537,11 +537,11 @@ window.DEBATE_DECKS = {
       {
         "name": "惡魔",
         "lore": "擅長交易、誘惑與利用人性弱點，能快速談成條件；弱點是信任、代價與道德風險很難說服人。",
-        "imageId": "😈",
+        "imageId": "惡魔",
         "icon": "😈",
         "iconAsset": "",
         "tokenIcon": "😈",
-        "image": "",
+        "image": "../assets/cards/召喚卡/惡魔.png",
         "rarity": "異族",
         "tags": [
           "異族類",
@@ -552,11 +552,11 @@ window.DEBATE_DECKS = {
       {
         "name": "海妖",
         "lore": "擅長歌聲、誘惑與水域行動，能吸引注意或操縱情緒；弱點是離開水域後能力下降，也容易被視為危險。",
-        "imageId": "🧜‍♀️",
+        "imageId": "海妖",
         "icon": "🧜‍♀️",
         "iconAsset": "",
         "tokenIcon": "🧜‍♀️",
-        "image": "",
+        "image": "../assets/cards/召喚卡/海妖.png",
         "rarity": "異族",
         "tags": [
           "異族類",
@@ -567,11 +567,11 @@ window.DEBATE_DECKS = {
       {
         "name": "仙子",
         "lore": "體型輕巧、會祝福與惡作劇，適合細節操作和情緒引導；弱點是力量有限，也容易讓局面變得不可預測。",
-        "imageId": "🧚‍♀️",
+        "imageId": "仙子",
         "icon": "🧚‍♀️",
         "iconAsset": "",
         "tokenIcon": "🧚‍♀️",
-        "image": "",
+        "image": "../assets/cards/召喚卡/仙子.png",
         "rarity": "異族",
         "tags": [
           "異族類",
@@ -582,11 +582,11 @@ window.DEBATE_DECKS = {
       {
         "name": "地底人",
         "lore": "熟悉地下空間、礦物、隧道與隱蔽生活；弱點是不習慣陽光與開闊場域，和地表人溝通成本高。",
-        "imageId": "⛏️",
+        "imageId": "地底人",
         "icon": "⛏️",
         "iconAsset": "",
         "tokenIcon": "⛏️",
-        "image": "",
+        "image": "../assets/cards/召喚卡/地底人.png",
         "rarity": "異族",
         "tags": [
           "異族類",
@@ -597,11 +597,11 @@ window.DEBATE_DECKS = {
       {
         "name": "神速力",
         "lore": "速度快到能搶時間、救援、配送與蒐集資訊；弱點是容易忽略細節，也可能造成公共安全問題。",
-        "imageId": "⚡",
+        "imageId": "神速力",
         "icon": "⚡",
         "iconAsset": "",
         "tokenIcon": "⚡",
-        "image": "",
+        "image": "../assets/cards/召喚卡/神速力.png",
         "rarity": "超能",
         "tags": [
           "超能類",
@@ -612,11 +612,11 @@ window.DEBATE_DECKS = {
       {
         "name": "超力量",
         "lore": "能搬動重物、突破障礙、保護他人；弱點是力量不等於策略，使用不當會造成破壞。",
-        "imageId": "💪",
+        "imageId": "超力量",
         "icon": "💪",
         "iconAsset": "",
         "tokenIcon": "💪",
-        "image": "",
+        "image": "../assets/cards/召喚卡/超力量.png",
         "rarity": "超能",
         "tags": [
           "超能類",
@@ -627,11 +627,11 @@ window.DEBATE_DECKS = {
       {
         "name": "瞬間移動",
         "lore": "能跨越距離、進行救援或快速抵達關鍵現場；弱點是定位、合法進入與隱私問題。",
-        "imageId": "🌀",
+        "imageId": "瞬間移動",
         "icon": "🌀",
         "iconAsset": "",
         "tokenIcon": "🌀",
-        "image": "",
+        "image": "../assets/cards/召喚卡/瞬間移動.png",
         "rarity": "超能",
         "tags": [
           "超能類",
@@ -642,11 +642,11 @@ window.DEBATE_DECKS = {
       {
         "name": "念動力",
         "lore": "能隔空移動物體、控場與精密操作；弱點是需要專注，也容易被要求交代能力邊界。",
-        "imageId": "🧠",
+        "imageId": "念動力",
         "icon": "🧠",
         "iconAsset": "",
         "tokenIcon": "🧠",
-        "image": "",
+        "image": "../assets/cards/召喚卡/念動力.png",
         "rarity": "超能",
         "tags": [
           "超能類",
@@ -657,11 +657,11 @@ window.DEBATE_DECKS = {
       {
         "name": "瘋狂",
         "lore": "不受常規限制，能提出極端創意與突破框架的方案；弱點是穩定性、可信度與風險管理很難說服人。",
-        "imageId": "🤪",
+        "imageId": "瘋狂",
         "icon": "🤪",
         "iconAsset": "",
         "tokenIcon": "🤪",
-        "image": "",
+        "image": "../assets/cards/召喚卡/瘋狂.png",
         "rarity": "超能",
         "tags": [
           "超能類",
@@ -672,11 +672,11 @@ window.DEBATE_DECKS = {
       {
         "name": "隱形",
         "lore": "能避開注意、偵查現場與取得第一手資訊；弱點是隱私、合法性與信任問題會被追問。",
-        "imageId": "🫥",
+        "imageId": "隱形",
         "icon": "🫥",
         "iconAsset": "",
         "tokenIcon": "🫥",
-        "image": "",
+        "image": "../assets/cards/召喚卡/隱形.png",
         "rarity": "超能",
         "tags": [
           "超能類",
@@ -687,11 +687,11 @@ window.DEBATE_DECKS = {
       {
         "name": "讀心術",
         "lore": "能快速理解他人想法與需求，適合談判、銷售與危機處理；弱點是倫理界線非常敏感。",
-        "imageId": "💭",
+        "imageId": "讀心術",
         "icon": "💭",
         "iconAsset": "",
         "tokenIcon": "💭",
-        "image": "",
+        "image": "../assets/cards/召喚卡/讀心術.png",
         "rarity": "超能",
         "tags": [
           "超能類",
@@ -702,11 +702,11 @@ window.DEBATE_DECKS = {
       {
         "name": "時間暫停",
         "lore": "能爭取準備時間、避開危險或修正錯誤；弱點是濫用後會讓方案失去公平性。",
-        "imageId": "⏸️",
+        "imageId": "時間暫停",
         "icon": "⏸️",
         "iconAsset": "",
         "tokenIcon": "⏸️",
-        "image": "",
+        "image": "../assets/cards/召喚卡/時間暫停.png",
         "rarity": "超能",
         "tags": [
           "超能類",
@@ -717,11 +717,11 @@ window.DEBATE_DECKS = {
       {
         "name": "治癒力",
         "lore": "能修復傷勢、穩定團隊與降低風險；弱點是容易被過度依賴，也會面對資源分配爭議。",
-        "imageId": "✨",
+        "imageId": "治癒力",
         "icon": "✨",
         "iconAsset": "",
         "tokenIcon": "✨",
-        "image": "",
+        "image": "../assets/cards/召喚卡/治癒力.png",
         "rarity": "超能",
         "tags": [
           "超能類",
@@ -730,13 +730,13 @@ window.DEBATE_DECKS = {
         ]
       },
       {
-        "name": "變身術",
-        "lore": "能改變外貌、身份或型態，適合偽裝與適應環境；弱點是身份信任與法律責任很難處理。",
-        "imageId": "🎭",
+        "name": "化身術",
+        "lore": "能化為靈魂動物，適合偽裝與適應環境；弱點是失去自我時也難以變回來。",
+        "imageId": "化身術",
         "icon": "🎭",
         "iconAsset": "",
         "tokenIcon": "🎭",
-        "image": "",
+        "image": "../assets/cards/召喚卡/化身術.png",
         "rarity": "超能",
         "tags": [
           "超能類",
@@ -745,13 +745,13 @@ window.DEBATE_DECKS = {
         ]
       },
       {
-        "name": "控火",
+        "name": "御火",
         "lore": "能提供能源、攻擊、照明與威嚇；弱點是公共安全、失控與損害賠償。",
-        "imageId": "🔥",
+        "imageId": "御火",
         "icon": "🔥",
         "iconAsset": "",
         "tokenIcon": "🔥",
-        "image": "",
+        "image": "../assets/cards/召喚卡/御火.png",
         "rarity": "超能",
         "tags": [
           "超能類",
@@ -760,13 +760,13 @@ window.DEBATE_DECKS = {
         ]
       },
       {
-        "name": "控冰",
+        "name": "語冰",
         "lore": "能降溫、封鎖、保存物資與製造地形優勢；弱點是環境限制與附帶傷害。",
-        "imageId": "❄️",
+        "imageId": "語冰",
         "icon": "❄️",
         "iconAsset": "",
         "tokenIcon": "❄️",
-        "image": "",
+        "image": "../assets/cards/召喚卡/語冰.png",
         "rarity": "超能",
         "tags": [
           "超能類",
@@ -777,11 +777,11 @@ window.DEBATE_DECKS = {
       {
         "name": "分身術",
         "lore": "能同時處理多個任務、製造人力優勢；弱點是協調、責任歸屬與品質控管。",
-        "imageId": "👥",
+        "imageId": "分身術",
         "icon": "👥",
         "iconAsset": "",
         "tokenIcon": "👥",
-        "image": "",
+        "image": "../assets/cards/召喚卡/分身術.png",
         "rarity": "超能",
         "tags": [
           "超能類",
@@ -792,11 +792,11 @@ window.DEBATE_DECKS = {
       {
         "name": "預知夢",
         "lore": "能提前看見風險或機會，適合投資、治理與救災；弱點是證據不足，容易被當成迷信。",
-        "imageId": "🔮",
+        "imageId": "預知夢",
         "icon": "🔮",
         "iconAsset": "",
         "tokenIcon": "🔮",
-        "image": "",
+        "image": "../assets/cards/召喚卡/預知夢.png",
         "rarity": "超能",
         "tags": [
           "超能類",
@@ -807,11 +807,11 @@ window.DEBATE_DECKS = {
       {
         "name": "重力操控",
         "lore": "能讓物體變輕或變重，適合運輸、工程與戰術控制；弱點是精準度與安全風險。",
-        "imageId": "🪐",
+        "imageId": "重力操控",
         "icon": "🪐",
         "iconAsset": "",
         "tokenIcon": "🪐",
-        "image": "",
+        "image": "../assets/cards/召喚卡/重力操控.png",
         "rarity": "超能",
         "tags": [
           "超能類",
@@ -822,11 +822,11 @@ window.DEBATE_DECKS = {
       {
         "name": "飛行",
         "lore": "能跨越地形、快速抵達現場，也能進行空中觀察；弱點是空域規則、天氣與安全風險。",
-        "imageId": "🪽",
+        "imageId": "飛行",
         "icon": "🪽",
         "iconAsset": "",
         "tokenIcon": "🪽",
-        "image": "",
+        "image": "../assets/cards/召喚卡/飛行.png",
         "rarity": "超能",
         "tags": [
           "超能類",
@@ -837,11 +837,11 @@ window.DEBATE_DECKS = {
       {
         "name": "神譯",
         "lore": "能聽懂動物、靈性生命或非人語言的訊息，取得線索並協調協助；弱點是人類不一定相信，對方也未必願意配合。",
-        "imageId": "🐾",
+        "imageId": "神譯",
         "icon": "🐾",
         "iconAsset": "",
         "tokenIcon": "🐾",
-        "image": "",
+        "image": "../assets/cards/召喚卡/神譯.png",
         "rarity": "超能",
         "tags": [
           "超能類",
@@ -852,11 +852,11 @@ window.DEBATE_DECKS = {
       {
         "name": "電能",
         "lore": "能提供電力、干擾設備、啟動機械或製造震懾；弱點是容易造成短路、受傷與公共安全問題。",
-        "imageId": "🔌",
+        "imageId": "電能",
         "icon": "🔌",
         "iconAsset": "",
         "tokenIcon": "🔌",
-        "image": "",
+        "image": "../assets/cards/召喚卡/電能.png",
         "rarity": "超能",
         "tags": [
           "超能類",
@@ -867,11 +867,11 @@ window.DEBATE_DECKS = {
       {
         "name": "不朽",
         "lore": "不會自然衰老，能承受漫長等待並累積經驗；弱點是容易和現代人產生價值斷層，也可能失去急迫感。",
-        "imageId": "♾️",
+        "imageId": "不朽",
         "icon": "♾️",
         "iconAsset": "",
         "tokenIcon": "♾️",
-        "image": "",
+        "image": "../assets/cards/召喚卡/不朽.png",
         "rarity": "超能",
         "tags": [
           "超能類",
@@ -882,11 +882,11 @@ window.DEBATE_DECKS = {
       {
         "name": "通靈",
         "lore": "能與已故者或歷史人物對話，取得記憶、建議與被遺忘的線索；弱點是證據難以驗證，也容易被情緒牽動。",
-        "imageId": "🕯️",
+        "imageId": "通靈",
         "icon": "🕯️",
         "iconAsset": "",
         "tokenIcon": "🕯️",
-        "image": "",
+        "image": "../assets/cards/召喚卡/通靈.png",
         "rarity": "超能",
         "tags": [
           "超能類",
@@ -897,11 +897,11 @@ window.DEBATE_DECKS = {
       {
         "name": "令牌",
         "lore": "每天可以對一個人下達一次不可忽視的行動指令；弱點是倫理風險極高，使用後也會破壞信任。",
-        "imageId": "🎟️",
+        "imageId": "令牌",
         "icon": "🎟️",
         "iconAsset": "",
         "tokenIcon": "🎟️",
-        "image": "",
+        "image": "../assets/cards/召喚卡/令牌.png",
         "rarity": "超能",
         "tags": [
           "超能類",
@@ -912,11 +912,11 @@ window.DEBATE_DECKS = {
       {
         "name": "千面",
         "lore": "能切換不同外貌、聲線與社會身份，適合潛入、談判與避開追蹤；弱點是身份責任與自我定位會變得混亂。",
-        "imageId": "🎭",
+        "imageId": "千面",
         "icon": "🎭",
         "iconAsset": "",
         "tokenIcon": "🎭",
-        "image": "",
+        "image": "../assets/cards/召喚卡/千面.png",
         "rarity": "超能",
         "tags": [
           "超能類",
@@ -927,11 +927,11 @@ window.DEBATE_DECKS = {
       {
         "name": "千機",
         "lore": "能理解精密機械與細緻工業流程，像鐘錶、儀器與微型裝置都能設計或修復；弱點是需要材料、時間與極高穩定度。",
-        "imageId": "⚙️",
+        "imageId": "千機",
         "icon": "⚙️",
         "iconAsset": "",
         "tokenIcon": "⚙️",
-        "image": "",
+        "image": "../assets/cards/召喚卡/千機.png",
         "rarity": "超能",
         "tags": [
           "超能類",
@@ -942,11 +942,11 @@ window.DEBATE_DECKS = {
       {
         "name": "浪人",
         "lore": "獨立行動、劍術與生存能力強，適合危險任務；弱點是缺少組織支援，也不一定願意服從命令。",
-        "imageId": "🗡️",
+        "imageId": "浪人",
         "icon": "🗡️",
         "iconAsset": "",
         "tokenIcon": "🗡️",
-        "image": "",
+        "image": "../assets/cards/召喚卡/浪人.png",
         "rarity": "特職",
         "tags": [
           "特職類",
@@ -957,11 +957,11 @@ window.DEBATE_DECKS = {
       {
         "name": "吟遊詩人",
         "lore": "擅長故事、音樂與群眾情緒，能把方案說得動人；弱點是實際執行能力需要團隊補足。",
-        "imageId": "🎻",
+        "imageId": "吟遊詩人",
         "icon": "🎻",
         "iconAsset": "",
         "tokenIcon": "🎻",
-        "image": "",
+        "image": "../assets/cards/召喚卡/吟遊詩人.png",
         "rarity": "特職",
         "tags": [
           "特職類",
@@ -972,11 +972,11 @@ window.DEBATE_DECKS = {
       {
         "name": "駭客",
         "lore": "擅長系統、資料與漏洞分析，能快速找到數位世界的入口；弱點是合法性與資訊安全界線。",
-        "imageId": "💻",
+        "imageId": "駭客",
         "icon": "💻",
         "iconAsset": "",
         "tokenIcon": "💻",
-        "image": "",
+        "image": "../assets/cards/召喚卡/駭客.png",
         "rarity": "特職",
         "tags": [
           "特職類",
@@ -987,11 +987,11 @@ window.DEBATE_DECKS = {
       {
         "name": "瘋狂科學家",
         "lore": "能做出大膽實驗、發明與非常規解法；弱點是安全、倫理與失敗成本。",
-        "imageId": "🥼",
+        "imageId": "瘋狂科學家",
         "icon": "🥼",
         "iconAsset": "",
         "tokenIcon": "🥼",
-        "image": "",
+        "image": "../assets/cards/召喚卡/瘋狂科學家.png",
         "rarity": "特職",
         "tags": [
           "特職類",
@@ -1002,11 +1002,11 @@ window.DEBATE_DECKS = {
       {
         "name": "海盜",
         "lore": "擅長冒險、談判、搶占機會與帶隊行動；弱點是紀律、合法性與信任問題。",
-        "imageId": "🏴‍☠️",
+        "imageId": "海盜",
         "icon": "🏴‍☠️",
         "iconAsset": "",
         "tokenIcon": "🏴‍☠️",
-        "image": "",
+        "image": "../assets/cards/召喚卡/海盜.png",
         "rarity": "特職",
         "tags": [
           "特職類",
@@ -1017,11 +1017,11 @@ window.DEBATE_DECKS = {
       {
         "name": "牛仔",
         "lore": "獨立、耐苦、擅長騎乘與現場判斷；弱點是不一定適合複雜制度與精密合作。",
-        "imageId": "🤠",
+        "imageId": "牛仔",
         "icon": "🤠",
         "iconAsset": "",
         "tokenIcon": "🤠",
-        "image": "",
+        "image": "../assets/cards/召喚卡/牛仔.png",
         "rarity": "特職",
         "tags": [
           "特職類",
@@ -1032,11 +1032,11 @@ window.DEBATE_DECKS = {
       {
         "name": "觀星者",
         "lore": "擅長觀察長期趨勢、解讀天象與建立方向感；弱點是行動較慢，容易被質疑太抽象。",
-        "imageId": "🔭",
+        "imageId": "觀星者",
         "icon": "🔭",
         "iconAsset": "",
         "tokenIcon": "🔭",
-        "image": "",
+        "image": "../assets/cards/召喚卡/觀星者.png",
         "rarity": "特職",
         "tags": [
           "特職類",
@@ -1047,11 +1047,11 @@ window.DEBATE_DECKS = {
       {
         "name": "忍者",
         "lore": "擅長潛行、偵查、快速撤離與精準執行；弱點是不適合公開溝通與建立信任。",
-        "imageId": "🥷",
+        "imageId": "忍者",
         "icon": "🥷",
         "iconAsset": "",
         "tokenIcon": "🥷",
-        "image": "",
+        "image": "../assets/cards/召喚卡/忍者.png",
         "rarity": "特職",
         "tags": [
           "特職類",
@@ -1062,11 +1062,11 @@ window.DEBATE_DECKS = {
       {
         "name": "刺客",
         "lore": "能精準找到弱點與完成高風險任務；弱點是暴力形象太強，現實方案必須避開非法手段。",
-        "imageId": "🗡️",
+        "imageId": "刺客",
         "icon": "🗡️",
         "iconAsset": "",
         "tokenIcon": "🗡️",
-        "image": "",
+        "image": "../assets/cards/召喚卡/刺客.png",
         "rarity": "特職",
         "tags": [
           "特職類",
@@ -1077,11 +1077,11 @@ window.DEBATE_DECKS = {
       {
         "name": "國王",
         "lore": "擁有象徵權威、動員能力與決策經驗；弱點是容易被認為傲慢或脫離民意。",
-        "imageId": "👑",
+        "imageId": "國王",
         "icon": "👑",
         "iconAsset": "",
         "tokenIcon": "👑",
-        "image": "",
+        "image": "../assets/cards/召喚卡/國王.png",
         "rarity": "特職",
         "tags": [
           "特職類",
@@ -1092,11 +1092,11 @@ window.DEBATE_DECKS = {
       {
         "name": "間諜",
         "lore": "擅長情報、偽裝與談判；適合複雜局勢，但可信度與倫理界線很難處理。",
-        "imageId": "🕶️",
+        "imageId": "間諜",
         "icon": "🕶️",
         "iconAsset": "",
         "tokenIcon": "🕶️",
-        "image": "",
+        "image": "../assets/cards/召喚卡/間諜.png",
         "rarity": "特職",
         "tags": [
           "特職類",
@@ -1107,11 +1107,11 @@ window.DEBATE_DECKS = {
       {
         "name": "占卜師",
         "lore": "擅長解讀象徵、安撫焦慮與提出可能性；弱點是需要面對證據與驗證問題。",
-        "imageId": "🃏",
+        "imageId": "占卜師",
         "icon": "🃏",
         "iconAsset": "",
         "tokenIcon": "🃏",
-        "image": "",
+        "image": "../assets/cards/召喚卡/占卜師.png",
         "rarity": "特職",
         "tags": [
           "特職類",
@@ -1122,11 +1122,11 @@ window.DEBATE_DECKS = {
       {
         "name": "煉金術士",
         "lore": "能把普通材料轉化成有價值的東西，適合創業與研發；弱點是配方不穩定，成本也可能爆炸。",
-        "imageId": "⚗️",
+        "imageId": "煉金術士",
         "icon": "⚗️",
         "iconAsset": "",
         "tokenIcon": "⚗️",
-        "image": "",
+        "image": "../assets/cards/召喚卡/煉金術士.png",
         "rarity": "特職",
         "tags": [
           "特職類",
@@ -1137,11 +1137,11 @@ window.DEBATE_DECKS = {
       {
         "name": "馴龍師",
         "lore": "懂得和強大生物合作，能處理危險資源；弱點是管理成本高，一失控就會造成災難。",
-        "imageId": "🐲",
+        "imageId": "馴龍師",
         "icon": "🐲",
         "iconAsset": "",
         "tokenIcon": "🐲",
-        "image": "",
+        "image": "../assets/cards/召喚卡/馴龍師.png",
         "rarity": "特職",
         "tags": [
           "特職類",
@@ -1152,11 +1152,11 @@ window.DEBATE_DECKS = {
       {
         "name": "賞金獵人",
         "lore": "擅長追蹤目標、完成委託與衡量報酬；弱點是動機常被懷疑只看錢。",
-        "imageId": "🎯",
+        "imageId": "賞金獵人",
         "icon": "🎯",
         "iconAsset": "",
         "tokenIcon": "🎯",
-        "image": "",
+        "image": "../assets/cards/召喚卡/賞金獵人.png",
         "rarity": "特職",
         "tags": [
           "特職類",
@@ -1167,11 +1167,11 @@ window.DEBATE_DECKS = {
       {
         "name": "化獸師",
         "lore": "能變成動物或借用動物特性，適合潛入、追蹤、偵查與逃脫；弱點是容易失去人類溝通能力，也會被場地限制。",
-        "imageId": "🐾",
+        "imageId": "化獸師",
         "icon": "🐾",
         "iconAsset": "",
         "tokenIcon": "🐾",
-        "image": "",
+        "image": "../assets/cards/召喚卡/化獸師.png",
         "rarity": "特職",
         "tags": [
           "特職類",
@@ -1182,11 +1182,11 @@ window.DEBATE_DECKS = {
       {
         "name": "宗師",
         "lore": "精通一門技藝或武學，能教人、立規矩並判斷真正的高手；弱點是可能太重視傳承，不容易接受新方法。",
-        "imageId": "🥋",
+        "imageId": "宗師",
         "icon": "🥋",
         "iconAsset": "",
         "tokenIcon": "🥋",
-        "image": "",
+        "image": "../assets/cards/召喚卡/宗師.png",
         "rarity": "特職",
         "tags": [
           "特職類",
@@ -1197,11 +1197,11 @@ window.DEBATE_DECKS = {
       {
         "name": "獵戶",
         "lore": "熟悉山林、追蹤、陷阱與耐心等待；弱點是進入城市或數位環境後優勢會下降。",
-        "imageId": "🏹",
+        "imageId": "獵戶",
         "icon": "🏹",
         "iconAsset": "",
         "tokenIcon": "🏹",
-        "image": "",
+        "image": "../assets/cards/召喚卡/獵戶.png",
         "rarity": "特職",
         "tags": [
           "特職類",
@@ -1212,11 +1212,11 @@ window.DEBATE_DECKS = {
       {
         "name": "神偷",
         "lore": "擅長潛入、開鎖、取物與避開警覺；弱點是合法性與信任很難處理，任何合作都會被懷疑。",
-        "imageId": "🔑",
+        "imageId": "神偷",
         "icon": "🔑",
         "iconAsset": "",
         "tokenIcon": "🔑",
-        "image": "",
+        "image": "../assets/cards/召喚卡/神偷.png",
         "rarity": "特職",
         "tags": [
           "特職類",
@@ -1227,11 +1227,11 @@ window.DEBATE_DECKS = {
       {
         "name": "典獄長",
         "lore": "懂得管理高風險人物、規則、隔離與秩序；弱點是容易過度控制，忽略自由與信任。",
-        "imageId": "⛓️",
+        "imageId": "典獄長",
         "icon": "⛓️",
         "iconAsset": "",
         "tokenIcon": "⛓️",
-        "image": "",
+        "image": "../assets/cards/召喚卡/典獄長.png",
         "rarity": "特職",
         "tags": [
           "特職類",
@@ -1242,11 +1242,11 @@ window.DEBATE_DECKS = {
       {
         "name": "禪師",
         "lore": "擅長穩定情緒、觀察心念與化解衝突；弱點是節奏很慢，面對急迫任務可能被嫌不夠直接。",
-        "imageId": "🧘",
+        "imageId": "禪師",
         "icon": "🧘",
         "iconAsset": "",
         "tokenIcon": "🧘",
-        "image": "",
+        "image": "../assets/cards/召喚卡/禪師.png",
         "rarity": "特職",
         "tags": [
           "特職類",
@@ -5226,7 +5226,7 @@ window.DEBATE_DECKS = {
         "icon": "world_icon_game",
         "iconAsset": "",
         "tokenIcon": "🎮",
-        "image": "worlds_game",
+        "image": "../assets/icons/worlds/worlds_game.png",
         "rarity": "B",
         "tags": [
           "水域",

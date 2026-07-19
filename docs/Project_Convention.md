@@ -46,6 +46,16 @@ AI_START_HERE.md
 
 新增大型玩法或拆分程式前，請先讀 `docs/Code_Health_Audit.md`。目前 `website/js/app.js` 與 `website/styles/main.css` 是主要需要逐步拆分的檔案。
 
+手機版已經有獨立操作模組：
+
+- `website/js/mobile-render.js`：手機版畫面 HTML 生成。
+- `website/js/mobile-app.js`：手機版事件與操作流程。
+- `website/styles/mobile.css`：手機版專屬版面與視覺。
+
+未來若只影響手機版，優先修改這三個檔案；不要把手機專屬流程繼續寫進 `app.js`，也不要把手機專屬樣式繼續塞回 `main.css`。只有桌機與手機共用的資料讀取、狀態、卡牌元件與抽卡核心，才放在共用檔案。
+
+小修採快速維修模式：文字、單一按鈕、單一手機樣式的修改，先精準搜尋、最小範圍修改、跑最小檢查。不要為了小修重新整理整個專案或重跑完整資料流程。動到 CSV / JSON / generated 資料時，才執行 `網站更新.command` 或 `node scripts/build-lexicons.mjs`。
+
 調整畫面或新增玩法後，請依照 `docs/Responsive_QA_Checklist.md` 檢查手機、平板與桌機版，避免只在桌機寬度看起來正常。
 
 ## 擴充規則

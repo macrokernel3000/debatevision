@@ -58,6 +58,18 @@ docs/Code_Health_Audit.md
 
 原則是先搬移、不改行為，並且每次拆完都要檢查桌機與手機版。
 
+小修採快速維修模式：如果只是刪一句文字、改一個按鈕名稱、微調手機樣式，先用 `rg` 精準搜尋文字或 class，改最小範圍，跑對應的最小檢查即可。不要每次都重跑完整資料流程或重新盤點全專案；只有動到 CSV / JSON / generated 資料時才需要跑詞庫更新。
+
+手機版已經是獨立操作流程，不只是桌面版縮小。修改手機流程、手機卡組選擇、手機結果頁、手機底部導覽、手機卡池 modal 時，優先改：
+
+```text
+website/js/mobile-render.js
+website/js/mobile-app.js
+website/styles/mobile.css
+```
+
+`mobile-render.js` 管手機畫面的 HTML 生成，`mobile-app.js` 管手機操作事件，`mobile.css` 管手機視覺。不要再把新的手機互動直接塞回 `website/js/app.js` 或把手機視覺規則塞回 `website/styles/main.css`，除非該功能確實同時屬於桌機與手機共用核心。
+
 ## 手機版檢查提醒
 
 每次修改畫面、活動選單、抽選池、卡牌顯示、計時器或新增玩法後，請依照：

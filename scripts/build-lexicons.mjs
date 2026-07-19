@@ -8,6 +8,7 @@ const modesDir = resolve(root, "data", "modes");
 const modeContentPath = resolve(root, "data", "content", "玩法文案.csv");
 const modeSettingsPath = resolve(root, "data", "content", "玩法設定.csv");
 const uiContentPath = resolve(root, "data", "content", "介面文字.csv");
+const mobileUiContentPath = resolve(root, "data", "content", "手機介面文字.csv");
 const imageLayoutsDir = resolve(root, "data", "image-layouts");
 const generatedDir = resolve(root, "data", "generated");
 const fallbackCsvPath = resolve(root, "docs", "archive", "legacy", "總詞庫備份.csv");
@@ -429,14 +430,15 @@ function applyModeSettings(modes) {
 }
 
 function buildUiTexts() {
-  if (!existsSync(uiContentPath)) return {};
-
   const texts = {};
-  for (const row of csvObjects(readFileSync(uiContentPath, "utf8"))) {
-    const key = (row.key || "").trim();
-    const value = (row.content || row.text || "").trim();
-    if (!key) continue;
-    texts[key] = value;
+  for (const path of [uiContentPath, mobileUiContentPath]) {
+    if (!existsSync(path)) continue;
+    for (const row of csvObjects(readFileSync(path, "utf8"))) {
+      const key = (row.key || "").trim();
+      const value = (row.content || row.text || "").trim();
+      if (!key) continue;
+      texts[key] = value;
+    }
   }
   return texts;
 }

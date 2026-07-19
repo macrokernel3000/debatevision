@@ -71,7 +71,7 @@
     const survivalPool = ctx.survivalActiveDeckIds().flatMap((deckId) => ctx.selectedCardsFrom(deckId));
     const cards = ctx.pickFromPool(survivalPool, ctx.count).map((card) => ctx.cardWithEnvironmentHooks(card, environment));
     if ((!ctx.noEnvironment && !environment) || cards.length < ctx.count) return ctx.renderPoolWarning();
-    ctx.renderCombo(environment, cards, "本輪異境");
+    ctx.renderCombo(environment, cards, "本輪異境", { hideStageInDesktopResults: true });
     ctx.markDrawn(ctx.noEnvironment || lockedEnvironment ? cards : [environment, ...cards]);
     return ctx.noEnvironment ? cards : [environment, ...cards];
   }

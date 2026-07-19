@@ -113,6 +113,12 @@ data/content/玩法文案.csv
 data/content/介面文字.csv
 ```
 
+手機首頁、模式卡、數量名稱、卡組標籤與流程教學可以直接改：
+
+```text
+data/content/手機介面文字.csv
+```
+
 改完後雙擊：
 
 ```text

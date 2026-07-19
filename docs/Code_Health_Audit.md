@@ -1,6 +1,6 @@
 # Code Health Audit
 
-Last checked: 2026-07-17
+Last checked: 2026-07-19
 
 這份文件記錄 DebateVision 目前程式碼健康狀態與拆檔方向。它不是玩法規格，而是給之後維護網站程式的人看的整理筆記。
 
@@ -8,8 +8,11 @@ Last checked: 2026-07-17
 
 主要檔案大小：
 
-- `website/js/app.js`：約 2800 行。已經可以運作，但狀態管理、抽卡規則、畫面渲染、圖片編輯器、計時器都集中在同一個檔案。
-- `website/styles/main.css`：約 2600 行。基本樣式、元件樣式、玩法專屬樣式與手機版調整都集中在同一個檔案。
+- `website/js/app.js`：約 3200 行。仍是共用核心，但手機事件監聽與手機 HTML 生成已先拆出。
+- `website/js/mobile-render.js`：手機版畫面生成入口，負責手機活動設定、卡組格、版本切換區與結果頁操作按鈕的 HTML。
+- `website/js/mobile-app.js`：手機版操作流程入口，負責手機模式切換、卡組選擇、手機 modal、結果頁、底部導覽與紀錄展開。
+- `website/styles/main.css`：約 3000 行。保留桌機、平板、共用元件與非手機專屬樣式。
+- `website/styles/mobile.css`：手機版專屬樣式，負責手機首頁、手機活動卡、手機設定區、手機結果頁、手機底部導覽與手機 modal。
 - `scripts/build-lexicons.mjs`：約 480 行。負責把 CSV / JSON 轉成網站可讀的 generated 檔，目前大小仍可接受。
 
 目前網站仍是可維護狀態，但如果繼續新增玩法，應該先拆出比較清楚的模組。
@@ -21,6 +24,9 @@ Last checked: 2026-07-17
 - 移除前端已不顯示的教練提示渲染殘留。
 - 移除已沒有對應畫面的教練提示 CSS。
 - 拆出第一批玩法抽卡控制器到 `website/js/modes/`。
+- 拆出手機版渲染入口到 `website/js/mobile-render.js`。
+- 拆出手機版事件入口到 `website/js/mobile-app.js`。
+- 拆出手機版視覺規則到 `website/styles/mobile.css`。
 
 保留：
 
@@ -46,6 +52,16 @@ website/js/modes/
 ```
 
 `website/js/app.js` 目前仍負責狀態、控制列與共用渲染，但 `drawResult()` 已改成先找對應玩法控制器。
+
+手機版已經視為獨立操作模組。修改手機版時：
+
+- 手機畫面 HTML 先看 `website/js/mobile-render.js`。
+- 手機操作流程先看 `website/js/mobile-app.js`。
+- 手機視覺先看 `website/styles/mobile.css`。
+- 只有共用資料、抽卡核心、共用卡片 markup、桌機也會使用的狀態，才回到 `website/js/app.js`。
+- 只有桌機/平板/共用元件樣式，才回到 `website/styles/main.css`。
+
+小修採快速維修模式：先精準搜尋、最小修改、最小檢查；只有資料結構、CSV / JSON 或 generated 輸出受影響時才跑完整詞庫更新。
 
 下一步再把 `app.js` 拆成下列區塊：
 
@@ -112,7 +128,8 @@ const modeControllers = {
 
 ```text
 website/styles/
-├── main.css              # 只 import 其他檔案
+├── main.css              # 桌機、平板與共用樣式
+├── mobile.css            # 手機版專屬樣式，已先拆出
 ├── base.css              # 變數、字體、全域
 ├── layout.css            # app-shell、header、section
 ├── components/

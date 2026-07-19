@@ -33,15 +33,16 @@
         "operatingSystem": "Any"
       }
     </script>
-    <link rel="stylesheet" href="./styles/main.css" />
+    <link rel="stylesheet" href="./styles/main.css?v=20260719-2" />
+    <link rel="stylesheet" href="./styles/mobile.css?v=20260719-23" />
   </head>
   <body>
     <main class="app-shell">
       <header class="top-bar">
         <div>
-          <p class="eyebrow">DebateVision</p>
           <h1 id="app-title">辯語視界</h1>
-          <p class="tagline">Every Thought Begins with a Question. <span>思想始於思考</span></p>
+          <p class="eyebrow">DebateVision</p>
+          <p class="tagline"><span>思想始於思考</span> Every Thought Begins with a Question.</p>
         </div>
         <button class="activity-menu-toggle" id="activityMenuToggle" type="button" aria-expanded="false" aria-controls="activityMenu">
           <span aria-hidden="true">☰</span>
@@ -53,27 +54,53 @@
         <div class="activity-menu-panel" role="menu" aria-label="活動列表"></div>
       </div>
 
+      <section class="mobile-home-screen" id="mobileHomeScreen" aria-label="手機版活動首頁">
+        <div class="mobile-home-hero">
+          <p data-mobile-home-eyebrow>DebateVision</p>
+          <h2 data-mobile-home-title>辯語視界</h2>
+          <span data-mobile-home-subtitle>思想始於思考｜Every Thought Begins with a Question.</span>
+        </div>
+        <div class="mobile-home-grid" id="mobileHomeGrid"></div>
+      </section>
+
       <section class="stage-panel" aria-labelledby="app-title">
+        <div class="scene-preview" id="scenePreview">
+          <div class="scene-emblem" id="sceneEmblem">◆</div>
+          <div class="scene-badge" id="sceneBadge">生存 × 冒險</div>
+          <h2 id="sceneTitle">異境求生</h2>
+          <p id="sceneDescription">抽出一個異境，再抽道具或職業，說明如何生存、合作或對抗。</p>
+        </div>
         <div class="scene-track" id="modeGrid" aria-label="選擇活動"></div>
       </section>
 
       <section class="card-dictionary-panel" aria-label="卡片字典">
         <div class="section-head">
           <p class="eyebrow">Card Dictionary</p>
-          <h2>卡片字典</h2>
+          <h2 data-ui-text="mobile.dictionary.title">卡片字典</h2>
         </div>
-        <p class="dictionary-intro">
+        <p class="dictionary-intro" data-ui-text="mobile.dictionary.intro">
           先勾選想使用的卡片類型，再從各卡池中直接挑選本場要用的卡，方便老師臨時設計自己的活動。
         </p>
         <div class="dictionary-strip" id="cardDictionary"></div>
         <div class="dictionary-actions">
-          <button id="drawDictionaryCards" type="button">儲存成這場</button>
-          <button id="clearDictionaryDecks" type="button">清空本場</button>
+          <button id="drawDictionaryCards" type="button" data-ui-text="mobile.dictionary.save">儲存成這場</button>
+          <button id="clearDictionaryDecks" type="button" data-ui-text="mobile.dictionary.clear">清空本場</button>
         </div>
         <div class="dictionary-result" id="dictionaryResult"></div>
       </section>
 
       <section class="control-band" aria-label="抽卡控制台">
+        <div class="mobile-mode-banner" id="mobileModeBanner" aria-hidden="true">
+          <div class="mobile-mode-emblem" id="mobileModeEmblem">◆</div>
+          <div class="mobile-mode-copy">
+            <p id="mobileModeTrack">生存 × 冒險</p>
+            <h2 id="mobileModeTitle">異境求生</h2>
+            <span id="mobileModeRule">抽出一個異境，再抽道具或職業，說明如何生存、合作或對抗。</span>
+          </div>
+        </div>
+
+        <div class="mobile-survival-dashboard" id="mobileSurvivalDashboard" aria-label="手機版活動設定"></div>
+
         <div class="selector-row">
           <label class="field" id="primaryDeckField">
             <span id="primaryDeckLabel">主要詞庫</span>
@@ -116,14 +143,15 @@
             <p class="eyebrow" data-ui-text="section.drawn.eyebrow">Drawn Cards</p>
             <h2 data-ui-text="section.drawn.title">本輪卡牌</h2>
           </div>
+          <div class="mobile-result-actions" id="mobileResultActions"></div>
           <div class="card-grid" id="cardGrid"></div>
         </div>
       </section>
 
       <section class="history-panel" aria-label="抽卡記憶">
         <div class="section-head">
-          <p class="eyebrow">Memory Log</p>
-          <h2>最近十場</h2>
+          <p class="eyebrow" data-ui-text="mobile.history.eyebrow">Memory Log</p>
+          <h2 data-ui-text="mobile.history.title">最近十場</h2>
         </div>
         <div class="draw-history" id="drawHistory"></div>
       </section>
@@ -141,12 +169,44 @@
         </div>
         <div class="token-cloud" id="tokenCloud"></div>
       </section>
+
+      <nav class="mobile-bottom-nav" aria-label="手機版主選單">
+        <button type="button" data-mobile-nav="home" data-ui-text="mobile.nav.home">首頁</button>
+        <button type="button" data-mobile-nav="menu" data-ui-text="mobile.nav.menu">列表</button>
+        <button type="button" data-mobile-nav="history" data-ui-text="mobile.nav.history">紀錄</button>
+      </nav>
+
+      <div class="mobile-card-modal" id="mobileCardModal" hidden>
+        <div class="mobile-card-modal-panel" role="dialog" aria-modal="true" aria-labelledby="mobileCardModalTitle">
+          <div class="mobile-card-modal-head">
+            <div>
+              <p class="eyebrow">Deck Editor</p>
+              <h2 id="mobileCardModalTitle">編輯卡池</h2>
+            </div>
+            <button type="button" data-mobile-card-modal-close data-ui-text="mobile.common.close">關閉</button>
+          </div>
+          <div class="mobile-card-modal-actions">
+            <button type="button" data-mobile-deck-action="select" data-ui-text="mobile.common.selectAll">全選</button>
+            <button type="button" data-mobile-deck-action="clear" data-ui-text="mobile.common.clear">取消</button>
+            <button type="button" data-mobile-deck-action="reset" data-ui-text="mobile.common.reset">返回預設</button>
+          </div>
+        <div class="mobile-card-modal-list" id="mobileCardModalList"></div>
+      </div>
+    </div>
+
+    <div class="mobile-art-modal" id="mobileArtModal" hidden>
+      <div class="mobile-art-modal-panel" role="dialog" aria-modal="true" aria-labelledby="mobileArtModalTitle">
+        <button type="button" data-mobile-art-close>關閉</button>
+        <h2 id="mobileArtModalTitle">卡牌圖片</h2>
+        <div class="mobile-art-preview" id="mobileArtPreview"></div>
+      </div>
+    </div>
     </main>
 
     <script src="../data/generated/decks.js"></script>
     <script src="../data/generated/modes.js"></script>
     <script src="../data/generated/image-layouts.js"></script>
-    <script src="../data/generated/ui-texts.js"></script>
+    <script src="../data/generated/ui-texts.js?v=20260719-3"></script>
     <script src="./js/icons.js"></script>
     <script src="./js/mode-lifecycle.js"></script>
     <script src="./js/modes/item-environment.js"></script>
@@ -154,7 +214,9 @@
     <script src="./js/modes/sales-command.js"></script>
     <script src="./js/modes/metaphor-compass.js"></script>
     <script src="./js/modes/secret-place.js"></script>
-    <script src="./js/modes/reality-summon.js"></script>
-    <script src="./js/app.js"></script>
+    <script src="./js/modes/reality-summon.js?v=20260719-1"></script>
+    <script src="./js/mobile-render.js?v=20260719-13"></script>
+    <script src="./js/app.js?v=20260719-15"></script>
+    <script src="./js/mobile-app.js?v=20260719-3"></script>
   </body>
 </html>

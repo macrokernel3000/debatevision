@@ -115,16 +115,6 @@ window.DEBATE_MODES = [
     "tone": "gold",
     "track": "卡牌 × 卡牌",
     "primaryDeck": "celebrities",
-    "availableDecks": [
-      "celebrities",
-      "items",
-      "needs",
-      "concepts",
-      "worlds",
-      "locations",
-      "roles",
-      "creatures"
-    ],
     "secondaryDeck": "",
     "primaryLabel": "比較卡",
     "secondaryLabel": "",
@@ -309,15 +299,6 @@ window.DEBATE_MODES = [
     "track": "秘密詞條",
     "image": "../assets/backgrounds/modes/where-am-i.webp",
     "primaryDeck": "locations",
-    "availableDecks": [
-      "locations",
-      "worlds",
-      "items",
-      "needs",
-      "roles",
-      "creatures",
-      "celebrities"
-    ],
     "secondaryDeck": "",
     "primaryLabel": "任意詞庫",
     "secondaryLabel": "",

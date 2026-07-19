@@ -111,10 +111,25 @@ const modeGrid = document.querySelector("#modeGrid");
 const activityMenuToggle = document.querySelector("#activityMenuToggle");
 const activityMenu = document.querySelector("#activityMenu");
 const activityMenuPanel = activityMenu?.querySelector(".activity-menu-panel");
+const mobileHomeScreen = document.querySelector("#mobileHomeScreen");
+const mobileHomeGrid = document.querySelector("#mobileHomeGrid");
 const playArea = document.querySelector(".play-area");
 const controlBand = document.querySelector(".control-band");
 const cardDictionaryPanel = document.querySelector(".card-dictionary-panel");
 const libraryBand = document.querySelector(".library-band");
+const mobileModeBanner = document.querySelector("#mobileModeBanner");
+const mobileModeEmblem = document.querySelector("#mobileModeEmblem");
+const mobileModeTrack = document.querySelector("#mobileModeTrack");
+const mobileModeTitle = document.querySelector("#mobileModeTitle");
+const mobileModeRule = document.querySelector("#mobileModeRule");
+const mobileSurvivalDashboard = document.querySelector("#mobileSurvivalDashboard");
+const mobileResultActions = document.querySelector("#mobileResultActions");
+const mobileCardModal = document.querySelector("#mobileCardModal");
+const mobileCardModalTitle = document.querySelector("#mobileCardModalTitle");
+const mobileCardModalList = document.querySelector("#mobileCardModalList");
+const mobileArtModal = document.querySelector("#mobileArtModal");
+const mobileArtModalTitle = document.querySelector("#mobileArtModalTitle");
+const mobileArtPreview = document.querySelector("#mobileArtPreview");
 const deckSelect = document.querySelector("#deckSelect");
 const primaryDeckField = document.querySelector("#primaryDeckField");
 const secondaryDeckSelect = document.querySelector("#secondaryDeckSelect");
@@ -150,6 +165,7 @@ const controlNote = document.querySelector("#controlNote");
 const dictionaryDeckSelections = new Set();
 const dictionaryCardSelections = new Set();
 let dictionaryActiveDeck = "";
+let mobileEditingDeck = "";
 const deckDictionary = {
   worlds: "特殊的世界觀，適合發揮想像力，需要臨機應變與危機判斷。",
   creatures: "我們的好朋友或者小生命，適合比較特色、建立觀察角度與討論生命關係。",
@@ -164,6 +180,9 @@ const deckDictionary = {
   summons: "被召喚出的角色與身份，適合把特殊能力轉成現實方案並接受質疑。"
 };
 const dictionaryDeckOrder = ["worlds", "creatures", "items", "roles", "locations", "celebrities", "needs", "concepts", "relations", "missions", "summons"];
+const derivedDeckIds = new Set(["needs"]);
+const hiddenImportanceDecks = new Set([...derivedDeckIds]);
+const hiddenSalesAudienceDecks = new Set(["items", "needs", "concepts", "relations", "missions"]);
 
 function readDraftLayouts() {
   if (!EDIT_MODE) return {};
@@ -190,15 +209,16 @@ function readTimerState() {
   try {
     const stored = JSON.parse(window.localStorage.getItem(TIMER_STORAGE_KEY) || "{}");
     const wasHidden = Boolean(stored.hidden);
+    const mobileTimerDefault = window.matchMedia?.("(max-width: 560px)")?.matches;
     return {
       elapsed: 0,
       running: false,
       startedAt: 0,
       ...stored,
-      collapsed: Boolean(stored.collapsed || wasHidden)
+      collapsed: Boolean(stored.collapsed || wasHidden || mobileTimerDefault)
     };
   } catch {
-    return { elapsed: 0, running: false, startedAt: 0, collapsed: false };
+    return { elapsed: 0, running: false, startedAt: 0, collapsed: true };
   }
 }
 
@@ -257,7 +277,7 @@ function setLayoutForTarget(target, nextLayout) {
   imageLayouts[target.group] ||= {};
   const minScale = minScaleForTarget(target);
   imageLayouts[target.group][target.id] = {
-    scale: Math.max(minScale, Number(nextLayout.scale) || DEFAULT_IMAGE_LAYOUT.scale),
+    scale: Math.min(4, Math.max(minScale, Number(nextLayout.scale) || DEFAULT_IMAGE_LAYOUT.scale)),
     x: Number(nextLayout.x) || DEFAULT_IMAGE_LAYOUT.x,
     y: Number(nextLayout.y) || DEFAULT_IMAGE_LAYOUT.y,
     rotate: Number(nextLayout.rotate) || DEFAULT_IMAGE_LAYOUT.rotate,
@@ -419,6 +439,7 @@ function raritiesFrom(deckId) {
 function rarityDisplayName(rarity) {
   if (rarity === "概念") return "概念卡";
   if (rarity === "需求") return "需求卡";
+  if (summonCategories.includes(rarity)) return `${rarity}卡`;
   return rarity === "N" ? "道具卡" : `${rarity} 卡`;
 }
 
@@ -474,8 +495,38 @@ function defaultSummonCategorySelection(mode = activeMode) {
 }
 
 function selectedSalesAudienceCards() {
+  ensureSalesAudienceDeck();
   if (salesAudienceDeck === "summons") return selectedSummonCards();
   return selectedCardsFrom(salesAudienceDeck);
+}
+
+function orderedDeckIds(options = {}) {
+  const includeDerived = Boolean(options.includeDerived);
+  const preferred = [
+    ...dictionaryDeckOrder.filter((deckId) => decks[deckId]),
+    ...Object.keys(decks).filter((deckId) => !dictionaryDeckOrder.includes(deckId))
+  ];
+  return preferred.filter((deckId, index, list) => (
+    list.indexOf(deckId) === index &&
+    decks[deckId] &&
+    (includeDerived || !derivedDeckIds.has(deckId))
+  ));
+}
+
+function salesAudienceDeckIds() {
+  return orderedDeckIds().filter((deckId) => !hiddenSalesAudienceDecks.has(deckId));
+}
+
+function defaultSalesAudienceDeck() {
+  const audienceDecks = salesAudienceDeckIds();
+  if (audienceDecks.includes("summons")) return "summons";
+  return audienceDecks[0] || "";
+}
+
+function ensureSalesAudienceDeck() {
+  const audienceDecks = salesAudienceDeckIds();
+  if (audienceDecks.includes(salesAudienceDeck)) return;
+  salesAudienceDeck = defaultSalesAudienceDeck();
 }
 
 function salesVariantLabel(variant = salesVariant) {
@@ -532,6 +583,8 @@ function modeStatusText(mode = activeMode) {
 }
 
 function availableDeckIdsForMode(mode = activeMode) {
+  if (mode.cardMode === "importanceDuel") return importanceAvailableDeckIds(mode);
+  if (mode.cardMode === "secretPlace" || mode.cardMode === "cardDictionary") return orderedDeckIds();
   if (Array.isArray(mode.availableDecks) && mode.availableDecks.length) {
     return mode.availableDecks.filter((deckId) => decks[deckId]);
   }
@@ -544,9 +597,9 @@ function availableDeckIdsForMode(mode = activeMode) {
       .filter((deckId, index, list) => deckId && decks[deckId] && list.indexOf(deckId) === index);
   }
   if (mode.cardMode === "salesPitch") {
-    return ["items", "needs", "concepts", "creatures", "roles", "summons"].filter((deckId) => decks[deckId]);
+    return ["items", "needs", "concepts", ...salesAudienceDeckIds()]
+      .filter((deckId, index, list) => decks[deckId] && list.indexOf(deckId) === index);
   }
-  if (mode.cardMode === "secretPlace") return Object.keys(decks);
   return [mode.secondaryDeck, mode.primaryDeck].filter(Boolean);
 }
 
@@ -558,14 +611,32 @@ function primaryVariantDeckIds(mode = activeMode) {
   if (Array.isArray(mode.variantDecks) && mode.variantDecks.length) {
     return mode.variantDecks.filter((deckId) => decks[deckId]);
   }
-  if (mode.cardMode === "importanceDuel" && Array.isArray(mode.availableDecks)) {
-    return mode.availableDecks.filter((deckId) => decks[deckId]);
+  if (mode.cardMode === "importanceDuel") {
+    return importanceAvailableDeckIds(mode);
   }
   return [];
 }
 
 function variantLabel(deckId) {
   return activeMode.variantLabels?.[deckId] || (decks[deckId]?.label || deckId).replace(/卡$/, "");
+}
+
+function deckTone(deckId) {
+  const baseDeck = String(deckId || "").split(":")[0];
+  const tones = {
+    worlds: "worlds",
+    items: "items",
+    roles: "roles",
+    creatures: "creatures",
+    locations: "locations",
+    concepts: "concepts",
+    relations: "relations",
+    celebrities: "celebrities",
+    summons: "summons",
+    missions: "missions",
+    needs: "needs"
+  };
+  return tones[baseDeck] || "default";
 }
 
 function resetModeSelections() {
@@ -612,8 +683,16 @@ function historyVariantLabel() {
 
 function resetImportanceDeckSelection(mode = activeMode) {
   if (mode.cardMode !== "importanceDuel") return;
-  const defaultDeck = mode.primaryDeck && decks[mode.primaryDeck] ? mode.primaryDeck : (mode.availableDecks || []).find((deckId) => decks[deckId]);
+  const available = importanceAvailableDeckIds(mode);
+  const defaultDeck = mode.primaryDeck && available.includes(mode.primaryDeck) ? mode.primaryDeck : available[0];
   selectedImportanceDecks = new Set(defaultDeck ? [defaultDeck] : []);
+}
+
+function importanceAvailableDeckIds(mode = activeMode) {
+  const explicitDecks = Array.isArray(mode.availableDecks) && mode.availableDecks.length
+    ? mode.availableDecks
+    : orderedDeckIds({ includeDerived: true });
+  return explicitDecks.filter((deckId) => decks[deckId] && !hiddenImportanceDecks.has(deckId));
 }
 
 function survivalActiveDeckIds(mode = activeMode) {
@@ -623,6 +702,187 @@ function survivalActiveDeckIds(mode = activeMode) {
   if (selected.length) return selected;
   const fallback = mode.primaryDeck && available.includes(mode.primaryDeck) ? mode.primaryDeck : available[0];
   return fallback ? [fallback] : [];
+}
+
+function isMobileAppView() {
+  return Boolean(window.matchMedia?.("(max-width: 560px)")?.matches);
+}
+
+function survivalModeLabel() {
+  return survivalVariant === "battle" ? "挑戰模式" : "生存模式";
+}
+
+function survivalActionLabel() {
+  return survivalVariant === "battle"
+    ? uiText("mobile.itemSurvival.startBattle")
+    : uiText("mobile.itemSurvival.startSurvival");
+}
+
+function survivalAgainLabel() {
+  return survivalVariant === "battle"
+    ? uiText("mobile.itemSurvival.againBattle")
+    : uiText("mobile.itemSurvival.againSurvival");
+}
+
+function mobileActionLabel() {
+  if (activeMode.cardMode === "itemEnvironment") return survivalActionLabel();
+  return activeMode.drawLabel || "開始抽卡";
+}
+
+function mobileAgainLabel() {
+  if (activeMode.cardMode === "itemEnvironment") return survivalAgainLabel();
+  return `再次${activeMode.title}`;
+}
+
+function survivalDeckCards() {
+  if (survivalVariant === "survival") {
+    return primaryVariantDeckIds().map((deckId) => ({
+      deckId,
+      title: deckId === "items"
+        ? uiText("mobile.itemSurvival.itemDeck")
+        : uiText("mobile.itemSurvival.roleDeck"),
+      subtitle: deckId === "items"
+        ? "可以操作的資源、工具與物件"
+        : "能協助求生的身份與能力",
+      selected: survivalDeckSelection.has(deckId),
+      count: selectedCount(deckId),
+      total: cardsFrom(deckId).length,
+      amount: null
+    }));
+  }
+
+  return [
+    ["items", "道具", "可使用的工具與資源", survivalItemCount],
+    ["roles", "職業", "團隊中的專業夥伴", survivalRoleCount],
+    ["creatures", "動物", "可以協助或造成變數的生物", survivalCreatureCount],
+    ["summons:異族", "異族", "現實召喚中的異族角色", survivalAlienCount],
+    ["summons:超能", "超能", "具備特殊能力的角色", survivalPowerCount],
+    ["summons:特職", "特職", "特殊職能與任務角色", survivalSpecialistCount]
+  ].map(([deckId, title, subtitle, amount]) => {
+    const [baseDeck, rarity] = String(deckId).split(":");
+    const totalCards = rarity
+      ? cardsFrom(baseDeck).filter((card) => card.rarity === rarity).length
+      : cardsFrom(baseDeck).length;
+    const selectedCards = rarity
+      ? selectedCardsFrom(baseDeck).filter((card) => card.rarity === rarity).length
+      : selectedCount(baseDeck);
+    return {
+      deckId: String(deckId),
+      baseDeck,
+      rarity,
+      title,
+      subtitle,
+      selected: Number(amount) > 0,
+      count: selectedCards,
+      total: totalCards,
+      amount: Number(amount)
+    };
+  });
+}
+
+function mobileGenericDeckCards() {
+  if (activeMode.cardMode === "itemEnvironment") return survivalDeckCards();
+  if (activeMode.cardMode === "importanceDuel") {
+    return importanceAvailableDeckIds(activeMode).map((deckId) => ({
+      deckId,
+      title: decks[deckId]?.label || variantLabel(deckId),
+      subtitle: "可加入本輪比較池",
+      selected: selectedImportanceDecks.has(deckId),
+      count: selectedCount(deckId),
+      total: cardsFrom(deckId).length
+    }));
+  }
+  if (activeMode.cardMode === "salesPitch") {
+    const deckCards = [
+      { deckId: "items", title: uiText("mobile.sales.productDeck"), subtitle: "本輪要銷售的產品", selected: true }
+    ];
+    if (salesVariant === "supply") {
+      deckCards.push({ deckId: "needs", title: uiText("mobile.sales.needDeck"), subtitle: "固定抽 1 張需求", selected: true });
+    }
+    if (salesVariant === "story" && !salesNoConcept) {
+      deckCards.push({ deckId: "concepts", title: uiText("mobile.sales.conceptDeck"), subtitle: "固定抽 1 張故事概念", selected: true });
+    }
+    if (salesVariant === "target") {
+      deckCards.push({
+        deckId: salesAudienceDeck,
+        title: decks[salesAudienceDeck]?.label || uiText("mobile.sales.targetDeck"),
+        subtitle: "固定抽 1 張客戶目標",
+        selected: true
+      });
+    }
+    return deckCards.map((deck) => ({
+      ...deck,
+      count: deck.deckId === "summons" ? selectedSalesAudienceCards().length : selectedCount(deck.deckId),
+      total: cardsFrom(deck.deckId).length
+    }));
+  }
+  if (activeMode.cardMode === "metaphorCompass") {
+    const deckCards = [];
+    if (metaphorVariant !== "concrete") {
+      deckCards.push({ deckId: metaphorPrefixDeck, title: uiText("mobile.metaphor.prefixDeck"), subtitle: decks[metaphorPrefixDeck]?.label || "前綴", selected: true });
+    }
+    deckCards.push({ deckId: activeSecondaryLibrary, title: uiText("mobile.metaphor.relationDeck"), subtitle: metaphorVariant === "concrete" ? "就像（固定）" : "連接兩個詞", selected: true });
+    deckCards.push({ deckId: metaphorSuffixDeck, title: uiText("mobile.metaphor.suffixDeck"), subtitle: decks[metaphorSuffixDeck]?.label || "後綴", selected: true });
+    return deckCards
+      .filter((deck) => deck.deckId && decks[deck.deckId])
+      .map((deck) => ({
+        ...deck,
+        count: selectedCount(deck.deckId),
+        total: cardsFrom(deck.deckId).length
+      }));
+  }
+  if (activeMode.cardMode === "summonMission") {
+    return [
+      { deckId: "missions", title: "任務卡", subtitle: "固定抽 1 張任務", selected: true, count: selectedCount("missions"), total: cardsFrom("missions").length },
+      ...summonCategories.map((category) => ({
+        deckId: `summons:${category}`,
+        toggleValue: category,
+        title: summonCategoryLabel(category),
+        subtitle: "可加入本輪召喚池",
+        selected: summonCategorySelection.has(category),
+        count: selectedCardsFrom("summons").filter((card) => card.rarity === category).length,
+        total: cardsFrom("summons").filter((card) => card.rarity === category).length
+      }))
+    ];
+  }
+  return availableDeckIdsForMode(activeMode).map((deckId) => ({
+    deckId,
+    title: decks[deckId]?.label || variantLabel(deckId),
+    subtitle: "本輪使用卡池",
+    selected: deckId === activeLibrary || deckId === activeSecondaryLibrary,
+    count: selectedCount(deckId),
+    total: cardsFrom(deckId).length
+  }));
+}
+
+function renderMobileGenericDashboard() {
+  const deckCards = mobileGenericDeckCards().map((deck) => ({
+    ...deck,
+    cover: mobileDeckCover(deck.deckId)
+  }));
+  const fixedCount = Boolean(activeMode.fixedCount || activeMode.cardMode === "metaphorCompass");
+  const standardDeckUi = ["salesPitch", "summonMission", "importanceDuel"].includes(activeMode.cardMode);
+  const countValue = activeMode.fixedCount || Math.max(1, Math.min(6, Number(drawCount.value) || 1));
+  return window.DebateVisionMobileRender.genericDashboard({
+    cardMode: activeMode.cardMode,
+    actionLabel: mobileActionLabel(),
+    countValue,
+    deckCards,
+    deckTone,
+    fixedCount,
+    metaphorVariant,
+    metaphorVariantLabel,
+    salesAudienceDeck,
+    salesAudienceDeckIds: salesAudienceDeckIds(),
+    salesNoConcept,
+    salesVariant,
+    statusText: modeStatusText(),
+    standardDeckUi,
+    summonCategories,
+    summonCategoryLabel,
+    summonCategorySelection,
+    variantLabel
+  });
 }
 
 function importanceActiveDeckIds(mode = activeMode) {
@@ -669,8 +929,7 @@ function rememberSecretAnswer(card) {
 }
 
 function historyTitle(index) {
-  const numerals = ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十"];
-  return `第${numerals[index] || index + 1}場`;
+  return `第${index + 1}場`;
 }
 
 function renderDrawHistory() {
@@ -682,7 +941,7 @@ function renderDrawHistory() {
   }
 
   drawHistory.innerHTML = entries.map((entry, index) => `
-    <article class="history-item">
+    <article class="history-item" data-history-index="${index}" role="button" tabindex="0" aria-label="查看${historyTitle((Number(entry.roundNumber) || entries.length - index) - 1)}紀錄">
       <div class="history-item-head">
         <strong>${historyTitle((Number(entry.roundNumber) || entries.length - index) - 1)}</strong>
         ${entry.variant ? `<span>${entry.variant}</span>` : ""}
@@ -692,6 +951,37 @@ function renderDrawHistory() {
       </div>
     </article>
   `).join("");
+}
+
+function cardsFromHistoryEntry(entry) {
+  return (entry?.cards || []).map((card) => {
+    const found = cardsFrom(card.deckId).find((candidate) => candidate.name === card.name);
+    return found || normalizeCard({ ...card, lore: "", hooks: [] }, card.deckId);
+  });
+}
+
+function restoreHistoryEntry(index, options = {}) {
+  const entries = drawHistoryByMode[historyScope()] || [];
+  const entry = entries[Number(index)];
+  const cards = cardsFromHistoryEntry(entry);
+  if (!cards.length) return false;
+
+  const stageCard = cards.find((card) => card.deckId === activeSecondaryLibrary) || cards[0];
+  if (activeMode.cardMode === "itemEnvironment" && stageCard?.deckId === activeSecondaryLibrary) {
+    renderCombo(stageCard, cards.filter((card) => cardKey(card) !== cardKey(stageCard)), "本輪異境", {
+      hideStageInDesktopResults: survivalVariant === "survival"
+    });
+  } else {
+    cardGrid.innerHTML = `<div class="combo-results">${cards.map((card) => cardMarkup(card)).join("")}</div>`;
+    renderReelCard(stageCard);
+  }
+
+  if (isMobileAppView() || options.mobileResult) {
+    document.body.classList.add("has-mobile-draw-result");
+    setMobileHistoryVisible(false);
+  }
+
+  return true;
 }
 
 function pickFrom(deckId, count) {
@@ -733,6 +1023,16 @@ function modeCardStyle(mode) {
   return ` style="--mode-card-image: url(&quot;${safeImage}&quot;)"`;
 }
 
+function modeImageCssValue(mode) {
+  const image = mode.image || mode.backgroundImage || "";
+  if (!image) return "";
+  try {
+    return `url("${new URL(image, document.baseURI).href.replace(/"/g, "%22")}")`;
+  } catch {
+    return `url("${image.replace(/"/g, "%22")}")`;
+  }
+}
+
 function renderModeButtons() {
   const markup = modes.map((mode) => `
     <button class="mode-card ${mode.id === activeMode.id ? "is-active" : ""}" data-mode="${mode.id}" data-tone="${mode.tone}" data-palette="${modeCardMeta(mode).palette}" type="button"${modeCardStyle(mode)}>
@@ -771,6 +1071,19 @@ function setActivityMenu(open) {
 }
 
 function renderActivity() {
+  const activeMeta = modeCardMeta(activeMode);
+  document.body.dataset.activePalette = activeMeta.palette;
+  document.body.dataset.activeMode = activeMode.id;
+  const activeModeImage = modeImageCssValue(activeMode);
+  if (activeModeImage) document.body.style.setProperty("--active-mode-image", activeModeImage);
+  else document.body.style.removeProperty("--active-mode-image");
+  if (mobileModeBanner) {
+    mobileModeBanner.dataset.palette = activeMeta.palette;
+    mobileModeEmblem.textContent = activeMode.icon;
+    mobileModeTrack.textContent = activeMeta.menuLabel || activeMode.track || "";
+    mobileModeTitle.textContent = activeMode.title;
+    mobileModeRule.textContent = modeStatusText();
+  }
   if (scenePreview) {
     scenePreview.dataset.tone = activeMode.tone;
     const modeImage = activeMode.image || activeMode.backgroundImage || "";
@@ -811,6 +1124,181 @@ function renderActivity() {
   controlNote.textContent = activeMode.cardMode === "secretPlace"
     ? lifecycleFor().setup
     : modeStatusText();
+}
+
+function renderMobileSurvivalDashboard() {
+  if (!mobileSurvivalDashboard) return;
+  const active = activeMode.cardMode !== "secretPlace" && activeMode.cardMode !== "cardDictionary";
+  mobileSurvivalDashboard.hidden = !active;
+  if (!active) {
+    mobileSurvivalDashboard.innerHTML = "";
+    return;
+  }
+
+  if (activeMode.cardMode !== "itemEnvironment") {
+    mobileSurvivalDashboard.innerHTML = renderMobileGenericDashboard();
+    return;
+  }
+
+  const selectedDecks = survivalDeckCards().map((deck) => ({
+    ...deck,
+    cover: mobileDeckCover(deck.deckId)
+  }));
+  const environmentDeck = {
+    deckId: activeMode.secondaryDeck || "worlds",
+    title: "異境卡",
+    selected: true,
+    cover: mobileDeckCover(activeMode.secondaryDeck || "worlds")
+  };
+  const survivalModeActive = survivalVariant === "survival";
+  const countLabel = survivalModeActive
+    ? uiText("mobile.itemSurvival.drawCount")
+    : uiText("mobile.itemSurvival.groupCount");
+  const countValue = survivalModeActive ? Math.max(1, Math.min(6, Number(drawCount.value) || 1)) : survivalGroupCount;
+  const countMin = 1;
+  const countMax = survivalModeActive ? 6 : 8;
+
+  mobileSurvivalDashboard.innerHTML = window.DebateVisionMobileRender.survivalDashboard({
+    actionLabel: survivalActionLabel(),
+    countLabel,
+    countMax,
+    countMin,
+    countValue,
+    deckTone,
+    environmentDeck,
+    selectedDecks,
+    survivalModeActive
+  });
+}
+
+function renderMobileResultActions() {
+  if (!mobileResultActions) return;
+  const active = activeMode.cardMode !== "secretPlace" && activeMode.cardMode !== "cardDictionary";
+  mobileResultActions.hidden = !active;
+  mobileResultActions.innerHTML = window.DebateVisionMobileRender.resultActions({
+    active,
+    againLabel: mobileAgainLabel()
+  });
+}
+
+function mobileDeckTarget(deckId) {
+  const [baseDeck, rarity] = String(deckId).split(":");
+  return { baseDeck, rarity };
+}
+
+function mobileDeckCards(deckId) {
+  const { baseDeck, rarity } = mobileDeckTarget(deckId);
+  return cardsFrom(baseDeck)
+    .map((card) => normalizeCard(card, baseDeck))
+    .filter((card) => !rarity || card.rarity === rarity);
+}
+
+function mobileDeckCover(deckId) {
+  const coverAssets = {
+    items: "../assets/ui/deck-covers/items.jpg",
+    "sales:items": "../assets/ui/deck-covers/sales-items.jpg",
+    worlds: "../assets/ui/deck-covers/worlds.jpg",
+    needs: "../assets/ui/deck-covers/needs.jpg",
+    concepts: "../assets/ui/deck-covers/concepts.jpg",
+    creatures: "../assets/ui/deck-covers/creatures.jpg",
+    roles: "../assets/ui/deck-covers/roles.jpg",
+    summons: "../assets/ui/deck-covers/summons.jpg",
+    "summons:異族": "../assets/ui/deck-covers/summons-alien.jpg",
+    "summons:超能": "../assets/ui/deck-covers/summons-power.jpg",
+    "summons:特職": "../assets/ui/deck-covers/summons-specialist.jpg"
+  };
+  const coverKey = activeMode.cardMode === "salesPitch" && String(deckId) === "items"
+    ? "sales:items"
+    : String(deckId);
+  const explicitCover = coverAssets[coverKey];
+  if (explicitCover) {
+    return {
+      image: explicitCover,
+      name: "",
+      symbol: "",
+      isDeckCover: true
+    };
+  }
+
+  const { baseDeck } = mobileDeckTarget(deckId);
+  const cards = mobileDeckCards(deckId);
+  const selectedKeys = selectedKeysForDeck(baseDeck);
+  const card = cards.find((candidate) => selectedKeys.has(cardKey(candidate))) || cards[0];
+  return card ? {
+    image: card.iconAsset || card.image || "",
+    name: card.name,
+    symbol: card.tokenIcon || iconFor(card)
+  } : { image: "", name: "", symbol: "□", isDeckCover: false };
+}
+
+function mobileResourceKey(deckId) {
+  return {
+    items: "items",
+    roles: "roles",
+    creatures: "creatures",
+    "summons:異族": "aliens",
+    "summons:超能": "powers",
+    "summons:特職": "specialists"
+  }[deckId] || deckId;
+}
+
+function renderMobileCardModal() {
+  if (!mobileCardModal || !mobileEditingDeck) return;
+  const { baseDeck, rarity } = mobileDeckTarget(mobileEditingDeck);
+  const deck = decks[baseDeck];
+  if (!deck) return;
+  const cards = mobileDeckCards(mobileEditingDeck);
+  const selectedKeys = selectedKeysForDeck(baseDeck);
+  const label = rarity || deck.label;
+  const rarityGroups = (rarity ? [rarity] : raritiesFrom(baseDeck))
+    .map((rarityName) => ({
+      rarity: rarityName,
+      cards: cards.filter((card) => (card.rarity || "C") === rarityName)
+    }))
+    .filter((group) => group.cards.length);
+  mobileCardModalTitle.textContent = `編輯${label}`;
+  mobileCardModalList.innerHTML = rarityGroups.map((group) => {
+    const selectedCount = group.cards.filter((card) => selectedKeys.has(cardKey(card))).length;
+    return `
+      <section class="mobile-rarity-group" data-rarity="${group.rarity}">
+        <div class="mobile-rarity-head">
+          <strong>${rarityDisplayName(group.rarity)}</strong>
+          <span>${selectedCount} / ${group.cards.length} 張</span>
+        </div>
+        <div class="mobile-rarity-cards">
+          ${group.cards.map((card) => `
+            <label class="mobile-card-choice">
+              <input type="checkbox" data-mobile-card-key="${cardKey(card)}" ${selectedKeys.has(cardKey(card)) ? "checked" : ""} />
+              ${tokenIconMarkup(card)}
+              <span>${card.name}</span>
+            </label>
+          `).join("")}
+        </div>
+      </section>
+    `;
+  }).join("");
+}
+
+function openMobileCardModal(deckId) {
+  mobileEditingDeck = deckId;
+  renderMobileCardModal();
+  mobileCardModal.hidden = false;
+}
+
+function closeMobileCardModal() {
+  mobileEditingDeck = "";
+  if (mobileCardModal) mobileCardModal.hidden = true;
+}
+
+function setMobileHistoryVisible(visible) {
+  document.body.classList.toggle("show-mobile-history", Boolean(visible));
+}
+
+function showMobileSetup() {
+  document.body.classList.remove("has-mobile-draw-result");
+  setMobileHistoryVisible(false);
+  renderEmptyState();
+  renderAll();
 }
 
 function sceneImageFor(card) {
@@ -946,6 +1434,7 @@ function syncMetaphorVariantDecks() {
 function renderDeckControls() {
   primaryDeckField.hidden = true;
   secondaryDeckField.hidden = true;
+  if (activeMode.cardMode === "salesPitch") ensureSalesAudienceDeck();
 
   primaryDeckLabel.textContent = activeMode.primaryLabel || "主要詞庫";
   secondaryDeckLabel.textContent = activeMode.secondaryLabel || "第二詞庫";
@@ -1071,9 +1560,11 @@ function renderDeckControls() {
       ` : ""}
       ${salesVariant === "target" ? `
         <div class="sales-variant-tools is-sales-variant" role="group" aria-label="目標版客戶類型">
-          <button type="button" class="${salesAudienceDeck === "creatures" ? "is-active" : ""}" data-sales-audience="creatures">生物</button>
-          <button type="button" class="${salesAudienceDeck === "roles" ? "is-active" : ""}" data-sales-audience="roles">職業</button>
-          <button type="button" class="${salesAudienceDeck === "summons" ? "is-active" : ""}" data-sales-audience="summons">異族</button>
+          ${salesAudienceDeckIds().map((deckId) => `
+            <button type="button" class="${salesAudienceDeck === deckId ? "is-active" : ""}" data-sales-audience="${deckId}">
+              ${deckId === "summons" ? "異族" : variantLabel(deckId)}
+            </button>
+          `).join("")}
         </div>
       ` : ""}
     `
@@ -1303,10 +1794,7 @@ function renderTokenCloud() {
 }
 
 function dictionaryDeckIds() {
-  return [
-    ...dictionaryDeckOrder.filter((deckId) => decks[deckId]),
-    ...Object.keys(decks).filter((deckId) => !dictionaryDeckOrder.includes(deckId))
-  ];
+  return orderedDeckIds();
 }
 
 function dictionaryDescription(deckId) {
@@ -1356,16 +1844,16 @@ function renderCardDictionary() {
                 ${decks[deckId].label}
               </button>
             `).join("")
-            : `<span>先勾選左側卡片類型。</span>`}
+            : `<span>${uiText("mobile.dictionary.deckHeading")}</span>`}
         </div>
         <div class="dictionary-card-picker">
           ${dictionaryActiveDeck
             ? activeCards.map((card) => dictionaryTokenMarkup(card)).join("")
-            : `<div class="dictionary-empty compact">選擇卡片類型後，這裡會列出可加入本場的卡。</div>`}
+            : `<div class="dictionary-empty compact">${uiText("mobile.dictionary.emptyPicker")}</div>`}
         </div>
         <div class="dictionary-tray">
           <div class="dictionary-tray-head">
-            <strong>本場已選</strong>
+            <strong>${uiText("mobile.dictionary.selectedHeading")}</strong>
             <span>${selectedCards.length} 張</span>
           </div>
           <div class="dictionary-selected-list">
@@ -1375,7 +1863,7 @@ function renderCardDictionary() {
                   ${tokenIconMarkup(card)}<span>${card.deckLabel}：${card.name}</span><strong>×</strong>
                 </button>
               `).join("")
-              : `<span class="dictionary-selected-empty">還沒有選卡。可以跨卡池加入多張。</span>`}
+              : `<span class="dictionary-selected-empty">${uiText("mobile.dictionary.selectedEmpty")}</span>`}
           </div>
         </div>
       </div>
@@ -1496,6 +1984,21 @@ function cardMarkup(card, extraClass = "") {
   `;
 }
 
+function openMobileArtPreview(card) {
+  if (!mobileArtModal || !mobileArtPreview || !card) return;
+  const image = card.image || card.iconAsset || "";
+  if (!image) return;
+  mobileArtModalTitle.textContent = card.name;
+  mobileArtPreview.innerHTML = `<img src="${image}" alt="${card.name} 全圖" />`;
+  mobileArtModal.hidden = false;
+}
+
+function closeMobileArtPreview() {
+  if (!mobileArtModal) return;
+  mobileArtModal.hidden = true;
+  if (mobileArtPreview) mobileArtPreview.innerHTML = "";
+}
+
 function findCardByKey(key) {
   for (const deckId of Object.keys(decks)) {
     const card = cardsFrom(deckId).find((candidate) => cardKey(candidate) === key);
@@ -1544,21 +2047,28 @@ function ensureEditPanel() {
           <p class="eyebrow">Edit Mode</p>
           <h2>圖片微調器</h2>
         </div>
-        <button class="editor-mini-button" id="editorPickFirst" type="button">選第一張</button>
+        <div class="editor-head-actions">
+          <button class="editor-mini-button" id="editorPickMode" type="button">選活動圖</button>
+          <button class="editor-mini-button" id="editorPickFirst" type="button">選第一張</button>
+        </div>
       </div>
       <p class="editor-selected" id="editorSelected">先抽卡，再點一張卡牌圖片。</p>
       <div class="editor-controls">
-        <label>縮放 <input id="editScale" type="range" min="0.5" max="2" step="0.01" value="1" /></label>
-        <label>左右 <input id="editX" type="range" min="-120" max="120" step="1" value="0" /></label>
-        <label>上下 <input id="editY" type="range" min="-120" max="120" step="1" value="0" /></label>
-        <label>旋轉 <input id="editRotate" type="range" min="-30" max="30" step="1" value="0" /></label>
-        <label>蒙版 <input id="editOverlay" type="range" min="0" max="0.8" step="0.01" value="0.28" /></label>
+        <label>縮放 <span id="editScaleValue">1</span><input id="editScale" type="range" min="0.5" max="4" step="0.01" value="1" /></label>
+        <label>左右 <span id="editXValue">0</span><input id="editX" type="range" min="-420" max="420" step="1" value="0" /></label>
+        <label>上下 <span id="editYValue">0</span><input id="editY" type="range" min="-260" max="260" step="1" value="0" /></label>
+        <label>旋轉 <span id="editRotateValue">0</span><input id="editRotate" type="range" min="-45" max="45" step="1" value="0" /></label>
+        <label>蒙版 <span id="editOverlayValue">0.28</span><input id="editOverlay" type="range" min="0" max="0.9" step="0.01" value="0.28" /></label>
       </div>
       <div class="editor-nudges" aria-label="方向微調">
-        <button type="button" data-nudge="up">上</button>
-        <button type="button" data-nudge="down">下</button>
-        <button type="button" data-nudge="left">左</button>
-        <button type="button" data-nudge="right">右</button>
+        <button type="button" data-nudge="up" data-step="2">上</button>
+        <button type="button" data-nudge="down" data-step="2">下</button>
+        <button type="button" data-nudge="left" data-step="2">左</button>
+        <button type="button" data-nudge="right" data-step="2">右</button>
+        <button type="button" data-nudge="up" data-step="16">大上</button>
+        <button type="button" data-nudge="down" data-step="16">大下</button>
+        <button type="button" data-nudge="left" data-step="16">大左</button>
+        <button type="button" data-nudge="right" data-step="16">大右</button>
         <button type="button" data-scale="up">放大</button>
         <button type="button" data-scale="down">縮小</button>
       </div>
@@ -1571,6 +2081,10 @@ function ensureEditPanel() {
       <textarea id="editorExportText" readonly spellcheck="false" aria-label="匯出的圖片設定"></textarea>
     </aside>
   `);
+
+  document.querySelector("#editorPickMode").addEventListener("click", () => {
+    selectEditTarget(editTargetForMode(activeMode));
+  });
 
   document.querySelector("#editorPickFirst").addEventListener("click", () => {
     const [firstCard] = visibleCards().filter((card) => card.imageId);
@@ -1586,11 +2100,12 @@ function ensureEditPanel() {
     const button = event.target.closest("button");
     if (!button || !selectedEditTarget) return;
     const layout = layoutForTarget(selectedEditTarget);
-    if (button.dataset.nudge === "up") layout.y -= 2;
-    if (button.dataset.nudge === "down") layout.y += 2;
-    if (button.dataset.nudge === "left") layout.x -= 2;
-    if (button.dataset.nudge === "right") layout.x += 2;
-    if (button.dataset.scale === "up") layout.scale = Math.min(2, Number((layout.scale + 0.02).toFixed(2)));
+    const step = Number(button.dataset.step) || 2;
+    if (button.dataset.nudge === "up") layout.y -= step;
+    if (button.dataset.nudge === "down") layout.y += step;
+    if (button.dataset.nudge === "left") layout.x -= step;
+    if (button.dataset.nudge === "right") layout.x += step;
+    if (button.dataset.scale === "up") layout.scale = Math.min(4, Number((layout.scale + 0.04).toFixed(2)));
     if (button.dataset.scale === "down") layout.scale = Math.max(minScaleForTarget(selectedEditTarget), Number((layout.scale - 0.02).toFixed(2)));
     setLayoutForTarget(selectedEditTarget, layout);
     updateVisibleImages(selectedEditTarget);
@@ -1625,6 +2140,7 @@ function updateEditPanel() {
   const scaleInput = document.querySelector("#editScale");
   const minScale = minScaleForTarget(selectedEditTarget);
   scaleInput.min = String(minScale);
+  scaleInput.max = "4";
   if (Number(layout.scale) < minScale) {
     layout.scale = minScale;
     setLayoutForTarget(selectedEditTarget, layout);
@@ -1635,6 +2151,11 @@ function updateEditPanel() {
   document.querySelector("#editY").value = layout.y;
   document.querySelector("#editRotate").value = layout.rotate;
   document.querySelector("#editOverlay").value = layout.overlay;
+  document.querySelector("#editScaleValue").textContent = Number(layout.scale).toFixed(2);
+  document.querySelector("#editXValue").textContent = Math.round(layout.x);
+  document.querySelector("#editYValue").textContent = Math.round(layout.y);
+  document.querySelector("#editRotateValue").textContent = Math.round(layout.rotate);
+  document.querySelector("#editOverlayValue").textContent = Number(layout.overlay).toFixed(2);
   selectedLabel.textContent = `${selectedEditTarget.label}：${selectedEditTarget.name}（${selectedEditTarget.id}）`;
   fileHint.textContent = `匯出後貼到 data/image-layouts/${selectedEditTarget.group}.json`;
   exportText.value = JSON.stringify(exportableLayouts(selectedEditTarget.group), null, 2);
@@ -1846,7 +2367,7 @@ function cardWithSalesTargetHooks(card, audience) {
   };
 }
 
-function renderCombo(environment, cards, label) {
+function renderCombo(environment, cards, label, options = {}) {
   currentStageCard = environment;
   renderReelCard(environment || {
     name: "無異境",
@@ -1854,9 +2375,15 @@ function renderCombo(environment, cards, label) {
     icon: activeMode.icon,
     deckLabel: "本輪設定"
   });
+  const showStageInResults = !options.hideStageInResults;
+  const showStageInDesktopResults = showStageInResults && !options.hideStageInDesktopResults;
+  const stageMarkup = environment && showStageInDesktopResults ? cardMarkup(environment, "environment-card mobile-stage-result") : "";
+  const mobileStageMarkup = environment && showStageInResults ? cardMarkup(environment, "environment-card mobile-stage-banner") : "";
   cardGrid.innerHTML = `
     <div class="combo-board">
+      <div class="mobile-stage-lane">${mobileStageMarkup}</div>
       <div class="combo-results">
+        ${stageMarkup}
         ${cards.map((card) => cardMarkup(card)).join("")}
       </div>
     </div>
@@ -1866,53 +2393,46 @@ function renderCombo(environment, cards, label) {
 function renderSurvivalBattle(environment, groups) {
   currentStageCard = environment;
   renderReelCard(environment);
+  const groupSections = [
+    ["items", "道具", "道具"],
+    ["roles", "職業", "職業"],
+    ["creatures", "動物", "動物"],
+    ["aliens", "異族", "異族"],
+    ["powers", "超能", "超能"],
+    ["specialists", "特職", "特職"]
+  ];
   cardGrid.innerHTML = `
     <div class="survival-battle-board">
+      <div class="mobile-stage-lane">
+        ${cardMarkup(environment, "environment-card mobile-stage-banner")}
+      </div>
       <div class="survival-group-grid">
-        ${groups.map((group) => `
-          <section class="survival-group-card">
+        ${groups.map((group) => {
+          const activeSections = groupSections.filter(([key]) => group[key].length);
+          const totalCards = activeSections.reduce((total, [key]) => total + group[key].length, 0);
+          const summary = activeSections.map(([key, label]) => `${group[key].length} ${label}`).join(" · ");
+          return `
+          <section class="survival-group-card" aria-label="第 ${group.index} 組，共 ${totalCards} 張隊伍卡">
             <div class="survival-group-head">
-              <strong>第 ${group.index} 組</strong>
-              <span>${group.items.length} 道具 · ${group.roles.length} 職業 · ${group.creatures.length} 動物 · ${group.aliens.length} 異族 · ${group.powers.length} 超能 · ${group.specialists.length} 特職</span>
-            </div>
-            <div class="survival-group-section">
-              <h3>道具</h3>
-              <div class="survival-mini-list">
-                ${group.items.map((card) => `<span class="survival-resource-pill">${tokenIconMarkup(card)}${card.name}</span>`).join("") || "<em>沒有道具</em>"}
+              <div class="survival-group-title">
+                <span class="survival-group-index">${group.index}</span>
+                <div>
+                  <strong>第 ${group.index} 組</strong>
+                  <small>${totalCards} 張隊伍卡</small>
+                </div>
               </div>
+              <span>${summary || "尚未配置隊伍卡"}</span>
             </div>
-            <div class="survival-group-section">
-              <h3>職業</h3>
-              <div class="survival-mini-list">
-                ${group.roles.map((card) => `<span class="survival-resource-pill">${tokenIconMarkup(card)}${card.name}</span>`).join("") || "<em>沒有職業</em>"}
+            ${activeSections.map(([key, label, type]) => `
+              <div class="survival-group-section" data-resource-type="${type}">
+                <h3><span>${label}</span><b>${group[key].length}</b></h3>
+                <div class="survival-mini-list">
+                  ${group[key].map((card) => cardMarkup(card, "survival-member-card")).join("")}
+                </div>
               </div>
-            </div>
-            <div class="survival-group-section">
-              <h3>動物</h3>
-              <div class="survival-mini-list">
-                ${group.creatures.map((card) => `<span class="survival-resource-pill">${tokenIconMarkup(card)}${card.name}</span>`).join("") || "<em>沒有動物</em>"}
-              </div>
-            </div>
-            <div class="survival-group-section">
-              <h3>異族</h3>
-              <div class="survival-mini-list">
-                ${group.aliens.map((card) => `<span class="survival-resource-pill">${tokenIconMarkup(card)}${card.name}</span>`).join("") || "<em>沒有異族</em>"}
-              </div>
-            </div>
-            <div class="survival-group-section">
-              <h3>超能</h3>
-              <div class="survival-mini-list">
-                ${group.powers.map((card) => `<span class="survival-resource-pill">${tokenIconMarkup(card)}${card.name}</span>`).join("") || "<em>沒有超能</em>"}
-              </div>
-            </div>
-            <div class="survival-group-section">
-              <h3>特職</h3>
-              <div class="survival-mini-list">
-                ${group.specialists.map((card) => `<span class="survival-resource-pill">${tokenIconMarkup(card)}${card.name}</span>`).join("") || "<em>沒有特職</em>"}
-              </div>
-            </div>
+            `).join("") || `<div class="survival-group-empty">請先為這一組設定隊伍卡。</div>`}
           </section>
-        `).join("")}
+        `}).join("")}
       </div>
     </div>
   `;
@@ -2245,6 +2765,10 @@ function finishDraw(selected) {
   reel.classList.remove("is-spinning");
   isDrawing = false;
   drawButton.disabled = false;
+  if (selected.length && activeMode.cardMode !== "secretPlace" && activeMode.cardMode !== "cardDictionary" && isMobileAppView()) {
+    document.body.classList.add("has-mobile-draw-result");
+    setMobileHistoryVisible(false);
+  }
   renderAll();
 }
 
@@ -2280,6 +2804,10 @@ function spinDraw() {
 }
 
 function setMode(modeId) {
+  document.body.classList.remove("has-mobile-home");
+  document.body.classList.remove("has-mobile-draw-result");
+  setMobileHistoryVisible(false);
+  closeMobileCardModal();
   activeMode = modes.find((mode) => mode.id === modeId) || activeMode;
   activeLibrary = activeMode.primaryDeck;
   activeSecondaryLibrary = activeMode.secondaryDeck || "";
@@ -2291,7 +2819,7 @@ function setMode(modeId) {
   secretShowAnswerNumber = false;
   salesVariant = "supply";
   salesNoConcept = false;
-  salesAudienceDeck = "creatures";
+  salesAudienceDeck = defaultSalesAudienceDeck();
   summonCategorySelection = defaultSummonCategorySelection(activeMode);
   survivalVariant = "survival";
   survivalDeckSelection = new Set(["items"]);
@@ -2322,10 +2850,47 @@ function setMode(modeId) {
   setActivityMenu(false);
 }
 
+function renderMobileHome() {
+  if (!mobileHomeGrid) return;
+  mobileHomeGrid.innerHTML = modes.map((mode) => `
+    <button
+      class="mobile-home-card"
+      type="button"
+      data-mobile-home-mode="${mode.id}"
+      style="--home-card-image: url('${(mode.image || "").replace("../", "/")}');"
+    >
+      <span class="mobile-home-card-icon">${mode.icon}</span>
+      <span class="mobile-home-card-copy">
+        <strong>${mode.title}</strong>
+        <small>${mode.menuLabel || mode.track}</small>
+      </span>
+      <b aria-hidden="true">›</b>
+    </button>
+  `).join("");
+  const eyebrow = mobileHomeScreen?.querySelector("[data-mobile-home-eyebrow]");
+  const title = mobileHomeScreen?.querySelector("[data-mobile-home-title]");
+  const subtitle = mobileHomeScreen?.querySelector("[data-mobile-home-subtitle]");
+  if (eyebrow) eyebrow.textContent = uiText("mobile.home.eyebrow");
+  if (title) title.textContent = uiText("mobile.home.title");
+  if (subtitle) subtitle.textContent = uiText("mobile.home.subtitle");
+}
+
+function showMobileHome() {
+  if (!isMobileAppView()) return;
+  document.body.classList.remove("has-mobile-draw-result");
+  document.body.classList.add("has-mobile-home");
+  setMobileHistoryVisible(false);
+  closeMobileCardModal();
+  setActivityMenu(false);
+  window.scrollTo({ top: 0 });
+}
+
 function renderAll() {
   renderModeButtons();
   renderActivity();
   renderDeckControls();
+  renderMobileSurvivalDashboard();
+  renderMobileResultActions();
   renderLibraryTools();
   renderTokenCloud();
   renderDrawHistory();
@@ -2364,6 +2929,80 @@ drawCount.addEventListener("input", () => {
   survivalGroupCount = Math.max(1, Math.min(8, Number(drawCount.value) || 1));
 });
 
+window.DebateVisionMobileApi = {
+  elements: {
+    dashboard: mobileSurvivalDashboard,
+    resultActions: mobileResultActions,
+    cardModal: mobileCardModal,
+    cardModalList: mobileCardModalList,
+    drawHistory,
+    bottomNav: document.querySelector(".mobile-bottom-nav"),
+    mobileHomeScreen,
+    mobileHomeGrid
+  },
+  get activeMode() { return activeMode; },
+  get activeSecondaryLibrary() { return activeSecondaryLibrary; },
+  get activeLibrary() { return activeLibrary; },
+  set activeLibrary(value) { activeLibrary = value; },
+  get activePreview() { return activePreview; },
+  set activePreview(value) { activePreview = value; },
+  get cardGrid() { return cardGrid; },
+  get currentStageCard() { return currentStageCard; },
+  set currentStageCard(value) { currentStageCard = value; },
+  get drawCount() { return drawCount; },
+  get drawHistoryByMode() { return drawHistoryByMode; },
+  get lockEnvironment() { return lockEnvironment; },
+  set lockEnvironment(value) { lockEnvironment = value; },
+  get metaphorVariant() { return metaphorVariant; },
+  set metaphorVariant(value) { metaphorVariant = value; },
+  set currentMetaphorCards(value) { currentMetaphorCards = value; },
+  get mobileEditingDeck() { return mobileEditingDeck; },
+  get noEnvironment() { return noEnvironment; },
+  set noEnvironment(value) { noEnvironment = value; },
+  get salesAudienceDeck() { return salesAudienceDeck; },
+  set salesAudienceDeck(value) { salesAudienceDeck = value; },
+  get salesNoConcept() { return salesNoConcept; },
+  set salesNoConcept(value) { salesNoConcept = value; },
+  get salesVariant() { return salesVariant; },
+  set salesVariant(value) { salesVariant = value; },
+  get selectedImportanceDecks() { return selectedImportanceDecks; },
+  get summonCategorySelection() { return summonCategorySelection; },
+  get survivalDeckSelection() { return survivalDeckSelection; },
+  get survivalGroupCount() { return survivalGroupCount; },
+  set survivalGroupCount(value) { survivalGroupCount = value; },
+  get survivalVariant() { return survivalVariant; },
+  set survivalVariant(value) { survivalVariant = value; },
+  cardKey,
+  cardMarkup,
+  cardsFromHistoryEntry,
+  closeMobileCardModal,
+  ensureSalesAudienceDeck,
+  historyScope,
+  isMobileAppView,
+  mobileDeckCards,
+  mobileDeckTarget,
+  mobileResourceKey,
+  openMobileCardModal,
+  renderAll,
+  renderMobileHome,
+  renderCombo,
+  renderEmptyState,
+  renderMobileCardModal,
+  renderReelCard,
+  restoreHistoryEntry,
+  resetDeckSelectionToDefault,
+  selectedKeysForDeck,
+  setActivityMenu,
+  setMode,
+  showMobileHome,
+  setMobileHistoryVisible,
+  setSurvivalCountValue,
+  showMobileSetup,
+  spinDraw,
+  survivalCountValue,
+  syncMetaphorVariantDecks
+};
+
 libraryTools.addEventListener("click", (event) => {
   const chip = event.target.closest("[data-preview]");
   if (!chip) return;
@@ -2374,6 +3013,32 @@ libraryTools.addEventListener("click", (event) => {
   }
   renderAll();
   refreshSecretPlaceBoard();
+});
+
+function handleHistoryItemOpen(item, options = {}) {
+  if (!item) return;
+  const restored = restoreHistoryEntry(item.dataset.historyIndex, options);
+  if (!restored) return;
+  drawHistory.querySelectorAll(".history-item.is-active").forEach((activeItem) => {
+    activeItem.classList.remove("is-active");
+  });
+  item.classList.add("is-active");
+  if (!options.skipScroll) {
+    playArea?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+
+drawHistory?.addEventListener("click", (event) => {
+  if (isMobileAppView()) return;
+  handleHistoryItemOpen(event.target.closest("[data-history-index]"));
+});
+
+drawHistory?.addEventListener("keydown", (event) => {
+  if (isMobileAppView() || (event.key !== "Enter" && event.key !== " ")) return;
+  const item = event.target.closest("[data-history-index]");
+  if (!item) return;
+  event.preventDefault();
+  handleHistoryItemOpen(item);
 });
 
 fixedPools.addEventListener("click", (event) => {
@@ -2438,7 +3103,10 @@ fixedPools.addEventListener("click", (event) => {
     salesVariant = button.dataset.salesVariant;
     if (salesVariant === "supply") activePreview = "items";
     if (salesVariant === "story") activePreview = salesNoConcept ? "items" : "concepts";
-    if (salesVariant === "target") activePreview = salesAudienceDeck;
+    if (salesVariant === "target") {
+      ensureSalesAudienceDeck();
+      activePreview = salesAudienceDeck;
+    }
     renderAll();
     renderEmptyState();
     return;
@@ -2629,11 +3297,22 @@ clearDictionaryDecks?.addEventListener("click", () => {
 });
 
 cardGrid.addEventListener("click", (event) => {
-  if (!EDIT_MODE) return;
   const cardElement = event.target.closest(".battle-card[data-card-key]");
   if (!cardElement) return;
   const card = findCardByKey(cardElement.dataset.cardKey);
-  if (card?.imageId) selectEditCard(card);
+  if (EDIT_MODE) {
+    if (card?.imageId) selectEditCard(card);
+    return;
+  }
+  if (isMobileAppView() && event.target.closest(".card-art")) {
+    openMobileArtPreview(card);
+  }
+});
+
+mobileArtModal?.addEventListener("click", (event) => {
+  if (event.target === mobileArtModal || event.target.closest("[data-mobile-art-close]")) {
+    closeMobileArtPreview();
+  }
 });
 
 if (scenePreview) {
@@ -2714,4 +3393,6 @@ quickResetActivePool?.addEventListener("click", handleResetAction);
 ensureEditPanel();
 ensureFloatingTimer();
 renderStaticUiText();
+renderMobileHome();
 setMode(activeMode.id);
+showMobileHome();
