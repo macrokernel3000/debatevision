@@ -53,12 +53,12 @@ let summonCategorySelection = new Set(["異族", "超能", "特職"]);
 let survivalVariant = "survival";
 let survivalDeckSelection = new Set(["items"]);
 let survivalGroupCount = 3;
-let survivalItemCount = 4;
-let survivalRoleCount = 3;
-let survivalCreatureCount = 0;
-let survivalAlienCount = 0;
-let survivalPowerCount = 0;
-let survivalSpecialistCount = 0;
+let survivalItemCount = 1;
+let survivalRoleCount = 1;
+let survivalCreatureCount = 1;
+let survivalAlienCount = 1;
+let survivalPowerCount = 1;
+let survivalSpecialistCount = 1;
 let lockEnvironment = false;
 let noEnvironment = false;
 let selectedImportanceDecks = new Set();
@@ -67,10 +67,7 @@ let metaphorPrefixDeck = "";
 let metaphorSuffixDeck = "";
 let metaphorLocks = { prefix: false, relation: false, suffix: false };
 let currentMetaphorCards = null;
-let selectedCardKeysByScope = {};
 const drawHistoryByMode = historyService.data;
-let selectedEditCard = null;
-let selectedEditTarget = null;
 
 const modeGrid = document.querySelector("#modeGrid");
 const activityMenuToggle = document.querySelector("#activityMenuToggle");
@@ -244,91 +241,29 @@ function fillCardHookTemplate(template, name, context = {}) {
   return text;
 }
 
-function cardsFrom(deckId) {
-  return (decks[deckId]?.cards || []).map((card) => normalizeCard(card, deckId));
-}
-
-function cardKey(card) {
-  return `${card.deckId}::${card.rarity || "C"}::${card.name}`;
-}
-
-function selectionScope(deckId) {
-  return `${activeMode.id}::${deckId}`;
-}
-
-function selectedKeysForDeck(deckId) {
-  ensureDeckSelection(deckId);
-  return selectedCardKeysByScope[selectionScope(deckId)] || new Set();
-}
-
-function defaultRaritiesFor(deckId) {
-  const defaults = activeMode.defaultRarities;
-  if (Array.isArray(defaults)) return defaults;
-  if (defaults && Array.isArray(defaults[deckId])) return defaults[deckId];
-  return null;
-}
-
-function defaultCardsForDeck(deckId) {
-  const cards = cardsFrom(deckId);
-  const defaultRarities = defaultRaritiesFor(deckId);
-  if (!defaultRarities) return cards;
-  const allowed = new Set(defaultRarities);
-  return cards.filter((card) => allowed.has(card.rarity || "C"));
-}
-
-function rarityOrder(rarity) {
-  const order = { A: 1, B: 2, C: 3, N: 4, 概念: 5, 需求: 6 };
-  return order[rarity] || 99;
-}
-
-function raritiesFrom(deckId) {
-  return [...new Set(cardsFrom(deckId).map((card) => card.rarity || "C"))]
-    .sort((a, b) => rarityOrder(a) - rarityOrder(b) || a.localeCompare(b));
-}
-
-function rarityDisplayName(rarity) {
-  if (rarity === "概念") return "概念卡";
-  if (rarity === "需求") return "需求卡";
-  if (summonCategories.includes(rarity)) return `${rarity}卡`;
-  return rarity === "N" ? "道具卡" : `${rarity} 卡`;
-}
-
-function ensureDeckSelection(deckId) {
-  if (!deckId) return;
-  const scope = selectionScope(deckId);
-  if (selectedCardKeysByScope[scope]) return;
-  selectedCardKeysByScope[scope] = new Set(defaultCardsForDeck(deckId).map((card) => cardKey(card)));
-}
-
-function setDeckSelection(deckId, checked) {
-  if (!deckId) return;
-  selectedCardKeysByScope[selectionScope(deckId)] = new Set(checked ? cardsFrom(deckId).map((card) => cardKey(card)) : []);
-}
-
-function resetDeckSelectionToDefault(deckId) {
-  if (!deckId) return;
-  selectedCardKeysByScope[selectionScope(deckId)] = new Set(defaultCardsForDeck(deckId).map((card) => cardKey(card)));
-}
-
-function setCardsSelection(deckId, cards, checked) {
-  if (!deckId) return;
-  const selectedKeys = selectedKeysForDeck(deckId);
-  for (const card of cards) {
-    if (checked) selectedKeys.add(cardKey(card));
-    else selectedKeys.delete(cardKey(card));
-  }
-}
-
-function selectedCount(deckId) {
-  return selectedKeysForDeck(deckId).size;
-}
-
-function selectedCardsFrom(deckId) {
-  const selectedKeys = selectedKeysForDeck(deckId);
-  return cardsFrom(deckId).filter((card) => selectedKeys.has(cardKey(card)));
-}
-
 const summonCategories = ["異族", "超能", "特職"];
+const deckCore = window.DEBATE_DECK_CORE.create({
+  decks,
+  getActiveMode: () => activeMode,
+  normalizeCard,
+  summonCategories
+});
+const {
+  cardKey,
+  cardsFrom,
+  ensureDeckSelection,
+  pickFrom,
+  pickFromAvailable,
+  pickFromPool,
+  raritiesFrom,
+  rarityDisplayName,
+  resetDeckSelectionToDefault,
+  selectedCardsFrom,
+  selectedCount,
+  selectedKeysForDeck,
+  setCardsSelection,
+  setDeckSelection
+} = deckCore;
 
 function summonCategoryLabel(category) {
   return `${category}卡`;
@@ -832,24 +767,6 @@ function restoreHistoryEntry(index, options = {}) {
   return true;
 }
 
-function pickFrom(deckId, count) {
-  const pool = [...selectedCardsFrom(deckId)];
-  return pickFromPool(pool, count);
-}
-
-function pickFromAvailable(deckId, count, excludedKeys = new Set()) {
-  const pool = selectedCardsFrom(deckId).filter((card) => !excludedKeys.has(cardKey(card)));
-  return pickFromPool(pool, count);
-}
-
-function pickFromPool(pool, count) {
-  const selected = [];
-  while (selected.length < count && pool.length) {
-    selected.push(pool.splice(Math.floor(Math.random() * pool.length), 1)[0]);
-  }
-  return selected;
-}
-
 function modeCardMeta(mode) {
   return {
     palette: mode.palette || mode.tone || "cyan",
@@ -1036,6 +953,10 @@ function sharedDeckCover(deckId) {
     concepts: "../assets/ui/deck-covers/concepts.jpg",
     creatures: "../assets/ui/deck-covers/creatures.jpg",
     roles: "../assets/ui/deck-covers/roles.jpg",
+    celebrities: "../assets/ui/deck-covers/celebrities.jpg",
+    locations: "../assets/ui/deck-covers/locations.jpg",
+    relations: "../assets/ui/deck-covers/relations.jpg",
+    missions: "../assets/ui/deck-covers/missions.jpg",
     summons: "../assets/ui/deck-covers/summons.jpg",
     "summons:異族": "../assets/ui/deck-covers/summons-alien.jpg",
     "summons:超能": "../assets/ui/deck-covers/summons-power.jpg",
@@ -1148,6 +1069,7 @@ function renderReelCard(card = currentStageCard, spinningName = "") {
   const title = spinningName || card?.name || uiText("reel.ready.title");
   const subtitle = card?.lore || readyReelSubtitle();
   const image = sceneImageFor(card);
+  const markImage = image || (card?.deckId ? sharedDeckCover(card.deckId).image : "");
   const target = editTargetForCard(card);
   const reelStyle = target ? imageStyleForTarget(target) : "";
   const editAttributes = target
@@ -1166,7 +1088,9 @@ function renderReelCard(card = currentStageCard, spinningName = "") {
   }
   reel.innerHTML = `
     ${image ? `<img class="reel-scene-image" src="${image}" alt="${title} 場景圖" ${imageService.managedAttributes(image, imageService.fallbackForCard(card))} ${editAttributes} />` : ""}
-    <div class="reel-scene-mark">${card ? activeMode.icon : "?"}</div>
+    <div class="reel-scene-mark">
+      ${markImage ? `<img class="reel-scene-mark-image" src="${markImage}" alt="" aria-hidden="true" ${imageService.managedAttributes(markImage, imageService.fallbackForCard(card))} />` : (card ? activeMode.icon : "?")}
+    </div>
     <div class="reel-scene-copy">
       <span>${card?.deckLabel || activeMode.secondaryLabel || activeMode.track || "Scene Card"}</span>
       <strong>${title}</strong>
@@ -1359,8 +1283,14 @@ function renderDeckControls() {
   const survivalVariantTools = activeMode.cardMode === "itemEnvironment"
     ? `
       <div class="sales-variant-tools is-survival-variant" role="group" aria-label="異境求生版本">
-        <button type="button" class="${survivalVariant === "survival" ? "is-active" : ""}" data-survival-variant="survival">求生版</button>
-        <button type="button" class="${survivalVariant === "battle" ? "is-active" : ""}" data-survival-variant="battle">冒險版</button>
+        <button type="button" class="${survivalVariant === "survival" ? "is-active" : ""}" data-survival-variant="survival">
+          <strong>求生版</strong>
+          <span>${uiText("mobile.itemSurvival.survivalDescription")}</span>
+        </button>
+        <button type="button" class="${survivalVariant === "battle" ? "is-active" : ""}" data-survival-variant="battle">
+          <strong>冒險版</strong>
+          <span>${uiText("mobile.itemSurvival.battleDescription")}</span>
+        </button>
       </div>
     `
     : "";
@@ -1783,52 +1713,39 @@ function saveDictionaryRound() {
   renderDictionaryResult(selectedDictionaryCards(), true);
 }
 
-function tokenMarkup(card, checked) {
-  const key = cardKey(card);
-  return `
-    <label class="token ${checked ? "" : "is-disabled"}">
-      <input type="checkbox" data-card-key="${key}" ${checked ? "checked" : ""} />
-      <span class="token-label">${tokenIconMarkup(card)}<span>${card.name}</span></span>
-    </label>
-  `;
-}
+const imageEditor = window.DebateVisionImageEditor.create({
+  cardGrid,
+  defaultLayout: DEFAULT_IMAGE_LAYOUT,
+  editTargetForCard,
+  editTargetForMode,
+  exportableLayouts,
+  getActiveMode: () => activeMode,
+  imageStyleForTarget,
+  isEditMode: EDIT_MODE,
+  layoutForTarget,
+  minScaleForTarget,
+  setLayoutForTarget,
+  visibleCards
+});
+const {
+  ensurePanel: ensureEditPanel,
+  getSelectedTarget,
+  resetSelection: resetEditSelection,
+  selectCard: selectEditCard,
+  selectTarget: selectEditTarget,
+  updatePanel: updateEditPanel
+} = imageEditor;
 
-function tokenIconMarkup(card) {
-  if (card.tokenIcon) {
-    return `<span class="token-symbol" aria-hidden="true">${card.tokenIcon}</span>`;
-  }
-  const image = card.iconAsset || "";
-  if (image) {
-    return `<img class="token-thumb" src="${image}" alt="" aria-hidden="true" />`;
-  }
-  return `<span class="token-symbol" aria-hidden="true">${iconFor(card)}</span>`;
-}
-
-function cardMarkup(card, extraClass = "") {
-  const layoutStyle = imageStyleFor(card);
-  const target = editTargetForCard(card);
-  const isSelected = EDIT_MODE && selectedEditTarget && selectedEditTarget.group === target?.group && selectedEditTarget.id === target?.id;
-  const imageEditAttributes = target
-    ? `style="${layoutStyle}" data-edit-group="${target.group}" data-edit-id="${target.id}" data-edit-name="${target.name}" data-card-key="${target.cardKey}"`
-    : `style="${layoutStyle}"`;
-  const image = imageService.imageForCard(card);
-  const imageMarkup = image
-    ? `<img src="${image}" alt="${card.name} 卡圖" ${imageService.managedAttributes(image, imageService.fallbackForCard(card))} ${imageEditAttributes} />`
-      : `<span>${iconFor(card)}</span>`;
-  const typeText = card.deckId === "items" ? card.deckLabel : `${card.deckLabel} · ${card.rarity || "C"}`;
-
-  return `
-    <article class="battle-card ${extraClass} ${isSelected ? "is-edit-selected" : ""}" data-rarity="${card.rarity || "C"}" data-card-key="${cardKey(card)}" data-deck-id="${card.deckId}" data-image-id="${card.imageId || ""}">
-      <div class="card-title">
-        <h3>${card.name}</h3>
-        <span class="card-type">${typeText}</span>
-      </div>
-      <div class="card-art">${imageMarkup}</div>
-      <p class="card-lore">${card.lore}</p>
-      <ul class="card-hooks">${card.hooks.map((hook) => `<li>${hook}</li>`).join("")}</ul>
-    </article>
-  `;
-}
+const cardView = window.DebateVisionCards.create({
+  cardKey,
+  editTargetForCard,
+  getSelectedEditTarget: getSelectedTarget,
+  iconFor,
+  imageService,
+  imageStyleFor,
+  isEditMode: EDIT_MODE
+});
+const { cardMarkup, tokenIconMarkup, tokenMarkup } = cardView;
 
 function openMobileArtPreview(card) {
   if (!mobileArtModal || !mobileArtPreview || !card) return;
@@ -1857,181 +1774,6 @@ function visibleCards() {
   return [...cardGrid.querySelectorAll(".battle-card[data-card-key]")]
     .map((element) => findCardByKey(element.dataset.cardKey))
     .filter(Boolean);
-}
-
-function selectEditTarget(target) {
-  if (!target) return;
-  selectedEditTarget = target;
-  selectedEditCard = target.cardKey ? findCardByKey(target.cardKey) : null;
-  cardGrid.querySelectorAll(".battle-card").forEach((element) => {
-    element.classList.toggle("is-edit-selected", element.dataset.cardKey === target.cardKey);
-  });
-  document.querySelectorAll(".scene-preview-image, .reel-scene-image").forEach((element) => {
-    element.classList.toggle("is-edit-selected", element.dataset.editGroup === target.group && element.dataset.editId === target.id);
-  });
-  updateEditPanel();
-}
-
-function selectEditCard(card) {
-  selectEditTarget(editTargetForCard(card));
-}
-
-function updateVisibleImages(target) {
-  const layoutStyle = imageStyleForTarget(target);
-  document.querySelectorAll(`[data-edit-group="${target.group}"][data-edit-id="${target.id}"]`).forEach((image) => {
-    image.setAttribute("style", layoutStyle);
-  });
-}
-
-function ensureEditPanel() {
-  if (!EDIT_MODE) return;
-  document.body.classList.add("is-edit-mode");
-  document.body.insertAdjacentHTML("beforeend", `
-    <aside class="image-editor-panel" id="imageEditorPanel" aria-label="圖片微調器">
-      <div class="image-editor-head">
-        <div>
-          <p class="eyebrow">Edit Mode</p>
-          <h2>圖片微調器</h2>
-        </div>
-        <div class="editor-head-actions">
-          <button class="editor-mini-button" id="editorPickMode" type="button">選活動圖</button>
-          <button class="editor-mini-button" id="editorPickFirst" type="button">選第一張</button>
-        </div>
-      </div>
-      <p class="editor-selected" id="editorSelected">先抽卡，再點一張卡牌圖片。</p>
-      <div class="editor-controls">
-        <label>縮放 <span id="editScaleValue">1</span><input id="editScale" type="range" min="0.5" max="4" step="0.01" value="1" /></label>
-        <label>左右 <span id="editXValue">0</span><input id="editX" type="range" min="-420" max="420" step="1" value="0" /></label>
-        <label>上下 <span id="editYValue">0</span><input id="editY" type="range" min="-260" max="260" step="1" value="0" /></label>
-        <label>旋轉 <span id="editRotateValue">0</span><input id="editRotate" type="range" min="-45" max="45" step="1" value="0" /></label>
-        <label>蒙版 <span id="editOverlayValue">0.28</span><input id="editOverlay" type="range" min="0" max="0.9" step="0.01" value="0.28" /></label>
-      </div>
-      <div class="editor-nudges" aria-label="方向微調">
-        <button type="button" data-nudge="up" data-step="2">上</button>
-        <button type="button" data-nudge="down" data-step="2">下</button>
-        <button type="button" data-nudge="left" data-step="2">左</button>
-        <button type="button" data-nudge="right" data-step="2">右</button>
-        <button type="button" data-nudge="up" data-step="16">大上</button>
-        <button type="button" data-nudge="down" data-step="16">大下</button>
-        <button type="button" data-nudge="left" data-step="16">大左</button>
-        <button type="button" data-nudge="right" data-step="16">大右</button>
-        <button type="button" data-scale="up">放大</button>
-        <button type="button" data-scale="down">縮小</button>
-      </div>
-      <div class="editor-actions">
-        <button id="resetImageLayout" type="button">重設這張</button>
-        <button id="exportImageLayout" type="button">匯出 JSON</button>
-      </div>
-      <p class="editor-file-hint" id="editorFileHint">匯出後貼到 data/image-layouts/items.json</p>
-      <p class="editor-status" id="editorStatus">編輯模式只會先預覽；匯出 JSON 後仍需貼回檔案。</p>
-      <textarea id="editorExportText" readonly spellcheck="false" aria-label="匯出的圖片設定"></textarea>
-    </aside>
-  `);
-
-  document.querySelector("#editorPickMode").addEventListener("click", () => {
-    selectEditTarget(editTargetForMode(activeMode));
-  });
-
-  document.querySelector("#editorPickFirst").addEventListener("click", () => {
-    const [firstCard] = visibleCards().filter((card) => card.imageId);
-    if (firstCard) selectEditCard(firstCard);
-    else selectEditTarget(editTargetForMode(activeMode));
-  });
-
-  for (const id of ["editScale", "editX", "editY", "editRotate", "editOverlay"]) {
-    document.querySelector(`#${id}`).addEventListener("input", applyEditorInputs);
-  }
-
-  document.querySelector(".editor-nudges").addEventListener("click", (event) => {
-    const button = event.target.closest("button");
-    if (!button || !selectedEditTarget) return;
-    const layout = layoutForTarget(selectedEditTarget);
-    const step = Number(button.dataset.step) || 2;
-    if (button.dataset.nudge === "up") layout.y -= step;
-    if (button.dataset.nudge === "down") layout.y += step;
-    if (button.dataset.nudge === "left") layout.x -= step;
-    if (button.dataset.nudge === "right") layout.x += step;
-    if (button.dataset.scale === "up") layout.scale = Math.min(4, Number((layout.scale + 0.04).toFixed(2)));
-    if (button.dataset.scale === "down") layout.scale = Math.max(minScaleForTarget(selectedEditTarget), Number((layout.scale - 0.02).toFixed(2)));
-    setLayoutForTarget(selectedEditTarget, layout);
-    updateVisibleImages(selectedEditTarget);
-    updateEditPanel();
-  });
-
-  document.querySelector("#resetImageLayout").addEventListener("click", () => {
-    if (!selectedEditTarget) return;
-    setLayoutForTarget(selectedEditTarget, DEFAULT_IMAGE_LAYOUT);
-    updateVisibleImages(selectedEditTarget);
-    updateEditPanel();
-  });
-
-  document.querySelector("#exportImageLayout").addEventListener("click", exportCurrentDeckLayout);
-}
-
-function updateEditPanel() {
-  if (!EDIT_MODE) return;
-  const selectedLabel = document.querySelector("#editorSelected");
-  const fileHint = document.querySelector("#editorFileHint");
-  const exportText = document.querySelector("#editorExportText");
-  const status = document.querySelector("#editorStatus");
-
-  if (!selectedEditTarget) {
-    selectedLabel.textContent = "點活動大圖、抽卡機異境圖，或下方卡牌圖片。";
-    fileHint.textContent = "匯出後貼到 data/image-layouts/items.json";
-    status.textContent = "編輯模式只會先預覽；匯出 JSON 後仍需貼回檔案。";
-    return;
-  }
-
-  const layout = layoutForTarget(selectedEditTarget);
-  const scaleInput = document.querySelector("#editScale");
-  const minScale = minScaleForTarget(selectedEditTarget);
-  scaleInput.min = String(minScale);
-  scaleInput.max = "4";
-  if (Number(layout.scale) < minScale) {
-    layout.scale = minScale;
-    setLayoutForTarget(selectedEditTarget, layout);
-    updateVisibleImages(selectedEditTarget);
-  }
-  scaleInput.value = layout.scale;
-  document.querySelector("#editX").value = layout.x;
-  document.querySelector("#editY").value = layout.y;
-  document.querySelector("#editRotate").value = layout.rotate;
-  document.querySelector("#editOverlay").value = layout.overlay;
-  document.querySelector("#editScaleValue").textContent = Number(layout.scale).toFixed(2);
-  document.querySelector("#editXValue").textContent = Math.round(layout.x);
-  document.querySelector("#editYValue").textContent = Math.round(layout.y);
-  document.querySelector("#editRotateValue").textContent = Math.round(layout.rotate);
-  document.querySelector("#editOverlayValue").textContent = Number(layout.overlay).toFixed(2);
-  selectedLabel.textContent = `${selectedEditTarget.label}：${selectedEditTarget.name}（${selectedEditTarget.id}）`;
-  fileHint.textContent = `匯出後貼到 data/image-layouts/${selectedEditTarget.group}.json`;
-  exportText.value = JSON.stringify(exportableLayouts(selectedEditTarget.group), null, 2);
-}
-
-function applyEditorInputs() {
-  if (!EDIT_MODE || !selectedEditTarget) return;
-  const layout = {
-    scale: Number(document.querySelector("#editScale").value),
-    x: Number(document.querySelector("#editX").value),
-    y: Number(document.querySelector("#editY").value),
-    rotate: Number(document.querySelector("#editRotate").value),
-    overlay: Number(document.querySelector("#editOverlay").value)
-  };
-  setLayoutForTarget(selectedEditTarget, layout);
-  updateVisibleImages(selectedEditTarget);
-  updateEditPanel();
-  document.querySelector("#editorStatus").textContent = "本頁預覽已更新；要永久保存，請按「匯出 JSON」再貼回檔案。";
-}
-
-function exportCurrentDeckLayout() {
-  const group = selectedEditTarget?.group || "items";
-  const text = JSON.stringify(exportableLayouts(group), null, 2);
-  const output = document.querySelector("#editorExportText");
-  output.value = text;
-  output.focus();
-  output.select();
-  navigator.clipboard?.writeText(text).catch(() => {});
-  const targetFile = `data/image-layouts/${group}.json`;
-  document.querySelector("#editorStatus").textContent = `JSON 已產生並嘗試複製；請貼到 ${targetFile} 後再執行網站更新。`;
 }
 
 function renderEmptyState() {
@@ -2129,49 +1871,7 @@ function renderCombo(environment, cards, label, options = {}) {
 function renderSurvivalBattle(environment, groups) {
   currentStageCard = environment;
   renderReelCard(environment);
-  const groupSections = [
-    ["items", "道具", "道具"],
-    ["roles", "職業", "職業"],
-    ["creatures", "動物", "動物"],
-    ["aliens", "異族", "異族"],
-    ["powers", "超能", "超能"],
-    ["specialists", "特職", "特職"]
-  ];
-  cardGrid.innerHTML = `
-    <div class="survival-battle-board">
-      <div class="mobile-stage-lane">
-        ${cardMarkup(environment, "environment-card mobile-stage-banner")}
-      </div>
-      <div class="survival-group-grid">
-        ${groups.map((group) => {
-          const activeSections = groupSections.filter(([key]) => group[key].length);
-          const totalCards = activeSections.reduce((total, [key]) => total + group[key].length, 0);
-          const summary = activeSections.map(([key, label]) => `${group[key].length} ${label}`).join(" · ");
-          return `
-          <section class="survival-group-card" aria-label="第 ${group.index} 組，共 ${totalCards} 張隊伍卡">
-            <div class="survival-group-head">
-              <div class="survival-group-title">
-                <span class="survival-group-index">${group.index}</span>
-                <div>
-                  <strong>第 ${group.index} 組</strong>
-                  <small>${totalCards} 張隊伍卡</small>
-                </div>
-              </div>
-              <span>${summary || "尚未配置隊伍卡"}</span>
-            </div>
-            ${activeSections.map(([key, label, type]) => `
-              <div class="survival-group-section" data-resource-type="${type}">
-                <h3><span>${label}</span><b>${group[key].length}</b></h3>
-                <div class="survival-mini-list">
-                  ${group[key].map((card) => cardMarkup(card, "survival-member-card")).join("")}
-                </div>
-              </div>
-            `).join("") || `<div class="survival-group-empty">請先為這一組設定隊伍卡。</div>`}
-          </section>
-        `}).join("")}
-      </div>
-    </div>
-  `;
+  cardGrid.innerHTML = window.DebateVisionSurvivalBattleView.render({ environment, groups, cardMarkup });
 }
 
 function renderDuel(cards) {
@@ -2560,12 +2260,12 @@ function setMode(modeId) {
   survivalVariant = "survival";
   survivalDeckSelection = new Set(["items"]);
   survivalGroupCount = 3;
-  survivalItemCount = 4;
-  survivalRoleCount = 3;
-  survivalCreatureCount = 0;
-  survivalAlienCount = 0;
-  survivalPowerCount = 0;
-  survivalSpecialistCount = 0;
+  survivalItemCount = 1;
+  survivalRoleCount = 1;
+  survivalCreatureCount = 1;
+  survivalAlienCount = 1;
+  survivalPowerCount = 1;
+  survivalSpecialistCount = 1;
   lockEnvironment = false;
   noEnvironment = false;
   resetImportanceDeckSelection(activeMode);
@@ -2575,8 +2275,7 @@ function setMode(modeId) {
   metaphorLocks = { prefix: true, relation: true, suffix: false };
   if (activeMode.cardMode === "metaphorCompass") syncMetaphorVariantDecks();
   currentMetaphorCards = null;
-  selectedEditCard = null;
-  selectedEditTarget = null;
+  resetEditSelection();
   for (const deckId of activeDeckIds()) ensureDeckSelection(deckId);
   renderAll();
   if (activeMode.cardMode === "secretPlace") renderSecretPlace(null, false);

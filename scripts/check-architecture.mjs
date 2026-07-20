@@ -83,6 +83,7 @@ for (const relativePath of listFiles("website/styles/components", ".css")) {
 const indexHtml = read("website/index.html");
 requireInOrder(indexHtml, "website/index.html", [
   "./styles/tokens.css",
+  "./styles/components/draw-machine.css",
   "./styles/main.css",
   "./styles/components/class-timer.css",
   "./styles/components/deck-option-cards.css",
@@ -93,12 +94,16 @@ requireInOrder(indexHtml, "website/index.html", [
   "../data/generated/ui-texts.js",
   "./js/core/state.js",
   "./js/core/ui-text.js",
+  "./js/core/decks.js",
   "./js/services/history-service.js",
   "./js/services/timer-service.js",
   "./js/services/image-service.js",
   "./js/mobile-render.js",
   "./js/components/class-timer.js",
   "./js/components/deck-option-cards.js",
+  "./js/components/image-editor.js",
+  "./js/components/cards.js",
+  "./js/components/survival-battle-view.js",
   "./js/app.js",
   "./js/mobile-app.js"
 ]);

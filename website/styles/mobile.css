@@ -19,7 +19,7 @@
   .app-shell {
     width: min(100% - 18px, 1180px);
     padding-top: max(6px, env(safe-area-inset-top));
-    padding-bottom: max(96px, calc(env(safe-area-inset-bottom) + 82px));
+    padding-bottom: max(28px, calc(env(safe-area-inset-bottom) + 18px));
   }
 
   .top-bar {
@@ -55,10 +55,7 @@
   }
 
   .activity-menu-toggle {
-    width: 40px;
-    height: 40px;
-    border-radius: 11px;
-    background: rgba(255, 255, 255, 0.9);
+    display: none;
   }
 
   .stage-panel {
@@ -473,15 +470,18 @@
     display: grid;
     gap: 4px;
     min-height: 78px;
-    border: 1px solid rgba(25, 24, 20, 0.18);
+    border: 1px solid color-mix(in srgb, var(--mobile-accent), white 60%);
     border-radius: 12px;
     padding: 10px;
     background:
-      linear-gradient(135deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.5)),
-      radial-gradient(circle at 82% 16%, var(--mobile-accent-soft), transparent 34%);
+      radial-gradient(circle at 84% 12%, var(--mobile-accent-soft), transparent 38%),
+      linear-gradient(145deg, rgba(255, 255, 255, 0.96), color-mix(in srgb, var(--mobile-accent), white 91%));
     color: var(--ink);
     text-align: left;
     cursor: pointer;
+    box-shadow:
+      0 8px 18px color-mix(in srgb, var(--mobile-accent-soft), transparent 35%),
+      inset 0 1px rgba(255, 255, 255, 0.92);
   }
 
   .mobile-survival-mode strong {
@@ -497,11 +497,19 @@
   }
 
   .mobile-survival-mode.is-active {
-    border-color: color-mix(in srgb, var(--mobile-accent), white 12%);
+    border-color: color-mix(in srgb, var(--mobile-accent), white 30%);
     background:
-      linear-gradient(135deg, color-mix(in srgb, var(--mobile-accent), black 10%), color-mix(in srgb, var(--mobile-accent), black 36%));
+      radial-gradient(circle at 88% 10%, color-mix(in srgb, var(--mobile-accent), white 34%), transparent 34%),
+      linear-gradient(
+        135deg,
+        color-mix(in srgb, var(--mobile-accent) 78%, #7a2830),
+        color-mix(in srgb, var(--mobile-accent) 48%, #260f1a)
+      );
     color: #fff;
-    box-shadow: 0 12px 26px var(--mobile-accent-soft);
+    box-shadow:
+      0 14px 28px var(--mobile-accent-soft),
+      inset 0 1px rgba(255, 239, 232, 0.38),
+      inset 0 -1px rgba(27, 5, 12, 0.42);
   }
 
   .mobile-survival-mode.is-active span {
@@ -1041,11 +1049,7 @@
   }
 
   body.has-mobile-draw-result .mobile-stage-lane .card-art::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.52));
-    pointer-events: none;
+    content: none;
   }
 
   body.has-mobile-draw-result .mobile-stage-lane .card-art img {
@@ -1064,8 +1068,8 @@
     z-index: 2;
     display: block;
     border: 0;
-    padding: 32px 0 0;
-    background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.78));
+    padding: 0;
+    background: none;
   }
 
   body.has-mobile-draw-result .mobile-stage-lane .card-title h3 {
@@ -1244,101 +1248,102 @@
   }
 
   body.has-mobile-draw-result .survival-group-grid {
-    display: flex;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
     width: 100%;
     min-width: 0;
-    gap: 14px;
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    padding: 4px 2px 16px;
-    scroll-snap-type: x mandatory;
+    gap: 6px;
+    overflow: visible;
+    padding: 1px 0 5px;
   }
 
   body.has-mobile-draw-result .survival-group-card {
-    flex: 0 0 min(310px, 86vw);
+    width: 100%;
+    min-width: 0;
     align-content: start;
-    gap: 16px;
+    gap: 5px;
     overflow: hidden;
     border: 1px solid rgba(25, 24, 20, 0.16);
-    border-radius: 18px;
-    padding: 16px;
+    border-radius: 10px;
+    padding: 7px;
     background:
       radial-gradient(circle at 100% 0, var(--mobile-accent-soft), transparent 38%),
       linear-gradient(180deg, #fffdf9, #f8f3ea);
-    box-shadow: 0 16px 34px rgba(25, 24, 20, 0.13);
-    scroll-snap-align: start;
+    box-shadow: 0 7px 15px rgba(25, 24, 20, 0.1);
   }
 
   body.has-mobile-draw-result .survival-group-head {
-    display: grid;
-    gap: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
     border-bottom: 1px solid rgba(25, 24, 20, 0.14);
-    padding-bottom: 13px;
+    padding-bottom: 5px;
   }
 
   body.has-mobile-draw-result .survival-group-head > span {
+    min-width: 0;
+    overflow: hidden;
     color: color-mix(in srgb, var(--mobile-accent), black 26%);
-    font-size: 0.78rem;
-    line-height: 1.45;
+    font-size: 0.57rem;
+    line-height: 1.2;
+    text-align: right;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   body.has-mobile-draw-result .survival-group-title {
-    gap: 11px;
+    flex: 0 0 auto;
+    gap: 5px;
   }
 
   body.has-mobile-draw-result .survival-group-index {
-    width: 42px;
-    height: 42px;
-    border-radius: 14px;
+    width: 25px;
+    height: 25px;
+    border-radius: 8px;
     background:
       linear-gradient(145deg, color-mix(in srgb, var(--mobile-accent), white 8%), color-mix(in srgb, var(--mobile-accent), black 24%));
-    box-shadow: 0 9px 18px var(--mobile-accent-soft);
+    font-size: 0.72rem !important;
+    box-shadow: 0 4px 9px var(--mobile-accent-soft);
   }
 
   body.has-mobile-draw-result .survival-group-title strong {
-    font-size: 1.14rem;
+    font-size: 0.76rem;
+    line-height: 1.05;
   }
 
   body.has-mobile-draw-result .survival-group-title small {
-    font-size: 0.74rem;
-  }
-
-  body.has-mobile-draw-result .survival-group-section {
-    gap: 9px;
-  }
-
-  body.has-mobile-draw-result .survival-group-section h3 {
-    padding: 0 2px;
-    font-size: 0.84rem;
-  }
-
-  body.has-mobile-draw-result .survival-group-section h3 b {
-    background: var(--mobile-accent-soft);
-    color: color-mix(in srgb, var(--mobile-accent), black 30%);
-    font-size: 0.74rem;
+    font-size: 0.53rem;
+    line-height: 1.05;
   }
 
   body.has-mobile-draw-result .survival-mini-list {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 4px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    padding: 1px 0 3px;
+    scroll-snap-type: x proximity;
   }
 
   body.has-mobile-draw-result .survival-member-card {
     --card-accent: var(--mobile-accent);
     position: relative;
+    flex: 0 0 49px;
     min-width: 0;
-    min-height: 152px;
+    min-height: 61px;
     overflow: hidden;
     display: block;
     padding: 0;
     border: 2px solid rgba(255, 255, 255, 0.16);
-    border-radius: 14px;
+    border-radius: 8px;
     background:
       radial-gradient(circle at 42% 22%, color-mix(in srgb, var(--card-accent), white 10%), transparent 38%),
       linear-gradient(155deg, color-mix(in srgb, var(--card-accent), black 36%), #130e0c 82%);
     color: #fff;
-    box-shadow: 0 10px 22px rgba(25, 24, 20, 0.2);
+    box-shadow: 0 4px 9px rgba(25, 24, 20, 0.16);
+    scroll-snap-align: start;
   }
 
   body.has-mobile-draw-result .survival-member-card .card-art {
@@ -1356,7 +1361,7 @@
     height: 100%;
     max-height: none;
     object-fit: contain;
-    padding: 17px 13px 34px;
+    padding: 4px 3px 18px;
   }
 
   body.has-mobile-draw-result .survival-member-card .card-title {
@@ -1365,7 +1370,7 @@
     z-index: 2;
     display: block;
     border: 0;
-    padding: 30px 9px 9px;
+    padding: 12px 3px 3px;
     background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.78) 46%, rgba(0, 0, 0, 0.96));
   }
 
@@ -1373,7 +1378,7 @@
     margin: 0;
     overflow: hidden;
     color: #fff;
-    font-size: 0.88rem;
+    font-size: 0.52rem;
     line-height: 1.15;
     text-overflow: ellipsis;
     text-shadow: 0 2px 7px rgba(0, 0, 0, 0.7);
@@ -1443,30 +1448,56 @@
   }
 
   .mobile-bottom-nav {
-    position: fixed;
-    left: 8px;
-    right: 8px;
-    bottom: max(8px, env(safe-area-inset-bottom));
+    position: relative;
+    flex: 0 0 auto;
     z-index: 75;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 6px;
+    display: flex;
+    gap: 3px;
     border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 16px;
-    padding: 8px;
-    background: rgba(17, 17, 17, 0.9);
+    border-radius: 13px;
+    padding: 3px;
+    background:
+      linear-gradient(180deg, rgba(66, 55, 52, 0.96), rgba(22, 18, 18, 0.96));
     color: #fff;
     backdrop-filter: blur(14px);
-    box-shadow: 0 18px 38px rgba(0, 0, 0, 0.28);
+    box-shadow:
+      0 8px 20px rgba(0, 0, 0, 0.2),
+      inset 0 1px rgba(255, 255, 255, 0.14);
   }
 
   .mobile-bottom-nav button {
-    min-height: 44px;
-    border: 0;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.08);
-    color: rgba(255, 255, 255, 0.86);
-    font-weight: 900;
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    padding: 0;
+    background: rgba(255, 255, 255, 0.07);
+    color: rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+    transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  }
+
+  .mobile-bottom-nav button:active {
+    transform: translateY(1px) scale(0.96);
+    border-color: color-mix(in srgb, var(--mobile-accent), white 34%);
+    background: color-mix(in srgb, var(--mobile-accent), black 20%);
+  }
+
+  .mobile-bottom-nav svg {
+    width: 19px;
+    height: 19px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .mobile-bottom-nav [data-mobile-nav="home"] svg path {
+    fill: currentColor;
+    stroke: none;
   }
 
   .mobile-card-modal {

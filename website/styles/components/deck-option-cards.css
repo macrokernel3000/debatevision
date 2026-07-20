@@ -13,13 +13,14 @@
   --deck-accent: #2d2925;
   --deck-soft: rgba(45, 41, 37, 0.14);
   position: relative;
+  overflow: hidden;
   min-width: 0;
   min-height: 122px;
   display: grid;
-  grid-template-rows: 76px auto auto;
+  grid-template-rows: 76px minmax(30px, auto) auto;
   justify-items: stretch;
   gap: 5px;
-  padding: 6px;
+  padding: 6px 6px 0;
   border: 2px solid color-mix(in srgb, var(--deck-accent) 46%, white);
   border-radius: 16px;
   background: linear-gradient(160deg, #fff 54%, var(--deck-soft));
@@ -50,7 +51,7 @@
   overflow: hidden;
   display: grid;
   place-items: center;
-  border-radius: 11px;
+  border-radius: 11px 11px 0 0;
   background: var(--deck-soft);
   color: var(--deck-accent);
   font-size: 2rem;
@@ -68,7 +69,16 @@
 }
 
 .deck-option-card > strong {
+  width: calc(100% + 12px);
+  min-height: 30px;
   overflow: hidden;
+  display: grid;
+  place-items: center;
+  align-self: stretch;
+  margin: 0 -6px;
+  padding: 7px 4px;
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.96);
   color: var(--ink);
   font-size: 0.82rem;
   line-height: 1.15;
@@ -106,8 +116,17 @@
 
 .deck-option-card.is-amount {
   min-height: 150px;
-  grid-template-rows: 84px auto auto;
+  grid-template-rows: 84px minmax(30px, auto) auto;
   cursor: default;
+}
+
+.deck-option-card.is-amount > strong {
+  margin-bottom: 0;
+  border-radius: 0;
+}
+
+.deck-option-card.is-amount .deck-option-stepper {
+  margin-bottom: 6px;
 }
 
 .survival-battle-row.is-resources {
@@ -203,7 +222,7 @@
 
   .deck-option-card {
     min-height: 112px;
-    grid-template-rows: 68px auto auto;
+    grid-template-rows: 68px minmax(30px, auto) auto;
   }
 
   .survival-battle-row.is-resources {
