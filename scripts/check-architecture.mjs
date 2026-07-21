@@ -16,7 +16,8 @@ const lineBudgets = new Map([
   ["website/js/mobile-app.js", 350],
   ["scripts/build-lexicons.mjs", 550],
   ["scripts/check-game-modes.mjs", 350],
-  ["scripts/check-history-replay.mjs", 180]
+  ["scripts/check-history-replay.mjs", 180],
+  ["scripts/check-survival-results.mjs", 180]
 ]);
 
 function read(relativePath) {
@@ -197,6 +198,17 @@ if (historyReplayCheck.status !== 0) {
   failures.push(`歷史回放檢查失敗：\n${historyReplayCheck.stderr || historyReplayCheck.stdout}`.trim());
 } else {
   notes.push("歷史回放檢查: 通過");
+}
+
+const survivalResultCheck = spawnSync(
+  process.execPath,
+  [path.join(root, "scripts/check-survival-results.mjs")],
+  { encoding: "utf8" }
+);
+if (survivalResultCheck.status !== 0) {
+  failures.push(`異境求生局部重抽檢查失敗：\n${survivalResultCheck.stderr || survivalResultCheck.stdout}`.trim());
+} else {
+  notes.push("異境求生局部重抽檢查: 通過");
 }
 
 if (failures.length > 0) {

@@ -87,9 +87,7 @@
     overflow: hidden;
     border-radius: 16px;
     padding: 18px;
-    background:
-      linear-gradient(120deg, rgba(0, 0, 0, 0.86), rgba(0, 0, 0, 0.18)),
-      url("../../assets/backgrounds/modes/item-survival.webp") center 44% / cover;
+    background: linear-gradient(120deg, #15110f, #4c241f);
     color: #fff;
     box-shadow: 0 20px 42px rgba(25, 24, 20, 0.2);
   }

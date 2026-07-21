@@ -77,6 +77,8 @@ node scripts/check-game-modes.mjs
 
 架構檢查也會執行 `scripts/check-history-replay.mjs`，驗證舊冒險紀錄、新分組 metadata 與異境提問能正確回放。
 
+異境求生的鎖定、資源交換與單隊重新編組由 `services/survival-result-service.js` 和 `components/survival-result-controller.js` 負責；不得把規則改寫進 DOM class 或手機事件。`scripts/check-survival-results.mjs` 會驗證鎖定保留、避免重複與只替換指定隊伍，並由架構檢查自動執行。
+
 新增可變狀態時，使用 `website/js/core/state.js` 建立分域 state；不要增加 `app.js` 頂層 `let`。歷史、圖片、計時器等跨畫面邏輯放在 `website/js/services/`，元件只處理畫面與事件。
 
 小修採快速維修模式：如果只是刪一句文字、改一個按鈕名稱、微調手機樣式，先用 `rg` 精準搜尋文字或 class，改最小範圍，跑對應的最小檢查即可。不要每次都重跑完整資料流程或重新盤點全專案；只有動到 CSV / JSON / generated 資料時才需要跑詞庫更新。
@@ -90,6 +92,8 @@ website/styles/mobile.css
 ```
 
 `mobile-render.js` 管手機畫面的 HTML 生成，`mobile-app.js` 管手機操作事件，`mobile.css` 管手機視覺。不要再把新的手機互動直接塞回 `website/js/app.js` 或把手機視覺規則塞回 `website/styles/main.css`，除非該功能確實同時屬於桌機與手機共用核心。
+
+手機活動首頁與 Banner 圖片由 `components/mobile-mode-images.js` 管載入狀態，路徑由 `services/image-service.js` 產生，樣式放在 `styles/components/mobile-mode-images.css`。首頁只用 `assets/backgrounds/modes/mobile/*-thumb.webp`，活動 Banner 用 `*-banner.webp`；禁止把 `/assets/...` 寫成網站根路徑，也不要在首頁預載全部大 Banner。
 
 ## 手機版檢查提醒
 

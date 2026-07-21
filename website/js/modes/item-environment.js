@@ -13,7 +13,7 @@
   };
 
   function drawBattle(ctx) {
-    ctx.survivalGroupCount = Math.max(1, Math.min(8, ctx.drawCountValue || ctx.survivalGroupCount));
+    ctx.survivalGroupCount = Math.max(1, Math.min(8, ctx.survivalGroupCount || 1));
     const environment = ctx.pickFrom(ctx.activeSecondaryLibrary, 1)[0];
     if (!environment) return ctx.renderPoolWarning();
     const groupResult = ctx.drawSurvivalGroups({

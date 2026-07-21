@@ -25,6 +25,7 @@
   dashboard?.addEventListener("click", (event) => {
     const variantButton = event.target.closest("[data-mobile-survival-variant]");
     if (variantButton) {
+      api.clearSurvivalResult();
       api.survivalVariant = variantButton.dataset.mobileSurvivalVariant;
       api.activeLibrary = "items";
       api.activePreview = "items";

@@ -1,6 +1,6 @@
 # Code Health Audit
 
-Last checked: 2026-07-20
+Last checked: 2026-07-21
 
 這份文件記錄 DebateVision 目前程式碼健康狀態與拆檔方向。它不是玩法規格，而是給之後維護網站程式的人看的整理筆記。
 
@@ -8,18 +8,21 @@ Last checked: 2026-07-20
 
 主要檔案大小：
 
-- `website/js/app.js`：約 1680 行。只保留啟動、四個導航狀態、玩法 context、抽卡生命週期與事件接線。
+- `website/js/app.js`：1774 行。只保留啟動、四個導航狀態、玩法 context、抽卡生命週期與事件接線；硬上限仍為 1800 行。
 - `website/js/core/state.js`：建立分域 state；架構檢查禁止增加 `app.js` 頂層可變狀態。
 - `website/js/core/ui-text.js`：generated 文案、預設文案與文字模板替換。
 - `website/js/services/history-service.js`：最近紀錄儲存、十場上限與回放資料。
 - `website/js/services/history-replay.js`：還原卡片提問、冒險分組與舊紀錄相容。
 - `website/js/services/image-service.js`：圖片選擇、URL、fallback 與 image layout。
+- `website/js/services/survival-result-service.js`：異境求生鎖定、資源交換、分組與指定隊伍重抽規則。
 - `website/js/services/timer-service.js`：課堂計時器狀態與持久化。
 - `website/js/components/class-timer.js`：課堂計時器 DOM、事件與顯示。
 - `website/js/components/deck-controls.js`：桌機玩法版本、牌組摘要、鎖定與數量控制。
 - `website/js/components/mode-shell.js`：活動選單、玩法 banner、背景圖與玩法畫面顯示切換。
 - `website/js/components/mobile-dashboard.js`：手機各玩法設定的 view model 與 dashboard。
+- `website/js/components/mobile-mode-images.js`：手機活動縮圖、Banner、skeleton、淡入與 fallback。
 - `website/js/components/mobile-modals.js`：手機卡池編輯與卡牌美術預覽。
+- `website/js/components/survival-result-controller.js`、`survival-battle-view.js`：正式結果狀態與冒險隊伍操作。
 - `website/js/components/history.js`、`results.js`、`reel-view.js`：歷史、結果與抽卡機畫面。
 - `website/js/components/card-dictionary.js`、`secret-place.js`：卡片字典與推理解密互動。
 - `website/js/mobile-render.js`：手機版畫面生成入口，負責手機活動設定、卡組格、版本切換區與結果頁操作按鈕的 HTML。
@@ -54,6 +57,9 @@ Last checked: 2026-07-20
 - 頂層 `let` 從 34 個降到 4 個，只保留目前活動與牌組導航。
 - 架構守門已收緊為 `app.js` 1800 行、頂層 `let` 4 個，並禁止已抽離的大型函式回流。
 - 新增歷史回放檢查，確保舊冒險紀錄仍能推回隊伍分組並恢復異境提問。
+- 新增手機活動 WebP 縮圖與 Banner，首頁不再預先下載所有活動大圖與隱藏卡池圖。
+- 新增異境求生結果鎖定、資源交換與單隊重新編組，狀態不依賴 DOM class。
+- 新增 `scripts/check-survival-results.mjs`，守住鎖定、避免重複與單隊替換契約。
 
 保留：
 

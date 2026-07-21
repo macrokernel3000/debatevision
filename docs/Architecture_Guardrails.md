@@ -35,6 +35,7 @@ website/js/
 │   ├── history-service.js    # 最近紀錄儲存、上限與取回
 │   ├── history-replay.js     # 紀錄卡片還原、冒險分組與舊資料相容
 │   ├── image-service.js      # 圖片選擇、URL、fallback 與 image layout
+│   ├── survival-result-service.js # 異境鎖定、資源交換、分組與單隊重抽規則
 │   └── timer-service.js      # 計時器狀態與持久化
 ├── components/
 │   ├── cards.js              # 共用卡片與詞庫 token HTML
@@ -42,11 +43,14 @@ website/js/
 │   ├── history.js            # 最近十場畫面
 │   ├── image-editor.js       # edit=1 圖片位置編輯
 │   ├── mobile-dashboard.js   # 手機各玩法設定 view model 與畫面協調
+│   ├── mobile-mode-images.js # 手機活動縮圖、Banner、skeleton 與 fallback
 │   ├── mobile-modals.js      # 手機卡池編輯與卡牌美術預覽
 │   ├── mode-shell.js         # 活動選單、玩法 banner、場景背景與顯示切換
 │   ├── card-dictionary.js    # 卡片字典選擇與結果
 │   ├── reel-view.js          # 抽卡機畫面
 │   ├── results.js            # 共用結果畫面
+│   ├── survival-result-controller.js # 異境結果正式狀態與操作協調
+│   ├── survival-battle-view.js # 冒險版分組結果與單隊操作
 │   ├── secret-place.js       # 推理解密互動 controller
 │   └── class-timer.js        # 計時器 DOM、事件與顯示更新
 ├── modes/                    # 各玩法抽卡 controller
@@ -59,7 +63,9 @@ website/styles/
 ├── mobile.css                # 手機專屬樣式
 ├── viewport-boundaries.css   # 桌機／手機顯示隔離，必須最後載入
 └── components/
-    └── class-timer.css       # 計時器所有寬度的樣式
+    ├── class-timer.css       # 計時器所有寬度的樣式
+    ├── mobile-mode-images.css # 手機活動圖載入狀態
+    └── mobile-survival-results.css # 手機鎖定與重抽操作
 ```
 
 ## 新增功能的固定流程
@@ -90,7 +96,10 @@ website/styles/
 - 桌機／手機 DOM marker 與邊界樣式是否仍存在。
 - 是否有人把 `data-ui-surface` 的控制規則散落回其他 CSS。
 - `scripts/check-game-modes.mjs` 是否能通過所有玩法 controller 與主要版本的抽卡契約。
+- `scripts/check-survival-results.mjs` 是否能保證鎖定保留、避免跨組重複與只替換指定隊伍。
 - 已搬出的控制列、手機 dashboard、活動 menu、modal 與推理解密函式是否被重新寫回 `app.js`。
+
+手機圖片路徑必須以目前頁面為基準交給 `image-service.js` 解析，不能使用會越過 GitHub Pages 專案子目錄的 `/assets/...`。首頁只載入 480px 縮圖，僅預載最常使用的異境求生 1080px Banner；其他 Banner 進入活動後才載入。
 
 `網站更新.command` 會在更新 generated data 後自動執行架構檢查。檢查失敗時，不應直接提高上限；先判斷新增內容應抽到哪個模組。
 
