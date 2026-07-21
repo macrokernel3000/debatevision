@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -7,13 +8,15 @@ const failures = [];
 const notes = [];
 
 const lineBudgets = new Map([
-  ["website/js/app.js", 3150],
+  ["website/js/app.js", 1800],
   ["website/styles/tokens.css", 120],
   ["website/styles/main.css", 3020],
   ["website/styles/mobile.css", 2000],
   ["website/js/mobile-render.js", 400],
   ["website/js/mobile-app.js", 350],
-  ["scripts/build-lexicons.mjs", 550]
+  ["scripts/build-lexicons.mjs", 550],
+  ["scripts/check-game-modes.mjs", 350],
+  ["scripts/check-history-replay.mjs", 180]
 ]);
 
 function read(relativePath) {
@@ -88,33 +91,64 @@ requireInOrder(indexHtml, "website/index.html", [
   "./styles/components/class-timer.css",
   "./styles/components/deck-option-cards.css",
   "./styles/mobile.css",
+  "./styles/components/mobile-mode-images.css",
+  "./styles/components/mobile-survival-results.css",
   "./styles/viewport-boundaries.css"
 ]);
 requireInOrder(indexHtml, "website/index.html", [
   "../data/generated/ui-texts.js",
   "./js/core/state.js",
   "./js/core/ui-text.js",
+  "./js/core/card-hooks.js",
   "./js/core/decks.js",
   "./js/services/history-service.js",
+  "./js/services/history-replay.js",
   "./js/services/timer-service.js",
   "./js/services/image-service.js",
+  "./js/services/survival-result-service.js",
   "./js/mobile-render.js",
   "./js/components/class-timer.js",
   "./js/components/deck-option-cards.js",
+  "./js/components/deck-controls.js",
+  "./js/components/history.js",
   "./js/components/image-editor.js",
   "./js/components/cards.js",
+  "./js/components/card-dictionary.js",
+  "./js/components/reel-view.js",
+  "./js/components/mobile-modals.js",
+  "./js/components/mobile-dashboard.js",
+  "./js/components/mobile-mode-images.js",
+  "./js/components/mode-shell.js",
+  "./js/components/results.js",
+  "./js/components/secret-place-view.js",
+  "./js/components/secret-place.js",
   "./js/components/survival-battle-view.js",
+  "./js/components/survival-result-controller.js",
   "./js/app.js",
   "./js/mobile-app.js"
 ]);
 
-const appTopLevelStateCount = (read("website/js/app.js").match(/^let\s+/gm) || []).length;
-if (appTopLevelStateCount > 35) {
+const appSource = read("website/js/app.js");
+const appTopLevelStateCount = (appSource.match(/^let\s+/gm) || []).length;
+if (appTopLevelStateCount > 4) {
   failures.push(
-    `website/js/app.js 有 ${appTopLevelStateCount} 個頂層可變狀態，超過 35 個基準。新狀態請放進 core/state.js 建立的分域 state。`
+    `website/js/app.js 有 ${appTopLevelStateCount} 個頂層可變狀態，超過 4 個基準。新狀態請放進 core/state.js 建立的分域 state。`
   );
 } else {
-  notes.push(`website/js/app.js top-level state: ${appTopLevelStateCount}/35`);
+  notes.push(`website/js/app.js top-level state: ${appTopLevelStateCount}/4`);
+}
+
+const forbiddenAppMarkers = [
+  "function renderDeckControls(",
+  "function renderMobileSurvivalDashboard(",
+  "function renderActivityMenu(",
+  "function openMobileCardModal(",
+  "function renderSecretPlace("
+];
+for (const marker of forbiddenAppMarkers) {
+  if (appSource.includes(marker)) {
+    failures.push(`website/js/app.js 不應重新出現已抽離責任：${marker}`);
+  }
 }
 
 for (const marker of ['data-ui-surface="desktop"', 'data-ui-surface="mobile"']) {
@@ -141,6 +175,28 @@ for (const relativePath of [
       `${relativePath} 不應控制 data-ui-surface；桌機／手機顯示邊界只能放在 viewport-boundaries.css。`
     );
   }
+}
+
+const gameModeCheck = spawnSync(
+  process.execPath,
+  [path.join(root, "scripts/check-game-modes.mjs")],
+  { encoding: "utf8" }
+);
+if (gameModeCheck.status !== 0) {
+  failures.push(`玩法煙霧檢查失敗：\n${gameModeCheck.stderr || gameModeCheck.stdout}`.trim());
+} else {
+  notes.push("玩法 controller 煙霧檢查: 通過");
+}
+
+const historyReplayCheck = spawnSync(
+  process.execPath,
+  [path.join(root, "scripts/check-history-replay.mjs")],
+  { encoding: "utf8" }
+);
+if (historyReplayCheck.status !== 0) {
+  failures.push(`歷史回放檢查失敗：\n${historyReplayCheck.stderr || historyReplayCheck.stdout}`.trim());
+} else {
+  notes.push("歷史回放檢查: 通過");
 }
 
 if (failures.length > 0) {

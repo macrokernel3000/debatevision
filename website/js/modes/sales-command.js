@@ -30,7 +30,14 @@
       name: "無概念",
       lore: "本輪不抽概念，直接用商品本身編織一個銷售故事。",
       icon: "$",
-      deckLabel: "故事版"
+      deckId: "concepts",
+      deckLabel: "故事版",
+      rarity: "",
+      hooks: [
+        "替商品建立一個有畫面感的使用情境。",
+        "說明商品背後可能代表的情緒、回憶或身份。",
+        "把平凡商品包裝成讓人願意購買的故事。"
+      ]
     };
     ctx.renderCombo(stageCard, items, "故事主題");
     if (concept) ctx.markDrawn([concept, ...items]);

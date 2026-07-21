@@ -1,0 +1,91 @@
+@media (max-width: 560px) {
+  .mobile-home-hero {
+    background:
+      radial-gradient(circle at 82% 18%, rgba(255, 176, 168, 0.25), transparent 32%),
+      linear-gradient(120deg, #15110f, #4c241f);
+  }
+
+  .mobile-home-card {
+    background: #241d1a;
+  }
+
+  .mobile-mode-image-frame,
+  .mobile-mode-banner-media,
+  .mobile-home-card-shade {
+    position: absolute;
+    inset: 0;
+  }
+
+  .mobile-mode-image-frame {
+    z-index: -2;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 28% 24%, rgba(255, 255, 255, 0.18), transparent 28%),
+      linear-gradient(145deg, color-mix(in srgb, var(--mobile-accent, #b7362c), black 30%), #17120f);
+  }
+
+  .mobile-mode-image-skeleton {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(105deg, transparent 22%, rgba(255, 255, 255, 0.18) 42%, transparent 62%),
+      linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(0, 0, 0, 0.2));
+    background-size: 220% 100%, 100% 100%;
+    animation: mobile-image-skeleton 1.25s ease-in-out infinite;
+  }
+
+  .mobile-mode-image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    opacity: 0;
+    transform: scale(1.015);
+    transition: opacity 220ms ease, transform 320ms ease;
+  }
+
+  [data-mobile-mode-image-state="loaded"] .mobile-mode-image {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  [data-mobile-mode-image-state="loaded"] .mobile-mode-image-skeleton,
+  [data-mobile-mode-image-state="error"] .mobile-mode-image-skeleton {
+    display: none;
+  }
+
+  [data-mobile-mode-image-state="error"] .mobile-mode-image {
+    display: none;
+  }
+
+  .mobile-home-card-shade {
+    z-index: -1;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.92));
+  }
+
+  .mobile-mode-banner {
+    background:
+      linear-gradient(90deg, rgba(0, 0, 0, 0.78), rgba(0, 0, 0, 0.38) 48%, rgba(0, 0, 0, 0.08)),
+      linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.78)),
+      linear-gradient(135deg, color-mix(in srgb, var(--mobile-accent), black 28%), #111);
+  }
+
+  .mobile-mode-banner-media {
+    z-index: -2;
+  }
+
+  @keyframes mobile-image-skeleton {
+    from { background-position: 120% 0, 0 0; }
+    to { background-position: -120% 0, 0 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mobile-mode-image-skeleton {
+      animation: none;
+    }
+
+    .mobile-mode-image {
+      transition: none;
+    }
+  }
+}

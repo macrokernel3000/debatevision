@@ -21,9 +21,52 @@ const imageService = window.DEBATE_IMAGE_SERVICE.create({
 });
 const uiState = window.DEBATE_STATE.create({
   resetConfirmActive: false,
-  resetConfirmTimer: null,
-  dictionaryActiveDeck: "",
-  mobileEditingDeck: ""
+  resetConfirmTimer: null
+});
+const salesState = window.DEBATE_STATE.create({
+  variant: "supply",
+  noConcept: false,
+  audienceDeck: "creatures"
+});
+const metaphorState = window.DEBATE_STATE.create({
+  variant: "concrete",
+  prefixDeck: "",
+  suffixDeck: "",
+  locks: { prefix: false, relation: false, suffix: false },
+  currentCards: null
+});
+const survivalState = window.DEBATE_STATE.create({
+  variant: "survival",
+  deckSelection: new Set(["items"]),
+  groupCount: 3,
+  counts: {
+    items: 1,
+    roles: 1,
+    creatures: 1,
+    aliens: 1,
+    powers: 1,
+    specialists: 1
+  },
+  lockEnvironment: false,
+  noEnvironment: false
+});
+const survivalResultState = window.DEBATE_STATE.create({
+  kind: "",
+  environment: null,
+  cards: [],
+  groups: [],
+  locks: { environment: false, cards: new Set() },
+  notice: ""
+});
+const drawState = window.DEBATE_STATE.create({
+  drawing: false,
+  stageCard: null
+});
+const summonState = window.DEBATE_STATE.create({
+  categorySelection: new Set(["異族", "超能", "特職"])
+});
+const importanceState = window.DEBATE_STATE.create({
+  selectedDecks: new Set()
 });
 const DEFAULT_IMAGE_LAYOUT = imageService.defaultLayout;
 const {
@@ -36,38 +79,9 @@ const {
 } = imageService;
 
 let activeMode = modes[0];
-let activityMenuOpen = false;
 let activeLibrary = activeMode.primaryDeck;
 let activeSecondaryLibrary = activeMode.secondaryDeck || "";
 let activePreview = activeMode.secondaryDeck || activeMode.primaryDeck;
-let isDrawing = false;
-let lastSecretCard = null;
-let currentStageCard = null;
-let secretRevealed = false;
-let secretAnswerIndex = "";
-let secretShowAnswerNumber = false;
-let salesVariant = "supply";
-let salesNoConcept = false;
-let salesAudienceDeck = "creatures";
-let summonCategorySelection = new Set(["異族", "超能", "特職"]);
-let survivalVariant = "survival";
-let survivalDeckSelection = new Set(["items"]);
-let survivalGroupCount = 3;
-let survivalItemCount = 1;
-let survivalRoleCount = 1;
-let survivalCreatureCount = 1;
-let survivalAlienCount = 1;
-let survivalPowerCount = 1;
-let survivalSpecialistCount = 1;
-let lockEnvironment = false;
-let noEnvironment = false;
-let selectedImportanceDecks = new Set();
-let metaphorVariant = "concrete";
-let metaphorPrefixDeck = "";
-let metaphorSuffixDeck = "";
-let metaphorLocks = { prefix: false, relation: false, suffix: false };
-let currentMetaphorCards = null;
-const drawHistoryByMode = historyService.data;
 
 const modeGrid = document.querySelector("#modeGrid");
 const activityMenuToggle = document.querySelector("#activityMenuToggle");
@@ -122,21 +136,6 @@ const sceneBadge = document.querySelector("#sceneBadge");
 const sceneTitle = document.querySelector("#sceneTitle");
 const sceneDescription = document.querySelector("#sceneDescription");
 const controlNote = document.querySelector("#controlNote");
-const dictionaryDeckSelections = new Set();
-const dictionaryCardSelections = new Set();
-const deckDictionary = {
-  worlds: "特殊的世界觀，適合發揮想像力，需要臨機應變與危機判斷。",
-  creatures: "我們的好朋友或者小生命，適合比較特色、建立觀察角度與討論生命關係。",
-  items: "具體可操作的道具與物件，適合練用途發想、銷售包裝與生存策略。",
-  roles: "不同身份與職業，適合練自我辯護、價值比較與團隊分工。",
-  locations: "各種可能所在位置，適合推理、提問、排除法與情境觀察。",
-  celebrities: "不同文化、領域與時代的真實人物，適合比較影響力與建立判準。",
-  needs: "人們心中的需求與動機，適合銷售、心理洞察與價值連結。",
-  concepts: "抽象概念與價值詞，適合隱喻、定義、哲學思考與概念辯護。",
-  relations: "連接兩個詞的關係詞，適合造句、隱喻羅盤與因果比較。",
-  missions: "現實世界中的具體任務，適合練策略設計、可行性檢查與風險回應。",
-  summons: "被召喚出的角色與身份，適合把特殊能力轉成現實方案並接受質疑。"
-};
 const dictionaryDeckOrder = ["worlds", "creatures", "items", "roles", "locations", "celebrities", "needs", "concepts", "relations", "missions", "summons"];
 const derivedDeckIds = new Set(["needs"]);
 const hiddenImportanceDecks = new Set([...derivedDeckIds]);
@@ -172,74 +171,18 @@ function normalizeCard(raw, deckId) {
   };
 }
 
-function buildHooks(name, deckId, rarity = "", context = {}) {
-  if (activeMode.cardMode === "metaphorCompass") {
-    if (metaphorVariant === "concrete") {
-      if (deckId === "relations") {
-        return [`說明「${name}」要求的是相似、象徵還是聯想。`, "找出比喻最容易被質疑的地方。", "嘗試換一個更精準的比喻關係。"];
-      }
-      return [`找出「人生」和「${name}」的一個相似點。`, `替「人生就像${name}」找一個生活例子。`, `說明這個比喻的限制或例外。`];
-    }
-    if (deckId === "relations") {
-      return [`說明「${name}」讓兩個概念形成什麼關係。`, `找出這個關係最容易被質疑的地方。`, `嘗試把這個關係換成生活中的例子。`];
-    }
-    return [`定義「${name}」在這句命題中的意思。`, `替「${name}」找一個具體例子。`, `回應一個針對「${name}」的反例。`];
-  }
-
-  if (activeMode.cardMode === "salesPitch" && deckId === "needs") {
-    return [`說明「${name}」常出現在哪些生活情境。`, `找出能滿足「${name}」的商品或服務。`, `包裝一個讓人願意為「${name}」付錢的故事。`];
-  }
-
-  if (Array.isArray(activeMode.cardHooks) && activeMode.cardHooks.length) {
-    return activeMode.cardHooks.map((hook) => fillCardHookTemplate(hook, name, { ...context, deckId, rarity }));
-  }
-
-  if (deckId === "items" && rarity === "N") {
-    return [`說明 ${name} 滿足哪一種需求。`, `找出最可能購買 ${name} 的對象。`, "包裝一個讓人願意掏錢的故事。"];
-  }
-  if (deckId === "items") {
-    return [`提出 ${name} 的一個用途。`, `說明 ${name} 的限制與補救。`, "比較它和另一件物品誰更有價值。"];
-  }
-  if (deckId === "roles") {
-    return ["說明這個身份的不可替代價值。", "主動承認一個弱點並化解。", "用一句話說服觀眾留下你。"];
-  }
-  if (deckId === "worlds" || deckId === "locations") {
-    return ["說明這個環境最關鍵的限制。", "列出學生可以追問的線索。", "思考哪些資源在這裡會變得重要。"];
-  }
-  return ["把特性連回當前玩法。", "回答一個尖銳質疑。", "提出最終投票標準。"];
-}
-
-function fillCardHookTemplate(template, name, context = {}) {
-  const values = {
-    name,
-    card: name,
-    role: context.role || context.roleName || name,
-    roleName: context.roleName || context.role || name,
-    mission: context.mission || context.missionName || "",
-    missionName: context.missionName || context.mission || "",
-    environment: context.environment || context.environmentName || "",
-    environmentName: context.environmentName || context.environment || "",
-    item: context.item || context.itemName || (context.deckId === "items" ? name : ""),
-    itemName: context.itemName || context.item || (context.deckId === "items" ? name : ""),
-    profession: context.profession || context.professionName || (context.deckId === "roles" ? name : ""),
-    professionName: context.professionName || context.profession || (context.deckId === "roles" ? name : ""),
-    "卡牌名稱": name,
-    "角色": context.role || context.roleName || name,
-    "任務": context.mission || context.missionName || "",
-    "異境": context.environment || context.environmentName || "",
-    "環境": context.environment || context.environmentName || "",
-    "道具": context.item || context.itemName || (context.deckId === "items" ? name : ""),
-    "物品": context.item || context.itemName || (context.deckId === "items" ? name : ""),
-    "職業": context.profession || context.professionName || (context.deckId === "roles" ? name : "")
-  };
-  let text = String(template || "");
-  for (const [key, value] of Object.entries(values)) {
-    text = text
-      .replaceAll(`{${key}}`, value)
-      .replaceAll(`{{${key}}}`, value);
-  }
-  return text;
-}
+const cardHooks = window.DEBATE_CARD_HOOKS.create({
+  getActiveMode: () => activeMode,
+  getMetaphorVariant: () => metaphorState.variant
+});
+const {
+  build: buildHooks,
+  dictionary: dictionaryHooks,
+  withEnvironment: cardWithEnvironmentHooks,
+  withSalesNeed: cardWithSalesNeedHooks,
+  withSalesStory: cardWithSalesStoryHooks,
+  withSalesTarget: cardWithSalesTargetHooks
+} = cardHooks;
 
 const summonCategories = ["異族", "超能", "特職"];
 const deckCore = window.DEBATE_DECK_CORE.create({
@@ -264,13 +207,25 @@ const {
   setCardsSelection,
   setDeckSelection
 } = deckCore;
+const historyReplay = window.DEBATE_HISTORY_REPLAY.create({
+  cardKey,
+  cardsFrom,
+  normalizeCard,
+  withEnvironmentHooks: cardWithEnvironmentHooks
+});
+const survivalResultService = window.DEBATE_SURVIVAL_RESULT_SERVICE.create({
+  cardKey,
+  pickFromPool,
+  selectedCardsFrom,
+  withEnvironmentHooks: cardWithEnvironmentHooks
+});
 
 function summonCategoryLabel(category) {
   return `${category}卡`;
 }
 
 function selectedSummonCards() {
-  return selectedCardsFrom("summons").filter((card) => summonCategorySelection.has(card.rarity || ""));
+  return selectedCardsFrom("summons").filter((card) => summonState.categorySelection.has(card.rarity || ""));
 }
 
 function defaultSummonCategorySelection(mode = activeMode) {
@@ -281,8 +236,8 @@ function defaultSummonCategorySelection(mode = activeMode) {
 
 function selectedSalesAudienceCards() {
   ensureSalesAudienceDeck();
-  if (salesAudienceDeck === "summons") return selectedSummonCards();
-  return selectedCardsFrom(salesAudienceDeck);
+  if (salesState.audienceDeck === "summons") return selectedSummonCards();
+  return selectedCardsFrom(salesState.audienceDeck);
 }
 
 function orderedDeckIds(options = {}) {
@@ -310,11 +265,11 @@ function defaultSalesAudienceDeck() {
 
 function ensureSalesAudienceDeck() {
   const audienceDecks = salesAudienceDeckIds();
-  if (audienceDecks.includes(salesAudienceDeck)) return;
-  salesAudienceDeck = defaultSalesAudienceDeck();
+  if (audienceDecks.includes(salesState.audienceDeck)) return;
+  salesState.audienceDeck = defaultSalesAudienceDeck();
 }
 
-function salesVariantLabel(variant = salesVariant) {
+function salesVariantLabel(variant = salesState.variant) {
   return {
     supply: "供需版",
     story: "故事版",
@@ -322,7 +277,7 @@ function salesVariantLabel(variant = salesVariant) {
   }[variant] || "供需版";
 }
 
-function salesVariantRule(variant = salesVariant) {
+function salesVariantRule(variant = salesState.variant) {
   return {
     supply: "供需版：你的產品如何滿足客戶們的專屬需求？",
     story: "故事版：先抽概念，再抽商品，替商品鋪陳一個有記憶點的故事。",
@@ -332,18 +287,18 @@ function salesVariantRule(variant = salesVariant) {
 
 function modeStatusKey(mode = activeMode) {
   if (mode.cardMode === "itemEnvironment") {
-    if (survivalVariant === "battle") return "battle";
-    if (noEnvironment) return "survival_no_environment";
+    if (survivalState.variant === "battle") return "battle";
+    if (survivalState.noEnvironment) return "survival_no_environment";
     return "survival";
   }
 
   if (mode.cardMode === "salesPitch") {
-    if (salesVariant === "story" && salesNoConcept) return "story_no_concept";
-    if (salesVariant === "target") return `target_${salesAudienceDeck}`;
-    return salesVariant;
+    if (salesState.variant === "story" && salesState.noConcept) return "story_no_concept";
+    if (salesState.variant === "target") return `target_${salesState.audienceDeck}`;
+    return salesState.variant;
   }
 
-  if (mode.cardMode === "metaphorCompass") return metaphorVariant;
+  if (mode.cardMode === "metaphorCompass") return metaphorState.variant;
   if (mode.cardMode === "importanceDuel") return "duel";
   if (mode.cardMode === "secretPlace") return activeLibrary ? `deck_${activeLibrary}` : "default";
   if (mode.cardMode === "summonMission") return "summon";
@@ -443,8 +398,8 @@ function historyScope() {
 
 function historyVariantLabel() {
   if (activeMode.cardMode === "itemEnvironment") {
-    return survivalVariant === "battle"
-      ? `冒險版：${survivalGroupCount} 組`
+    return survivalState.variant === "battle"
+      ? `冒險版：${survivalState.groupCount} 組`
       : `求生版：${survivalActiveDeckIds().map((deckId) => variantLabel(deckId)).join(" + ")}`;
   }
   if (activeMode.cardMode === "salesPitch") {
@@ -452,9 +407,9 @@ function historyVariantLabel() {
   }
   if (activeMode.cardMode === "metaphorCompass") {
     const variantLabel = metaphorVariantLabel();
-    const prefixLabel = decks[metaphorPrefixDeck]?.label || "";
-    const suffixLabel = decks[metaphorSuffixDeck]?.label || "";
-    if (metaphorVariant === "concrete") return `${variantLabel}：人生 → ${suffixLabel}`;
+    const prefixLabel = decks[metaphorState.prefixDeck]?.label || "";
+    const suffixLabel = decks[metaphorState.suffixDeck]?.label || "";
+    if (metaphorState.variant === "concrete") return `${variantLabel}：人生 → ${suffixLabel}`;
     return prefixLabel && suffixLabel ? `${variantLabel}：${prefixLabel} → ${suffixLabel}` : variantLabel;
   }
   if (activeMode.cardMode === "secretPlace") return decks[activeLibrary]?.label || "";
@@ -470,7 +425,7 @@ function resetImportanceDeckSelection(mode = activeMode) {
   if (mode.cardMode !== "importanceDuel") return;
   const available = importanceAvailableDeckIds(mode);
   const defaultDeck = mode.primaryDeck && available.includes(mode.primaryDeck) ? mode.primaryDeck : available[0];
-  selectedImportanceDecks = new Set(defaultDeck ? [defaultDeck] : []);
+  importanceState.selectedDecks = new Set(defaultDeck ? [defaultDeck] : []);
 }
 
 function importanceAvailableDeckIds(mode = activeMode) {
@@ -481,9 +436,9 @@ function importanceAvailableDeckIds(mode = activeMode) {
 }
 
 function survivalActiveDeckIds(mode = activeMode) {
-  if (mode.cardMode !== "itemEnvironment" || survivalVariant !== "survival") return [];
+  if (mode.cardMode !== "itemEnvironment" || survivalState.variant !== "survival") return [];
   const available = primaryVariantDeckIds(mode);
-  const selected = available.filter((deckId) => survivalDeckSelection.has(deckId));
+  const selected = available.filter((deckId) => survivalState.deckSelection.has(deckId));
   if (selected.length) return selected;
   const fallback = mode.primaryDeck && available.includes(mode.primaryDeck) ? mode.primaryDeck : available[0];
   return fallback ? [fallback] : [];
@@ -493,187 +448,10 @@ function isMobileAppView() {
   return Boolean(window.matchMedia?.("(max-width: 560px)")?.matches);
 }
 
-function survivalModeLabel() {
-  return survivalVariant === "battle" ? "挑戰模式" : "生存模式";
-}
-
-function survivalActionLabel() {
-  return survivalVariant === "battle"
-    ? uiText("mobile.itemSurvival.startBattle")
-    : uiText("mobile.itemSurvival.startSurvival");
-}
-
-function survivalAgainLabel() {
-  return survivalVariant === "battle"
-    ? uiText("mobile.itemSurvival.againBattle")
-    : uiText("mobile.itemSurvival.againSurvival");
-}
-
-function mobileActionLabel() {
-  if (activeMode.cardMode === "itemEnvironment") return survivalActionLabel();
-  return activeMode.drawLabel || "開始抽卡";
-}
-
-function mobileAgainLabel() {
-  if (activeMode.cardMode === "itemEnvironment") return survivalAgainLabel();
-  return `再次${activeMode.title}`;
-}
-
-function survivalDeckCards() {
-  if (survivalVariant === "survival") {
-    return primaryVariantDeckIds().map((deckId) => ({
-      deckId,
-      title: deckId === "items"
-        ? uiText("mobile.itemSurvival.itemDeck")
-        : uiText("mobile.itemSurvival.roleDeck"),
-      subtitle: deckId === "items"
-        ? "可以操作的資源、工具與物件"
-        : "能協助求生的身份與能力",
-      selected: survivalDeckSelection.has(deckId),
-      count: selectedCount(deckId),
-      total: cardsFrom(deckId).length,
-      amount: null
-    }));
-  }
-
-  return [
-    ["items", "道具", "可使用的工具與資源", survivalItemCount],
-    ["roles", "職業", "團隊中的專業夥伴", survivalRoleCount],
-    ["creatures", "動物", "可以協助或造成變數的生物", survivalCreatureCount],
-    ["summons:異族", "異族", "現實召喚中的異族角色", survivalAlienCount],
-    ["summons:超能", "超能", "具備特殊能力的角色", survivalPowerCount],
-    ["summons:特職", "特職", "特殊職能與任務角色", survivalSpecialistCount]
-  ].map(([deckId, title, subtitle, amount]) => {
-    const [baseDeck, rarity] = String(deckId).split(":");
-    const totalCards = rarity
-      ? cardsFrom(baseDeck).filter((card) => card.rarity === rarity).length
-      : cardsFrom(baseDeck).length;
-    const selectedCards = rarity
-      ? selectedCardsFrom(baseDeck).filter((card) => card.rarity === rarity).length
-      : selectedCount(baseDeck);
-    return {
-      deckId: String(deckId),
-      baseDeck,
-      rarity,
-      title,
-      subtitle,
-      selected: Number(amount) > 0,
-      count: selectedCards,
-      total: totalCards,
-      amount: Number(amount)
-    };
-  });
-}
-
-function mobileGenericDeckCards() {
-  if (activeMode.cardMode === "itemEnvironment") return survivalDeckCards();
-  if (activeMode.cardMode === "importanceDuel") {
-    return importanceAvailableDeckIds(activeMode).map((deckId) => ({
-      deckId,
-      title: decks[deckId]?.label || variantLabel(deckId),
-      subtitle: "可加入本輪比較池",
-      selected: selectedImportanceDecks.has(deckId),
-      count: selectedCount(deckId),
-      total: cardsFrom(deckId).length
-    }));
-  }
-  if (activeMode.cardMode === "salesPitch") {
-    const deckCards = [
-      { deckId: "items", title: uiText("mobile.sales.productDeck"), subtitle: "本輪要銷售的產品", selected: true }
-    ];
-    if (salesVariant === "supply") {
-      deckCards.push({ deckId: "needs", title: uiText("mobile.sales.needDeck"), subtitle: "固定抽 1 張需求", selected: true });
-    }
-    if (salesVariant === "story" && !salesNoConcept) {
-      deckCards.push({ deckId: "concepts", title: uiText("mobile.sales.conceptDeck"), subtitle: "固定抽 1 張故事概念", selected: true });
-    }
-    if (salesVariant === "target") {
-      deckCards.push({
-        deckId: salesAudienceDeck,
-        title: decks[salesAudienceDeck]?.label || uiText("mobile.sales.targetDeck"),
-        subtitle: "固定抽 1 張客戶目標",
-        selected: true
-      });
-    }
-    return deckCards.map((deck) => ({
-      ...deck,
-      count: deck.deckId === "summons" ? selectedSalesAudienceCards().length : selectedCount(deck.deckId),
-      total: cardsFrom(deck.deckId).length
-    }));
-  }
-  if (activeMode.cardMode === "metaphorCompass") {
-    const deckCards = [];
-    if (metaphorVariant !== "concrete") {
-      deckCards.push({ deckId: metaphorPrefixDeck, title: uiText("mobile.metaphor.prefixDeck"), subtitle: decks[metaphorPrefixDeck]?.label || "前綴", selected: true });
-    }
-    deckCards.push({ deckId: activeSecondaryLibrary, title: uiText("mobile.metaphor.relationDeck"), subtitle: metaphorVariant === "concrete" ? "就像（固定）" : "連接兩個詞", selected: true });
-    deckCards.push({ deckId: metaphorSuffixDeck, title: uiText("mobile.metaphor.suffixDeck"), subtitle: decks[metaphorSuffixDeck]?.label || "後綴", selected: true });
-    return deckCards
-      .filter((deck) => deck.deckId && decks[deck.deckId])
-      .map((deck) => ({
-        ...deck,
-        count: selectedCount(deck.deckId),
-        total: cardsFrom(deck.deckId).length
-      }));
-  }
-  if (activeMode.cardMode === "summonMission") {
-    return [
-      { deckId: "missions", title: "任務卡", subtitle: "固定抽 1 張任務", selected: true, count: selectedCount("missions"), total: cardsFrom("missions").length },
-      ...summonCategories.map((category) => ({
-        deckId: `summons:${category}`,
-        toggleValue: category,
-        title: summonCategoryLabel(category),
-        subtitle: "可加入本輪召喚池",
-        selected: summonCategorySelection.has(category),
-        count: selectedCardsFrom("summons").filter((card) => card.rarity === category).length,
-        total: cardsFrom("summons").filter((card) => card.rarity === category).length
-      }))
-    ];
-  }
-  return availableDeckIdsForMode(activeMode).map((deckId) => ({
-    deckId,
-    title: decks[deckId]?.label || variantLabel(deckId),
-    subtitle: "本輪使用卡池",
-    selected: deckId === activeLibrary || deckId === activeSecondaryLibrary,
-    count: selectedCount(deckId),
-    total: cardsFrom(deckId).length
-  }));
-}
-
-function renderMobileGenericDashboard() {
-  const deckCards = mobileGenericDeckCards().map((deck) => ({
-    ...deck,
-    cover: sharedDeckCover(deck.deckId)
-  }));
-  const fixedCount = Boolean(activeMode.fixedCount || activeMode.cardMode === "metaphorCompass");
-  const standardDeckUi = ["salesPitch", "summonMission", "importanceDuel"].includes(activeMode.cardMode);
-  const countValue = activeMode.fixedCount || Math.max(1, Math.min(6, Number(drawCount.value) || 1));
-  return window.DebateVisionMobileRender.genericDashboard({
-    cardMode: activeMode.cardMode,
-    actionLabel: mobileActionLabel(),
-    countValue,
-    deckCards,
-    deckTone,
-    fixedCount,
-    metaphorVariant,
-    metaphorVariantLabel,
-    salesAudienceDeck,
-    salesAudienceDeckIds: salesAudienceDeckIds(),
-    salesNoConcept,
-    salesVariant,
-    statusText: modeStatusText(),
-    standardDeckUi,
-    summonCategories,
-    summonCategoryLabel,
-    summonCategorySelection,
-    variantLabel
-  });
-}
-
 function importanceActiveDeckIds(mode = activeMode) {
   if (mode.cardMode !== "importanceDuel") return [];
   const available = primaryVariantDeckIds(mode);
-  const selected = available.filter((deckId) => selectedImportanceDecks.has(deckId));
+  const selected = available.filter((deckId) => importanceState.selectedDecks.has(deckId));
   if (selected.length) return selected;
   const fallback = mode.primaryDeck && available.includes(mode.primaryDeck) ? mode.primaryDeck : available[0];
   return fallback ? [fallback] : [];
@@ -684,23 +462,33 @@ function cardHistoryLabel(card) {
   return `${deckLabel}：${card.name}`;
 }
 
+const historyView = window.DebateVisionHistory.create({
+  container: drawHistory,
+  historyService,
+  cardLabel: cardHistoryLabel
+});
+
+function renderDrawHistory() {
+  historyView.render(historyScope());
+}
+
 function rememberDraw(cards, options = {}) {
   if (!Array.isArray(cards) || !cards.length) return;
   if (activeMode.cardMode === "secretPlace" && !options.includeSecret) return;
   const scope = historyScope();
-  const previousEntries = drawHistoryByMode[scope] || [];
-  const latestRound = Math.max(0, ...previousEntries.map((entry) => Number(entry.roundNumber) || 0));
   const entry = {
     modeId: activeMode.id,
     modeTitle: activeMode.title,
     variant: historyVariantLabel(),
-    roundNumber: latestRound + 1,
+    roundNumber: historyService.nextRound(scope),
     time: new Date().toISOString(),
+    meta: historyReplay.entryMeta(activeMode, survivalState),
     cards: cards.map((card) => ({
       name: card.name,
       deckId: card.deckId,
       deckLabel: card.deckLabel || decks[card.deckId]?.label || "",
-      rarity: card.rarity || ""
+      rarity: card.rarity || "",
+      hooks: Array.isArray(card.hooks) ? [...card.hooks] : []
     }))
   };
   historyService.remember(scope, entry);
@@ -712,36 +500,8 @@ function rememberSecretAnswer(card) {
   rememberDraw([card], { includeSecret: true });
 }
 
-function historyTitle(index) {
-  return `第${index + 1}場`;
-}
-
-function renderDrawHistory() {
-  if (!drawHistory) return;
-  const entries = historyService.entries(historyScope());
-  if (!entries.length) {
-    drawHistory.innerHTML = `<div class="history-empty">抽卡後會在這裡保留最近十場紀錄。</div>`;
-    return;
-  }
-
-  drawHistory.innerHTML = entries.map((entry, index) => `
-    <article class="history-item" data-history-index="${index}" role="button" tabindex="0" aria-label="查看${historyTitle((Number(entry.roundNumber) || entries.length - index) - 1)}紀錄">
-      <div class="history-item-head">
-        <strong>${historyTitle((Number(entry.roundNumber) || entries.length - index) - 1)}</strong>
-        ${entry.variant ? `<span>${entry.variant}</span>` : ""}
-      </div>
-      <div class="history-card-list">
-        ${entry.cards.map((card) => `<span>${cardHistoryLabel(card)}</span>`).join("")}
-      </div>
-    </article>
-  `).join("");
-}
-
 function cardsFromHistoryEntry(entry) {
-  return (entry?.cards || []).map((card) => {
-    const found = cardsFrom(card.deckId).find((candidate) => candidate.name === card.name);
-    return found || normalizeCard({ ...card, lore: "", hooks: [] }, card.deckId);
-  });
+  return historyReplay.cardsForEntry(entry);
 }
 
 function restoreHistoryEntry(index, options = {}) {
@@ -750,12 +510,20 @@ function restoreHistoryEntry(index, options = {}) {
   if (!cards.length) return false;
 
   const stageCard = cards.find((card) => card.deckId === activeSecondaryLibrary) || cards[0];
-  if (activeMode.cardMode === "itemEnvironment" && stageCard?.deckId === activeSecondaryLibrary) {
-    renderCombo(stageCard, cards.filter((card) => cardKey(card) !== cardKey(stageCard)), "本輪異境", {
-      hideStageInDesktopResults: survivalVariant === "survival"
-    });
+  if (activeMode.cardMode === "itemEnvironment") {
+    const replay = historyReplay.itemEnvironment(entry, cards, activeSecondaryLibrary);
+    if (replay?.kind === "battle") {
+      renderSurvivalBattle(replay.environment, replay.groups);
+    } else if (replay?.kind === "combo") {
+      renderCombo(replay.environment, replay.cards, "本輪異境", {
+        hideStageInDesktopResults: replay.hideStageInDesktopResults
+      });
+    } else {
+      resultsView.cards(replay?.cards || cards);
+      renderReelCard(stageCard);
+    }
   } else {
-    cardGrid.innerHTML = `<div class="combo-results">${cards.map((card) => cardMarkup(card)).join("")}</div>`;
+    resultsView.cards(cards);
     renderReelCard(stageCard);
   }
 
@@ -765,171 +533,6 @@ function restoreHistoryEntry(index, options = {}) {
   }
 
   return true;
-}
-
-function modeCardMeta(mode) {
-  return {
-    palette: mode.palette || mode.tone || "cyan",
-    menuLabel: mode.menuLabel || mode.track || ""
-  };
-}
-
-function modeCardStyle(mode) {
-  return imageService.modeCardStyle(mode);
-}
-
-function modeImageCssValue(mode) {
-  return imageService.cssUrl(imageService.imageForMode(mode));
-}
-
-function renderModeButtons() {
-  const markup = modes.map((mode) => `
-    <button class="mode-card ${mode.id === activeMode.id ? "is-active" : ""}" data-mode="${mode.id}" data-tone="${mode.tone}" data-palette="${modeCardMeta(mode).palette}" type="button"${modeCardStyle(mode)}>
-      <span class="mode-card-top">
-        <span class="mode-icon">${mode.icon}</span>
-        <span class="mode-track">${modeCardMeta(mode).menuLabel}</span>
-      </span>
-      <span class="mode-card-body">
-        <strong>${mode.title}</strong>
-      </span>
-    </button>
-  `).join("");
-
-  modeGrid.innerHTML = markup;
-  renderActivityMenu();
-}
-
-function renderActivityMenu() {
-  if (!activityMenuPanel) return;
-  activityMenuPanel.innerHTML = modes.map((mode) => `
-    <button class="activity-menu-item ${mode.id === activeMode.id ? "is-active" : ""}" data-menu-mode="${mode.id}" data-palette="${modeCardMeta(mode).palette}" type="button" role="menuitem">
-      <span class="activity-menu-item-icon">${mode.icon}</span>
-      <span class="activity-menu-copy">
-        <strong>${mode.title}</strong>
-        <small>${modeCardMeta(mode).menuLabel}</small>
-        <em>${mode.statusRules?.default || mode.controlRule || mode.description || ""}</em>
-      </span>
-    </button>
-  `).join("");
-}
-
-function setActivityMenu(open) {
-  activityMenuOpen = Boolean(open);
-  if (activityMenu) activityMenu.hidden = !activityMenuOpen;
-  activityMenuToggle?.setAttribute("aria-expanded", activityMenuOpen ? "true" : "false");
-}
-
-function renderActivity() {
-  const activeMeta = modeCardMeta(activeMode);
-  document.body.dataset.activePalette = activeMeta.palette;
-  document.body.dataset.activeMode = activeMode.id;
-  const activeModeImage = modeImageCssValue(activeMode);
-  if (activeModeImage) document.body.style.setProperty("--active-mode-image", activeModeImage);
-  else document.body.style.removeProperty("--active-mode-image");
-  if (mobileModeBanner) {
-    mobileModeBanner.dataset.palette = activeMeta.palette;
-    mobileModeEmblem.textContent = activeMode.icon;
-    mobileModeTrack.textContent = activeMeta.menuLabel || activeMode.track || "";
-    mobileModeTitle.textContent = activeMode.title;
-    mobileModeRule.textContent = modeStatusText();
-  }
-  if (scenePreview) {
-    scenePreview.dataset.tone = activeMode.tone;
-    const modeImage = imageService.imageForMode(activeMode);
-    scenePreview.classList.toggle("has-mode-image", Boolean(modeImage));
-    const currentImage = scenePreview.querySelector(".scene-preview-image");
-    const modeTarget = editTargetForMode(activeMode);
-    const modeStyle = imageStyleForTarget(modeTarget);
-    scenePreview.setAttribute("style", modeStyle);
-    scenePreview.dataset.editGroup = modeTarget.group;
-    scenePreview.dataset.editId = modeTarget.id;
-    scenePreview.dataset.editName = modeTarget.name;
-    const modeImageAttributes = `style="${modeStyle}" data-edit-group="${modeTarget.group}" data-edit-id="${modeTarget.id}" data-edit-name="${modeTarget.name}"`;
-    if (modeImage) {
-      if (currentImage) {
-        currentImage.hidden = false;
-        currentImage.src = modeImage;
-        currentImage.alt = `${activeMode.title} 玩法背景`;
-        currentImage.setAttribute("style", modeStyle);
-        currentImage.dataset.imageManaged = "true";
-        currentImage.dataset.editGroup = modeTarget.group;
-        currentImage.dataset.editId = modeTarget.id;
-        currentImage.dataset.editName = modeTarget.name;
-      } else {
-        scenePreview.insertAdjacentHTML("afterbegin", `<img class="scene-preview-image" src="${modeImage}" alt="${activeMode.title} 玩法背景" ${imageService.managedAttributes(modeImage)} ${modeImageAttributes} />`);
-      }
-    } else {
-      currentImage?.remove();
-    }
-    sceneEmblem.textContent = activeMode.icon;
-    sceneBadge.textContent = activeMode.track;
-    sceneTitle.textContent = activeMode.title;
-    sceneDescription.textContent = activeMode.description;
-  }
-  drawButton.textContent = activeMode.drawLabel;
-  const dictionaryMode = activeMode.cardMode === "cardDictionary";
-  controlBand.hidden = activeMode.cardMode === "secretPlace" || dictionaryMode;
-  playArea.hidden = dictionaryMode;
-  libraryBand.hidden = dictionaryMode;
-  cardDictionaryPanel.hidden = !dictionaryMode;
-  controlNote.textContent = activeMode.cardMode === "secretPlace"
-    ? lifecycleFor().setup
-    : modeStatusText();
-}
-
-function renderMobileSurvivalDashboard() {
-  if (!mobileSurvivalDashboard) return;
-  const active = activeMode.cardMode !== "secretPlace" && activeMode.cardMode !== "cardDictionary";
-  mobileSurvivalDashboard.hidden = !active;
-  if (!active) {
-    mobileSurvivalDashboard.innerHTML = "";
-    return;
-  }
-
-  if (activeMode.cardMode !== "itemEnvironment") {
-    mobileSurvivalDashboard.innerHTML = renderMobileGenericDashboard();
-    return;
-  }
-
-  const selectedDecks = survivalDeckCards().map((deck) => ({
-    ...deck,
-    cover: sharedDeckCover(deck.deckId)
-  }));
-  const environmentDeck = {
-    deckId: activeMode.secondaryDeck || "worlds",
-    title: "異境卡",
-    selected: true,
-    cover: sharedDeckCover(activeMode.secondaryDeck || "worlds")
-  };
-  const survivalModeActive = survivalVariant === "survival";
-  const countLabel = survivalModeActive
-    ? uiText("mobile.itemSurvival.drawCount")
-    : uiText("mobile.itemSurvival.groupCount");
-  const countValue = survivalModeActive ? Math.max(1, Math.min(6, Number(drawCount.value) || 1)) : survivalGroupCount;
-  const countMin = 1;
-  const countMax = survivalModeActive ? 6 : 8;
-
-  mobileSurvivalDashboard.innerHTML = window.DebateVisionMobileRender.survivalDashboard({
-    actionLabel: survivalActionLabel(),
-    countLabel,
-    countMax,
-    countMin,
-    countValue,
-    deckTone,
-    environmentDeck,
-    selectedDecks,
-    survivalModeActive
-  });
-}
-
-function renderMobileResultActions() {
-  if (!mobileResultActions) return;
-  const active = activeMode.cardMode !== "secretPlace" && activeMode.cardMode !== "cardDictionary";
-  mobileResultActions.hidden = !active;
-  mobileResultActions.innerHTML = window.DebateVisionMobileRender.resultActions({
-    active,
-    againLabel: mobileAgainLabel()
-  });
 }
 
 function mobileDeckTarget(deckId) {
@@ -967,8 +570,13 @@ function sharedDeckCover(deckId) {
     : String(deckId);
   const explicitCover = coverAssets[coverKey];
   if (explicitCover) {
+    const image = isMobileAppView()
+      ? explicitCover
+        .replace("../assets/ui/deck-covers/", "../assets/ui/deck-covers/mobile/")
+        .replace(/\.jpg$/i, ".webp")
+      : explicitCover;
     return {
-      image: explicitCover,
+      image,
       name: "",
       symbol: "",
       isDeckCover: true
@@ -997,54 +605,6 @@ function mobileResourceKey(deckId) {
   }[deckId] || deckId;
 }
 
-function renderMobileCardModal() {
-  if (!mobileCardModal || !uiState.mobileEditingDeck) return;
-  const { baseDeck, rarity } = mobileDeckTarget(uiState.mobileEditingDeck);
-  const deck = decks[baseDeck];
-  if (!deck) return;
-  const cards = mobileDeckCards(uiState.mobileEditingDeck);
-  const selectedKeys = selectedKeysForDeck(baseDeck);
-  const label = rarity || deck.label;
-  const rarityGroups = (rarity ? [rarity] : raritiesFrom(baseDeck))
-    .map((rarityName) => ({
-      rarity: rarityName,
-      cards: cards.filter((card) => (card.rarity || "C") === rarityName)
-    }))
-    .filter((group) => group.cards.length);
-  mobileCardModalTitle.textContent = `編輯${label}`;
-  mobileCardModalList.innerHTML = rarityGroups.map((group) => {
-    const selectedCount = group.cards.filter((card) => selectedKeys.has(cardKey(card))).length;
-    return `
-      <section class="mobile-rarity-group" data-rarity="${group.rarity}">
-        <div class="mobile-rarity-head">
-          <strong>${rarityDisplayName(group.rarity)}</strong>
-          <span>${selectedCount} / ${group.cards.length} 張</span>
-        </div>
-        <div class="mobile-rarity-cards">
-          ${group.cards.map((card) => `
-            <label class="mobile-card-choice">
-              <input type="checkbox" data-mobile-card-key="${cardKey(card)}" ${selectedKeys.has(cardKey(card)) ? "checked" : ""} />
-              ${tokenIconMarkup(card)}
-              <span>${card.name}</span>
-            </label>
-          `).join("")}
-        </div>
-      </section>
-    `;
-  }).join("");
-}
-
-function openMobileCardModal(deckId) {
-  uiState.mobileEditingDeck = deckId;
-  renderMobileCardModal();
-  mobileCardModal.hidden = false;
-}
-
-function closeMobileCardModal() {
-  uiState.mobileEditingDeck = "";
-  if (mobileCardModal) mobileCardModal.hidden = true;
-}
-
 function setMobileHistoryVisible(visible) {
   document.body.classList.toggle("show-mobile-history", Boolean(visible));
 }
@@ -1052,54 +612,12 @@ function setMobileHistoryVisible(visible) {
 function showMobileSetup() {
   document.body.classList.remove("has-mobile-draw-result");
   setMobileHistoryVisible(false);
+  survivalResults.clear();
   renderEmptyState();
   renderAll();
 }
 
-function sceneImageFor(card) {
-  return imageService.imageForCard(card);
-}
-
-function readyReelSubtitle() {
-  if (activeMode.cardMode === "itemEnvironment") return uiText("reel.ready.subtitle.environment");
-  return uiText("reel.ready.subtitle");
-}
-
-function renderReelCard(card = currentStageCard, spinningName = "") {
-  const title = spinningName || card?.name || uiText("reel.ready.title");
-  const subtitle = card?.lore || readyReelSubtitle();
-  const image = sceneImageFor(card);
-  const markImage = image || (card?.deckId ? sharedDeckCover(card.deckId).image : "");
-  const target = editTargetForCard(card);
-  const reelStyle = target ? imageStyleForTarget(target) : "";
-  const editAttributes = target
-    ? `style="${reelStyle}" data-edit-group="${target.group}" data-edit-id="${target.id}" data-edit-name="${target.name}" data-card-key="${target.cardKey}"`
-    : "";
-  reel.classList.toggle("has-scene-image", Boolean(image));
-  reel.setAttribute("style", reelStyle);
-  if (target) {
-    reel.dataset.editGroup = target.group;
-    reel.dataset.editId = target.id;
-    reel.dataset.editName = target.name;
-  } else {
-    delete reel.dataset.editGroup;
-    delete reel.dataset.editId;
-    delete reel.dataset.editName;
-  }
-  reel.innerHTML = `
-    ${image ? `<img class="reel-scene-image" src="${image}" alt="${title} 場景圖" ${imageService.managedAttributes(image, imageService.fallbackForCard(card))} ${editAttributes} />` : ""}
-    <div class="reel-scene-mark">
-      ${markImage ? `<img class="reel-scene-mark-image" src="${markImage}" alt="" aria-hidden="true" ${imageService.managedAttributes(markImage, imageService.fallbackForCard(card))} />` : (card ? activeMode.icon : "?")}
-    </div>
-    <div class="reel-scene-copy">
-      <span>${card?.deckLabel || activeMode.secondaryLabel || activeMode.track || "Scene Card"}</span>
-      <strong>${title}</strong>
-      <small>${subtitle}</small>
-    </div>
-  `;
-}
-
-function metaphorVariantLabel(value = metaphorVariant) {
+function metaphorVariantLabel(value = metaphorState.variant) {
   return {
     concrete: "具體版",
     abstract: "抽象版",
@@ -1118,10 +636,10 @@ function metaphorAllDeckOptions(mode = activeMode) {
 }
 
 function metaphorDeckOptions(part = "prefix") {
-  if (metaphorVariant === "concrete") {
+  if (metaphorState.variant === "concrete") {
     return part === "suffix" ? metaphorConcreteDeckOptions() : [];
   }
-  if (metaphorVariant === "free") return metaphorFreeDeckOptions();
+  if (metaphorState.variant === "free") return metaphorFreeDeckOptions();
   return metaphorAbstractDeckOptions();
 }
 
@@ -1168,356 +686,34 @@ function fixedMetaphorRelationCard() {
 }
 
 function syncMetaphorVariantDecks() {
-  if (metaphorVariant === "concrete") {
-    metaphorPrefixDeck = "";
-    metaphorSuffixDeck = metaphorConcreteDeckOptions().includes(metaphorSuffixDeck)
-      ? metaphorSuffixDeck
+  if (metaphorState.variant === "concrete") {
+    metaphorState.prefixDeck = "";
+    metaphorState.suffixDeck = metaphorConcreteDeckOptions().includes(metaphorState.suffixDeck)
+      ? metaphorState.suffixDeck
       : metaphorConcreteDeckOptions()[0] || "";
-    metaphorLocks = { prefix: true, relation: true, suffix: false };
-    activePreview = metaphorSuffixDeck || activeSecondaryLibrary;
+    metaphorState.locks = { prefix: true, relation: true, suffix: false };
+    activePreview = metaphorState.suffixDeck || activeSecondaryLibrary;
     return;
   }
 
   const options = metaphorDeckOptions("prefix");
-  metaphorPrefixDeck = options.includes(metaphorPrefixDeck) ? metaphorPrefixDeck : options[0] || "";
-  metaphorSuffixDeck = options.includes(metaphorSuffixDeck) ? metaphorSuffixDeck : options[0] || "";
-  metaphorLocks = {
-    prefix: Boolean(metaphorLocks.prefix),
-    relation: Boolean(metaphorLocks.relation),
-    suffix: Boolean(metaphorLocks.suffix)
+  metaphorState.prefixDeck = options.includes(metaphorState.prefixDeck) ? metaphorState.prefixDeck : options[0] || "";
+  metaphorState.suffixDeck = options.includes(metaphorState.suffixDeck) ? metaphorState.suffixDeck : options[0] || "";
+  metaphorState.locks = {
+    prefix: Boolean(metaphorState.locks.prefix),
+    relation: Boolean(metaphorState.locks.relation),
+    suffix: Boolean(metaphorState.locks.suffix)
   };
-  activePreview = metaphorPrefixDeck || activeSecondaryLibrary;
-}
-
-function renderDeckControls() {
-  primaryDeckField.hidden = true;
-  secondaryDeckField.hidden = true;
-  if (activeMode.cardMode === "salesPitch") ensureSalesAudienceDeck();
-
-  primaryDeckLabel.textContent = activeMode.primaryLabel || "主要詞庫";
-  secondaryDeckLabel.textContent = activeMode.secondaryLabel || "第二詞庫";
-
-  const survivalBattleMode = activeMode.cardMode === "itemEnvironment" && survivalVariant === "battle";
-  const survivalMode = activeMode.cardMode === "itemEnvironment";
-  const metaphorMode = activeMode.cardMode === "metaphorCompass";
-  const salesMode = activeMode.cardMode === "salesPitch";
-  drawCountField.hidden = metaphorMode;
-  drawCountField.classList.remove("is-ghost-control");
-  drawCountField.setAttribute("aria-hidden", "false");
-  controlNote.hidden = false;
-  controlNote.textContent = modeStatusText();
-  const fixed = activeMode.fixedCount;
-  if (survivalBattleMode) {
-    drawCountLabel.textContent = "隊伍數";
-    drawCount.min = "1";
-    drawCount.max = "8";
-    drawCount.value = survivalGroupCount;
-    drawCount.disabled = false;
-  } else {
-    drawCountLabel.textContent = uiText("label.drawCount");
-    drawCount.min = "1";
-    drawCount.max = "6";
-    drawCount.value = fixed || Math.min(Math.max(Number(drawCount.value) || 1, 1), 6);
-    drawCount.disabled = Boolean(fixed);
-  }
-
-  const primaryTotal = cardsFrom(activeLibrary).length;
-  let primaryText = `${decks[activeLibrary]?.label || activeMode.primaryLabel}：${selectedCount(activeLibrary)} / ${primaryTotal} 張可抽`;
-  let secondaryText = activeSecondaryLibrary
-    ? activeMode.cardMode === "salesPitch"
-      ? `${activeMode.secondaryLabel || decks[activeSecondaryLibrary]?.label}：${selectedCount(activeSecondaryLibrary)} / ${cardsFrom(activeSecondaryLibrary).length} 張可抽`
-      : `${activeMode.secondaryLabel || decks[activeSecondaryLibrary]?.label}：固定抽 1 張，${selectedCount(activeSecondaryLibrary)} / ${cardsFrom(activeSecondaryLibrary).length} 張可抽`
-    : "";
-  if (activeMode.cardMode === "importanceDuel") {
-    const activeDeckIds = importanceActiveDeckIds();
-    const totalSelected = activeDeckIds.reduce((sum, deckId) => sum + selectedCount(deckId), 0);
-    const totalCards = activeDeckIds.reduce((sum, deckId) => sum + cardsFrom(deckId).length, 0);
-    primaryText = `已選 ${activeDeckIds.length} 個牌組：${totalSelected} / ${totalCards} 張可抽`;
-    secondaryText = "";
-  }
-  if (activeMode.cardMode === "metaphorCompass") {
-    if (metaphorVariant === "concrete") {
-      primaryText = "前綴：人生（固定）";
-      secondaryText = "介係：就像（固定）";
-    } else {
-      primaryText = `前綴：${decks[metaphorPrefixDeck]?.label || ""}，${selectedCount(metaphorPrefixDeck)} / ${cardsFrom(metaphorPrefixDeck).length} 張可抽`;
-      secondaryText = `介係：${decks[activeSecondaryLibrary]?.label || ""}，${selectedCount(activeSecondaryLibrary)} / ${cardsFrom(activeSecondaryLibrary).length} 張可抽`;
-    }
-  }
-  if (survivalBattleMode) {
-    primaryText = `道具卡：${selectedCount("items")} / ${cardsFrom("items").length} 張可抽`;
-  } else if (survivalMode) {
-    const activeDeckIds = survivalActiveDeckIds();
-    const totalSelected = activeDeckIds.reduce((sum, deckId) => sum + selectedCount(deckId), 0);
-    const totalCards = activeDeckIds.reduce((sum, deckId) => sum + cardsFrom(deckId).length, 0);
-    primaryText = `已選 ${activeDeckIds.map((deckId) => variantLabel(deckId)).join("、")}：${totalSelected} / ${totalCards} 張可抽`;
-  }
-  if (salesMode) {
-    primaryText = `商品卡：${selectedCount("items")} / ${cardsFrom("items").length} 張可抽`;
-    if (salesVariant === "supply") {
-      secondaryText = `需求卡：固定抽 1 張，${selectedCount("needs")} / ${cardsFrom("needs").length} 張可抽`;
-    } else if (salesVariant === "story") {
-      secondaryText = salesNoConcept
-        ? "概念卡：本輪不抽概念"
-        : `概念卡：固定抽 1 張，${selectedCount("concepts")} / ${cardsFrom("concepts").length} 張可抽`;
-    } else {
-      const audienceCards = selectedSalesAudienceCards();
-      const total = salesAudienceDeck === "summons"
-        ? cardsFrom("summons").filter((card) => summonCategorySelection.has(card.rarity || "")).length
-        : cardsFrom(salesAudienceDeck).length;
-      secondaryText = `${decks[salesAudienceDeck]?.label || "客戶卡"}：固定抽 1 張，${audienceCards.length} / ${total} 張可抽`;
-    }
-  }
-  const suffixText = activeMode.cardMode === "metaphorCompass"
-    ? `後綴：${decks[metaphorSuffixDeck]?.label || ""}，${selectedCount(metaphorSuffixDeck)} / ${cardsFrom(metaphorSuffixDeck).length} 張可抽`
-    : "";
-  const survivalRoleText = survivalBattleMode
-    ? `職業卡：${selectedCount("roles")} / ${cardsFrom("roles").length} 張可抽`
-    : "";
-  const survivalCreatureText = survivalBattleMode
-    ? `動物卡：${selectedCount("creatures")} / ${cardsFrom("creatures").length} 張可抽`
-    : "";
-  const survivalSummonText = survivalBattleMode
-    ? `召喚卡：${selectedCount("summons")} / ${cardsFrom("summons").length} 張可抽`
-    : "";
-  const survivalVariantTools = activeMode.cardMode === "itemEnvironment"
-    ? `
-      <div class="sales-variant-tools is-survival-variant" role="group" aria-label="異境求生版本">
-        <button type="button" class="${survivalVariant === "survival" ? "is-active" : ""}" data-survival-variant="survival">
-          <strong>求生版</strong>
-          <span>${uiText("mobile.itemSurvival.survivalDescription")}</span>
-        </button>
-        <button type="button" class="${survivalVariant === "battle" ? "is-active" : ""}" data-survival-variant="battle">
-          <strong>冒險版</strong>
-          <span>${uiText("mobile.itemSurvival.battleDescription")}</span>
-        </button>
-      </div>
-    `
-    : "";
-  normalizeSurvivalAllocation();
-  const survivalBattleTools = survivalBattleMode
-    ? `
-      <div class="survival-battle-tools" role="group" aria-label="冒險版設定">
-        <div class="survival-battle-row is-resources">
-          ${survivalNumberControl("items", "道具", survivalItemCount, 0, 12)}
-          ${survivalNumberControl("roles", "職業", survivalRoleCount, 0, 12)}
-          ${survivalNumberControl("creatures", "動物", survivalCreatureCount, 0, 12)}
-          ${survivalNumberControl("aliens", "異族", survivalAlienCount, 0, 12)}
-          ${survivalNumberControl("powers", "超能", survivalPowerCount, 0, 12)}
-          ${survivalNumberControl("specialists", "特職", survivalSpecialistCount, 0, 12)}
-        </div>
-      </div>
-    `
-    : "";
-  const salesTools = activeMode.cardMode === "salesPitch"
-    ? `
-      <div class="sales-variant-tools is-sales-variant" role="group" aria-label="銷售密令抽法">
-        <button type="button" class="${salesVariant === "supply" ? "is-active" : ""}" data-sales-variant="supply">供需版</button>
-        <button type="button" class="${salesVariant === "story" ? "is-active" : ""}" data-sales-variant="story">故事版</button>
-        <button type="button" class="${salesVariant === "target" ? "is-active" : ""}" data-sales-variant="target">目標版</button>
-      </div>
-      ${salesVariant === "story" ? `
-        <label class="environment-lock-toggle">
-          <input type="checkbox" data-sales-no-concept ${salesNoConcept ? "checked" : ""} />
-          <span>無概念</span>
-        </label>
-      ` : ""}
-      ${salesVariant === "target" ? `
-        ${window.DebateVisionDeckOptions.selectGroup(salesAudienceDeckIds().map((deckId) => ({
-          deckId,
-          label: deckId === "summons" ? "異族" : variantLabel(deckId),
-          selected: salesAudienceDeck === deckId,
-          tone: deckTone(deckId),
-          cover: sharedDeckCover(deckId)
-        })), {
-          attribute: "data-sales-audience",
-          ariaLabel: "目標版客戶類型"
-        })}
-      ` : ""}
-    `
-    : "";
-  const summonCategoryTools = activeMode.cardMode === "summonMission"
-    ? `
-      ${window.DebateVisionDeckOptions.selectGroup(summonCategories.map((category) => ({
-        deckId: `summons:${category}`,
-        value: category,
-        label: summonCategoryLabel(category),
-        selected: summonCategorySelection.has(category),
-        tone: deckTone("summons"),
-        cover: sharedDeckCover(`summons:${category}`)
-      })), {
-        attribute: "data-summon-category",
-        ariaLabel: "現實召喚分類"
-      })}
-    `
-    : "";
-  const primaryVariantDecks = primaryVariantDeckIds();
-  const primaryVariantTools = primaryVariantDecks.length && !survivalBattleMode
-    ? `
-      ${window.DebateVisionDeckOptions.selectGroup(primaryVariantDecks.map((deckId) => ({
-        deckId,
-        label: variantLabel(deckId),
-        selected: activeMode.cardMode === "importanceDuel"
-          ? selectedImportanceDecks.has(deckId)
-          : survivalMode ? survivalDeckSelection.has(deckId) : activeLibrary === deckId,
-        tone: deckTone(deckId),
-        cover: sharedDeckCover(deckId)
-      })), {
-        attribute: "data-primary-variant",
-        ariaLabel: `${activeMode.title}抽選類型`
-      })}
-    `
-    : "";
-  const environmentLockTool = activeMode.cardMode === "itemEnvironment" && survivalVariant === "survival"
-    ? `
-      <label class="environment-lock-toggle">
-        <input type="checkbox" data-lock-environment ${lockEnvironment ? "checked" : ""} ${noEnvironment ? "disabled" : ""} />
-        <span>鎖定異境</span>
-      </label>
-      <label class="environment-lock-toggle">
-        <input type="checkbox" data-no-environment ${noEnvironment ? "checked" : ""} />
-        <span>無異境</span>
-      </label>
-    `
-    : "";
-  const metaphorTool = metaphorMode
-    ? `
-      <div class="metaphor-variant-tools" role="group" aria-label="隱喻羅盤版本">
-        ${["concrete", "abstract", "free"].map((variant) => `
-          <button type="button" class="${metaphorVariant === variant ? "is-active" : ""}" data-metaphor-variant="${variant}">
-            ${metaphorVariantLabel(variant)}
-          </button>
-        `).join("")}
-      </div>
-      <div class="metaphor-deck-tools" role="group" aria-label="隱喻羅盤詞庫選擇">
-        ${metaphorVariant === "concrete" ? `<span class="metaphor-fixed-text">人生 就像</span>` : metaphorDeckSelectMarkup("prefix", "前綴", metaphorPrefixDeck)}
-        ${metaphorDeckSelectMarkup("suffix", "後綴", metaphorSuffixDeck)}
-      </div>
-      <div class="metaphor-lock-tools" role="group" aria-label="隱喻羅盤鎖定">
-        ${metaphorLockMarkup("prefix", "鎖定前綴")}
-        ${metaphorLockMarkup("relation", "鎖定介係")}
-        ${metaphorLockMarkup("suffix", "鎖定後綴")}
-      </div>
-    `
-    : "";
-
-  const poolSummary = `
-    <span class="pool-summary-chip">${primaryText}</span>
-    ${secondaryText ? `<span class="pool-summary-chip">${secondaryText}</span>` : ""}
-    ${survivalRoleText ? `<span class="pool-summary-chip">${survivalRoleText}</span>` : ""}
-    ${survivalCreatureText ? `<span class="pool-summary-chip">${survivalCreatureText}</span>` : ""}
-    ${survivalSummonText ? `<span class="pool-summary-chip">${survivalSummonText}</span>` : ""}
-    ${suffixText ? `<span class="pool-summary-chip">${suffixText}</span>` : ""}
-  `;
-
-  fixedPools.classList.toggle("is-survival-controls", survivalMode);
-  fixedPools.innerHTML = metaphorMode
-    ? `
-      ${metaphorTool}
-      ${poolSummary}
-    `
-    : survivalMode
-      ? `
-        <div class="survival-control-row">
-          ${survivalVariantTools}
-          ${survivalBattleMode ? survivalBattleTools : `${primaryVariantTools}${environmentLockTool}`}
-        </div>
-        <div class="survival-pool-summary">
-          ${poolSummary}
-        </div>
-      `
-    : `
-      ${poolSummary}
-      ${survivalVariantTools}
-      ${primaryVariantTools}
-      ${environmentLockTool}
-      ${survivalBattleTools}
-      ${salesTools}
-      ${summonCategoryTools}
-    `;
-}
-
-function normalizeSurvivalAllocation() {
-  survivalItemCount = Math.max(0, Math.min(12, survivalItemCount));
-  survivalRoleCount = Math.max(0, Math.min(12, survivalRoleCount));
-  survivalCreatureCount = Math.max(0, Math.min(12, survivalCreatureCount));
-  survivalAlienCount = Math.max(0, Math.min(12, survivalAlienCount));
-  survivalPowerCount = Math.max(0, Math.min(12, survivalPowerCount));
-  survivalSpecialistCount = Math.max(0, Math.min(12, survivalSpecialistCount));
+  activePreview = metaphorState.prefixDeck || activeSecondaryLibrary;
 }
 
 function survivalCountValue(key) {
-  return {
-    groups: survivalGroupCount,
-    items: survivalItemCount,
-    roles: survivalRoleCount,
-    creatures: survivalCreatureCount,
-    aliens: survivalAlienCount,
-    powers: survivalPowerCount,
-    specialists: survivalSpecialistCount
-  }[key] || 0;
+  return key === "groups" ? survivalState.groupCount : survivalState.counts[key] || 0;
 }
 
 function setSurvivalCountValue(key, value) {
-  if (key === "groups") survivalGroupCount = value;
-  if (["items", "roles", "creatures", "aliens", "powers", "specialists"].includes(key)) {
-    if (key === "items") survivalItemCount = value;
-    if (key === "roles") survivalRoleCount = value;
-    if (key === "creatures") survivalCreatureCount = value;
-    if (key === "aliens") survivalAlienCount = value;
-    if (key === "powers") survivalPowerCount = value;
-    if (key === "specialists") survivalSpecialistCount = value;
-  }
-}
-
-function survivalNumberControl(key, label, value, min, max) {
-  const deckId = {
-    items: "items",
-    roles: "roles",
-    creatures: "creatures",
-    aliens: "summons:異族",
-    powers: "summons:超能",
-    specialists: "summons:特職"
-  }[key];
-  return window.DebateVisionDeckOptions.amountCard({
-    key, label, value, min, max, deckId,
-    tone: deckTone(deckId),
-    cover: sharedDeckCover(deckId)
-  });
-}
-
-function metaphorDeckSelectMarkup(part, label, value) {
-  return `
-    <label class="metaphor-deck-select">
-      <span>${label}</span>
-      <select data-metaphor-deck="${part}">
-        ${metaphorDeckOptions(part).map((deckId) => `
-          <option value="${deckId}" ${deckId === value ? "selected" : ""}>${decks[deckId].label}</option>
-        `).join("")}
-      </select>
-    </label>
-  `;
-}
-
-function metaphorLockMarkup(part, label) {
-  if (metaphorVariant === "concrete" && (part === "prefix" || part === "relation")) {
-    return `
-      <label class="environment-lock-toggle is-disabled">
-        <input type="checkbox" data-lock-metaphor="${part}" checked disabled />
-        <span>${label}</span>
-      </label>
-    `;
-  }
-  const card = currentMetaphorCards?.[part];
-  const expectedDeck = part === "prefix" ? metaphorPrefixDeck : part === "suffix" ? metaphorSuffixDeck : activeSecondaryLibrary;
-  const canLock = Boolean(card) && (!expectedDeck || card.deckId === expectedDeck);
-  const locked = Boolean(metaphorLocks[part] && canLock);
-  return `
-    <label class="environment-lock-toggle ${canLock ? "" : "is-disabled"}">
-      <input type="checkbox" data-lock-metaphor="${part}" ${locked ? "checked" : ""} ${canLock ? "" : "disabled"} />
-      <span>${label}</span>
-    </label>
-  `;
+  if (key === "groups") survivalState.groupCount = value;
+  if (Object.hasOwn(survivalState.counts, key)) survivalState.counts[key] = value;
 }
 
 function activeDeckIds() {
@@ -1570,149 +766,6 @@ function renderTokenCloud() {
   }).join("");
 }
 
-function dictionaryDeckIds() {
-  return orderedDeckIds();
-}
-
-function dictionaryDescription(deckId) {
-  return deckDictionary[deckId] || `${decks[deckId]?.label || deckId} 詞庫，可用來自行組合臨時活動。`;
-}
-
-function dictionaryCardKey(deckId, cardName) {
-  return `${deckId}::${cardName}`;
-}
-
-function dictionaryCardFromKey(key) {
-  const [deckId, ...nameParts] = String(key).split("::");
-  const name = nameParts.join("::");
-  const rawCard = cardsFrom(deckId).find((card) => card.name === name);
-  return rawCard ? dictionaryNormalizeCard(rawCard, deckId) : null;
-}
-
-function selectedDictionaryCards() {
-  return [...dictionaryCardSelections].map((key) => dictionaryCardFromKey(key)).filter(Boolean);
-}
-
-function ensureDictionaryActiveDeck() {
-  const selectedDecks = [...dictionaryDeckSelections].filter((deckId) => decks[deckId]);
-  if (selectedDecks.includes(uiState.dictionaryActiveDeck)) return;
-  uiState.dictionaryActiveDeck = selectedDecks[0] || "";
-}
-
-function renderCardDictionary() {
-  if (!cardDictionary) return;
-  ensureDictionaryActiveDeck();
-  const selectedDecks = [...dictionaryDeckSelections].filter((deckId) => decks[deckId]);
-  const selectedCards = selectedDictionaryCards();
-  const activeCards = uiState.dictionaryActiveDeck
-    ? cardsFrom(uiState.dictionaryActiveDeck).map((card) => dictionaryNormalizeCard(card, uiState.dictionaryActiveDeck))
-    : [];
-
-  cardDictionary.innerHTML = `
-    <div class="dictionary-layout">
-      <div class="dictionary-decks" aria-label="卡片類型">
-        ${dictionaryDeckIds().map((deckId) => dictionaryDeckCardMarkup(deckId)).join("")}
-      </div>
-      <div class="dictionary-workbench">
-        <div class="dictionary-tabs" aria-label="已啟用卡池">
-          ${selectedDecks.length
-            ? selectedDecks.map((deckId) => `
-              <button type="button" class="${deckId === uiState.dictionaryActiveDeck ? "is-active" : ""}" data-dictionary-preview="${deckId}">
-                ${decks[deckId].label}
-              </button>
-            `).join("")
-            : `<span>${uiText("mobile.dictionary.deckHeading")}</span>`}
-        </div>
-        <div class="dictionary-card-picker">
-          ${uiState.dictionaryActiveDeck
-            ? activeCards.map((card) => dictionaryTokenMarkup(card)).join("")
-            : `<div class="dictionary-empty compact">${uiText("mobile.dictionary.emptyPicker")}</div>`}
-        </div>
-        <div class="dictionary-tray">
-          <div class="dictionary-tray-head">
-            <strong>${uiText("mobile.dictionary.selectedHeading")}</strong>
-            <span>${selectedCards.length} 張</span>
-          </div>
-          <div class="dictionary-selected-list">
-            ${selectedCards.length
-              ? selectedCards.map((card) => `
-                <button type="button" data-remove-dictionary-card="${dictionaryCardKey(card.deckId, card.name)}">
-                  ${tokenIconMarkup(card)}<span>${card.deckLabel}：${card.name}</span><strong>×</strong>
-                </button>
-              `).join("")
-              : `<span class="dictionary-selected-empty">${uiText("mobile.dictionary.selectedEmpty")}</span>`}
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
-}
-
-function dictionaryDeckCardMarkup(deckId) {
-  const deck = decks[deckId];
-  const checked = dictionaryDeckSelections.has(deckId);
-  const selectedInDeck = [...dictionaryCardSelections].filter((key) => key.startsWith(`${deckId}::`)).length;
-  return `
-    <label class="dictionary-card ${checked ? "is-selected" : ""}">
-      <input type="checkbox" data-dictionary-deck="${deckId}" ${checked ? "checked" : ""} />
-      <span class="dictionary-icon">${deck.icon || "□"}</span>
-      <span class="dictionary-copy">
-        <strong>${deck.label}</strong>
-        <span>${selectedInDeck ? `已選 ${selectedInDeck} 張 / ` : ""}${deck.cards.length} 張卡</span>
-        <small>${dictionaryDescription(deckId)}</small>
-      </span>
-    </label>
-  `;
-}
-
-function dictionaryTokenMarkup(card) {
-  const key = dictionaryCardKey(card.deckId, card.name);
-  const checked = dictionaryCardSelections.has(key);
-  return `
-    <label class="token dictionary-token ${checked ? "" : "is-disabled"}">
-      <input type="checkbox" data-dictionary-card-key="${key}" ${checked ? "checked" : ""} />
-      <span class="token-label">${tokenIconMarkup(card)}<span>${card.name}</span></span>
-    </label>
-  `;
-}
-
-function dictionaryHooks(card) {
-  return [
-    `把「${card.name}」和其他抽出的卡建立一個活動題目。`,
-    `說明「${card.name}」最值得討論的一個特色。`,
-    "請學生提出一個例子、用途、比較標準或反例。"
-  ];
-}
-
-function dictionaryNormalizeCard(raw, deckId) {
-  return {
-    ...normalizeCard(raw, deckId),
-    hooks: dictionaryHooks({ name: raw.name })
-  };
-}
-
-function renderDictionaryResult(cards = [], saved = false) {
-  if (!dictionaryResult) return;
-  if (!cards.length) {
-    dictionaryResult.innerHTML = `<div class="dictionary-empty">請先在上方勾選卡片類型，並選出本場要使用的卡。</div>`;
-    return;
-  }
-
-  dictionaryResult.innerHTML = `
-    <div class="dictionary-result-head">
-      <strong>${saved ? "已儲存本場" : "本場組合"}</strong>
-      <span>${cards.map((card) => card.deckLabel).join(" × ")}</span>
-    </div>
-    <div class="dictionary-result-grid">
-      ${cards.map((card) => cardMarkup(card, "dictionary-drawn-card")).join("")}
-    </div>
-  `;
-}
-
-function saveDictionaryRound() {
-  renderDictionaryResult(selectedDictionaryCards(), true);
-}
-
 const imageEditor = window.DebateVisionImageEditor.create({
   cardGrid,
   defaultLayout: DEFAULT_IMAGE_LAYOUT,
@@ -1746,21 +799,226 @@ const cardView = window.DebateVisionCards.create({
   isEditMode: EDIT_MODE
 });
 const { cardMarkup, tokenIconMarkup, tokenMarkup } = cardView;
-
-function openMobileArtPreview(card) {
-  if (!mobileArtModal || !mobileArtPreview || !card) return;
-  const image = imageService.imageForCard(card);
-  if (!image) return;
-  mobileArtModalTitle.textContent = card.name;
-  mobileArtPreview.innerHTML = `<img src="${image}" alt="${card.name} 全圖" ${imageService.managedAttributes(image, imageService.fallbackForCard(card))} />`;
-  mobileArtModal.hidden = false;
-}
-
-function closeMobileArtPreview() {
-  if (!mobileArtModal) return;
-  mobileArtModal.hidden = true;
-  if (mobileArtPreview) mobileArtPreview.innerHTML = "";
-}
+const mobileModals = window.DebateVisionMobileModals.create({
+  artModal: mobileArtModal,
+  artPreview: mobileArtPreview,
+  artTitle: mobileArtModalTitle,
+  cardKey,
+  cardList: mobileCardModalList,
+  cardModal: mobileCardModal,
+  cardTitle: mobileCardModalTitle,
+  cardsForDeck: mobileDeckCards,
+  deckTarget: mobileDeckTarget,
+  decks,
+  imageService,
+  raritiesFrom,
+  rarityDisplayName,
+  selectedKeysForDeck,
+  tokenIconMarkup
+});
+const {
+  closeCardModal: closeMobileCardModal,
+  openArt: openMobileArtPreview,
+  openCardModal: openMobileCardModal,
+  renderCardModal: renderMobileCardModal
+} = mobileModals;
+const mobileDashboard = window.DebateVisionMobileDashboard.create({
+  availableDeckIdsForMode,
+  cardsFrom,
+  dashboard: mobileSurvivalDashboard,
+  deckTone,
+  decks,
+  getActiveLibrary: () => activeLibrary,
+  getActiveMode: () => activeMode,
+  getActiveSecondaryLibrary: () => activeSecondaryLibrary,
+  getDrawCount: () => Number(drawCount.value) || 1,
+  getImportanceSelection: () => importanceState.selectedDecks,
+  getMetaphorState: () => metaphorState,
+  getSalesState: () => salesState,
+  getSummonSelection: () => summonState.categorySelection,
+  getSurvivalState: () => survivalState,
+  getSurvivalResultState: () => survivalResultState,
+  importanceAvailableDeckIds,
+  metaphorVariantLabel,
+  modeStatusText,
+  primaryVariantDeckIds,
+  resultActions: mobileResultActions,
+  salesAudienceDeckIds,
+  selectedCardsFrom,
+  selectedCount,
+  selectedSalesAudienceCards,
+  sharedDeckCover,
+  summonCategories,
+  summonCategoryLabel,
+  uiText,
+  variantLabel
+});
+const {
+  render: renderMobileSurvivalDashboard,
+  renderActions: renderMobileResultActions
+} = mobileDashboard;
+const mobileModeImages = window.DebateVisionMobileModeImages.create({
+  banner: mobileModeBanner,
+  homeGrid: mobileHomeGrid,
+  homeScreen: mobileHomeScreen,
+  imageService,
+  isMobileView: isMobileAppView,
+  modes,
+  uiText
+});
+const { renderHome: renderMobileHome } = mobileModeImages;
+const modeShell = window.DebateVisionModeShell.create({
+  editTargetForMode,
+  elements: {
+    activityMenu,
+    activityMenuPanel,
+    activityMenuToggle,
+    cardDictionaryPanel,
+    controlBand,
+    controlNote,
+    drawButton,
+    libraryBand,
+    mobileModeBanner,
+    mobileModeEmblem,
+    mobileModeRule,
+    mobileModeTitle,
+    mobileModeTrack,
+    modeGrid,
+    playArea,
+    sceneBadge,
+    sceneDescription,
+    sceneEmblem,
+    scenePreview,
+    sceneTitle
+  },
+  getActiveMode: () => activeMode,
+  imageService,
+  imageStyleForTarget,
+  lifecycleFor,
+  mobileModeImages,
+  modes,
+  modeStatusText
+});
+const {
+  renderActivity,
+  renderButtons: renderModeButtons,
+  setMenu: setActivityMenu
+} = modeShell;
+const deckControls = window.DebateVisionDeckControls.create({
+  cardsFrom,
+  deckTone,
+  decks,
+  elements: {
+    controlNote,
+    drawCount,
+    drawCountField,
+    drawCountLabel,
+    fixedPools,
+    primaryDeckField,
+    primaryDeckLabel,
+    secondaryDeckField,
+    secondaryDeckLabel
+  },
+  ensureSalesAudienceDeck,
+  getActiveLibrary: () => activeLibrary,
+  getActiveMode: () => activeMode,
+  getActiveSecondaryLibrary: () => activeSecondaryLibrary,
+  getImportanceSelection: () => importanceState.selectedDecks,
+  getMetaphorState: () => metaphorState,
+  getSalesState: () => salesState,
+  getSummonSelection: () => summonState.categorySelection,
+  getSurvivalState: () => survivalState,
+  importanceActiveDeckIds,
+  metaphorDeckOptions,
+  metaphorVariantLabel,
+  modeStatusText,
+  primaryVariantDeckIds,
+  salesAudienceDeckIds,
+  selectedCount,
+  selectedSalesAudienceCards,
+  sharedDeckCover,
+  summonCategories,
+  summonCategoryLabel,
+  survivalActiveDeckIds,
+  uiText,
+  variantLabel
+});
+const { render: renderDeckControlsView } = deckControls;
+const dictionaryView = window.DebateVisionCardDictionary.create({
+  cardMarkup,
+  cardsFrom,
+  clearButton: clearDictionaryDecks,
+  container: cardDictionary,
+  decks,
+  dictionaryHooks,
+  drawButton: drawDictionaryCards,
+  normalizeCard,
+  orderedDeckIds,
+  resultContainer: dictionaryResult,
+  tokenIconMarkup,
+  uiText
+});
+const reelView = window.DebateVisionReelView.create({
+  container: reel,
+  editTargetForCard,
+  getActiveMode: () => activeMode,
+  getCurrentStageCard: () => drawState.stageCard,
+  imageService,
+  imageStyleForTarget,
+  sharedDeckCover,
+  uiText
+});
+const { render: renderReelCard } = reelView;
+const resultsView = window.DebateVisionResults.create({
+  cardKey,
+  container: cardGrid,
+  cardMarkup
+});
+const survivalResults = window.DebateVisionSurvivalResultController.create({
+  cardKey,
+  getConfig: () => ({
+    activeDeckIds: survivalActiveDeckIds(),
+    counts: { ...survivalState.counts },
+    noEnvironment: survivalState.noEnvironment,
+    worldDeckId: activeSecondaryLibrary
+  }),
+  markDrawn,
+  rememberDraw,
+  renderBattle: (environment, groups, locks) => renderSurvivalBattle(environment, groups, {
+    locks,
+    mobileControls: true
+  }),
+  renderSurvival: (environment, cards, locks) => {
+    drawState.stageCard = environment;
+    renderReelCard(environment);
+    resultsView.survival(environment, cards, locks);
+  },
+  renderUi: renderMobileResultActions,
+  service: survivalResultService,
+  state: survivalResultState
+});
+const secretPlaceView = window.DebateVisionSecretPlaceView.create({
+  cardKey,
+  tokenIconMarkup,
+  uiText
+});
+const secretPlace = window.DebateVisionSecretPlace.create({
+  cardKey,
+  cardsFrom: selectedCardsFrom,
+  container: cardGrid,
+  getActiveDeck: () => activeLibrary,
+  getActiveMode: () => activeMode,
+  getDeckLabel: () => decks[activeLibrary]?.label || activeMode.primaryLabel || "詞庫",
+  rememberAnswer: rememberSecretAnswer,
+  uiText,
+  view: secretPlaceView
+});
+const {
+  cardFromIndex: secretCardFromIndex,
+  refresh: refreshSecretPlaceBoard,
+  render: renderSecretPlace,
+  reset: resetSecretPlaceState
+} = secretPlace;
 
 function findCardByKey(key) {
   for (const deckId of Object.keys(decks)) {
@@ -1777,327 +1035,58 @@ function visibleCards() {
 }
 
 function renderEmptyState() {
-  cardGrid.innerHTML = `<div class="empty-state">${uiText("empty.default", { drawLabel: activeMode.drawLabel })}</div>`;
+  resultsView.empty(uiText("empty.default", { drawLabel: activeMode.drawLabel }));
 }
 
 function renderPoolWarning() {
-  cardGrid.innerHTML = `<div class="empty-state">${uiText("warning.pool")}</div>`;
+  resultsView.empty(uiText("warning.pool"));
   return [];
 }
 
-function cardWithEnvironmentHooks(card, environment) {
-  const environmentName = environment?.name || "無異境";
-  return {
-    ...card,
-    hooks: buildHooks(card.name, card.deckId, card.rarity, {
-      environment: environmentName,
-      environmentName,
-      item: card.deckId === "items" ? card.name : "",
-      itemName: card.deckId === "items" ? card.name : "",
-      profession: card.deckId === "roles" ? card.name : "",
-      professionName: card.deckId === "roles" ? card.name : ""
-    })
-  };
-}
-
-function cardWithSalesNeedHooks(card, need) {
-  const productName = card.name;
-  const needName = need?.name || "本輪需求";
-  return {
-    ...card,
-    hooks: [
-      `說明「${productName}」如何滿足「${needName}」。`,
-      `找出最可能因為「${needName}」而購買「${productName}」的對象。`,
-      `包裝一個讓人願意為「${productName}」付錢的理由。`
-    ]
-  };
-}
-
-function cardWithSalesStoryHooks(card, concept) {
-  const productName = card.name;
-  const conceptName = concept?.name || "";
-  return {
-    ...card,
-    hooks: concept
-      ? [
-        `說一個「${conceptName}的${productName}」故事。`,
-        `說明「${conceptName}」讓「${productName}」變得更有價值的原因。`,
-        `替「${productName}」設計一句能被記住的銷售故事。`
-      ]
-      : [
-        `替「${productName}」說一個有畫面感的故事。`,
-        `說明「${productName}」背後可能代表的情緒、回憶或身份。`,
-        `把「${productName}」包裝成讓人願意購買的選擇。`
-      ]
-  };
-}
-
-function cardWithSalesTargetHooks(card, audience) {
-  const productName = card.name;
-  const audienceName = audience?.name || "本輪目標";
-  return {
-    ...card,
-    hooks: [
-      `說明「${productName}」為什麼適合賣給「${audienceName}」。`,
-      `找出「${audienceName}」可能在意的價格、功能或情緒價值。`,
-      `設計一句能打動「${audienceName}」的銷售主張。`
-    ]
-  };
-}
-
 function renderCombo(environment, cards, label, options = {}) {
-  currentStageCard = environment;
+  drawState.stageCard = environment;
   renderReelCard(environment || {
     name: "無異境",
     lore: "本輪刻意不抽異境，直接用抽到的卡牌思考可行方案。",
     icon: activeMode.icon,
     deckLabel: "本輪設定"
   });
-  const showStageInResults = !options.hideStageInResults;
-  const showStageInDesktopResults = showStageInResults && !options.hideStageInDesktopResults;
-  const stageMarkup = environment && showStageInDesktopResults ? cardMarkup(environment, "environment-card mobile-stage-result") : "";
-  const mobileStageMarkup = environment && showStageInResults ? cardMarkup(environment, "environment-card mobile-stage-banner") : "";
-  cardGrid.innerHTML = `
-    <div class="combo-board">
-      <div class="mobile-stage-lane">${mobileStageMarkup}</div>
-      <div class="combo-results">
-        ${stageMarkup}
-        ${cards.map((card) => cardMarkup(card)).join("")}
-      </div>
-    </div>
-  `;
+  resultsView.combo(environment, cards, options);
 }
 
-function renderSurvivalBattle(environment, groups) {
-  currentStageCard = environment;
+function renderSurvivalBattle(environment, groups, options = {}) {
+  drawState.stageCard = environment;
   renderReelCard(environment);
-  cardGrid.innerHTML = window.DebateVisionSurvivalBattleView.render({ environment, groups, cardMarkup });
+  const environmentCard = {
+    ...environment,
+    hooks: [
+      `指出「${environment.name}」最關鍵的生存限制。`,
+      `比較各組隊伍面對「${environment.name}」時的優勢與風險。`
+    ]
+  };
+  cardGrid.innerHTML = window.DebateVisionSurvivalBattleView.render({
+    environment: environmentCard,
+    groups,
+    cardMarkup,
+    locks: options.locks,
+    showControls: Boolean(options.mobileControls)
+  });
 }
 
 function renderDuel(cards) {
-  cardGrid.innerHTML = `
-    <div class="duel-board">
-      ${cardMarkup(cards[0])}
-      <div class="vs-badge">VS</div>
-      ${cardMarkup(cards[1])}
-    </div>
-  `;
+  resultsView.duel(cards);
 }
 
 function renderMetaphorCompass(concepts, relation) {
   const [left, right] = concepts;
-  currentMetaphorCards = { prefix: left, relation, suffix: right };
-  const guideTitle = metaphorVariant === "concrete"
+  metaphorState.currentCards = { prefix: left, relation, suffix: right };
+  const guideTitle = metaphorState.variant === "concrete"
     ? `請解釋：人生為什麼「${relation.name}${right.name}」？`
     : `請解釋：為什麼「${left.name}${relation.name}${right.name}」可以成立？`;
-  const guideBody = metaphorVariant === "concrete"
+  const guideBody = metaphorState.variant === "concrete"
     ? "可以先找相似點，再提出一個生活例子，最後補充這個比喻有哪些限制。"
     : "可以先重新定義兩個概念，再提出一個具體例子，最後回應可能的反例。";
-  cardGrid.innerHTML = `
-    <div class="metaphor-board">
-      <article class="metaphor-sentence">
-        <span>${left.name}</span>
-        <strong>${relation.name}</strong>
-        <span>${right.name}</span>
-      </article>
-      <div class="metaphor-guide">
-        <p>${guideTitle}</p>
-        <p>${guideBody}</p>
-      </div>
-      <div class="metaphor-cards">
-        ${cardMarkup(left)}
-        ${cardMarkup(relation, "relation-card")}
-        ${cardMarkup(right)}
-      </div>
-    </div>
-  `;
-}
-
-function renderSecretPlace(card, revealed = false) {
-  secretRevealed = revealed;
-  const places = selectedCardsFrom(activeLibrary);
-  const deckLabel = decks[activeLibrary]?.label || activeMode.primaryLabel || "詞庫";
-  if (!revealed) card = secretCardFromIndex(secretAnswerIndex);
-  lastSecretCard = card || null;
-
-  if (revealed && card) {
-    rememberSecretAnswer(card);
-    cardGrid.innerHTML = `
-      <div class="secret-board is-revealed">
-        <div class="secret-banner">
-          <p class="eyebrow">${uiText("secret.result.eyebrow")}</p>
-          <h2>${uiText("secret.result.title", { name: card.name })}</h2>
-          <p>${uiText("secret.result.body")}</p>
-          <button class="reveal-action restart-action" data-restart-secret type="button">${uiText("secret.restart")}</button>
-        </div>
-        <div class="secret-place-options">
-          ${placeOptionsMarkup(card, true, places)}
-        </div>
-      </div>
-    `;
-    bindSecretPlaceOptions(card);
-    return;
-  }
-
-  const total = places.length;
-  const chosenNumber = Number(secretAnswerIndex);
-  const hasValidAnswer = Number.isInteger(chosenNumber) && chosenNumber >= 1 && chosenNumber <= total;
-  const statusText = hasValidAnswer
-    ? uiText("secret.status.set")
-    : uiText("secret.status.prompt", { total: total || 0 });
-
-  cardGrid.innerHTML = `
-    <div class="secret-board">
-      <div class="secret-banner">
-        <p class="eyebrow">${uiText("secret.setup.eyebrow")}</p>
-        <h2>${uiText("secret.setup.title")}</h2>
-        <p>${uiText("secret.setup.body", { total, deckLabel })}</p>
-        <div class="secret-teacher-panel">
-          <label class="secret-answer-field">
-            <span>${uiText("secret.answer.label")}</span>
-            <input
-              id="secretAnswerIndex"
-              type="${secretShowAnswerNumber ? "text" : "password"}"
-              inputmode="numeric"
-              pattern="[0-9]*"
-              min="1"
-              max="${total}"
-              value="${secretAnswerIndex}"
-              placeholder="1-${total || 0}"
-              autocomplete="off"
-            />
-          </label>
-          <label class="secret-show-toggle">
-            <input id="secretShowAnswerNumber" type="checkbox" ${secretShowAnswerNumber ? "checked" : ""} />
-            <span>${uiText("secret.showNumber")}</span>
-          </label>
-          <p class="secret-answer-status" id="secretAnswerStatus">${statusText}</p>
-        </div>
-        <button class="reveal-action" data-reveal-secret type="button" ${hasValidAnswer ? "" : "disabled"}>${uiText("secret.reveal")}</button>
-      </div>
-      <div class="secret-place-options">
-        ${placeOptionsMarkup(card, false, places)}
-      </div>
-    </div>
-  `;
-
-  bindSecretPlaceOptions(card);
-  bindSecretAnswerControls();
-}
-
-function placeOptionsMarkup(answerCard, revealed, places = selectedCardsFrom(activeLibrary)) {
-  return places.map((place, index) => {
-    const isAnswer = answerCard && cardKey(place) === cardKey(answerCard);
-    const stateClass = [
-      revealed && isAnswer ? "is-correct" : "",
-    ].filter(Boolean).join(" ");
-    const stateText = revealed && isAnswer
-      ? `<span>${uiText("secret.correct")}</span>`
-      : "";
-    return `
-      <button class="secret-place-option ${stateClass}" data-card-key="${cardKey(place)}" type="button">
-        <b class="secret-place-number">${index + 1}</b>
-        ${tokenIconMarkup(place)}
-        <strong>${place.name}</strong>
-        ${stateText}
-      </button>
-    `;
-  }).join("");
-}
-
-function secretCardFromIndex(indexValue) {
-  const places = selectedCardsFrom(activeLibrary);
-  const index = Number(indexValue);
-  if (!Number.isInteger(index) || index < 1 || index > places.length) return null;
-  return places[index - 1];
-}
-
-function updateSecretAnswerState() {
-  const input = cardGrid.querySelector("#secretAnswerIndex");
-  const status = cardGrid.querySelector("#secretAnswerStatus");
-  const revealButton = cardGrid.querySelector("[data-reveal-secret]");
-  if (!input) return;
-
-  secretAnswerIndex = input.value.replace(/[^\d]/g, "");
-  if (input.value !== secretAnswerIndex) input.value = secretAnswerIndex;
-  lastSecretCard = secretCardFromIndex(secretAnswerIndex);
-  secretRevealed = false;
-
-  const total = selectedCardsFrom(activeLibrary).length;
-  if (lastSecretCard) {
-    status.textContent = uiText("secret.status.set");
-    revealButton.disabled = false;
-    return;
-  }
-
-  status.textContent = uiText("secret.status.prompt", { total: total || 0 });
-  revealButton.disabled = true;
-}
-
-function bindSecretAnswerControls() {
-  const input = cardGrid.querySelector("#secretAnswerIndex");
-  const showToggle = cardGrid.querySelector("#secretShowAnswerNumber");
-  if (!input) return;
-
-  input.addEventListener("input", updateSecretAnswerState);
-  showToggle?.addEventListener("change", () => {
-    secretShowAnswerNumber = showToggle.checked;
-    input.type = secretShowAnswerNumber ? "text" : "password";
-    input.focus();
-  });
-}
-
-function bindSecretPlaceOptions(answerCard) {
-  const options = cardGrid.querySelector(".secret-place-options");
-  if (!options) return;
-
-  options.addEventListener("click", (event) => {
-    const option = event.target.closest(".secret-place-option");
-    if (!option || option.disabled) return;
-
-    if (!lastSecretCard) {
-      const status = cardGrid.querySelector("#secretAnswerStatus");
-      if (status) status.textContent = uiText("secret.status.needAnswer");
-      return;
-    }
-
-    if (option.dataset.cardKey === cardKey(lastSecretCard)) {
-      renderSecretPlace(lastSecretCard, true);
-      return;
-    }
-
-    option.classList.add("is-wrong");
-    if (!option.querySelector("span")) option.insertAdjacentHTML("beforeend", `<span>${uiText("secret.wrong")}</span>`);
-  });
-
-  const revealButton = cardGrid.querySelector("[data-reveal-secret]");
-  revealButton?.addEventListener("click", () => {
-    updateSecretAnswerState();
-    if (lastSecretCard) renderSecretPlace(lastSecretCard, true);
-  });
-
-  const restartButton = cardGrid.querySelector("[data-restart-secret]");
-  restartButton?.addEventListener("click", restartSecretPlaceRound);
-}
-
-function restartSecretPlaceRound() {
-  secretAnswerIndex = "";
-  secretShowAnswerNumber = false;
-  secretRevealed = false;
-  lastSecretCard = null;
-  renderSecretPlace(null, false);
-}
-
-function resetSecretPlaceState() {
-  if (activeMode.cardMode !== "secretPlace") return;
-  secretAnswerIndex = "";
-  secretRevealed = false;
-  lastSecretCard = null;
-}
-
-function refreshSecretPlaceBoard() {
-  if (activeMode.cardMode !== "secretPlace") return;
-  renderSecretPlace(lastSecretCard, secretRevealed);
+  resultsView.metaphor({ left, relation, right, guideTitle, guideBody });
 }
 
 function createModeContext(count = activeMode.fixedCount || Math.max(1, Math.min(6, Number(drawCount.value) || 1))) {
@@ -2108,31 +1097,31 @@ function createModeContext(count = activeMode.fixedCount || Math.max(1, Math.min
     get activeSecondaryLibrary() { return activeSecondaryLibrary; },
     decks,
     get drawCountValue() { return Number(drawCount.value) || 1; },
-    get currentStageCard() { return currentStageCard; },
-    set currentStageCard(value) { currentStageCard = value; },
-    get lastSecretCard() { return lastSecretCard; },
-    set lastSecretCard(value) { lastSecretCard = value; },
-    get secretAnswerIndex() { return secretAnswerIndex; },
-    get secretRevealed() { return secretRevealed; },
-    set secretRevealed(value) { secretRevealed = value; },
-    get salesVariant() { return salesVariant; },
-    get salesNoConcept() { return salesNoConcept; },
-    get survivalVariant() { return survivalVariant; },
-    get survivalGroupCount() { return survivalGroupCount; },
-    set survivalGroupCount(value) { survivalGroupCount = value; },
-    get survivalItemCount() { return survivalItemCount; },
-    get survivalRoleCount() { return survivalRoleCount; },
-    get survivalCreatureCount() { return survivalCreatureCount; },
-    get survivalAlienCount() { return survivalAlienCount; },
-    get survivalPowerCount() { return survivalPowerCount; },
-    get survivalSpecialistCount() { return survivalSpecialistCount; },
-    get lockEnvironment() { return lockEnvironment; },
-    get noEnvironment() { return noEnvironment; },
-    get metaphorVariant() { return metaphorVariant; },
-    get metaphorPrefixDeck() { return metaphorPrefixDeck; },
-    get metaphorSuffixDeck() { return metaphorSuffixDeck; },
-    get metaphorLocks() { return metaphorLocks; },
-    get currentMetaphorCards() { return currentMetaphorCards; },
+    get currentStageCard() { return drawState.stageCard; },
+    set currentStageCard(value) { drawState.stageCard = value; },
+    get lastSecretCard() { return secretPlace.lastCard; },
+    set lastSecretCard(value) { secretPlace.lastCard = value; },
+    get secretAnswerIndex() { return secretPlace.answerIndex; },
+    get secretRevealed() { return secretPlace.revealed; },
+    set secretRevealed(value) { secretPlace.revealed = value; },
+    get salesVariant() { return salesState.variant; },
+    get salesNoConcept() { return salesState.noConcept; },
+    get survivalVariant() { return survivalState.variant; },
+    get survivalGroupCount() { return survivalState.groupCount; },
+    set survivalGroupCount(value) { survivalState.groupCount = value; },
+    get survivalItemCount() { return survivalState.counts.items; },
+    get survivalRoleCount() { return survivalState.counts.roles; },
+    get survivalCreatureCount() { return survivalState.counts.creatures; },
+    get survivalAlienCount() { return survivalState.counts.aliens; },
+    get survivalPowerCount() { return survivalState.counts.powers; },
+    get survivalSpecialistCount() { return survivalState.counts.specialists; },
+    get lockEnvironment() { return survivalState.lockEnvironment; },
+    get noEnvironment() { return survivalState.noEnvironment; },
+    get metaphorVariant() { return metaphorState.variant; },
+    get metaphorPrefixDeck() { return metaphorState.prefixDeck; },
+    get metaphorSuffixDeck() { return metaphorState.suffixDeck; },
+    get metaphorLocks() { return metaphorState.locks; },
+    get currentMetaphorCards() { return metaphorState.currentCards; },
     cardGrid,
     buildHooks,
     cardKey,
@@ -2145,6 +1134,7 @@ function createModeContext(count = activeMode.fixedCount || Math.max(1, Math.min
     fixedMetaphorRelationCard,
     importanceActiveDeckIds,
     markDrawn,
+    drawSurvivalGroups: survivalResultService.drawGroups,
     pickFrom,
     pickFromAvailable,
     pickFromPool,
@@ -2153,7 +1143,8 @@ function createModeContext(count = activeMode.fixedCount || Math.max(1, Math.min
     renderMetaphorCompass,
     renderPoolWarning,
     renderSecretPlace,
-    renderSurvivalBattle,
+    startSurvivalBattle: survivalResults.startBattle,
+    startSurvivalResult: survivalResults.startSurvival,
     secretCardFromIndex,
     selectedCardsFrom,
     selectedSalesAudienceCards,
@@ -2182,8 +1173,8 @@ function reelPoolForActiveMode() {
 
 function shouldSkipReelAnimation() {
   return activeMode.cardMode === "itemEnvironment"
-    && lockEnvironment
-    && currentStageCard?.deckId === activeSecondaryLibrary;
+    && survivalState.lockEnvironment
+    && drawState.stageCard?.deckId === activeSecondaryLibrary;
 }
 
 function finishDraw(selected) {
@@ -2192,14 +1183,14 @@ function finishDraw(selected) {
   } else {
     rememberDraw(selected);
     const first = selected[0];
-    if (activeMode.cardMode === "secretPlace") renderReelCard(currentStageCard);
+    if (activeMode.cardMode === "secretPlace") renderReelCard(drawState.stageCard);
     else if (activeMode.cardMode === "salesPitch") renderReelCard(first);
     else if (activeMode.cardMode === "metaphorCompass") renderReelCard(first);
-    else if (shouldSkipReelAnimation()) renderReelCard(currentStageCard);
+    else if (shouldSkipReelAnimation()) renderReelCard(drawState.stageCard);
     else if (!activeSecondaryLibrary) renderReelCard(first);
   }
   reel.classList.remove("is-spinning");
-  isDrawing = false;
+  drawState.drawing = false;
   drawButton.disabled = false;
   if (selected.length && activeMode.cardMode !== "secretPlace" && activeMode.cardMode !== "cardDictionary" && isMobileAppView()) {
     document.body.classList.add("has-mobile-draw-result");
@@ -2209,9 +1200,9 @@ function finishDraw(selected) {
 }
 
 function spinDraw() {
-  if (isDrawing) return;
+  if (drawState.drawing) return;
 
-  isDrawing = true;
+  drawState.drawing = true;
   drawButton.disabled = true;
 
   if (shouldSkipReelAnimation()) {
@@ -2239,8 +1230,8 @@ function spinDraw() {
   }, 1000);
 }
 
-function setMode(modeId) {
-  document.body.classList.remove("has-mobile-home");
+function setMode(modeId, options = {}) {
+  if (!options.preserveMobileHome) document.body.classList.remove("has-mobile-home");
   document.body.classList.remove("has-mobile-draw-result");
   setMobileHistoryVisible(false);
   closeMobileCardModal();
@@ -2248,66 +1239,43 @@ function setMode(modeId) {
   activeLibrary = activeMode.primaryDeck;
   activeSecondaryLibrary = activeMode.secondaryDeck || "";
   activePreview = activeMode.cardMode === "salesPitch" ? activeMode.primaryDeck : activeMode.secondaryDeck || activeMode.primaryDeck;
-  lastSecretCard = null;
-  currentStageCard = null;
-  secretRevealed = false;
-  secretAnswerIndex = "";
-  secretShowAnswerNumber = false;
-  salesVariant = "supply";
-  salesNoConcept = false;
-  salesAudienceDeck = defaultSalesAudienceDeck();
-  summonCategorySelection = defaultSummonCategorySelection(activeMode);
-  survivalVariant = "survival";
-  survivalDeckSelection = new Set(["items"]);
-  survivalGroupCount = 3;
-  survivalItemCount = 1;
-  survivalRoleCount = 1;
-  survivalCreatureCount = 1;
-  survivalAlienCount = 1;
-  survivalPowerCount = 1;
-  survivalSpecialistCount = 1;
-  lockEnvironment = false;
-  noEnvironment = false;
+  secretPlace.clear();
+  drawState.stageCard = null;
+  survivalResults.clear();
+  salesState.variant = "supply";
+  salesState.noConcept = false;
+  salesState.audienceDeck = defaultSalesAudienceDeck();
+  summonState.categorySelection = defaultSummonCategorySelection(activeMode);
+  survivalState.variant = "survival";
+  survivalState.deckSelection = new Set(["items"]);
+  survivalState.groupCount = 3;
+  survivalState.counts = {
+    items: 1,
+    roles: 1,
+    creatures: 1,
+    aliens: 1,
+    powers: 1,
+    specialists: 1
+  };
+  survivalState.lockEnvironment = false;
+  survivalState.noEnvironment = false;
   resetImportanceDeckSelection(activeMode);
-  metaphorVariant = "concrete";
-  metaphorPrefixDeck = "";
-  metaphorSuffixDeck = activeMode.metaphorConcreteDecks?.[0] || "items";
-  metaphorLocks = { prefix: true, relation: true, suffix: false };
+  metaphorState.variant = "concrete";
+  metaphorState.prefixDeck = "";
+  metaphorState.suffixDeck = activeMode.metaphorConcreteDecks?.[0] || "items";
+  metaphorState.locks = { prefix: true, relation: true, suffix: false };
   if (activeMode.cardMode === "metaphorCompass") syncMetaphorVariantDecks();
-  currentMetaphorCards = null;
+  metaphorState.currentCards = null;
   resetEditSelection();
   for (const deckId of activeDeckIds()) ensureDeckSelection(deckId);
-  renderAll();
-  if (activeMode.cardMode === "secretPlace") renderSecretPlace(null, false);
-  else if (activeMode.cardMode === "cardDictionary") renderDictionaryResult([]);
-  else renderEmptyState();
-  updateEditPanel();
+  if (!options.deferRender) {
+    renderAll();
+    if (activeMode.cardMode === "secretPlace") renderSecretPlace(null, false);
+    else if (activeMode.cardMode === "cardDictionary") dictionaryView.renderResult([]);
+    else renderEmptyState();
+    updateEditPanel();
+  }
   setActivityMenu(false);
-}
-
-function renderMobileHome() {
-  if (!mobileHomeGrid) return;
-  mobileHomeGrid.innerHTML = modes.map((mode) => `
-    <button
-      class="mobile-home-card"
-      type="button"
-      data-mobile-home-mode="${mode.id}"
-      style="--home-card-image: url('${(mode.image || "").replace("../", "/")}');"
-    >
-      <span class="mobile-home-card-icon">${mode.icon}</span>
-      <span class="mobile-home-card-copy">
-        <strong>${mode.title}</strong>
-        <small>${mode.menuLabel || mode.track}</small>
-      </span>
-      <b aria-hidden="true">›</b>
-    </button>
-  `).join("");
-  const eyebrow = mobileHomeScreen?.querySelector("[data-mobile-home-eyebrow]");
-  const title = mobileHomeScreen?.querySelector("[data-mobile-home-title]");
-  const subtitle = mobileHomeScreen?.querySelector("[data-mobile-home-subtitle]");
-  if (eyebrow) eyebrow.textContent = uiText("mobile.home.eyebrow");
-  if (title) title.textContent = uiText("mobile.home.title");
-  if (subtitle) subtitle.textContent = uiText("mobile.home.subtitle");
 }
 
 function showMobileHome() {
@@ -2317,20 +1285,32 @@ function showMobileHome() {
   setMobileHistoryVisible(false);
   closeMobileCardModal();
   setActivityMenu(false);
+  modeGrid.replaceChildren();
+  fixedPools.replaceChildren();
+  mobileSurvivalDashboard.replaceChildren();
+  scenePreview?.querySelector(".scene-preview-image")?.remove();
   window.scrollTo({ top: 0 });
 }
 
 function renderAll() {
-  renderModeButtons();
-  renderActivity();
-  renderDeckControls();
+  const mobileView = isMobileAppView();
+  if (mobileView) {
+    modeShell.renderMenu();
+    renderActivity({ skipDesktopVisuals: true });
+  } else {
+    renderModeButtons();
+    renderActivity();
+    renderDeckControlsView();
+  }
   renderMobileSurvivalDashboard();
   renderMobileResultActions();
-  renderLibraryTools();
-  renderTokenCloud();
+  if (!mobileView) {
+    renderLibraryTools();
+    renderTokenCloud();
+  }
   renderDrawHistory();
-  renderCardDictionary();
-  if (!isDrawing) renderReelCard();
+  dictionaryView.render();
+  if (!drawState.drawing) renderReelCard();
 }
 
 function handleModeClick(event) {
@@ -2341,7 +1321,7 @@ function handleModeClick(event) {
 
 modeGrid.addEventListener("click", handleModeClick);
 activityMenuToggle?.addEventListener("click", () => {
-  setActivityMenu(!activityMenuOpen);
+  modeShell.toggleMenu();
 });
 
 activityMenu?.addEventListener("click", (event) => {
@@ -2355,13 +1335,13 @@ activityMenu?.addEventListener("click", (event) => {
 });
 
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && activityMenuOpen) setActivityMenu(false);
+  if (event.key === "Escape" && modeShell.isMenuOpen()) setActivityMenu(false);
 });
 
 drawButton.addEventListener("click", spinDraw);
 drawCount.addEventListener("input", () => {
-  if (activeMode.cardMode !== "itemEnvironment" || survivalVariant !== "battle") return;
-  survivalGroupCount = Math.max(1, Math.min(8, Number(drawCount.value) || 1));
+  if (activeMode.cardMode !== "itemEnvironment" || survivalState.variant !== "battle") return;
+  survivalState.groupCount = Math.max(1, Math.min(8, Number(drawCount.value) || 1));
 });
 
 window.DebateVisionMobileApi = {
@@ -2382,35 +1362,36 @@ window.DebateVisionMobileApi = {
   get activePreview() { return activePreview; },
   set activePreview(value) { activePreview = value; },
   get cardGrid() { return cardGrid; },
-  get currentStageCard() { return currentStageCard; },
-  set currentStageCard(value) { currentStageCard = value; },
+  get currentStageCard() { return drawState.stageCard; },
+  set currentStageCard(value) { drawState.stageCard = value; },
   get drawCount() { return drawCount; },
-  get drawHistoryByMode() { return drawHistoryByMode; },
-  get lockEnvironment() { return lockEnvironment; },
-  set lockEnvironment(value) { lockEnvironment = value; },
-  get metaphorVariant() { return metaphorVariant; },
-  set metaphorVariant(value) { metaphorVariant = value; },
-  set currentMetaphorCards(value) { currentMetaphorCards = value; },
-  get mobileEditingDeck() { return uiState.mobileEditingDeck; },
-  get noEnvironment() { return noEnvironment; },
-  set noEnvironment(value) { noEnvironment = value; },
-  get salesAudienceDeck() { return salesAudienceDeck; },
-  set salesAudienceDeck(value) { salesAudienceDeck = value; },
-  get salesNoConcept() { return salesNoConcept; },
-  set salesNoConcept(value) { salesNoConcept = value; },
-  get salesVariant() { return salesVariant; },
-  set salesVariant(value) { salesVariant = value; },
-  get selectedImportanceDecks() { return selectedImportanceDecks; },
-  get summonCategorySelection() { return summonCategorySelection; },
-  get survivalDeckSelection() { return survivalDeckSelection; },
-  get survivalGroupCount() { return survivalGroupCount; },
-  set survivalGroupCount(value) { survivalGroupCount = value; },
-  get survivalVariant() { return survivalVariant; },
-  set survivalVariant(value) { survivalVariant = value; },
+  get lockEnvironment() { return survivalState.lockEnvironment; },
+  set lockEnvironment(value) { survivalState.lockEnvironment = value; },
+  get metaphorVariant() { return metaphorState.variant; },
+  set metaphorVariant(value) { metaphorState.variant = value; },
+  set currentMetaphorCards(value) { metaphorState.currentCards = value; },
+  get mobileEditingDeck() { return mobileModals.editingDeck; },
+  get noEnvironment() { return survivalState.noEnvironment; },
+  set noEnvironment(value) { survivalState.noEnvironment = value; },
+  get salesAudienceDeck() { return salesState.audienceDeck; },
+  set salesAudienceDeck(value) { salesState.audienceDeck = value; },
+  get salesNoConcept() { return salesState.noConcept; },
+  set salesNoConcept(value) { salesState.noConcept = value; },
+  get salesVariant() { return salesState.variant; },
+  set salesVariant(value) { salesState.variant = value; },
+  get selectedImportanceDecks() { return importanceState.selectedDecks; },
+  get summonCategorySelection() { return summonState.categorySelection; },
+  get survivalDeckSelection() { return survivalState.deckSelection; },
+  get survivalGroupCount() { return survivalState.groupCount; },
+  set survivalGroupCount(value) { survivalState.groupCount = value; },
+  get survivalVariant() { return survivalState.variant; },
+  set survivalVariant(value) { survivalState.variant = value; },
   cardKey,
   cardMarkup,
   cardsFromHistoryEntry,
   closeMobileCardModal,
+  clearSurvivalResult: survivalResults.clear,
+  exchangeSurvivalResources: survivalResults.exchange,
   ensureSalesAudienceDeck,
   historyScope,
   isMobileAppView,
@@ -2424,6 +1405,7 @@ window.DebateVisionMobileApi = {
   renderEmptyState,
   renderMobileCardModal,
   renderReelCard,
+  rerollSurvivalGroup: survivalResults.rerollGroup,
   restoreHistoryEntry,
   resetDeckSelectionToDefault,
   selectedKeysForDeck,
@@ -2435,7 +1417,8 @@ window.DebateVisionMobileApi = {
   showMobileSetup,
   spinDraw,
   survivalCountValue,
-  syncMetaphorVariantDecks
+  syncMetaphorVariantDecks,
+  toggleSurvivalResultLock: survivalResults.toggleLock
 };
 
 libraryTools.addEventListener("click", (event) => {
@@ -2454,10 +1437,7 @@ function handleHistoryItemOpen(item, options = {}) {
   if (!item) return;
   const restored = restoreHistoryEntry(item.dataset.historyIndex, options);
   if (!restored) return;
-  drawHistory.querySelectorAll(".history-item.is-active").forEach((activeItem) => {
-    activeItem.classList.remove("is-active");
-  });
-  item.classList.add("is-active");
+  historyView.activate(item);
   if (!options.skipScroll) {
     playArea?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
@@ -2481,12 +1461,12 @@ fixedPools.addEventListener("click", (event) => {
 
   const survivalVariantButton = event.target.closest("[data-survival-variant]");
   if (survivalVariantButton) {
-    survivalVariant = survivalVariantButton.dataset.survivalVariant;
+    survivalState.variant = survivalVariantButton.dataset.survivalVariant;
     activeLibrary = "items";
     activePreview = "items";
-    lockEnvironment = false;
-    noEnvironment = false;
-    currentStageCard = null;
+    survivalState.lockEnvironment = false;
+    survivalState.noEnvironment = false;
+    drawState.stageCard = null;
     renderAll();
     renderEmptyState();
     return;
@@ -2494,8 +1474,8 @@ fixedPools.addEventListener("click", (event) => {
 
   const metaphorVariantButton = event.target.closest("[data-metaphor-variant]");
   if (metaphorVariantButton) {
-    metaphorVariant = metaphorVariantButton.dataset.metaphorVariant;
-    currentMetaphorCards = null;
+    metaphorState.variant = metaphorVariantButton.dataset.metaphorVariant;
+    metaphorState.currentCards = null;
     syncMetaphorVariantDecks();
     renderAll();
     renderEmptyState();
@@ -2506,21 +1486,21 @@ fixedPools.addEventListener("click", (event) => {
   if (primaryButton) {
     const deckId = primaryButton.dataset.primaryVariant;
     if (activeMode.cardMode === "importanceDuel") {
-      if (selectedImportanceDecks.has(deckId) && selectedImportanceDecks.size > 1) {
-        selectedImportanceDecks.delete(deckId);
+      if (importanceState.selectedDecks.has(deckId) && importanceState.selectedDecks.size > 1) {
+        importanceState.selectedDecks.delete(deckId);
       } else {
-        selectedImportanceDecks.add(deckId);
+        importanceState.selectedDecks.add(deckId);
       }
       activeLibrary = deckId;
       activePreview = deckId;
       renderAll();
       return;
     }
-    if (activeMode.cardMode === "itemEnvironment" && survivalVariant === "survival") {
-      if (survivalDeckSelection.has(deckId) && survivalDeckSelection.size > 1) {
-        survivalDeckSelection.delete(deckId);
+    if (activeMode.cardMode === "itemEnvironment" && survivalState.variant === "survival") {
+      if (survivalState.deckSelection.has(deckId) && survivalState.deckSelection.size > 1) {
+        survivalState.deckSelection.delete(deckId);
       } else {
-        survivalDeckSelection.add(deckId);
+        survivalState.deckSelection.add(deckId);
       }
       activeLibrary = deckId;
       activePreview = deckId;
@@ -2535,12 +1515,12 @@ fixedPools.addEventListener("click", (event) => {
 
   const button = event.target.closest("[data-sales-variant]");
   if (button) {
-    salesVariant = button.dataset.salesVariant;
-    if (salesVariant === "supply") activePreview = "items";
-    if (salesVariant === "story") activePreview = salesNoConcept ? "items" : "concepts";
-    if (salesVariant === "target") {
+    salesState.variant = button.dataset.salesVariant;
+    if (salesState.variant === "supply") activePreview = "items";
+    if (salesState.variant === "story") activePreview = salesState.noConcept ? "items" : "concepts";
+    if (salesState.variant === "target") {
       ensureSalesAudienceDeck();
-      activePreview = salesAudienceDeck;
+      activePreview = salesState.audienceDeck;
     }
     renderAll();
     renderEmptyState();
@@ -2549,8 +1529,8 @@ fixedPools.addEventListener("click", (event) => {
 
   const audienceButton = event.target.closest("[data-sales-audience]");
   if (audienceButton) {
-    salesAudienceDeck = audienceButton.dataset.salesAudience;
-    activePreview = salesAudienceDeck;
+    salesState.audienceDeck = audienceButton.dataset.salesAudience;
+    activePreview = salesState.audienceDeck;
     renderAll();
     renderEmptyState();
     return;
@@ -2559,10 +1539,10 @@ fixedPools.addEventListener("click", (event) => {
   const summonCategoryButton = event.target.closest("[data-summon-category]");
   if (!summonCategoryButton) return;
   const category = summonCategoryButton.dataset.summonCategory;
-  if (summonCategorySelection.has(category)) {
-    if (summonCategorySelection.size > 1) summonCategorySelection.delete(category);
+  if (summonState.categorySelection.has(category)) {
+    if (summonState.categorySelection.size > 1) summonState.categorySelection.delete(category);
   } else {
-    summonCategorySelection.add(category);
+    summonState.categorySelection.add(category);
   }
   renderAll();
   renderEmptyState();
@@ -2598,7 +1578,7 @@ function handleSurvivalStep(event) {
 
 fixedPools.addEventListener("input", (event) => {
   if (!handleSurvivalCountInput(event)) return;
-  renderDeckControls();
+  renderDeckControlsView();
 });
 
 fixedPools.addEventListener("change", (event) => {
@@ -2610,14 +1590,14 @@ fixedPools.addEventListener("change", (event) => {
   const metaphorDeckSelect = event.target.closest("[data-metaphor-deck]");
   if (metaphorDeckSelect) {
     const part = metaphorDeckSelect.dataset.metaphorDeck;
-    currentMetaphorCards = null;
+    metaphorState.currentCards = null;
     if (part === "prefix") {
-      metaphorPrefixDeck = metaphorDeckSelect.value;
-      metaphorLocks.prefix = false;
+      metaphorState.prefixDeck = metaphorDeckSelect.value;
+      metaphorState.locks.prefix = false;
     }
     if (part === "suffix") {
-      metaphorSuffixDeck = metaphorDeckSelect.value;
-      metaphorLocks.suffix = false;
+      metaphorState.suffixDeck = metaphorDeckSelect.value;
+      metaphorState.locks.suffix = false;
     }
     activePreview = metaphorDeckSelect.value;
     renderAll();
@@ -2626,15 +1606,15 @@ fixedPools.addEventListener("change", (event) => {
 
   const metaphorCheckbox = event.target.closest("[data-lock-metaphor]");
   if (metaphorCheckbox) {
-    metaphorLocks[metaphorCheckbox.dataset.lockMetaphor] = metaphorCheckbox.checked;
+    metaphorState.locks[metaphorCheckbox.dataset.lockMetaphor] = metaphorCheckbox.checked;
     renderAll();
     return;
   }
 
   const salesNoConceptCheckbox = event.target.closest("[data-sales-no-concept]");
   if (salesNoConceptCheckbox) {
-    salesNoConcept = salesNoConceptCheckbox.checked;
-    activePreview = salesNoConcept ? "items" : "concepts";
+    salesState.noConcept = salesNoConceptCheckbox.checked;
+    activePreview = salesState.noConcept ? "items" : "concepts";
     renderAll();
     renderEmptyState();
     return;
@@ -2642,17 +1622,17 @@ fixedPools.addEventListener("change", (event) => {
 
   const checkbox = event.target.closest("[data-lock-environment]");
   if (checkbox) {
-    lockEnvironment = checkbox.checked;
+    survivalState.lockEnvironment = checkbox.checked;
     renderAll();
     return;
   }
 
   const noEnvironmentCheckbox = event.target.closest("[data-no-environment]");
   if (!noEnvironmentCheckbox) return;
-  noEnvironment = noEnvironmentCheckbox.checked;
-  if (noEnvironment) {
-    lockEnvironment = false;
-    currentStageCard = null;
+  survivalState.noEnvironment = noEnvironmentCheckbox.checked;
+  if (survivalState.noEnvironment) {
+    survivalState.lockEnvironment = false;
+    drawState.stageCard = null;
   }
   renderAll();
 });
@@ -2683,54 +1663,6 @@ tokenCloud.addEventListener("click", (event) => {
   refreshSecretPlaceBoard();
 });
 
-cardDictionary?.addEventListener("change", (event) => {
-  const deckCheckbox = event.target.closest("[data-dictionary-deck]");
-  if (deckCheckbox) {
-    const deckId = deckCheckbox.dataset.dictionaryDeck;
-    if (deckCheckbox.checked) {
-      dictionaryDeckSelections.add(deckId);
-      uiState.dictionaryActiveDeck = deckId;
-    } else {
-      dictionaryDeckSelections.delete(deckId);
-      for (const key of [...dictionaryCardSelections]) {
-        if (key.startsWith(`${deckId}::`)) dictionaryCardSelections.delete(key);
-      }
-    }
-    renderCardDictionary();
-    return;
-  }
-
-  const cardCheckbox = event.target.closest("[data-dictionary-card-key]");
-  if (!cardCheckbox) return;
-  if (cardCheckbox.checked) dictionaryCardSelections.add(cardCheckbox.dataset.dictionaryCardKey);
-  else dictionaryCardSelections.delete(cardCheckbox.dataset.dictionaryCardKey);
-  renderCardDictionary();
-});
-
-cardDictionary?.addEventListener("click", (event) => {
-  const previewButton = event.target.closest("[data-dictionary-preview]");
-  if (previewButton) {
-    uiState.dictionaryActiveDeck = previewButton.dataset.dictionaryPreview;
-    renderCardDictionary();
-    return;
-  }
-
-  const removeButton = event.target.closest("[data-remove-dictionary-card]");
-  if (!removeButton) return;
-  dictionaryCardSelections.delete(removeButton.dataset.removeDictionaryCard);
-  renderCardDictionary();
-});
-
-drawDictionaryCards?.addEventListener("click", saveDictionaryRound);
-
-clearDictionaryDecks?.addEventListener("click", () => {
-  dictionaryDeckSelections.clear();
-  dictionaryCardSelections.clear();
-  uiState.dictionaryActiveDeck = "";
-  renderCardDictionary();
-  renderDictionaryResult([]);
-});
-
 cardGrid.addEventListener("click", (event) => {
   const cardElement = event.target.closest(".battle-card[data-card-key]");
   if (!cardElement) return;
@@ -2740,13 +1672,14 @@ cardGrid.addEventListener("click", (event) => {
     return;
   }
   if (isMobileAppView() && event.target.closest(".card-art")) {
+    if (activeMode.cardMode === "itemEnvironment" && survivalResultState.kind) {
+      const deckId = card.deckId === "summons" && card.rarity
+        ? `summons:${card.rarity}`
+        : card.deckId;
+      openMobileCardModal(deckId);
+      return;
+    }
     openMobileArtPreview(card);
-  }
-});
-
-mobileArtModal?.addEventListener("click", (event) => {
-  if (event.target === mobileArtModal || event.target.closest("[data-mobile-art-close]")) {
-    closeMobileArtPreview();
   }
 });
 
@@ -2808,6 +1741,7 @@ function setResetConfirmState(active) {
 
 function resetActiveModeCards() {
   resetModeSelections();
+  survivalResults.clear();
   resetSecretPlaceState();
   setResetConfirmState(false);
   renderAll();
@@ -2830,5 +1764,10 @@ imageService.installFallbackHandler();
 window.DEBATE_CLASS_TIMER?.init();
 renderStaticUiText();
 renderMobileHome();
-setMode(activeMode.id);
-showMobileHome();
+if (isMobileAppView()) {
+  setMode(activeMode.id, { deferRender: true, preserveMobileHome: true });
+  mobileModeImages.renderBanner(activeMode);
+  showMobileHome();
+} else {
+  setMode(activeMode.id);
+}

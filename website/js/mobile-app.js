@@ -170,7 +170,28 @@
   });
 
   resultActions?.addEventListener("click", (event) => {
+    if (event.target.closest("[data-mobile-resource-exchange]")) {
+      api.exchangeSurvivalResources();
+      return;
+    }
     if (event.target.closest("[data-mobile-again]")) api.showMobileSetup();
+  });
+
+  api.cardGrid?.addEventListener("click", (event) => {
+    const lockButton = event.target.closest("[data-mobile-result-lock]");
+    if (lockButton) {
+      event.preventDefault();
+      event.stopPropagation();
+      api.toggleSurvivalResultLock(lockButton.dataset.mobileResultLock);
+      return;
+    }
+
+    const groupButton = event.target.closest("[data-mobile-reroll-group]");
+    if (groupButton) {
+      event.preventDefault();
+      event.stopPropagation();
+      api.rerollSurvivalGroup(groupButton.dataset.mobileRerollGroup);
+    }
   });
 
   cardModal?.addEventListener("click", (event) => {
@@ -230,6 +251,7 @@
     }
     if (target === "menu") api.setActivityMenu(true);
     if (target === "history") {
+      document.body.classList.remove("has-mobile-home");
       document.body.classList.add("has-mobile-draw-result");
       api.setMobileHistoryVisible(true);
       document.querySelector(".history-panel")?.scrollIntoView({ behavior: "smooth", block: "start" });

@@ -280,7 +280,16 @@
 
   function resultActions(state) {
     return state.active
-      ? `<button type="button" class="mobile-again-action" data-mobile-again>${state.againLabel}</button>`
+      ? `
+        ${state.survivalKind === "survival" ? `
+          <button type="button" class="mobile-resource-exchange" data-mobile-resource-exchange>
+            <strong>資源交換</strong>
+            <span>把未鎖定的卡隨機換成新的</span>
+          </button>
+        ` : ""}
+        ${state.notice ? `<p class="mobile-result-notice" role="status" aria-live="polite">${state.notice}</p>` : ""}
+        <button type="button" class="mobile-again-action" data-mobile-again>${state.againLabel}</button>
+      `
       : "";
   }
 

@@ -32,7 +32,11 @@
       return data[scope]?.[Number(index)] || null;
     }
 
-    return Object.freeze({ data, entries, remember, entry });
+    function nextRound(scope) {
+      return Math.max(0, ...entries(scope).map((item) => Number(item.roundNumber) || 0)) + 1;
+    }
+
+    return Object.freeze({ data, entries, remember, entry, nextRound });
   }
 
   window.DEBATE_HISTORY_SERVICE = Object.freeze({ create: createHistoryService });

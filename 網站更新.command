@@ -12,7 +12,7 @@ fi
 
 /usr/bin/env node ./scripts/build-lexicons.mjs
 
-echo "正在檢查程式架構..."
+echo "正在檢查程式架構與所有玩法..."
 if ! /usr/bin/env node ./scripts/check-architecture.mjs; then
   echo ""
   echo "架構檢查失敗，網站資料已產生，但程式需要先依提示拆分。"

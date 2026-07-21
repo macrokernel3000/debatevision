@@ -1,6 +1,6 @@
 # Code Health Audit
 
-Last checked: 2026-07-19
+Last checked: 2026-07-20
 
 這份文件記錄 DebateVision 目前程式碼健康狀態與拆檔方向。它不是玩法規格，而是給之後維護網站程式的人看的整理筆記。
 
@@ -8,13 +8,20 @@ Last checked: 2026-07-19
 
 主要檔案大小：
 
-- `website/js/app.js`：約 3120 行。仍是共用核心，但手機流程、介面文字、歷史、圖片與計時器服務已拆出。
+- `website/js/app.js`：約 1680 行。只保留啟動、四個導航狀態、玩法 context、抽卡生命週期與事件接線。
 - `website/js/core/state.js`：建立分域 state；架構檢查禁止增加 `app.js` 頂層可變狀態。
 - `website/js/core/ui-text.js`：generated 文案、預設文案與文字模板替換。
 - `website/js/services/history-service.js`：最近紀錄儲存、十場上限與回放資料。
+- `website/js/services/history-replay.js`：還原卡片提問、冒險分組與舊紀錄相容。
 - `website/js/services/image-service.js`：圖片選擇、URL、fallback 與 image layout。
 - `website/js/services/timer-service.js`：課堂計時器狀態與持久化。
 - `website/js/components/class-timer.js`：課堂計時器 DOM、事件與顯示。
+- `website/js/components/deck-controls.js`：桌機玩法版本、牌組摘要、鎖定與數量控制。
+- `website/js/components/mode-shell.js`：活動選單、玩法 banner、背景圖與玩法畫面顯示切換。
+- `website/js/components/mobile-dashboard.js`：手機各玩法設定的 view model 與 dashboard。
+- `website/js/components/mobile-modals.js`：手機卡池編輯與卡牌美術預覽。
+- `website/js/components/history.js`、`results.js`、`reel-view.js`：歷史、結果與抽卡機畫面。
+- `website/js/components/card-dictionary.js`、`secret-place.js`：卡片字典與推理解密互動。
 - `website/js/mobile-render.js`：手機版畫面生成入口，負責手機活動設定、卡組格、版本切換區與結果頁操作按鈕的 HTML。
 - `website/js/mobile-app.js`：手機版操作流程入口，負責手機模式切換、卡組選擇、手機 modal、結果頁、底部導覽與紀錄展開。
 - `website/styles/main.css`：約 3000 行。保留桌機、平板、共用元件與非手機專屬樣式。
@@ -42,6 +49,11 @@ Last checked: 2026-07-19
 - 建立 `website/js/core/state.js`，先搬純 UI 暫態與計時器 state；不一次搬動玩法狀態。
 - 抽出 `website/styles/tokens.css`，保持原有視覺數值。
 - 新增 `scripts/check-architecture.mjs`，用行數預算、載入順序與 viewport marker 防止入口檔再次膨脹。
+- 抽離圖片編輯器、歷史、結果、卡片 hooks、卡片字典、抽卡機、推理解密、手機 modal 與手機 dashboard。
+- 抽離桌機牌組控制列與活動 shell，`app.js` 從約 3120 行降到約 1680 行。
+- 頂層 `let` 從 34 個降到 4 個，只保留目前活動與牌組導航。
+- 架構守門已收緊為 `app.js` 1800 行、頂層 `let` 4 個，並禁止已抽離的大型函式回流。
+- 新增歷史回放檢查，確保舊冒險紀錄仍能推回隊伍分組並恢復異境提問。
 
 保留：
 
@@ -78,21 +90,28 @@ website/js/modes/
 
 小修採快速維修模式：先精準搜尋、最小修改、最小檢查；只有資料結構、CSV / JSON 或 generated 輸出受影響時才跑完整詞庫更新。
 
-後續再把 `app.js` 拆成下列區塊：
+目前已形成下列結構：
 
 ```text
 website/js/core/
-├── state.js          # 已完成：分域 state factory；後續逐域搬移
+├── state.js          # 分域 state factory
 ├── decks.js          # 卡池、勾選、抽選工具
-└── ui-text.js        # 已完成：generated 文案、預設文案與文字模板替換
+├── card-hooks.js     # 卡片提問模板
+└── ui-text.js        # generated 文案、預設文案與文字模板替換
 
 website/js/components/
-├── cards.js          # cardMarkup、tokenIconMarkup
-├── reel.js           # 抽卡機與大黑卡
-├── pools.js          # 抽選池、篩選按鈕
-├── activity-menu.js  # 手機活動列表與活動卡
-├── image-editor.js   # ?edit=1 圖片位置編輯器
-└── class-timer.js    # 已完成：浮動計時器
+├── cards.js
+├── deck-controls.js
+├── mode-shell.js
+├── mobile-dashboard.js
+├── mobile-modals.js
+├── history.js
+├── results.js
+├── reel-view.js
+├── card-dictionary.js
+├── secret-place.js
+├── image-editor.js
+└── class-timer.js
 
 website/js/modes/
 ├── survival.js       # 異境求生
@@ -104,12 +123,15 @@ website/js/modes/
 └── dictionary.js     # 卡片字典
 ```
 
-`website/js/app.js` 最後應該只負責：
+`website/js/app.js` 現在負責：
 
 - 讀取 generated data。
 - 初始化狀態。
 - 綁定事件。
-- 呼叫目前玩法的 controller。
+- 建立玩法 context、呼叫目前玩法 controller。
+- 協調抽卡開始／完成與桌機、手機共同結果。
+
+這是合理入口層責任；不要為了追求零行數而把它們搬成新的巨大協調檔。
 
 ### 第二階段：拆 `drawResult()`
 
@@ -164,14 +186,14 @@ website/styles/
 
 CSS 拆檔時要特別小心手機版，不要只在桌機寬度檢查。
 
-## 冗餘觀察
+## 後續觀察
 
 目前比較像冗餘或可整理的地方：
 
-- 多個玩法都有類似的「版本按鈕」、「卡池按鈕」、「鎖定卡片」邏輯，可以抽成共用元件。
-- 卡牌 hooks 目前散在多個函式中，例如異境、銷售、現實召喚都各自做模板替換。未來可以集中成 `buildHooks()` 的設定表。
+- 版本按鈕、卡池按鈕與鎖定卡片已由 `deck-controls.js` 和 `deck-option-cards.js` 共用。
+- 卡牌 hooks 已集中到 `core/card-hooks.js`。
 - 活動卡、手機選單、大黑卡都使用同一批玩法名稱與短句，資料已經往 CSV 集中，之後應繼續維持。
-- 圖片 layout 編輯器已經功能完整，但和主流程放在同一個檔案，適合獨立出去。
+- 圖片 layout 編輯器已獨立到 `components/image-editor.js`。
 
 ## 每次重構後必做檢查
 

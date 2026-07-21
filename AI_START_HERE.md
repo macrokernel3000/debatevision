@@ -67,6 +67,16 @@ node scripts/check-architecture.mjs
 
 這項檢查有行數預算、模組大小、載入順序與桌機／手機邊界保護。檢查失敗時，應把功能放進正確模組，不要直接提高預算，也不要把新程式繼續接在 `app.js` 或 `main.css` 尾端。
 
+目前 `app.js` 的硬上限是 1800 行、頂層 `let` 上限是 4 個。活動 shell、桌機牌組控制、手機 dashboard／modal、歷史、圖片、結果、字典與推理解密都已有專屬模組；任何 AI 都不得把同類函式複製回 `app.js`。若既有元件不適合新功能，新增一個責任清楚的小模組，而不是提高上限。
+
+`check-architecture.mjs` 也會自動執行 `scripts/check-game-modes.mjs`，驗證所有玩法 controller 與主要版本仍能抽出正確卡數。若只想單獨檢查玩法，可以執行：
+
+```text
+node scripts/check-game-modes.mjs
+```
+
+架構檢查也會執行 `scripts/check-history-replay.mjs`，驗證舊冒險紀錄、新分組 metadata 與異境提問能正確回放。
+
 新增可變狀態時，使用 `website/js/core/state.js` 建立分域 state；不要增加 `app.js` 頂層 `let`。歷史、圖片、計時器等跨畫面邏輯放在 `website/js/services/`，元件只處理畫面與事件。
 
 小修採快速維修模式：如果只是刪一句文字、改一個按鈕名稱、微調手機樣式，先用 `rg` 精準搜尋文字或 class，改最小範圍，跑對應的最小檢查即可。不要每次都重跑完整資料流程或重新盤點全專案；只有動到 CSV / JSON / generated 資料時才需要跑詞庫更新。

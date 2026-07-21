@@ -104,6 +104,14 @@
       return mode?.image || mode?.backgroundImage || "";
     }
 
+    function mobileImageForMode(mode, variant = "thumb") {
+      const source = imageForMode(mode);
+      if (!source) return "";
+      const filename = String(source).split("/").pop() || "";
+      const stem = filename.replace(/\.[^.]+$/, "");
+      return `../assets/backgrounds/modes/mobile/${stem}-${variant}.webp`;
+    }
+
     function resolveUrl(image) {
       if (!image) return "";
       try {
@@ -160,6 +168,8 @@
       imageForCard,
       fallbackForCard,
       imageForMode,
+      mobileImageForMode,
+      resolveUrl,
       cssUrl,
       modeCardStyle,
       managedAttributes,

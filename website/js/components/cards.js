@@ -21,7 +21,7 @@
       `;
     }
 
-    function cardMarkup(card, extraClass = "") {
+    function cardMarkup(card, extraClass = "", cardOptions = {}) {
       const layoutStyle = options.imageStyleFor(card);
       const target = options.editTargetForCard(card);
       const selectedTarget = options.getSelectedEditTarget();
@@ -36,9 +36,28 @@
         ? `<img src="${image}" alt="${card.name} 卡圖" ${options.imageService.managedAttributes(image, options.imageService.fallbackForCard(card))} ${imageEditAttributes} />`
         : `<span>${options.iconFor(card)}</span>`;
       const typeText = card.deckId === "items" ? card.deckLabel : `${card.deckLabel} · ${card.rarity || "C"}`;
+      const resultControl = cardOptions.resultControl;
+      const resultControlMarkup = resultControl
+        ? `
+          <div class="mobile-result-card-control">
+            <span>${resultControl.title}</span>
+            <button
+              type="button"
+              class="mobile-result-lock ${resultControl.locked ? "is-locked" : ""}"
+              data-mobile-result-lock="${resultControl.key}"
+              aria-pressed="${resultControl.locked ? "true" : "false"}"
+              aria-label="${resultControl.locked ? `取消鎖定${resultControl.title}` : `鎖定${resultControl.title}`}"
+            >
+              <span aria-hidden="true">${resultControl.locked ? "🔒" : "○"}</span>
+              <b>${resultControl.locked ? "已鎖定" : "鎖定"}</b>
+            </button>
+          </div>
+        `
+        : "";
 
       return `
-        <article class="battle-card ${extraClass} ${isSelected ? "is-edit-selected" : ""}" data-rarity="${card.rarity || "C"}" data-card-key="${options.cardKey(card)}" data-deck-id="${card.deckId}" data-image-id="${card.imageId || ""}">
+        <article class="battle-card ${extraClass} ${resultControl?.locked ? "is-mobile-result-locked" : ""} ${isSelected ? "is-edit-selected" : ""}" data-rarity="${card.rarity || "C"}" data-card-key="${options.cardKey(card)}" data-deck-id="${card.deckId}" data-image-id="${card.imageId || ""}">
+          ${resultControlMarkup}
           <div class="card-title">
             <h3>${card.name}</h3>
             <span class="card-type">${typeText}</span>
