@@ -38,9 +38,12 @@
     if (options.compactSelect) {
       const toggleState = toggleEnabled ? "" : "disabled aria-disabled=\"true\"";
       const cover = deck.cover || {};
+      const toggleLabel = options.singleSelect
+        ? `${deck.selected ? "目前選擇：" : "選擇"}${deck.title}`
+        : `${deck.selected ? "取消" : "選擇"}${deck.title}`;
       return `
         <article class="mobile-deck-card is-compact-select ${deck.selected ? "is-active" : ""}" data-mobile-deck="${deck.deckId}" data-deck-tone="${tone}">
-          <button class="mobile-deck-toggle" type="button" ${toggleAttr}="${toggleValue}" ${toggleState} aria-label="${deck.selected ? "取消" : "選擇"}${deck.title}">
+          <button class="mobile-deck-toggle" type="button" ${toggleAttr}="${toggleValue}" ${toggleState} aria-label="${toggleLabel}" aria-pressed="${deck.selected ? "true" : "false"}">
             ${deck.selected ? "✓" : ""}
           </button>
           <button class="mobile-deck-visual" type="button" data-mobile-edit-deck="${deck.deckId}" aria-label="${mobileText("mobile.common.editPrefix", "編輯")}${deck.title}">
@@ -65,6 +68,58 @@
         ${amountControl}
         <button class="mobile-deck-edit" type="button" data-mobile-edit-deck="${deck.deckId}" aria-label="${mobileText("mobile.common.editPrefix", "編輯")}${deck.title}">✎</button>
       </article>
+    `;
+  }
+
+  function metaphorDeckGroup(label, decks, state, part, extraClass = "") {
+    return `
+      <div class="mobile-metaphor-deck-group ${extraClass}">
+        <span>${label}</span>
+        <div class="mobile-deck-grid mobile-metaphor-side-decks">
+          ${decks.map((deck) => deckCard(deck, {
+            deckTone: state.deckTone,
+            toggleAttr: `data-mobile-metaphor-${part}-deck`,
+            toggleEnabled: true,
+            compactSelect: true,
+            singleSelect: true
+          })).join("")}
+        </div>
+      </div>
+    `;
+  }
+
+  function metaphorDeckLayout(state) {
+    const groups = state.metaphorDecks;
+    if (!groups) return "";
+    if (groups.concrete) {
+      return `
+        <div class="mobile-metaphor-deck-layout is-concrete">
+          <div class="mobile-metaphor-deck-group is-fixed-prefix">
+            <span>固定前綴</span>
+            <div class="mobile-metaphor-fixed-phrase" aria-label="固定前綴：人生就像">
+              <b>人生</b>
+              <strong>就像</strong>
+            </div>
+          </div>
+          ${metaphorDeckGroup("後綴詞", groups.suffix, state, "suffix")}
+        </div>
+      `;
+    }
+    return `
+      <div class="mobile-metaphor-deck-layout">
+        ${metaphorDeckGroup("前綴詞", groups.prefix, state, "prefix")}
+        <div class="mobile-metaphor-deck-group is-relation">
+          <span>介係詞</span>
+          ${deckCard(groups.relation, {
+            deckTone: state.deckTone,
+            toggleAttr: "data-mobile-metaphor-relation-deck",
+            toggleEnabled: false,
+            compactSelect: true,
+            singleSelect: true
+          })}
+        </div>
+        ${metaphorDeckGroup("後綴詞", groups.suffix, state, "suffix")}
+      </div>
     `;
   }
 
@@ -169,7 +224,11 @@
             ? mobileText("mobile.importance.deckNote", "可複選")
             : summonMode
               ? mobileText("mobile.realitySummon.deckNote", "任務固定・召喚複選")
-              : mobileText("mobile.common.fixedCombo", "固定搭配")}</span>
+              : state.cardMode === "metaphorCompass"
+                ? state.metaphorVariant === "concrete"
+                  ? "固定前綴 × 後綴詞"
+                  : "前綴詞 × 介係詞 × 後綴詞"
+                : mobileText("mobile.common.fixedCombo", "固定搭配")}</span>
         </div>
         ${summonMode ? `
           <div class="mobile-survival-deck-layout mobile-summon-deck-layout">
@@ -194,6 +253,8 @@
               </div>
             </div>
           </div>
+        ` : state.cardMode === "metaphorCompass" ? `
+          ${metaphorDeckLayout(state)}
         ` : `
           <div class="mobile-deck-grid">
             ${state.deckCards.map((deck) => deckCard(deck, {

@@ -66,6 +66,21 @@
       return;
     }
 
+    const metaphorPrefixDeckButton = event.target.closest("[data-mobile-metaphor-prefix-deck]");
+    const metaphorSuffixDeckButton = event.target.closest("[data-mobile-metaphor-suffix-deck]");
+    if (metaphorPrefixDeckButton || metaphorSuffixDeckButton) {
+      const deckId = metaphorPrefixDeckButton
+        ? metaphorPrefixDeckButton.dataset.mobileMetaphorPrefixDeck
+        : metaphorSuffixDeckButton.dataset.mobileMetaphorSuffixDeck;
+      if (metaphorPrefixDeckButton) api.metaphorPrefixDeck = deckId;
+      if (metaphorSuffixDeckButton) api.metaphorSuffixDeck = deckId;
+      api.currentMetaphorCards = null;
+      api.activeLibrary = deckId;
+      api.activePreview = deckId;
+      resetMobileActivityView();
+      return;
+    }
+
     const summonCategoryButton = event.target.closest("[data-mobile-summon-category]");
     if (summonCategoryButton) {
       const category = summonCategoryButton.dataset.mobileSummonCategory;

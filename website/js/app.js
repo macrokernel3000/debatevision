@@ -963,6 +963,7 @@ const reelView = window.DebateVisionReelView.create({
   editTargetForCard,
   getActiveMode: () => activeMode,
   getCurrentStageCard: () => drawState.stageCard,
+  getSalesVariant: () => salesState.variant,
   imageService,
   imageStyleForTarget,
   sharedDeckCover,
@@ -1222,12 +1223,12 @@ function spinDraw() {
     const card = reelPool[Math.floor(Math.random() * reelPool.length)];
     if (!card) return;
     renderReelCard(null, card.name);
-  }, 80);
+  }, 60);
 
   window.setTimeout(() => {
     window.clearInterval(spinTimer);
     finishDraw(drawResult());
-  }, 1000);
+  }, 480);
 }
 
 function setMode(modeId, options = {}) {
@@ -1369,6 +1370,10 @@ window.DebateVisionMobileApi = {
   set lockEnvironment(value) { survivalState.lockEnvironment = value; },
   get metaphorVariant() { return metaphorState.variant; },
   set metaphorVariant(value) { metaphorState.variant = value; },
+  get metaphorPrefixDeck() { return metaphorState.prefixDeck; },
+  set metaphorPrefixDeck(value) { metaphorState.prefixDeck = value; },
+  get metaphorSuffixDeck() { return metaphorState.suffixDeck; },
+  set metaphorSuffixDeck(value) { metaphorState.suffixDeck = value; },
   set currentMetaphorCards(value) { metaphorState.currentCards = value; },
   get mobileEditingDeck() { return mobileModals.editingDeck; },
   get noEnvironment() { return survivalState.noEnvironment; },

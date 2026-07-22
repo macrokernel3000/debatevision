@@ -807,6 +807,97 @@
     padding-bottom: 2px;
   }
 
+  .mobile-metaphor-deck-layout {
+    min-width: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 72px minmax(0, 1fr);
+    gap: 7px;
+    align-items: start;
+  }
+
+  .mobile-metaphor-deck-layout.is-concrete {
+    grid-template-columns: 92px minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .mobile-metaphor-deck-group {
+    min-width: 0;
+    display: grid;
+    gap: 6px;
+    align-content: start;
+  }
+
+  .mobile-metaphor-deck-group > span {
+    overflow: hidden;
+    color: var(--muted);
+    font-size: 0.66rem;
+    font-weight: 950;
+    line-height: 1;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .mobile-metaphor-side-decks {
+    gap: 4px;
+    padding: 0 0 3px;
+  }
+
+  .mobile-metaphor-side-decks .mobile-deck-card,
+  .mobile-metaphor-deck-group.is-relation .mobile-deck-card {
+    width: 100%;
+    min-width: 0;
+    flex: 0 0 calc((100% - 4px) / 2);
+  }
+
+  .mobile-metaphor-deck-group.is-relation .mobile-deck-card {
+    flex-basis: 72px;
+  }
+
+  .mobile-metaphor-deck-layout .mobile-deck-visual {
+    grid-template-rows: 60px 24px;
+    min-height: 84px;
+  }
+
+  .mobile-metaphor-deck-layout .mobile-deck-card.is-compact-select {
+    min-height: 84px;
+  }
+
+  .mobile-metaphor-deck-layout .mobile-deck-visual strong {
+    padding: 0 3px;
+    font-size: 0.66rem;
+  }
+
+  .mobile-metaphor-fixed-phrase {
+    min-height: 84px;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    overflow: hidden;
+    border: 1.5px solid color-mix(in srgb, var(--mobile-accent), white 44%);
+    border-radius: 12px;
+    background:
+      radial-gradient(circle at 70% 18%, var(--mobile-accent-soft), transparent 48%),
+      linear-gradient(145deg, #fff, color-mix(in srgb, var(--mobile-accent), white 91%));
+    color: color-mix(in srgb, var(--mobile-accent), black 34%);
+    box-shadow: 0 10px 22px var(--mobile-accent-soft);
+  }
+
+  .mobile-metaphor-fixed-phrase b,
+  .mobile-metaphor-fixed-phrase strong {
+    display: grid;
+    place-items: center;
+  }
+
+  .mobile-metaphor-fixed-phrase b {
+    font-size: 1rem;
+  }
+
+  .mobile-metaphor-fixed-phrase strong {
+    min-height: 26px;
+    background: color-mix(in srgb, var(--mobile-accent), black 8%);
+    color: #fff;
+    font-size: 0.72rem;
+  }
+
   .mobile-deck-card[data-deck-tone="items"] {
     --deck-accent: #c84f45;
     --deck-soft: rgba(200, 79, 69, 0.18);
@@ -999,6 +1090,15 @@
 
   body.has-mobile-draw-result .section-head {
     margin-bottom: 10px;
+  }
+
+  body[data-active-mode="metaphor-compass"].has-mobile-draw-result .metaphor-board {
+    gap: 0;
+  }
+
+  body[data-active-mode="metaphor-compass"].has-mobile-draw-result .metaphor-guide,
+  body[data-active-mode="metaphor-compass"].has-mobile-draw-result .metaphor-cards {
+    display: none;
   }
 
   body.has-mobile-draw-result .combo-results {

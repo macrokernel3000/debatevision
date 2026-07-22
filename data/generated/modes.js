@@ -27,7 +27,7 @@ window.DEBATE_MODES = [
     },
     "drawLabel": "抽出求生組合",
     "cardMode": "itemEnvironment",
-    "description": "求生版：用抽到的道具或職業，在異境中盡力生存。冒險版：選出最適格的探險隊前往異境。",
+    "description": "用抽到的道具或職業盡力生存，或選出最適格的探險隊前往異境。",
     "prompts": [
       [
         "環境限制",
@@ -182,7 +182,7 @@ window.DEBATE_MODES = [
     },
     "drawLabel": "抽出銷售題目",
     "cardMode": "salesPitch",
-    "description": "向我賣出一支筆？快找出需求、產品與故事，把平凡加諸價值，讓他人意識到內在的需求。",
+    "description": "向我賣出一支筆？把產品加諸故事或價值，讓他人意識到內在的需求。",
     "prompts": [
       [
         "需求洞察",

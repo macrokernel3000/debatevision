@@ -5,6 +5,7 @@
       editTargetForCard,
       getActiveMode,
       getCurrentStageCard,
+      getSalesVariant = () => "",
       imageService,
       imageStyleForTarget,
       sharedDeckCover,
@@ -19,10 +20,14 @@
 
     function render(card = getCurrentStageCard(), spinningName = "") {
       const mode = getActiveMode();
+      const salesPitch = mode.cardMode === "salesPitch";
+      const salesTarget = salesPitch && getSalesVariant() === "target";
       const title = spinningName || card?.name || uiText("reel.ready.title");
       const subtitle = card?.lore || readySubtitle();
       const image = imageService.imageForCard(card);
-      const markImage = image || (card?.deckId ? sharedDeckCover(card.deckId).image : "");
+      const deckCover = card?.deckId ? sharedDeckCover(card.deckId).image : "";
+      const fallbackImage = imageService.fallbackForCard(card) || deckCover;
+      const markImage = deckCover || image;
       const target = editTargetForCard(card);
       const style = target ? imageStyleForTarget(target) : "";
       const editAttributes = target
@@ -30,6 +35,8 @@
         : "";
 
       container.classList.toggle("has-scene-image", Boolean(image));
+      container.classList.toggle("is-sales-pitch", salesPitch);
+      container.classList.toggle("is-sales-target", salesTarget);
       container.setAttribute("style", style);
       if (target) {
         container.dataset.editGroup = target.group;
@@ -42,7 +49,7 @@
       }
 
       container.innerHTML = `
-        ${image ? `<img class="reel-scene-image" src="${image}" alt="${title} 場景圖" ${imageService.managedAttributes(image, imageService.fallbackForCard(card))} ${editAttributes} />` : ""}
+        ${image ? `<img class="reel-scene-image" src="${image}" alt="${title} 場景圖" ${imageService.managedAttributes(image, fallbackImage)} ${editAttributes} />` : ""}
         <div class="reel-scene-mark">
           ${markImage ? `<img class="reel-scene-mark-image" src="${markImage}" alt="" aria-hidden="true" ${imageService.managedAttributes(markImage, imageService.fallbackForCard(card))} />` : (card ? mode.icon : "?")}
         </div>

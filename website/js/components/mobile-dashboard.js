@@ -53,9 +53,9 @@
 
     function againLabel() {
       const mode = getActiveMode();
-      return mode.cardMode === "itemEnvironment"
-        ? survivalAgainLabel()
-        : `再次${mode.title}`;
+      if (mode.cardMode === "itemEnvironment") return survivalAgainLabel();
+      if (mode.cardMode === "metaphorCompass") return "再來一場";
+      return `再次${mode.title}`;
     }
 
     function survivalDeckCards() {
@@ -213,6 +213,42 @@
       const sales = getSalesState();
       const metaphor = getMetaphorState();
       const deckCards = genericDeckCards().map((deck) => ({ ...deck, cover: sharedDeckCover(deck.deckId) }));
+      const metaphorDeckTitle = (deckId) => ({
+        items: "道具卡",
+        creatures: "動物卡",
+        concepts: "概念卡",
+        needs: "需求卡",
+        relations: "關係卡"
+      }[deckId] || decks[deckId]?.label || variantLabel(deckId));
+      const metaphorDeck = (deckId, part) => ({
+        deckId,
+        part,
+        title: metaphorDeckTitle(deckId),
+        selected: part === "prefix"
+          ? metaphor.prefixDeck === deckId
+          : part === "suffix"
+            ? metaphor.suffixDeck === deckId
+            : true,
+        cover: sharedDeckCover(deckId)
+      });
+      const metaphorDecks = mode.cardMode === "metaphorCompass"
+        ? {
+            concrete: metaphor.variant === "concrete",
+            prefix: metaphor.variant === "concrete"
+              ? []
+              : (metaphor.variant === "free" ? (mode.metaphorFreeDecks || []) : (mode.metaphorDecks || []))
+                .filter((deckId) => decks[deckId])
+                .map((deckId) => metaphorDeck(deckId, "prefix")),
+            relation: metaphorDeck(getActiveSecondaryLibrary(), "relation"),
+            suffix: (metaphor.variant === "concrete"
+              ? mode.metaphorConcreteDecks || []
+              : metaphor.variant === "free"
+                ? mode.metaphorFreeDecks || []
+                : mode.metaphorDecks || [])
+              .filter((deckId) => decks[deckId])
+              .map((deckId) => metaphorDeck(deckId, "suffix"))
+          }
+        : null;
       const fixedCount = Boolean(mode.fixedCount || mode.cardMode === "metaphorCompass");
       return window.DebateVisionMobileRender.genericDashboard({
         actionLabel: actionLabel(),
@@ -221,6 +257,7 @@
         deckCards,
         deckTone,
         fixedCount,
+        metaphorDecks,
         metaphorVariant: metaphor.variant,
         metaphorVariantLabel,
         salesAudienceDeck: sales.audienceDeck,
