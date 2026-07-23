@@ -64,11 +64,14 @@ website/styles/
 ├── viewport-boundaries.css   # 桌機／手機顯示隔離，必須最後載入
 └── components/
     ├── class-timer.css       # 計時器所有寬度的樣式
+    ├── mobile-modals.css     # 手機卡池編輯與卡牌美術預覽彈窗
     ├── mobile-mode-images.css # 手機活動圖載入狀態
     └── mobile-survival-results.css # 手機鎖定與重抽操作
 ```
 
 ## 新增功能的固定流程
+
+本節只適用於新功能、跨模組修改與重構。單一文字、局部樣式或單一玩法微調，依 `AI_START_HERE.md` 的快速維修路徑處理。
 
 1. 先判斷它是內容、素材、玩法、共用元件、桌機或手機功能。
 2. 優先新增小而完整的模組，不在 `app.js` 或 `main.css` 尾端追加一大段。
@@ -79,11 +82,11 @@ website/styles/
 
    ```bash
    node scripts/check-architecture.mjs
-   node --check website/js/app.js
-   node scripts/build-lexicons.mjs
    ```
 
-7. 依 `docs/Responsive_QA_Checklist.md` 檢查手機、平板、桌機與實際抽卡。
+   只有變更 CSV / JSON / generated 資料時才額外執行 `node scripts/build-lexicons.mjs`；只檢查實際改動的 JavaScript 檔案，不固定重查未修改的 `app.js`。
+
+7. 依 `docs/Responsive_QA_Checklist.md` 檢查受影響裝置與實際操作。只有共用介面、邊界 CSS、新玩法或發布前回歸，才檢查手機、平板與桌機全部尺寸。
 
 ## 自動防線
 

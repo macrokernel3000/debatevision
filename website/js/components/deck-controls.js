@@ -210,7 +210,7 @@
         : "";
       const survivalVariantTools = mode.cardMode === "itemEnvironment"
         ? `
-          <div class="sales-variant-tools is-survival-variant" role="group" aria-label="異境求生版本">
+          <div class="sales-variant-tools is-mode-card-variant is-survival-variant" role="group" aria-label="異境求生版本">
             <button type="button" class="${survival.variant === "survival" ? "is-active" : ""}" data-survival-variant="survival">
               <strong>求生版</strong>
               <span>${uiText("mobile.itemSurvival.survivalDescription")}</span>
@@ -240,10 +240,19 @@
         : "";
       const salesTools = salesMode
         ? `
-          <div class="sales-variant-tools is-sales-variant" role="group" aria-label="銷售密令抽法">
-            <button type="button" class="${sales.variant === "supply" ? "is-active" : ""}" data-sales-variant="supply">供需版</button>
-            <button type="button" class="${sales.variant === "story" ? "is-active" : ""}" data-sales-variant="story">故事版</button>
-            <button type="button" class="${sales.variant === "target" ? "is-active" : ""}" data-sales-variant="target">目標版</button>
+          <div class="sales-variant-tools is-mode-card-variant is-sales-variant" role="group" aria-label="銷售密令抽法">
+            <button type="button" class="${sales.variant === "supply" ? "is-active" : ""}" data-sales-variant="supply">
+              <strong>${uiText("mobile.sales.supplyTitle")}</strong>
+              <span>${uiText("mobile.sales.supplyDescription")}</span>
+            </button>
+            <button type="button" class="${sales.variant === "story" ? "is-active" : ""}" data-sales-variant="story">
+              <strong>${uiText("mobile.sales.storyTitle")}</strong>
+              <span>${uiText("mobile.sales.storyDescription")}</span>
+            </button>
+            <button type="button" class="${sales.variant === "target" ? "is-active" : ""}" data-sales-variant="target">
+              <strong>${uiText("mobile.sales.targetTitle")}</strong>
+              <span>${uiText("mobile.sales.targetDescription")}</span>
+            </button>
           </div>
           ${sales.variant === "story" ? `
             <label class="environment-lock-toggle">
@@ -307,10 +316,11 @@
         : "";
       const metaphorTool = metaphorMode
         ? `
-          <div class="metaphor-variant-tools" role="group" aria-label="隱喻羅盤版本">
+          <div class="metaphor-variant-tools is-mode-card-variant" role="group" aria-label="隱喻羅盤版本">
             ${["concrete", "abstract", "free"].map((variant) => `
               <button type="button" class="${metaphor.variant === variant ? "is-active" : ""}" data-metaphor-variant="${variant}">
-                ${metaphorVariantLabel(variant)}
+                <strong>${metaphorVariantLabel(variant)}</strong>
+                <span>${uiText(`mobile.metaphor.${variant}Description`)}</span>
               </button>
             `).join("")}
           </div>
@@ -337,6 +347,7 @@
       `;
 
       fixedPools.classList.toggle("is-survival-controls", survivalMode);
+      fixedPools.classList.toggle("is-sales-controls", salesMode);
       fixedPools.innerHTML = metaphorMode
         ? `${metaphorTool}${poolSummary}`
         : survivalMode
@@ -347,13 +358,17 @@
             </div>
             <div class="survival-pool-summary">${poolSummary}</div>
           `
+          : salesMode
+            ? `
+              <div class="sales-control-row">${salesTools}</div>
+              <div class="sales-pool-summary">${poolSummary}</div>
+            `
           : `
             ${poolSummary}
             ${survivalVariantTools}
             ${primaryVariantTools}
             ${environmentLockTool}
             ${survivalBattleTools}
-            ${salesTools}
             ${summonCategoryTools}
           `;
     }

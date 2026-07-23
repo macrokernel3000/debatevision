@@ -58,7 +58,7 @@ AI_START_HERE.md
 
 新增功能或完成重構後，必須執行 `node scripts/check-architecture.mjs`。這會檢查大型入口檔的行數預算、模組大小、載入順序與桌機／手機顯示邊界；不要以提高預算代替拆分。
 
-調整畫面或新增玩法後，請依照 `docs/Responsive_QA_Checklist.md` 檢查手機、平板與桌機版，避免只在桌機寬度看起來正常。
+局部畫面修改先檢查目標裝置與一個相鄰邊界。只有新玩法、跨裝置共用介面、顯示邊界變更或發布前回歸，才依 `docs/Responsive_QA_Checklist.md` 完整檢查手機、平板與桌機版。
 
 ## 擴充規則
 

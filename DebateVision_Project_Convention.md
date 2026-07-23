@@ -16,14 +16,9 @@ AI_START_HERE.md
 
 ## 開發前必讀
 
-每次擴充 DebateVision 時，請先讀：
+每次只必讀 `AI_START_HERE.md`。它會依任務類型指向需要的詳細規格。
 
-- `AI_START_HERE.md`
-- `docs/Project_Convention.md`
-- `docs/Icon_Style_Guide.md`
-- `docs/Card_Data_Specification.md`
-- `docs/Game_Mode_Specification.md`
-- `docs/Architecture_Guardrails.md`
+不要在局部 UI、單張圖片或單一卡牌修改時預讀所有規格；只有新玩法、跨模組功能或重構才需要同時讀玩法與架構文件。
 
 ## 目前標準結構
 

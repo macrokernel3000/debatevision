@@ -860,16 +860,20 @@ body[data-active-palette="cyan"] {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  align-items: flex-start;
 }
 
-.fixed-pools.is-survival-controls {
+.fixed-pools.is-survival-controls,
+.fixed-pools.is-sales-controls {
   display: grid;
   grid-template-columns: 1fr;
   align-items: start;
 }
 
 .survival-control-row,
-.survival-pool-summary {
+.survival-pool-summary,
+.sales-control-row,
+.sales-pool-summary {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
@@ -919,9 +923,19 @@ body[data-active-palette="cyan"] {
   color: #fff;
 }
 
-.sales-variant-tools.is-survival-variant {
+.is-mode-card-variant {
+  --variant-border: rgba(143, 43, 37, 0.24);
+  --variant-glow: rgba(205, 80, 67, 0.2);
+  --variant-soft: #f7ece9;
+  --variant-soft-deep: #f0dcda;
+  --variant-active-border: rgba(255, 164, 143, 0.72);
+  --variant-active-glow: rgba(255, 172, 137, 0.32);
+  --variant-active-a: #b54237;
+  --variant-active-b: #7f2229;
+  --variant-active-c: #35131d;
+  --variant-shadow: rgba(111, 27, 32, 0.28);
   display: grid;
-  grid-template-columns: repeat(2, minmax(220px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   width: min(100%, 720px);
   gap: 12px;
   border: 0;
@@ -931,18 +945,18 @@ body[data-active-palette="cyan"] {
   box-shadow: none;
 }
 
-.sales-variant-tools.is-survival-variant button {
+.is-mode-card-variant button {
   display: grid;
   align-content: center;
   gap: 8px;
   min-height: 112px;
   overflow: hidden;
-  border: 1px solid rgba(143, 43, 37, 0.24);
+  border: 1px solid var(--variant-border);
   border-radius: 20px;
   padding: 18px 20px;
   background:
-    radial-gradient(circle at 88% 12%, rgba(205, 80, 67, 0.2), transparent 36%),
-    linear-gradient(145deg, #fffdfb 0%, #f7ece9 62%, #f0dcda 100%);
+    radial-gradient(circle at 88% 12%, var(--variant-glow), transparent 36%),
+    linear-gradient(145deg, #fffdfb 0%, var(--variant-soft) 62%, var(--variant-soft-deep) 100%);
   color: var(--ink);
   text-align: left;
   box-shadow:
@@ -951,55 +965,75 @@ body[data-active-palette="cyan"] {
   transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
 }
 
-.sales-variant-tools.is-survival-variant button:hover {
+.is-mode-card-variant button:hover {
   transform: translateY(-2px);
-  border-color: rgba(143, 43, 37, 0.48);
+  border-color: var(--variant-active-border);
   box-shadow:
     0 18px 34px rgba(80, 24, 24, 0.13),
     inset 0 1px rgba(255, 255, 255, 0.9);
 }
 
-.sales-variant-tools.is-survival-variant button strong {
+.is-mode-card-variant button strong {
   font-size: 1.2rem;
   line-height: 1.15;
 }
 
-.sales-variant-tools.is-survival-variant button span {
+.is-mode-card-variant button span {
   color: var(--muted);
   font-size: 0.88rem;
   font-weight: 800;
   line-height: 1.45;
 }
 
-.sales-variant-tools.is-survival-variant button.is-active {
-  border-color: rgba(255, 164, 143, 0.72);
+.is-mode-card-variant button.is-active {
+  border-color: var(--variant-active-border);
   background:
-    radial-gradient(circle at 88% 10%, rgba(255, 172, 137, 0.32), transparent 34%),
-    linear-gradient(135deg, #b54237 0%, #7f2229 48%, #35131d 100%);
+    radial-gradient(circle at 88% 10%, var(--variant-active-glow), transparent 34%),
+    linear-gradient(135deg, var(--variant-active-a) 0%, var(--variant-active-b) 48%, var(--variant-active-c) 100%);
   color: #fff;
   box-shadow:
-    0 20px 38px rgba(111, 27, 32, 0.28),
+    0 20px 38px var(--variant-shadow),
     inset 0 1px rgba(255, 235, 226, 0.42),
     inset 0 -1px rgba(26, 5, 11, 0.48);
 }
 
-.sales-variant-tools.is-survival-variant button.is-active span {
+.is-mode-card-variant button.is-active span {
   color: rgba(255, 255, 255, 0.84);
 }
 
-.sales-variant-tools.is-survival-variant button:focus-visible {
+.is-mode-card-variant button:focus-visible {
   outline: 3px solid rgba(204, 83, 70, 0.36);
   outline-offset: 3px;
 }
 
-.sales-variant-tools.is-sales-variant {
-  border-color: rgba(199, 144, 34, 0.34);
-  box-shadow: 0 8px 18px rgba(199, 144, 34, 0.08);
+.sales-variant-tools.is-survival-variant {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.sales-variant-tools.is-sales-variant button.is-active {
-  background: var(--gold);
-  color: #111;
+.sales-variant-tools.is-sales-variant {
+  --variant-border: rgba(167, 105, 36, 0.28);
+  --variant-glow: rgba(199, 144, 34, 0.18);
+  --variant-soft: #f8f0e2;
+  --variant-soft-deep: #eddfc6;
+  --variant-active-border: rgba(232, 181, 87, 0.76);
+  --variant-active-glow: rgba(229, 178, 83, 0.34);
+  --variant-active-a: #b5772f;
+  --variant-active-b: #80501f;
+  --variant-active-c: #3f2816;
+  --variant-shadow: rgba(118, 72, 24, 0.25);
+}
+
+.metaphor-variant-tools.is-mode-card-variant {
+  --variant-border: rgba(126, 107, 50, 0.28);
+  --variant-glow: rgba(178, 148, 58, 0.18);
+  --variant-soft: #f4f0df;
+  --variant-soft-deep: #e7dfbf;
+  --variant-active-border: rgba(216, 185, 91, 0.72);
+  --variant-active-glow: rgba(222, 194, 104, 0.3);
+  --variant-active-a: #98813e;
+  --variant-active-b: #625523;
+  --variant-active-c: #302d17;
+  --variant-shadow: rgba(81, 72, 30, 0.24);
 }
 
 .sales-variant-tools.is-summon-variant {
@@ -1048,7 +1082,7 @@ body[data-active-palette="cyan"] {
   color: #fff;
 }
 
-.metaphor-variant-tools {
+.metaphor-variant-tools:not(.is-mode-card-variant) {
   display: inline-flex;
   flex-wrap: wrap;
   gap: 6px;
@@ -1059,7 +1093,7 @@ body[data-active-palette="cyan"] {
   box-shadow: 0 10px 24px rgba(25, 24, 20, 0.06);
 }
 
-.metaphor-variant-tools button {
+.metaphor-variant-tools:not(.is-mode-card-variant) button {
   min-height: 38px;
   border: 0;
   border-radius: 999px;
@@ -1070,7 +1104,7 @@ body[data-active-palette="cyan"] {
   cursor: pointer;
 }
 
-.metaphor-variant-tools button.is-active {
+.metaphor-variant-tools:not(.is-mode-card-variant) button.is-active {
   background: var(--violet);
   color: #fff;
 }
@@ -2824,8 +2858,8 @@ body[data-active-palette="cyan"] {
     font-size: 0.82rem;
   }
 
-  .sales-variant-tools button,
-  .metaphor-variant-tools button {
+  .sales-variant-tools:not(.is-mode-card-variant) button,
+  .metaphor-variant-tools:not(.is-mode-card-variant) button {
     min-height: 28px;
   }
 

@@ -92,6 +92,7 @@ requireInOrder(indexHtml, "website/index.html", [
   "./styles/components/class-timer.css",
   "./styles/components/deck-option-cards.css",
   "./styles/mobile.css",
+  "./styles/components/mobile-modals.css",
   "./styles/components/mobile-mode-images.css",
   "./styles/components/mobile-survival-results.css",
   "./styles/viewport-boundaries.css"
@@ -169,7 +170,8 @@ for (const relativePath of [
   "website/styles/main.css",
   "website/styles/mobile.css",
   "website/styles/components/class-timer.css",
-  "website/styles/components/deck-option-cards.css"
+  "website/styles/components/deck-option-cards.css",
+  "website/styles/components/mobile-modals.css"
 ]) {
   if (read(relativePath).includes("[data-ui-surface=")) {
     failures.push(

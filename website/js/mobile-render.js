@@ -159,14 +159,19 @@
     }
     if (state.cardMode === "metaphorCompass") {
       return `
-        <div class="mobile-pill-row" role="group" aria-label="隱喻羅盤版本">
+        <div class="mobile-survival-mode-grid mobile-sales-mode-grid" role="group" aria-label="隱喻羅盤版本">
           ${["concrete", "abstract", "free"].map((variant) => `
-            <button type="button" class="${state.metaphorVariant === variant ? "is-active" : ""}" data-mobile-metaphor-variant="${variant}">
-              ${variant === "concrete"
+            <button type="button" class="mobile-survival-mode ${state.metaphorVariant === variant ? "is-active" : ""}" data-mobile-metaphor-variant="${variant}">
+              <strong>${variant === "concrete"
                 ? mobileText("mobile.metaphor.concrete", state.metaphorVariantLabel(variant))
                 : variant === "abstract"
                   ? mobileText("mobile.metaphor.abstract", state.metaphorVariantLabel(variant))
-                  : mobileText("mobile.metaphor.free", state.metaphorVariantLabel(variant))}
+                  : mobileText("mobile.metaphor.free", state.metaphorVariantLabel(variant))}</strong>
+              <span>${mobileText(`mobile.metaphor.${variant}Description`, variant === "concrete"
+                ? "用「人生就像」連結一個具體事物"
+                : variant === "abstract"
+                  ? "連結兩個抽象概念並說明關係"
+                  : "自由選擇詞庫組合隱喻命題")}</span>
             </button>
           `).join("")}
         </div>
@@ -177,12 +182,17 @@
 
   function genericDashboard(state) {
     const summonMode = state.cardMode === "summonMission";
+    const hasModeCards = state.cardMode === "salesPitch" || state.cardMode === "metaphorCompass";
     const missionDeck = summonMode ? state.deckCards.find((deck) => deck.deckId === "missions") : null;
     const summonDecks = summonMode ? state.deckCards.filter((deck) => deck.deckId.startsWith("summons:")) : [];
     return `
       <section class="mobile-game-section ${state.standardDeckUi ? "is-standard-settings" : ""}">
         <div class="mobile-section-head">
-          <h2>${summonMode ? mobileText("mobile.realitySummon.flowHeading", "玩法流程") : mobileText("mobile.common.activitySettings", "活動設定")}</h2>
+          <h2>${summonMode
+            ? mobileText("mobile.realitySummon.flowHeading", "玩法流程")
+            : hasModeCards
+              ? mobileText("mobile.itemSurvival.modeHeading", "選擇模式")
+              : mobileText("mobile.common.activitySettings", "活動設定")}</h2>
         </div>
         ${summonMode ? `
           <div class="mobile-summon-guide" aria-label="現實召喚三步驟">
@@ -193,7 +203,7 @@
             <div><span>💡</span><b>${mobileText("mobile.realitySummon.step3Title", "說明方案")}</b><small>${mobileText("mobile.realitySummon.step3Description", "完成任務")}</small></div>
           </div>
         ` : `
-          <p class="mobile-rule-line">${state.statusText}</p>
+          ${hasModeCards ? "" : `<p class="mobile-rule-line">${state.statusText}</p>`}
           ${variantControls(state)}
         `}
       </section>
