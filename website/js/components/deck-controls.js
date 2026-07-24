@@ -6,15 +6,19 @@
       decks,
       elements,
       ensureSalesAudienceDeck,
+      fixedMetaphorPrefixCard,
+      fixedMetaphorRelationCard,
       getActiveLibrary,
       getActiveMode,
       getActiveSecondaryLibrary,
       getImportanceSelection,
+      getImportanceState,
       getMetaphorState,
       getSalesState,
       getSummonSelection,
       getSurvivalState,
       importanceActiveDeckIds,
+      importanceAvailableDeckIds,
       metaphorDeckOptions,
       metaphorVariantLabel,
       modeStatusText,
@@ -68,16 +72,21 @@
       });
     }
 
-    function metaphorDeckSelectMarkup(part, label, value) {
+    function metaphorDeckCardsMarkup(part, label, value) {
       return `
-        <label class="metaphor-deck-select">
-          <span>${label}</span>
-          <select data-metaphor-deck="${part}">
-            ${metaphorDeckOptions(part).map((deckId) => `
-              <option value="${deckId}" ${deckId === value ? "selected" : ""}>${decks[deckId].label}</option>
-            `).join("")}
-          </select>
-        </label>
+        <section class="metaphor-deck-group" aria-label="${label}">
+          <strong class="metaphor-deck-group-title">${label}</strong>
+          ${window.DebateVisionDeckOptions.selectGroup(metaphorDeckOptions(part).map((deckId) => ({
+            deckId,
+            label: decks[deckId].label,
+            selected: deckId === value,
+            tone: deckTone(deckId),
+            cover: sharedDeckCover(deckId)
+          })), {
+            attribute: `data-metaphor-${part}-deck`,
+            ariaLabel: `${label}圖卡選擇`
+          })}
+        </section>
       `;
     }
 
@@ -107,11 +116,24 @@
       `;
     }
 
+    function fixedMetaphorCardMarkup(card, label, fallbackImage = "") {
+      const image = card?.image || card?.iconAsset || fallbackImage;
+      return `
+        <div class="metaphor-fixed-card" aria-label="${label}（固定）">
+          <span class="metaphor-fixed-card-art">
+            ${image ? `<img src="${image}" alt="" aria-hidden="true" />` : `<b>${card?.tokenIcon || card?.icon || "◇"}</b>`}
+          </span>
+          <strong>${label}</strong>
+        </div>
+      `;
+    }
+
     function render() {
       const mode = getActiveMode();
       const activeLibrary = getActiveLibrary();
       const activeSecondaryLibrary = getActiveSecondaryLibrary();
       const importanceSelection = getImportanceSelection();
+      const importance = getImportanceState();
       const metaphor = getMetaphorState();
       const sales = getSalesState();
       const summonSelection = getSummonSelection();
@@ -156,20 +178,18 @@
           : `${mode.secondaryLabel || decks[activeSecondaryLibrary]?.label}：固定抽 1 張，${selectedCount(activeSecondaryLibrary)} / ${cardsFrom(activeSecondaryLibrary).length} 張可抽`
         : "";
       if (mode.cardMode === "importanceDuel") {
-        const activeDeckIds = importanceActiveDeckIds();
-        const totalSelected = activeDeckIds.reduce((sum, deckId) => sum + selectedCount(deckId), 0);
-        const totalCards = activeDeckIds.reduce((sum, deckId) => sum + cardsFrom(deckId).length, 0);
-        primaryText = `已選 ${activeDeckIds.length} 個牌組：${totalSelected} / ${totalCards} 張可抽`;
+        const redLabel = decks[importance.redDeck]?.label || variantLabel(importance.redDeck);
+        const blueLabel = decks[importance.blueDeck]?.label || variantLabel(importance.blueDeck);
+        primaryText = `紅角 ${redLabel} ${selectedCount(importance.redDeck)} / ${cardsFrom(importance.redDeck).length} ｜藍角 ${blueLabel} ${selectedCount(importance.blueDeck)} / ${cardsFrom(importance.blueDeck).length}`;
         secondaryText = "";
       }
       if (mode.cardMode === "metaphorCompass") {
         if (metaphor.variant === "concrete") {
-          primaryText = "前綴：人生（固定）";
-          secondaryText = "介係：就像（固定）";
+          primaryText = `人生版：人生（固定） × 就像（固定） × 後綴 ${decks[metaphor.suffixDeck]?.label || ""} ${selectedCount(metaphor.suffixDeck)} / ${cardsFrom(metaphor.suffixDeck).length} 張可抽`;
         } else {
-          primaryText = `前綴：${decks[metaphor.prefixDeck]?.label || ""}，${selectedCount(metaphor.prefixDeck)} / ${cardsFrom(metaphor.prefixDeck).length} 張可抽`;
-          secondaryText = `介係：${decks[activeSecondaryLibrary]?.label || ""}，${selectedCount(activeSecondaryLibrary)} / ${cardsFrom(activeSecondaryLibrary).length} 張可抽`;
+          primaryText = `前綴 ${decks[metaphor.prefixDeck]?.label || ""} ${selectedCount(metaphor.prefixDeck)} / ${cardsFrom(metaphor.prefixDeck).length} ｜介係 ${decks[activeSecondaryLibrary]?.label || ""} ${selectedCount(activeSecondaryLibrary)} / ${cardsFrom(activeSecondaryLibrary).length} ｜後綴 ${decks[metaphor.suffixDeck]?.label || ""} ${selectedCount(metaphor.suffixDeck)} / ${cardsFrom(metaphor.suffixDeck).length}`;
         }
+        secondaryText = "";
       }
       if (survivalBattleMode) {
         primaryText = `道具卡：${selectedCount("items")} / ${cardsFrom("items").length} 張可抽`;
@@ -196,9 +216,7 @@
         }
       }
 
-      const suffixText = mode.cardMode === "metaphorCompass"
-        ? `後綴：${decks[metaphor.suffixDeck]?.label || ""}，${selectedCount(metaphor.suffixDeck)} / ${cardsFrom(metaphor.suffixDeck).length} 張可抽`
-        : "";
+      const suffixText = "";
       const survivalRoleText = survivalBattleMode
         ? `職業卡：${selectedCount("roles")} / ${cardsFrom("roles").length} 張可抽`
         : "";
@@ -286,7 +304,7 @@
         })
         : "";
       const primaryVariantDecks = primaryVariantDeckIds();
-      const primaryVariantTools = primaryVariantDecks.length && !survivalBattleMode
+      const primaryVariantTools = primaryVariantDecks.length && !survivalBattleMode && mode.cardMode !== "importanceDuel"
         ? window.DebateVisionDeckOptions.selectGroup(primaryVariantDecks.map((deckId) => ({
           deckId,
           label: variantLabel(deckId),
@@ -301,6 +319,41 @@
           attribute: "data-primary-variant",
           ariaLabel: `${mode.title}抽選類型`
         })
+        : "";
+      const importanceTool = mode.cardMode === "importanceDuel"
+        ? `
+          <div class="importance-side-selector" role="group" aria-label="紅藍角牌池選擇">
+            <section class="importance-side is-red">
+              <strong>紅角</strong>
+              ${window.DebateVisionDeckOptions.selectGroup(importanceAvailableDeckIds(mode).map((deckId) => ({
+                deckId,
+                label: variantLabel(deckId),
+                selected: importance.redDeck === deckId,
+                tone: deckTone(deckId),
+                cover: sharedDeckCover(deckId)
+              })), {
+                attribute: "data-importance-red",
+                ariaLabel: "紅角牌池",
+                className: "importance-deck-options"
+              })}
+            </section>
+            <div class="importance-vs">VS</div>
+            <section class="importance-side is-blue">
+              <strong>藍角</strong>
+              ${window.DebateVisionDeckOptions.selectGroup(importanceAvailableDeckIds(mode).map((deckId) => ({
+                deckId,
+                label: variantLabel(deckId),
+                selected: importance.blueDeck === deckId,
+                tone: deckTone(deckId),
+                cover: sharedDeckCover(deckId)
+              })), {
+                attribute: "data-importance-blue",
+                ariaLabel: "藍角牌池",
+                className: "importance-deck-options"
+              })}
+            </section>
+          </div>
+        `
         : "";
       const environmentLockTool = survivalMode && survival.variant === "survival"
         ? `
@@ -317,18 +370,27 @@
       const metaphorTool = metaphorMode
         ? `
           <div class="metaphor-variant-tools is-mode-card-variant" role="group" aria-label="隱喻羅盤版本">
-            ${["concrete", "abstract", "free"].map((variant) => `
+            ${["concrete", "abstract"].map((variant) => `
               <button type="button" class="${metaphor.variant === variant ? "is-active" : ""}" data-metaphor-variant="${variant}">
                 <strong>${metaphorVariantLabel(variant)}</strong>
                 <span>${uiText(`mobile.metaphor.${variant}Description`)}</span>
               </button>
             `).join("")}
           </div>
-          <div class="metaphor-deck-tools" role="group" aria-label="隱喻羅盤詞庫選擇">
+          <div class="metaphor-deck-tools ${metaphor.variant === "concrete" ? "is-life-variant" : ""}" role="group" aria-label="隱喻羅盤詞庫選擇">
             ${metaphor.variant === "concrete"
-              ? `<span class="metaphor-fixed-text">人生 就像</span>`
-              : metaphorDeckSelectMarkup("prefix", "前綴", metaphor.prefixDeck)}
-            ${metaphorDeckSelectMarkup("suffix", "後綴", metaphor.suffixDeck)}
+              ? `
+                <section class="metaphor-deck-group is-fixed-prefix" aria-label="固定前綴">
+                  <strong class="metaphor-deck-group-title">前綴</strong>
+                  ${fixedMetaphorCardMarkup(fixedMetaphorPrefixCard(), "人生")}
+                </section>
+                <section class="metaphor-deck-group is-fixed-relation" aria-label="固定介係">
+                  <strong class="metaphor-deck-group-title">介係</strong>
+                  ${fixedMetaphorCardMarkup(fixedMetaphorRelationCard(), "就像", sharedDeckCover("relations").image)}
+                </section>
+              `
+              : metaphorDeckCardsMarkup("prefix", "前綴區", metaphor.prefixDeck)}
+            ${metaphorDeckCardsMarkup("suffix", "後綴區", metaphor.suffixDeck)}
           </div>
           <div class="metaphor-lock-tools" role="group" aria-label="隱喻羅盤鎖定">
             ${metaphorLockMarkup("prefix", "鎖定前綴")}
@@ -348,6 +410,7 @@
 
       fixedPools.classList.toggle("is-survival-controls", survivalMode);
       fixedPools.classList.toggle("is-sales-controls", salesMode);
+      fixedPools.classList.toggle("is-metaphor-controls", metaphorMode);
       fixedPools.innerHTML = metaphorMode
         ? `${metaphorTool}${poolSummary}`
         : survivalMode
@@ -367,6 +430,7 @@
             ${poolSummary}
             ${survivalVariantTools}
             ${primaryVariantTools}
+            ${importanceTool}
             ${environmentLockTool}
             ${survivalBattleTools}
             ${summonCategoryTools}

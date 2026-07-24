@@ -16,6 +16,12 @@
   },
   "drawLabel": "抽出銷售題目",
   "cardMode": "salesPitch",
+  "salesAudienceDecks": [
+    "creatures",
+    "roles",
+    "celebrities",
+    "summons"
+  ],
   "description": "切換供需版、故事版或目標版，讓學生從需求、敘事與客戶三個角度，把平凡物品包裝成值得購買的選擇。",
   "prompts": [
     [

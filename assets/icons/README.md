@@ -1,17 +1,19 @@
-# DebateVision 圖片素材資料夾
+# 卡牌圖示素材
 
-這裡放所有卡牌圖片。
+這裡只放依牌組 ID 分類的卡牌圖示；完整卡圖可放在 `assets/cards/`，活動背景放在 `assets/backgrounds/`。
 
-CSV 的「圖片」欄位只填路徑，例如：
+卡牌 CSV 的「卡牌圖示」可以直接填 Emoji 或 icon id；「圖片」可留空、填同牌組資料夾內的檔名，或填網站可用的相對路徑。例如：
 
-```text
-assets/icons/items/item_hammer.svg
+```csv
+items,物品卡,□,鐵錘,可以敲擊。,🔨,🔨,item_hammer,A,工具
 ```
 
-未來如果想改鐵錘圖片，只要替換：
+建置器會依 `牌組ID` 尋找 `assets/icons/items/item_hammer.{png,webp,jpg,jpeg,svg}`。若 CSV 使用完整路徑，應寫成 `../assets/...`，不要使用會越過 GitHub Pages 專案目錄的 `/assets/...`。
 
-```text
-assets/icons/items/item_hammer.svg
+修改後執行：
+
+```bash
+node scripts/check-data-contracts.mjs
+node scripts/build-lexicons.mjs
+node scripts/check-assets.mjs
 ```
-
-CSV 不需要修改。

@@ -65,7 +65,7 @@ AI_START_HERE.md
 - 新增牌組：新增一個 CSV 到 `data/cards/`。
 - 新增玩法：新增一個 JSON 到 `data/modes/`，並同步新增 `data/content/玩法設定.csv` 與 `data/content/玩法文案.csv` 的同一個 `玩法ID`。
 - `card-dictionary` 是工具型玩法，永遠排在所有活動最後；新增玩法不要排到卡片字典後面。
-- 新增圖示：小圖示放到 `assets/icons/{deck_id}/`，CSV 的 `卡牌圖示` 只填 icon id。
+- 新增圖示：可直接在 CSV 的 `卡牌圖示`、`抽選池圖示` 使用 Emoji；若使用自訂圖檔，才把檔案放到 `assets/icons/{deck_id}/` 並填 icon id。
 - 新增大圖：放到適合的 `assets/` 子資料夾，CSV 的 `圖片` 欄填 image id 或檔名。
 - 更新網站資料：執行最外層的 `網站更新.command`。
 

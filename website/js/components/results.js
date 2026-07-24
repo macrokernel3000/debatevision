@@ -79,7 +79,27 @@
       `;
     }
 
-    return Object.freeze({ cards, combo, duel, empty, metaphor, survival });
+    function salesPair({ leftLabel, leftCards, rightLabel, rightCard, variant }) {
+      container.innerHTML = `
+        <div class="sales-result-board" data-sales-variant="${variant}">
+          <section class="sales-result-slot is-product">
+            <p class="sales-result-label">${leftLabel}</p>
+            <div class="sales-result-cards">
+              ${leftCards.map((card) => cardMarkup(card)).join("")}
+            </div>
+          </section>
+          <div class="sales-result-link" aria-hidden="true">→</div>
+          <section class="sales-result-slot is-challenge">
+            <p class="sales-result-label">${rightLabel}</p>
+            <div class="sales-result-cards">
+              ${cardMarkup(rightCard)}
+            </div>
+          </section>
+        </div>
+      `;
+    }
+
+    return Object.freeze({ cards, combo, duel, empty, metaphor, salesPair, survival });
   }
 
   window.DebateVisionResults = Object.freeze({ create });

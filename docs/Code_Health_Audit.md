@@ -1,227 +1,85 @@
 # Code Health Audit
 
-Last checked: 2026-07-21
+Last checked: 2026-07-24
 
-這份文件記錄 DebateVision 目前程式碼健康狀態與拆檔方向。它不是玩法規格，而是給之後維護網站程式的人看的整理筆記。
+這是目前架構健康快照，不是玩法規格。檔案定位先讀 `AI_START_HERE.md` 與 `docs/AI_Project_Map.md`。
 
-## 目前狀態
+## 結論
 
-主要檔案大小：
+- 來源資料、generated data、網站程式與圖片素材已有清楚單向資料流。
+- 桌機與手機 DOM 由 `viewport-boundaries.css` 隔離；兩端可以各自修改，只有共用資料或共用元件才需同步調整。
+- `app.js` 已回到協調層，玩法規則、元件事件、服務與畫面已分離。
+- CSV、玩法引用、圖片路徑、主要玩法、歷史回放與異境分組都有自動守門。
+- `main.css` 與 `mobile.css` 仍偏大，但已有新功能不得回流的邊界；應在實際修改相關區塊時逐步抽離，不做無行為需求的大搬家。
 
-- `website/js/app.js`：1774 行。只保留啟動、四個導航狀態、玩法 context、抽卡生命週期與事件接線；硬上限仍為 1800 行。
-- `website/js/core/state.js`：建立分域 state；架構檢查禁止增加 `app.js` 頂層可變狀態。
-- `website/js/core/ui-text.js`：generated 文案、預設文案與文字模板替換。
-- `website/js/services/history-service.js`：最近紀錄儲存、十場上限與回放資料。
-- `website/js/services/history-replay.js`：還原卡片提問、冒險分組與舊紀錄相容。
-- `website/js/services/image-service.js`：圖片選擇、URL、fallback 與 image layout。
-- `website/js/services/survival-result-service.js`：異境求生鎖定、資源交換、分組與指定隊伍重抽規則。
-- `website/js/services/timer-service.js`：課堂計時器狀態與持久化。
-- `website/js/components/class-timer.js`：課堂計時器 DOM、事件與顯示。
-- `website/js/components/deck-controls.js`：桌機玩法版本、牌組摘要、鎖定與數量控制。
-- `website/js/components/mode-shell.js`：活動選單、玩法 banner、背景圖與玩法畫面顯示切換。
-- `website/js/components/mobile-dashboard.js`：手機各玩法設定的 view model 與 dashboard。
-- `website/js/components/mobile-mode-images.js`：手機活動縮圖、Banner、skeleton、淡入與 fallback。
-- `website/js/components/mobile-modals.js`：手機卡池編輯與卡牌美術預覽。
-- `website/js/components/survival-result-controller.js`、`survival-battle-view.js`：正式結果狀態與冒險隊伍操作。
-- `website/js/components/history.js`、`results.js`、`reel-view.js`：歷史、結果與抽卡機畫面。
-- `website/js/components/card-dictionary.js`、`secret-place.js`：卡片字典與推理解密互動。
-- `website/js/mobile-render.js`：手機版畫面生成入口，負責手機活動設定、卡組格、版本切換區與結果頁操作按鈕的 HTML。
-- `website/js/mobile-app.js`：手機版操作流程入口，負責手機模式切換、卡組選擇、手機 modal、結果頁、底部導覽與紀錄展開。
-- `website/styles/main.css`：約 3000 行。保留桌機、平板、共用元件與非手機專屬樣式。
-- `website/styles/tokens.css`：共用顏色、間距、圓角與陰影。
-- `website/styles/mobile.css`：手機版專屬樣式，負責手機首頁、手機活動卡、手機設定區、手機結果頁、手機底部導覽與手機 modal。
-- `website/styles/components/class-timer.css`：計時器在桌機、平板與手機的完整樣式。
-- `website/styles/viewport-boundaries.css`：桌機與手機 DOM 的顯示隔離，固定最後載入。
-- `scripts/build-lexicons.mjs`：約 480 行。負責把 CSV / JSON 轉成網站可讀的 generated 檔，目前大小仍可接受。
+## 目前核心尺寸
 
-目前網站仍是可維護狀態，但如果繼續新增玩法，應該先拆出比較清楚的模組。
+| 檔案 | 約略行數 | 上限 | 責任 |
+| --- | ---: | ---: | --- |
+| `website/js/app.js` | 1624 | 1800 | 啟動、玩法 context、抽卡生命週期與跨元件接線 |
+| `website/styles/main.css` | 2730 | 3020 | 桌機、平板與尚未拆分的共用樣式 |
+| `website/styles/mobile.css` | 1898 | 2000 | 手機版專屬樣式 |
+| `website/js/mobile-render.js` | 373 | 400 | 手機 HTML 生成 |
+| `website/js/mobile-app.js` | 277 | 350 | 手機操作事件 |
+| `scripts/build-lexicons.mjs` | 481 | 550 | 來源資料轉 generated data |
 
-## 這次已清理
+實際上限與完整檔案清單以 `scripts/check-architecture.mjs` 為準，不在文件重複維護第二份數字。
 
-- 移除已不使用的銷售密令舊渲染函式。
-- 移除目前沒有任何玩法使用的 `roleEnvironment` 抽卡分支。
-- 移除前端已不顯示的教練提示渲染殘留。
-- 移除已沒有對應畫面的教練提示 CSS。
-- 拆出第一批玩法抽卡控制器到 `website/js/modes/`。
-- 拆出手機版渲染入口到 `website/js/mobile-render.js`。
-- 拆出手機版事件入口到 `website/js/mobile-app.js`。
-- 拆出手機版視覺規則到 `website/styles/mobile.css`。
-- 拆出介面文字服務到 `website/js/core/ui-text.js`。
-- 拆出課堂計時器到 `website/js/components/class-timer.js` 與對應 component CSS。
-- 拆出歷史、圖片與計時器純邏輯到 `website/js/services/`。
-- 建立 `website/js/core/state.js`，先搬純 UI 暫態與計時器 state；不一次搬動玩法狀態。
-- 抽出 `website/styles/tokens.css`，保持原有視覺數值。
-- 新增 `scripts/check-architecture.mjs`，用行數預算、載入順序與 viewport marker 防止入口檔再次膨脹。
-- 抽離圖片編輯器、歷史、結果、卡片 hooks、卡片字典、抽卡機、推理解密、手機 modal 與手機 dashboard。
-- 抽離桌機牌組控制列與活動 shell，`app.js` 從約 3120 行降到約 1680 行。
-- 頂層 `let` 從 34 個降到 4 個，只保留目前活動與牌組導航。
-- 架構守門已收緊為 `app.js` 1800 行、頂層 `let` 4 個，並禁止已抽離的大型函式回流。
-- 新增歷史回放檢查，確保舊冒險紀錄仍能推回隊伍分組並恢復異境提問。
-- 新增手機活動 WebP 縮圖與 Banner，首頁不再預先下載所有活動大圖與隱藏卡池圖。
-- 新增異境求生結果鎖定、資源交換與單隊重新編組，狀態不依賴 DOM class。
-- 新增 `scripts/check-survival-results.mjs`，守住鎖定、避免重複與單隊替換契約。
-
-保留：
-
-- `data/content/玩法文案.csv` 裡的教練提示與回合流程資料。這些仍屬於內容資料，未來可能重新用於老師手冊或備課模式。
-- `data/content/介面文字.csv` 裡的舊文字列。若未來確定完全不用，再由內容整理時一起刪除。
-
-## 優先拆檔方向
-
-### 第一階段：拆 `app.js`
-
-已先完成第一步：每個主要活動的「抽卡規則」已拆到 `website/js/modes/`。
-
-目前已有：
+## 已建立的責任邊界
 
 ```text
-website/js/modes/
-├── item-environment.js   # 異境求生
-├── importance-duel.js    # 誰更重要
-├── sales-command.js      # 銷售密令
-├── metaphor-compass.js   # 隱喻羅盤
-├── secret-place.js       # 推理解密
-└── reality-summon.js     # 現實召喚
+data/cards + data/content + data/modes + data/image-layouts
+  -> scripts/build-lexicons.mjs
+  -> data/generated
+  -> core / mode controllers / services
+  -> components
+  -> app.js orchestration
+  -> mobile-app.js event bridge
 ```
 
-`website/js/app.js` 目前仍負責狀態、控制列與共用渲染，但 `drawResult()` 已改成先找對應玩法控制器。
+- `website/js/core/`：卡池、文字、卡片 hooks、分域 state factory。
+- `website/js/modes/`：六個抽卡玩法 controller；卡片字典是工具型玩法。
+- `website/js/services/`：歷史、圖片、計時器、異境結果等跨畫面純邏輯。
+- `website/js/components/`：可獨立渲染或綁定事件的畫面元件。
+- `website/styles/components/`：已抽離元件樣式；推理解密桌機棋盤在 `secret-place.css`。
+- `website/styles/viewport-boundaries.css`：唯一可控制桌機／手機 surface 顯示的檔案。
 
-手機版已經視為獨立操作模組。修改手機版時：
+## 自動防線
 
-- 手機畫面 HTML 先看 `website/js/mobile-render.js`。
-- 手機操作流程先看 `website/js/mobile-app.js`。
-- 手機視覺先看 `website/styles/mobile.css`。
-- 只有共用資料、抽卡核心、共用卡片 markup、桌機也會使用的狀態，才回到 `website/js/app.js`。
-- 只有桌機/平板/共用元件樣式，才回到 `website/styles/main.css`。
+| 指令 | 保護範圍 |
+| --- | --- |
+| `node scripts/check-data-contracts.mjs` | 卡牌十欄、必要欄位、重複 key、玩法與內容交叉引用 |
+| `node scripts/check-assets.mjs` | 明確圖片路徑與手機衍生圖 |
+| `node scripts/check-game-modes.mjs` | controller 與主要版本抽卡契約 |
+| `node scripts/check-history-replay.mjs` | 新舊歷史紀錄相容 |
+| `node scripts/check-survival-results.mjs` | 異境鎖定、分組、不重複、單隊重抽 |
+| `node scripts/check-architecture.mjs` | 上述檢查、行數預算、載入順序、surface 邊界與禁止責任回流 |
 
-小修採快速維修模式：先精準搜尋、最小修改、最小檢查；只有資料結構、CSV / JSON 或 generated 輸出受影響時才跑完整詞庫更新。
+資料更新的安全順序固定為：資料契約 → 產生 generated data → 架構檢查。根目錄 `網站更新.command` 已依此執行，資料錯誤不會先覆寫上一份可用輸出。
 
-目前已形成下列結構：
+## 搜尋與非執行區
 
-```text
-website/js/core/
-├── state.js          # 分域 state factory
-├── decks.js          # 卡池、勾選、抽選工具
-├── card-hooks.js     # 卡片提問模板
-└── ui-text.js        # generated 文案、預設文案與文字模板替換
+`.rgignore` 預設排除：
 
-website/js/components/
-├── cards.js
-├── deck-controls.js
-├── mode-shell.js
-├── mobile-dashboard.js
-├── mobile-modals.js
-├── history.js
-├── results.js
-├── reel-view.js
-├── card-dictionary.js
-├── secret-place.js
-├── image-editor.js
-└── class-timer.js
+- `data/generated/`：自動產物。
+- `docs/archive/`：歷史留存。
+- `assets/`：二進位素材。
+- `tmp/`、`outputs/`、`mobile-audit/`：製作或檢查輸出。
 
-website/js/modes/
-├── survival.js       # 異境求生
-├── sales.js          # 銷售密令
-├── metaphor.js       # 隱喻羅盤
-├── secret-place.js   # 推理解密
-├── summon.js         # 現實召喚
-├── importance.js     # 誰更重要
-└── dictionary.js     # 卡片字典
-```
+需要盤點檔名時使用 `find` 或 `rg --no-ignore --files` 指定目錄，不要移除忽略規則。`assets/cards/召喚卡_original_checkerboard/` 與 `tmp/imagegen/` 是可回溯的製作來源，不屬網站執行依賴。
 
-`website/js/app.js` 現在負責：
+## 維護風險與下一步
 
-- 讀取 generated data。
-- 初始化狀態。
-- 綁定事件。
-- 建立玩法 context、呼叫目前玩法 controller。
-- 協調抽卡開始／完成與桌機、手機共同結果。
+1. `mobile.css` 接近預算；下一次新增大型手機元件時，同步建立對應 component CSS。
+2. `main.css` 應在修改到相關功能時逐區拆出，優先卡片字典、活動選單或單一玩法，不做一次性全檔重排。
+3. `app.js` 的四個頂層導航狀態已達上限；新增狀態必須進分域 state 或所屬 service。
+4. `add-sales-n-cards.mjs` 與 `normalize-card-icons.mjs` 是一次性遷移，尤其後者會建立舊式 SVG，不得放入日常更新流程。
+5. 自動檢查不能取代瀏覽器。共用結構、響應式樣式或載入順序修改後，仍要依 `Responsive_QA_Checklist.md` 實測。
 
-這是合理入口層責任；不要為了追求零行數而把它們搬成新的巨大協調檔。
+## 重構完成條件
 
-### 第二階段：拆 `drawResult()`
-
-`drawResult()` 已經先完成第一輪瘦身。它現在只負責呼叫對應玩法控制器；各玩法抽卡規則放在 `website/js/modes/`。
-
-目前使用的概念是：
-
-```js
-const modeControllers = {
-  itemEnvironment: survivalController,
-  salesPitch: salesController,
-  metaphorCompass: metaphorController,
-  secretPlace: secretPlaceController,
-  summonMission: summonController,
-  importanceDuel: importanceController,
-  cardDictionary: dictionaryController
-};
-```
-
-每個 controller 自己處理：
-
-- 控制列怎麼顯示。
-- 抽卡前要檢查哪些卡池。
-- 抽出後怎麼渲染。
-- 最近十場要記錄哪些卡。
-
-### 第三階段：拆 CSS
-
-建議先改成：
-
-```text
-website/styles/
-├── main.css              # 桌機、平板與共用樣式
-├── mobile.css            # 手機版專屬樣式，已先拆出
-├── base.css              # 變數、字體、全域
-├── layout.css            # app-shell、header、section
-├── components/
-│   ├── activity-menu.css
-│   ├── cards.css
-│   ├── controls.css
-│   ├── reel.css
-│   ├── pools.css
-│   └── timer.css
-└── modes/
-    ├── survival.css
-    ├── sales.css
-    ├── metaphor.css
-    ├── secret-place.css
-    ├── summon.css
-    └── dictionary.css
-```
-
-CSS 拆檔時要特別小心手機版，不要只在桌機寬度檢查。
-
-## 後續觀察
-
-目前比較像冗餘或可整理的地方：
-
-- 版本按鈕、卡池按鈕與鎖定卡片已由 `deck-controls.js` 和 `deck-option-cards.js` 共用。
-- 卡牌 hooks 已集中到 `core/card-hooks.js`。
-- 活動卡、手機選單、大黑卡都使用同一批玩法名稱與短句，資料已經往 CSV 集中，之後應繼續維持。
-- 圖片 layout 編輯器已獨立到 `components/image-editor.js`。
-
-## 每次重構後必做檢查
-
-至少執行：
-
-```bash
-node scripts/check-architecture.mjs
-node --check website/js/app.js
-node --check scripts/build-lexicons.mjs
-node scripts/build-lexicons.mjs
-```
-
-如果拆成 ES modules，還要啟動本機網站並檢查：
-
-- 桌機版：活動切換、抽卡、重置、最近十場。
-- 手機版：活動列表、橫向活動卡、抽卡控制、計時器遮擋。
-- `?edit=1`：圖片調整器仍能開啟與匯出。
-
-## 重構原則
-
-- 先搬移，不改行為。
-- 一次只拆一類功能。
-- 每拆完一段都先跑語法檢查。
-- 不手改 `data/generated/`，除非剛執行完更新腳本。
-- 任何畫面改動都要同時想桌機、平板、手機。
+- 不增加入口檔責任與頂層可變狀態。
+- 新功能可從專案地圖直接定位，不需全庫搜尋。
+- 資料錯誤在 generated data 被覆寫前停止。
+- 桌機與手機修改不互相控制 surface 顯示。
+- 自動檢查通過，且受影響畫面完成實際瀏覽器驗證。

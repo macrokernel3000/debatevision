@@ -81,10 +81,10 @@ DebateVision/
 data/cards/*.csv
 ```
 
-CSV 只負責內容。每一個 CSV 是獨立牌組，例如 `物品卡.csv`、`異境卡.csv`、`職業卡.csv`、`名人卡.csv`、`需求卡.csv`。圖片欄位可以留空；`icon` 欄位建議只填 icon id，例如：
+CSV 只負責內容。每一個 CSV 是獨立牌組，例如 `物品卡.csv`、`異境卡.csv`、`職業卡.csv`、`名人卡.csv`、`概念卡.csv`。圖片欄位可以留空；圖示可以直接使用 Emoji，也可以填 icon id。
 
 ```csv
-items,物品卡,□,鐵錘,可以敲擊。,item_hammer,,普通,工具
+items,物品卡,□,鐵錘,可以敲擊。,🔨,🔨,item_hammer,A,工具
 ```
 
 網站會自動對應：
@@ -174,7 +174,7 @@ data/content/玩法設定.csv
 data/content/玩法文案.csv
 ```
 
-如果只是更換抽哪些牌組，不需要改網站程式。若需要全新的抽選或卡牌呈現方式，才改 `website/js/app.js`。
+如果只是更換抽哪些牌組，不需要改網站程式。若需要全新的抽選規則，放進 `website/js/modes/`；新的畫面放進 `website/js/components/` 與對應樣式，不把完整功能直接寫進 `app.js`。
 
 ## 更新資料
 
@@ -236,13 +236,4 @@ docs/Google_Search_Checklist.md
 
 ## 規格文件
 
-開始擴充前先讀：
-
-- `docs/DebateVision_v1_5_Roadmap.md`
-- `docs/Teacher_Manual.md`
-- `docs/Project_Convention.md`
-- `docs/Icon_Style_Guide.md`
-- `docs/Card_Data_Specification.md`
-- `docs/Game_Mode_Specification.md`
-- `docs/Image_Layout_Editor_Guide.md`
-- `docs/Google_Search_Checklist.md`
+不要預先讀完整個 `docs/`。先讀 `AI_START_HERE.md`；需要定位資料流與檢查入口時讀 `docs/AI_Project_Map.md`，再依任務打開單一相關規格。

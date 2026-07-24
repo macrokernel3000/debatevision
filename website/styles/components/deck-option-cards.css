@@ -226,7 +226,95 @@
   --deck-soft: rgba(95, 111, 131, 0.18);
 }
 
+.metaphor-deck-tools {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.metaphor-deck-tools.is-life-variant {
+  grid-template-columns: 112px 112px minmax(0, 1fr);
+}
+
+.metaphor-deck-group {
+  min-width: 0;
+  display: grid;
+  gap: 8px;
+  align-content: start;
+}
+
+.metaphor-deck-group-title {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 950;
+}
+
+.metaphor-deck-group .deck-option-grid {
+  grid-template-columns: repeat(auto-fit, minmax(92px, 112px));
+  align-content: start;
+  border: 0;
+  padding: 0;
+  background: transparent;
+}
+
+.metaphor-fixed-card {
+  width: 112px;
+  min-height: 122px;
+  display: grid;
+  grid-template-rows: 86px auto;
+  overflow: hidden;
+  border: 2px solid color-mix(in srgb, var(--mobile-accent), white 42%);
+  border-radius: 16px;
+  background: linear-gradient(145deg, #fff, color-mix(in srgb, var(--mobile-accent), white 91%));
+  color: color-mix(in srgb, var(--mobile-accent), black 34%);
+  box-shadow: 0 8px 18px var(--mobile-accent-soft);
+}
+
+.metaphor-fixed-card-art,
+.metaphor-fixed-card strong {
+  display: grid;
+  place-items: center;
+}
+
+.metaphor-fixed-card-art {
+  min-height: 0;
+  overflow: hidden;
+  background: #070b11;
+}
+
+.metaphor-fixed-card-art img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.metaphor-fixed-card strong {
+  min-height: 34px;
+  background: color-mix(in srgb, var(--mobile-accent), black 8%);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 950;
+}
+
 @media (max-width: 900px) and (min-width: 561px) {
+  .metaphor-deck-tools {
+    grid-template-columns: 1fr;
+  }
+
+  .metaphor-deck-tools.is-life-variant {
+    grid-template-columns: 112px 112px minmax(0, 1fr);
+  }
+
+  .metaphor-deck-group .deck-option-grid {
+    grid-template-columns: repeat(auto-fit, minmax(84px, 1fr));
+  }
+
   .deck-option-grid {
     grid-template-columns: repeat(auto-fit, minmax(84px, 1fr));
   }

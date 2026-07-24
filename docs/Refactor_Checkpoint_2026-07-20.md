@@ -4,7 +4,7 @@
 
 ## 完成結果
 
-- `website/js/app.js` 由約 2800 行降至 1702 行。
+- `website/js/app.js` 由約 2800 行降至 1623 行左右；桌面牌組事件已再抽到 `deck-control-events.js`。
 - 頂層 `let` 由 34 個降至 4 個，只保留活動／牌組導航協調狀態：
   - `activeMode`
   - `activeLibrary`
@@ -22,6 +22,7 @@
 - 六玩法抽卡：`website/js/modes/`。
 - 卡片與結果畫面：`website/js/components/cards.js`、`results.js`。
 - 桌機牌組控制：`website/js/components/deck-controls.js`。
+- 桌機牌組操作事件：`website/js/components/deck-control-events.js`。
 - 手機儀表板與 modal：`website/js/components/mobile-dashboard.js`、`mobile-modals.js`。
 - 活動選單與桌手機殼層：`website/js/components/mode-shell.js`。
 - 圖片路徑、fallback、版位與編輯器：`website/js/services/image-service.js`、`website/js/components/image-editor.js`。

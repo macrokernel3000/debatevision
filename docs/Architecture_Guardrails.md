@@ -64,6 +64,8 @@ website/styles/
 ├── viewport-boundaries.css   # 桌機／手機顯示隔離，必須最後載入
 └── components/
     ├── class-timer.css       # 計時器所有寬度的樣式
+    ├── deck-option-cards.css # 桌機牌組選擇圖卡
+    ├── secret-place.css      # 推理解密桌機場地棋盤
     ├── mobile-modals.css     # 手機卡池編輯與卡牌美術預覽彈窗
     ├── mobile-mode-images.css # 手機活動圖載入狀態
     └── mobile-survival-results.css # 手機鎖定與重抽操作
@@ -96,6 +98,9 @@ website/styles/
 - `core`、`services`、`components`、`modes` 是否又出現過大的單檔。
 - `app.js` 頂層可變狀態是否增加。
 - CSS 與 JavaScript 的必要載入順序。
+- 卡牌 CSV、內容 CSV、玩法 JSON 的欄位與交叉引用契約。
+- 所有來源 CSV / JSON 重新計算後是否與 generated 完全一致，防止改完內容卻忘記重建。
+- 來源圖片路徑與手機縮圖／Banner 衍生圖是否存在；`.DS_Store` 等系統檔由 `.gitignore` 處理。
 - 桌機／手機 DOM marker 與邊界樣式是否仍存在。
 - 是否有人把 `data-ui-surface` 的控制規則散落回其他 CSS。
 - `scripts/check-game-modes.mjs` 是否能通過所有玩法 controller 與主要版本的抽卡契約。
@@ -105,6 +110,8 @@ website/styles/
 手機圖片路徑必須以目前頁面為基準交給 `image-service.js` 解析，不能使用會越過 GitHub Pages 專案子目錄的 `/assets/...`。首頁只載入 480px 縮圖，僅預載最常使用的異境求生 1080px Banner；其他 Banner 進入活動後才載入。
 
 `網站更新.command` 會在更新 generated data 後自動執行架構檢查。檢查失敗時，不應直接提高上限；先判斷新增內容應抽到哪個模組。
+
+它會先執行 `check-data-contracts.mjs`，只有資料正確才覆寫 generated data；因此錯欄或錯誤玩法引用不會污染上一份可用輸出。
 
 目前自動上限：
 

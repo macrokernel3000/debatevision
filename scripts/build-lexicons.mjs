@@ -1,4 +1,5 @@
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { dirname, extname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -12,6 +13,8 @@ const mobileUiContentPath = resolve(root, "data", "content", "手機介面文字
 const imageLayoutsDir = resolve(root, "data", "image-layouts");
 const generatedDir = resolve(root, "data", "generated");
 const fallbackCsvPath = resolve(root, "docs", "archive", "legacy", "總詞庫備份.csv");
+const websiteIndexPath = resolve(root, "website", "index.html");
+const checkOnly = process.argv.includes("--check");
 
 const headerAliases = {
   "牌組ID": "deck_id",
@@ -450,31 +453,43 @@ const modes = buildModes();
 const imageLayouts = buildImageLayouts();
 const uiTexts = buildUiTexts();
 
-writeFileSync(
-  resolve(generatedDir, "decks.js"),
-  `window.DEBATE_DECKS = ${JSON.stringify(decks, null, 2)};\n`,
-  "utf8"
+const generatedOutputs = new Map([
+  ["decks.js", `window.DEBATE_DECKS = ${JSON.stringify(decks, null, 2)};\n`],
+  ["modes.js", `window.DEBATE_MODES = ${JSON.stringify(modes, null, 2)};\n`],
+  ["image-layouts.js", `window.DEBATE_IMAGE_LAYOUTS = ${JSON.stringify(imageLayouts, null, 2)};\n`],
+  ["ui-texts.js", `window.DEBATE_UI_TEXTS = ${JSON.stringify(uiTexts, null, 2)};\n`]
+]);
+const generatedVersion = createHash("sha256")
+  .update([...generatedOutputs.values()].join("\n"))
+  .digest("hex")
+  .slice(0, 10);
+const currentIndexHtml = readFileSync(websiteIndexPath, "utf8");
+const versionedIndexHtml = currentIndexHtml.replace(
+  /(\.\.\/data\/generated\/(?:decks|modes|image-layouts|ui-texts)\.js)(?:\?v=[^"]*)?/g,
+  `$1?v=${generatedVersion}`
 );
 
-writeFileSync(
-  resolve(generatedDir, "modes.js"),
-  `window.DEBATE_MODES = ${JSON.stringify(modes, null, 2)};\n`,
-  "utf8"
-);
-
-writeFileSync(
-  resolve(generatedDir, "image-layouts.js"),
-  `window.DEBATE_IMAGE_LAYOUTS = ${JSON.stringify(imageLayouts, null, 2)};\n`,
-  "utf8"
-);
-
-writeFileSync(
-  resolve(generatedDir, "ui-texts.js"),
-  `window.DEBATE_UI_TEXTS = ${JSON.stringify(uiTexts, null, 2)};\n`,
-  "utf8"
-);
-
-console.log(`已更新 ${resolve(generatedDir, "decks.js")}`);
-console.log(`已更新 ${resolve(generatedDir, "modes.js")}`);
-console.log(`已更新 ${resolve(generatedDir, "image-layouts.js")}`);
-console.log(`已更新 ${resolve(generatedDir, "ui-texts.js")}`);
+if (checkOnly) {
+  const staleFiles = [];
+  for (const [filename, expected] of generatedOutputs) {
+    const outputPath = resolve(generatedDir, filename);
+    const actual = existsSync(outputPath) ? readFileSync(outputPath, "utf8") : "";
+    if (actual !== expected) staleFiles.push(filename);
+  }
+  if (currentIndexHtml !== versionedIndexHtml) staleFiles.push("website/index.html 的 generated 快取版本");
+  if (staleFiles.length) {
+    console.error(`CSV / JSON 尚未掛入 generated：${staleFiles.join("、")}。請執行 node scripts/build-lexicons.mjs`);
+    process.exit(1);
+  }
+  console.log(`generated 與所有來源 CSV / JSON 一致：${modes.length} 個活動、${Object.keys(uiTexts).length} 筆介面文字。`);
+} else {
+  for (const [filename, content] of generatedOutputs) {
+    const outputPath = resolve(generatedDir, filename);
+    writeFileSync(outputPath, content, "utf8");
+    console.log(`已更新 ${outputPath}`);
+  }
+  if (currentIndexHtml !== versionedIndexHtml) {
+    writeFileSync(websiteIndexPath, versionedIndexHtml, "utf8");
+    console.log(`已更新 generated 快取版本 ${generatedVersion}`);
+  }
+}

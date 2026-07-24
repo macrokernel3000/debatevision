@@ -30,7 +30,7 @@
     }
 
     function rarityOrder(rarity) {
-      return ({ A: 1, B: 2, C: 3, N: 4, 概念: 5, 需求: 6 })[rarity] || 99;
+      return ({ A: 1, B: 2, C: 3, N: 4, 人生: 5, 概念: 6, 需求: 7 })[rarity] || 99;
     }
 
     function raritiesFrom(deckId) {
@@ -41,6 +41,7 @@
     function rarityDisplayName(rarity) {
       if (rarity === "概念") return "概念卡";
       if (rarity === "需求") return "需求卡";
+      if (rarity === "人生") return "人生卡";
       if (summonCategories.includes(rarity)) return `${rarity}卡`;
       return rarity === "N" ? "道具卡" : `${rarity} 卡`;
     }

@@ -9,17 +9,16 @@
   "secondaryDeck": "relations",
   "metaphorConcreteDecks": ["items", "creatures"],
   "metaphorDecks": ["concepts", "needs"],
-  "metaphorFreeDecks": ["worlds", "creatures", "items", "roles", "locations", "celebrities", "needs", "concepts"],
   "primaryLabel": "概念卡",
   "secondaryLabel": "關係卡",
   "drawLabel": "抽出隱喻命題",
   "cardMode": "metaphorCompass",
   "fixedCount": 2,
-  "description": "先用「人生就像……」練習具體比喻，再進階到抽象概念與自由詞庫的關係命題。",
+  "description": "先用人生版的「人生就像……」練習比喻，再進階到抽象概念之間的關係命題。",
   "prompts": [
     [
       "重新定義",
-      "具體版先找相似點，抽象版再練習重新定義兩端詞語。"
+      "人生版先找相似點，抽象版再練習重新定義兩端詞語。"
     ],
     [
       "找到角度",
@@ -31,8 +30,8 @@
     ]
   ],
   "flow": [
-    "選擇具體版、抽象版或自由版",
-    "具體版固定「人生」「就像」，只抽後綴卡",
+    "選擇人生版或抽象版",
+    "人生版固定從人生子池抽出「人生」「就像」，只抽後綴卡",
     "抽象版抽前綴、關係卡與後綴，組成「A 關係 C」命題",
     "30 秒找相似點或定義兩端詞語",
     "45 秒提出一個可成立的解釋角度",

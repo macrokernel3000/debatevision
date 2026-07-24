@@ -42,9 +42,15 @@ const pools = {
   roles: Array.from({ length: 6 }, (_, index) => card(`role-${index + 1}`, "roles")),
   creatures: Array.from({ length: 6 }, (_, index) => card(`creature-${index + 1}`, "creatures")),
   celebrities: Array.from({ length: 4 }, (_, index) => card(`celebrity-${index + 1}`, "celebrities")),
-  concepts: Array.from({ length: 4 }, (_, index) => card(`concept-${index + 1}`, "concepts", "概念")),
+  concepts: [
+    card("人生", "concepts", "人生"),
+    ...Array.from({ length: 4 }, (_, index) => card(`concept-${index + 1}`, "concepts", "概念"))
+  ],
   needs: Array.from({ length: 4 }, (_, index) => card(`need-${index + 1}`, "needs", "需求")),
-  relations: Array.from({ length: 4 }, (_, index) => card(`relation-${index + 1}`, "relations")),
+  relations: [
+    card("就像", "relations", "人生"),
+    ...Array.from({ length: 4 }, (_, index) => card(`relation-${index + 1}`, "relations"))
+  ],
   locations: Array.from({ length: 4 }, (_, index) => card(`location-${index + 1}`, "locations")),
   summons: [
     ...Array.from({ length: 5 }, (_, index) => card(`alien-${index + 1}`, "summons", "異族")),
@@ -93,9 +99,11 @@ function createContext(overrides = {}) {
     cardWithSalesNeedHooks: (value) => ({ ...value, hooks: [`need:${value.name}`] }),
     cardWithSalesStoryHooks: (value) => ({ ...value, hooks: [`story:${value.name}`] }),
     cardWithSalesTargetHooks: (value) => ({ ...value, hooks: [`target:${value.name}`] }),
-    fixedMetaphorPrefixCard: () => card("人生", "metaphor-fixed"),
-    fixedMetaphorRelationCard: () => card("就像", "metaphor-fixed"),
+    fixedMetaphorPrefixCard: () => pools.concepts.find((value) => value.name === "人生" && value.rarity === "人生"),
+    fixedMetaphorRelationCard: () => pools.relations.find((value) => value.name === "就像" && value.rarity === "人生"),
     importanceActiveDeckIds: () => ["items", "roles"],
+    importanceSideDeckIds: () => ["items", "roles"],
+    isMobileView: true,
     markDrawn: (cards) => calls.push(["markDrawn", cards]),
     pickFrom: (deckId, count) => pickFromPool([...(pools[deckId] || [])], count),
     pickFromAvailable: (deckId, count, excludedKeys = new Set()) => pickFromPool(
@@ -106,6 +114,7 @@ function createContext(overrides = {}) {
     renderCombo: (...args) => calls.push(["renderCombo", ...args]),
     renderDuel: (...args) => calls.push(["renderDuel", ...args]),
     renderMetaphorCompass: (...args) => calls.push(["renderMetaphorCompass", ...args]),
+    renderSalesPair: (...args) => calls.push(["renderSalesPair", ...args]),
     renderPoolWarning: () => {
       calls.push(["renderPoolWarning"]);
       return [];
@@ -190,10 +199,10 @@ for (const [salesVariant, salesNoConcept, expectedLength] of [
   const { calls, ctx } = createContext({ salesVariant, salesNoConcept });
   const result = controllers.salesPitch.draw(ctx);
   assert.equal(result.length, expectedLength, `sales ${salesVariant}`);
-  assertCall(calls, "renderCombo");
+  assertCall(calls, "renderSalesPair");
   assertCall(calls, "markDrawn");
   if (salesVariant === "story" && salesNoConcept) {
-    const stageCard = calls.find(([name]) => name === "renderCombo")[1];
+    const stageCard = calls.find(([name]) => name === "renderSalesPair")[2];
     assert.equal(stageCard.deckId, "concepts");
     assert.ok(Array.isArray(stageCard.hooks) && stageCard.hooks.length > 0);
   }
@@ -208,6 +217,11 @@ for (const metaphorVariant of ["concrete", "abstract", "free"]) {
   assert.equal(result.length, 3, `metaphor ${metaphorVariant}`);
   assertCall(calls, "renderMetaphorCompass");
   assertCall(calls, "markDrawn");
+  if (metaphorVariant === "concrete") {
+    const markedCards = calls.find(([name]) => name === "markDrawn")[1];
+    assert.equal(markedCards.length, 1, "人生版只消耗後綴卡");
+    assert.ok(markedCards.every((value) => value.name !== "人生" && value.name !== "就像"));
+  }
 }
 
 {
@@ -230,5 +244,5 @@ console.log("玩法煙霧檢查通過。");
 console.log(`- ${Object.keys(controllers).length} 個玩法 controller`);
 console.log("- 異境求生：求生版、冒險版");
 console.log("- 銷售密令：供需版、故事版（含無概念）、目標版");
-console.log("- 隱喻羅盤：具象版、抽象版、自由版");
+console.log("- 隱喻羅盤：人生版、抽象版、自由版；人生與就像不消耗");
 console.log("- 現實召喚、誰更重要、推理解密");

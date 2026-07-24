@@ -10,11 +10,29 @@ if [ -x "$CODEX_PYTHON" ] && [ -f "./scripts/optimize-images.py" ]; then
   "$CODEX_PYTHON" ./scripts/optimize-images.py
 fi
 
+echo "正在檢查卡牌與玩法資料契約..."
+if ! /usr/bin/env node ./scripts/check-data-contracts.mjs; then
+  echo ""
+  echo "資料契約檢查失敗，已停止產生網站資料，避免錯誤覆蓋 generated 檔案。"
+  echo "按 Enter 結束。"
+  read
+  exit 1
+fi
+
+echo "正在檢查圖片路徑與手機衍生圖..."
+if ! /usr/bin/env node ./scripts/check-assets.mjs; then
+  echo ""
+  echo "圖片檢查失敗，已停止產生網站資料。"
+  echo "按 Enter 結束。"
+  read
+  exit 1
+fi
+
 /usr/bin/env node ./scripts/build-lexicons.mjs
 
 echo "正在檢查程式架構與所有玩法..."
 ARCHITECTURE_STATUS=0
-if ! /usr/bin/env node ./scripts/check-architecture.mjs; then
+if ! /usr/bin/env node ./scripts/check-architecture.mjs --skip-data --skip-assets; then
   ARCHITECTURE_STATUS=1
   echo ""
   echo "架構檢查失敗，網站資料已產生，但程式需要先依提示拆分。"

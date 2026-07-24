@@ -1,0 +1,45 @@
+.brand-lockup {
+  min-width: 0;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.brand-logo {
+  width: 72px;
+  height: 72px;
+  flex: 0 0 72px;
+  display: block;
+  border: 1px solid rgba(199, 144, 34, 0.5);
+  border-radius: 20px;
+  background: #000;
+  object-fit: cover;
+  box-shadow:
+    0 10px 26px rgba(27, 20, 13, 0.18),
+    0 0 0 4px rgba(255, 255, 255, 0.72);
+}
+
+.brand-copy {
+  min-width: 0;
+}
+
+@media (max-width: 560px) {
+  .brand-lockup {
+    gap: 8px;
+  }
+
+  .brand-logo {
+    width: 42px;
+    height: 42px;
+    flex-basis: 42px;
+    border-radius: 12px;
+    box-shadow:
+      0 5px 14px rgba(27, 20, 13, 0.16),
+      0 0 0 2px rgba(255, 255, 255, 0.76);
+  }
+
+  .brand-copy {
+    line-height: 1;
+  }
+
+}

@@ -11,7 +11,7 @@
   "secondaryLabel": "",
   "drawLabel": "儲存成這場",
   "cardMode": "cardDictionary",
-  "description": "瀏覽目前所有卡片類型，勾選卡池後直接挑選本場要用的卡，讓老師自由發明活動。",
+  "description": "瀏覽目前所有卡片類型，勾選卡池後直接挑選本場要用的卡。",
   "prompts": [
     [
       "自由組合",

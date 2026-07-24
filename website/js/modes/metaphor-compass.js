@@ -20,8 +20,7 @@
       ctx.markDrawn(drawnCards.filter((card) => (
         card !== lockedPrefix &&
         card !== lockedRelation &&
-        card !== lockedSuffix &&
-        card.deckId !== "metaphor-fixed"
+        card !== lockedSuffix
       )));
       return drawnCards;
     },

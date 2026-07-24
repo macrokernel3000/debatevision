@@ -17,7 +17,7 @@
     const need = ctx.pickFrom("needs", 1)[0];
     const items = ctx.pickFrom("items", ctx.count).map((card) => ctx.cardWithSalesNeedHooks(card, need));
     if (!need || items.length < ctx.count) return ctx.renderPoolWarning();
-    ctx.renderCombo(need, items, "本輪需求", { hideStageInDesktopResults: true });
+    ctx.renderSalesPair(items, need, { left: "我的產品", right: "客戶需求" });
     ctx.markDrawn([need, ...items]);
     return [need, ...items];
   }
@@ -39,7 +39,7 @@
         "把平凡商品包裝成讓人願意購買的故事。"
       ]
     };
-    ctx.renderCombo(stageCard, items, "故事主題", { hideStageInDesktopResults: true });
+    ctx.renderSalesPair(items, stageCard, { left: "我的產品", right: "什麼特色" });
     if (concept) ctx.markDrawn([concept, ...items]);
     else ctx.markDrawn(items);
     return concept ? [concept, ...items] : items;
@@ -49,7 +49,7 @@
     const audience = ctx.pickFromPool([...ctx.selectedSalesAudienceCards()], 1)[0];
     const items = ctx.pickFrom("items", ctx.count).map((card) => ctx.cardWithSalesTargetHooks(card, audience));
     if (!audience || items.length < ctx.count) return ctx.renderPoolWarning();
-    ctx.renderCombo(audience, items, "本輪目標", { hideStageInDesktopResults: true });
+    ctx.renderSalesPair(items, audience, { left: "我的產品", right: "目標課群" });
     ctx.markDrawn([audience, ...items]);
     return [audience, ...items];
   }

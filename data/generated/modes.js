@@ -128,7 +128,7 @@ window.DEBATE_MODES = [
     "drawLabel": "抽出對決卡牌",
     "cardMode": "importanceDuel",
     "fixedCount": 2,
-    "description": "直接抽兩張卡牌進行比較。可以切換不同牌組。",
+    "description": "紅角與藍角各選一個牌池，抽出兩張卡牌跨類別比較誰更重要。",
     "prompts": [
       [
         "建立標準",
@@ -144,8 +144,8 @@ window.DEBATE_MODES = [
       ]
     ],
     "flow": [
-      "選定本局要比較的詞庫",
-      "抽 2 張卡牌",
+      "紅角與藍角各選一個要比較的詞庫",
+      "兩邊各抽 1 張卡牌",
       "左右兩方各 30 秒建立標準",
       "互相質疑一次",
       "觀眾投票：誰的比較標準更合理"
@@ -159,7 +159,7 @@ window.DEBATE_MODES = [
     ],
     "statusRules": {
       "default": "抽出兩張卡牌，建立比較標準，說服大家誰更重要。",
-      "duel": "比較本局選定的卡池，找出真正關鍵的一方。"
+      "duel": "紅角與藍角各選一個牌池，再抽出卡牌進行跨卡池比較。"
     },
     "menuLabel": "卡牌 × 比較",
     "palette": "gold"
@@ -182,6 +182,12 @@ window.DEBATE_MODES = [
     },
     "drawLabel": "抽出銷售題目",
     "cardMode": "salesPitch",
+    "salesAudienceDecks": [
+      "creatures",
+      "roles",
+      "celebrities",
+      "summons"
+    ],
     "description": "向我賣出一支筆？把產品加諸故事或價值，讓他人意識到內在的需求。",
     "prompts": [
       [
@@ -219,6 +225,7 @@ window.DEBATE_MODES = [
       "target": "目標版：先抽目標，再抽商品，判斷產品該怎麼賣給不同客戶。",
       "target_creatures": "目標版：把商品賣給動物，找出牠們可能在意的需求。",
       "target_roles": "目標版：把商品賣給不同職業，對準工作情境與痛點。",
+      "target_celebrities": "目標版：把商品賣給名人，結合他的身分、經歷與公眾形象設計賣點。",
       "target_summons": "目標版：把商品賣給召喚異族，從陌生文化或能力限制找賣點。"
     },
     "menuLabel": "供需 × 故事 × 目標",
@@ -241,16 +248,6 @@ window.DEBATE_MODES = [
       "concepts",
       "needs"
     ],
-    "metaphorFreeDecks": [
-      "worlds",
-      "creatures",
-      "items",
-      "roles",
-      "locations",
-      "celebrities",
-      "needs",
-      "concepts"
-    ],
     "primaryLabel": "概念卡",
     "secondaryLabel": "關係卡",
     "drawLabel": "抽出隱喻命題",
@@ -260,7 +257,7 @@ window.DEBATE_MODES = [
     "prompts": [
       [
         "入門比喻",
-        "具體版：人生和這個後綴詞哪裡像？"
+        "人生版：人生和這個後綴詞哪裡像？"
       ],
       [
         "進階命題",
@@ -268,10 +265,9 @@ window.DEBATE_MODES = [
       ]
     ],
     "flow": [
-      "選擇具體版、抽象版或自由版",
-      "具體版固定「人生就像⋯⋯」，只抽物品或動物作為後綴",
+      "選擇人生版或抽象版",
+      "人生版固定從人生子池抽「人生」與「就像」，只抽物品或動物作為後綴",
       "抽象版抽前綴、關係卡與後綴，組成「A 關係 C」命題",
-      "自由版前綴與後綴可選任意詞庫，中間維持關係卡",
       "30 秒找相似點或定義兩端詞語",
       "可鎖定前綴、介係或後綴，再重抽其他位置練習變化"
     ],
@@ -283,9 +279,8 @@ window.DEBATE_MODES = [
     ],
     "statusRules": {
       "default": "抽出詞語與關係，組成一句命題，解釋為什麼這個關係可以成立。",
-      "concrete": "具體版：「人生就像⋯⋯」什麼物品或動物呢？",
-      "abstract": "抽象版：抽出前綴、關係與後綴，解釋抽象命題為什麼成立。",
-      "free": "自由版：前綴與後綴可選任意詞庫，中間用關係卡連成命題。"
+      "concrete": "人生版：「人生就像⋯⋯」。",
+      "abstract": "抽象版：抽出前綴、關係與後綴，解釋抽象命題為什麼成立。"
     },
     "menuLabel": "比喻 × 命題",
     "palette": "earth"
@@ -353,7 +348,7 @@ window.DEBATE_MODES = [
     "secondaryLabel": "",
     "drawLabel": "儲存成這場",
     "cardMode": "cardDictionary",
-    "description": "瀏覽目前所有卡片類型，勾選卡池後直接挑選本場要用的卡，讓老師自由發明活動。",
+    "description": "瀏覽目前所有卡片類型，勾選卡池後直接挑選本場要用的卡。",
     "prompts": [
       [
         "自由組合",

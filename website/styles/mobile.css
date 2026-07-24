@@ -79,44 +79,6 @@
     display: none !important;
   }
 
-  .mobile-home-hero {
-    min-height: 154px;
-    display: grid;
-    align-content: end;
-    gap: 5px;
-    overflow: hidden;
-    border-radius: 16px;
-    padding: 18px;
-    background: linear-gradient(120deg, #15110f, #4c241f);
-    color: #fff;
-    box-shadow: 0 20px 42px rgba(25, 24, 20, 0.2);
-  }
-
-  .mobile-home-hero p,
-  .mobile-home-hero h2,
-  .mobile-home-hero span {
-    margin: 0;
-  }
-
-  .mobile-home-hero p {
-    color: #ffb0a8;
-    font-size: 0.7rem;
-    font-weight: 1000;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .mobile-home-hero h2 {
-    font-size: 1.8rem;
-    line-height: 1;
-  }
-
-  .mobile-home-hero span {
-    color: rgba(255, 255, 255, 0.82);
-    font-size: 0.78rem;
-    font-weight: 800;
-  }
-
   .mobile-home-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -816,8 +778,8 @@
   }
 
   .mobile-metaphor-deck-layout.is-concrete {
-    grid-template-columns: 92px minmax(0, 1fr);
-    gap: 10px;
+    grid-template-columns: 72px 72px minmax(0, 1fr);
+    gap: 7px;
   }
 
   .mobile-metaphor-deck-group {
@@ -881,14 +843,24 @@
     box-shadow: 0 10px 22px var(--mobile-accent-soft);
   }
 
-  .mobile-metaphor-fixed-phrase b,
+  .mobile-metaphor-fixed-art,
   .mobile-metaphor-fixed-phrase strong {
     display: grid;
     place-items: center;
   }
 
-  .mobile-metaphor-fixed-phrase b {
+  .mobile-metaphor-fixed-art {
+    min-height: 0;
+    overflow: hidden;
+    background: #070b11;
     font-size: 1rem;
+  }
+
+  .mobile-metaphor-fixed-art img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
   }
 
   .mobile-metaphor-fixed-phrase strong {

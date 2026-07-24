@@ -6,6 +6,8 @@
       dashboard,
       deckTone,
       decks,
+      fixedMetaphorPrefixCard,
+      fixedMetaphorRelationCard,
       getActiveLibrary,
       getActiveMode,
       getActiveSecondaryLibrary,
@@ -234,17 +236,18 @@
       const metaphorDecks = mode.cardMode === "metaphorCompass"
         ? {
             concrete: metaphor.variant === "concrete",
+            fixedPrefix: metaphor.variant === "concrete" ? fixedMetaphorPrefixCard() : null,
+            fixedRelation: metaphor.variant === "concrete" ? fixedMetaphorRelationCard() : null,
+            relationCover: sharedDeckCover("relations"),
             prefix: metaphor.variant === "concrete"
               ? []
-              : (metaphor.variant === "free" ? (mode.metaphorFreeDecks || []) : (mode.metaphorDecks || []))
+              : (mode.metaphorDecks || [])
                 .filter((deckId) => decks[deckId])
                 .map((deckId) => metaphorDeck(deckId, "prefix")),
             relation: metaphorDeck(getActiveSecondaryLibrary(), "relation"),
             suffix: (metaphor.variant === "concrete"
               ? mode.metaphorConcreteDecks || []
-              : metaphor.variant === "free"
-                ? mode.metaphorFreeDecks || []
-                : mode.metaphorDecks || [])
+              : mode.metaphorDecks || [])
               .filter((deckId) => decks[deckId])
               .map((deckId) => metaphorDeck(deckId, "suffix"))
           }

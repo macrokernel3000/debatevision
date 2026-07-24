@@ -92,12 +92,21 @@
     const groups = state.metaphorDecks;
     if (!groups) return "";
     if (groups.concrete) {
+      const prefixImage = groups.fixedPrefix?.image || groups.fixedPrefix?.iconAsset || "";
+      const relationImage = groups.fixedRelation?.image || groups.fixedRelation?.iconAsset || groups.relationCover?.image || "";
       return `
         <div class="mobile-metaphor-deck-layout is-concrete">
           <div class="mobile-metaphor-deck-group is-fixed-prefix">
-            <span>固定前綴</span>
-            <div class="mobile-metaphor-fixed-phrase" aria-label="固定前綴：人生就像">
-              <b>人生</b>
+            <span>前綴</span>
+            <div class="mobile-metaphor-fixed-phrase" aria-label="固定前綴：人生">
+              <span class="mobile-metaphor-fixed-art">${prefixImage ? `<img src="${prefixImage}" alt="" aria-hidden="true" />` : "🧭"}</span>
+              <strong>人生</strong>
+            </div>
+          </div>
+          <div class="mobile-metaphor-deck-group is-fixed-relation">
+            <span>介係</span>
+            <div class="mobile-metaphor-fixed-phrase" aria-label="固定介係：就像">
+              <span class="mobile-metaphor-fixed-art">${relationImage ? `<img src="${relationImage}" alt="" aria-hidden="true" />` : "≈"}</span>
               <strong>就像</strong>
             </div>
           </div>
@@ -160,18 +169,14 @@
     if (state.cardMode === "metaphorCompass") {
       return `
         <div class="mobile-survival-mode-grid mobile-sales-mode-grid" role="group" aria-label="隱喻羅盤版本">
-          ${["concrete", "abstract", "free"].map((variant) => `
+          ${["concrete", "abstract"].map((variant) => `
             <button type="button" class="mobile-survival-mode ${state.metaphorVariant === variant ? "is-active" : ""}" data-mobile-metaphor-variant="${variant}">
               <strong>${variant === "concrete"
                 ? mobileText("mobile.metaphor.concrete", state.metaphorVariantLabel(variant))
-                : variant === "abstract"
-                  ? mobileText("mobile.metaphor.abstract", state.metaphorVariantLabel(variant))
-                  : mobileText("mobile.metaphor.free", state.metaphorVariantLabel(variant))}</strong>
+                : mobileText("mobile.metaphor.abstract", state.metaphorVariantLabel(variant))}</strong>
               <span>${mobileText(`mobile.metaphor.${variant}Description`, variant === "concrete"
-                ? "用「人生就像」連結一個具體事物"
-                : variant === "abstract"
-                  ? "連結兩個抽象概念並說明關係"
-                  : "自由選擇詞庫組合隱喻命題")}</span>
+                ? "固定抽出「人生」「就像」，再連結一個具體事物"
+                : "連結兩個抽象概念並說明關係")}</span>
             </button>
           `).join("")}
         </div>

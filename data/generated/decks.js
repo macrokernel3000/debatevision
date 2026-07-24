@@ -1719,10 +1719,10 @@ window.DEBATE_DECKS = {
       {
         "name": "舞台戲劇院",
         "lore": "燈光、布景與後台通道交錯，適合表演、偽裝與臨場發揮，但觀眾與時間壓力會放大失誤。",
-        "imageId": "location_stage_theater",
-        "icon": "",
-        "iconAsset": "../assets/icons/locations/location_stage_theater.svg",
-        "tokenIcon": "",
+        "imageId": "🎭",
+        "icon": "🎭",
+        "iconAsset": "",
+        "tokenIcon": "🎭",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -1732,10 +1732,10 @@ window.DEBATE_DECKS = {
       {
         "name": "工地",
         "lore": "建材、機具與未完成結構很多，能找到大量臨時工具，但噪音、墜落與安全風險很高。",
-        "imageId": "location_construction_site",
-        "icon": "",
-        "iconAsset": "../assets/icons/locations/location_construction_site.svg",
-        "tokenIcon": "",
+        "imageId": "🚧",
+        "icon": "🚧",
+        "iconAsset": "",
+        "tokenIcon": "🚧",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -1745,10 +1745,10 @@ window.DEBATE_DECKS = {
       {
         "name": "潛水艇",
         "lore": "空間狹窄、氧氣有限、艙室分明，團隊溝通與維修能力會直接影響生存。",
-        "imageId": "location_submarine",
-        "icon": "",
-        "iconAsset": "../assets/icons/locations/location_submarine.svg",
-        "tokenIcon": "",
+        "imageId": "🛥️",
+        "icon": "🛥️",
+        "iconAsset": "",
+        "tokenIcon": "🛥️",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -1758,10 +1758,10 @@ window.DEBATE_DECKS = {
       {
         "name": "飛機",
         "lore": "高度、座位、行李與機組規則限制行動，任何混亂都必須在狹小通道中快速處理。",
-        "imageId": "location_airplane",
-        "icon": "",
-        "iconAsset": "../assets/icons/locations/location_airplane.svg",
-        "tokenIcon": "",
+        "imageId": "✈️",
+        "icon": "✈️",
+        "iconAsset": "",
+        "tokenIcon": "✈️",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -1771,10 +1771,10 @@ window.DEBATE_DECKS = {
       {
         "name": "體育場",
         "lore": "空間廣大、座位階梯多、出入口集中，適合群眾行動與追逐，也容易造成擁擠。",
-        "imageId": "location_stadium",
-        "icon": "",
-        "iconAsset": "../assets/icons/locations/location_stadium.svg",
-        "tokenIcon": "",
+        "imageId": "🏟️",
+        "icon": "🏟️",
+        "iconAsset": "",
+        "tokenIcon": "🏟️",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -1784,10 +1784,10 @@ window.DEBATE_DECKS = {
       {
         "name": "圖書館",
         "lore": "資訊、安靜與規則感很強，適合查找線索與藏身，但聲音與破壞行為很容易被注意。",
-        "imageId": "location_library",
-        "icon": "",
-        "iconAsset": "../assets/icons/locations/location_library.svg",
-        "tokenIcon": "",
+        "imageId": "📚",
+        "icon": "📚",
+        "iconAsset": "",
+        "tokenIcon": "📚",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -1797,10 +1797,10 @@ window.DEBATE_DECKS = {
       {
         "name": "太空站",
         "lore": "微重力、設備精密、資源封閉，任何小錯誤都可能連鎖成系統危機。",
-        "imageId": "location_space_station",
-        "icon": "",
-        "iconAsset": "../assets/icons/locations/location_space_station.svg",
-        "tokenIcon": "",
+        "imageId": "🛰️",
+        "icon": "🛰️",
+        "iconAsset": "",
+        "tokenIcon": "🛰️",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -1810,10 +1810,10 @@ window.DEBATE_DECKS = {
       {
         "name": "馬戲團",
         "lore": "帳篷、動物、道具與表演者混雜，充滿創意解法，也充滿不可預測的變數。",
-        "imageId": "location_circus",
-        "icon": "",
-        "iconAsset": "../assets/icons/locations/location_circus.svg",
-        "tokenIcon": "",
+        "imageId": "🎪",
+        "icon": "🎪",
+        "iconAsset": "",
+        "tokenIcon": "🎪",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -1823,10 +1823,10 @@ window.DEBATE_DECKS = {
       {
         "name": "動物園",
         "lore": "不同動物與區域設施形成天然關卡，能借助生物特性，也必須處理安全隔離。",
-        "imageId": "location_zoo",
-        "icon": "",
-        "iconAsset": "../assets/icons/locations/location_zoo.svg",
-        "tokenIcon": "",
+        "imageId": "🦁",
+        "icon": "🦁",
+        "iconAsset": "",
+        "tokenIcon": "🦁",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -1836,10 +1836,10 @@ window.DEBATE_DECKS = {
       {
         "name": "大賣場",
         "lore": "物資豐富、貨架密集、動線複雜，選擇很多但容易迷路或因爭奪資源失控。",
-        "imageId": "location_hypermarket",
-        "icon": "",
-        "iconAsset": "../assets/icons/locations/location_hypermarket.svg",
-        "tokenIcon": "",
+        "imageId": "🛒",
+        "icon": "🛒",
+        "iconAsset": "",
+        "tokenIcon": "🛒",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -1849,10 +1849,10 @@ window.DEBATE_DECKS = {
       {
         "name": "警察局",
         "lore": "有秩序、紀錄、拘留空間與防護裝備，適合建立規則，但也容易引發權力衝突。",
-        "imageId": "location_police_station",
-        "icon": "",
-        "iconAsset": "../assets/icons/locations/location_police_station.svg",
-        "tokenIcon": "",
+        "imageId": "🚓",
+        "icon": "🚓",
+        "iconAsset": "",
+        "tokenIcon": "🚓",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -1862,10 +1862,10 @@ window.DEBATE_DECKS = {
       {
         "name": "電影攝影棚",
         "lore": "布景、道具、燈光與假場景很多，適合製造假象與拍攝證據，但真實與虛構容易混淆。",
-        "imageId": "location_film_studio",
-        "icon": "",
-        "iconAsset": "../assets/icons/locations/location_film_studio.svg",
-        "tokenIcon": "",
+        "imageId": "🎬",
+        "icon": "🎬",
+        "iconAsset": "",
+        "tokenIcon": "🎬",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -1875,10 +1875,10 @@ window.DEBATE_DECKS = {
       {
         "name": "海盜船",
         "lore": "甲板、船艙、繩索與海上限制並存，行動要考慮風浪、空間與團隊紀律。",
-        "imageId": "location_pirate_ship",
-        "icon": "",
-        "iconAsset": "../assets/icons/locations/location_pirate_ship.svg",
-        "tokenIcon": "",
+        "imageId": "🏴‍☠️",
+        "icon": "🏴‍☠️",
+        "iconAsset": "",
+        "tokenIcon": "🏴‍☠️",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -1888,10 +1888,10 @@ window.DEBATE_DECKS = {
       {
         "name": "沙灘",
         "lore": "視野開闊、水陸交界明顯，適合尋找漂流物與訊號，但遮蔽少、曝曬強。",
-        "imageId": "location_beach",
-        "icon": "",
-        "iconAsset": "../assets/icons/locations/location_beach.svg",
-        "tokenIcon": "",
+        "imageId": "🏖️",
+        "icon": "🏖️",
+        "iconAsset": "",
+        "tokenIcon": "🏖️",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -1901,10 +1901,10 @@ window.DEBATE_DECKS = {
       {
         "name": "廚藝學校",
         "lore": "食材、刀具、火源與教室設備齊全，適合資源轉換，但安全與衛生問題不能忽略。",
-        "imageId": "location_culinary_school",
-        "icon": "",
-        "iconAsset": "../assets/icons/locations/location_culinary_school.svg",
-        "tokenIcon": "",
+        "imageId": "👨‍🍳",
+        "icon": "👨‍🍳",
+        "iconAsset": "",
+        "tokenIcon": "👨‍🍳",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -1914,10 +1914,10 @@ window.DEBATE_DECKS = {
       {
         "name": "天堂",
         "lore": "規則可能過於美好或不合常理，適合討論願望、代價與價值選擇。",
-        "imageId": "location_heaven",
-        "icon": "",
-        "iconAsset": "../assets/icons/locations/location_heaven.svg",
-        "tokenIcon": "",
+        "imageId": "☁️",
+        "icon": "☁️",
+        "iconAsset": "",
+        "tokenIcon": "☁️",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -1927,10 +1927,10 @@ window.DEBATE_DECKS = {
       {
         "name": "監獄",
         "lore": "高牆、鎖、監控與固定作息形成強限制，逃脫、秩序與信任是主要挑戰。",
-        "imageId": "location_prison",
-        "icon": "",
-        "iconAsset": "../assets/icons/locations/location_prison.svg",
-        "tokenIcon": "",
+        "imageId": "🔒",
+        "icon": "🔒",
+        "iconAsset": "",
+        "tokenIcon": "🔒",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -1940,10 +1940,10 @@ window.DEBATE_DECKS = {
       {
         "name": "學校",
         "lore": "教室、操場、辦公室與器材室提供多樣資源，熟悉的空間也可能暴露固定思維。",
-        "imageId": "location_school",
-        "icon": "",
-        "iconAsset": "../assets/icons/locations/location_school.svg",
-        "tokenIcon": "",
+        "imageId": "🏫",
+        "icon": "🏫",
+        "iconAsset": "",
+        "tokenIcon": "🏫",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -1953,10 +1953,10 @@ window.DEBATE_DECKS = {
       {
         "name": "夜市",
         "lore": "人潮、攤位、食物與聲音密集，適合交易與打聽消息，但混亂會降低判斷。",
-        "imageId": "location_night_market",
-        "icon": "",
-        "iconAsset": "../assets/icons/locations/location_night_market.svg",
-        "tokenIcon": "",
+        "imageId": "🏮",
+        "icon": "🏮",
+        "iconAsset": "",
+        "tokenIcon": "🏮",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -1966,10 +1966,10 @@ window.DEBATE_DECKS = {
       {
         "name": "農場",
         "lore": "土地、動物、工具與季節節奏明顯，適合長期生存，但短期防禦與交通較弱。",
-        "imageId": "location_farm",
-        "icon": "",
-        "iconAsset": "../assets/icons/locations/location_farm.svg",
-        "tokenIcon": "",
+        "imageId": "🚜",
+        "icon": "🚜",
+        "iconAsset": "",
+        "tokenIcon": "🚜",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -1979,10 +1979,10 @@ window.DEBATE_DECKS = {
       {
         "name": "戰場",
         "lore": "危險、資源破碎、資訊混亂，任何行動都要在風險與目標之間取捨。",
-        "imageId": "location_battlefield",
-        "icon": "",
-        "iconAsset": "../assets/icons/locations/location_battlefield.svg",
-        "tokenIcon": "",
+        "imageId": "⚔️",
+        "icon": "⚔️",
+        "iconAsset": "",
+        "tokenIcon": "⚔️",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -1992,10 +1992,10 @@ window.DEBATE_DECKS = {
       {
         "name": "育嬰室",
         "lore": "嬰兒、照護物資與安靜需求形成特殊限制，保護弱小與降低噪音是核心任務。",
-        "imageId": "location_nursery",
-        "icon": "",
-        "iconAsset": "../assets/icons/locations/location_nursery.svg",
-        "tokenIcon": "",
+        "imageId": "👶",
+        "icon": "👶",
+        "iconAsset": "",
+        "tokenIcon": "👶",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -2005,10 +2005,10 @@ window.DEBATE_DECKS = {
       {
         "name": "實驗室",
         "lore": "儀器、藥品與未知樣本很多，適合研究與驗證，也可能因誤操作造成危險。",
-        "imageId": "location_laboratory",
-        "icon": "",
-        "iconAsset": "../assets/icons/locations/location_laboratory.svg",
-        "tokenIcon": "",
+        "imageId": "🧪",
+        "icon": "🧪",
+        "iconAsset": "",
+        "tokenIcon": "🧪",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -2018,10 +2018,10 @@ window.DEBATE_DECKS = {
       {
         "name": "競技場",
         "lore": "規則明確、觀眾壓力高、勝負導向強，適合設計對抗策略與臨場辯護。",
-        "imageId": "location_arena",
-        "icon": "",
-        "iconAsset": "../assets/icons/locations/location_arena.svg",
-        "tokenIcon": "",
+        "imageId": "🏛️",
+        "icon": "🏛️",
+        "iconAsset": "",
+        "tokenIcon": "🏛️",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -2031,10 +2031,10 @@ window.DEBATE_DECKS = {
       {
         "name": "紡織廠",
         "lore": "布料、線材、機械與流水線資源豐富，可製作防護與陷阱，但機械風險高。",
-        "imageId": "location_textile_factory",
-        "icon": "",
-        "iconAsset": "../assets/icons/locations/location_textile_factory.svg",
-        "tokenIcon": "",
+        "imageId": "🧵",
+        "icon": "🧵",
+        "iconAsset": "",
+        "tokenIcon": "🧵",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -2044,10 +2044,10 @@ window.DEBATE_DECKS = {
       {
         "name": "公園廣場",
         "lore": "開放、公共、可聚集，適合宣傳、協商與觀察人群，但缺乏天然防護。",
-        "imageId": "location_park_square",
-        "icon": "",
-        "iconAsset": "../assets/icons/locations/location_park_square.svg",
-        "tokenIcon": "",
+        "imageId": "🌳",
+        "icon": "🌳",
+        "iconAsset": "",
+        "tokenIcon": "🌳",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -2057,10 +2057,10 @@ window.DEBATE_DECKS = {
       {
         "name": "博物館",
         "lore": "展品、歷史資訊與保全系統並存，適合查證與解謎，但破壞代價很高。",
-        "imageId": "location_museum",
-        "icon": "",
-        "iconAsset": "../assets/icons/locations/location_museum.svg",
-        "tokenIcon": "",
+        "imageId": "🏺",
+        "icon": "🏺",
+        "iconAsset": "",
+        "tokenIcon": "🏺",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -2070,10 +2070,10 @@ window.DEBATE_DECKS = {
       {
         "name": "月球基地",
         "lore": "低重力、氧氣與能源受限，行動要依賴設備，任何外出都需要精密計畫。",
-        "imageId": "location_moon_base",
-        "icon": "",
-        "iconAsset": "../assets/icons/locations/location_moon_base.svg",
-        "tokenIcon": "",
+        "imageId": "🌕",
+        "icon": "🌕",
+        "iconAsset": "",
+        "tokenIcon": "🌕",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -2083,10 +2083,10 @@ window.DEBATE_DECKS = {
       {
         "name": "罐頭工廠",
         "lore": "食物加工、金屬容器與機械設備集中，適合補給與製作工具，但噪音和衛生風險高。",
-        "imageId": "location_cannery",
-        "icon": "",
-        "iconAsset": "../assets/icons/locations/location_cannery.svg",
-        "tokenIcon": "",
+        "imageId": "🥫",
+        "icon": "🥫",
+        "iconAsset": "",
+        "tokenIcon": "🥫",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -2096,10 +2096,10 @@ window.DEBATE_DECKS = {
       {
         "name": "商業大樓",
         "lore": "樓層、電梯、辦公設備與人際階層複雜，適合取得資訊，也容易被動線困住。",
-        "imageId": "location_office_tower",
-        "icon": "",
-        "iconAsset": "../assets/icons/locations/location_office_tower.svg",
-        "tokenIcon": "",
+        "imageId": "🏢",
+        "icon": "🏢",
+        "iconAsset": "",
+        "tokenIcon": "🏢",
         "image": "",
         "rarity": "A",
         "tags": [
@@ -2112,6 +2112,21 @@ window.DEBATE_DECKS = {
     "label": "概念卡",
     "icon": "◇",
     "cards": [
+      {
+        "name": "人生",
+        "lore": "由經驗、選擇、關係與時間共同形成的一段生命歷程。",
+        "imageId": "人生",
+        "icon": "🧭",
+        "iconAsset": "",
+        "tokenIcon": "🧭",
+        "image": "../assets/cards/概念卡/人生.png",
+        "rarity": "人生",
+        "tags": [
+          "生命",
+          "經驗",
+          "選擇"
+        ]
+      },
       {
         "name": "孤獨",
         "lore": "一個人面對世界，也可能因此更了解自己。",
@@ -5784,7 +5799,7 @@ window.DEBATE_DECKS = {
         "iconAsset": "",
         "tokenIcon": "≈",
         "image": "",
-        "rarity": "B",
+        "rarity": "人生",
         "tags": [
           "象徵",
           "相似",

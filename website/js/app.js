@@ -66,7 +66,9 @@ const summonState = window.DEBATE_STATE.create({
   categorySelection: new Set(["異族", "超能", "特職"])
 });
 const importanceState = window.DEBATE_STATE.create({
-  selectedDecks: new Set()
+  selectedDecks: new Set(),
+  redDeck: "",
+  blueDeck: ""
 });
 const DEFAULT_IMAGE_LAYOUT = imageService.defaultLayout;
 const {
@@ -254,7 +256,8 @@ function orderedDeckIds(options = {}) {
 }
 
 function salesAudienceDeckIds() {
-  return orderedDeckIds().filter((deckId) => !hiddenSalesAudienceDecks.has(deckId));
+  const configuredDecks = activeMode.salesAudienceDecks;
+  return Array.isArray(configuredDecks) ? configuredDecks.filter((deckId, index, list) => decks[deckId] && list.indexOf(deckId) === index) : orderedDeckIds().filter((deckId) => !hiddenSalesAudienceDecks.has(deckId));
 }
 
 function defaultSalesAudienceDeck() {
@@ -425,7 +428,9 @@ function resetImportanceDeckSelection(mode = activeMode) {
   if (mode.cardMode !== "importanceDuel") return;
   const available = importanceAvailableDeckIds(mode);
   const defaultDeck = mode.primaryDeck && available.includes(mode.primaryDeck) ? mode.primaryDeck : available[0];
-  importanceState.selectedDecks = new Set(defaultDeck ? [defaultDeck] : []);
+  importanceState.redDeck = defaultDeck || "";
+  importanceState.blueDeck = available.find((deckId) => deckId !== defaultDeck) || defaultDeck || "";
+  importanceState.selectedDecks = new Set([importanceState.redDeck, importanceState.blueDeck].filter(Boolean));
 }
 
 function importanceAvailableDeckIds(mode = activeMode) {
@@ -455,6 +460,14 @@ function importanceActiveDeckIds(mode = activeMode) {
   if (selected.length) return selected;
   const fallback = mode.primaryDeck && available.includes(mode.primaryDeck) ? mode.primaryDeck : available[0];
   return fallback ? [fallback] : [];
+}
+
+function importanceSideDeckIds(mode = activeMode) {
+  if (mode.cardMode !== "importanceDuel") return [];
+  const available = importanceAvailableDeckIds(mode);
+  const red = available.includes(importanceState.redDeck) ? importanceState.redDeck : available[0];
+  const blue = available.includes(importanceState.blueDeck) ? importanceState.blueDeck : available[1] || red;
+  return [red, blue].filter(Boolean);
 }
 
 function cardHistoryLabel(card) {
@@ -619,17 +632,15 @@ function showMobileSetup() {
 
 function metaphorVariantLabel(value = metaphorState.variant) {
   return {
-    concrete: "具體版",
-    abstract: "抽象版",
-    free: "自由版"
+    concrete: "人生版",
+    abstract: "抽象版"
   }[value] || "隱喻";
 }
 
 function metaphorAllDeckOptions(mode = activeMode) {
   const base = [
     ...(mode.metaphorConcreteDecks || []),
-    ...(mode.metaphorDecks || []),
-    ...(mode.metaphorFreeDecks || [])
+    ...(mode.metaphorDecks || [])
   ];
   if (!base.length) return [mode.primaryDeck];
   return [...new Set(base)].filter((deckId) => deckId && decks[deckId]);
@@ -639,7 +650,6 @@ function metaphorDeckOptions(part = "prefix") {
   if (metaphorState.variant === "concrete") {
     return part === "suffix" ? metaphorConcreteDeckOptions() : [];
   }
-  if (metaphorState.variant === "free") return metaphorFreeDeckOptions();
   return metaphorAbstractDeckOptions();
 }
 
@@ -657,32 +667,11 @@ function metaphorFreeDeckOptions() {
 }
 
 function fixedMetaphorPrefixCard() {
-  return {
-    name: "人生",
-    lore: "作為比喻句的固定前綴，讓學生先練習從日常物件或生物中找相似點。",
-    icon: "人",
-    tokenIcon: "人",
-    rarity: "C",
-    deckId: "metaphor-fixed",
-    deckLabel: "固定詞",
-    deckIcon: "人",
-    hooks: ["說明人生和後綴詞哪裡相似。", "找出一個具體生活例子。", "補充這個比喻可能不成立的地方。"]
-  };
+  return cardsFrom("concepts").find((card) => card.name === "人生" && card.rarity === "人生");
 }
 
 function fixedMetaphorRelationCard() {
-  const relation = cardsFrom(activeSecondaryLibrary).find((card) => card.name === "就像");
-  return relation || {
-    name: "就像",
-    lore: "A 與 C 在某些特質上十分相似。",
-    icon: "≈",
-    tokenIcon: "≈",
-    rarity: "B",
-    deckId: activeSecondaryLibrary || "relations",
-    deckLabel: decks[activeSecondaryLibrary]?.label || "關係卡",
-    deckIcon: "→",
-    hooks: ["說明兩者相似的角度。", "找一個能讓比喻成立的例子。", "指出這個比喻最容易被質疑的地方。"]
-  };
+  return cardsFrom(activeSecondaryLibrary).find((card) => card.name === "就像" && card.rarity === "人生");
 }
 
 function syncMetaphorVariantDecks() {
@@ -828,11 +817,14 @@ const mobileDashboard = window.DebateVisionMobileDashboard.create({
   dashboard: mobileSurvivalDashboard,
   deckTone,
   decks,
+  fixedMetaphorPrefixCard,
+  fixedMetaphorRelationCard,
   getActiveLibrary: () => activeLibrary,
   getActiveMode: () => activeMode,
   getActiveSecondaryLibrary: () => activeSecondaryLibrary,
   getDrawCount: () => Number(drawCount.value) || 1,
   getImportanceSelection: () => importanceState.selectedDecks,
+  getImportanceState: () => importanceState,
   getMetaphorState: () => metaphorState,
   getSalesState: () => salesState,
   getSummonSelection: () => summonState.categorySelection,
@@ -908,6 +900,8 @@ const deckControls = window.DebateVisionDeckControls.create({
   cardsFrom,
   deckTone,
   decks,
+  fixedMetaphorPrefixCard,
+  fixedMetaphorRelationCard,
   elements: {
     controlNote,
     drawCount,
@@ -924,11 +918,13 @@ const deckControls = window.DebateVisionDeckControls.create({
   getActiveMode: () => activeMode,
   getActiveSecondaryLibrary: () => activeSecondaryLibrary,
   getImportanceSelection: () => importanceState.selectedDecks,
+  getImportanceState: () => importanceState,
   getMetaphorState: () => metaphorState,
   getSalesState: () => salesState,
   getSummonSelection: () => summonState.categorySelection,
   getSurvivalState: () => survivalState,
   importanceActiveDeckIds,
+  importanceAvailableDeckIds,
   metaphorDeckOptions,
   metaphorVariantLabel,
   modeStatusText,
@@ -1090,6 +1086,21 @@ function renderMetaphorCompass(concepts, relation) {
   resultsView.metaphor({ left, relation, right, guideTitle, guideBody });
 }
 
+function renderSalesPair(items, challenge, labels) {
+  drawState.stageCard = challenge;
+  if (isMobileAppView()) {
+    resultsView.combo(challenge, items, { hideStageInDesktopResults: true });
+    return;
+  }
+  resultsView.salesPair({
+    leftLabel: labels.left,
+    leftCards: items,
+    rightLabel: labels.right,
+    rightCard: challenge,
+    variant: salesState.variant
+  });
+}
+
 function createModeContext(count = activeMode.fixedCount || Math.max(1, Math.min(6, Number(drawCount.value) || 1))) {
   return {
     count,
@@ -1134,6 +1145,8 @@ function createModeContext(count = activeMode.fixedCount || Math.max(1, Math.min
     fixedMetaphorPrefixCard,
     fixedMetaphorRelationCard,
     importanceActiveDeckIds,
+    importanceSideDeckIds,
+    get isMobileView() { return isMobileAppView(); },
     markDrawn,
     drawSurvivalGroups: survivalResultService.drawGroups,
     pickFrom,
@@ -1142,6 +1155,7 @@ function createModeContext(count = activeMode.fixedCount || Math.max(1, Math.min
     renderCombo,
     renderDuel,
     renderMetaphorCompass,
+    renderSalesPair,
     renderPoolWarning,
     renderSecretPlace,
     startSurvivalBattle: survivalResults.startBattle,
@@ -1461,185 +1475,29 @@ drawHistory?.addEventListener("keydown", (event) => {
   handleHistoryItemOpen(item);
 });
 
-fixedPools.addEventListener("click", (event) => {
-  if (handleSurvivalStep(event)) return;
-
-  const survivalVariantButton = event.target.closest("[data-survival-variant]");
-  if (survivalVariantButton) {
-    survivalState.variant = survivalVariantButton.dataset.survivalVariant;
-    activeLibrary = "items";
-    activePreview = "items";
-    survivalState.lockEnvironment = false;
-    survivalState.noEnvironment = false;
-    drawState.stageCard = null;
-    renderAll();
-    renderEmptyState();
-    return;
-  }
-
-  const metaphorVariantButton = event.target.closest("[data-metaphor-variant]");
-  if (metaphorVariantButton) {
-    metaphorState.variant = metaphorVariantButton.dataset.metaphorVariant;
-    metaphorState.currentCards = null;
-    syncMetaphorVariantDecks();
-    renderAll();
-    renderEmptyState();
-    return;
-  }
-
-  const primaryButton = event.target.closest("[data-primary-variant]");
-  if (primaryButton) {
-    const deckId = primaryButton.dataset.primaryVariant;
-    if (activeMode.cardMode === "importanceDuel") {
-      if (importanceState.selectedDecks.has(deckId) && importanceState.selectedDecks.size > 1) {
-        importanceState.selectedDecks.delete(deckId);
-      } else {
-        importanceState.selectedDecks.add(deckId);
-      }
-      activeLibrary = deckId;
-      activePreview = deckId;
-      renderAll();
-      return;
-    }
-    if (activeMode.cardMode === "itemEnvironment" && survivalState.variant === "survival") {
-      if (survivalState.deckSelection.has(deckId) && survivalState.deckSelection.size > 1) {
-        survivalState.deckSelection.delete(deckId);
-      } else {
-        survivalState.deckSelection.add(deckId);
-      }
-      activeLibrary = deckId;
-      activePreview = deckId;
-      renderAll();
-      return;
-    }
-    activeLibrary = deckId;
-    activePreview = activeLibrary;
-    renderAll();
-    return;
-  }
-
-  const button = event.target.closest("[data-sales-variant]");
-  if (button) {
-    salesState.variant = button.dataset.salesVariant;
-    if (salesState.variant === "supply") activePreview = "items";
-    if (salesState.variant === "story") activePreview = salesState.noConcept ? "items" : "concepts";
-    if (salesState.variant === "target") {
-      ensureSalesAudienceDeck();
-      activePreview = salesState.audienceDeck;
-    }
-    renderAll();
-    renderEmptyState();
-    return;
-  }
-
-  const audienceButton = event.target.closest("[data-sales-audience]");
-  if (audienceButton) {
-    salesState.audienceDeck = audienceButton.dataset.salesAudience;
-    activePreview = salesState.audienceDeck;
-    renderAll();
-    renderEmptyState();
-    return;
-  }
-
-  const summonCategoryButton = event.target.closest("[data-summon-category]");
-  if (!summonCategoryButton) return;
-  const category = summonCategoryButton.dataset.summonCategory;
-  if (summonState.categorySelection.has(category)) {
-    if (summonState.categorySelection.size > 1) summonState.categorySelection.delete(category);
-  } else {
-    summonState.categorySelection.add(category);
-  }
-  renderAll();
-  renderEmptyState();
-});
-
-function handleSurvivalCountInput(event) {
-  const survivalCountInput = event.target.closest("[data-survival-count]");
-  if (!survivalCountInput) return false;
-  const key = survivalCountInput.dataset.survivalCount;
-  const min = Number(survivalCountInput.min) || 0;
-  const max = Number(survivalCountInput.max) || 8;
-  const cleanValue = String(survivalCountInput.value || "").replace(/[^\d]/g, "");
-  if (survivalCountInput.value !== cleanValue) survivalCountInput.value = cleanValue;
-  const value = Math.max(min, Math.min(max, Number(cleanValue) || min));
-  setSurvivalCountValue(key, value);
-  return true;
-}
-
-function handleSurvivalStep(event) {
-  const button = event.target.closest("[data-survival-step]");
-  if (!button) return false;
-  const key = button.dataset.survivalStep;
-  const step = Number(button.dataset.step) || 0;
-  const input = fixedPools.querySelector(`[data-survival-count="${key}"]`);
-  if (!input) return false;
-  const min = Number(input.min) || 0;
-  const max = Number(input.max) || 8;
-  const nextValue = Math.max(min, Math.min(max, survivalCountValue(key) + step));
-  setSurvivalCountValue(key, nextValue);
-  renderAll();
-  return true;
-}
-
-fixedPools.addEventListener("input", (event) => {
-  if (!handleSurvivalCountInput(event)) return;
-  renderDeckControlsView();
-});
-
-fixedPools.addEventListener("change", (event) => {
-  if (handleSurvivalCountInput(event)) {
-    renderAll();
-    return;
-  }
-
-  const metaphorDeckSelect = event.target.closest("[data-metaphor-deck]");
-  if (metaphorDeckSelect) {
-    const part = metaphorDeckSelect.dataset.metaphorDeck;
-    metaphorState.currentCards = null;
-    if (part === "prefix") {
-      metaphorState.prefixDeck = metaphorDeckSelect.value;
-      metaphorState.locks.prefix = false;
-    }
-    if (part === "suffix") {
-      metaphorState.suffixDeck = metaphorDeckSelect.value;
-      metaphorState.locks.suffix = false;
-    }
-    activePreview = metaphorDeckSelect.value;
-    renderAll();
-    return;
-  }
-
-  const metaphorCheckbox = event.target.closest("[data-lock-metaphor]");
-  if (metaphorCheckbox) {
-    metaphorState.locks[metaphorCheckbox.dataset.lockMetaphor] = metaphorCheckbox.checked;
-    renderAll();
-    return;
-  }
-
-  const salesNoConceptCheckbox = event.target.closest("[data-sales-no-concept]");
-  if (salesNoConceptCheckbox) {
-    salesState.noConcept = salesNoConceptCheckbox.checked;
-    activePreview = salesState.noConcept ? "items" : "concepts";
-    renderAll();
-    renderEmptyState();
-    return;
-  }
-
-  const checkbox = event.target.closest("[data-lock-environment]");
-  if (checkbox) {
-    survivalState.lockEnvironment = checkbox.checked;
-    renderAll();
-    return;
-  }
-
-  const noEnvironmentCheckbox = event.target.closest("[data-no-environment]");
-  if (!noEnvironmentCheckbox) return;
-  survivalState.noEnvironment = noEnvironmentCheckbox.checked;
-  if (survivalState.noEnvironment) {
-    survivalState.lockEnvironment = false;
-    drawState.stageCard = null;
-  }
-  renderAll();
+window.DebateVisionDeckControlEvents.bind({
+  clearStageCard: () => { drawState.stageCard = null; },
+  ensureSalesAudienceDeck,
+  getActiveMode: () => activeMode,
+  renderAll,
+  renderDeckControls: renderDeckControlsView,
+  renderEmptyState,
+  root: fixedPools,
+  setActiveDecks: (library, preview) => {
+    activeLibrary = library;
+    activePreview = preview;
+  },
+  setActivePreview: (deckId) => { activePreview = deckId; },
+  setSurvivalCountValue,
+  states: {
+    importance: importanceState,
+    metaphor: metaphorState,
+    sales: salesState,
+    summon: summonState,
+    survival: survivalState
+  },
+  survivalCountValue,
+  syncMetaphorVariantDecks
 });
 
 tokenCloud.addEventListener("change", (event) => {

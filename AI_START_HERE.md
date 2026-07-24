@@ -10,6 +10,8 @@
 4. 只驗證本次可能受影響的範圍，不為了「保險」每次重跑所有玩法。
 5. 不做任務外的重構、格式化、檔名變更或全專案整理。
 
+需要快速理解資料流、玩法對應或檢查入口時，只讀 `docs/AI_Project_Map.md`，不要掃描整個專案。
+
 ## 先判斷任務類型
 
 | 任務 | 優先查看 | 需讀規格 | 最小驗證 |
@@ -20,6 +22,7 @@
 | 圖片、圖示、Banner | CSV 圖片欄、`assets/`、`image-service.js` | 只讀對應圖片指南 | 目標畫面無缺圖 |
 | 新玩法、新共用功能 | `data/modes/`、`modes/`、components | 玩法規格＋架構守則 | 架構檢查＋相關玩法＋受影響裝置 |
 | 拆檔、跨裝置共用樣式、核心狀態 | 現有模組邊界 | `docs/Architecture_Guardrails.md` | 完整架構檢查＋手機／平板／桌機回歸 |
+| 不確定檔案位置或依賴 | `docs/AI_Project_Map.md` | 不需額外讀完整 docs | 依地圖選擇對應檢查 |
 
 ## 快速維修路徑（預設）
 
@@ -64,7 +67,7 @@ node scripts/check-architecture.mjs
 - 卡牌、分類、描述：`data/cards/*.csv`
 - 玩法規則與牌組：`data/modes/*.json`
 - 玩法與介面文案：`data/content/*.csv`
-- 圖片與圖示：`assets/`
+- 圖片與圖示：`assets/`（檔名盤點用 `find` 或 `rg --no-ignore --files assets`）
 - 單一玩法抽卡規則：`website/js/modes/`
 - 跨畫面邏輯：`website/js/services/`
 - 元件與元件樣式：`website/js/components/`、`website/styles/components/`
@@ -78,6 +81,8 @@ node scripts/check-architecture.mjs
 
 - 修改既有 CSV 前，必須先讀實際檔案，保留現有 emoji、分類與欄位語意。
 - 不手改 `data/generated/`；修改 CSV / JSON 後才執行 `build-lexicons`。
+- CSV / JSON 修改後先執行 `node scripts/check-data-contracts.mjs`，避免錯欄、重複名稱或玩法索引不一致進入 generated data。
+- 圖片或圖片路徑修改後執行 `node scripts/check-assets.mjs`；它會檢查桌機來源圖與手機衍生圖。系統垃圾檔交由 `.gitignore` 排除，不阻擋更新。
 - 手機圖片路徑交給 `image-service.js` 解析，不寫會越過 GitHub Pages 子目錄的 `/assets/...`。
 - 首頁用手機縮圖，不預載全部大 Banner。
 

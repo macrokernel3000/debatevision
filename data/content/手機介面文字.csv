@@ -61,12 +61,10 @@ mobile.sales.conceptDeck,sales-command,卡組設定,概念卡,概念卡組名稱
 mobile.sales.targetDeck,sales-command,卡組設定,目標卡,目標卡組預設備用名稱
 mobile.importance.deckHeading,importance-duel,卡組設定,選擇卡組,比較卡組標題
 mobile.importance.deckNote,importance-duel,卡組設定,可複選,比較卡組提示
-mobile.metaphor.concrete,metaphor-compass,模式選擇,具體版,具體模式名稱
-mobile.metaphor.concreteDescription,metaphor-compass,模式選擇,用「人生就像」連結一個具體事物,具體模式簡介
+mobile.metaphor.concrete,metaphor-compass,模式選擇,人生版,人生模式名稱
+mobile.metaphor.concreteDescription,metaphor-compass,模式選擇,固定抽出「人生」「就像」，再連結一個具體事物,人生模式簡介
 mobile.metaphor.abstract,metaphor-compass,模式選擇,抽象版,抽象模式名稱
 mobile.metaphor.abstractDescription,metaphor-compass,模式選擇,連結兩個抽象概念並說明關係,抽象模式簡介
-mobile.metaphor.free,metaphor-compass,模式選擇,自由版,自由模式名稱
-mobile.metaphor.freeDescription,metaphor-compass,模式選擇,自由選擇詞庫組合隱喻命題,自由模式簡介
 mobile.metaphor.prefixDeck,metaphor-compass,卡組設定,前綴詞,前綴卡組名稱
 mobile.metaphor.relationDeck,metaphor-compass,卡組設定,關係卡,關係卡組名稱
 mobile.metaphor.suffixDeck,metaphor-compass,卡組設定,後綴詞,後綴卡組名稱

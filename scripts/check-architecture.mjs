@@ -4,6 +4,8 @@ import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const skipDataCheck = process.argv.includes("--skip-data");
+const skipAssetCheck = process.argv.includes("--skip-assets");
 const failures = [];
 const notes = [];
 
@@ -17,7 +19,9 @@ const lineBudgets = new Map([
   ["scripts/build-lexicons.mjs", 550],
   ["scripts/check-game-modes.mjs", 350],
   ["scripts/check-history-replay.mjs", 180],
-  ["scripts/check-survival-results.mjs", 180]
+  ["scripts/check-survival-results.mjs", 180],
+  ["scripts/check-data-contracts.mjs", 240],
+  ["scripts/check-assets.mjs", 180]
 ]);
 
 function read(relativePath) {
@@ -83,14 +87,19 @@ for (const relativePath of listFiles("website/js/modes", ".js")) {
 for (const relativePath of listFiles("website/styles/components", ".css")) {
   checkBudget(relativePath, 500);
 }
+for (const relativePath of listFiles("website/styles/modes", ".css")) {
+  checkBudget(relativePath, 500);
+}
 
 const indexHtml = read("website/index.html");
 requireInOrder(indexHtml, "website/index.html", [
   "./styles/tokens.css",
   "./styles/components/draw-machine.css",
   "./styles/main.css",
+  "./styles/components/brand.css",
   "./styles/components/class-timer.css",
   "./styles/components/deck-option-cards.css",
+  "./styles/components/secret-place.css",
   "./styles/mobile.css",
   "./styles/components/mobile-modals.css",
   "./styles/components/mobile-mode-images.css",
@@ -111,6 +120,7 @@ requireInOrder(indexHtml, "website/index.html", [
   "./js/mobile-render.js",
   "./js/components/class-timer.js",
   "./js/components/deck-option-cards.js",
+  "./js/components/deck-control-events.js",
   "./js/components/deck-controls.js",
   "./js/components/history.js",
   "./js/components/image-editor.js",
@@ -189,6 +199,43 @@ if (gameModeCheck.status !== 0) {
   failures.push(`玩法煙霧檢查失敗：\n${gameModeCheck.stderr || gameModeCheck.stdout}`.trim());
 } else {
   notes.push("玩法 controller 煙霧檢查: 通過");
+}
+
+if (!skipDataCheck) {
+  const dataContractCheck = spawnSync(
+    process.execPath,
+    [path.join(root, "scripts/check-data-contracts.mjs")],
+    { encoding: "utf8" }
+  );
+  if (dataContractCheck.status !== 0) {
+    failures.push(`資料契約檢查失敗：\n${dataContractCheck.stderr || dataContractCheck.stdout}`.trim());
+  } else {
+    notes.push("卡牌、內容與玩法資料契約: 通過");
+  }
+}
+
+if (!skipAssetCheck) {
+const assetCheck = spawnSync(
+    process.execPath,
+    [path.join(root, "scripts/check-assets.mjs")],
+    { encoding: "utf8" }
+  );
+  if (assetCheck.status !== 0) {
+    failures.push(`資產檢查失敗：\n${assetCheck.stderr || assetCheck.stdout}`.trim());
+  } else {
+    notes.push("來源與衍生圖片引用: 通過");
+  }
+}
+
+const generatedFreshnessCheck = spawnSync(
+  process.execPath,
+  [path.join(root, "scripts/build-lexicons.mjs"), "--check"],
+  { encoding: "utf8" }
+);
+if (generatedFreshnessCheck.status !== 0) {
+  failures.push(`generated 掛勾檢查失敗：\n${generatedFreshnessCheck.stderr || generatedFreshnessCheck.stdout}`.trim());
+} else {
+  notes.push("所有 CSV / JSON 已掛入 generated: 通過");
 }
 
 const historyReplayCheck = spawnSync(

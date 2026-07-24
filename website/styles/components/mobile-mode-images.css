@@ -1,10 +1,4 @@
 @media (max-width: 560px) {
-  .mobile-home-hero {
-    background:
-      radial-gradient(circle at 82% 18%, rgba(255, 176, 168, 0.25), transparent 32%),
-      linear-gradient(120deg, #15110f, #4c241f);
-  }
-
   .mobile-home-card {
     background: #241d1a;
   }
