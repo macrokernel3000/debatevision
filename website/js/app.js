@@ -94,6 +94,7 @@ const mobileHomeGrid = document.querySelector("#mobileHomeGrid");
 const playArea = document.querySelector(".play-area");
 const controlBand = document.querySelector(".control-band");
 const cardDictionaryPanel = document.querySelector(".card-dictionary-panel");
+const historyPanel = document.querySelector(".history-panel");
 const libraryBand = document.querySelector(".library-band");
 const mobileModeBanner = document.querySelector("#mobileModeBanner");
 const mobileModeEmblem = document.querySelector("#mobileModeEmblem");
@@ -869,6 +870,7 @@ const modeShell = window.DebateVisionModeShell.create({
     controlBand,
     controlNote,
     drawButton,
+    historyPanel,
     libraryBand,
     mobileModeBanner,
     mobileModeEmblem,

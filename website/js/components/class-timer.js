@@ -25,6 +25,7 @@
     document.querySelector("#timerDisplay").textContent = elapsedText;
     document.querySelector("#timerLauncherText").textContent = elapsedText;
     document.querySelector("#timerToggle").textContent = state.running ? "暫停" : "開始";
+    document.querySelector("#timerStatus").textContent = state.running ? "計時中" : "準備";
   }
 
   function refreshInterval() {
@@ -56,15 +57,19 @@
         <button class="timer-launcher" id="timerLauncher" type="button" aria-label="打開計時器">⏱ <span id="timerLauncherText">00:00.0</span></button>
         <div class="timer-panel" id="timerPanel">
           <div class="timer-head">
-            <div>
+            <div class="timer-brand">
+              <span class="timer-brand-mark" aria-hidden="true">◷</span>
+              <div>
               <p class="eyebrow">Class Timer</p>
               <h2>課堂計時</h2>
+              </div>
             </div>
             <div class="timer-window-actions">
               <button id="timerCollapse" type="button" aria-label="收合計時器">收合</button>
             </div>
           </div>
           <div class="timer-display" id="timerDisplay" aria-live="polite">00:00.0</div>
+          <div class="timer-status"><span></span><b id="timerStatus">準備</b></div>
           <div class="timer-actions">
             <button id="timerToggle" type="button">開始</button>
             <button id="timerReset" type="button">重設</button>

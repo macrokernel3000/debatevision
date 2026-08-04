@@ -25,6 +25,7 @@ vm.runInContext(generatedModesSource, sandbox, { filename: "data/generated/modes
 const controllers = sandbox.window.DEBATE_MODE_CONTROLLERS;
 const controllerModes = new Set(sandbox.window.DEBATE_MODES.map((mode) => mode.cardMode));
 controllerModes.delete("cardDictionary");
+controllerModes.delete("debateBoard");
 assert.deepEqual(
   [...controllerModes].sort(),
   Object.keys(controllers).sort(),

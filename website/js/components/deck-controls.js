@@ -150,6 +150,7 @@
       const survivalMode = mode.cardMode === "itemEnvironment";
       const metaphorMode = mode.cardMode === "metaphorCompass";
       const salesMode = mode.cardMode === "salesPitch";
+      const importanceMode = mode.cardMode === "importanceDuel";
       drawCountField.hidden = metaphorMode;
       drawCountField.classList.remove("is-ghost-control");
       drawCountField.setAttribute("aria-hidden", "false");

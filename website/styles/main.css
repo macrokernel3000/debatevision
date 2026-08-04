@@ -1107,28 +1107,48 @@ body[data-active-palette="cyan"] {
 .importance-side.is-red { border-color: #b94b45; color: #8f2b25; }
 .importance-side.is-blue { border-color: #397da6; color: #245d80; }
 
-.importance-deck-options {
-  grid-template-columns: repeat(5, minmax(82px, 1fr));
+.importance-deck-options.deck-option-grid {
+  grid-template-columns: repeat(auto-fit, minmax(80px, 96px));
+  grid-auto-flow: row;
+  grid-auto-columns: auto;
   gap: 8px;
   padding: 0;
   border: 0;
   border-radius: 0;
   background: transparent;
+  overflow: visible;
 }
 
 .importance-deck-options .deck-option-card {
-  min-height: 112px;
-  grid-template-rows: 68px minmax(30px, auto);
+  min-height: 106px;
+  grid-template-rows: 1fr;
+}
+
+.importance-deck-options .deck-option-art {
+  min-height: 106px;
+  border-radius: 14px;
+}
+
+.importance-deck-options .deck-option-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.importance-deck-options .deck-option-card > strong {
+  width: 100%;
+  min-height: 36px;
+  margin: 0;
+  padding: 7px 4px;
+  background: rgba(255, 255, 255, 0.68);
 }
 
 .importance-side.is-red .deck-option-card.is-active {
-  border-color: #a83b35;
-  box-shadow: 0 0 0 3px rgba(168, 59, 53, 0.18), 0 10px 22px rgba(25, 24, 20, 0.12);
+  box-shadow: 0 10px 22px rgba(168, 59, 53, 0.2);
 }
 
 .importance-side.is-blue .deck-option-card.is-active {
-  border-color: #2f7198;
-  box-shadow: 0 0 0 3px rgba(47, 113, 152, 0.18), 0 10px 22px rgba(25, 24, 20, 0.12);
+  box-shadow: 0 10px 22px rgba(47, 113, 152, 0.2);
 }
 
 .importance-vs {
@@ -1766,7 +1786,29 @@ body[data-active-palette="cyan"] {
   display: grid;
   grid-template-columns: minmax(220px, 1fr) 74px minmax(220px, 1fr);
   gap: 14px;
-  align-items: center;
+  align-items: stretch;
+}
+
+body[data-active-mode="importance-duel"] .duel-board .battle-card {
+  height: 620px;
+  grid-template-rows: 48px 240px 92px 174px;
+}
+
+body[data-active-mode="importance-duel"] .duel-board .card-art {
+  min-height: 0;
+  height: 240px;
+}
+
+body[data-active-mode="importance-duel"] .duel-board .card-art img {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: contain;
+}
+
+body[data-active-mode="importance-duel"] .duel-board .card-lore,
+body[data-active-mode="importance-duel"] .duel-board .card-hooks {
+  overflow: auto;
 }
 
 .vs-badge {

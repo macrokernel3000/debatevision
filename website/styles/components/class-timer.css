@@ -19,8 +19,8 @@
   border: 2px solid var(--ink);
   border-radius: var(--radius-pill);
   padding: 0 14px;
-  background: rgba(23, 23, 23, 0.92);
-  color: #fff;
+  background: linear-gradient(135deg, #1d3f38, #0b1513);
+  color: #f7e7b1;
   font-size: 0.95rem;
   font-weight: 1000;
   box-shadow: var(--shadow-md);
@@ -29,11 +29,15 @@
 
 .timer-panel {
   width: min(300px, calc(100vw - 28px));
-  border: 2px solid rgba(23, 23, 23, 0.88);
-  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid rgba(216, 191, 114, 0.65);
+  border-radius: 18px;
   padding: var(--space-3);
-  background: rgba(255, 255, 255, 0.94);
-  box-shadow: 0 18px 46px rgba(25, 24, 20, 0.2);
+  background:
+    radial-gradient(circle at 85% 0%, rgba(216, 191, 114, .16), transparent 36%),
+    linear-gradient(145deg, rgba(27, 61, 52, .98), rgba(10, 22, 19, .98));
+  color: #f7f2db;
+  box-shadow: 0 22px 54px rgba(8, 18, 15, 0.34), inset 0 0 0 1px rgba(255,255,255,.05);
 }
 
 .timer-head {
@@ -48,6 +52,14 @@
   font-size: 1.15rem;
 }
 
+.timer-brand { display: flex; gap: 10px; align-items: center; }
+.timer-brand-mark {
+  width: 38px; height: 38px; display: grid; place-items: center;
+  border: 1px solid rgba(216,191,114,.7); border-radius: 50%;
+  color: #d8bf72; font-size: 1.35rem; box-shadow: inset 0 0 14px rgba(216,191,114,.12);
+}
+.timer-head .eyebrow { color: rgba(247,242,219,.58); }
+
 .timer-window-actions {
   display: inline-flex;
   gap: var(--space-1-5);
@@ -55,11 +67,11 @@
 
 .timer-window-actions button {
   min-height: 30px;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(247,242,219,.2);
   border-radius: var(--radius-sm);
   padding: 0 8px;
-  background: #fff;
-  color: var(--muted);
+  background: rgba(255,255,255,.07);
+  color: rgba(247,242,219,.72);
   font-size: 0.78rem;
   font-weight: 900;
   cursor: pointer;
@@ -67,19 +79,25 @@
 
 .timer-display {
   margin: 10px 0;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(216,191,114,.3);
   border-radius: var(--radius-md);
   padding: var(--space-3);
   background:
-    radial-gradient(circle at 85% 12%, rgba(199, 144, 34, 0.14), transparent 32%),
-    #111;
-  color: #fff;
+    repeating-linear-gradient(90deg, transparent 0 18px, rgba(255,255,255,.015) 18px 19px),
+    #07100e;
+  color: #f3d883;
+  text-shadow: 0 0 18px rgba(243,216,131,.28);
   font-variant-numeric: tabular-nums;
   font-size: clamp(2rem, 8vw, 3rem);
   font-weight: 1000;
   line-height: 1;
   text-align: center;
 }
+
+.timer-status { display: flex; justify-content: center; gap: 7px; align-items: center; margin: -2px 0 9px; color: rgba(247,242,219,.62); font-size: .72rem; letter-spacing: .16em; }
+.timer-status span { width: 7px; height: 7px; border-radius: 50%; background: #d8bf72; box-shadow: 0 0 10px rgba(216,191,114,.65); }
+.floating-timer.is-running .timer-status span { background: #5ed5bd; box-shadow: 0 0 12px rgba(94,213,189,.8); animation: timerGlow 1.2s ease-in-out infinite alternate; }
+@keyframes timerGlow { to { opacity: .38; transform: scale(.75); } }
 
 .timer-actions {
   display: grid;
@@ -89,24 +107,25 @@
 
 .timer-actions button {
   min-height: 38px;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(247,242,219,.22);
   border-radius: var(--radius-sm);
-  background: #fff;
-  color: var(--ink);
+  background: rgba(255,255,255,.08);
+  color: #f7f2db;
   font-weight: 1000;
   cursor: pointer;
 }
 
 #timerToggle {
-  border-color: var(--ink);
-  background: var(--ink);
-  color: #fff;
+  border-color: #d8bf72;
+  background: linear-gradient(135deg, #d8bf72, #a87a2d);
+  color: #15110a;
 }
 
 .floating-timer.is-running #timerToggle,
 .floating-timer.is-running .timer-launcher {
-  border-color: var(--teal);
-  background: var(--teal);
+  border-color: #5ed5bd;
+  background: linear-gradient(135deg, #2d9a88, #14564c);
+  color: #fff;
 }
 
 .floating-timer.is-collapsed .timer-panel {

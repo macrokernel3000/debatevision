@@ -1,0 +1,22 @@
+{
+  "id": "debate-board",
+  "order": 7,
+  "title": "辯論黑板",
+  "icon": "辯",
+  "tone": "ink",
+  "track": "辯題 × 座位",
+  "primaryDeck": "concepts",
+  "secondaryDeck": "",
+  "primaryLabel": "辯題",
+  "secondaryLabel": "",
+  "drawLabel": "顯示辯論黑板",
+  "cardMode": "debateBoard",
+  "description": "輸入辯題與正反方辯士姓名，快速排出正式辯論座位黑板。",
+  "prompts": [],
+  "flow": [
+    "輸入本場辯題",
+    "填寫正反方一至三辯姓名",
+    "確認黑板上的鏡像座位順序",
+    "搭配課堂計時器開始辯論"
+  ]
+}

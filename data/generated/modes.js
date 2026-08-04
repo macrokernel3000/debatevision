@@ -108,65 +108,8 @@ window.DEBATE_MODES = [
     "palette": "purple"
   },
   {
-    "id": "importance-duel",
-    "order": 3,
-    "title": "誰更重要",
-    "icon": "VS",
-    "tone": "gold",
-    "track": "卡牌 × 卡牌",
-    "primaryDeck": "celebrities",
-    "secondaryDeck": "",
-    "primaryLabel": "比較卡",
-    "secondaryLabel": "",
-    "defaultRarities": {
-      "celebrities": [
-        "A",
-        "B",
-        "C"
-      ]
-    },
-    "drawLabel": "抽出對決卡牌",
-    "cardMode": "importanceDuel",
-    "fixedCount": 2,
-    "description": "紅角與藍角各選一個牌池，抽出兩張卡牌跨類別比較誰更重要。",
-    "prompts": [
-      [
-        "建立標準",
-        "要用什麼標準比較重要性？影響力、實用性、稀缺性、急迫性、創造力、貢獻度？"
-      ],
-      [
-        "正反互攻",
-        "支持 A 的人要指出 B 的限制；支持 B 的人也要反擊 A 的弱點。"
-      ],
-      [
-        "重新定義",
-        "如果標準改變，結果會不會翻盤？"
-      ]
-    ],
-    "flow": [
-      "紅角與藍角各選一個要比較的詞庫",
-      "兩邊各抽 1 張卡牌",
-      "左右兩方各 30 秒建立標準",
-      "互相質疑一次",
-      "觀眾投票：誰的比較標準更合理"
-    ],
-    "controlRule": "抽出兩張或多張卡牌，建立比較標準，說服大家誰更重要。",
-    "image": "../assets/backgrounds/modes/importance-duel.webp",
-    "cardHooks": [
-      "建立比較標準，說明 {name} 為什麼更重要。",
-      "指出另一張卡牌相較於 {name} 的限制。",
-      "如果比較標準改變，說明 {name} 是否仍有優勢。"
-    ],
-    "statusRules": {
-      "default": "抽出兩張卡牌，建立比較標準，說服大家誰更重要。",
-      "duel": "紅角與藍角各選一個牌池，再抽出卡牌進行跨卡池比較。"
-    },
-    "menuLabel": "卡牌 × 比較",
-    "palette": "gold"
-  },
-  {
     "id": "sales-command",
-    "order": 4,
+    "order": 3,
     "title": "銷售密令",
     "icon": "$",
     "tone": "gold",
@@ -233,7 +176,7 @@ window.DEBATE_MODES = [
   },
   {
     "id": "metaphor-compass",
-    "order": 5,
+    "order": 4,
     "title": "隱喻羅盤",
     "icon": "◇",
     "tone": "cosmos",
@@ -286,6 +229,63 @@ window.DEBATE_MODES = [
     "palette": "earth"
   },
   {
+    "id": "importance-duel",
+    "order": 5,
+    "title": "誰更重要",
+    "icon": "VS",
+    "tone": "gold",
+    "track": "卡牌 × 卡牌",
+    "primaryDeck": "celebrities",
+    "secondaryDeck": "",
+    "primaryLabel": "比較卡",
+    "secondaryLabel": "",
+    "defaultRarities": {
+      "celebrities": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    "drawLabel": "抽出對決卡牌",
+    "cardMode": "importanceDuel",
+    "fixedCount": 2,
+    "description": "紅角與藍角各選一個牌池，抽出兩張卡牌跨類別比較誰更重要。",
+    "prompts": [
+      [
+        "建立標準",
+        "要用什麼標準比較重要性？影響力、實用性、稀缺性、急迫性、創造力、貢獻度？"
+      ],
+      [
+        "正反互攻",
+        "支持 A 的人要指出 B 的限制；支持 B 的人也要反擊 A 的弱點。"
+      ],
+      [
+        "重新定義",
+        "如果標準改變，結果會不會翻盤？"
+      ]
+    ],
+    "flow": [
+      "紅角與藍角各選一個要比較的詞庫",
+      "兩邊各抽 1 張卡牌",
+      "左右兩方各 30 秒建立標準",
+      "互相質疑一次",
+      "觀眾投票：誰的比較標準更合理"
+    ],
+    "controlRule": "抽出兩張或多張卡牌，建立比較標準，說服大家誰更重要。",
+    "image": "../assets/backgrounds/modes/importance-duel.webp",
+    "cardHooks": [
+      "建立比較標準，說明 {name} 為什麼更重要。",
+      "指出另一張卡牌相較於 {name} 的限制。",
+      "如果比較標準改變，說明 {name} 是否仍有優勢。"
+    ],
+    "statusRules": {
+      "default": "抽出兩張卡牌，建立比較標準，說服大家誰更重要。",
+      "duel": "紅角與藍角各選一個牌池，再抽出卡牌進行跨卡池比較。"
+    },
+    "menuLabel": "卡牌 × 比較",
+    "palette": "gold"
+  },
+  {
     "id": "where-am-i",
     "order": 6,
     "title": "推理解密",
@@ -334,6 +334,35 @@ window.DEBATE_MODES = [
     },
     "menuLabel": "秘密 × 線索",
     "palette": "purple"
+  },
+  {
+    "id": "debate-board",
+    "order": 7,
+    "title": "辯論黑板",
+    "icon": "辯",
+    "tone": "ink",
+    "track": "辯題 × 座位",
+    "primaryDeck": "concepts",
+    "secondaryDeck": "",
+    "primaryLabel": "辯題",
+    "secondaryLabel": "",
+    "drawLabel": "顯示辯論黑板",
+    "cardMode": "debateBoard",
+    "description": "輸入辯題與正反方辯士姓名，快速排出正式辯論座位黑板。",
+    "prompts": [],
+    "flow": [
+      "輸入本場辯題",
+      "填寫正反方一至三辯姓名",
+      "確認黑板上的鏡像座位順序",
+      "搭配課堂計時器開始辯論"
+    ],
+    "controlRule": "正方位於辯題左側、反方位於右側；雙方一辯最靠近中央辯題，二辯與三辯依序向外排列。",
+    "image": "../assets/backgrounds/modes/importance-duel.webp",
+    "statusRules": {
+      "default": "填寫辯題與六位辯士姓名，黑板會即時更新。"
+    },
+    "menuLabel": "辯題 × 座位",
+    "palette": "cyan"
   },
   {
     "id": "card-dictionary",

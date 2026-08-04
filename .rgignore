@@ -1,0 +1,11 @@
+# 大型自動產生檔：需要除錯輸出時用 rg --no-ignore 明確搜尋。
+data/generated/
+
+# 歷史資料、檢查截圖與人工產出，不是網站執行來源。
+docs/archive/
+mobile-audit/
+outputs/
+tmp/
+
+# 二進位素材通常不適合文字搜尋；檔名仍可用 find 或 rg --no-ignore --files。
+assets/

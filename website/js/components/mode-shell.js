@@ -19,6 +19,7 @@
       controlBand,
       controlNote,
       drawButton,
+      historyPanel,
       libraryBand,
       mobileModeBanner,
       mobileModeEmblem,
@@ -140,10 +141,13 @@
 
       drawButton.textContent = activeMode.drawLabel;
       const dictionaryMode = activeMode.cardMode === "cardDictionary";
-      controlBand.hidden = activeMode.cardMode === "secretPlace" || dictionaryMode;
-      playArea.hidden = dictionaryMode;
-      libraryBand.hidden = dictionaryMode;
+      const debateBoardMode = activeMode.cardMode === "debateBoard";
+      controlBand.hidden = activeMode.cardMode === "secretPlace" || dictionaryMode || debateBoardMode;
+      playArea.hidden = dictionaryMode || debateBoardMode;
+      libraryBand.hidden = dictionaryMode || debateBoardMode;
+      if (historyPanel) historyPanel.hidden = debateBoardMode;
       cardDictionaryPanel.hidden = !dictionaryMode;
+      window.DEBATE_BOARD?.setActive(debateBoardMode);
       controlNote.textContent = activeMode.cardMode === "secretPlace"
         ? lifecycleFor().setup
         : modeStatusText();
