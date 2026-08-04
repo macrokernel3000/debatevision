@@ -49,6 +49,31 @@
     updateUi();
   }
 
+  function ringBell() {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContext) return;
+    const context = new AudioContext();
+    const master = context.createGain();
+    const now = context.currentTime;
+    const duration = 0.24;
+    master.gain.setValueAtTime(0.0001, now);
+    master.gain.exponentialRampToValueAtTime(0.16, now + 0.012);
+    master.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+    master.connect(context.destination);
+
+    [[740, "sine"], [1110, "triangle"]].forEach(([frequency, type], index) => {
+      const oscillator = context.createOscillator();
+      const partial = context.createGain();
+      oscillator.type = type;
+      oscillator.frequency.setValueAtTime(frequency, now);
+      partial.gain.setValueAtTime(index === 0 ? 1 : 0.32, now);
+      oscillator.connect(partial).connect(master);
+      oscillator.start(now);
+      oscillator.stop(now + duration);
+      if (index === 0) oscillator.addEventListener("ended", () => context.close(), { once: true });
+    });
+  }
+
   function init() {
     if (document.querySelector("#floatingTimer")) return;
     const state = timerService.snapshot();
@@ -73,6 +98,7 @@
           <div class="timer-actions">
             <button id="timerToggle" type="button">開始</button>
             <button id="timerReset" type="button">重設</button>
+            <button id="timerBell" type="button" aria-label="播放響鈴">🔔 響鈴</button>
           </div>
         </div>
       </aside>
@@ -88,6 +114,7 @@
     });
     document.querySelector("#timerToggle").addEventListener("click", toggle);
     document.querySelector("#timerReset").addEventListener("click", reset);
+    document.querySelector("#timerBell").addEventListener("click", ringBell);
     updateUi();
     refreshInterval();
   }

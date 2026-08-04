@@ -30,6 +30,15 @@ fi
 
 /usr/bin/env node ./scripts/build-lexicons.mjs
 
+echo "正在產生首頁 SEO、活動介紹頁與 sitemap..."
+if ! /usr/bin/env node ./scripts/build-seo.mjs; then
+  echo ""
+  echo "SEO 設定或活動頁產生失敗，請依照上方提示修正 data/content/SEO設定.csv。"
+  echo "按 Enter 結束。"
+  read
+  exit 1
+fi
+
 echo "正在檢查程式架構與所有玩法..."
 ARCHITECTURE_STATUS=0
 if ! /usr/bin/env node ./scripts/check-architecture.mjs --skip-data --skip-assets; then

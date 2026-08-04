@@ -9,6 +9,8 @@ AI 與協作者只需依任務使用對應腳本，不要把所有腳本都執�
 | `node scripts/check-data-contracts.mjs` | 驗證卡牌、內容、玩法欄位與引用 | 修改 CSV / JSON 後、建置前 |
 | `node scripts/build-lexicons.mjs` | 從來源資料產生 `data/generated/` | 資料契約通過後 |
 | `node scripts/build-lexicons.mjs --check` | 不寫檔，比對所有 CSV / JSON 是否已掛入 generated | 懷疑改完資料未生效時 |
+| `node scripts/build-seo.mjs` | 從 `SEO設定.csv` 更新首頁、sitemap 與各活動介紹頁 | 修改搜尋標題、摘要、關鍵詞或活動 SEO 時 |
+| `node scripts/build-seo.mjs --check` | 不寫檔，檢查 SEO 設定與所有活動頁是否同步 | 發布前檢查 |
 | `node scripts/check-assets.mjs` | 驗證來源圖片與手機衍生圖 | 修改圖片或圖片路徑後 |
 | `node scripts/check-architecture.mjs` | 完整架構、資料、圖片與主要行為守門 | 新功能、拆檔、共用結構修改 |
 | `python3 scripts/optimize-images.py` | 只轉換有更新的活動背景 | 新增或修改大圖後 |

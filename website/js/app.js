@@ -13,7 +13,9 @@ if (!decks.needs && decks.concepts) {
   };
 }
 
-const EDIT_MODE = new URLSearchParams(window.location.search).get("edit") === "1";
+const URL_PARAMS = new URLSearchParams(window.location.search);
+const EDIT_MODE = URL_PARAMS.get("edit") === "1";
+const REQUESTED_MODE_ID = URL_PARAMS.get("mode") || "";
 const historyService = window.DEBATE_HISTORY_SERVICE.create();
 const imageService = window.DEBATE_IMAGE_SERVICE.create({
   baseLayouts: window.DEBATE_IMAGE_LAYOUTS || {},
@@ -80,7 +82,7 @@ const {
   exportableLayouts
 } = imageService;
 
-let activeMode = modes[0];
+let activeMode = modes.find((mode) => mode.id === REQUESTED_MODE_ID) || modes[0];
 let activeLibrary = activeMode.primaryDeck;
 let activeSecondaryLibrary = activeMode.secondaryDeck || "";
 let activePreview = activeMode.secondaryDeck || activeMode.primaryDeck;
@@ -1630,9 +1632,13 @@ window.DEBATE_CLASS_TIMER?.init();
 renderStaticUiText();
 renderMobileHome();
 if (isMobileAppView()) {
-  setMode(activeMode.id, { deferRender: true, preserveMobileHome: true });
-  mobileModeImages.renderBanner(activeMode);
-  showMobileHome();
+  if (REQUESTED_MODE_ID) {
+    setMode(activeMode.id);
+  } else {
+    setMode(activeMode.id, { deferRender: true, preserveMobileHome: true });
+    mobileModeImages.renderBanner(activeMode);
+    showMobileHome();
+  }
 } else {
   setMode(activeMode.id);
 }

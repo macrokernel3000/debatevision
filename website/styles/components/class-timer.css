@@ -101,7 +101,7 @@
 
 .timer-actions {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1.15fr;
   gap: var(--space-2);
 }
 
@@ -119,6 +119,12 @@
   border-color: #d8bf72;
   background: linear-gradient(135deg, #d8bf72, #a87a2d);
   color: #15110a;
+}
+
+#timerBell {
+  border-color: rgba(216,191,114,.62);
+  background: rgba(216,191,114,.12);
+  color: #f3d883;
 }
 
 .floating-timer.is-running #timerToggle,

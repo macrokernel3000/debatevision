@@ -21,7 +21,8 @@ const lineBudgets = new Map([
   ["scripts/check-history-replay.mjs", 180],
   ["scripts/check-survival-results.mjs", 180],
   ["scripts/check-data-contracts.mjs", 240],
-  ["scripts/check-assets.mjs", 180]
+  ["scripts/check-assets.mjs", 180],
+  ["scripts/build-seo.mjs", 500]
 ]);
 
 function read(relativePath) {
@@ -236,6 +237,17 @@ if (generatedFreshnessCheck.status !== 0) {
   failures.push(`generated 掛勾檢查失敗：\n${generatedFreshnessCheck.stderr || generatedFreshnessCheck.stdout}`.trim());
 } else {
   notes.push("所有 CSV / JSON 已掛入 generated: 通過");
+}
+
+const seoFreshnessCheck = spawnSync(
+  process.execPath,
+  [path.join(root, "scripts/build-seo.mjs"), "--check"],
+  { encoding: "utf8" }
+);
+if (seoFreshnessCheck.status !== 0) {
+  failures.push(`SEO 活動頁掛勾檢查失敗：\n${seoFreshnessCheck.stderr || seoFreshnessCheck.stdout}`.trim());
+} else {
+  notes.push("首頁 SEO、sitemap 與獨立活動頁: 通過");
 }
 
 const historyReplayCheck = spawnSync(
