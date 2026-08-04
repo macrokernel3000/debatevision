@@ -2,6 +2,7 @@
   margin-top: 18px;
   display: grid;
   gap: 16px;
+  padding-bottom: max(180px, calc(100dvh - 540px));
 }
 
 .debate-board-panel[hidden] { display: none; }
@@ -125,7 +126,7 @@
 .debate-team.is-con strong { color: #d8eaff; }
 
 @media (max-width: 560px) {
-  .debate-board-panel { margin: 10px 10px 90px; gap: 10px; }
+  .debate-board-panel { margin: 10px 10px 0; gap: 10px; }
   .debate-board-editor { padding: 14px; }
   .debate-board-editor-head { display: grid; gap: 4px; align-items: start; }
   .debate-name-inputs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
