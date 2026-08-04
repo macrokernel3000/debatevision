@@ -51,7 +51,7 @@ window.DEBATE_MODES = [
       "同學質疑後投票選出最適格的探險隊"
     ],
     "controlRule": "求生版抽道具或職業來求生；冒險版組成探險隊，比較誰最適合前往異境。",
-    "image": "../assets/backgrounds/modes/item-survival.webp",
+    "image": "../assets/backgrounds/modes/item-survival.webp?v=c236550627",
     "cardHooks": [
       "請說明「{name}」在異境「{異境}」中，可以如何創造優勢。",
       "比較「{name}」和其他選項，為什麼它在「{異境}」中值得保留？"
@@ -94,7 +94,7 @@ window.DEBATE_MODES = [
       "每位召喚師選一個角色提出現實方案",
       "誰最能把能力轉成現實中的成功策略"
     ],
-    "image": "../assets/backgrounds/modes/reality-summon.webp",
+    "image": "../assets/backgrounds/modes/reality-summon.webp?v=9399c16355",
     "controlRule": "抽出角色與任務，說明角色在現實世界中如何完成挑戰。",
     "cardHooks": [
       "請說明「{角色}」在任務「{任務}」時該怎麼做。",
@@ -154,7 +154,7 @@ window.DEBATE_MODES = [
       "參與者提問：價格、替代品、可信度與真實需求"
     ],
     "controlRule": "抽出商品與需求，找出目標對象，包裝成一個有說服力的銷售故事。",
-    "image": "../assets/backgrounds/modes/sales-command.webp",
+    "image": "../assets/backgrounds/modes/sales-command.webp?v=e7f162ccb0",
     "cardHooks": [
       "說明 {name} 滿足哪一種需求。",
       "找出最可能購買 {name} 的對象。",
@@ -215,7 +215,7 @@ window.DEBATE_MODES = [
       "可鎖定前綴、介係或後綴，再重抽其他位置練習變化"
     ],
     "controlRule": "抽出詞語與關係，組成一句命題，解釋為什麼這個關係可以成立。",
-    "image": "../assets/backgrounds/modes/metaphor-compass.webp",
+    "image": "../assets/backgrounds/modes/metaphor-compass.webp?v=f0cba2a531",
     "cardHooks": [
       "定義 {name} 在這句命題中的意思。",
       "替 {name} 找一個具體例子。"
@@ -272,7 +272,7 @@ window.DEBATE_MODES = [
       "觀眾投票：誰的比較標準更合理"
     ],
     "controlRule": "抽出兩張或多張卡牌，建立比較標準，說服大家誰更重要。",
-    "image": "../assets/backgrounds/modes/importance-duel.webp",
+    "image": "../assets/backgrounds/modes/importance-duel.webp?v=6901981db6",
     "cardHooks": [
       "建立比較標準，說明 {name} 為什麼更重要。",
       "指出另一張卡牌相較於 {name} 的限制。",
@@ -292,7 +292,7 @@ window.DEBATE_MODES = [
     "icon": "?",
     "tone": "cosmos",
     "track": "秘密詞條",
-    "image": "../assets/backgrounds/modes/where-am-i.webp",
+    "image": "../assets/backgrounds/modes/where-am-i.webp?v=3c2ec315d0",
     "primaryDeck": "locations",
     "secondaryDeck": "",
     "primaryLabel": "任意詞庫",
@@ -357,7 +357,7 @@ window.DEBATE_MODES = [
       "搭配課堂計時器開始辯論"
     ],
     "controlRule": "正方位於辯題左側、反方位於右側；雙方一辯最靠近中央辯題，二辯與三辯依序向外排列。",
-    "image": "../assets/backgrounds/modes/importance-duel.webp",
+    "image": "../assets/backgrounds/modes/debate-board.webp?v=616509a671",
     "statusRules": {
       "default": "填寫辯題與六位辯士姓名，黑板會即時更新。"
     },
@@ -399,7 +399,7 @@ window.DEBATE_MODES = [
       "可跨卡池加入或刪除卡牌",
       "按下儲存成這場，形成本局活動卡牌"
     ],
-    "image": "../assets/backgrounds/modes/card-dictionary.webp",
+    "image": "../assets/backgrounds/modes/card-dictionary.webp?v=0f0051168c",
     "statusRules": {
       "default": "先選卡池，再直接挑選本場要用的卡，組成自己的臨時活動。",
       "dictionary": "直接瀏覽所有卡池與卡牌，跨區挑選、刪除或儲存成這一場。"

@@ -271,7 +271,23 @@ function buildModes() {
     .map((file) => JSON.parse(readFileSync(join(modesDir, file), "utf8")))
     .sort((a, b) => (a.order || 999) - (b.order || 999));
 
-  return sortModes(applyModeSettings(applyModeContent(modes)));
+  return sortModes(versionModeImages(applyModeSettings(applyModeContent(modes))));
+}
+
+function versionModeImages(modes) {
+  return modes.map((mode) => {
+    const nextMode = { ...mode };
+    for (const field of ["image", "backgroundImage"]) {
+      const reference = nextMode[field];
+      if (!reference?.startsWith("../assets/")) continue;
+      const cleanReference = reference.replace(/[?#].*$/, "");
+      const assetPath = resolve(root, cleanReference.slice(3));
+      if (!existsSync(assetPath)) continue;
+      const assetVersion = createHash("sha256").update(readFileSync(assetPath)).digest("hex").slice(0, 10);
+      nextMode[field] = `${cleanReference}?v=${assetVersion}`;
+    }
+    return nextMode;
+  });
 }
 
 function sortModes(modes) {

@@ -37,7 +37,7 @@ where-am-i,玩法名稱,1,,推理解密
 debate-board,玩法描述,1,,輸入辯題與正反方辯士姓名，快速排出正式辯論座位黑板。
 debate-board,活動規則,1,,正方位於辯題左側、反方位於右側；雙方一辯最靠近中央辯題，二辯與三辯依序向外排列。
 debate-board,狀態說明,1,default,填寫辯題與六位辯士姓名，黑板會即時更新。
-debate-board,玩法背景,1,,../assets/backgrounds/modes/importance-duel.webp
+debate-board,玩法背景,1,,../assets/backgrounds/modes/debate-board.webp
 debate-board,回合流程,1,,輸入本場辯題
 debate-board,回合流程,2,,填寫正反方一至三辯姓名
 debate-board,回合流程,3,,確認黑板上的鏡像座位順序

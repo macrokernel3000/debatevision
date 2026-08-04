@@ -107,7 +107,7 @@
     function mobileImageForMode(mode, variant = "thumb") {
       const source = imageForMode(mode);
       if (!source) return "";
-      const filename = String(source).split("/").pop() || "";
+      const filename = (String(source).split("/").pop() || "").replace(/[?#].*$/, "");
       const stem = filename.replace(/\.[^.]+$/, "");
       return `../assets/backgrounds/modes/mobile/${stem}-${variant}.webp`;
     }
