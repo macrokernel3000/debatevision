@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>免費辯論教學與思辨教育活動工具｜辯語視界</title>
+    <title>辯語思界｜辯論思維卡牌訓練</title>
     <meta name="description" content="辯語視界提供老師可直接使用的辯論教學、思辨教育、課堂討論與口語表達活動，透過抽卡快速產生題目與挑戰。" />
     <meta name="robots" content="index, follow" />
     <meta name="application-name" content="辯語視界 DebateVision" />
@@ -11,7 +11,7 @@
     <link rel="canonical" href="https://macrokernel3000.github.io/debatevision/website/" />
     <meta property="og:locale" content="zh_TW" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="免費辯論教學與思辨教育活動工具｜辯語視界" />
+    <meta property="og:title" content="辯語思界｜辯論思維卡牌訓練" />
     <meta property="og:description" content="辯語視界提供老師可直接使用的辯論教學、思辨教育、課堂討論與口語表達活動，透過抽卡快速產生題目與挑戰。" />
     <meta property="og:url" content="https://macrokernel3000.github.io/debatevision/website/" />
     <meta property="og:image" content="https://macrokernel3000.github.io/debatevision/assets/ui/logo/debatevision-logo-source.png" />
@@ -33,13 +33,14 @@
     </script>
     <link rel="stylesheet" href="./styles/tokens.css?v=20260719-1" />
     <link rel="stylesheet" href="./styles/components/draw-machine.css?v=20260721-5" />
-    <link rel="stylesheet" href="./styles/main.css?v=20260724-13" />
+    <link rel="stylesheet" href="./styles/main.css?v=20260806-1" />
     <link rel="stylesheet" href="./styles/components/brand.css?v=20260724-1" />
     <link rel="stylesheet" href="./styles/components/class-timer.css?v=20260804-2" />
+    <link rel="stylesheet" href="./styles/components/history.css?v=20260806-2" />
     <link rel="stylesheet" href="./styles/components/deck-option-cards.css?v=20260724-5" />
     <link rel="stylesheet" href="./styles/components/secret-place.css?v=20260724-1" />
     <link rel="stylesheet" href="./styles/modes/debate-board.css?v=20260804-9" />
-    <link rel="stylesheet" href="./styles/mobile.css?v=20260722-1" />
+    <link rel="stylesheet" href="./styles/mobile.css?v=20260806-1" />
     <link rel="stylesheet" href="./styles/components/mobile-modals.css?v=20260722-1" />
     <link rel="stylesheet" href="./styles/components/mobile-mode-images.css?v=20260721-1" />
     <link rel="stylesheet" href="./styles/components/mobile-survival-results.css?v=20260721-1" />
@@ -182,7 +183,7 @@
       <section class="history-panel" aria-label="抽卡記憶">
         <div class="section-head">
           <p class="eyebrow" data-ui-text="mobile.history.eyebrow">Memory Log</p>
-          <h2 data-ui-text="mobile.history.title">最近十場</h2>
+          <h2>活動紀錄</h2>
         </div>
         <div class="draw-history" id="drawHistory"></div>
       </section>
@@ -228,10 +229,10 @@
     </div>
     </main>
 
-    <script src="../data/generated/decks.js?v=8d272a4fa5"></script>
-    <script src="../data/generated/modes.js?v=8d272a4fa5"></script>
-    <script src="../data/generated/image-layouts.js?v=8d272a4fa5"></script>
-    <script src="../data/generated/ui-texts.js?v=8d272a4fa5"></script>
+    <script src="../data/generated/decks.js?v=3664742d39"></script>
+    <script src="../data/generated/modes.js?v=3664742d39"></script>
+    <script src="../data/generated/image-layouts.js?v=3664742d39"></script>
+    <script src="../data/generated/ui-texts.js?v=3664742d39"></script>
     <script src="./js/icons.js"></script>
     <script src="./js/mode-lifecycle.js"></script>
     <script src="./js/modes/item-environment.js?v=20260721-2"></script>
@@ -244,17 +245,17 @@
     <script src="./js/core/ui-text.js?v=20260719-1"></script>
     <script src="./js/core/card-hooks.js?v=20260720-1"></script>
     <script src="./js/core/decks.js?v=20260720-1"></script>
-    <script src="./js/services/history-service.js?v=20260719-1"></script>
+    <script src="./js/services/history-service.js?v=20260806-2"></script>
     <script src="./js/services/history-replay.js?v=20260720-1"></script>
     <script src="./js/services/timer-service.js?v=20260719-1"></script>
     <script src="./js/services/image-service.js?v=20260721-1"></script>
     <script src="./js/services/survival-result-service.js?v=20260721-1"></script>
     <script src="./js/mobile-render.js?v=20260724-1"></script>
-    <script src="./js/components/class-timer.js?v=20260804-2"></script>
+    <script src="./js/components/class-timer.js?v=20260806-1"></script>
     <script src="./js/components/deck-option-cards.js?v=20260719-1"></script>
     <script src="./js/components/deck-control-events.js?v=20260724-2"></script>
     <script src="./js/components/deck-controls.js?v=20260724-4"></script>
-    <script src="./js/components/history.js?v=20260720-1"></script>
+    <script src="./js/components/history.js?v=20260806-2"></script>
     <script src="./js/components/image-editor.js?v=20260720-1"></script>
     <script src="./js/components/cards.js?v=20260721-1"></script>
     <script src="./js/components/card-dictionary.js?v=20260720-1"></script>
@@ -269,7 +270,7 @@
     <script src="./js/components/survival-battle-view.js?v=20260721-1"></script>
     <script src="./js/components/survival-result-controller.js?v=20260721-1"></script>
     <script src="./js/standalone/debate-board.js?v=20260804-7"></script>
-    <script src="./js/app.js?v=20260804-2"></script>
-    <script src="./js/mobile-app.js?v=20260721-3"></script>
+    <script src="./js/app.js?v=20260806-1"></script>
+    <script src="./js/mobile-app.js?v=20260806-2"></script>
   </body>
 </html>

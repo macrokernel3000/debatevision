@@ -251,9 +251,13 @@
   });
 
   drawHistory?.addEventListener("click", (event) => {
-    const item = event.target.closest("[data-history-index]");
+    if (event.target.closest("[data-history-pin-index], [data-pinned-unpin-index]")) return;
+    const item = event.target.closest("[data-history-index], [data-pinned-history-index]");
     if (!item || !api.isMobileAppView()) return;
-    if (!api.restoreHistoryEntry(item.dataset.historyIndex, { mobileResult: true })) return;
+    const restored = item.dataset.pinnedHistoryIndex !== undefined
+      ? api.restorePinnedHistoryEntry(item.dataset.pinnedHistoryIndex, { mobileResult: true })
+      : api.restoreHistoryEntry(item.dataset.historyIndex, { mobileResult: true });
+    if (!restored) return;
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 

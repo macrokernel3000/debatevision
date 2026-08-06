@@ -55,23 +55,32 @@
     const context = new AudioContext();
     const master = context.createGain();
     const now = context.currentTime;
-    const duration = 0.24;
-    master.gain.setValueAtTime(0.0001, now);
-    master.gain.exponentialRampToValueAtTime(0.16, now + 0.012);
-    master.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+    const duration = 1.05;
+    master.gain.setValueAtTime(0.22, now);
     master.connect(context.destination);
 
-    [[740, "sine"], [1110, "triangle"]].forEach(([frequency, type], index) => {
+    // 不規則泛音與各自不同的衰減速度，模擬服務鈴金屬圓頂的「叮」聲。
+    [
+      [880, 1, 1.05],
+      [1338, 0.48, 0.78],
+      [1865, 0.24, 0.56],
+      [2446, 0.13, 0.38],
+      [3238, 0.07, 0.24],
+    ].forEach(([frequency, volume, decay]) => {
       const oscillator = context.createOscillator();
       const partial = context.createGain();
-      oscillator.type = type;
+      oscillator.type = "sine";
       oscillator.frequency.setValueAtTime(frequency, now);
-      partial.gain.setValueAtTime(index === 0 ? 1 : 0.32, now);
+      oscillator.frequency.exponentialRampToValueAtTime(frequency * 0.985, now + decay);
+      partial.gain.setValueAtTime(0.0001, now);
+      partial.gain.exponentialRampToValueAtTime(volume, now + 0.004);
+      partial.gain.exponentialRampToValueAtTime(0.0001, now + decay);
       oscillator.connect(partial).connect(master);
       oscillator.start(now);
-      oscillator.stop(now + duration);
-      if (index === 0) oscillator.addEventListener("ended", () => context.close(), { once: true });
+      oscillator.stop(now + decay + 0.02);
     });
+
+    window.setTimeout(() => context.close(), (duration + 0.1) * 1000);
   }
 
   function init() {

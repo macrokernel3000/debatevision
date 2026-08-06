@@ -520,8 +520,7 @@ function cardsFromHistoryEntry(entry) {
   return historyReplay.cardsForEntry(entry);
 }
 
-function restoreHistoryEntry(index, options = {}) {
-  const entry = historyService.entry(historyScope(), index);
+function restoreStoredHistoryEntry(entry, options = {}) {
   const cards = cardsFromHistoryEntry(entry);
   if (!cards.length) return false;
 
@@ -549,6 +548,14 @@ function restoreHistoryEntry(index, options = {}) {
   }
 
   return true;
+}
+
+function restoreHistoryEntry(index, options = {}) {
+  return restoreStoredHistoryEntry(historyService.entry(historyScope(), index), options);
+}
+
+function restorePinnedHistoryEntry(index, options = {}) {
+  return restoreStoredHistoryEntry(historyService.pinnedEntry(historyScope(), index), options);
 }
 
 function mobileDeckTarget(deckId) {
@@ -1430,6 +1437,7 @@ window.DebateVisionMobileApi = {
   renderReelCard,
   rerollSurvivalGroup: survivalResults.rerollGroup,
   restoreHistoryEntry,
+  restorePinnedHistoryEntry,
   resetDeckSelectionToDefault,
   selectedKeysForDeck,
   setActivityMenu,
@@ -1458,7 +1466,10 @@ libraryTools.addEventListener("click", (event) => {
 
 function handleHistoryItemOpen(item, options = {}) {
   if (!item) return;
-  const restored = restoreHistoryEntry(item.dataset.historyIndex, options);
+  const isPinnedItem = item.dataset.pinnedHistoryIndex !== undefined;
+  const restored = isPinnedItem
+    ? restorePinnedHistoryEntry(item.dataset.pinnedHistoryIndex, options)
+    : restoreHistoryEntry(item.dataset.historyIndex, options);
   if (!restored) return;
   historyView.activate(item);
   if (!options.skipScroll) {
@@ -1467,13 +1478,28 @@ function handleHistoryItemOpen(item, options = {}) {
 }
 
 drawHistory?.addEventListener("click", (event) => {
+  const unpinButton = event.target.closest("[data-pinned-unpin-index]");
+  if (unpinButton) {
+    event.stopPropagation();
+    historyService.unpin(historyScope(), unpinButton.dataset.pinnedUnpinIndex);
+    historyView.render(historyScope());
+    return;
+  }
+  const pinButton = event.target.closest("[data-history-pin-index]");
+  if (pinButton) {
+    event.stopPropagation();
+    const result = historyService.togglePin(historyScope(), pinButton.dataset.historyPinIndex);
+    if (result.full) window.alert(`最多可釘選 ${result.limit} 場紀錄。`);
+    historyView.render(historyScope());
+    return;
+  }
   if (isMobileAppView()) return;
-  handleHistoryItemOpen(event.target.closest("[data-history-index]"));
+  handleHistoryItemOpen(event.target.closest("[data-history-index], [data-pinned-history-index]"));
 });
 
 drawHistory?.addEventListener("keydown", (event) => {
   if (isMobileAppView() || (event.key !== "Enter" && event.key !== " ")) return;
-  const item = event.target.closest("[data-history-index]");
+  const item = event.target.closest("[data-history-index], [data-pinned-history-index]");
   if (!item) return;
   event.preventDefault();
   handleHistoryItemOpen(item);

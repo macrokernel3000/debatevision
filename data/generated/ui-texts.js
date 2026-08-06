@@ -50,7 +50,7 @@ window.DEBATE_UI_TEXTS = {
   "mobile.common.clear": "取消",
   "mobile.common.reset": "返回預設",
   "mobile.history.eyebrow": "Memory Log",
-  "mobile.history.title": "最近十場",
+  "mobile.history.title": "活動紀錄",
   "mobile.itemSurvival.modeHeading": "選擇模式",
   "mobile.itemSurvival.survivalTitle": "生存模式",
   "mobile.itemSurvival.survivalDescription": "抽取求生道具或職業夥伴在異境中求生",

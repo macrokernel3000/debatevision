@@ -7,25 +7,39 @@
     function render(scope) {
       if (!container) return;
       const entries = historyService.entries(scope);
-      if (!entries.length) {
-        container.innerHTML = `<div class="history-empty">抽卡後會在這裡保留最近十場紀錄。</div>`;
-        return;
-      }
-
-      container.innerHTML = entries.map((entry, index) => {
+      const pinnedEntries = historyService.pinnedEntries(scope);
+      const entryMarkup = (entry, index, { pinned = false } = {}) => {
         const roundNumber = Number(entry.roundNumber) || entries.length - index;
         return `
-          <article class="history-item" data-history-index="${index}" role="button" tabindex="0" aria-label="查看${roundTitle(roundNumber)}紀錄">
+          <article class="history-item${pinned ? " is-pinned" : ""}" ${pinned ? `data-pinned-history-index="${index}"` : `data-history-index="${index}"`} role="button" tabindex="0" aria-label="查看${roundTitle(roundNumber)}紀錄">
             <div class="history-item-head">
               <strong>${roundTitle(roundNumber)}</strong>
-              ${entry.variant ? `<span>${entry.variant}</span>` : ""}
+              <div class="history-item-meta">
+                ${entry.variant ? `<span>${entry.variant}</span>` : ""}
+                ${pinned ? `<button class="history-pin is-selected" type="button" data-pinned-unpin-index="${index}" aria-label="取消釘選${roundTitle(roundNumber)}" title="取消釘選">📌</button>` : `<button class="history-pin${historyService.isPinned(scope, entry) ? " is-selected" : ""}" type="button" data-history-pin-index="${index}" aria-label="${historyService.isPinned(scope, entry) ? "取消釘選" : "釘選"}${roundTitle(roundNumber)}" title="${historyService.isPinned(scope, entry) ? "取消釘選" : "釘選"}">📌</button>`}
+              </div>
             </div>
             <div class="history-card-list">
               ${entry.cards.map((card) => `<span>${cardLabel(card)}</span>`).join("")}
             </div>
           </article>
         `;
-      }).join("");
+      };
+
+      container.innerHTML = `
+        <div class="history-column history-recent-column">
+          <div class="history-column-head"><h3>最近 20 場</h3><span>${entries.length} / 20</span></div>
+          <div class="history-list">
+            ${entries.length ? entries.map((entry, index) => entryMarkup(entry, index)).join("") : `<div class="history-empty">抽卡後會在這裡保留最近 20 場紀錄。</div>`}
+          </div>
+        </div>
+        <div class="history-column history-pinned-column">
+          <div class="history-column-head"><h3>釘選紀錄</h3><span>${pinnedEntries.length} / ${historyService.pinnedLimit}</span></div>
+          <div class="history-list">
+            ${pinnedEntries.length ? pinnedEntries.map((entry, index) => entryMarkup(entry, index, { pinned: true })).join("") : `<div class="history-empty">按下左側紀錄的 📌，重要組合會固定在這裡。</div>`}
+          </div>
+        </div>
+      `;
     }
 
     function activate(item) {

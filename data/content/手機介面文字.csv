@@ -18,7 +18,7 @@ mobile.common.selectAll,global,卡組編輯,全選,全選卡牌
 mobile.common.clear,global,卡組編輯,取消,取消全部卡牌
 mobile.common.reset,global,卡組編輯,返回預設,回復預設卡牌
 mobile.history.eyebrow,global,紀錄,Memory Log,紀錄英文小標
-mobile.history.title,global,紀錄,最近十場,紀錄標題
+mobile.history.title,global,紀錄,活動紀錄,紀錄標題
 mobile.itemSurvival.modeHeading,item-survival,模式選擇,選擇模式,異境求生模式標題
 mobile.itemSurvival.survivalTitle,item-survival,模式選擇,生存模式,生存模式名稱
 mobile.itemSurvival.survivalDescription,item-survival,模式選擇,抽取求生道具或職業夥伴在異境中求生,生存模式簡介

@@ -1038,6 +1038,18 @@
     display: block;
   }
 
+  .draw-history {
+    grid-template-columns: 1fr;
+  }
+
+  .history-column {
+    padding: 10px;
+  }
+
+  .history-pinned-column {
+    order: -1;
+  }
+
   body.has-mobile-draw-result .cards-zone {
     display: grid;
     min-width: 0;
