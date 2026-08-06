@@ -194,6 +194,7 @@
   });
 
   api.cardGrid?.addEventListener("click", (event) => {
+    if (!api.isMobileAppView()) return;
     const lockButton = event.target.closest("[data-mobile-result-lock]");
     if (lockButton) {
       event.preventDefault();

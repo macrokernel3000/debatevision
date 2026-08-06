@@ -14,8 +14,8 @@
   };
 
   function drawSupply(ctx) {
-    const need = ctx.pickFrom("needs", 1)[0];
-    const items = ctx.pickFrom("items", ctx.count).map((card) => ctx.cardWithSalesNeedHooks(card, need));
+    const need = ctx.lockedResultCard?.("challenge", ["needs"]) || ctx.pickFrom("needs", 1)[0];
+    const items = (ctx.drawWithLockedSlots?.("product", ctx.count, ctx.selectedCardsFrom("items")) || ctx.pickFrom("items", ctx.count)).map((card) => ctx.cardWithSalesNeedHooks(card, need));
     if (!need || items.length < ctx.count) return ctx.renderPoolWarning();
     ctx.renderSalesPair(items, need, { left: "我的產品", right: "客戶需求" });
     ctx.markDrawn([need, ...items]);
@@ -23,8 +23,8 @@
   }
 
   function drawStory(ctx) {
-    const concept = ctx.salesNoConcept ? null : ctx.pickFrom("concepts", 1)[0];
-    const items = ctx.pickFrom("items", ctx.count).map((card) => ctx.cardWithSalesStoryHooks(card, concept));
+    const concept = ctx.salesNoConcept ? null : ctx.lockedResultCard?.("challenge", ["concepts"]) || ctx.pickFrom("concepts", 1)[0];
+    const items = (ctx.drawWithLockedSlots?.("product", ctx.count, ctx.selectedCardsFrom("items")) || ctx.pickFrom("items", ctx.count)).map((card) => ctx.cardWithSalesStoryHooks(card, concept));
     if ((!ctx.salesNoConcept && !concept) || items.length < ctx.count) return ctx.renderPoolWarning();
     const stageCard = concept || {
       name: "無概念",
@@ -46,8 +46,9 @@
   }
 
   function drawTarget(ctx) {
-    const audience = ctx.pickFromPool([...ctx.selectedSalesAudienceCards()], 1)[0];
-    const items = ctx.pickFrom("items", ctx.count).map((card) => ctx.cardWithSalesTargetHooks(card, audience));
+    const audienceDeckIds = [...new Set(ctx.selectedSalesAudienceCards().map((card) => card.deckId))];
+    const audience = ctx.lockedResultCard?.("challenge", audienceDeckIds) || ctx.pickFromPool([...ctx.selectedSalesAudienceCards()], 1)[0];
+    const items = (ctx.drawWithLockedSlots?.("product", ctx.count, ctx.selectedCardsFrom("items")) || ctx.pickFrom("items", ctx.count)).map((card) => ctx.cardWithSalesTargetHooks(card, audience));
     if (!audience || items.length < ctx.count) return ctx.renderPoolWarning();
     ctx.renderSalesPair(items, audience, { left: "我的產品", right: "目標課群" });
     ctx.markDrawn([audience, ...items]);

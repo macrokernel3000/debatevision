@@ -1,28 +1,31 @@
 (() => {
-  function create({ cardKey, container, cardMarkup }) {
+  function create({ cardKey, container, cardMarkup, resultControlFor }) {
+    const control = (card, slot, title = "卡牌") => ({
+      resultControl: resultControlFor?.(card, slot, title)
+    });
     function empty(message) {
       container.innerHTML = `<div class="empty-state">${message}</div>`;
     }
 
     function cards(cardsToRender) {
-      container.innerHTML = `<div class="combo-results">${cardsToRender.map((card) => cardMarkup(card)).join("")}</div>`;
+      container.innerHTML = `<div class="combo-results">${cardsToRender.map((card, index) => cardMarkup(card, "", control(card, `card-${index}`, card.deckLabel))).join("")}</div>`;
     }
 
     function combo(stage, cardsToRender, options = {}) {
       const showStageInResults = !options.hideStageInResults;
       const showStageInDesktopResults = showStageInResults && !options.hideStageInDesktopResults;
       const desktopStage = stage && showStageInDesktopResults
-        ? cardMarkup(stage, "environment-card mobile-stage-result", options.stageCardOptions)
+        ? cardMarkup(stage, "environment-card mobile-stage-result", options.stageCardOptions || control(stage, "stage", stage.deckLabel))
         : "";
       const mobileStage = stage && showStageInResults
-        ? cardMarkup(stage, "environment-card mobile-stage-banner", options.stageCardOptions)
+        ? cardMarkup(stage, "environment-card mobile-stage-banner", options.stageCardOptions || control(stage, "stage", stage.deckLabel))
         : "";
       container.innerHTML = `
         <div class="combo-board">
           <div class="mobile-stage-lane">${mobileStage}</div>
           <div class="combo-results">
             ${desktopStage}
-            ${cardsToRender.map((card) => cardMarkup(card, "", options.cardOptions?.(card))).join("")}
+            ${cardsToRender.map((card, index) => cardMarkup(card, "", options.cardOptions?.(card) || control(card, `card-${index}`, card.deckLabel))).join("")}
           </div>
         </div>
       `;
@@ -35,14 +38,16 @@
           resultControl: {
             key: "environment",
             locked: locks.environment,
-            title: "異境"
+            title: "異境",
+            desktopCompact: true
           }
         } : {},
         cardOptions: (card) => ({
           resultControl: {
             key: cardKey(card),
             locked: locks.cards.has(cardKey(card)),
-            title: card.deckLabel || "資源卡"
+            title: card.deckLabel || "資源卡",
+            desktopCompact: true
           }
         })
       });
@@ -51,9 +56,9 @@
     function duel(cardsToRender) {
       container.innerHTML = `
         <div class="duel-board">
-          ${cardMarkup(cardsToRender[0])}
+          ${cardMarkup(cardsToRender[0], "", control(cardsToRender[0], "red", "紅角"))}
           <div class="vs-badge">VS</div>
-          ${cardMarkup(cardsToRender[1])}
+          ${cardMarkup(cardsToRender[1], "", control(cardsToRender[1], "blue", "藍角"))}
         </div>
       `;
     }
@@ -71,9 +76,9 @@
             <p>${guideBody}</p>
           </div>
           <div class="metaphor-cards">
-            ${cardMarkup(left)}
-            ${cardMarkup(relation, "relation-card")}
-            ${cardMarkup(right)}
+            ${cardMarkup(left, "", control(left, "prefix", "前綴"))}
+            ${cardMarkup(relation, "relation-card", control(relation, "relation", "介係"))}
+            ${cardMarkup(right, "", control(right, "suffix", "後綴"))}
           </div>
         </div>
       `;
@@ -85,14 +90,14 @@
           <section class="sales-result-slot is-product">
             <p class="sales-result-label">${leftLabel}</p>
             <div class="sales-result-cards">
-              ${leftCards.map((card) => cardMarkup(card)).join("")}
+              ${leftCards.map((card, index) => cardMarkup(card, "", control(card, `product-${index}`, "我的產品"))).join("")}
             </div>
           </section>
           <div class="sales-result-link" aria-hidden="true">→</div>
           <section class="sales-result-slot is-challenge">
             <p class="sales-result-label">${rightLabel}</p>
             <div class="sales-result-cards">
-              ${cardMarkup(rightCard)}
+              ${cardMarkup(rightCard, "", control(rightCard, "challenge", rightLabel))}
             </div>
           </section>
         </div>

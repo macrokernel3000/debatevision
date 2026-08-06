@@ -45,14 +45,19 @@
   }
 
   function drawSurvival(ctx) {
-    const lockedEnvironment = !ctx.noEnvironment && ctx.lockEnvironment && ctx.currentStageCard?.deckId === ctx.activeSecondaryLibrary
-      ? ctx.currentStageCard
+    const resultLocks = ctx.survivalResultLocks || { environment: false, cards: new Set() };
+    const currentCards = ctx.currentSurvivalCards || [];
+    const lockedEnvironment = !ctx.noEnvironment && (ctx.lockEnvironment || resultLocks.environment) && ctx.currentSurvivalEnvironment?.deckId === ctx.activeSecondaryLibrary
+      ? ctx.currentSurvivalEnvironment
       : null;
     const environment = ctx.noEnvironment ? null : lockedEnvironment || ctx.pickFrom(ctx.activeSecondaryLibrary, 1)[0];
     const survivalPool = ctx.survivalActiveDeckIds().flatMap((deckId) => ctx.selectedCardsFrom(deckId));
-    const cards = ctx.pickFromPool(survivalPool, ctx.count).map((card) => ctx.cardWithEnvironmentHooks(card, environment));
+    const lockedCards = currentCards.filter((card) => resultLocks.cards.has(ctx.cardKey(card))).slice(0, ctx.count);
+    const lockedKeys = new Set(lockedCards.map(ctx.cardKey));
+    const freshCards = ctx.pickFromPool(survivalPool.filter((card) => !lockedKeys.has(ctx.cardKey(card))), ctx.count - lockedCards.length);
+    const cards = [...lockedCards, ...freshCards].map((card) => ctx.cardWithEnvironmentHooks(card, environment));
     if ((!ctx.noEnvironment && !environment) || cards.length < ctx.count) return ctx.renderPoolWarning();
-    ctx.startSurvivalResult(environment, cards);
+    ctx.startSurvivalResult(environment, cards, true);
     ctx.markDrawn(ctx.noEnvironment || lockedEnvironment ? cards : [environment, ...cards]);
     return ctx.noEnvironment ? cards : [environment, ...cards];
   }

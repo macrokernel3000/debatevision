@@ -5,9 +5,9 @@
     draw(ctx) {
       if (!ctx.isMobileView) {
         const [redDeck, blueDeck] = ctx.importanceSideDeckIds();
-        const red = ctx.pickFromPool([...ctx.selectedCardsFrom(redDeck)], 1)[0];
+        const red = ctx.lockedResultCard?.("red", [redDeck]) || ctx.pickFromPool([...ctx.selectedCardsFrom(redDeck)], 1)[0];
         const bluePool = ctx.selectedCardsFrom(blueDeck).filter((card) => !red || ctx.cardKey(card) !== ctx.cardKey(red));
-        const blue = ctx.pickFromPool([...bluePool], 1)[0];
+        const blue = ctx.lockedResultCard?.("blue", [blueDeck]) || ctx.pickFromPool([...bluePool], 1)[0];
         if (!red || !blue) return ctx.renderPoolWarning();
         const cards = [red, blue];
         ctx.renderDuel(cards);
@@ -16,7 +16,11 @@
       }
       const activeDeckIds = ctx.importanceActiveDeckIds();
       const pool = activeDeckIds.flatMap((deckId) => ctx.selectedCardsFrom(deckId));
-      const cards = ctx.pickFromPool(pool, 2);
+      const cards = [
+        ctx.lockedResultCard?.("red") || ctx.pickFromPool(pool, 1)[0],
+        ctx.lockedResultCard?.("blue")
+      ];
+      if (!cards[1]) cards[1] = ctx.pickFromPool(pool.filter((card) => !cards[0] || ctx.cardKey(card) !== ctx.cardKey(cards[0])), 1)[0];
       if (cards.length < 2) return ctx.renderPoolWarning();
       ctx.renderDuel(cards);
       ctx.markDrawn(cards);

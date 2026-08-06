@@ -3,8 +3,8 @@
 
   controllers.summonMission = {
     draw(ctx) {
-      const mission = ctx.pickFrom(ctx.activeSecondaryLibrary, 1)[0];
-      const cards = ctx.pickFromPool([...ctx.selectedSummonCards()], ctx.count).map((card) => ({
+      const mission = ctx.lockedResultCard?.("stage", [ctx.activeSecondaryLibrary]) || ctx.pickFrom(ctx.activeSecondaryLibrary, 1)[0];
+      const cards = (ctx.drawWithLockedSlots?.("card", ctx.count, [...ctx.selectedSummonCards()]) || ctx.pickFromPool([...ctx.selectedSummonCards()], ctx.count)).map((card) => ({
         ...card,
         hooks: ctx.buildHooks(card.name, card.deckId, card.rarity, {
           mission: mission?.name || "",

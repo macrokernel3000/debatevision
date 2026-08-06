@@ -90,32 +90,6 @@
       `;
     }
 
-    function metaphorLockMarkup(part, label) {
-      const metaphor = getMetaphorState();
-      if (metaphor.variant === "concrete" && (part === "prefix" || part === "relation")) {
-        return `
-          <label class="environment-lock-toggle is-disabled">
-            <input type="checkbox" data-lock-metaphor="${part}" checked disabled />
-            <span>${label}</span>
-          </label>
-        `;
-      }
-      const card = metaphor.currentCards?.[part];
-      const expectedDeck = part === "prefix"
-        ? metaphor.prefixDeck
-        : part === "suffix"
-          ? metaphor.suffixDeck
-          : getActiveSecondaryLibrary();
-      const canLock = Boolean(card) && (!expectedDeck || card.deckId === expectedDeck);
-      const locked = Boolean(metaphor.locks[part] && canLock);
-      return `
-        <label class="environment-lock-toggle ${canLock ? "" : "is-disabled"}">
-          <input type="checkbox" data-lock-metaphor="${part}" ${locked ? "checked" : ""} ${canLock ? "" : "disabled"} />
-          <span>${label}</span>
-        </label>
-      `;
-    }
-
     function fixedMetaphorCardMarkup(card, label, fallbackImage = "") {
       const image = card?.image || card?.iconAsset || fallbackImage;
       return `
@@ -359,10 +333,6 @@
       const environmentLockTool = survivalMode && survival.variant === "survival"
         ? `
           <label class="environment-lock-toggle">
-            <input type="checkbox" data-lock-environment ${survival.lockEnvironment ? "checked" : ""} ${survival.noEnvironment ? "disabled" : ""} />
-            <span>鎖定異境</span>
-          </label>
-          <label class="environment-lock-toggle">
             <input type="checkbox" data-no-environment ${survival.noEnvironment ? "checked" : ""} />
             <span>無異境</span>
           </label>
@@ -392,11 +362,6 @@
               `
               : metaphorDeckCardsMarkup("prefix", "前綴區", metaphor.prefixDeck)}
             ${metaphorDeckCardsMarkup("suffix", "後綴區", metaphor.suffixDeck)}
-          </div>
-          <div class="metaphor-lock-tools" role="group" aria-label="隱喻羅盤鎖定">
-            ${metaphorLockMarkup("prefix", "鎖定前綴")}
-            ${metaphorLockMarkup("relation", "鎖定介係")}
-            ${metaphorLockMarkup("suffix", "鎖定後綴")}
           </div>
         `
         : "";

@@ -11,6 +11,7 @@
       normalizeCard,
       orderedDeckIds,
       resultContainer,
+      resultControlFor,
       tokenIconMarkup,
       uiText
     } = options;
@@ -152,7 +153,7 @@
           <span>${cards.map((card) => card.deckLabel).join(" × ")}</span>
         </div>
         <div class="dictionary-result-grid">
-          ${cards.map((card) => cardMarkup(card, "dictionary-drawn-card")).join("")}
+          ${cards.map((card, index) => cardMarkup(card, "dictionary-drawn-card", { resultControl: resultControlFor?.(card, index) })).join("")}
         </div>
       `;
     }

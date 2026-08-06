@@ -1,0 +1,13 @@
+@media (min-width: 900px) {
+  .combo-results,
+  .dictionary-result-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    align-items: start;
+  }
+
+  .combo-results > .battle-card,
+  .dictionary-result-grid > .battle-card {
+    width: 100%;
+    min-width: 0;
+  }
+}

@@ -1,0 +1,104 @@
+.battle-card:has(.generic-result-control) {
+  position: relative;
+}
+
+.battle-card:has(.generic-result-control) .card-title {
+  box-sizing: border-box;
+  gap: 6px;
+  padding-right: 46px;
+}
+
+.battle-card:has(.generic-result-control) .card-title h3 {
+  min-width: 0;
+}
+
+.battle-card:has(.generic-result-control) .card-title .card-type {
+  flex: 0 1 auto;
+  max-width: calc(100% - 42px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.generic-result-control {
+  position: absolute;
+  z-index: 8;
+  top: 9px;
+  right: 9px;
+  display: flex !important;
+  padding: 0;
+  background: transparent;
+}
+
+.generic-result-control > span {
+  display: none;
+}
+
+.generic-result-control .mobile-result-lock {
+  width: 32px;
+  min-width: 32px;
+  height: 32px;
+  min-height: 32px;
+  display: grid;
+  place-items: center;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.88);
+  color: #222;
+  box-shadow: 0 5px 16px rgba(18, 18, 18, 0.2);
+  cursor: pointer;
+}
+
+.generic-result-control .mobile-result-lock.is-locked {
+  border-color: #d39a29;
+  background: #fff0bd;
+  color: #71450b;
+}
+
+.generic-result-control .mobile-result-lock b {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.generic-result-control .mobile-result-lock span {
+  font-size: 0.9rem;
+}
+
+.reel-stage-lock {
+  position: absolute;
+  z-index: 9;
+  top: 12px;
+  right: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 38px;
+  border: 2px solid rgba(255, 255, 255, 0.86);
+  border-radius: 12px;
+  padding: 6px 11px;
+  background: rgba(18, 18, 18, 0.74);
+  color: #fff;
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.24);
+  cursor: pointer;
+  backdrop-filter: blur(5px);
+}
+
+.reel-stage-lock.is-locked {
+  border-color: #e0aa36;
+  background: rgba(104, 67, 10, 0.9);
+}
+
+.reel-stage-lock b {
+  font: inherit;
+  font-size: 0.82rem;
+}
+
+@media (max-width: 560px) {
+  .reel-stage-lock {
+    display: none;
+  }
+}

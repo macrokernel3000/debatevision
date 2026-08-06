@@ -5,6 +5,8 @@
       editTargetForCard,
       getActiveMode,
       getCurrentStageCard,
+      getEnvironmentLocked = () => false,
+      getSurvivalResultKind = () => "",
       getSalesVariant = () => "",
       imageService,
       imageStyleForTarget,
@@ -33,6 +35,10 @@
       const editAttributes = target
         ? `style="${style}" data-edit-group="${target.group}" data-edit-id="${target.id}" data-edit-name="${target.name}" data-card-key="${target.cardKey}"`
         : "";
+      const showEnvironmentLock = mode.cardMode === "itemEnvironment"
+        && getSurvivalResultKind() === "survival"
+        && Boolean(card);
+      const environmentLocked = showEnvironmentLock && getEnvironmentLocked();
 
       container.classList.toggle("has-scene-image", Boolean(image));
       container.classList.toggle("is-sales-pitch", salesPitch);
@@ -58,6 +64,18 @@
           <strong>${title}</strong>
           <small>${subtitle}</small>
         </div>
+        ${showEnvironmentLock ? `
+          <button
+            type="button"
+            class="reel-stage-lock ${environmentLocked ? "is-locked" : ""}"
+            data-reel-stage-lock
+            aria-pressed="${environmentLocked ? "true" : "false"}"
+            aria-label="${environmentLocked ? "取消鎖定異境" : "鎖定異境"}"
+          >
+            <span aria-hidden="true">${environmentLocked ? "🔒" : "🔓"}</span>
+            <b>${environmentLocked ? "異境已鎖定" : "鎖定異境"}</b>
+          </button>
+        ` : ""}
       `;
     }
 

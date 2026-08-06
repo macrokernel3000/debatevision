@@ -72,6 +72,37 @@ const importanceState = window.DEBATE_STATE.create({
   redDeck: "",
   blueDeck: ""
 });
+const genericLockState = window.DEBATE_STATE.create({ byMode: {} });
+
+function genericLockBucket() {
+  return genericLockState.byMode[activeMode.id] ||= { locks: new Set(), cards: {} };
+}
+
+function lockedResultCard(slot, allowedDeckIds = []) {
+  const bucket = genericLockBucket();
+  const card = bucket.locks.has(slot) ? bucket.cards[slot] : null;
+  if (!card) return null;
+  return !allowedDeckIds.length || allowedDeckIds.includes(card.deckId) ? card : null;
+}
+
+function drawWithLockedSlots(prefix, count, pool) {
+  const cards = Array.from({ length: count }, (_, index) => lockedResultCard(`${prefix}-${index}`));
+  const usedKeys = new Set(cards.filter(Boolean).map(cardKey));
+  const replacements = pickFromPool(pool.filter((card) => !usedKeys.has(cardKey(card))), cards.filter((card) => !card).length);
+  let replacementIndex = 0;
+  return cards.map((card) => card || replacements[replacementIndex++]).filter(Boolean);
+}
+
+function genericResultControl(card, slot, title) {
+  const bucket = genericLockBucket();
+  bucket.cards[slot] = card;
+  return {
+    key: slot,
+    locked: bucket.locks.has(slot),
+    title: title || card.deckLabel || "卡牌",
+    compact: true
+  };
+}
 const DEFAULT_IMAGE_LAYOUT = imageService.defaultLayout;
 const {
   targetForCard: editTargetForCard,
@@ -962,6 +993,12 @@ const dictionaryView = window.DebateVisionCardDictionary.create({
   normalizeCard,
   orderedDeckIds,
   resultContainer: dictionaryResult,
+  resultControlFor: (card, index) => ({
+    key: `dictionary-${index}`,
+    locked: genericLockBucket().locks.has(`dictionary-${index}`),
+    title: card.deckLabel || "卡牌",
+    compact: true
+  }),
   tokenIconMarkup,
   uiText
 });
@@ -970,6 +1007,8 @@ const reelView = window.DebateVisionReelView.create({
   editTargetForCard,
   getActiveMode: () => activeMode,
   getCurrentStageCard: () => drawState.stageCard,
+  getEnvironmentLocked: () => survivalResultState.locks.environment,
+  getSurvivalResultKind: () => survivalResultState.kind,
   getSalesVariant: () => salesState.variant,
   imageService,
   imageStyleForTarget,
@@ -980,7 +1019,8 @@ const { render: renderReelCard } = reelView;
 const resultsView = window.DebateVisionResults.create({
   cardKey,
   container: cardGrid,
-  cardMarkup
+  cardMarkup,
+  resultControlFor: genericResultControl
 });
 const survivalResults = window.DebateVisionSurvivalResultController.create({
   cardKey,
@@ -1076,6 +1116,12 @@ function renderSurvivalBattle(environment, groups, options = {}) {
     environment: environmentCard,
     groups,
     cardMarkup,
+    resultControlFor: (card, slot, title) => ({
+      key: slot,
+      locked: genericLockBucket().locks.has(slot),
+      title,
+      compact: true
+    }),
     locks: options.locks,
     showControls: Boolean(options.mobileControls)
   });
@@ -1100,7 +1146,11 @@ function renderMetaphorCompass(concepts, relation) {
 function renderSalesPair(items, challenge, labels) {
   drawState.stageCard = challenge;
   if (isMobileAppView()) {
-    resultsView.combo(challenge, items, { hideStageInDesktopResults: true });
+    resultsView.combo(challenge, items, {
+      hideStageInDesktopResults: true,
+      stageCardOptions: { resultControl: genericResultControl(challenge, "challenge", labels.right) },
+      cardOptions: (card) => ({ resultControl: genericResultControl(card, `product-${items.indexOf(card)}`, labels.left) })
+    });
     return;
   }
   resultsView.salesPair({
@@ -1130,6 +1180,9 @@ function createModeContext(count = activeMode.fixedCount || Math.max(1, Math.min
     get salesVariant() { return salesState.variant; },
     get salesNoConcept() { return salesState.noConcept; },
     get survivalVariant() { return survivalState.variant; },
+    get currentSurvivalCards() { return survivalResultState.cards; },
+    get currentSurvivalEnvironment() { return survivalResultState.environment; },
+    get survivalResultLocks() { return survivalResultState.locks; },
     get survivalGroupCount() { return survivalState.groupCount; },
     set survivalGroupCount(value) { survivalState.groupCount = value; },
     get survivalItemCount() { return survivalState.counts.items; },
@@ -1145,6 +1198,8 @@ function createModeContext(count = activeMode.fixedCount || Math.max(1, Math.min
     get metaphorSuffixDeck() { return metaphorState.suffixDeck; },
     get metaphorLocks() { return metaphorState.locks; },
     get currentMetaphorCards() { return metaphorState.currentCards; },
+    lockedResultCard,
+    drawWithLockedSlots,
     cardGrid,
     buildHooks,
     cardKey,
@@ -1184,7 +1239,7 @@ function drawResult() {
   const controller = modeControllers[activeMode.cardMode];
   if (controller?.draw) return controller.draw(createModeContext(count));
 
-  const cards = pickFrom(activeLibrary, count);
+  const cards = drawWithLockedSlots("card", count, selectedCardsFrom(activeLibrary));
   if (cards.length < count) return renderPoolWarning();
   cardGrid.innerHTML = cards.map((card) => cardMarkup(card)).join("");
   markDrawn(cards);
@@ -1503,6 +1558,37 @@ drawHistory?.addEventListener("keydown", (event) => {
   if (!item) return;
   event.preventDefault();
   handleHistoryItemOpen(item);
+});
+
+document.addEventListener("click", (event) => {
+  const reelStageLock = event.target.closest("[data-reel-stage-lock]");
+  if (reelStageLock) {
+    event.preventDefault();
+    event.stopPropagation();
+    survivalResults.toggleLock("environment");
+    return;
+  }
+  const survivalLockButton = event.target.closest("[data-mobile-result-lock]");
+  if (survivalLockButton && !isMobileAppView()) {
+    event.preventDefault();
+    event.stopPropagation();
+    survivalResults.toggleLock(survivalLockButton.dataset.mobileResultLock);
+    return;
+  }
+  const lockButton = event.target.closest("[data-generic-result-lock]");
+  if (!lockButton) return;
+  event.preventDefault();
+  event.stopPropagation();
+  const locks = genericLockBucket().locks;
+  const slot = lockButton.dataset.genericResultLock;
+  if (locks.has(slot)) locks.delete(slot);
+  else locks.add(slot);
+  lockButton.classList.toggle("is-locked", locks.has(slot));
+  lockButton.setAttribute("aria-pressed", String(locks.has(slot)));
+  lockButton.setAttribute("aria-label", `${locks.has(slot) ? "取消鎖定" : "鎖定"}卡牌`);
+  lockButton.querySelector("span").textContent = locks.has(slot) ? "🔒" : "🔓";
+  lockButton.querySelector("b").textContent = locks.has(slot) ? "已鎖定" : "鎖定";
+  lockButton.closest(".battle-card")?.classList.toggle("is-mobile-result-locked", locks.has(slot));
 });
 
 window.DebateVisionDeckControlEvents.bind({

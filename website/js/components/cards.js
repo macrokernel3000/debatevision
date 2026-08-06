@@ -39,16 +39,16 @@
       const resultControl = cardOptions.resultControl;
       const resultControlMarkup = resultControl
         ? `
-          <div class="mobile-result-card-control">
+          <div class="mobile-result-card-control ${resultControl.compact || resultControl.desktopCompact ? "generic-result-control" : ""}">
             <span>${resultControl.title}</span>
             <button
               type="button"
               class="mobile-result-lock ${resultControl.locked ? "is-locked" : ""}"
-              data-mobile-result-lock="${resultControl.key}"
+              ${resultControl.compact ? `data-generic-result-lock="${resultControl.key}"` : `data-mobile-result-lock="${resultControl.key}"`}
               aria-pressed="${resultControl.locked ? "true" : "false"}"
               aria-label="${resultControl.locked ? `取消鎖定${resultControl.title}` : `鎖定${resultControl.title}`}"
             >
-              <span aria-hidden="true">${resultControl.locked ? "🔒" : "○"}</span>
+              <span aria-hidden="true">${resultControl.locked ? "🔒" : "🔓"}</span>
               <b>${resultControl.locked ? "已鎖定" : "鎖定"}</b>
             </button>
           </div>

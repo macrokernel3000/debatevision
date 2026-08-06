@@ -179,26 +179,12 @@
         return;
       }
 
-      const metaphorLock = event.target.closest("[data-lock-metaphor]");
-      if (metaphorLock) {
-        metaphor.locks[metaphorLock.dataset.lockMetaphor] = metaphorLock.checked;
-        renderAll();
-        return;
-      }
-
       const noConcept = event.target.closest("[data-sales-no-concept]");
       if (noConcept) {
         sales.noConcept = noConcept.checked;
         setActivePreview(sales.noConcept ? "items" : "concepts");
         renderAll();
         renderEmptyState();
-        return;
-      }
-
-      const environmentLock = event.target.closest("[data-lock-environment]");
-      if (environmentLock) {
-        survival.lockEnvironment = environmentLock.checked;
-        renderAll();
         return;
       }
 

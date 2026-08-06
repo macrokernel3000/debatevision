@@ -8,7 +8,7 @@
     ["specialists", "特職"]
   ];
 
-  function groupMarkup(group, cardMarkup, showControls) {
+  function groupMarkup(group, cardMarkup, showControls, resultControlFor) {
     const activeSections = groupSections.filter(([key]) => group[key].length);
     const members = activeSections.flatMap(([key]) => group[key]);
     const summary = activeSections.map(([key, label]) => `${label} ${group[key].length}`).join(" · ");
@@ -34,14 +34,14 @@
         </div>
         ${members.length ? `
           <div class="survival-mini-list">
-            ${members.map((card) => cardMarkup(card, "survival-member-card")).join("")}
+            ${members.map((card, index) => cardMarkup(card, "survival-member-card", showControls ? {} : { resultControl: resultControlFor?.(card, `group-${group.index}-${index}`, `第 ${group.index} 組`) })).join("")}
           </div>
         ` : `<div class="survival-group-empty">請先為這一組設定隊伍卡。</div>`}
       </section>
     `;
   }
 
-  function render({ environment, groups, cardMarkup, locks, showControls = false }) {
+  function render({ environment, groups, cardMarkup, locks, resultControlFor, showControls = false }) {
     return `
       <div class="survival-battle-board">
         <div class="mobile-stage-lane">
@@ -51,10 +51,10 @@
               locked: locks?.environment || false,
               title: "異境"
             }
-          } : {})}
+          } : { resultControl: resultControlFor?.(environment, "environment", "異境") })}
         </div>
         <div class="survival-group-grid">
-          ${groups.map((group) => groupMarkup(group, cardMarkup, showControls)).join("")}
+          ${groups.map((group) => groupMarkup(group, cardMarkup, showControls, resultControlFor)).join("")}
         </div>
       </div>
     `;

@@ -34,11 +34,18 @@
       }
     }
 
-    function startSurvival(environment, cards) {
+    function startSurvival(environment, cards, preserveLocks = false) {
+      const previousLocks = preserveLocks ? state.locks : null;
       clear();
       state.kind = "survival";
       state.environment = environment;
       state.cards = cards;
+      if (previousLocks) {
+        state.locks = {
+          environment: previousLocks.environment,
+          cards: new Set(cards.filter((card) => previousLocks.cards.has(cardKey(card))).map(cardKey))
+        };
+      }
       render();
     }
 
