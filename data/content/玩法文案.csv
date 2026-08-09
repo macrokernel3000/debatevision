@@ -34,14 +34,14 @@ importance-duel,回合流程,3,,左右兩方各 30 秒建立標準
 importance-duel,回合流程,4,,互相質疑一次
 importance-duel,回合流程,5,,觀眾投票：誰的比較標準更合理
 where-am-i,玩法名稱,1,,推理解密
-debate-board,玩法描述,1,,輸入辯題並分別設定正反方人數，快速排出正式辯論座位黑板。
+debate-board,玩法描述,1,,輸入辯題並分別設定正反方人數，快速排出正式辯論座位黑板，再用雙方辯論計時器進行獨立計時或對辯。
 debate-board,活動規則,1,,正方位於辯題左側、反方位於右側；雙方可各選一至五位辯士、各標記一位結辯，也可隱藏隊名與辯士姓名。
 debate-board,狀態說明,1,default,選擇雙方人數並填寫辯題，黑板會即時更新。
 debate-board,玩法背景,1,,../assets/backgrounds/modes/debate-board.webp
 debate-board,回合流程,1,,輸入本場辯題
 debate-board,回合流程,2,,分別選擇正反方人數，視需要填寫姓名並標記雙方結辯
 debate-board,回合流程,3,,確認黑板上的鏡像座位順序
-debate-board,回合流程,4,,搭配課堂計時器開始辯論
+debate-board,回合流程,4,,展開雙方辯論計時器，選擇獨立或對辯模式，使用交換與提示鈴聲開始辯論
 where-am-i,玩法描述,1,,所有卡片都被編號，請靠是非題推理出關鍵機密。
 where-am-i,活動規則,1,,先秘密選定答案，再讓學生用問題逐步縮小範圍並推理答案。
 where-am-i,狀態說明,1,default,選定任一詞庫作為秘密答案池，輸入編號後讓學生用問題推理。

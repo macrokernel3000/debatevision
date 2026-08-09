@@ -348,13 +348,13 @@ window.DEBATE_MODES = [
     "secondaryLabel": "",
     "drawLabel": "顯示辯論黑板",
     "cardMode": "debateBoard",
-    "description": "輸入辯題並分別設定正反方人數，快速排出正式辯論座位黑板。",
+    "description": "輸入辯題並分別設定正反方人數，快速排出正式辯論座位黑板，再用雙方辯論計時器進行獨立計時或對辯。",
     "prompts": [],
     "flow": [
       "輸入本場辯題",
       "分別選擇正反方人數，視需要填寫姓名並標記雙方結辯",
       "確認黑板上的鏡像座位順序",
-      "搭配課堂計時器開始辯論"
+      "展開雙方辯論計時器，選擇獨立或對辯模式，使用交換與提示鈴聲開始辯論"
     ],
     "controlRule": "正方位於辯題左側、反方位於右側；雙方可各選一至五位辯士、各標記一位結辯，也可隱藏隊名與辯士姓名。",
     "image": "../assets/backgrounds/modes/debate-board.webp?v=616509a671",

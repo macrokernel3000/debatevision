@@ -77,7 +77,7 @@
   min-width: 820px;
   min-height: 500px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr) 1.35fr repeat(4, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(62px, .22fr) minmax(150px, .42fr) minmax(62px, .22fr) minmax(0, 1fr);
   gap: 10px;
   align-items: center;
   padding: 28px 24px;
@@ -127,6 +127,14 @@
 .debate-speaker,
 .debate-team { display: grid; justify-items: center; align-content: center; }
 
+.debate-side-seats {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(var(--seat-count), minmax(0, 1fr));
+  gap: 10px;
+  align-items: center;
+}
+
 .debate-topic strong,
 .debate-speaker strong,
 .debate-speaker b,
@@ -168,7 +176,7 @@
   .debate-format-picker .debate-hide-names { grid-column: 1 / -1; }
   .debate-name-inputs { grid-template-columns: 1fr; gap: 12px; }
   .debate-team-inputs { gap: 8px; }
-  .debate-blackboard { min-width: 720px; min-height: 450px; padding: 20px 16px; }
+  .debate-blackboard { min-width: 920px; min-height: 450px; padding: 20px 16px; }
   .debate-topic { min-height: 370px; }
   .debate-topic-copy { height: 330px; }
   .debate-speaker,

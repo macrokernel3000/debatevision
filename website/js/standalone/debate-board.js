@@ -89,16 +89,14 @@
 
     const blackboard = panel.querySelector(".debate-blackboard");
     blackboard.className = `debate-blackboard${state.hideNames ? " hide-names" : ""}`;
-    blackboard.style.gridTemplateColumns = `repeat(${state.proCount + 1}, 1fr) 1.35fr repeat(${state.conCount + 1}, 1fr)`;
-    blackboard.style.minWidth = `${500 + (state.proCount + state.conCount) * 55}px`;
     const proColumns = Array.from({ length: state.proCount }, (_, index) => speakerColumn("pro", state.proCount - index)).join("");
     const conColumns = Array.from({ length: state.conCount }, (_, index) => speakerColumn("con", index + 1)).join("");
     blackboard.innerHTML = `
-      ${proColumns}
+      <div class="debate-side-seats is-pro" style="--seat-count:${state.proCount}">${proColumns}</div>
       <div class="debate-team is-pro"><b>隊伍</b><strong data-team="proTeam"></strong></div>
       <div class="debate-topic"><small>辯題</small><strong class="debate-topic-copy"></strong></div>
       <div class="debate-team is-con"><b>隊伍</b><strong data-team="conTeam"></strong></div>
-      ${conColumns}
+      <div class="debate-side-seats is-con" style="--seat-count:${state.conCount}">${conColumns}</div>
     `;
   }
 
