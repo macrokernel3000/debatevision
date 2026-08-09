@@ -1,5 +1,6 @@
 .brand-lockup {
   min-width: 0;
+  flex: 1 1 auto;
   display: flex;
   gap: 14px;
   align-items: center;
@@ -23,6 +24,37 @@
   min-width: 0;
 }
 
+.brand-purpose {
+  display: block;
+  margin-bottom: 7px;
+  color: #9a6a18;
+  font-size: .76rem;
+  font-weight: 950;
+  letter-spacing: .14em;
+}
+
+@media (min-width: 901px) {
+  .brand-copy {
+    flex: 1 1 auto;
+    display: grid;
+    grid-template-columns: max-content minmax(310px, 1fr);
+    gap: clamp(54px, 8vw, 132px);
+    align-items: center;
+  }
+
+  .brand-meta {
+    min-width: 0;
+    justify-self: start;
+    border-left: 2px solid rgba(199, 144, 34, .32);
+    padding: 5px 0 5px 24px;
+  }
+
+  .brand-meta .tagline span {
+    margin-left: 0;
+    margin-right: 8px;
+  }
+}
+
 @media (max-width: 560px) {
   .brand-lockup {
     gap: 8px;
@@ -39,7 +71,16 @@
   }
 
   .brand-copy {
+    display: block;
     line-height: 1;
+  }
+
+  .brand-identity {
+    white-space: nowrap;
+  }
+
+  .brand-purpose {
+    display: none;
   }
 
 }
