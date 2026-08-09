@@ -54,10 +54,23 @@
     }
 
     function againLabel() {
+      return "再次挑戰";
+    }
+
+    function partialAction() {
       const mode = getActiveMode();
-      if (mode.cardMode === "itemEnvironment") return survivalAgainLabel();
-      if (mode.cardMode === "metaphorCompass") return "再來一場";
-      return `再次${mode.title}`;
+      if (mode.cardMode === "itemEnvironment") {
+        return getSurvivalState().variant === "battle"
+          ? { label: "局部編隊", description: "保留鎖定內容，重新調整其他隊伍" }
+          : { label: "資源交換", description: "把未鎖定的卡隨機換成新的" };
+      }
+      if (mode.cardMode === "summonMission") {
+        return { label: "局部召喚", description: "保留鎖定內容，召喚其餘新卡" };
+      }
+      if (mode.cardMode === "importanceDuel") {
+        return { label: "局部比較", description: "保留鎖定的一方，替換另一方" };
+      }
+      return { label: "局部重抽", description: "保留鎖定內容，替換其餘卡牌" };
     }
 
     function survivalDeckCards() {
@@ -318,10 +331,13 @@
       const active = mode.cardMode !== "secretPlace" && mode.cardMode !== "cardDictionary";
       resultActions.hidden = !active;
       const result = getSurvivalResultState();
+      const partial = partialAction();
       resultActions.innerHTML = window.DebateVisionMobileRender.resultActions({
         active,
         againLabel: againLabel(),
         notice: mode.cardMode === "itemEnvironment" ? result.notice : "",
+        partialDescription: partial.description,
+        partialLabel: partial.label,
         survivalKind: mode.cardMode === "itemEnvironment" ? result.kind : ""
       });
     }

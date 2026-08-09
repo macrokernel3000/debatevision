@@ -186,8 +186,11 @@
   });
 
   resultActions?.addEventListener("click", (event) => {
-    if (event.target.closest("[data-mobile-resource-exchange]")) {
-      api.exchangeSurvivalResources();
+    if (event.target.closest("[data-mobile-partial-redraw]")) {
+      const survivalExchange = api.activeMode.cardMode === "itemEnvironment"
+        && api.survivalVariant === "survival";
+      if (survivalExchange) api.exchangeSurvivalResources();
+      else api.spinDraw();
       return;
     }
     if (event.target.closest("[data-mobile-again]")) api.showMobileSetup();

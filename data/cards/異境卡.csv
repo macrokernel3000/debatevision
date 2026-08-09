@@ -1,6 +1,6 @@
 ﻿牌組ID,牌組名稱,牌組圖示,卡牌名稱,說明,卡牌圖示,抽選池圖示,圖片,稀有度,標籤
 worlds,異境卡,◎,殭屍末日,城市秩序崩潰，街道危險且資源有限，任何聲響都可能帶來麻煩。,world_icon_zombie,🧟,worlds_Zombie.png,A,危機|城市|生存
-worlds,異境卡,◎,神秘星球,空氣、重力與生物都不確定，探索者必須先判斷未知規則。,world_icon_mystery_planet,🪐,worlds_mysteryplanet,A,科幻|探索|未知
+worlds,異境卡,◎,神秘星球,空氣、重力與生物都不確定，探索者必須先判斷未知規則。,world_icon_mystery_planet,🪐,worlds_mysteryplanet.png,A,科幻|探索|未知
 worlds,異境卡,◎,遠古叢林,潮濕、茂密、野生動物多，方向感與補給管理會被嚴重考驗。,world_icon_jungle,🌴,worlds_jungle.png,A,自然|野外|潮濕
 worlds,異境卡,◎,炙熱沙漠,高溫、缺水、日夜溫差大，水源與遮蔽比力量更重要。,world_icon_desert,🏜️,worlds_desert .png,A,乾旱|高溫|野外
 worlds,異境卡,◎,無人島,四面環海，資源有限，必須同時處理求生、訊號與長期等待。,world_icon_island,🏝️,worlds_uninhabited island.png,A,海島|求救|長期
@@ -16,10 +16,10 @@ worlds,異境卡,◎,未來都市,科技高度發達，但監控、能源與系�
 worlds,異境卡,◎,巨型迷宮,路線混亂、出口未知，記錄與團隊分工會比速度更可靠。,world_icon_maze,🌀,worlds_maze,B,推理|地形|迷失
 worlds,異境卡,◎,鬧鬼校園,熟悉空間變得陌生，教室、操場與器材室都似乎有靈魂。,world_icon_haunted_school,👻,worlds_Abandoned Campus.png,A,日常|夜晚|校園
 worlds,異境卡,◎,古代戰場,資源粗糙、衝突不斷，該注意己方的策略與士氣。,world_icon_battlefield,⚔️,worlds_Ancient battlefield.png,A,歷史|衝突|野外
-worlds,異境卡,◎,豪華郵輪,空間巨大且漂浮海上，資源、階層與撤離問題交錯。,world_icon_cruise,🛳️,worlds_Cruise ship,B,海洋|交通|室內
-worlds,異境卡,◎,雲端城市,稀薄的空氣與神秘科技，氣候的影響被嚴重放大。,world_icon_cloud_city,☁️,worlds_CloudCity,B,科幻|高空|城市
-worlds,異境卡,◎,失控實驗室,未知物質、封鎖門與安全規範混在一起，知識與冷靜很重要。,world_icon_lab,🧪,worlds_laboratory,A,科學|危機|室內
-worlds,異境卡,◎,漂流木筏,空間極小、物資有限、方向難控，任何物品都要發揮最大價值。,world_icon_raft,🛶,worlds_Raft,A,水域|求生|限制
-worlds,異境卡,◎,天星隕落,最後的倒數時刻，有什麼能夠讓我們活著？或者更快樂？,world_icon_meteorite,🪨,worlds_meteorite,A,危機|城市|倒數
-worlds,異境卡,◎,原始部落,鼓聲、敵意、人多勢眾，逃跑或者戰鬥還是和解都有機會。,world_icon_Clans,✪,worlds_Clans,B,水域|求生|限制
-worlds,異境卡,◎,遊戲世界,劍與魔法降臨，無數任務與魔王等著玩家挑戰。,world_icon_game,🎮,worlds_game,B,水域|求生|限制
+worlds,異境卡,◎,豪華郵輪,空間巨大且漂浮海上，資源、階層與撤離問題交錯。,world_icon_cruise,🛳️,worlds_Cruise ship.png,B,海洋|交通|室內
+worlds,異境卡,◎,雲端城市,稀薄的空氣與神秘科技，氣候的影響被嚴重放大。,world_icon_cloud_city,☁️,worlds_CloudCity.png,B,科幻|高空|城市
+worlds,異境卡,◎,失控實驗室,未知物質、封鎖門與安全規範混在一起，知識與冷靜很重要。,world_icon_lab,🧪,worlds_laboratory.png,A,科學|危機|室內
+worlds,異境卡,◎,漂流木筏,空間極小、物資有限、方向難控，任何物品都要發揮最大價值。,world_icon_raft,🛶,worlds_Raft.png,A,水域|求生|限制
+worlds,異境卡,◎,天星隕落,最後的倒數時刻，有什麼能夠讓我們活著？或者更快樂？,world_icon_meteorite,🪨,worlds_meteorite.png,A,危機|城市|倒數
+worlds,異境卡,◎,原始部落,鼓聲、敵意、人多勢眾，逃跑或者戰鬥還是和解都有機會。,world_icon_Clans,🔨,world_Clans.png,B,水域|求生|限制
+worlds,異境卡,◎,遊戲世界,劍與魔法降臨，無數任務與魔王等著玩家挑戰。,world_icon_game,🎮,worlds_game.png,B,水域|求生|限制

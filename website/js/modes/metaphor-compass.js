@@ -5,9 +5,9 @@
     draw(ctx) {
       const fixedPrefix = ctx.metaphorVariant === "concrete" ? ctx.fixedMetaphorPrefixCard() : null;
       const fixedRelation = ctx.metaphorVariant === "concrete" ? ctx.fixedMetaphorRelationCard() : null;
-      const lockedPrefix = fixedPrefix || ctx.lockedResultCard?.("prefix", [ctx.metaphorPrefixDeck]) || (ctx.metaphorLocks.prefix ? ctx.currentMetaphorCards?.prefix : null);
-      const lockedRelation = fixedRelation || ctx.lockedResultCard?.("relation", [ctx.activeSecondaryLibrary]) || (ctx.metaphorLocks.relation ? ctx.currentMetaphorCards?.relation : null);
-      const lockedSuffix = ctx.lockedResultCard?.("suffix", [ctx.metaphorSuffixDeck]) || (ctx.metaphorLocks.suffix ? ctx.currentMetaphorCards?.suffix : null);
+      const lockedPrefix = fixedPrefix || ctx.lockedResultCard?.("prefix", [ctx.metaphorPrefixDeck]);
+      const lockedRelation = fixedRelation || ctx.lockedResultCard?.("relation", [ctx.activeSecondaryLibrary]);
+      const lockedSuffix = ctx.lockedResultCard?.("suffix", [ctx.metaphorSuffixDeck]);
       const prefix = lockedPrefix || ctx.pickFromAvailable(ctx.metaphorPrefixDeck, 1)[0];
       const suffixExcludedKeys = new Set(prefix?.deckId === ctx.metaphorSuffixDeck ? [ctx.cardKey(prefix)] : []);
       const suffix = lockedSuffix || ctx.pickFromAvailable(ctx.metaphorSuffixDeck, 1, suffixExcludedKeys)[0];

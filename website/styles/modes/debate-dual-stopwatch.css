@@ -1,0 +1,58 @@
+.debate-dual-stopwatch {
+  position: fixed;
+  z-index: 72;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  width: min(560px, calc(100vw - 36px));
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 17px;
+  padding: 10px;
+  background: rgba(24, 20, 17, 0.94);
+  color: #fff;
+  box-shadow: 0 18px 42px rgba(15, 12, 10, 0.34);
+  backdrop-filter: blur(12px);
+}
+
+.debate-dual-stopwatch[hidden] { display: none; }
+.debate-stopwatch-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px; padding: 0 2px; }
+.debate-stopwatch-head > strong { font-size: .78rem; letter-spacing: .08em; }
+.debate-stopwatch-head-actions { display: flex; align-items: center; gap: 5px; }
+.debate-stopwatch-summary { display: none; align-items: center; gap: 12px; margin-left: auto; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .72rem; }
+.debate-stopwatch-summary span:first-child { color: #ffaaa7; }
+.debate-stopwatch-summary span:last-child { color: #9ee4c6; }
+.debate-stopwatch-modes { display: flex; gap: 3px; border-radius: 9px; padding: 3px; background: rgba(255, 255, 255, .08); }
+.debate-stopwatch-modes button { min-height: 27px; border: 0; border-radius: 7px; padding: 3px 10px; background: transparent; color: rgba(255,255,255,.58); font: inherit; font-size: .72rem; font-weight: 900; cursor: pointer; }
+.debate-stopwatch-modes button.is-active { background: #f6ead2; color: #281d16; }
+.debate-stopwatch-collapse { min-height: 33px; border: 1px solid rgba(255,255,255,.16); border-radius: 8px; padding: 4px 9px; background: rgba(255,255,255,.08); color: rgba(255,255,255,.74); font: inherit; font-size: .68rem; font-weight: 900; cursor: pointer; }
+.debate-stopwatch-bell.is-ringing { border-color: #f1c257; background: #f1c257; color: #271b0e; box-shadow: 0 0 16px rgba(241,194,87,.48); }
+.debate-stopwatch-body { display: grid; grid-template-columns: minmax(0, 1fr) 52px minmax(0, 1fr); gap: 10px; align-items: stretch; }
+
+.debate-stopwatch-side { min-width: 0; display: grid; gap: 7px; border-radius: 13px; padding: 12px 14px; color: #fff; transition: filter 140ms ease, box-shadow 140ms ease; }
+.debate-stopwatch-side.is-pro { background: linear-gradient(145deg, #771d20, #3d1013); }
+.debate-stopwatch-side.is-con { background: linear-gradient(145deg, #175d43, #0c3025); }
+.debate-stopwatch-side.is-running { box-shadow: inset 0 0 0 2px rgba(255,255,255,.72), 0 0 18px rgba(255,255,255,.13); filter: brightness(1.12); }
+.debate-stopwatch-side > span { font-size: .68rem; font-weight: 950; letter-spacing: .12em; opacity: .8; }
+.debate-stopwatch-side output { overflow: hidden; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: clamp(1.45rem, 2.4vw, 2rem); font-weight: 950; line-height: 1.1; letter-spacing: -.05em; white-space: nowrap; }
+.debate-stopwatch-side > div { display: grid; grid-template-columns: 1fr auto; gap: 5px; }
+.debate-stopwatch-side button { min-height: 34px; border: 1px solid rgba(255,255,255,.25); border-radius: 8px; padding: 4px 10px; background: rgba(255,255,255,.12); color: #fff; font: inherit; font-size: .72rem; font-weight: 900; cursor: pointer; }
+.debate-stopwatch-side button:first-child { background: rgba(255,255,255,.88); color: #211713; }
+.debate-stopwatch-center-actions { align-self: center; display: grid; gap: 6px; }
+.debate-stopwatch-swap,
+.debate-stopwatch-bell { min-height: 52px; display: grid; place-items: center; gap: 0; border: 1px solid rgba(255,255,255,.22); border-radius: 12px; background: #d0a34a; color: #24190f; font: inherit; font-size: 1.05rem; font-weight: 1000; cursor: pointer; }
+.debate-stopwatch-swap span,
+.debate-stopwatch-bell span { font-size: .58rem; }
+.debate-stopwatch-bell { min-height: 44px; background: rgba(255,255,255,.08); color: #ffe2a0; }
+.debate-stopwatch-swap:disabled { background: rgba(255,255,255,.08); color: rgba(255,255,255,.3); cursor: default; }
+
+.debate-dual-stopwatch.is-collapsed { width: min(410px, calc(100vw - 36px)); padding: 8px 10px; }
+.debate-dual-stopwatch.is-collapsed .debate-stopwatch-head { margin-bottom: 0; }
+.debate-dual-stopwatch.is-collapsed .debate-stopwatch-summary { display: flex; }
+.debate-dual-stopwatch.is-collapsed .debate-stopwatch-modes,
+.debate-dual-stopwatch.is-collapsed .debate-stopwatch-body { display: none; }
+
+body[data-active-mode="debate-board"] .floating-timer { display: none !important; }
+
+@media (max-width: 560px) {
+  .debate-dual-stopwatch { display: none !important; }
+}

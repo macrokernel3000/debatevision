@@ -138,6 +138,7 @@
       <div class="debate-blackboard"></div>
     </div>
   `;
+  const dualStopwatch = window.DEBATE_DUAL_STOPWATCH?.create(panel);
 
   function render() {
     renderTopic();
@@ -182,6 +183,7 @@
 
   function setActive(active) {
     panel.hidden = !active;
+    dualStopwatch?.setActive(active);
     if (active) render();
   }
 

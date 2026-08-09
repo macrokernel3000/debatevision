@@ -667,6 +667,9 @@ function showMobileSetup() {
   document.body.classList.remove("has-mobile-draw-result");
   setMobileHistoryVisible(false);
   survivalResults.clear();
+  const bucket = genericLockBucket();
+  bucket.locks.clear();
+  bucket.cards = {};
   renderEmptyState();
   renderAll();
 }
@@ -716,6 +719,11 @@ function fixedMetaphorRelationCard() {
 }
 
 function syncMetaphorVariantDecks() {
+  const resultLocks = genericLockBucket();
+  ["prefix", "relation", "suffix"].forEach((slot) => {
+    resultLocks.locks.delete(slot);
+    delete resultLocks.cards[slot];
+  });
   if (metaphorState.variant === "concrete") {
     metaphorState.prefixDeck = "";
     metaphorState.suffixDeck = metaphorConcreteDeckOptions().includes(metaphorState.suffixDeck)
@@ -729,11 +737,9 @@ function syncMetaphorVariantDecks() {
   const options = metaphorDeckOptions("prefix");
   metaphorState.prefixDeck = options.includes(metaphorState.prefixDeck) ? metaphorState.prefixDeck : options[0] || "";
   metaphorState.suffixDeck = options.includes(metaphorState.suffixDeck) ? metaphorState.suffixDeck : options[0] || "";
-  metaphorState.locks = {
-    prefix: Boolean(metaphorState.locks.prefix),
-    relation: Boolean(metaphorState.locks.relation),
-    suffix: Boolean(metaphorState.locks.suffix)
-  };
+  // 人生版的前綴與介係是玩法固定卡，不應把舊鎖定狀態帶進抽象版。
+  // 抽象版的保留狀態統一由結果卡牌上的鎖頭管理。
+  metaphorState.locks = { prefix: false, relation: false, suffix: false };
   activePreview = metaphorState.prefixDeck || activeSecondaryLibrary;
 }
 

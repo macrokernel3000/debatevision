@@ -5222,11 +5222,11 @@ window.DEBATE_DECKS = {
       {
         "name": "原始部落",
         "lore": "鼓聲、敵意、人多勢眾，逃跑或者戰鬥還是和解都有機會。",
-        "imageId": "worlds_Clans",
+        "imageId": "world_Clans",
         "icon": "world_icon_Clans",
         "iconAsset": "",
-        "tokenIcon": "✪",
-        "image": "worlds_Clans",
+        "tokenIcon": "🔨",
+        "image": "../assets/icons/worlds/world_Clans.png",
         "rarity": "B",
         "tags": [
           "水域",
