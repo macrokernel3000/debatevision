@@ -8,6 +8,7 @@ const modesPath = path.join(root, "data/generated/modes.js");
 const websiteIndexPath = path.join(root, "website/index.html");
 const rootIndexPath = path.join(root, "index.html");
 const sitemapPath = path.join(root, "sitemap.xml");
+const websiteSitemapPath = path.join(root, "website/sitemap.xml");
 const activitiesDir = path.join(root, "website/activities");
 const checkOnly = process.argv.includes("--check");
 const siteRoot = "https://macrokernel3000.github.io/debatevision";
@@ -187,6 +188,8 @@ const pageMap = new Map(pages.map((page) => [page.id, page]));
 for (const mode of modes) compareOrWrite(path.join(activitiesDir, pageMap.get(mode.id).slug, "index.html"), modePage(mode, pageMap.get(mode.id), pages), stale);
 compareOrWrite(websiteIndexPath, updateHomepage(fs.readFileSync(websiteIndexPath, "utf8"), homepage), stale);
 compareOrWrite(rootIndexPath, updateHomepage(fs.readFileSync(rootIndexPath, "utf8"), homepage, false), stale);
-compareOrWrite(sitemapPath, sitemap(pages), stale);
+const sitemapContent = sitemap(pages);
+compareOrWrite(sitemapPath, sitemapContent, stale);
+compareOrWrite(websiteSitemapPath, sitemapContent, stale);
 if (stale.length) { console.error(`SEO 產物尚未更新：${stale.join("、")}。請執行 node scripts/build-seo.mjs`); process.exit(1); }
 console.log(checkOnly ? `SEO 設定與 ${pages.length} 個活動頁一致。` : `已更新首頁 SEO、sitemap 與 ${pages.length} 個獨立活動頁。`);
