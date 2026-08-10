@@ -3,6 +3,8 @@
   if (!panel) return;
 
   const storageKey = "debatevision:debate-board";
+  // 黑板正式排版規格：每欄 12 字、由上往下讀；整欄貼底並隨輸入向上增長。
+  const topicColumnCapacity = 12;
   const defaults = {
     proCount: 3,
     conCount: 3,
@@ -104,12 +106,13 @@
     const topic = state.topic || "請輸入辯題";
     const characters = Array.from(topic.replaceAll("\n", ""));
     const chunks = [];
-    while (characters.length) chunks.push(characters.splice(0, 9).join(""));
+    while (characters.length) chunks.push(characters.splice(0, topicColumnCapacity));
     const topicCopy = panel.querySelector(".debate-topic-copy");
     topicCopy.replaceChildren(...chunks.map((chunk, index) => {
       const column = document.createElement("span");
       column.className = index === 0 ? "is-first" : "is-following";
-      column.textContent = chunk;
+      column.dataset.capacity = String(topicColumnCapacity);
+      column.textContent = chunk.join("");
       return column;
     }));
   }

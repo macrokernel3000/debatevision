@@ -52,6 +52,8 @@
       con: { elapsed: 0, running: false, startedAt: 0 }
     };
     let frame = 0;
+    let bellPlayback = null;
+    let bellHoldTimer = 0;
 
     function elapsed(side, now = performance.now()) {
       const timer = state[side];
@@ -120,41 +122,65 @@
       render();
     }
 
-    function ringBell() {
+    function setBellLabel(label, ringing = true) {
+      const bell = root.querySelector("[data-stopwatch-bell]");
+      bell.classList.toggle("is-ringing", ringing);
+      bell.innerHTML = `🔔<span>${label}</span>`;
+    }
+
+    function startBell() {
+      if (bellPlayback) return;
       const AudioContext = window.AudioContext || window.webkitAudioContext;
       if (!AudioContext) return;
       const context = new AudioContext();
       const master = context.createGain();
       const now = context.currentTime;
-      master.gain.setValueAtTime(0.2, now);
+      const oscillators = [];
+      master.gain.setValueAtTime(0.0001, now);
+      master.gain.exponentialRampToValueAtTime(0.18, now + 0.012);
       master.connect(context.destination);
 
-      // 短促、明亮的單次金屬泛音，作為交換或時間到的「叮」聲。
+      // 按一下是清楚的短鈴，持續按住則維持金屬泛音直到放開。
       [
-        [1046.5, 1, 0.62],
-        [2093, 0.28, 0.38],
-        [3139.5, 0.11, 0.22]
-      ].forEach(([frequency, volume, decay]) => {
+        [1046.5, 1],
+        [2093, 0.26],
+        [3139.5, 0.1]
+      ].forEach(([frequency, volume]) => {
         const oscillator = context.createOscillator();
         const gain = context.createGain();
         oscillator.type = "sine";
         oscillator.frequency.setValueAtTime(frequency, now);
-        gain.gain.setValueAtTime(0.0001, now);
-        gain.gain.exponentialRampToValueAtTime(volume, now + 0.003);
-        gain.gain.exponentialRampToValueAtTime(0.0001, now + decay);
+        gain.gain.setValueAtTime(volume, now);
         oscillator.connect(gain).connect(master);
         oscillator.start(now);
-        oscillator.stop(now + decay + 0.02);
+        oscillators.push(oscillator);
       });
 
-      const bell = root.querySelector("[data-stopwatch-bell]");
-      bell.classList.add("is-ringing");
-      bell.innerHTML = "🔔<span>鈴聲！</span>";
+      bellPlayback = { context, master, oscillators, startedAt: now, held: false };
+      setBellLabel("鈴！");
+      bellHoldTimer = window.setTimeout(() => {
+        if (!bellPlayback) return;
+        bellPlayback.held = true;
+        setBellLabel("鈴～");
+      }, 320);
+    }
+
+    function stopBell() {
+      if (!bellPlayback) return;
+      window.clearTimeout(bellHoldTimer);
+      const playback = bellPlayback;
+      bellPlayback = null;
+      const now = playback.context.currentTime;
+      const stopAt = playback.held ? now : Math.max(now, playback.startedAt + 0.3);
+      playback.master.gain.cancelScheduledValues(now);
+      playback.master.gain.setValueAtTime(0.18, now);
+      playback.master.gain.exponentialRampToValueAtTime(0.0001, stopAt + 0.32);
+      playback.oscillators.forEach((oscillator) => oscillator.stop(stopAt + 0.34));
+      setBellLabel(playback.held ? "鈴～" : "鈴！");
       window.setTimeout(() => {
-        bell.classList.remove("is-ringing");
-        bell.innerHTML = "🔔<span>鈴聲</span>";
-        context.close();
-      }, 700);
+        if (!bellPlayback) setBellLabel("鈴聲", false);
+        playback.context.close();
+      }, Math.max(420, (stopAt - now) * 1000 + 380));
     }
 
     function render() {
@@ -196,17 +222,34 @@
       else if (toggleButton) toggle(toggleButton.dataset.stopwatchToggle);
       else if (resetButton) reset(resetButton.dataset.stopwatchReset);
       else if (event.target.closest("[data-stopwatch-swap]")) swap();
-      else if (event.target.closest("[data-stopwatch-bell]")) ringBell();
       else if (event.target.closest("[data-stopwatch-collapse]")) {
         state.collapsed = !state.collapsed;
         render();
       }
     });
 
+    const bellButton = root.querySelector("[data-stopwatch-bell]");
+    bellButton.addEventListener("pointerdown", (event) => {
+      event.preventDefault();
+      bellButton.setPointerCapture?.(event.pointerId);
+      startBell();
+    });
+    bellButton.addEventListener("pointerup", stopBell);
+    bellButton.addEventListener("pointercancel", stopBell);
+    bellButton.addEventListener("keydown", (event) => {
+      if (event.key !== " " && event.key !== "Enter") return;
+      event.preventDefault();
+      startBell();
+    });
+    bellButton.addEventListener("keyup", (event) => {
+      if (event.key === " " || event.key === "Enter") stopBell();
+    });
+
     function setActive(active) {
       state.active = Boolean(active);
       root.hidden = !state.active;
       if (!state.active) {
+        stopBell();
         pause("pro");
         pause("con");
         if (frame) cancelAnimationFrame(frame);

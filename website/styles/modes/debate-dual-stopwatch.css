@@ -4,7 +4,7 @@
   left: 50%;
   bottom: 18px;
   transform: translateX(-50%);
-  width: min(560px, calc(100vw - 36px));
+  width: min(700px, calc(100vw - 36px));
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 17px;
   padding: 10px;
@@ -43,6 +43,7 @@
 .debate-stopwatch-swap span,
 .debate-stopwatch-bell span { font-size: .58rem; }
 .debate-stopwatch-bell { min-height: 44px; background: rgba(255,255,255,.08); color: #ffe2a0; }
+.debate-stopwatch-bell.is-ringing { transform: translateY(1px); }
 .debate-stopwatch-swap:disabled { background: rgba(255,255,255,.08); color: rgba(255,255,255,.3); cursor: default; }
 
 .debate-dual-stopwatch.is-collapsed { width: min(410px, calc(100vw - 36px)); padding: 8px 10px; }

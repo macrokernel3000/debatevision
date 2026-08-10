@@ -73,6 +73,24 @@ for (const [relativePath, maximum] of lineBudgets) {
   checkBudget(relativePath, maximum);
 }
 
+const debateBoardSource = read("website/js/standalone/debate-board.js");
+const debateBoardStyle = read("website/styles/modes/debate-board.css");
+if (!debateBoardSource.includes("const topicColumnCapacity = 12")) {
+  failures.push("辯論黑板辯題每欄必須固定容納 12 字。");
+}
+if (!debateBoardSource.includes('column.textContent = chunk.join("")')) {
+  failures.push("辯論黑板辯題文字必須維持由上往下閱讀，不可反轉字元。");
+}
+if (!/\.debate-topic strong\.debate-topic-copy\s*\{[^}]*align-items:\s*flex-end/s.test(debateBoardStyle)) {
+  failures.push("辯論黑板辯題各欄必須貼齊底部，輸入時由下往上增長。");
+}
+if (!/\.debate-topic-copy span\s*\{[^}]*white-space:\s*nowrap/s.test(debateBoardStyle)) {
+  failures.push("辯論黑板辯題單一 12 字欄內禁止再次換行。");
+}
+if (!failures.some((failure) => failure.includes("辯論黑板辯題"))) {
+  notes.push("辯論黑板辯題規格: 由上往下讀、貼底向上增長、每欄 12 字、欄內不換行、超過向右分欄");
+}
+
 for (const relativePath of listFiles("website/js/core", ".js")) {
   checkBudget(relativePath, 400);
 }

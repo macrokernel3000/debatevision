@@ -75,7 +75,7 @@
   position: relative;
   isolation: isolate;
   min-width: 820px;
-  min-height: 500px;
+  min-height: 640px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(62px, .22fr) minmax(150px, .42fr) minmax(62px, .22fr) minmax(0, 1fr);
   gap: 10px;
@@ -145,23 +145,25 @@
   letter-spacing: .08em;
 }
 
-.debate-topic strong.debate-topic-copy { width: max-content; height: 360px; display: flex; align-items: flex-end; gap: .08em; writing-mode: horizontal-tb; }
-.debate-topic-copy span { writing-mode: vertical-lr; text-orientation: upright; }
+.debate-topic strong.debate-topic-copy { width: max-content; height: 15em; display: flex; align-items: flex-end; gap: .08em; writing-mode: horizontal-tb; }
+.debate-topic-copy span { flex: 0 0 auto; writing-mode: vertical-lr; text-orientation: upright; white-space: nowrap; }
 
 .debate-topic {
-  min-height: 410px;
+  min-height: 570px;
   border-inline: 1px solid rgba(247,242,219,.24);
   padding-inline: 20px;
 }
 
 .debate-topic small { margin-bottom: 12px; color: #d8bf72; font-weight: 900; letter-spacing: .2em; }
-.debate-topic strong { font-size: clamp(1.35rem, 2.4vw, 2.2rem); line-height: 1.45; }
+.debate-topic strong { font-size: clamp(1.35rem, 2.4vw, 2.2rem); line-height: 1.25; }
 .debate-speaker,
 .debate-team { min-height: 360px; gap: 18px; }
 .debate-speaker b,
 .debate-team b { color: #d8bf72; font-size: .9rem; }
 .debate-speaker strong,
-.debate-team strong { max-height: 270px; font-size: clamp(1rem, 1.55vw, 1.35rem); line-height: 1.5; }
+.debate-team strong { max-height: 300px; line-height: 1.5; }
+.debate-speaker strong { font-size: clamp(1.3rem, 2vw, 1.75rem); font-weight: 950; }
+.debate-team strong { font-size: clamp(1.05rem, 1.45vw, 1.35rem); }
 .debate-speaker.is-pro strong,
 .debate-team.is-pro strong { color: #ffd6cf; }
 .debate-speaker.is-con strong,
@@ -176,9 +178,9 @@
   .debate-format-picker .debate-hide-names { grid-column: 1 / -1; }
   .debate-name-inputs { grid-template-columns: 1fr; gap: 12px; }
   .debate-team-inputs { gap: 8px; }
-  .debate-blackboard { min-width: 920px; min-height: 450px; padding: 20px 16px; }
-  .debate-topic { min-height: 370px; }
-  .debate-topic-copy { height: 330px; }
+  .debate-blackboard { min-width: 920px; min-height: 620px; padding: 20px 16px; }
+  .debate-topic { min-height: 560px; }
+  .debate-topic strong.debate-topic-copy { height: 15em; }
   .debate-speaker,
   .debate-team { min-height: 330px; }
 }
