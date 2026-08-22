@@ -132,59 +132,6 @@
     `;
   }
 
-  function variantControls(state) {
-    if (state.cardMode === "salesPitch") {
-      return `
-        <div class="mobile-survival-mode-grid mobile-sales-mode-grid" role="group" aria-label="銷售密令模式">
-          <button type="button" class="mobile-survival-mode ${state.salesVariant === "supply" ? "is-active" : ""}" data-mobile-sales-variant="supply">
-            <strong>${mobileText("mobile.sales.supplyTitle", "供需版")}</strong>
-            <span>${mobileText("mobile.sales.supplyDescription", "把商品賣給有特定需求的客戶")}</span>
-          </button>
-          <button type="button" class="mobile-survival-mode ${state.salesVariant === "story" ? "is-active" : ""}" data-mobile-sales-variant="story">
-            <strong>${mobileText("mobile.sales.storyTitle", "故事版")}</strong>
-            <span>${mobileText("mobile.sales.storyDescription", "用概念與故事替商品增加價值")}</span>
-          </button>
-          <button type="button" class="mobile-survival-mode ${state.salesVariant === "target" ? "is-active" : ""}" data-mobile-sales-variant="target">
-            <strong>${mobileText("mobile.sales.targetTitle", "目標版")}</strong>
-            <span>${mobileText("mobile.sales.targetDescription", "針對不同對象設計銷售方式")}</span>
-          </button>
-        </div>
-        ${state.salesVariant === "story" ? `
-          <label class="mobile-toggle-pill">
-            <input type="checkbox" data-mobile-sales-no-concept ${state.salesNoConcept ? "checked" : ""} />
-            <span>${mobileText("mobile.sales.noConcept", "無概念")}</span>
-          </label>
-        ` : ""}
-        ${state.salesVariant === "target" ? `
-          <div class="mobile-pill-row" role="group" aria-label="目標類型">
-            ${state.salesAudienceDeckIds.map((deckId) => `
-              <button type="button" class="${state.salesAudienceDeck === deckId ? "is-active" : ""}" data-mobile-sales-audience="${deckId}">
-                ${deckId === "summons" ? "異族" : state.variantLabel(deckId)}
-              </button>
-            `).join("")}
-          </div>
-        ` : ""}
-      `;
-    }
-    if (state.cardMode === "metaphorCompass") {
-      return `
-        <div class="mobile-survival-mode-grid mobile-sales-mode-grid" role="group" aria-label="隱喻羅盤版本">
-          ${["concrete", "abstract"].map((variant) => `
-            <button type="button" class="mobile-survival-mode ${state.metaphorVariant === variant ? "is-active" : ""}" data-mobile-metaphor-variant="${variant}">
-              <strong>${variant === "concrete"
-                ? mobileText("mobile.metaphor.concrete", state.metaphorVariantLabel(variant))
-                : mobileText("mobile.metaphor.abstract", state.metaphorVariantLabel(variant))}</strong>
-              <span>${mobileText(`mobile.metaphor.${variant}Description`, variant === "concrete"
-                ? "固定抽出「人生」「就像」，再連結一個具體事物"
-                : "連結兩個抽象概念並說明關係")}</span>
-            </button>
-          `).join("")}
-        </div>
-      `;
-    }
-    return "";
-  }
-
   function genericDashboard(state) {
     const summonMode = state.cardMode === "summonMission";
     const hasModeCards = state.cardMode === "salesPitch" || state.cardMode === "metaphorCompass";
@@ -209,7 +156,7 @@
           </div>
         ` : `
           ${hasModeCards ? "" : `<p class="mobile-rule-line">${state.statusText}</p>`}
-          ${variantControls(state)}
+          ${window.DebateVisionMobileVariantControls.render(state, mobileText)}
         `}
       </section>
 

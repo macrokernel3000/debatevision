@@ -18,7 +18,23 @@
 
     const selectedDecks = new Set();
     const selectedCards = new Set();
+    const presetStorageKey = "debatevision-card-dictionary-presets";
     let activeDeck = "";
+
+    function escapeHtml(value) {
+      return String(value || "").replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
+    }
+
+    function presets() {
+      try {
+        const stored = JSON.parse(window.localStorage.getItem(presetStorageKey) || "{}");
+        return stored && typeof stored === "object" && !Array.isArray(stored) ? stored : {};
+      } catch { return {}; }
+    }
+
+    function savePresets(value) {
+      window.localStorage.setItem(presetStorageKey, JSON.stringify(value));
+    }
 
     function description(deckId) {
       const descriptions = {
@@ -102,6 +118,14 @@
         : [];
 
       container.innerHTML = `
+        <div class="dictionary-preset-toolbar">
+          <label><span>預設組合名稱</span><input type="text" data-dictionary-preset-name maxlength="40" placeholder="例如：五年級比較練習" /></label>
+          <label><span>載入預設</span><select data-dictionary-preset-select><option value="">選擇已儲存組合</option>${Object.keys(presets()).sort().map((name) => `<option value="${escapeHtml(name)}">${escapeHtml(name)}</option>`).join("")}</select></label>
+          <button type="button" data-dictionary-preset-save>儲存預設</button>
+          <button type="button" data-dictionary-preset-load>載入</button>
+          <button type="button" data-dictionary-preset-delete>刪除</button>
+          <span class="dictionary-preset-status" data-dictionary-preset-status role="status" aria-live="polite"></span>
+        </div>
         <div class="dictionary-layout">
           <div class="dictionary-decks" aria-label="卡片類型">
             ${orderedDeckIds().map(deckMarkup).join("")}
@@ -183,6 +207,32 @@
     });
 
     container?.addEventListener("click", (event) => {
+      const status = container.querySelector("[data-dictionary-preset-status]");
+      const presetName = container.querySelector("[data-dictionary-preset-name]")?.value.trim() || "";
+      const presetSelect = container.querySelector("[data-dictionary-preset-select]");
+      if (event.target.closest("[data-dictionary-preset-save]")) {
+        if (!presetName || !selectedCards.size) { if (status) status.textContent = "請輸入名稱並先選擇卡牌。"; return; }
+        const next = presets();
+        next[presetName] = { decks: [...selectedDecks], cards: [...selectedCards] };
+        savePresets(next);
+        render();
+        return;
+      }
+      if (event.target.closest("[data-dictionary-preset-load]")) {
+        const selected = presets()[presetSelect?.value];
+        if (!selected) { if (status) status.textContent = "請先選擇預設組合。"; return; }
+        selectedDecks.clear(); selectedCards.clear();
+        (selected.decks || []).filter((deckId) => decks[deckId]).forEach((deckId) => selectedDecks.add(deckId));
+        (selected.cards || []).filter((key) => cardFromKey(key)).forEach((key) => selectedCards.add(key));
+        activeDeck = [...selectedDecks][0] || "";
+        render(); renderResult(selectedCardList());
+        return;
+      }
+      if (event.target.closest("[data-dictionary-preset-delete]")) {
+        if (!presetSelect?.value) { if (status) status.textContent = "請先選擇要刪除的預設。"; return; }
+        const next = presets(); delete next[presetSelect.value]; savePresets(next); render();
+        return;
+      }
       const preview = event.target.closest("[data-dictionary-preview]");
       if (preview) {
         activeDeck = preview.dataset.dictionaryPreview;

@@ -1,0 +1,79 @@
+@media (min-width: 561px) {
+  body.has-desktop-card-detail { overflow: hidden; }
+
+  .desktop-card-detail {
+    position: fixed;
+    z-index: 120;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 30px;
+    background: rgba(12, 10, 8, .76);
+    backdrop-filter: blur(8px);
+  }
+
+  .desktop-card-detail[hidden] { display: none; }
+
+  .desktop-card-detail-panel {
+    position: relative;
+    width: min(92vw, 1000px);
+    max-height: calc(100vh - 60px);
+    overflow: auto;
+    padding: 52px 26px 26px;
+    border: 1px solid rgba(238, 210, 154, .48);
+    border-radius: 22px;
+    background: #171310;
+    box-shadow: 0 30px 90px rgba(0, 0, 0, .48);
+  }
+
+  .desktop-card-detail-close {
+    position: absolute;
+    z-index: 2;
+    top: 12px;
+    right: 14px;
+    min-width: 88px;
+    min-height: 34px;
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 10px;
+    background: rgba(255,255,255,.1);
+    color: #fff;
+    font: inherit;
+    font-weight: 900;
+    cursor: pointer;
+  }
+
+  .desktop-card-detail-content.is-vertical { width: min(460px, 100%); margin-inline: auto; }
+  .desktop-card-detail-content.is-horizontal { width: 100%; }
+
+  .desktop-card-detail-card { min-height: 0; cursor: default; }
+  .desktop-card-detail-content.is-vertical .desktop-card-detail-card { grid-template-rows: auto minmax(280px, 42vh) auto; }
+  .desktop-card-detail-content.is-horizontal .desktop-card-detail-card { grid-template-rows: auto auto auto; }
+
+  .desktop-card-detail-card .card-art { min-height: 260px; }
+  .desktop-card-detail-card .card-art img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 42vh;
+    object-fit: contain;
+    transform: none !important;
+  }
+
+  .desktop-card-detail-content.is-horizontal .desktop-card-detail-card .card-art {
+    min-height: 0;
+    aspect-ratio: 16 / 9;
+  }
+  .desktop-card-detail-content.is-horizontal .desktop-card-detail-card .card-art img {
+    width: 100%;
+    max-height: none;
+  }
+
+  .desktop-card-detail-card .card-lore { font-size: 1.06rem; line-height: 1.65; }
+  .desktop-card-detail-card .card-hooks { display: none; }
+
+  #cardGrid .battle-card[data-card-key] { cursor: zoom-in; }
+}
+
+@media (max-width: 560px) {
+  .desktop-card-detail { display: none !important; }
+}

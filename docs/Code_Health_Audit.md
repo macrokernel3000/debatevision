@@ -1,6 +1,6 @@
 # Code Health Audit
 
-Last checked: 2026-07-24
+Last checked: 2026-08-18
 
 這是目前架構健康快照，不是玩法規格。檔案定位先讀 `AI_START_HERE.md` 與 `docs/AI_Project_Map.md`。
 
@@ -16,12 +16,12 @@ Last checked: 2026-07-24
 
 | 檔案 | 約略行數 | 上限 | 責任 |
 | --- | ---: | ---: | --- |
-| `website/js/app.js` | 1624 | 1800 | 啟動、玩法 context、抽卡生命週期與跨元件接線 |
-| `website/styles/main.css` | 2730 | 3020 | 桌機、平板與尚未拆分的共用樣式 |
-| `website/styles/mobile.css` | 1898 | 2000 | 手機版專屬樣式 |
-| `website/js/mobile-render.js` | 373 | 400 | 手機 HTML 生成 |
-| `website/js/mobile-app.js` | 277 | 350 | 手機操作事件 |
-| `scripts/build-lexicons.mjs` | 481 | 550 | 來源資料轉 generated data |
+| `website/js/app.js` | 1741 | 1800 | 啟動、玩法 context、抽卡生命週期與跨元件接線 |
+| `website/styles/main.css` | 2960 | 3020 | 桌機、平板與尚未拆分的共用樣式 |
+| `website/styles/mobile.css` | 1882 | 2000 | 手機版專屬樣式 |
+| `website/js/mobile-render.js` | 323 | 400 | 手機 HTML 生成 |
+| `website/js/mobile-app.js` | 285 | 350 | 手機操作事件 |
+| `scripts/build-lexicons.mjs` | 517 | 550 | 來源資料轉 generated data |
 
 實際上限與完整檔案清單以 `scripts/check-architecture.mjs` 為準，不在文件重複維護第二份數字。
 

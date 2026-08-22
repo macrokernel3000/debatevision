@@ -13,6 +13,8 @@ AI 與協作者只需依任務使用對應腳本，不要把所有腳本都執�
 | `node scripts/build-seo.mjs --check` | 不寫檔，檢查 SEO 設定與所有活動頁是否同步 | 發布前檢查 |
 | `node scripts/check-assets.mjs` | 驗證來源圖片與手機衍生圖 | 修改圖片或圖片路徑後 |
 | `node scripts/check-architecture.mjs` | 完整架構、資料、圖片與主要行為守門 | 新功能、拆檔、共用結構修改 |
+| `node scripts/check-browser-smoke.mjs` | 用本機 Chrome 驗證三尺寸與八個活動 | 發布前、跨裝置或共用介面修改 |
+| `node scripts/audit-assets.mjs` | 產生大型圖片、製作來源與未引用候選報告 | 整理圖片前；報告不代表可以直接刪除 |
 | `python3 scripts/optimize-images.py` | 只轉換有更新的活動背景 | 新增或修改大圖後 |
 
 一般使用者直接執行根目錄 `網站更新.command`；它會依安全順序完成資料檢查、圖片最佳化、建置與架構檢查。

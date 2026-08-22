@@ -36,9 +36,11 @@
     <link rel="stylesheet" href="./styles/main.css?v=20260806-1" />
     <link rel="stylesheet" href="./styles/components/brand.css?v=20260810-2" />
     <link rel="stylesheet" href="./styles/components/class-timer.css?v=20260804-2" />
-    <link rel="stylesheet" href="./styles/components/history.css?v=20260806-2" />
+    <link rel="stylesheet" href="./styles/components/history.css?v=20260818-1" />
+    <link rel="stylesheet" href="./styles/components/dictionary-presets.css?v=20260818-1" />
     <link rel="stylesheet" href="./styles/components/result-locks.css?v=20260806-3" />
     <link rel="stylesheet" href="./styles/components/desktop-result-grid.css?v=20260806-1" />
+    <link rel="stylesheet" href="./styles/components/desktop-card-detail.css?v=20260813-1" />
     <link rel="stylesheet" href="./styles/components/deck-option-cards.css?v=20260724-5" />
     <link rel="stylesheet" href="./styles/components/secret-place.css?v=20260724-1" />
     <link rel="stylesheet" href="./styles/modes/debate-board.css?v=20260810-13" />
@@ -235,15 +237,22 @@
         <div class="mobile-art-preview" id="mobileArtPreview"></div>
       </div>
     </div>
+
+    <div class="desktop-card-detail" id="desktopCardDetail" hidden>
+      <div class="desktop-card-detail-panel" role="dialog" aria-modal="true" aria-label="卡片詳細內容">
+        <button class="desktop-card-detail-close" type="button" data-desktop-card-detail-close>關閉</button>
+        <div class="desktop-card-detail-content" id="desktopCardDetailContent"></div>
+      </div>
+    </div>
     </main>
 
-    <script src="../data/generated/decks.js?v=4b7ea22f67"></script>
-    <script src="../data/generated/modes.js?v=4b7ea22f67"></script>
-    <script src="../data/generated/image-layouts.js?v=4b7ea22f67"></script>
-    <script src="../data/generated/ui-texts.js?v=4b7ea22f67"></script>
+    <script src="../data/generated/decks.js?v=fef246a74c"></script>
+    <script src="../data/generated/modes.js?v=fef246a74c"></script>
+    <script src="../data/generated/image-layouts.js?v=fef246a74c"></script>
+    <script src="../data/generated/ui-texts.js?v=fef246a74c"></script>
     <script src="./js/icons.js"></script>
     <script src="./js/mode-lifecycle.js"></script>
-    <script src="./js/modes/item-environment.js?v=20260806-1"></script>
+    <script src="./js/modes/item-environment.js?v=20260820-1"></script>
     <script src="./js/modes/importance-duel.js?v=20260806-1"></script>
     <script src="./js/modes/sales-command.js?v=20260806-1"></script>
     <script src="./js/modes/metaphor-compass.js?v=20260810-1"></script>
@@ -253,33 +262,36 @@
     <script src="./js/core/ui-text.js?v=20260719-1"></script>
     <script src="./js/core/card-hooks.js?v=20260720-1"></script>
     <script src="./js/core/decks.js?v=20260720-1"></script>
-    <script src="./js/services/history-service.js?v=20260806-2"></script>
-    <script src="./js/services/history-replay.js?v=20260720-1"></script>
+    <script src="./js/services/history-service.js?v=20260818-1"></script>
+    <script src="./js/services/history-replay.js?v=20260822-1"></script>
     <script src="./js/services/timer-service.js?v=20260719-1"></script>
     <script src="./js/services/image-service.js?v=20260721-1"></script>
     <script src="./js/services/survival-result-service.js?v=20260721-1"></script>
-    <script src="./js/mobile-render.js?v=20260809-1"></script>
+    <script src="./js/components/mobile-variant-controls.js?v=20260818-1"></script>
+    <script src="./js/mobile-render.js?v=20260818-1"></script>
     <script src="./js/components/class-timer.js?v=20260806-1"></script>
     <script src="./js/components/deck-option-cards.js?v=20260719-1"></script>
+    <script src="./js/components/deck-covers.js?v=20260818-1"></script>
     <script src="./js/components/deck-control-events.js?v=20260806-1"></script>
     <script src="./js/components/deck-controls.js?v=20260806-1"></script>
-    <script src="./js/components/history.js?v=20260806-2"></script>
+    <script src="./js/components/history.js?v=20260818-1"></script>
     <script src="./js/components/image-editor.js?v=20260720-1"></script>
     <script src="./js/components/cards.js?v=20260806-2"></script>
-    <script src="./js/components/card-dictionary.js?v=20260806-1"></script>
-    <script src="./js/components/reel-view.js?v=20260806-1"></script>
+    <script src="./js/components/desktop-card-detail.js?v=20260812-1"></script>
+    <script src="./js/components/card-dictionary.js?v=20260818-1"></script>
+    <script src="./js/components/reel-view.js?v=20260820-1"></script>
     <script src="./js/components/mobile-modals.js?v=20260720-1"></script>
-    <script src="./js/components/mobile-dashboard.js?v=20260809-1"></script>
+    <script src="./js/components/mobile-dashboard.js?v=20260818-1"></script>
     <script src="./js/components/mobile-mode-images.js?v=20260721-1"></script>
     <script src="./js/components/mode-shell.js?v=20260804-1"></script>
     <script src="./js/components/results.js?v=20260806-2"></script>
     <script src="./js/components/secret-place-view.js?v=20260720-1"></script>
     <script src="./js/components/secret-place.js?v=20260720-1"></script>
     <script src="./js/components/survival-battle-view.js?v=20260806-1"></script>
-    <script src="./js/components/survival-result-controller.js?v=20260806-1"></script>
+    <script src="./js/components/survival-result-controller.js?v=20260820-1"></script>
     <script src="./js/standalone/debate-dual-stopwatch.js?v=20260810-5"></script>
     <script src="./js/standalone/debate-board.js?v=20260810-5"></script>
-    <script src="./js/app.js?v=20260810-1"></script>
+    <script src="./js/app.js?v=20260822-1"></script>
     <script src="./js/mobile-app.js?v=20260809-1"></script>
   </body>
 </html>

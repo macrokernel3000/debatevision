@@ -36,6 +36,10 @@ mobile.itemSurvival.startSurvival,item-survival,操作按鈕,開始生存,生存
 mobile.itemSurvival.startBattle,item-survival,操作按鈕,開始探險,挑戰模式開始按鈕
 mobile.itemSurvival.againSurvival,item-survival,操作按鈕,再次求生,生存模式再次抽卡
 mobile.itemSurvival.againBattle,item-survival,操作按鈕,再次挑戰,挑戰模式再次抽卡
+mobile.realitySummon.again,reality-summon,操作按鈕,再次召喚,現實召喚再次抽卡
+mobile.sales.again,sales-command,操作按鈕,再次銷售,銷售密令再次抽卡
+mobile.metaphor.again,metaphor-compass,操作按鈕,再抽一組,隱喻羅盤再次抽卡
+mobile.importance.again,importance-duel,操作按鈕,再次比較,誰更重要再次抽卡
 mobile.realitySummon.flowHeading,reality-summon,流程教學,玩法流程,召喚流程標題
 mobile.realitySummon.step1Title,reality-summon,流程教學,召喚次數,第一步標題
 mobile.realitySummon.step1Description,reality-summon,流程教學,決定角色數,第一步說明

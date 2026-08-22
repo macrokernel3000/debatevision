@@ -107,6 +107,15 @@
       return { changed: true };
     }
 
+    function exportScope(scope) {
+      return {
+        exportedAt: new Date().toISOString(),
+        scope,
+        recent: entries(scope),
+        pinned: pinnedEntries(scope)
+      };
+    }
+
     return Object.freeze({
       data,
       entries,
@@ -118,6 +127,7 @@
       isPinned,
       togglePin,
       unpin,
+      exportScope,
       pinnedLimit
     });
   }

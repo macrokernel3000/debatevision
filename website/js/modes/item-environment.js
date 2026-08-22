@@ -14,7 +14,12 @@
 
   function drawBattle(ctx) {
     ctx.survivalGroupCount = Math.max(1, Math.min(8, ctx.survivalGroupCount || 1));
-    const environment = ctx.pickFrom(ctx.activeSecondaryLibrary, 1)[0];
+    const resultLocks = ctx.survivalResultLocks || { environment: false };
+    const lockedEnvironment = resultLocks.environment
+      && ctx.currentSurvivalEnvironment?.deckId === ctx.activeSecondaryLibrary
+      ? ctx.currentSurvivalEnvironment
+      : null;
+    const environment = lockedEnvironment || ctx.pickFrom(ctx.activeSecondaryLibrary, 1)[0];
     if (!environment) return ctx.renderPoolWarning();
     const groupResult = ctx.drawSurvivalGroups({
       environment,
@@ -39,8 +44,8 @@
       ...group.powers,
       ...group.specialists
     ])];
-    ctx.startSurvivalBattle(environment, groups);
-    ctx.markDrawn(drawnCards);
+    ctx.startSurvivalBattle(environment, groups, Boolean(lockedEnvironment));
+    ctx.markDrawn(lockedEnvironment ? drawnCards.slice(1) : drawnCards);
     return drawnCards;
   }
 

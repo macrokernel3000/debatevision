@@ -27,6 +27,9 @@
       };
 
       container.innerHTML = `
+        <div class="history-toolbar">
+          <button type="button" data-history-export>匯出目前活動紀錄</button>
+        </div>
         <div class="history-column history-recent-column">
           <div class="history-column-head"><h3>最近 20 場</h3><span>${entries.length} / 20</span></div>
           <div class="history-list">
@@ -40,6 +43,15 @@
           </div>
         </div>
       `;
+      container.querySelector("[data-history-export]")?.addEventListener("click", () => {
+        const data = historyService.exportScope(scope);
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = `debatevision-${scope}-history.json`;
+        link.click();
+        window.setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+      });
     }
 
     function activate(item) {

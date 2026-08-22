@@ -1,0 +1,52 @@
+.dictionary-preset-toolbar {
+  display: grid;
+  grid-template-columns: minmax(180px, 1fr) minmax(180px, 1fr) repeat(3, auto);
+  gap: 8px;
+  align-items: end;
+  margin-bottom: 12px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.dictionary-preset-toolbar label {
+  display: grid;
+  gap: 5px;
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 900;
+}
+
+.dictionary-preset-toolbar input,
+.dictionary-preset-toolbar select,
+.dictionary-preset-toolbar button {
+  min-height: 38px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 6px 10px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+}
+
+.dictionary-preset-toolbar button {
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.dictionary-preset-status {
+  grid-column: 1 / -1;
+  min-height: 1em;
+  color: var(--teal);
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+@media (max-width: 760px) {
+  .dictionary-preset-toolbar { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 560px) {
+  .dictionary-preset-toolbar { grid-template-columns: 1fr; }
+}

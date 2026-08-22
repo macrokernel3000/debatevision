@@ -142,6 +142,8 @@ const mobileCardModalList = document.querySelector("#mobileCardModalList");
 const mobileArtModal = document.querySelector("#mobileArtModal");
 const mobileArtModalTitle = document.querySelector("#mobileArtModalTitle");
 const mobileArtPreview = document.querySelector("#mobileArtPreview");
+const desktopCardDetail = document.querySelector("#desktopCardDetail");
+const desktopCardDetailContent = document.querySelector("#desktopCardDetailContent");
 const deckSelect = document.querySelector("#deckSelect");
 const primaryDeckField = document.querySelector("#primaryDeckField");
 const secondaryDeckSelect = document.querySelector("#secondaryDeckSelect");
@@ -555,8 +557,15 @@ function restoreStoredHistoryEntry(entry, options = {}) {
   const cards = cardsFromHistoryEntry(entry);
   if (!cards.length) return false;
 
-  const stageCard = cards.find((card) => card.deckId === activeSecondaryLibrary) || cards[0];
-  if (activeMode.cardMode === "itemEnvironment") {
+  const stageDeckId = activeMode.secondaryDeck || activeSecondaryLibrary;
+  const stageCard = cards.find((card) => card.deckId === stageDeckId) || cards[0];
+  if (activeMode.cardMode === "summonMission") {
+    const replay = historyReplay.stageAndCards(cards, stageDeckId);
+    if (!replay.stage) return false;
+    const bucket = genericLockBucket();
+    bucket.cards.stage = replay.stage;
+    renderCombo(replay.stage, replay.cards, "本輪任務", { hideStageInDesktopResults: true });
+  } else if (activeMode.cardMode === "itemEnvironment") {
     const replay = historyReplay.itemEnvironment(entry, cards, activeSecondaryLibrary);
     if (replay?.kind === "battle") {
       renderSurvivalBattle(replay.environment, replay.groups);
@@ -589,64 +598,8 @@ function restorePinnedHistoryEntry(index, options = {}) {
   return restoreStoredHistoryEntry(historyService.pinnedEntry(historyScope(), index), options);
 }
 
-function mobileDeckTarget(deckId) {
-  const [baseDeck, rarity] = String(deckId).split(":");
-  return { baseDeck, rarity };
-}
-
-function mobileDeckCards(deckId) {
-  const { baseDeck, rarity } = mobileDeckTarget(deckId);
-  return cardsFrom(baseDeck)
-    .map((card) => normalizeCard(card, baseDeck))
-    .filter((card) => !rarity || card.rarity === rarity);
-}
-
-function sharedDeckCover(deckId) {
-  const coverAssets = {
-    items: "../assets/ui/deck-covers/items.jpg",
-    "sales:items": "../assets/ui/deck-covers/sales-items.jpg",
-    worlds: "../assets/ui/deck-covers/worlds.jpg",
-    needs: "../assets/ui/deck-covers/needs.jpg",
-    concepts: "../assets/ui/deck-covers/concepts.jpg",
-    creatures: "../assets/ui/deck-covers/creatures.jpg",
-    roles: "../assets/ui/deck-covers/roles.jpg",
-    celebrities: "../assets/ui/deck-covers/celebrities.jpg",
-    locations: "../assets/ui/deck-covers/locations.jpg",
-    relations: "../assets/ui/deck-covers/relations.jpg",
-    missions: "../assets/ui/deck-covers/missions.jpg",
-    summons: "../assets/ui/deck-covers/summons.jpg",
-    "summons:異族": "../assets/ui/deck-covers/summons-alien.jpg",
-    "summons:超能": "../assets/ui/deck-covers/summons-power.jpg",
-    "summons:特職": "../assets/ui/deck-covers/summons-specialist.jpg"
-  };
-  const coverKey = activeMode.cardMode === "salesPitch" && String(deckId) === "items"
-    ? "sales:items"
-    : String(deckId);
-  const explicitCover = coverAssets[coverKey];
-  if (explicitCover) {
-    const image = isMobileAppView()
-      ? explicitCover
-        .replace("../assets/ui/deck-covers/", "../assets/ui/deck-covers/mobile/")
-        .replace(/\.jpg$/i, ".webp")
-      : explicitCover;
-    return {
-      image,
-      name: "",
-      symbol: "",
-      isDeckCover: true
-    };
-  }
-
-  const { baseDeck } = mobileDeckTarget(deckId);
-  const cards = mobileDeckCards(deckId);
-  const selectedKeys = selectedKeysForDeck(baseDeck);
-  const card = cards.find((candidate) => selectedKeys.has(cardKey(candidate))) || cards[0];
-  return card ? {
-    image: card.iconAsset || card.image || "",
-    name: card.name,
-    symbol: card.tokenIcon || iconFor(card)
-  } : { image: "", name: "", symbol: "□", isDeckCover: false };
-}
+const deckCovers = window.DebateVisionDeckCovers.create({ cardKey, cardsFrom, getActiveMode: () => activeMode, iconFor, isMobileView: isMobileAppView, normalizeCard, selectedKeysForDeck });
+const { cards: mobileDeckCards, cover: sharedDeckCover, target: mobileDeckTarget } = deckCovers;
 
 function mobileResourceKey(deckId) {
   return {
@@ -835,6 +788,7 @@ const cardView = window.DebateVisionCards.create({
   isEditMode: EDIT_MODE
 });
 const { cardMarkup, tokenIconMarkup, tokenMarkup } = cardView;
+const desktopCardDetailView = window.DebateVisionDesktopCardDetail.create({ modal: desktopCardDetail, content: desktopCardDetailContent, cardMarkup });
 const mobileModals = window.DebateVisionMobileModals.create({
   artModal: mobileArtModal,
   artPreview: mobileArtPreview,
@@ -1014,6 +968,7 @@ const reelView = window.DebateVisionReelView.create({
   getActiveMode: () => activeMode,
   getCurrentStageCard: () => drawState.stageCard,
   getEnvironmentLocked: () => survivalResultState.locks.environment,
+  getGenericStageLocked: () => genericLockBucket().locks.has("stage"),
   getSurvivalResultKind: () => survivalResultState.kind,
   getSalesVariant: () => salesState.variant,
   imageService,
@@ -1567,6 +1522,27 @@ drawHistory?.addEventListener("keydown", (event) => {
 });
 
 document.addEventListener("click", (event) => {
+  const reelMissionLock = event.target.closest("[data-reel-mission-lock]");
+  if (reelMissionLock) {
+    event.preventDefault();
+    event.stopPropagation();
+    const bucket = genericLockBucket();
+    if (bucket.locks.has("stage")) bucket.locks.delete("stage");
+    else bucket.locks.add("stage");
+    if (drawState.stageCard) bucket.cards.stage = drawState.stageCard;
+    renderReelCard(drawState.stageCard);
+    const resultLock = cardGrid.querySelector('[data-generic-result-lock="stage"]');
+    const locked = bucket.locks.has("stage");
+    resultLock?.classList.toggle("is-locked", locked);
+    resultLock?.setAttribute("aria-pressed", String(locked));
+    resultLock?.setAttribute("aria-label", `${locked ? "取消鎖定" : "鎖定"}任務`);
+    if (resultLock) {
+      resultLock.querySelector("span").textContent = locked ? "🔒" : "🔓";
+      resultLock.querySelector("b").textContent = locked ? "已鎖定" : "鎖定";
+      resultLock.closest(".battle-card")?.classList.toggle("is-mobile-result-locked", locked);
+    }
+    return;
+  }
   const reelStageLock = event.target.closest("[data-reel-stage-lock]");
   if (reelStageLock) {
     event.preventDefault();
@@ -1656,6 +1632,10 @@ cardGrid.addEventListener("click", (event) => {
     if (card?.imageId) selectEditCard(card);
     return;
   }
+  if (!isMobileAppView() && !event.target.closest("button, input, label, a")) {
+    desktopCardDetailView.open(card, cardElement);
+    return;
+  }
   if (isMobileAppView() && event.target.closest(".card-art")) {
     if (activeMode.cardMode === "itemEnvironment" && survivalResultState.kind) {
       const deckId = card.deckId === "summons" && card.rarity
@@ -1684,7 +1664,12 @@ if (scenePreview) {
 }
 
 reel.addEventListener("click", (event) => {
-  if (!EDIT_MODE) return;
+  if (!EDIT_MODE) {
+    if (!isMobileAppView() && drawState.stageCard && !event.target.closest("button")) {
+      desktopCardDetailView.open(drawState.stageCard, reel);
+    }
+    return;
+  }
   const image = reel.querySelector(".reel-scene-image[data-edit-group]");
   if (!image) return;
   const card = findCardByKey(image.dataset.cardKey);

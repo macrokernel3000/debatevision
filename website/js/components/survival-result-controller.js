@@ -49,11 +49,13 @@
       render();
     }
 
-    function startBattle(environment, groups) {
+    function startBattle(environment, groups, preserveEnvironmentLock = false) {
+      const environmentLocked = preserveEnvironmentLock && state.locks.environment;
       clear();
       state.kind = "battle";
       state.environment = environment;
       state.groups = groups;
+      state.locks.environment = environmentLocked;
       render();
     }
 

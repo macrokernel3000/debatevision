@@ -39,12 +39,14 @@ website/js/
 │   └── timer-service.js      # 計時器狀態與持久化
 ├── components/
 │   ├── cards.js              # 共用卡片與詞庫 token HTML
+│   ├── deck-covers.js        # 共用牌庫封面與目標牌庫圖卡
 │   ├── deck-controls.js      # 桌機版本切換、卡組摘要、鎖定與數量控制
 │   ├── history.js            # 最近十場畫面
 │   ├── image-editor.js       # edit=1 圖片位置編輯
 │   ├── mobile-dashboard.js   # 手機各玩法設定 view model 與畫面協調
 │   ├── mobile-mode-images.js # 手機活動縮圖、Banner、skeleton 與 fallback
 │   ├── mobile-modals.js      # 手機卡池編輯與卡牌美術預覽
+│   ├── mobile-variant-controls.js # 手機銷售／隱喻版本控制列
 │   ├── mode-shell.js         # 活動選單、玩法 banner、場景背景與顯示切換
 │   ├── card-dictionary.js    # 卡片字典選擇與結果
 │   ├── reel-view.js          # 抽卡機畫面
@@ -128,3 +130,5 @@ website/styles/
 - 若日後新增第七種以上玩法，先新增 `modes/` controller 與對應元件，不要擴大 `drawResult()`。
 
 每次只搬一類功能、不改行為，並在每一次搬移後完成瀏覽器驗證。
+
+目前可用 `node scripts/check-browser-smoke.mjs` 一次檢查手機、平板、桌機三種尺寸與八項活動；資產盤點則執行 `node scripts/audit-assets.mjs`，報告只列候選項目，不會自動刪圖。

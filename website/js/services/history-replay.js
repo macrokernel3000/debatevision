@@ -84,10 +84,19 @@
       return { kind: "cards", cards: members };
     }
 
+    function stageAndCards(cards, stageDeckId) {
+      const stage = cards.find((card) => card.deckId === stageDeckId) || null;
+      return {
+        stage,
+        cards: stage ? cards.filter((card) => options.cardKey(card) !== options.cardKey(stage)) : cards
+      };
+    }
+
     return Object.freeze({
       cardsForEntry,
       entryMeta,
-      itemEnvironment
+      itemEnvironment,
+      stageAndCards
     });
   }
 

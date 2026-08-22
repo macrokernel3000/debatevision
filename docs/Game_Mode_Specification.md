@@ -67,11 +67,11 @@ website/js/mode-lifecycle.js
 - `roleDefense`：純職業辯護，不自動抽異境。舊玩法可用，但目前前台沒有獨立啟用。
 - `roleEnvironment`：環境 + 職業。舊模式仍可用，但目前前台沒有獨立啟用。
 - `importanceDuel`：兩張卡牌對決。預設會自動讀取所有可用牌組，新增牌組後不需要再手動修改玩法設定；目前會排除 `needs` 這種由概念卡衍生出的虛擬需求池。
-- `salesPitch`：銷售密令。供需版使用商品與需求，故事版使用商品與概念，目標版會自動列出適合當客戶或對象的卡池。
+- `salesPitch`：銷售密令。供需版使用商品與需求，故事版使用商品與概念，目標版依 `salesAudienceDecks` 列出可作為客戶或對象的卡池。
 - `secretPlace`：秘密詞條推理。推理解密使用這個模式，可從可用詞庫中選擇候選卡。
 - `metaphorCompass`：抽 2 張概念卡與 1 張關係卡，組成「A 關係 C」的隱喻命題。
 - `summonMission`：先固定抽 1 張第二牌組作為任務，再抽 1 到 6 張主要牌組作為可辯護角色或方案。
-- `cardDictionary`：獨立的自由組合玩法。前台列出所有卡池，老師勾選多個卡池後，從每個卡池各抽一張。
+- `cardDictionary`：獨立的自由組合工具。前台列出所有卡池，老師啟用卡池後直接挑選本場要使用的卡。
 
 如果新增玩法只是在更換牌組，可以只新增 JSON。若需要全新抽選或呈現方式，才需要改 `website/js/app.js`。
 
@@ -84,7 +84,7 @@ website/js/mode-lifecycle.js
 - `importanceDuel` 會自動列出所有真實卡池，排除 `needs` 這種由概念卡衍生出的虛擬池。
 - `secretPlace` 會自動列出所有真實卡池，讓老師用任意詞庫玩推理解密。
 - `cardDictionary` 會自動列出所有真實卡池，方便老師自由挑選。
-- `salesPitch` 的供需版仍明確使用 `needs`，故事版仍明確使用 `concepts`，目標版則自動列出適合當目標對象的卡池。
+- `salesPitch` 的供需版明確使用 `needs`，故事版明確使用 `concepts`；目標版由玩法 JSON 的 `salesAudienceDecks` 控制，新增或刪除牌庫只需調整該清單。
 - `needs` 是從概念卡中篩選出來的虛擬需求池，不應在一般全卡池玩法中重複出現。
 
 新增 `data/cards/*.csv` 牌組後，只要更新生成檔，以上玩法就應該自動看見新卡池。刪除牌組後，也不應留下已不存在的選項。

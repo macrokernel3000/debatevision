@@ -54,7 +54,13 @@
     }
 
     function againLabel() {
-      return "再次挑戰";
+      const mode = getActiveMode();
+      if (mode.cardMode === "itemEnvironment") return survivalAgainLabel();
+      if (mode.cardMode === "summonMission") return uiText("mobile.realitySummon.again");
+      if (mode.cardMode === "salesPitch") return uiText("mobile.sales.again");
+      if (mode.cardMode === "metaphorCompass") return uiText("mobile.metaphor.again");
+      if (mode.cardMode === "importanceDuel") return uiText("mobile.importance.again");
+      return "再來一場";
     }
 
     function partialAction() {

@@ -191,6 +191,17 @@ function assertUnique(cards, label) {
   assert.equal(calls.find(([name]) => name === "markDrawn")[1].length, 3);
 }
 
+{
+  const lockedMission = pools.missions[1];
+  const { calls, ctx } = createContext({
+    activeSecondaryLibrary: "missions",
+    lockedResultCard: (slot) => slot === "stage" ? lockedMission : null
+  });
+  controllers.summonMission.draw(ctx);
+  const renderedMission = calls.find(([name]) => name === "renderCombo")[1];
+  assert.equal(renderedMission.name, lockedMission.name, "現實召喚鎖定任務後必須保留同一張任務卡");
+}
+
 for (const [salesVariant, salesNoConcept, expectedLength] of [
   ["supply", false, 3],
   ["story", false, 3],

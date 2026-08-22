@@ -230,6 +230,15 @@ function imageIdFor(item) {
   return raw.replace(/\.(svg|png|webp|jpe?g)$/i, "");
 }
 
+function versionAssetReference(reference) {
+  if (!reference?.startsWith("../assets/")) return reference || "";
+  const cleanReference = reference.replace(/[?#].*$/, "");
+  const assetPath = resolve(root, cleanReference.slice(3));
+  if (!existsSync(assetPath)) return reference;
+  const assetVersion = createHash("sha256").update(readFileSync(assetPath)).digest("hex").slice(0, 10);
+  return `${cleanReference}?v=${assetVersion}`;
+}
+
 function buildDecks() {
   const decks = {};
 
@@ -242,9 +251,9 @@ function buildDecks() {
       cards: []
     };
 
-    const iconAsset = assetPathFor(item);
+    const iconAsset = versionAssetReference(assetPathFor(item));
     const imageId = imageIdFor(item);
-    const image = imagePathFor(item);
+    const image = versionAssetReference(imagePathFor(item));
 
     decks[item.deck_id].cards.push({
       name: item.name,
@@ -280,11 +289,7 @@ function versionModeImages(modes) {
     for (const field of ["image", "backgroundImage"]) {
       const reference = nextMode[field];
       if (!reference?.startsWith("../assets/")) continue;
-      const cleanReference = reference.replace(/[?#].*$/, "");
-      const assetPath = resolve(root, cleanReference.slice(3));
-      if (!existsSync(assetPath)) continue;
-      const assetVersion = createHash("sha256").update(readFileSync(assetPath)).digest("hex").slice(0, 10);
-      nextMode[field] = `${cleanReference}?v=${assetVersion}`;
+      nextMode[field] = versionAssetReference(reference);
     }
     return nextMode;
   });

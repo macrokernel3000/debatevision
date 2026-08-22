@@ -37,7 +37,8 @@ const pools = {
   items: members.filter((value) => value.deckId === "items"),
   roles: members.filter((value) => value.deckId === "roles"),
   creatures: members.filter((value) => value.deckId === "creatures"),
-  summons: members.filter((value) => value.deckId === "summons")
+  summons: members.filter((value) => value.deckId === "summons"),
+  missions: [card("治理城市", "missions")]
 };
 const cardKey = (value) => `${value.deckId}::${value.rarity}::${value.name}`;
 const replay = sandbox.window.DEBATE_HISTORY_REPLAY.create({
@@ -96,7 +97,13 @@ const normalReplay = replay.itemEnvironment(normalEntry, normalCards, "worlds");
 assert.equal(normalReplay.kind, "combo");
 assert.equal(normalReplay.cards[0].hooks[0], "道具1 @ 無人島");
 
+const summonCards = [pools.missions[0], pools.summons[0]];
+const summonReplay = replay.stageAndCards(summonCards, "missions");
+assert.equal(summonReplay.stage.name, "治理城市");
+assert.deepEqual(summonReplay.cards.map((value) => value.name), ["異族1"]);
+
 console.log("歷史回放檢查通過。");
 console.log("- 舊冒險紀錄可推回分組");
 console.log("- 新紀錄保存分組設定");
 console.log("- 回放卡片重新套用異境提問");
+console.log("- 現實召喚回放保留任務與召喚卡分工");
