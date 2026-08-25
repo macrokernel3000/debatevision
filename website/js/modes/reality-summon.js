@@ -16,7 +16,7 @@
       if (!mission || cards.length < ctx.count) return ctx.renderPoolWarning();
       ctx.renderCombo(mission, cards, "本輪任務", { hideStageInDesktopResults: true });
       ctx.markDrawn([mission, ...cards]);
-      return cards;
+      return [mission, ...cards];
     },
     reelPool(ctx) {
       return ctx.selectedSummonCards();

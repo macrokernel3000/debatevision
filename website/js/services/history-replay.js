@@ -85,10 +85,18 @@
     }
 
     function stageAndCards(cards, stageDeckId) {
-      const stage = cards.find((card) => card.deckId === stageDeckId) || null;
+      const savedStage = cards.find((card) => card.deckId === stageDeckId) || null;
+      const savedHookText = cards
+        .flatMap((card) => Array.isArray(card.hooks) ? card.hooks : [])
+        .join("\n");
+      const recoveredStage = savedStage || options.cardsFrom(stageDeckId).find((candidate) => (
+        savedHookText.includes(`「${candidate.name}」`)
+      )) || null;
+      const stage = savedStage || recoveredStage;
       return {
         stage,
-        cards: stage ? cards.filter((card) => options.cardKey(card) !== options.cardKey(stage)) : cards
+        cards: savedStage ? cards.filter((card) => options.cardKey(card) !== options.cardKey(savedStage)) : cards,
+        recovered: Boolean(!savedStage && recoveredStage)
       };
     }
 

@@ -561,7 +561,11 @@ function restoreStoredHistoryEntry(entry, options = {}) {
   const stageCard = cards.find((card) => card.deckId === stageDeckId) || cards[0];
   if (activeMode.cardMode === "summonMission") {
     const replay = historyReplay.stageAndCards(cards, stageDeckId);
-    if (!replay.stage) return false;
+    if (!replay.stage) {
+      resultsView.empty("這筆舊紀錄沒有保存現實任務，無法完整套回；請重新抽一場，新紀錄會保留任務。");
+      renderReelCard(null, "舊紀錄缺少任務");
+      return true;
+    }
     const bucket = genericLockBucket();
     bucket.cards.stage = replay.stage;
     renderCombo(replay.stage, replay.cards, "本輪任務", { hideStageInDesktopResults: true });

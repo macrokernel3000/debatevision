@@ -102,8 +102,19 @@ const summonReplay = replay.stageAndCards(summonCards, "missions");
 assert.equal(summonReplay.stage.name, "治理城市");
 assert.deepEqual(summonReplay.cards.map((value) => value.name), ["異族1"]);
 
+const legacySummonReplay = replay.stageAndCards([
+  card("異族1", "summons", "異族", ["請說明「異族1」在任務「治理城市」時該怎麼做。"])
+], "missions");
+assert.equal(legacySummonReplay.stage.name, "治理城市");
+assert.equal(legacySummonReplay.recovered, true);
+assert.deepEqual(legacySummonReplay.cards.map((value) => value.name), ["異族1"]);
+
+const incompleteSummonReplay = replay.stageAndCards([card("異族1", "summons", "異族")], "missions");
+assert.equal(incompleteSummonReplay.stage, null);
+
 console.log("歷史回放檢查通過。");
 console.log("- 舊冒險紀錄可推回分組");
 console.log("- 新紀錄保存分組設定");
 console.log("- 回放卡片重新套用異境提問");
 console.log("- 現實召喚回放保留任務與召喚卡分工");
+console.log("- 舊現實召喚紀錄可由保存的任務引導文字還原");

@@ -186,7 +186,8 @@ function assertUnique(cards, label) {
 {
   const { calls, ctx } = createContext({ activeSecondaryLibrary: "missions" });
   const result = controllers.summonMission.draw(ctx);
-  assert.equal(result.length, 2);
+  assert.equal(result.length, 3);
+  assert.equal(result[0].deckId, "missions", "現實召喚紀錄必須把任務卡放在召喚卡之前保存");
   assertCall(calls, "renderCombo");
   assert.equal(calls.find(([name]) => name === "markDrawn")[1].length, 3);
 }
