@@ -1,7 +1,7 @@
 window.DEBATE_MODE_LIFECYCLE = {
   default: {
     setup: "確認卡池與抽取數量。",
-    active: "學生依本局題目進行說明、提問或說服。",
+    active: "依本局題目進行說明、提問或說服。",
     result: "整理最有效的理由與追問。",
     restart: "重新抽卡或調整卡池後再來一場。"
   },
@@ -25,7 +25,7 @@ window.DEBATE_MODE_LIFECYCLE = {
   },
   "where-am-i": {
     setup: "推理解密：選定詞庫與秘密編號。",
-    active: "學生只能用問題推理答案。",
+    active: "只能用問題推理答案。",
     result: "逐一公布不是這個或就是這個。",
     restart: "按再來一場，重新輸入秘密編號。"
   },
@@ -36,7 +36,7 @@ window.DEBATE_MODE_LIFECYCLE = {
     restart: "保留任務重抽角色，或重新抽出一組召喚任務。"
   },
   "metaphor-compass": {
-    setup: "選擇人生版或抽象版，確認前綴與後綴卡池。",
+    setup: "選擇具體版或抽象版，確認前綴與後綴卡池。",
     active: "找出相似點或定義概念，說明這個比喻或關係為什麼成立。",
     result: "用例子、反例或改寫關係詞檢查命題是否有說服力。",
     restart: "保留想練習的位置，只重抽其他前綴、介係或後綴。"
@@ -49,8 +49,8 @@ window.DEBATE_MODE_LIFECYCLE = {
   },
   "card-dictionary": {
     setup: "啟用想使用的卡池，挑選本場卡牌。",
-    active: "由老師或學生決定比較、說故事、推理或辯護規則。",
-    result: "整理本場選定卡牌與學生共同建立的活動規則。",
+    active: "由參與者決定比較、說故事、推理或辯護規則。",
+    result: "整理本場選定卡牌與共同建立的活動規則。",
     restart: "調整目前選卡，或載入另一套預設組合。"
   }
 };

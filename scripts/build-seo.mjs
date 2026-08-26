@@ -16,6 +16,7 @@ const appUrl = `${siteRoot}/website/`;
 
 const headers = {
   "頁面ID": "id", "網址代號": "slug", "允許索引": "index",
+  "最後更新": "lastModified",
   "搜尋標題": "title", "搜尋摘要": "description", "頁面主標題": "h1",
   "主要關鍵詞": "primaryKeyword", "次要關鍵詞": "secondaryKeywords",
   "分享圖片": "image", "頁面介紹": "intro"
@@ -141,22 +142,30 @@ function modePage(mode, seo, allPages) {
       </div>
       <section class="seo-more"><h2>更多思辨活動</h2><div class="seo-more-grid">${more}</div></section>
     </main>
-    <footer class="seo-footer"><div class="seo-shell">辯語視界 DebateVision｜給老師與教練使用的思辨教育活動工具</div></footer>
+    <footer class="seo-footer"><div class="seo-shell">辯語視界 DebateVision｜給所有人使用的思辨活動工具</div></footer>
   </body>
 </html>\n`;
 }
 
-function sitemap(pages) {
-  const sourceModifiedAt = Math.max(fs.statSync(configPath).mtimeMs, fs.statSync(modesPath).mtimeMs);
-  const today = new Date(sourceModifiedAt).toISOString().slice(0, 10);
-  const urls = [{ loc: appUrl, priority: "1.0" }, ...pages.filter((page) => page.index === "是").map((page) => ({ loc: `${appUrl}activities/${page.slug}/`, priority: "0.8" }))];
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(({ loc, priority }) => `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>${priority}</priority>\n  </url>`).join("\n")}\n</urlset>\n`;
+function sitemap(homepage, pages) {
+  const urls = [
+    { loc: appUrl, priority: "1.0", lastModified: homepage.lastModified },
+    ...pages.filter((page) => page.index === "是").map((page) => ({
+      loc: `${appUrl}activities/${page.slug}/`,
+      priority: "0.8",
+      lastModified: page.lastModified
+    }))
+  ];
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(({ loc, priority, lastModified }) => `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${lastModified}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>${priority}</priority>\n  </url>`).join("\n")}\n</urlset>\n`;
 }
 
 function validate(rows, modes) {
   const issues = [];
   const homepage = rows.find((row) => row.id === "home");
   if (!homepage) issues.push("缺少 home 首頁設定");
+  for (const row of rows) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(row.lastModified || "")) issues.push(`${row.id || "未命名頁面"} 的最後更新必須是 YYYY-MM-DD`);
+  }
   const pages = rows.filter((row) => row.id !== "home");
   const modeIds = new Set(modes.map((mode) => mode.id));
   for (const mode of modes) if (!pages.some((page) => page.id === mode.id)) issues.push(`缺少 ${mode.title} 的 SEO 設定`);
@@ -188,7 +197,7 @@ const pageMap = new Map(pages.map((page) => [page.id, page]));
 for (const mode of modes) compareOrWrite(path.join(activitiesDir, pageMap.get(mode.id).slug, "index.html"), modePage(mode, pageMap.get(mode.id), pages), stale);
 compareOrWrite(websiteIndexPath, updateHomepage(fs.readFileSync(websiteIndexPath, "utf8"), homepage), stale);
 compareOrWrite(rootIndexPath, updateHomepage(fs.readFileSync(rootIndexPath, "utf8"), homepage, false), stale);
-const sitemapContent = sitemap(pages);
+const sitemapContent = sitemap(homepage, pages);
 compareOrWrite(sitemapPath, sitemapContent, stale);
 compareOrWrite(websiteSitemapPath, sitemapContent, stale);
 if (stale.length) { console.error(`SEO 產物尚未更新：${stale.join("、")}。請執行 node scripts/build-seo.mjs`); process.exit(1); }

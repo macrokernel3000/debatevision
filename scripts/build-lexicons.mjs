@@ -45,6 +45,8 @@ const headerAliases = {
   "rarity": "rarity",
   "標籤": "tags",
   "tags": "tags",
+  "三階段挑戰": "challenges",
+  "challenges": "challenges",
   "玩法ID": "mode_id",
   "玩法代號": "mode_id",
   "mode_id": "mode_id",
@@ -264,7 +266,8 @@ function buildDecks() {
       tokenIcon: item.token_icon || "",
       image,
       rarity: item.rarity || "C",
-      tags: item.tags ? item.tags.split("|").map((tag) => tag.trim()).filter(Boolean) : []
+      tags: item.tags ? item.tags.split("|").map((tag) => tag.trim()).filter(Boolean) : [],
+      challenges: item.challenges ? item.challenges.split("|").map((challenge) => challenge.trim()).filter(Boolean) : []
     });
   }
 

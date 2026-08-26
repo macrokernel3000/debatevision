@@ -169,6 +169,31 @@ const lifeRelationRows = csvRows(path.join(root, "data/cards/關係卡.csv")).sl
 if (lifeConceptRows.length !== 1) failures.push("概念卡.csv 必須恰有一張名稱與稀有度皆為「人生」的固定卡");
 if (lifeRelationRows.length !== 1) failures.push("關係卡.csv 必須恰有一張名稱為「就像」、稀有度為「人生」的固定卡");
 
+// 公開活動面向所有人，不應用特定身分稱呼預設使用者。
+// 卡牌名稱與圖示對照屬內容資料，不納入此項介面文案檢查。
+const forbiddenAudienceTerms = /玩家|學生|教師|老師/g;
+const publicCopyFiles = [
+  ...fs.readdirSync(path.join(root, "data/content"))
+    .filter((name) => name.endsWith(".csv"))
+    .map((name) => path.join(root, "data/content", name)),
+  ...modeFiles.map((name) => path.join(root, "data/modes", name)),
+  path.join(root, "website/js/core/card-hooks.js"),
+  path.join(root, "website/js/mode-lifecycle.js"),
+  path.join(root, "website/js/components/desktop-card-detail.js"),
+  path.join(root, "website/js/components/mobile-modals.js"),
+  path.join(root, "website/index.html"),
+  path.join(root, "scripts/build-seo.mjs")
+];
+for (const filePath of publicCopyFiles) {
+  const lines = fs.readFileSync(filePath, "utf8").split(/\r?\n/);
+  for (const [offset, line] of lines.entries()) {
+    const matches = [...line.matchAll(forbiddenAudienceTerms)].map((match) => match[0]);
+    if (matches.length) {
+      failures.push(`${relative(filePath)}:${offset + 1} 公開活動文案不得預設身分稱呼：${[...new Set(matches)].join("、")}`);
+    }
+  }
+}
+
 if (failures.length) {
   console.error("資料契約檢查失敗：\n");
   for (const failure of failures) console.error(`- ${failure}`);

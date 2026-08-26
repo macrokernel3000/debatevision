@@ -71,6 +71,63 @@
   .desktop-card-detail-card .card-lore { font-size: 1.06rem; line-height: 1.65; }
   .desktop-card-detail-card .card-hooks { display: none; }
 
+  .desktop-card-detail-content.has-challenges .desktop-card-detail-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto auto auto;
+    gap: 16px;
+    padding: 22px;
+  }
+
+  .desktop-card-detail-content.has-challenges .card-title { grid-column: 1; }
+  .desktop-card-detail-content.has-challenges .card-art {
+    grid-column: 1;
+    grid-row: 2;
+    min-height: 0;
+    aspect-ratio: 16 / 7;
+  }
+  .desktop-card-detail-content.has-challenges .card-art img {
+    width: 100%;
+    height: 100%;
+    max-height: 390px;
+    object-fit: cover;
+  }
+  .desktop-card-intro {
+    grid-column: 1;
+    grid-row: 3;
+    margin: 0;
+    padding: 16px 18px;
+    border: 1px solid rgba(96, 75, 42, .16);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, .7);
+  }
+  .desktop-card-intro h4,
+  .desktop-card-challenges h4 { margin: 0 0 10px; font-size: 1.12rem; }
+  .desktop-card-intro .card-lore { margin: 0; padding: 0; background: none; }
+
+  .desktop-card-challenges {
+    grid-column: 1;
+    grid-row: 4;
+  }
+  .desktop-card-challenges ol {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .desktop-card-challenges li {
+    display: grid;
+    gap: 4px;
+    padding: 13px 15px;
+    border: 1px solid rgba(96, 75, 42, .18);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, .68);
+  }
+  .desktop-card-challenges li strong { color: #72501f; }
+  .desktop-card-challenges li span { line-height: 1.5; }
+
   #cardGrid .battle-card[data-card-key] { cursor: zoom-in; }
 }
 

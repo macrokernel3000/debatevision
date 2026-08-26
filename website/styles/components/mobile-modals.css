@@ -15,6 +15,7 @@
 
   .mobile-art-modal-panel {
     width: min(100%, 420px);
+    max-height: calc(100vh - 36px);
     display: grid;
     gap: 12px;
     border: 1px solid rgba(255, 255, 255, 0.16);
@@ -43,16 +44,41 @@
 
   .mobile-art-preview {
     display: grid;
-    place-items: center;
-    overflow: hidden;
+    gap: 12px;
+    overflow-y: auto;
     border-radius: 14px;
-    background: #050505;
+    background: var(--paper, #f7f0df);
+    color: var(--ink, #171717);
   }
 
   .mobile-art-preview img {
     width: 100%;
-    max-height: 72vh;
-    object-fit: contain;
+    max-height: 34vh;
+    object-fit: cover;
+  }
+
+  .mobile-art-intro,
+  .mobile-art-challenges { padding: 0 12px 12px; }
+  .mobile-art-intro h3,
+  .mobile-art-challenges h3 { margin: 0 0 8px; font-size: 1rem; }
+  .mobile-art-intro p { margin: 0; line-height: 1.55; }
+  .mobile-art-challenges ol {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .mobile-art-challenges li {
+    display: grid;
+    gap: 3px;
+    padding: 10px 11px;
+    border: 1px solid var(--line, #d8d2c7);
+    border-radius: 10px;
+    background: #fff;
+  }
+  .mobile-art-challenges li strong { color: #72501f; }
+  .mobile-art-challenges li span { font-size: .9rem; line-height: 1.45; }
   }
 
   .mobile-card-modal {
