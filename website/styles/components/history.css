@@ -103,6 +103,11 @@
   justify-content: flex-end;
 }
 
+.history-toolbar-hint {
+  color: var(--ink-muted, #6b7280);
+  font-size: 0.78rem;
+}
+
 .history-toolbar button {
   min-height: 36px;
   border: 1px solid var(--line);

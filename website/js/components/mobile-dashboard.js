@@ -282,6 +282,7 @@
         metaphorDecks,
         metaphorVariant: metaphor.variant,
         metaphorVariantLabel,
+        lifePrefixLocked: metaphor.lifePrefixLocked,
         salesAudienceDeck: sales.audienceDeck,
         salesAudienceDeckIds: salesAudienceDeckIds(),
         salesNoConcept: sales.noConcept,

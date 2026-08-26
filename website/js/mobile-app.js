@@ -80,6 +80,13 @@
       resetMobileActivityView();
       return;
     }
+    const lifeLock = event.target.closest("[data-mobile-metaphor-life-lock]");
+    if (lifeLock) {
+      api.metaphorLifePrefixLocked = lifeLock.checked;
+      api.currentMetaphorCards = null;
+      api.renderAll();
+      return;
+    }
 
     const summonCategoryButton = event.target.closest("[data-mobile-summon-category]");
     if (summonCategoryButton) {

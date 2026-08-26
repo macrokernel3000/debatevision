@@ -1,16 +1,36 @@
 import { createServer } from "node:http";
 import { spawn } from "node:child_process";
-import { mkdtemp, readFile, rm, stat } from "node:fs/promises";
+import { access, mkdtemp, readFile, rm, stat } from "node:fs/promises";
 import { extname, join, normalize, resolve } from "node:path";
 import { tmpdir } from "node:os";
 
 const root = resolve(import.meta.dirname, "..");
 const port = 5189;
-const chromePath = process.env.CHROME_PATH || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 const modes = ["item-survival", "reality-summon", "sales-command", "metaphor-compass", "importance-duel", "where-am-i", "debate-board", "card-dictionary"];
 const drawModes = new Set(modes.slice(0, 5));
 const sizes = [{ width: 390, height: 844 }, { width: 768, height: 1024 }, { width: 1280, height: 800 }];
 const mime = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css", ".json": "application/json", ".png": "image/png", ".jpg": "image/jpeg", ".webp": "image/webp", ".svg": "image/svg+xml" };
+
+async function findChrome() {
+  const candidates = [
+    process.env.CHROME_PATH,
+    ...(process.platform === "win32" ? [
+      process.env.PROGRAMFILES && join(process.env.PROGRAMFILES, "Google/Chrome/Application/chrome.exe"),
+      process.env["PROGRAMFILES(X86)"] && join(process.env["PROGRAMFILES(X86)"], "Google/Chrome/Application/chrome.exe"),
+      process.env.LOCALAPPDATA && join(process.env.LOCALAPPDATA, "Google/Chrome/Application/chrome.exe"),
+      process.env.PROGRAMFILES && join(process.env.PROGRAMFILES, "Chromium/Application/chrome.exe")
+    ] : process.platform === "darwin" ? [
+      "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+      "/Applications/Chromium.app/Contents/MacOS/Chromium"
+    ] : [
+      "/usr/bin/google-chrome", "/usr/bin/google-chrome-stable", "/usr/bin/chromium", "/usr/bin/chromium-browser"
+    ])
+  ].filter(Boolean);
+  for (const candidate of candidates) {
+    try { await access(candidate); return candidate; } catch {}
+  }
+  throw new Error(`找不到 Chrome 或 Chromium。請設定 CHROME_PATH，或安裝支援的瀏覽器。\n已檢查：${candidates.join(", ")}`);
+}
 
 function serve() {
   return createServer(async (request, response) => {
@@ -59,6 +79,7 @@ async function waitFor(test, timeout = 5000) {
 }
 
 async function run() {
+  const chromePath = await findChrome();
   const profile = await mkdtemp(join(tmpdir(), "debatevision-smoke-"));
   const server = serve();
   const chrome = spawn(chromePath, ["--headless=new", "--disable-gpu", "--no-first-run", `--user-data-dir=${profile}`, "--remote-debugging-port=9229", "about:blank"], { stdio: "ignore" });
@@ -70,6 +91,47 @@ async function run() {
     await cdp.call("Page.enable"); await cdp.call("Runtime.enable");
     const evaluate = async (expression) => (await cdp.call("Runtime.evaluate", { expression, returnByValue: true, awaitPromise: true })).result.value;
     const issues = [];
+    const featureCheck = async (size) => {
+      const result = await evaluate(`(async () => {
+        const problems = [];
+        const click = (selector) => document.querySelector(selector)?.click();
+        const text = (selector) => document.querySelector(selector)?.textContent?.trim() || "";
+        const timer = document.querySelector("#timerToggle");
+        if (!timer) problems.push("timer: missing");
+        else {
+          click("#timerToggle");
+          await new Promise((resolve) => setTimeout(resolve, 150));
+          if (text("#timerStatus") !== "計時中") problems.push("timer: did-not-start");
+          click("#timerToggle"); click("#timerReset");
+          if (text("#timerDisplay") !== "00:00.0") problems.push("timer: did-not-reset");
+        }
+        click('[data-mode="card-dictionary"]');
+        const name = document.querySelector("[data-dictionary-preset-name]");
+        const card = document.querySelector("[data-dictionary-card-key]") || document.querySelector("[data-dictionary-deck]");
+        if (!name || !card) problems.push("preset: controls-missing");
+        else {
+          name.value = "smoke-test";
+          name.dispatchEvent(new Event("input", { bubbles: true }));
+          card.click();
+          click("[data-dictionary-preset-save]");
+          const select = document.querySelector("[data-dictionary-preset-select]");
+          if (!select || ![...select.options].some((option) => option.value === "smoke-test")) problems.push("preset: did-not-save");
+          select.value = "smoke-test"; click("[data-dictionary-preset-load]");
+          if (!localStorage.getItem("debatevision-card-dictionary-presets")) problems.push("preset: storage-missing");
+          click("[data-dictionary-preset-delete]");
+        }
+        click('[data-mode="item-survival"]'); click("#drawButton");
+        const exportButton = document.querySelector("[data-history-export]");
+        let exported = false;
+        const originalClick = HTMLAnchorElement.prototype.click;
+        HTMLAnchorElement.prototype.click = function () { if (this.download?.endsWith("-history.json")) exported = true; };
+        exportButton?.click();
+        HTMLAnchorElement.prototype.click = originalClick;
+        if (!exported) problems.push("history: export-not-triggered");
+        return problems;
+      })()`);
+      for (const problem of result || []) issues.push(`${size.width}x${size.height} ${problem}`);
+    };
     for (const size of sizes) {
       await cdp.call("Emulation.setDeviceMetricsOverride", { ...size, deviceScaleFactor: 1, mobile: size.width <= 560 });
       await cdp.call("Page.navigate", { url: `http://127.0.0.1:${port}/website/` });
@@ -96,6 +158,21 @@ async function run() {
         }
         if (size.width <= 560) await evaluate("document.querySelector('[data-mobile-nav=\"home\"]')?.click()");
       }
+      await featureCheck(size);
+      await cdp.call("Page.navigate", { url: `http://127.0.0.1:${port}/website/?edit=1` });
+      await waitFor(async () => evaluate("document.readyState === 'complete' && Boolean(window.DEBATE_MODES)") );
+      const editor = await evaluate(`(() => {
+        const panel = document.querySelector("#imageEditorPanel");
+        if (!panel) return ["image-editor: missing"];
+        document.querySelector("#editorPickMode")?.click();
+        document.querySelector("#editX")?.dispatchEvent(new Event("input", { bubbles: true }));
+        document.querySelector("#exportImageLayout")?.click();
+        return [
+          !document.querySelector("#editorSelected")?.textContent.includes("點活動") ? null : "image-editor: selection-failed",
+          !(document.querySelector("#editorExportText")?.value || "").startsWith("{") ? "image-editor: export-failed" : null
+        ].filter(Boolean);
+      })()`);
+      for (const problem of editor || []) issues.push(`${size.width}x${size.height} ${problem}`);
     }
     if (issues.length) throw new Error(`瀏覽器 smoke 失敗：\n- ${issues.join("\n- ")}`);
     console.log(`瀏覽器 smoke 通過：${sizes.length} 個尺寸 × ${modes.length} 個活動。`);
