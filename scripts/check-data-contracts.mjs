@@ -6,6 +6,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const failures = [];
 const notes = [];
 const cardHeader = ["牌組ID", "牌組名稱", "牌組圖示", "卡牌名稱", "說明", "卡牌圖示", "抽選池圖示", "圖片", "稀有度", "標籤"];
+const optionalCardHeaders = ["三階段挑戰"];
 
 function parseCsv(text) {
   const rows = [];
@@ -67,16 +68,19 @@ const deckIds = new Set();
 for (const filePath of cardFiles) {
   const rows = csvRows(filePath);
   if (!rows.length) continue;
-  if (!sameValues(rows[0], cardHeader)) {
-    failures.push(`${relative(filePath)} 欄位必須精確為 ${cardHeader.join("、")}`);
+  const fileHeader = rows[0];
+  const validHeader = fileHeader.slice(0, cardHeader.length).every((value, index) => value === cardHeader[index])
+    && fileHeader.slice(cardHeader.length).every((value) => optionalCardHeaders.includes(value));
+  if (!validHeader) {
+    failures.push(`${relative(filePath)} 基本欄位必須為 ${cardHeader.join("、")}，其後僅能加入 ${optionalCardHeaders.join("、")}`);
     continue;
   }
   const cardKeys = new Set();
   const metadata = new Set();
   for (const [offset, row] of rows.slice(1).entries()) {
     const line = offset + 2;
-    if (row.length !== cardHeader.length) {
-      failures.push(`${relative(filePath)}:${line} 有 ${row.length} 欄，應為 ${cardHeader.length} 欄`);
+    if (row.length !== fileHeader.length) {
+      failures.push(`${relative(filePath)}:${line} 有 ${row.length} 欄，應為 ${fileHeader.length} 欄`);
       continue;
     }
     const [deckId, deckLabel, deckIcon, name, description, , , , rarity] = row;
@@ -164,6 +168,31 @@ const lifeRelationRows = csvRows(path.join(root, "data/cards/關係卡.csv")).sl
   .filter((row) => row[3] === "就像" && row[8] === "人生");
 if (lifeConceptRows.length !== 1) failures.push("概念卡.csv 必須恰有一張名稱與稀有度皆為「人生」的固定卡");
 if (lifeRelationRows.length !== 1) failures.push("關係卡.csv 必須恰有一張名稱為「就像」、稀有度為「人生」的固定卡");
+
+// 公開活動面向所有人，不應用特定身分稱呼預設使用者。
+// 卡牌名稱與圖示對照屬內容資料，不納入此項介面文案檢查。
+const forbiddenAudienceTerms = /玩家|學生|教師|老師/g;
+const publicCopyFiles = [
+  ...fs.readdirSync(path.join(root, "data/content"))
+    .filter((name) => name.endsWith(".csv"))
+    .map((name) => path.join(root, "data/content", name)),
+  ...modeFiles.map((name) => path.join(root, "data/modes", name)),
+  path.join(root, "website/js/core/card-hooks.js"),
+  path.join(root, "website/js/mode-lifecycle.js"),
+  path.join(root, "website/js/components/desktop-card-detail.js"),
+  path.join(root, "website/js/components/mobile-modals.js"),
+  path.join(root, "website/index.html"),
+  path.join(root, "scripts/build-seo.mjs")
+];
+for (const filePath of publicCopyFiles) {
+  const lines = fs.readFileSync(filePath, "utf8").split(/\r?\n/);
+  for (const [offset, line] of lines.entries()) {
+    const matches = [...line.matchAll(forbiddenAudienceTerms)].map((match) => match[0]);
+    if (matches.length) {
+      failures.push(`${relative(filePath)}:${offset + 1} 公開活動文案不得預設身分稱呼：${[...new Set(matches)].join("、")}`);
+    }
+  }
+}
 
 if (failures.length) {
   console.error("資料契約檢查失敗：\n");

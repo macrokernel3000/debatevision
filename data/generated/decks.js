@@ -16,7 +16,8 @@ window.DEBATE_DECKS = {
           "財富",
           "商業",
           "現實"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "開公司做產品",
@@ -31,7 +32,8 @@ window.DEBATE_DECKS = {
           "創業",
           "產品",
           "商業"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "拍電影",
@@ -46,7 +48,8 @@ window.DEBATE_DECKS = {
           "創作",
           "媒體",
           "合作"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "上學",
@@ -61,7 +64,8 @@ window.DEBATE_DECKS = {
           "學習",
           "日常",
           "適應"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "治理城市",
@@ -76,7 +80,8 @@ window.DEBATE_DECKS = {
           "治理",
           "公共",
           "民意"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "當網紅",
@@ -91,7 +96,8 @@ window.DEBATE_DECKS = {
           "媒體",
           "影響力",
           "形象"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "救一間學校",
@@ -106,7 +112,8 @@ window.DEBATE_DECKS = {
           "教育",
           "組織",
           "修復"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "贏得選舉",
@@ -121,7 +128,8 @@ window.DEBATE_DECKS = {
           "政治",
           "說服",
           "信任"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "經營餐廳",
@@ -136,7 +144,8 @@ window.DEBATE_DECKS = {
           "服務",
           "經營",
           "口碑"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "成立社團",
@@ -151,7 +160,8 @@ window.DEBATE_DECKS = {
           "群體",
           "組織",
           "參與"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "修復名聲",
@@ -166,7 +176,8 @@ window.DEBATE_DECKS = {
           "信任",
           "形象",
           "危機"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "隱居現代城市",
@@ -181,7 +192,8 @@ window.DEBATE_DECKS = {
           "城市",
           "隱居",
           "身分"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "找產品代言",
@@ -196,7 +208,8 @@ window.DEBATE_DECKS = {
           "行銷",
           "品牌",
           "信任"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "參加運動",
@@ -211,7 +224,8 @@ window.DEBATE_DECKS = {
           "運動",
           "規則",
           "競爭"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "寫一本書",
@@ -226,7 +240,8 @@ window.DEBATE_DECKS = {
           "創作",
           "表達",
           "出版"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "幫助他人",
@@ -241,7 +256,8 @@ window.DEBATE_DECKS = {
           "助人",
           "需求",
           "責任"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "尋找夥伴",
@@ -256,7 +272,8 @@ window.DEBATE_DECKS = {
           "合作",
           "招募",
           "信任"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "跟人類談判",
@@ -271,7 +288,8 @@ window.DEBATE_DECKS = {
           "談判",
           "人類",
           "合作"
-        ]
+        ],
+        "challenges": []
       }
     ]
   },
@@ -292,7 +310,8 @@ window.DEBATE_DECKS = {
           "異族類",
           "變形",
           "吸收"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "狼人",
@@ -307,7 +326,8 @@ window.DEBATE_DECKS = {
           "異族類",
           "追蹤",
           "爆發"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "殭屍",
@@ -322,7 +342,8 @@ window.DEBATE_DECKS = {
           "異族類",
           "耐久",
           "危機"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "獸人",
@@ -337,7 +358,8 @@ window.DEBATE_DECKS = {
           "異族類",
           "力量",
           "榮譽"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "巫師",
@@ -352,7 +374,8 @@ window.DEBATE_DECKS = {
           "異族類",
           "魔法",
           "知識"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "外星人",
@@ -367,7 +390,8 @@ window.DEBATE_DECKS = {
           "異族類",
           "科技",
           "陌生"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "恐龍",
@@ -382,7 +406,8 @@ window.DEBATE_DECKS = {
           "異族類",
           "巨大",
           "震懾"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "哥布林",
@@ -397,7 +422,8 @@ window.DEBATE_DECKS = {
           "異族類",
           "狡猾",
           "撿漏"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "巨魔",
@@ -412,7 +438,8 @@ window.DEBATE_DECKS = {
           "異族類",
           "巨大",
           "防禦"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "妖精",
@@ -427,7 +454,8 @@ window.DEBATE_DECKS = {
           "異族類",
           "靈巧",
           "惡作劇"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "龍人",
@@ -442,7 +470,8 @@ window.DEBATE_DECKS = {
           "異族類",
           "龍族",
           "威嚇"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "人魚",
@@ -457,7 +486,8 @@ window.DEBATE_DECKS = {
           "異族類",
           "水域",
           "魅力"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "半人馬",
@@ -472,7 +502,8 @@ window.DEBATE_DECKS = {
           "異族類",
           "速度",
           "巡邏"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "吸血鬼",
@@ -487,7 +518,8 @@ window.DEBATE_DECKS = {
           "異族類",
           "夜晚",
           "魅力"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "樹人",
@@ -502,7 +534,8 @@ window.DEBATE_DECKS = {
           "異族類",
           "自然",
           "耐久"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "天使",
@@ -517,7 +550,8 @@ window.DEBATE_DECKS = {
           "異族類",
           "神聖",
           "治癒"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "樹妖",
@@ -532,7 +566,8 @@ window.DEBATE_DECKS = {
           "異族類",
           "自然",
           "植物"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "惡魔",
@@ -547,7 +582,8 @@ window.DEBATE_DECKS = {
           "異族類",
           "交易",
           "風險"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "海妖",
@@ -562,7 +598,8 @@ window.DEBATE_DECKS = {
           "異族類",
           "水域",
           "誘惑"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "仙子",
@@ -577,7 +614,8 @@ window.DEBATE_DECKS = {
           "異族類",
           "祝福",
           "靈巧"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "地底人",
@@ -592,7 +630,8 @@ window.DEBATE_DECKS = {
           "異族類",
           "地下",
           "礦物"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "神速力",
@@ -607,7 +646,8 @@ window.DEBATE_DECKS = {
           "超能類",
           "速度",
           "救援"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "超力量",
@@ -622,7 +662,8 @@ window.DEBATE_DECKS = {
           "超能類",
           "力量",
           "保護"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "瞬間移動",
@@ -637,7 +678,8 @@ window.DEBATE_DECKS = {
           "超能類",
           "移動",
           "突入"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "念動力",
@@ -652,7 +694,8 @@ window.DEBATE_DECKS = {
           "超能類",
           "控制",
           "精密"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "瘋狂",
@@ -667,7 +710,8 @@ window.DEBATE_DECKS = {
           "超能類",
           "創意",
           "失控"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "隱形",
@@ -682,7 +726,8 @@ window.DEBATE_DECKS = {
           "超能類",
           "偵查",
           "隱私"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "讀心術",
@@ -697,7 +742,8 @@ window.DEBATE_DECKS = {
           "超能類",
           "心理",
           "談判"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "時間暫停",
@@ -712,7 +758,8 @@ window.DEBATE_DECKS = {
           "超能類",
           "時間",
           "控制"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "治癒力",
@@ -727,7 +774,8 @@ window.DEBATE_DECKS = {
           "超能類",
           "醫療",
           "支持"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "化身術",
@@ -742,7 +790,8 @@ window.DEBATE_DECKS = {
           "超能類",
           "偽裝",
           "適應"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "火焰",
@@ -757,7 +806,8 @@ window.DEBATE_DECKS = {
           "超能類",
           "火焰",
           "能源"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "冰凍",
@@ -772,7 +822,8 @@ window.DEBATE_DECKS = {
           "超能類",
           "冰霜",
           "封鎖"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "分身術",
@@ -787,7 +838,8 @@ window.DEBATE_DECKS = {
           "超能類",
           "複製",
           "效率"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "預知夢",
@@ -802,7 +854,8 @@ window.DEBATE_DECKS = {
           "超能類",
           "預測",
           "風險"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "重力操控",
@@ -817,7 +870,8 @@ window.DEBATE_DECKS = {
           "超能類",
           "重力",
           "工程"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "飛行",
@@ -832,7 +886,8 @@ window.DEBATE_DECKS = {
           "超能類",
           "飛行",
           "偵查"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "神譯",
@@ -847,7 +902,8 @@ window.DEBATE_DECKS = {
           "超能類",
           "動物",
           "溝通"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "電能",
@@ -862,7 +918,8 @@ window.DEBATE_DECKS = {
           "超能類",
           "電力",
           "能源"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "不朽",
@@ -877,7 +934,8 @@ window.DEBATE_DECKS = {
           "超能類",
           "長生",
           "耐久"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "通靈",
@@ -892,7 +950,8 @@ window.DEBATE_DECKS = {
           "超能類",
           "靈魂",
           "歷史"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "令牌",
@@ -907,7 +966,8 @@ window.DEBATE_DECKS = {
           "超能類",
           "指揮",
           "控制"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "千面",
@@ -922,7 +982,8 @@ window.DEBATE_DECKS = {
           "超能類",
           "偽裝",
           "身份"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "千機",
@@ -937,7 +998,8 @@ window.DEBATE_DECKS = {
           "超能類",
           "精密",
           "工業"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "浪人",
@@ -952,7 +1014,8 @@ window.DEBATE_DECKS = {
           "特職類",
           "武藝",
           "獨行"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "吟遊詩人",
@@ -967,7 +1030,8 @@ window.DEBATE_DECKS = {
           "特職類",
           "敘事",
           "魅力"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "駭客",
@@ -982,7 +1046,8 @@ window.DEBATE_DECKS = {
           "特職類",
           "科技",
           "情報"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "瘋狂科學家",
@@ -997,7 +1062,8 @@ window.DEBATE_DECKS = {
           "特職類",
           "發明",
           "實驗"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "海盜",
@@ -1012,7 +1078,8 @@ window.DEBATE_DECKS = {
           "特職類",
           "冒險",
           "領導"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "牛仔",
@@ -1027,7 +1094,8 @@ window.DEBATE_DECKS = {
           "特職類",
           "荒野",
           "判斷"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "觀星者",
@@ -1042,7 +1110,8 @@ window.DEBATE_DECKS = {
           "特職類",
           "觀察",
           "預測"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "忍者",
@@ -1057,7 +1126,8 @@ window.DEBATE_DECKS = {
           "特職類",
           "潛行",
           "執行"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "刺客",
@@ -1072,7 +1142,8 @@ window.DEBATE_DECKS = {
           "特職類",
           "精準",
           "風險"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "國王",
@@ -1087,7 +1158,8 @@ window.DEBATE_DECKS = {
           "特職類",
           "權威",
           "治理"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "間諜",
@@ -1102,7 +1174,8 @@ window.DEBATE_DECKS = {
           "特職類",
           "情報",
           "偽裝"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "占卜師",
@@ -1117,7 +1190,8 @@ window.DEBATE_DECKS = {
           "特職類",
           "預測",
           "心理"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "煉金術士",
@@ -1132,7 +1206,8 @@ window.DEBATE_DECKS = {
           "特職類",
           "轉化",
           "研發"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "馴龍師",
@@ -1147,7 +1222,8 @@ window.DEBATE_DECKS = {
           "特職類",
           "馴服",
           "合作"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "賞金獵人",
@@ -1162,7 +1238,8 @@ window.DEBATE_DECKS = {
           "特職類",
           "追蹤",
           "委託"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "化獸師",
@@ -1177,7 +1254,8 @@ window.DEBATE_DECKS = {
           "特職類",
           "變身",
           "動物"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "宗師",
@@ -1192,7 +1270,8 @@ window.DEBATE_DECKS = {
           "特職類",
           "技藝",
           "教導"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "獵戶",
@@ -1207,7 +1286,8 @@ window.DEBATE_DECKS = {
           "特職類",
           "追蹤",
           "野外"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "神偷",
@@ -1222,7 +1302,8 @@ window.DEBATE_DECKS = {
           "特職類",
           "潛入",
           "技巧"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "典獄長",
@@ -1237,7 +1318,8 @@ window.DEBATE_DECKS = {
           "特職類",
           "管理",
           "秩序"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "禪師",
@@ -1252,7 +1334,8 @@ window.DEBATE_DECKS = {
           "特職類",
           "心智",
           "安定"
-        ]
+        ],
+        "challenges": []
       }
     ]
   },
@@ -1273,7 +1356,8 @@ window.DEBATE_DECKS = {
           "科學",
           "物理",
           "思想"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "牛頓",
@@ -1288,7 +1372,8 @@ window.DEBATE_DECKS = {
           "科學",
           "物理",
           "數學"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "居禮夫人",
@@ -1303,7 +1388,8 @@ window.DEBATE_DECKS = {
           "科學",
           "化學",
           "女性"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "達文西",
@@ -1318,7 +1404,8 @@ window.DEBATE_DECKS = {
           "藝術",
           "發明",
           "文藝復興"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "莎士比亞",
@@ -1333,7 +1420,8 @@ window.DEBATE_DECKS = {
           "文學",
           "戲劇",
           "語言"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "莫札特",
@@ -1348,7 +1436,8 @@ window.DEBATE_DECKS = {
           "音樂",
           "古典",
           "創作"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "貝多芬",
@@ -1363,7 +1452,8 @@ window.DEBATE_DECKS = {
           "音樂",
           "意志",
           "古典"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "孔子",
@@ -1378,7 +1468,8 @@ window.DEBATE_DECKS = {
           "思想",
           "教育",
           "文化"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "甘地",
@@ -1393,7 +1484,8 @@ window.DEBATE_DECKS = {
           "政治",
           "和平",
           "社會運動"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "曼德拉",
@@ -1408,7 +1500,8 @@ window.DEBATE_DECKS = {
           "人權",
           "政治",
           "領導"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "金恩博士",
@@ -1423,7 +1516,8 @@ window.DEBATE_DECKS = {
           "人權",
           "演說",
           "社會運動"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "林肯",
@@ -1438,7 +1532,8 @@ window.DEBATE_DECKS = {
           "政治",
           "歷史",
           "領導"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "拿破崙",
@@ -1453,7 +1548,8 @@ window.DEBATE_DECKS = {
           "軍事",
           "政治",
           "歷史"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "亞里斯多德",
@@ -1468,7 +1564,8 @@ window.DEBATE_DECKS = {
           "歷史",
           "政治",
           "古文明"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "特蕾莎修女",
@@ -1483,7 +1580,8 @@ window.DEBATE_DECKS = {
           "慈善",
           "宗教",
           "服務"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "愛迪生",
@@ -1498,7 +1596,8 @@ window.DEBATE_DECKS = {
           "發明",
           "科技",
           "商業"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "賈伯斯",
@@ -1513,7 +1612,8 @@ window.DEBATE_DECKS = {
           "科技",
           "設計",
           "商業"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "比爾蓋茲",
@@ -1528,7 +1628,8 @@ window.DEBATE_DECKS = {
           "科技",
           "商業",
           "慈善"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "馬拉拉",
@@ -1543,7 +1644,8 @@ window.DEBATE_DECKS = {
           "教育",
           "人權",
           "青年"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "梅西",
@@ -1558,7 +1660,8 @@ window.DEBATE_DECKS = {
           "運動",
           "足球",
           "團隊"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "麥可喬丹",
@@ -1573,7 +1676,8 @@ window.DEBATE_DECKS = {
           "運動",
           "籃球",
           "競爭"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "大谷翔平",
@@ -1588,7 +1692,8 @@ window.DEBATE_DECKS = {
           "運動",
           "棒球",
           "突破"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "泰勒絲",
@@ -1603,7 +1708,8 @@ window.DEBATE_DECKS = {
           "音樂",
           "流行",
           "創作"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "宮崎駿",
@@ -1618,7 +1724,8 @@ window.DEBATE_DECKS = {
           "動畫",
           "電影",
           "創作"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "李安",
@@ -1633,7 +1740,8 @@ window.DEBATE_DECKS = {
           "電影",
           "台灣",
           "文化"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "秦始皇",
@@ -1648,7 +1756,8 @@ window.DEBATE_DECKS = {
           "科技",
           "台灣",
           "產業"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "珍古德",
@@ -1663,7 +1772,8 @@ window.DEBATE_DECKS = {
           "科學",
           "保育",
           "動物"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "梵谷",
@@ -1678,7 +1788,8 @@ window.DEBATE_DECKS = {
           "教育",
           "生命",
           "倡議"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "達爾文",
@@ -1693,7 +1804,8 @@ window.DEBATE_DECKS = {
           "科學",
           "生物",
           "演化"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "霍金",
@@ -1708,7 +1820,8 @@ window.DEBATE_DECKS = {
           "科學",
           "宇宙",
           "知識"
-        ]
+        ],
+        "challenges": []
       }
     ]
   },
@@ -1727,7 +1840,8 @@ window.DEBATE_DECKS = {
         "rarity": "A",
         "tags": [
           "場地"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "工地",
@@ -1740,7 +1854,8 @@ window.DEBATE_DECKS = {
         "rarity": "A",
         "tags": [
           "場地"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "潛水艇",
@@ -1753,7 +1868,8 @@ window.DEBATE_DECKS = {
         "rarity": "A",
         "tags": [
           "場地"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "飛機",
@@ -1766,7 +1882,8 @@ window.DEBATE_DECKS = {
         "rarity": "A",
         "tags": [
           "場地"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "體育場",
@@ -1779,7 +1896,8 @@ window.DEBATE_DECKS = {
         "rarity": "A",
         "tags": [
           "場地"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "圖書館",
@@ -1792,7 +1910,8 @@ window.DEBATE_DECKS = {
         "rarity": "A",
         "tags": [
           "場地"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "太空站",
@@ -1805,7 +1924,8 @@ window.DEBATE_DECKS = {
         "rarity": "A",
         "tags": [
           "場地"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "馬戲團",
@@ -1818,7 +1938,8 @@ window.DEBATE_DECKS = {
         "rarity": "A",
         "tags": [
           "場地"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "動物園",
@@ -1831,7 +1952,8 @@ window.DEBATE_DECKS = {
         "rarity": "A",
         "tags": [
           "場地"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "大賣場",
@@ -1844,7 +1966,8 @@ window.DEBATE_DECKS = {
         "rarity": "A",
         "tags": [
           "場地"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "警察局",
@@ -1857,7 +1980,8 @@ window.DEBATE_DECKS = {
         "rarity": "A",
         "tags": [
           "場地"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "電影攝影棚",
@@ -1870,7 +1994,8 @@ window.DEBATE_DECKS = {
         "rarity": "A",
         "tags": [
           "場地"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "海盜船",
@@ -1883,7 +2008,8 @@ window.DEBATE_DECKS = {
         "rarity": "A",
         "tags": [
           "場地"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "沙灘",
@@ -1896,7 +2022,8 @@ window.DEBATE_DECKS = {
         "rarity": "A",
         "tags": [
           "場地"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "廚藝學校",
@@ -1909,7 +2036,8 @@ window.DEBATE_DECKS = {
         "rarity": "A",
         "tags": [
           "場地"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "天堂",
@@ -1922,7 +2050,8 @@ window.DEBATE_DECKS = {
         "rarity": "A",
         "tags": [
           "場地"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "監獄",
@@ -1935,7 +2064,8 @@ window.DEBATE_DECKS = {
         "rarity": "A",
         "tags": [
           "場地"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "學校",
@@ -1948,7 +2078,8 @@ window.DEBATE_DECKS = {
         "rarity": "A",
         "tags": [
           "場地"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "夜市",
@@ -1961,7 +2092,8 @@ window.DEBATE_DECKS = {
         "rarity": "A",
         "tags": [
           "場地"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "農場",
@@ -1974,7 +2106,8 @@ window.DEBATE_DECKS = {
         "rarity": "A",
         "tags": [
           "場地"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "戰場",
@@ -1987,7 +2120,8 @@ window.DEBATE_DECKS = {
         "rarity": "A",
         "tags": [
           "場地"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "育嬰室",
@@ -2000,7 +2134,8 @@ window.DEBATE_DECKS = {
         "rarity": "A",
         "tags": [
           "場地"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "實驗室",
@@ -2013,7 +2148,8 @@ window.DEBATE_DECKS = {
         "rarity": "A",
         "tags": [
           "場地"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "競技場",
@@ -2026,7 +2162,8 @@ window.DEBATE_DECKS = {
         "rarity": "A",
         "tags": [
           "場地"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "紡織廠",
@@ -2039,7 +2176,8 @@ window.DEBATE_DECKS = {
         "rarity": "A",
         "tags": [
           "場地"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "公園廣場",
@@ -2052,7 +2190,8 @@ window.DEBATE_DECKS = {
         "rarity": "A",
         "tags": [
           "場地"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "博物館",
@@ -2065,7 +2204,8 @@ window.DEBATE_DECKS = {
         "rarity": "A",
         "tags": [
           "場地"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "月球基地",
@@ -2078,7 +2218,8 @@ window.DEBATE_DECKS = {
         "rarity": "A",
         "tags": [
           "場地"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "罐頭工廠",
@@ -2091,7 +2232,8 @@ window.DEBATE_DECKS = {
         "rarity": "A",
         "tags": [
           "場地"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "商業大樓",
@@ -2104,7 +2246,8 @@ window.DEBATE_DECKS = {
         "rarity": "A",
         "tags": [
           "場地"
-        ]
+        ],
+        "challenges": []
       }
     ]
   },
@@ -2125,7 +2268,8 @@ window.DEBATE_DECKS = {
           "生命",
           "經驗",
           "選擇"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "孤獨",
@@ -2140,7 +2284,8 @@ window.DEBATE_DECKS = {
           "關係",
           "信任",
           "支持"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "團結",
@@ -2155,7 +2300,8 @@ window.DEBATE_DECKS = {
           "關係",
           "信任",
           "支持"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "正義",
@@ -2170,7 +2316,8 @@ window.DEBATE_DECKS = {
           "價值",
           "社會",
           "判斷"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "自律",
@@ -2185,7 +2332,8 @@ window.DEBATE_DECKS = {
           "習慣",
           "意志",
           "行動"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "溫柔",
@@ -2200,7 +2348,8 @@ window.DEBATE_DECKS = {
           "情感",
           "關係",
           "態度"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "選擇",
@@ -2215,7 +2364,8 @@ window.DEBATE_DECKS = {
           "判斷",
           "自由",
           "責任"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "失敗",
@@ -2230,7 +2380,8 @@ window.DEBATE_DECKS = {
           "挫折",
           "學習",
           "反思"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "知識",
@@ -2245,7 +2396,8 @@ window.DEBATE_DECKS = {
           "學習",
           "理解",
           "判斷"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "成長",
@@ -2260,7 +2412,8 @@ window.DEBATE_DECKS = {
           "學習",
           "改變",
           "生命"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "俐落",
@@ -2275,7 +2428,8 @@ window.DEBATE_DECKS = {
           "效率",
           "風格",
           "清楚"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "信念",
@@ -2290,7 +2444,8 @@ window.DEBATE_DECKS = {
           "價值",
           "堅持",
           "判斷"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "努力",
@@ -2305,7 +2460,8 @@ window.DEBATE_DECKS = {
           "行動",
           "意志",
           "成果"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "諒解",
@@ -2320,7 +2476,8 @@ window.DEBATE_DECKS = {
           "關係",
           "同理",
           "修復"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "藝術",
@@ -2335,7 +2492,8 @@ window.DEBATE_DECKS = {
           "創作",
           "感受",
           "表達"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "財富",
@@ -2350,7 +2508,8 @@ window.DEBATE_DECKS = {
           "資源",
           "交換",
           "權力"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "武器",
@@ -2365,7 +2524,8 @@ window.DEBATE_DECKS = {
           "力量",
           "防衛",
           "改變"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "複雜",
@@ -2380,7 +2540,8 @@ window.DEBATE_DECKS = {
           "系統",
           "問題",
           "理解"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "熟練",
@@ -2395,7 +2556,8 @@ window.DEBATE_DECKS = {
           "技能",
           "練習",
           "穩定"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "幽默",
@@ -2410,7 +2572,8 @@ window.DEBATE_DECKS = {
           "表達",
           "情緒",
           "角度"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "友情",
@@ -2425,7 +2588,8 @@ window.DEBATE_DECKS = {
           "關係",
           "信任",
           "支持"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "勇氣",
@@ -2440,7 +2604,8 @@ window.DEBATE_DECKS = {
           "風險",
           "行動",
           "意志"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "生活",
@@ -2455,7 +2620,8 @@ window.DEBATE_DECKS = {
           "日常",
           "經驗",
           "習慣"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "歡樂",
@@ -2470,7 +2636,8 @@ window.DEBATE_DECKS = {
           "情緒",
           "分享",
           "愉悅"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "精密",
@@ -2485,7 +2652,8 @@ window.DEBATE_DECKS = {
           "細節",
           "準確",
           "技術"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "運氣",
@@ -2500,7 +2668,8 @@ window.DEBATE_DECKS = {
           "偶然",
           "結果",
           "不確定"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "競爭",
@@ -2515,7 +2684,8 @@ window.DEBATE_DECKS = {
           "比較",
           "成就",
           "資源"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "愛",
@@ -2530,7 +2700,8 @@ window.DEBATE_DECKS = {
           "情感",
           "關係",
           "價值"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "成功",
@@ -2545,7 +2716,8 @@ window.DEBATE_DECKS = {
           "成果",
           "目標",
           "認可"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "懶惰",
@@ -2560,7 +2732,8 @@ window.DEBATE_DECKS = {
           "心理",
           "便利",
           "動機"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "競技",
@@ -2575,7 +2748,8 @@ window.DEBATE_DECKS = {
           "競爭",
           "成就",
           "遊戲"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "歸屬",
@@ -2590,7 +2764,8 @@ window.DEBATE_DECKS = {
           "關係",
           "群體",
           "情感"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "榮譽",
@@ -2605,7 +2780,8 @@ window.DEBATE_DECKS = {
           "尊重",
           "地位",
           "成就"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "紀念",
@@ -2620,7 +2796,8 @@ window.DEBATE_DECKS = {
           "記憶",
           "情感",
           "收藏"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "擁有",
@@ -2635,7 +2812,8 @@ window.DEBATE_DECKS = {
           "所有權",
           "安全",
           "慾望"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "安全",
@@ -2650,7 +2828,8 @@ window.DEBATE_DECKS = {
           "風險",
           "保護",
           "安心"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "便利",
@@ -2665,7 +2844,8 @@ window.DEBATE_DECKS = {
           "效率",
           "生活",
           "工具"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "美感",
@@ -2680,7 +2860,8 @@ window.DEBATE_DECKS = {
           "審美",
           "設計",
           "愉悅"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "陪伴",
@@ -2695,7 +2876,8 @@ window.DEBATE_DECKS = {
           "情感",
           "關係",
           "支持"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "成長",
@@ -2710,7 +2892,8 @@ window.DEBATE_DECKS = {
           "學習",
           "進步",
           "自我"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "探索",
@@ -2725,7 +2908,8 @@ window.DEBATE_DECKS = {
           "好奇",
           "冒險",
           "未知"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "控制",
@@ -2740,7 +2924,8 @@ window.DEBATE_DECKS = {
           "秩序",
           "掌控",
           "計畫"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "表達",
@@ -2755,7 +2940,8 @@ window.DEBATE_DECKS = {
           "自我",
           "溝通",
           "風格"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "省錢",
@@ -2770,7 +2956,8 @@ window.DEBATE_DECKS = {
           "價格",
           "成本",
           "理性"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "效率",
@@ -2785,7 +2972,8 @@ window.DEBATE_DECKS = {
           "時間",
           "生產力",
           "速度"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "身分",
@@ -2800,7 +2988,8 @@ window.DEBATE_DECKS = {
           "認同",
           "社會",
           "形象"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "放鬆",
@@ -2815,7 +3004,8 @@ window.DEBATE_DECKS = {
           "休息",
           "療癒",
           "壓力"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "驚喜",
@@ -2830,7 +3020,8 @@ window.DEBATE_DECKS = {
           "新奇",
           "情緒",
           "體驗"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "公平",
@@ -2845,7 +3036,8 @@ window.DEBATE_DECKS = {
           "正義",
           "規則",
           "社會"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "成就",
@@ -2860,7 +3052,8 @@ window.DEBATE_DECKS = {
           "成果",
           "自我",
           "肯定"
-        ]
+        ],
+        "challenges": []
       }
     ]
   },
@@ -2877,7 +3070,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "水壺",
@@ -2888,7 +3082,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "睡袋",
@@ -2899,7 +3094,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "膠帶",
@@ -2910,7 +3106,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "小型無人機",
@@ -2921,7 +3118,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "小刀",
@@ -2932,7 +3130,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "垃圾袋",
@@ -2943,7 +3142,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "夜視鏡",
@@ -2954,7 +3154,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "瑞士刀",
@@ -2965,7 +3166,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "軍用乾糧",
@@ -2976,7 +3178,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "濾水器",
@@ -2987,7 +3190,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "收音機",
@@ -2998,7 +3202,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "防彈背心",
@@ -3009,7 +3214,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "繩索",
@@ -3020,7 +3226,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "防水火柴",
@@ -3031,7 +3238,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "衛星電話",
@@ -3042,7 +3250,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "鐵錘",
@@ -3053,7 +3262,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "酒精",
@@ -3064,7 +3274,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "罐頭",
@@ -3075,7 +3286,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "手槍",
@@ -3086,7 +3298,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "鋼杯",
@@ -3097,7 +3310,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "鏟子",
@@ -3108,7 +3322,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "網子",
@@ -3119,7 +3334,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "迷你瓦斯爐",
@@ -3130,7 +3346,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "平底鍋",
@@ -3141,7 +3358,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "打火機",
@@ -3152,7 +3370,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "滅火器",
@@ -3163,7 +3382,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "急救包",
@@ -3174,7 +3394,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "折疊鋸",
@@ -3185,7 +3406,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "背包",
@@ -3196,7 +3418,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "折疊梯",
@@ -3207,7 +3430,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "保溫毯",
@@ -3218,7 +3442,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "胡椒噴霧",
@@ -3229,7 +3454,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "撬棍",
@@ -3240,7 +3466,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "伸縮棍",
@@ -3251,7 +3478,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "防毒面具",
@@ -3262,7 +3490,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "手電筒",
@@ -3273,7 +3502,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "哨子",
@@ -3284,7 +3514,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "百科全書",
@@ -3295,7 +3526,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "冰箱",
@@ -3306,7 +3538,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "鋁箔紙",
@@ -3317,7 +3550,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "熱水瓶",
@@ -3328,7 +3562,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "小型鎖頭",
@@ -3339,7 +3574,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "防水袋",
@@ -3350,7 +3586,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "手套",
@@ -3361,7 +3598,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "安全帽",
@@ -3372,7 +3610,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "針線包",
@@ -3383,7 +3622,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "布條",
@@ -3394,7 +3634,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "鏡子",
@@ -3405,7 +3646,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "折疊桌",
@@ -3416,7 +3658,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "舊手機",
@@ -3427,7 +3670,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "空玻璃瓶",
@@ -3438,7 +3682,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "罐頭開罐器",
@@ -3449,7 +3694,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "保鮮膜",
@@ -3460,7 +3706,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "醫療手冊",
@@ -3471,7 +3718,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "地圖",
@@ -3482,7 +3730,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "雨衣",
@@ -3493,7 +3742,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "反光背心",
@@ -3504,7 +3754,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "手錶",
@@ -3515,7 +3766,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "太陽能充電板",
@@ -3526,7 +3778,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "粉筆",
@@ -3537,7 +3790,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "衛生紙",
@@ -3548,7 +3802,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "肥皂",
@@ -3559,7 +3814,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "蠟燭",
@@ -3570,7 +3826,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "小鏡頭攝影機",
@@ -3581,7 +3838,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "醫療夾板",
@@ -3592,7 +3850,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "雨鞋",
@@ -3603,7 +3862,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "防水筆",
@@ -3614,7 +3874,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "擴音器",
@@ -3625,7 +3886,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "滑輪組",
@@ -3636,7 +3898,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "折疊水桶",
@@ -3647,7 +3910,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "釣魚線",
@@ -3658,7 +3922,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "望遠鏡頭",
@@ -3669,7 +3934,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "筆記本",
@@ -3680,7 +3946,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "行動電源",
@@ -3691,7 +3958,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "船槳",
@@ -3702,7 +3970,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "小型濾網",
@@ -3713,7 +3982,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "雨傘",
@@ -3724,7 +3994,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "口罩",
@@ -3735,7 +4006,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "指南旗",
@@ -3746,7 +4018,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "B",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "折疊椅",
@@ -3757,7 +4030,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "C",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "密碼鎖箱",
@@ -3768,7 +4042,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "C",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "小型投影機",
@@ -3779,7 +4054,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "C",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "捕鼠夾",
@@ -3790,7 +4066,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "C",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "磁鐵",
@@ -3801,7 +4078,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "C",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "塑膠水管",
@@ -3812,7 +4090,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "C",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "滑板",
@@ -3823,7 +4102,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "C",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "小風扇",
@@ -3834,7 +4114,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "C",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "紙牌",
@@ -3845,7 +4126,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "C",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "微型顯微鏡",
@@ -3856,7 +4138,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "C",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "彈珠",
@@ -3867,7 +4150,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "",
         "image": "",
         "rarity": "C",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "花瓶",
@@ -3881,7 +4165,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "茶包",
@@ -3895,7 +4180,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "鉛筆",
@@ -3909,7 +4195,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "貼紙包",
@@ -3923,7 +4210,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "圍巾",
@@ -3937,7 +4225,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "餐墊",
@@ -3951,7 +4240,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "耳機",
@@ -3965,7 +4255,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "棋盤",
@@ -3979,7 +4270,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "木梳",
@@ -3993,7 +4285,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "餅乾禮盒",
@@ -4007,7 +4300,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "香氛卡片",
@@ -4021,7 +4315,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "髮夾",
@@ -4035,7 +4330,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "鑰匙圈",
@@ -4049,7 +4345,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "皮衣",
@@ -4063,7 +4360,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "巧克力",
@@ -4077,7 +4375,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "行李箱",
@@ -4091,7 +4390,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "明信片",
@@ -4105,7 +4405,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "果醬",
@@ -4119,7 +4420,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "香水",
@@ -4133,7 +4435,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "電動牙刷",
@@ -4147,7 +4450,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "手帳",
@@ -4161,7 +4465,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "折疊購物袋",
@@ -4175,7 +4480,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "鬧鐘",
@@ -4189,7 +4495,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "項鍊",
@@ -4203,7 +4510,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "便當盒",
@@ -4217,7 +4525,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "桌燈",
@@ -4231,7 +4540,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "拼圖",
@@ -4245,7 +4555,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "毛毯",
@@ -4259,7 +4570,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "盆栽",
@@ -4273,7 +4585,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "絨毛玩具",
@@ -4287,7 +4600,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "相冊",
@@ -4301,7 +4615,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "靠枕",
@@ -4315,7 +4630,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "皮革筆袋",
@@ -4329,7 +4645,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "皮夾",
@@ -4343,7 +4660,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "陶瓷碗",
@@ -4357,7 +4675,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "咖啡杯",
@@ -4371,7 +4690,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "鋼筆",
@@ -4385,7 +4705,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "桌曆",
@@ -4399,7 +4720,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "手工皂",
@@ -4413,7 +4735,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "球鞋",
@@ -4427,7 +4750,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "帽T",
@@ -4441,7 +4765,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "旅行枕",
@@ -4455,7 +4780,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "畫框",
@@ -4469,7 +4795,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "名片夾",
@@ -4483,7 +4810,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "金屬書籤",
@@ -4497,7 +4825,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "保溫杯",
@@ -4511,7 +4840,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "戒指",
@@ -4525,7 +4855,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "唱片",
@@ -4539,7 +4870,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "帆布袋",
@@ -4553,7 +4885,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "太陽眼鏡",
@@ -4567,7 +4900,8 @@ window.DEBATE_DECKS = {
         "tags": [
           "銷售",
           "N卡"
-        ]
+        ],
+        "challenges": []
       }
     ]
   },
@@ -4584,7 +4918,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🐶",
         "image": "../assets/cards/生物卡/狗狗.png?v=641220bf10",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "貓貓",
@@ -4595,7 +4930,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🐱",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "熊貓",
@@ -4606,7 +4942,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🐼",
         "image": "../assets/cards/生物卡/熊貓.png?v=05638e926b",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "大象",
@@ -4617,7 +4954,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🐘",
         "image": "../assets/cards/生物卡/大象.png?v=5aa4aac499",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "老鷹",
@@ -4628,7 +4966,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🦅",
         "image": "../assets/cards/生物卡/老鷹.png?v=5efbf77150",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "章魚",
@@ -4639,7 +4978,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🐙",
         "image": "../assets/cards/生物卡/章魚.png?v=9a94f1947b",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "蜜蜂",
@@ -4650,7 +4990,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🐝",
         "image": "../assets/cards/生物卡/蜜蜂.png?v=70dec27b56",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "駱駝",
@@ -4661,7 +5002,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🐪",
         "image": "../assets/cards/生物卡/駱駝.png?v=db9d2f0f9a",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "海豚",
@@ -4672,7 +5014,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🐬",
         "image": "../assets/cards/生物卡/海豚.png?v=59bbe89808",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "烏龜",
@@ -4683,7 +5026,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🐢",
         "image": "../assets/cards/生物卡/烏龜.png?v=601b2ca1d2",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "狼",
@@ -4694,7 +5038,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🐺",
         "image": "../assets/cards/生物卡/狼.png?v=bded45336b",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "企鵝",
@@ -4705,7 +5050,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🐧",
         "image": "../assets/cards/生物卡/企鵝.png?v=2842cc62d9",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "馬",
@@ -4716,7 +5062,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🐴",
         "image": "../assets/cards/生物卡/馬.png?v=e584f86986",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "松鼠",
@@ -4727,7 +5074,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🐿️",
         "image": "../assets/cards/生物卡/松鼠.png?v=0bf19ae6e0",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "貓頭鷹",
@@ -4738,7 +5086,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🦉",
         "image": "../assets/cards/生物卡/貓頭鷹.png?v=7d444341a6",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "袋鼠",
@@ -4749,7 +5098,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🦘",
         "image": "../assets/cards/生物卡/袋鼠.png?v=89f18712f2",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "獅子",
@@ -4760,7 +5110,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🦁",
         "image": "../assets/cards/生物卡/獅子.png?v=4d16496025",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "長頸鹿",
@@ -4771,7 +5122,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🦒",
         "image": "../assets/cards/生物卡/長頸鹿.png?v=acd3fcfaea",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "犀牛",
@@ -4782,7 +5134,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🦏",
         "image": "../assets/cards/生物卡/犀牛.png?v=601759274d",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "河馬",
@@ -4793,7 +5146,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🦛",
         "image": "../assets/cards/生物卡/河馬.png?v=1ac5d632fe",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "樹懶",
@@ -4804,7 +5158,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🦥",
         "image": "../assets/cards/生物卡/樹懶.png?v=cdccc0aa91",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "水獺",
@@ -4815,7 +5170,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🦦",
         "image": "../assets/cards/生物卡/水獺.png?v=19cae9fc98",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "鸚鵡",
@@ -4826,7 +5182,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🦜",
         "image": "../assets/cards/生物卡/鸚鵡.png?v=0711223927",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "孔雀",
@@ -4837,7 +5194,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🦚",
         "image": "../assets/cards/生物卡/孔雀.png?v=89d7050d33",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "天鵝",
@@ -4848,7 +5206,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🦢",
         "image": "../assets/cards/生物卡/天鵝.png?v=f80065b094",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "蜥蜴",
@@ -4859,7 +5218,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🦎",
         "image": "../assets/cards/生物卡/蜥蜴.png?v=08d394a037",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "鯊魚",
@@ -4870,7 +5230,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🦈",
         "image": "../assets/cards/生物卡/鯊魚.png?v=8b49cdac80",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "蝴蝶",
@@ -4881,7 +5242,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🦋",
         "image": "../assets/cards/生物卡/蝴蝶.png?v=d80edb102a",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       }
     ]
   },
@@ -4902,6 +5264,11 @@ window.DEBATE_DECKS = {
           "危機",
           "城市",
           "生存"
+        ],
+        "challenges": [
+          "生存第一天：尋找到安全且有水源的安全屋",
+          "生存第十天：建立移動方針且能拓展搜索能力",
+          "生存第三十天：尋求撤離方案或建立可庇護他人之處所"
         ]
       },
       {
@@ -4917,7 +5284,8 @@ window.DEBATE_DECKS = {
           "科幻",
           "探索",
           "未知"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "遠古叢林",
@@ -4932,7 +5300,8 @@ window.DEBATE_DECKS = {
           "自然",
           "野外",
           "潮濕"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "炙熱沙漠",
@@ -4947,7 +5316,8 @@ window.DEBATE_DECKS = {
           "乾旱",
           "高溫",
           "野外"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "無人島",
@@ -4962,7 +5332,8 @@ window.DEBATE_DECKS = {
           "海島",
           "求救",
           "長期"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "極地冰原",
@@ -4977,7 +5348,8 @@ window.DEBATE_DECKS = {
           "寒冷",
           "極地",
           "低溫"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "地下洞穴",
@@ -4992,7 +5364,8 @@ window.DEBATE_DECKS = {
           "黑暗",
           "地形",
           "封閉"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "廢棄醫院",
@@ -5007,7 +5380,8 @@ window.DEBATE_DECKS = {
           "城市",
           "醫療",
           "驚悚"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "暴雨山區",
@@ -5022,7 +5396,8 @@ window.DEBATE_DECKS = {
           "山地",
           "暴雨",
           "失溫"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "太空船",
@@ -5037,7 +5412,8 @@ window.DEBATE_DECKS = {
           "科幻",
           "封閉",
           "資源"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "海底基地",
@@ -5052,7 +5428,8 @@ window.DEBATE_DECKS = {
           "海洋",
           "封閉",
           "高壓"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "火山邊緣",
@@ -5067,7 +5444,8 @@ window.DEBATE_DECKS = {
           "高溫",
           "災害",
           "地形"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "中世紀城堡",
@@ -5082,7 +5460,8 @@ window.DEBATE_DECKS = {
           "歷史",
           "防守",
           "封閉"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "未來都市",
@@ -5097,7 +5476,8 @@ window.DEBATE_DECKS = {
           "城市",
           "科幻",
           "科技"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "巨型迷宮",
@@ -5112,7 +5492,8 @@ window.DEBATE_DECKS = {
           "推理",
           "地形",
           "迷失"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "鬧鬼校園",
@@ -5127,7 +5508,8 @@ window.DEBATE_DECKS = {
           "日常",
           "夜晚",
           "校園"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "古代戰場",
@@ -5142,7 +5524,8 @@ window.DEBATE_DECKS = {
           "歷史",
           "衝突",
           "野外"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "豪華郵輪",
@@ -5157,7 +5540,8 @@ window.DEBATE_DECKS = {
           "海洋",
           "交通",
           "室內"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "雲端城市",
@@ -5172,7 +5556,8 @@ window.DEBATE_DECKS = {
           "科幻",
           "高空",
           "城市"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "失控實驗室",
@@ -5187,7 +5572,8 @@ window.DEBATE_DECKS = {
           "科學",
           "危機",
           "室內"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "漂流木筏",
@@ -5202,7 +5588,8 @@ window.DEBATE_DECKS = {
           "水域",
           "求生",
           "限制"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "天星隕落",
@@ -5217,7 +5604,8 @@ window.DEBATE_DECKS = {
           "危機",
           "城市",
           "倒數"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "原始部落",
@@ -5232,7 +5620,8 @@ window.DEBATE_DECKS = {
           "水域",
           "求生",
           "限制"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "遊戲世界",
@@ -5247,7 +5636,8 @@ window.DEBATE_DECKS = {
           "水域",
           "求生",
           "限制"
-        ]
+        ],
+        "challenges": []
       }
     ]
   },
@@ -5264,7 +5654,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🪖",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "醫生",
@@ -5275,7 +5666,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🩺",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "工程師",
@@ -5286,7 +5678,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "⚙️",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "廚師",
@@ -5297,7 +5690,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "👨‍🍳",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "老師",
@@ -5308,7 +5702,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🍎",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "消防員",
@@ -5319,7 +5714,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🚒",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "農夫",
@@ -5330,7 +5726,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🌾",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "律師",
@@ -5341,7 +5738,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "⚖️",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "心理師",
@@ -5352,7 +5750,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🧠",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "記者",
@@ -5363,7 +5762,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "📰",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "程式設計師",
@@ -5374,7 +5774,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "💻",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "建築師",
@@ -5385,7 +5786,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "📐",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "護理師",
@@ -5396,7 +5798,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "💉",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "警察",
@@ -5407,7 +5810,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "👮",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "翻譯員",
@@ -5418,7 +5822,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🌐",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "植物學家",
@@ -5429,7 +5834,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🌿",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "天文學家",
@@ -5440,7 +5846,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🔭",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "機師",
@@ -5451,7 +5858,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "✈️",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "商人",
@@ -5462,7 +5870,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "💼",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "藝術家",
@@ -5473,7 +5882,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🎨",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "運動員",
@@ -5484,7 +5894,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🏅",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "導遊",
@@ -5495,7 +5906,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🗺️",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "科學家",
@@ -5506,7 +5918,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🔬",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "水電工",
@@ -5517,7 +5930,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🔧",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       },
       {
         "name": "社工",
@@ -5528,7 +5942,8 @@ window.DEBATE_DECKS = {
         "tokenIcon": "🤝",
         "image": "",
         "rarity": "A",
-        "tags": []
+        "tags": [],
+        "challenges": []
       }
     ]
   },
@@ -5549,7 +5964,8 @@ window.DEBATE_DECKS = {
           "等同",
           "本質",
           "比喻"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "等於",
@@ -5564,7 +5980,8 @@ window.DEBATE_DECKS = {
           "等同",
           "本質",
           "定義"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "導致",
@@ -5579,7 +5996,8 @@ window.DEBATE_DECKS = {
           "因果",
           "結果",
           "推動"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "來自",
@@ -5594,7 +6012,8 @@ window.DEBATE_DECKS = {
           "來源",
           "因果",
           "前提"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "促進",
@@ -5609,7 +6028,8 @@ window.DEBATE_DECKS = {
           "增強",
           "因果",
           "推進"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "勝於",
@@ -5624,7 +6044,8 @@ window.DEBATE_DECKS = {
           "比較",
           "優先",
           "標準"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "不如",
@@ -5639,7 +6060,8 @@ window.DEBATE_DECKS = {
           "比較",
           "取捨",
           "標準"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "定義",
@@ -5654,7 +6076,8 @@ window.DEBATE_DECKS = {
           "定義",
           "邊界",
           "判準"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "代表",
@@ -5669,7 +6092,8 @@ window.DEBATE_DECKS = {
           "定義",
           "象徵",
           "意義"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "幫助",
@@ -5684,7 +6108,8 @@ window.DEBATE_DECKS = {
           "功能",
           "支持",
           "推動"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "補足",
@@ -5699,7 +6124,8 @@ window.DEBATE_DECKS = {
           "功能",
           "互補",
           "完整"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "支持",
@@ -5714,7 +6140,8 @@ window.DEBATE_DECKS = {
           "功能",
           "支援",
           "力量"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "阻礙",
@@ -5729,7 +6156,8 @@ window.DEBATE_DECKS = {
           "對立",
           "阻止",
           "衝突"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "削弱",
@@ -5744,7 +6172,8 @@ window.DEBATE_DECKS = {
           "對立",
           "減弱",
           "影響"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "破壞",
@@ -5759,7 +6188,8 @@ window.DEBATE_DECKS = {
           "對立",
           "破壞",
           "衝突"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "需要",
@@ -5774,7 +6204,8 @@ window.DEBATE_DECKS = {
           "條件",
           "前提",
           "依賴"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "依賴",
@@ -5789,7 +6220,8 @@ window.DEBATE_DECKS = {
           "條件",
           "依存",
           "前提"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "就像",
@@ -5804,7 +6236,8 @@ window.DEBATE_DECKS = {
           "象徵",
           "相似",
           "隱喻"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "象徵",
@@ -5819,7 +6252,8 @@ window.DEBATE_DECKS = {
           "象徵",
           "意涵",
           "代表"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "映照",
@@ -5834,7 +6268,8 @@ window.DEBATE_DECKS = {
           "象徵",
           "反映",
           "隱喻"
-        ]
+        ],
+        "challenges": []
       },
       {
         "name": "改變",
@@ -5847,7 +6282,8 @@ window.DEBATE_DECKS = {
         "rarity": "A",
         "tags": [
           "變化"
-        ]
+        ],
+        "challenges": []
       }
     ]
   }

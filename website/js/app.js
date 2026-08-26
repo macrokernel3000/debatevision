@@ -1452,6 +1452,7 @@ window.DebateVisionMobileApi = {
   mobileDeckCards,
   mobileDeckTarget,
   mobileResourceKey,
+  openMobileArtPreview,
   openMobileCardModal,
   renderAll,
   renderMobileHome,
@@ -1673,8 +1674,9 @@ if (scenePreview) {
 
 reel.addEventListener("click", (event) => {
   if (!EDIT_MODE) {
-    if (!isMobileAppView() && drawState.stageCard && !event.target.closest("button")) {
-      desktopCardDetailView.open(drawState.stageCard, reel);
+    if (drawState.stageCard && !event.target.closest("button")) {
+      if (isMobileAppView()) openMobileArtPreview(drawState.stageCard);
+      else desktopCardDetailView.open(drawState.stageCard, reel);
     }
     return;
   }

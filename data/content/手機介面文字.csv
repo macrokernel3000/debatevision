@@ -75,7 +75,7 @@ mobile.metaphor.suffixDeck,metaphor-compass,卡組設定,後綴詞,後綴卡組�
 mobile.secret.deckRail,where-am-i,卡組設定,選擇秘密詞庫,推理解密詞庫列說明
 mobile.dictionary.deckHeading,card-dictionary,卡組設定,先勾選卡片類型,卡片字典第一步提示
 mobile.dictionary.title,card-dictionary,頁面標題,卡片字典,卡片字典標題
-mobile.dictionary.intro,card-dictionary,頁面說明,先勾選想使用的卡片類型，再從各卡池中直接挑選本場要用的卡，方便老師臨時設計自己的活動。,卡片字典簡介
+mobile.dictionary.intro,card-dictionary,頁面說明,先勾選想使用的卡片類型，再從各卡池中直接挑選本場要用的卡，方便臨時設計自己的活動。,卡片字典簡介
 mobile.dictionary.emptyPicker,card-dictionary,選卡區,選擇卡片類型後，這裡會列出可加入本場的卡。,尚未選擇卡組時提示
 mobile.dictionary.selectedHeading,card-dictionary,已選區,本場已選,已選卡牌標題
 mobile.dictionary.selectedEmpty,card-dictionary,已選區,還沒有選卡。可以跨卡池加入多張。,尚未選卡提示

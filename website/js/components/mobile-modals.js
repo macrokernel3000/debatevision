@@ -19,6 +19,35 @@
     } = options;
     let editingDeck = "";
 
+    function escapeHtml(value) {
+      return String(value || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;");
+    }
+
+    function challengeDetailMarkup(card) {
+      const challenges = Array.isArray(card.challenges) ? card.challenges : [];
+      return `
+        <section class="mobile-art-intro" aria-label="卡片介紹">
+          <h3>卡片介紹</h3>
+          <p>${escapeHtml(card.lore)}</p>
+        </section>
+        ${challenges.length ? `
+          <section class="mobile-art-challenges" aria-label="異境挑戰">
+            <h3>異境挑戰</h3>
+            <ol>
+              ${challenges.map((challenge) => {
+                const [title, ...details] = challenge.split("：");
+                return `<li><strong>${escapeHtml(title)}</strong><span>${escapeHtml(details.join("："))}</span></li>`;
+              }).join("")}
+            </ol>
+          </section>
+        ` : ""}
+      `;
+    }
+
     function renderCardModal() {
       if (!cardModal || !editingDeck) return;
       const { baseDeck, rarity } = deckTarget(editingDeck);
@@ -72,7 +101,10 @@
       const image = imageService.imageForCard(card);
       if (!image) return;
       artTitle.textContent = card.name;
-      artPreview.innerHTML = `<img src="${image}" alt="${card.name} 全圖" ${imageService.managedAttributes(image, imageService.fallbackForCard(card))} />`;
+      artPreview.innerHTML = `
+        <img src="${image}" alt="${card.name} 全圖" ${imageService.managedAttributes(image, imageService.fallbackForCard(card))} />
+        ${challengeDetailMarkup(card)}
+      `;
       artModal.hidden = false;
     }
 

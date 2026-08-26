@@ -117,7 +117,21 @@ async function run() {
         }
         click('[data-mode="card-dictionary"]');
         if (document.body.dataset.activeMode !== "card-dictionary") return problems;
-        click('[data-mode="item-survival"]'); click("#drawButton");
+        click(${size.width <= 560 ? `'[data-mobile-home-mode="item-survival"]'` : `'[data-mode="item-survival"]'`});
+        click("#drawButton");
+        if (${size.width <= 560}) {
+          const api = window.DebateVisionMobileApi;
+          const zombie = api?.mobileDeckCards("worlds").find((card) => card.name === "殭屍末日");
+          if (!zombie) problems.push("mobile-world-detail: zombie-missing");
+          else {
+            api.openMobileArtPreview(zombie);
+            const preview = document.querySelector("#mobileArtModal");
+            if (preview?.hidden) problems.push("mobile-world-detail: modal-closed");
+            if (!document.querySelector(".mobile-art-intro")) problems.push("mobile-world-detail: intro-missing");
+            if (document.querySelectorAll(".mobile-art-challenges li").length !== 3) problems.push("mobile-world-detail: challenges-missing");
+            click("[data-mobile-art-close]");
+          }
+        }
         const exportButton = document.querySelector("[data-history-export]");
         let exported = false;
         const originalClick = HTMLAnchorElement.prototype.click;

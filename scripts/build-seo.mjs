@@ -142,7 +142,7 @@ function modePage(mode, seo, allPages) {
       </div>
       <section class="seo-more"><h2>更多思辨活動</h2><div class="seo-more-grid">${more}</div></section>
     </main>
-    <footer class="seo-footer"><div class="seo-shell">辯語視界 DebateVision｜給老師與教練使用的思辨教育活動工具</div></footer>
+    <footer class="seo-footer"><div class="seo-shell">辯語視界 DebateVision｜給所有人使用的思辨活動工具</div></footer>
   </body>
 </html>\n`;
 }

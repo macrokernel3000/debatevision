@@ -107,7 +107,7 @@ window.DEBATE_UI_TEXTS = {
   "mobile.secret.deckRail": "選擇秘密詞庫",
   "mobile.dictionary.deckHeading": "先勾選卡片類型",
   "mobile.dictionary.title": "卡片字典",
-  "mobile.dictionary.intro": "先勾選想使用的卡片類型，再從各卡池中直接挑選本場要用的卡，方便老師臨時設計自己的活動。",
+  "mobile.dictionary.intro": "先勾選想使用的卡片類型，再從各卡池中直接挑選本場要用的卡，方便臨時設計自己的活動。",
   "mobile.dictionary.emptyPicker": "選擇卡片類型後，這裡會列出可加入本場的卡。",
   "mobile.dictionary.selectedHeading": "本場已選",
   "mobile.dictionary.selectedEmpty": "還沒有選卡。可以跨卡池加入多張。",
