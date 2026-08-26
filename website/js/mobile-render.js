@@ -96,12 +96,15 @@
       const relationImage = groups.fixedRelation?.image || groups.fixedRelation?.iconAsset || groups.relationCover?.image || "";
       return `
         <div class="mobile-metaphor-deck-layout is-concrete">
-          <div class="mobile-metaphor-deck-group is-fixed-prefix">
-            <span>前綴</span>
-            <div class="mobile-metaphor-fixed-phrase" aria-label="固定前綴：人生">
-              <span class="mobile-metaphor-fixed-art">${prefixImage ? `<img src="${prefixImage}" alt="" aria-hidden="true" />` : "🧭"}</span>
-              <strong>人生</strong>
-            </div>
+            <div class="mobile-metaphor-deck-group is-fixed-prefix">
+              <span>前綴</span>
+              <label class="mobile-metaphor-life-lock"><input type="checkbox" data-mobile-metaphor-life-lock ${state.lifePrefixLocked ? "checked" : ""} />固定抽到人生</label>
+              ${state.lifePrefixLocked ? `
+              <div class="mobile-metaphor-fixed-phrase" aria-label="固定前綴：人生">
+                <span class="mobile-metaphor-fixed-art">${prefixImage ? `<img src="${prefixImage}" alt="" aria-hidden="true" />` : "🧭"}</span>
+                <strong>人生</strong>
+              </div>
+              ` : metaphorDeckGroup("前綴詞", [{ deckId: "concepts", title: "概念卡", selected: true, cover: { image: "", symbol: "◇" } }], state, "prefix")}
           </div>
           <div class="mobile-metaphor-deck-group is-fixed-relation">
             <span>介係</span>
@@ -304,6 +307,7 @@
   function resultActions(state) {
     return state.active
       ? `
+        <p class="mobile-result-guide" role="status">先查看卡牌；要保留重要結果，請按卡片上的「鎖定」。不滿意時可局部重新抽取，或重新開始一場。</p>
         <button type="button" class="mobile-resource-exchange" data-mobile-partial-redraw>
           <strong>${state.partialLabel}</strong>
           <span>${state.partialDescription}</span>

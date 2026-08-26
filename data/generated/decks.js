@@ -6,11 +6,11 @@ window.DEBATE_DECKS = {
       {
         "name": "賺大錢",
         "lore": "在現實世界合法賺到大量金錢，必須說清楚商業模式、客戶、成本與風險。",
-        "imageId": "💰",
+        "imageId": "missions_01",
         "icon": "💰",
         "iconAsset": "",
         "tokenIcon": "💰",
-        "image": "",
+        "image": "../assets/icons/missions/missions_01.png?v=276dfae1f4",
         "rarity": "A",
         "tags": [
           "財富",
@@ -21,11 +21,11 @@ window.DEBATE_DECKS = {
       {
         "name": "開公司做產品",
         "lore": "成立一間能活下來的公司，並做出一個有人願意使用或購買的產品；必須決定痛點、客戶、團隊、成本與第一批訂單。",
-        "imageId": "🏢",
+        "imageId": "missions_02",
         "icon": "🏢",
         "iconAsset": "",
         "tokenIcon": "🏢",
-        "image": "",
+        "image": "../assets/icons/missions/missions_02.png?v=a4436315f7",
         "rarity": "A",
         "tags": [
           "創業",
@@ -36,11 +36,11 @@ window.DEBATE_DECKS = {
       {
         "name": "拍電影",
         "lore": "完成一部能被觀眾看見的電影，必須處理劇本、資金、演員、宣傳與審查。",
-        "imageId": "🎬",
+        "imageId": "missions_03",
         "icon": "🎬",
         "iconAsset": "",
         "tokenIcon": "🎬",
-        "image": "",
+        "image": "../assets/icons/missions/missions_03.png?v=f419a011f4",
         "rarity": "B",
         "tags": [
           "創作",
@@ -51,11 +51,11 @@ window.DEBATE_DECKS = {
       {
         "name": "上學",
         "lore": "進入學校並完成一段學習任務，必須面對規範、人際、作業與考試。",
-        "imageId": "🎒",
+        "imageId": "missions_04",
         "icon": "🎒",
         "iconAsset": "",
         "tokenIcon": "🎒",
-        "image": "",
+        "image": "../assets/icons/missions/missions_04.png?v=4bfa52a0d8",
         "rarity": "C",
         "tags": [
           "學習",
@@ -66,11 +66,11 @@ window.DEBATE_DECKS = {
       {
         "name": "治理城市",
         "lore": "讓一座城市變得更安全、有效率且讓居民願意支持，必須處理交通、治安、預算與民意。",
-        "imageId": "🏛️",
+        "imageId": "missions_05",
         "icon": "🏛️",
         "iconAsset": "",
         "tokenIcon": "🏛️",
-        "image": "",
+        "image": "../assets/icons/missions/missions_05.png?v=a0062ff63a",
         "rarity": "A",
         "tags": [
           "治理",
@@ -81,11 +81,11 @@ window.DEBATE_DECKS = {
       {
         "name": "當網紅",
         "lore": "在網路上建立影響力，必須決定人設、內容節奏、平台規則與公眾壓力。",
-        "imageId": "📱",
+        "imageId": "missions_06-v2",
         "icon": "📱",
         "iconAsset": "",
         "tokenIcon": "📱",
-        "image": "",
+        "image": "../assets/icons/missions/missions_06-v2.png?v=c74c0b8b65",
         "rarity": "B",
         "tags": [
           "媒體",
@@ -96,11 +96,11 @@ window.DEBATE_DECKS = {
       {
         "name": "救一間學校",
         "lore": "讓一間混亂或快倒閉的學校重新運作，必須處理學生、老師、家長與資源。",
-        "imageId": "🏫",
+        "imageId": "missions_07",
         "icon": "🏫",
         "iconAsset": "",
         "tokenIcon": "🏫",
-        "image": "",
+        "image": "../assets/icons/missions/missions_07.png?v=dc9ff96e17",
         "rarity": "B",
         "tags": [
           "教育",
@@ -111,11 +111,11 @@ window.DEBATE_DECKS = {
       {
         "name": "贏得選舉",
         "lore": "取得足夠選票與信任，必須提出政見、建立形象、回應攻擊並組織支持者。",
-        "imageId": "🗳️",
+        "imageId": "missions_08",
         "icon": "🗳️",
         "iconAsset": "",
         "tokenIcon": "🗳️",
-        "image": "",
+        "image": "../assets/icons/missions/missions_08.png?v=5da72f931d",
         "rarity": "A",
         "tags": [
           "政治",
@@ -126,11 +126,11 @@ window.DEBATE_DECKS = {
       {
         "name": "經營餐廳",
         "lore": "讓餐廳穩定賺錢並被顧客喜歡，必須做出招牌料理，處理菜單、衛生、服務、租金與口碑。",
-        "imageId": "🍽️",
+        "imageId": "missions_09",
         "icon": "🍽️",
         "iconAsset": "",
         "tokenIcon": "🍽️",
-        "image": "",
+        "image": "../assets/icons/missions/missions_09.png?v=ccb4e5f943",
         "rarity": "C",
         "tags": [
           "服務",
@@ -141,11 +141,11 @@ window.DEBATE_DECKS = {
       {
         "name": "成立社團",
         "lore": "讓一群人願意固定參加，必須設計活動、分工、招募與共同目標。",
-        "imageId": "🤝",
+        "imageId": "missions_10",
         "icon": "🤝",
         "iconAsset": "",
         "tokenIcon": "🤝",
-        "image": "",
+        "image": "../assets/icons/missions/missions_10.png?v=34c7b2e521",
         "rarity": "C",
         "tags": [
           "群體",
@@ -156,11 +156,11 @@ window.DEBATE_DECKS = {
       {
         "name": "修復名聲",
         "lore": "從被懷疑或討厭的狀態重新取得信任，必須面對錯誤、證據、道歉與行動。",
-        "imageId": "🪞",
+        "imageId": "missions_11",
         "icon": "🪞",
         "iconAsset": "",
         "tokenIcon": "🪞",
-        "image": "",
+        "image": "../assets/icons/missions/missions_11.png?v=71006aa95e",
         "rarity": "B",
         "tags": [
           "信任",
@@ -171,11 +171,11 @@ window.DEBATE_DECKS = {
       {
         "name": "隱居現代城市",
         "lore": "在高度監控、人口密集、消費便利的現代化城市中低調生活，必須處理住所、金錢、身分、網路足跡與鄰居注意。",
-        "imageId": "🏙️",
+        "imageId": "missions_12",
         "icon": "🏙️",
         "iconAsset": "",
         "tokenIcon": "🏙️",
-        "image": "",
+        "image": "../assets/icons/missions/missions_12.png?v=396c633a23",
         "rarity": "B",
         "tags": [
           "城市",
@@ -186,11 +186,11 @@ window.DEBATE_DECKS = {
       {
         "name": "找產品代言",
         "lore": "替一個產品找到合適代言方式，必須判斷品牌形象、目標客群、可信度、曝光管道與翻車風險。",
-        "imageId": "📣",
+        "imageId": "missions_13",
         "icon": "📣",
         "iconAsset": "",
         "tokenIcon": "📣",
-        "image": "",
+        "image": "../assets/icons/missions/missions_13.png?v=b84219bbe4",
         "rarity": "B",
         "tags": [
           "行銷",
@@ -201,11 +201,11 @@ window.DEBATE_DECKS = {
       {
         "name": "參加運動",
         "lore": "加入一項現代運動並取得成績或人氣，必須處理規則、訓練、隊友、裁判與公平競爭。",
-        "imageId": "🏅",
+        "imageId": "missions_14",
         "icon": "🏅",
         "iconAsset": "",
         "tokenIcon": "🏅",
-        "image": "",
+        "image": "../assets/icons/missions/missions_14.png?v=465473ec45",
         "rarity": "C",
         "tags": [
           "運動",
@@ -216,11 +216,11 @@ window.DEBATE_DECKS = {
       {
         "name": "寫一本書",
         "lore": "完成一本能被讀者理解並願意閱讀的書，必須決定主題、讀者、章節、寫作節奏與出版方式。",
-        "imageId": "📚",
+        "imageId": "missions_15",
         "icon": "📚",
         "iconAsset": "",
         "tokenIcon": "📚",
-        "image": "",
+        "image": "../assets/icons/missions/missions_15.png?v=50f19ebfa1",
         "rarity": "B",
         "tags": [
           "創作",
@@ -231,11 +231,11 @@ window.DEBATE_DECKS = {
       {
         "name": "幫助他人",
         "lore": "真正改善某個人的處境，必須先判斷對方需要什麼，再處理資源、方法、尊重與長期效果。",
-        "imageId": "🫶",
+        "imageId": "missions_16",
         "icon": "🫶",
         "iconAsset": "",
         "tokenIcon": "🫶",
-        "image": "",
+        "image": "../assets/icons/missions/missions_16.png?v=dfc15b7008",
         "rarity": "C",
         "tags": [
           "助人",
@@ -246,11 +246,11 @@ window.DEBATE_DECKS = {
       {
         "name": "尋找夥伴",
         "lore": "找到願意一起行動的可靠夥伴，必須說清楚要去哪裡找、如何開口、如何篩選，以及如何建立信任。",
-        "imageId": "🧭",
+        "imageId": "missions_17",
         "icon": "🧭",
         "iconAsset": "",
         "tokenIcon": "🧭",
-        "image": "",
+        "image": "../assets/icons/missions/missions_17.png?v=16085c4a19",
         "rarity": "B",
         "tags": [
           "合作",
@@ -261,11 +261,11 @@ window.DEBATE_DECKS = {
       {
         "name": "跟人類談判",
         "lore": "和現代人類談判取得合作、資源或通行權，必須理解對方利益、恐懼、規則與可以交換的籌碼。",
-        "imageId": "🤝",
+        "imageId": "missions_18",
         "icon": "🤝",
         "iconAsset": "",
         "tokenIcon": "🤝",
-        "image": "",
+        "image": "../assets/icons/missions/missions_18.png?v=54c503d6a0",
         "rarity": "A",
         "tags": [
           "談判",

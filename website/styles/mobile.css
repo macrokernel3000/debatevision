@@ -1030,7 +1030,7 @@
     margin: 16px 0 0;
   }
 
-  .history-panel {
+.history-panel {
     display: none;
   }
 
@@ -1839,6 +1839,17 @@
   body[data-active-mode="where-am-i"] .secret-place-option span {
     font-size: 0.68rem;
   }
+}
+
+.mobile-result-guide {
+  margin: 0.75rem 0;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--line, #d8d2c7);
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--ink-muted, #5f6470);
+  font-size: 0.86rem;
+  line-height: 1.45;
 }
 
 @media (max-width: 360px) {

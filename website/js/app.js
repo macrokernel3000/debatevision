@@ -34,6 +34,7 @@ const metaphorState = window.DEBATE_STATE.create({
   variant: "concrete",
   prefixDeck: "",
   suffixDeck: "",
+  lifePrefixLocked: true,
   locks: { prefix: false, relation: false, suffix: false },
   currentCards: null
 });
@@ -682,12 +683,12 @@ function syncMetaphorVariantDecks() {
     delete resultLocks.cards[slot];
   });
   if (metaphorState.variant === "concrete") {
-    metaphorState.prefixDeck = "";
+    metaphorState.prefixDeck = "concepts";
     metaphorState.suffixDeck = metaphorConcreteDeckOptions().includes(metaphorState.suffixDeck)
       ? metaphorState.suffixDeck
       : metaphorConcreteDeckOptions()[0] || "";
-    metaphorState.locks = { prefix: true, relation: true, suffix: false };
-    activePreview = metaphorState.suffixDeck || activeSecondaryLibrary;
+    metaphorState.locks = { prefix: metaphorState.lifePrefixLocked, relation: true, suffix: false };
+    activePreview = metaphorState.lifePrefixLocked ? metaphorState.suffixDeck || activeSecondaryLibrary : metaphorState.prefixDeck;
     return;
   }
 
@@ -1159,6 +1160,8 @@ function createModeContext(count = activeMode.fixedCount || Math.max(1, Math.min
     get lockEnvironment() { return survivalState.lockEnvironment; },
     get noEnvironment() { return survivalState.noEnvironment; },
     get metaphorVariant() { return metaphorState.variant; },
+    set metaphorLifePrefixLocked(value) { metaphorState.lifePrefixLocked = Boolean(value); },
+    get metaphorLifePrefixLocked() { return metaphorState.lifePrefixLocked; },
     get metaphorPrefixDeck() { return metaphorState.prefixDeck; },
     get metaphorSuffixDeck() { return metaphorState.suffixDeck; },
     get metaphorLocks() { return metaphorState.locks; },
@@ -1413,7 +1416,8 @@ window.DebateVisionMobileApi = {
   get drawCount() { return drawCount; },
   get lockEnvironment() { return survivalState.lockEnvironment; },
   set lockEnvironment(value) { survivalState.lockEnvironment = value; },
-  get metaphorVariant() { return metaphorState.variant; },
+    get metaphorVariant() { return metaphorState.variant; },
+    get metaphorLifePrefixLocked() { return metaphorState.lifePrefixLocked; },
   set metaphorVariant(value) { metaphorState.variant = value; },
   get metaphorPrefixDeck() { return metaphorState.prefixDeck; },
   set metaphorPrefixDeck(value) { metaphorState.prefixDeck = value; },

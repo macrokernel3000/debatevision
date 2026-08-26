@@ -29,6 +29,8 @@
       container.innerHTML = `
         <div class="history-toolbar">
           <button type="button" data-history-export>匯出目前活動紀錄</button>
+          <button type="button" data-history-clear>清除目前活動紀錄</button>
+          <span class="history-toolbar-hint" role="status">匯出會下載 JSON；清除會同時移除最近與釘選紀錄。</span>
         </div>
         <div class="history-column history-recent-column">
           <div class="history-column-head"><h3>最近 20 場</h3><span>${entries.length} / 20</span></div>
@@ -51,6 +53,12 @@
         link.download = `debatevision-${scope}-history.json`;
         link.click();
         window.setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+      });
+      container.querySelector("[data-history-clear]")?.addEventListener("click", () => {
+        if (!entries.length && !pinnedEntries.length) return;
+        if (!window.confirm("確定要清除目前活動的所有最近與釘選紀錄嗎？")) return;
+        historyService.clearScope(scope);
+        render(scope);
       });
     }
 

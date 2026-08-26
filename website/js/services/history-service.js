@@ -116,6 +116,13 @@
       };
     }
 
+    function clearScope(scope) {
+      delete data[scope];
+      delete pinned[scope];
+      save();
+      savePinned();
+    }
+
     return Object.freeze({
       data,
       entries,
@@ -128,6 +135,7 @@
       togglePin,
       unpin,
       exportScope,
+      clearScope,
       pinnedLimit
     });
   }

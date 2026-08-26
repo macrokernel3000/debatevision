@@ -6,6 +6,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const failures = [];
 const notes = [];
 const cardHeader = ["牌組ID", "牌組名稱", "牌組圖示", "卡牌名稱", "說明", "卡牌圖示", "抽選池圖示", "圖片", "稀有度", "標籤"];
+const optionalCardHeaders = ["三階段挑戰"];
 
 function parseCsv(text) {
   const rows = [];
@@ -67,16 +68,19 @@ const deckIds = new Set();
 for (const filePath of cardFiles) {
   const rows = csvRows(filePath);
   if (!rows.length) continue;
-  if (!sameValues(rows[0], cardHeader)) {
-    failures.push(`${relative(filePath)} 欄位必須精確為 ${cardHeader.join("、")}`);
+  const fileHeader = rows[0];
+  const validHeader = fileHeader.slice(0, cardHeader.length).every((value, index) => value === cardHeader[index])
+    && fileHeader.slice(cardHeader.length).every((value) => optionalCardHeaders.includes(value));
+  if (!validHeader) {
+    failures.push(`${relative(filePath)} 基本欄位必須為 ${cardHeader.join("、")}，其後僅能加入 ${optionalCardHeaders.join("、")}`);
     continue;
   }
   const cardKeys = new Set();
   const metadata = new Set();
   for (const [offset, row] of rows.slice(1).entries()) {
     const line = offset + 2;
-    if (row.length !== cardHeader.length) {
-      failures.push(`${relative(filePath)}:${line} 有 ${row.length} 欄，應為 ${cardHeader.length} 欄`);
+    if (row.length !== fileHeader.length) {
+      failures.push(`${relative(filePath)}:${line} 有 ${row.length} 欄，應為 ${fileHeader.length} 欄`);
       continue;
     }
     const [deckId, deckLabel, deckIcon, name, description, , , , rarity] = row;
