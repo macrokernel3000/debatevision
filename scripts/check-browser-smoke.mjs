@@ -116,16 +116,18 @@ async function run() {
           if (text("#timerDisplay") !== "00:00.0") problems.push("timer: did-not-reset");
         }
         click('[data-mode="card-dictionary"]');
+        if (document.body.dataset.activeMode !== "card-dictionary") return problems;
         localStorage.removeItem("debatevision-card-dictionary-presets");
         const name = document.querySelector("[data-dictionary-preset-name]");
         const deck = document.querySelector("[data-dictionary-deck]");
-        deck?.click();
+        if (deck) { deck.checked = true; deck.dispatchEvent(new Event("change", { bubbles: true })); }
         const card = document.querySelector("[data-dictionary-card-key]");
         if (!name || !card) problems.push("preset: controls-missing");
         else {
           name.value = "smoke-test";
           name.dispatchEvent(new Event("input", { bubbles: true }));
-          card.click();
+          card.checked = true;
+          card.dispatchEvent(new Event("change", { bubbles: true }));
           click("[data-dictionary-preset-save]");
           const select = document.querySelector("[data-dictionary-preset-select]");
           if (!select || ![...select.options].some((option) => option.value === "smoke-test")) problems.push("preset: did-not-save");
