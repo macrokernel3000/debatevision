@@ -4,6 +4,10 @@
       return `第${roundNumber}場`;
     }
 
+    function variantLabel(value) {
+      return String(value || "").replace(/^人生版/, "具體版");
+    }
+
     function render(scope) {
       if (!container) return;
       const entries = historyService.entries(scope);
@@ -15,7 +19,7 @@
             <div class="history-item-head">
               <strong>${roundTitle(roundNumber)}</strong>
               <div class="history-item-meta">
-                ${entry.variant ? `<span>${entry.variant}</span>` : ""}
+                ${entry.variant ? `<span>${variantLabel(entry.variant)}</span>` : ""}
                 ${pinned ? `<button class="history-pin is-selected" type="button" data-pinned-unpin-index="${index}" aria-label="取消釘選${roundTitle(roundNumber)}" title="取消釘選">📌</button>` : `<button class="history-pin${historyService.isPinned(scope, entry) ? " is-selected" : ""}" type="button" data-history-pin-index="${index}" aria-label="${historyService.isPinned(scope, entry) ? "取消釘選" : "釘選"}${roundTitle(roundNumber)}" title="${historyService.isPinned(scope, entry) ? "取消釘選" : "釘選"}">📌</button>`}
               </div>
             </div>

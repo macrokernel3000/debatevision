@@ -80,7 +80,7 @@
         metaphor.lifePrefixLocked = lifeLock.checked;
         metaphor.currentCards = null;
         syncMetaphorVariantDecks();
-        render();
+        renderAll();
         return;
       }
 

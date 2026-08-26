@@ -85,16 +85,16 @@ sales-command,回合流程,5,,參與者提問：價格、替代品、可信度�
 metaphor-compass,玩法描述,1,,論述語言關聯性，具體、抽象及自由版可供挑戰。
 metaphor-compass,活動規則,1,,抽出詞語與關係，組成一句命題，解釋為什麼這個關係可以成立。
 metaphor-compass,狀態說明,1,default,抽出詞語與關係，組成一句命題，解釋為什麼這個關係可以成立。
-metaphor-compass,狀態說明,2,concrete,人生版：「人生就像⋯⋯」。
+metaphor-compass,狀態說明,2,concrete,具體版：「人生就像⋯⋯」。
 metaphor-compass,狀態說明,3,abstract,抽象版：抽出前綴、關係與後綴，解釋抽象命題為什麼成立。
 metaphor-compass,玩法背景,1,,../assets/backgrounds/modes/metaphor-compass.webp
 metaphor-compass,按鈕文字,1,,抽出隱喻命題
-metaphor-compass,教練提示,1,入門比喻,人生版：人生和這個後綴詞哪裡像？
+metaphor-compass,教練提示,1,入門比喻,具體版：人生和這個後綴詞哪裡像？
 metaphor-compass,教練提示,2,進階命題,抽象版：這兩個詞中間的關係為什麼成立？
 metaphor-compass,卡牌任務,1,,定義 {name} 在這句命題中的意思。
 metaphor-compass,卡牌任務,2,,替 {name} 找一個具體例子。
-metaphor-compass,回合流程,1,,選擇人生版或抽象版
-metaphor-compass,回合流程,2,,人生版固定從人生子池抽「人生」與「就像」，只抽物品或動物作為後綴
+metaphor-compass,回合流程,1,,選擇具體版或抽象版
+metaphor-compass,回合流程,2,,具體版固定從人生子池抽「人生」與「就像」，只抽物品或動物作為後綴
 metaphor-compass,回合流程,3,,抽象版抽前綴、關係卡與後綴，組成「A 關係 C」命題
 metaphor-compass,回合流程,5,,30 秒找相似點或定義兩端詞語
 metaphor-compass,回合流程,6,,可鎖定前綴、介係或後綴，再重抽其他位置練習變化

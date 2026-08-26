@@ -160,7 +160,10 @@
       }
       if (mode.cardMode === "metaphorCompass") {
         if (metaphor.variant === "concrete") {
-          primaryText = `人生版：人生（固定） × 就像（固定） × 後綴 ${decks[metaphor.suffixDeck]?.label || ""} ${selectedCount(metaphor.suffixDeck)} / ${cardsFrom(metaphor.suffixDeck).length} 張可抽`;
+          const prefixText = metaphor.lifePrefixLocked
+            ? "人生（固定）"
+            : `前綴 ${decks[metaphor.prefixDeck]?.label || ""} ${selectedCount(metaphor.prefixDeck)} / ${cardsFrom(metaphor.prefixDeck).length} 張可抽`;
+          primaryText = `具體版：${prefixText} × 就像（固定） × 後綴 ${decks[metaphor.suffixDeck]?.label || ""} ${selectedCount(metaphor.suffixDeck)} / ${cardsFrom(metaphor.suffixDeck).length} 張可抽`;
         } else {
           primaryText = `前綴 ${decks[metaphor.prefixDeck]?.label || ""} ${selectedCount(metaphor.prefixDeck)} / ${cardsFrom(metaphor.prefixDeck).length} ｜介係 ${decks[activeSecondaryLibrary]?.label || ""} ${selectedCount(activeSecondaryLibrary)} / ${cardsFrom(activeSecondaryLibrary).length} ｜後綴 ${decks[metaphor.suffixDeck]?.label || ""} ${selectedCount(metaphor.suffixDeck)} / ${cardsFrom(metaphor.suffixDeck).length}`;
         }
@@ -354,7 +357,7 @@
                 <section class="metaphor-deck-group is-fixed-prefix" aria-label="固定前綴">
                   <strong class="metaphor-deck-group-title">前綴</strong>
                   <label class="metaphor-life-lock"><input type="checkbox" data-metaphor-life-lock ${metaphor.lifePrefixLocked ? "checked" : ""} />固定抽到人生</label>
-                  ${metaphor.lifePrefixLocked ? fixedMetaphorCardMarkup(fixedMetaphorPrefixCard(), "人生") : metaphorDeckCardsMarkup("prefix", "概念卡", "concepts")}
+                  ${metaphor.lifePrefixLocked ? "" : metaphorDeckCardsMarkup("prefix", "概念卡", "concepts")}
                 </section>
                 <section class="metaphor-deck-group is-fixed-relation" aria-label="固定介係">
                   <strong class="metaphor-deck-group-title">介係</strong>

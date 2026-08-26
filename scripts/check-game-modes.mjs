@@ -233,7 +233,7 @@ for (const metaphorVariant of ["concrete", "abstract", "free"]) {
   assertCall(calls, "markDrawn");
   if (metaphorVariant === "concrete") {
     const markedCards = calls.find(([name]) => name === "markDrawn")[1];
-    assert.equal(markedCards.length, 1, "人生版只消耗後綴卡");
+    assert.equal(markedCards.length, 1, "具體版只消耗後綴卡");
     assert.ok(markedCards.every((value) => value.name !== "人生" && value.name !== "就像"));
   }
 }
@@ -247,7 +247,7 @@ for (const metaphorVariant of ["concrete", "abstract", "free"]) {
     metaphorSuffixDeck: "items"
   });
   const result = controllers.metaphorCompass.draw(ctx);
-  assert.equal(result.length, 3, "人生版可抽概念前綴");
+  assert.equal(result.length, 3, "具體版可抽概念前綴");
   assert.equal(calls.find(([name]) => name === "markDrawn")[1].length, 2, "解鎖人生後消耗前綴與後綴");
 }
 
@@ -271,5 +271,5 @@ console.log("玩法煙霧檢查通過。");
 console.log(`- ${Object.keys(controllers).length} 個玩法 controller`);
 console.log("- 異境求生：求生版、冒險版");
 console.log("- 銷售密令：供需版、故事版（含無概念）、目標版");
-console.log("- 隱喻羅盤：人生版、抽象版、自由版；人生與就像不消耗");
+console.log("- 隱喻羅盤：具體版、抽象版、自由版；人生與就像不消耗");
 console.log("- 現實召喚、誰更重要、推理解密");

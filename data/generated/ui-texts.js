@@ -97,7 +97,7 @@ window.DEBATE_UI_TEXTS = {
   "mobile.sales.targetDeck": "目標卡",
   "mobile.importance.deckHeading": "選擇卡組",
   "mobile.importance.deckNote": "可複選",
-  "mobile.metaphor.concrete": "人生版",
+  "mobile.metaphor.concrete": "具體版",
   "mobile.metaphor.concreteDescription": "固定抽出「人生」「就像」，再連結一個具體事物",
   "mobile.metaphor.abstract": "抽象版",
   "mobile.metaphor.abstractDescription": "連結兩個抽象概念並說明關係",

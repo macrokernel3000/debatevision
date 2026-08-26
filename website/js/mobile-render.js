@@ -92,19 +92,13 @@
     const groups = state.metaphorDecks;
     if (!groups) return "";
     if (groups.concrete) {
-      const prefixImage = groups.fixedPrefix?.image || groups.fixedPrefix?.iconAsset || "";
       const relationImage = groups.fixedRelation?.image || groups.fixedRelation?.iconAsset || groups.relationCover?.image || "";
       return `
         <div class="mobile-metaphor-deck-layout is-concrete">
             <div class="mobile-metaphor-deck-group is-fixed-prefix">
               <span>前綴</span>
               <label class="mobile-metaphor-life-lock"><input type="checkbox" data-mobile-metaphor-life-lock ${state.lifePrefixLocked ? "checked" : ""} />固定抽到人生</label>
-              ${state.lifePrefixLocked ? `
-              <div class="mobile-metaphor-fixed-phrase" aria-label="固定前綴：人生">
-                <span class="mobile-metaphor-fixed-art">${prefixImage ? `<img src="${prefixImage}" alt="" aria-hidden="true" />` : "🧭"}</span>
-                <strong>人生</strong>
-              </div>
-              ` : metaphorDeckGroup("前綴詞", [{ deckId: "concepts", title: "概念卡", selected: true, cover: { image: "", symbol: "◇" } }], state, "prefix")}
+              ${state.lifePrefixLocked ? "" : metaphorDeckGroup("前綴詞", [{ deckId: "concepts", title: "概念卡", selected: true, cover: { image: "", symbol: "◇" } }], state, "prefix")}
           </div>
           <div class="mobile-metaphor-deck-group is-fixed-relation">
             <span>介係</span>
