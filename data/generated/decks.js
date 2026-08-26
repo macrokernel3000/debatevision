@@ -6,290 +6,362 @@ window.DEBATE_DECKS = {
       {
         "name": "賺大錢",
         "lore": "在現實世界合法賺到大量金錢，必須說清楚商業模式、客戶、成本與風險。",
-        "imageId": "💰",
+        "imageId": "missions_01",
         "icon": "💰",
         "iconAsset": "",
         "tokenIcon": "💰",
-        "image": "",
+        "image": "../assets/icons/missions/missions_01.png?v=276dfae1f4",
         "rarity": "A",
         "tags": [
           "財富",
           "商業",
           "現實"
         ],
-        "challenges": []
+        "challenges": [
+          "起步階段：選定合法商業模式與第一個客戶",
+          "成長階段：控制成本並建立穩定收入",
+          "長期階段：擴大規模且承擔法律與社會責任"
+        ]
       },
       {
         "name": "開公司做產品",
         "lore": "成立一間能活下來的公司，並做出一個有人願意使用或購買的產品；必須決定痛點、客戶、團隊、成本與第一批訂單。",
-        "imageId": "🏢",
+        "imageId": "missions_02",
         "icon": "🏢",
         "iconAsset": "",
         "tokenIcon": "🏢",
-        "image": "",
+        "image": "../assets/icons/missions/missions_02.png?v=a4436315f7",
         "rarity": "A",
         "tags": [
           "創業",
           "產品",
           "商業"
         ],
-        "challenges": []
+        "challenges": [
+          "起步階段：找出痛點並做出最小可用產品",
+          "成長階段：取得第一批使用者與訂單",
+          "長期階段：建立能持續成長的團隊與商業模式"
+        ]
       },
       {
         "name": "拍電影",
         "lore": "完成一部能被觀眾看見的電影，必須處理劇本、資金、演員、宣傳與審查。",
-        "imageId": "🎬",
+        "imageId": "missions_03",
         "icon": "🎬",
         "iconAsset": "",
         "tokenIcon": "🎬",
-        "image": "",
+        "image": "../assets/icons/missions/missions_03.png?v=f419a011f4",
         "rarity": "B",
         "tags": [
           "創作",
           "媒體",
           "合作"
         ],
-        "challenges": []
+        "challenges": [
+          "起步階段：完成劇本、預算與核心團隊",
+          "製作階段：在限制內完成拍攝與剪輯",
+          "長期階段：公開作品並面對市場、評價與版權問題"
+        ]
       },
       {
         "name": "上學",
         "lore": "進入學校並完成一段學習任務，必須面對規範、人際、作業與考試。",
-        "imageId": "🎒",
+        "imageId": "missions_04",
         "icon": "🎒",
         "iconAsset": "",
         "tokenIcon": "🎒",
-        "image": "",
+        "image": "../assets/icons/missions/missions_04.png?v=4bfa52a0d8",
         "rarity": "C",
         "tags": [
           "學習",
           "日常",
           "適應"
         ],
-        "challenges": []
+        "challenges": [
+          "起步階段：選定學習目標並適應校園規範",
+          "成長階段：完成作業、考試與一項合作任務",
+          "長期階段：把所學轉化為能力並找到自己的方向"
+        ]
       },
       {
         "name": "治理城市",
         "lore": "讓一座城市變得更安全、有效率且讓居民願意支持，必須處理交通、治安、預算與民意。",
-        "imageId": "🏛️",
+        "imageId": "missions_05",
         "icon": "🏛️",
         "iconAsset": "",
         "tokenIcon": "🏛️",
-        "image": "",
+        "image": "../assets/icons/missions/missions_05.png?v=a0062ff63a",
         "rarity": "A",
         "tags": [
           "治理",
           "公共",
           "民意"
         ],
-        "challenges": []
+        "challenges": [
+          "起步階段：盤點城市問題與可用預算",
+          "治理階段：推動一項政策並取得居民支持",
+          "長期階段：建立公平、有效率且能應對危機的城市系統"
+        ]
       },
       {
         "name": "當網紅",
         "lore": "在網路上建立影響力，必須決定人設、內容節奏、平台規則與公眾壓力。",
-        "imageId": "📱",
+        "imageId": "missions_06",
         "icon": "📱",
         "iconAsset": "",
         "tokenIcon": "📱",
-        "image": "",
+        "image": "../assets/icons/missions/missions_06.png?v=9d4ab65007",
         "rarity": "B",
         "tags": [
           "媒體",
           "影響力",
           "形象"
         ],
-        "challenges": []
+        "challenges": [
+          "起步階段：確定人設、主題與第一批內容",
+          "成長階段：建立穩定發布節奏並回應批評",
+          "長期階段：維持信任、收入與心理健康"
+        ]
       },
       {
         "name": "救一間學校",
         "lore": "讓一間混亂或快倒閉的學校重新運作，必須處理學生、老師、家長與資源。",
-        "imageId": "🏫",
+        "imageId": "missions_07",
         "icon": "🏫",
         "iconAsset": "",
         "tokenIcon": "🏫",
-        "image": "",
+        "image": "../assets/icons/missions/missions_07.png?v=dc9ff96e17",
         "rarity": "B",
         "tags": [
           "教育",
           "組織",
           "修復"
         ],
-        "challenges": []
+        "challenges": [
+          "起步階段：找出學校最急迫的問題",
+          "修復階段：協調學生、老師、家長與資源",
+          "長期階段：建立能自行運作且持續改善的制度"
+        ]
       },
       {
         "name": "贏得選舉",
         "lore": "取得足夠選票與信任，必須提出政見、建立形象、回應攻擊並組織支持者。",
-        "imageId": "🗳️",
+        "imageId": "missions_08",
         "icon": "🗳️",
         "iconAsset": "",
         "tokenIcon": "🗳️",
-        "image": "",
+        "image": "../assets/icons/missions/missions_08.png?v=5da72f931d",
         "rarity": "A",
         "tags": [
           "政治",
           "說服",
           "信任"
         ],
-        "challenges": []
+        "challenges": [
+          "起步階段：提出清楚政見並組織支持者",
+          "競選階段：回應攻擊、辨識假訊息並爭取中間選民",
+          "長期階段：勝選後兌現承諾並接受公共監督"
+        ]
       },
       {
         "name": "經營餐廳",
         "lore": "讓餐廳穩定賺錢並被顧客喜歡，必須做出招牌料理，處理菜單、衛生、服務、租金與口碑。",
-        "imageId": "🍽️",
+        "imageId": "missions_09",
         "icon": "🍽️",
         "iconAsset": "",
         "tokenIcon": "🍽️",
-        "image": "",
+        "image": "../assets/icons/missions/missions_09.png?v=ccb4e5f943",
         "rarity": "C",
         "tags": [
           "服務",
           "經營",
           "口碑"
         ],
-        "challenges": []
+        "challenges": [
+          "起步階段：確定菜單、客群與啟動成本",
+          "經營階段：穩定品質、衛生與服務流程",
+          "長期階段：在競爭中保有口碑並實現獲利"
+        ]
       },
       {
         "name": "成立社團",
         "lore": "讓一群人願意固定參加，必須設計活動、分工、招募與共同目標。",
-        "imageId": "🤝",
+        "imageId": "missions_10",
         "icon": "🤝",
         "iconAsset": "",
         "tokenIcon": "🤝",
-        "image": "",
+        "image": "../assets/icons/missions/missions_10.png?v=34c7b2e521",
         "rarity": "C",
         "tags": [
           "群體",
           "組織",
           "參與"
         ],
-        "challenges": []
+        "challenges": [
+          "起步階段：找到共同興趣與核心成員",
+          "成長階段：辦出固定活動並清楚分工",
+          "長期階段：培養接班人並讓社團持續吸引新成員"
+        ]
       },
       {
         "name": "修復名聲",
         "lore": "從被懷疑或討厭的狀態重新取得信任，必須面對錯誤、證據、道歉與行動。",
-        "imageId": "🪞",
+        "imageId": "missions_11",
         "icon": "🪞",
         "iconAsset": "",
         "tokenIcon": "🪞",
-        "image": "",
+        "image": "../assets/icons/missions/missions_11.png?v=71006aa95e",
         "rarity": "B",
         "tags": [
           "信任",
           "形象",
           "危機"
         ],
-        "challenges": []
+        "challenges": [
+          "起步階段：釐清錯誤、證據與受影響的人",
+          "修復階段：公開道歉並用行動補救",
+          "長期階段：持續透明溝通直到信任重新建立"
+        ]
       },
       {
         "name": "隱居現代城市",
         "lore": "在高度監控、人口密集、消費便利的現代化城市中低調生活，必須處理住所、金錢、身分、網路足跡與鄰居注意。",
-        "imageId": "🏙️",
+        "imageId": "missions_12",
         "icon": "🏙️",
         "iconAsset": "",
         "tokenIcon": "🏙️",
-        "image": "",
+        "image": "../assets/icons/missions/missions_12.png?v=396c633a23",
         "rarity": "B",
         "tags": [
           "城市",
           "隱居",
           "身分"
         ],
-        "challenges": []
+        "challenges": [
+          "起步階段：安排住所、收入與安全身分",
+          "適應階段：降低網路足跡並建立日常支持",
+          "長期階段：在不傷害他人的前提下維持自由與穩定"
+        ]
       },
       {
         "name": "找產品代言",
         "lore": "替一個產品找到合適代言方式，必須判斷品牌形象、目標客群、可信度、曝光管道與翻車風險。",
-        "imageId": "📣",
+        "imageId": "missions_13",
         "icon": "📣",
         "iconAsset": "",
         "tokenIcon": "📣",
-        "image": "",
+        "image": "../assets/icons/missions/missions_13.png?v=b84219bbe4",
         "rarity": "B",
         "tags": [
           "行銷",
           "品牌",
           "信任"
         ],
-        "challenges": []
+        "challenges": [
+          "起步階段：定義品牌形象與目標客群",
+          "評估階段：比較代言人的可信度、曝光與風險",
+          "長期階段：管理合作成效並處理可能的翻車"
+        ]
       },
       {
         "name": "參加運動",
         "lore": "加入一項現代運動並取得成績或人氣，必須處理規則、訓練、隊友、裁判與公平競爭。",
-        "imageId": "🏅",
+        "imageId": "missions_14",
         "icon": "🏅",
         "iconAsset": "",
         "tokenIcon": "🏅",
-        "image": "",
+        "image": "../assets/icons/missions/missions_14.png?v=465473ec45",
         "rarity": "C",
         "tags": [
           "運動",
           "規則",
           "競爭"
         ],
-        "challenges": []
+        "challenges": [
+          "起步階段：選定運動、規則與訓練計畫",
+          "競賽階段：與隊友合作並公平面對對手",
+          "長期階段：在成績、健康與人氣之間取得平衡"
+        ]
       },
       {
         "name": "寫一本書",
         "lore": "完成一本能被讀者理解並願意閱讀的書，必須決定主題、讀者、章節、寫作節奏與出版方式。",
-        "imageId": "📚",
+        "imageId": "missions_15",
         "icon": "📚",
         "iconAsset": "",
         "tokenIcon": "📚",
-        "image": "",
+        "image": "../assets/icons/missions/missions_15.png?v=50f19ebfa1",
         "rarity": "B",
         "tags": [
           "創作",
           "表達",
           "出版"
         ],
-        "challenges": []
+        "challenges": [
+          "起步階段：確定主題、讀者與章節架構",
+          "寫作階段：完成初稿並接受可靠的回饋",
+          "長期階段：出版作品並持續與讀者對話"
+        ]
       },
       {
         "name": "幫助他人",
         "lore": "真正改善某個人的處境，必須先判斷對方需要什麼，再處理資源、方法、尊重與長期效果。",
-        "imageId": "🫶",
+        "imageId": "missions_16",
         "icon": "🫶",
         "iconAsset": "",
         "tokenIcon": "🫶",
-        "image": "",
+        "image": "../assets/icons/missions/missions_16.png?v=dfc15b7008",
         "rarity": "C",
         "tags": [
           "助人",
           "需求",
           "責任"
         ],
-        "challenges": []
+        "challenges": [
+          "起步階段：理解對方真正的需要與界線",
+          "行動階段：連結資源並共同執行可行方案",
+          "長期階段：確認幫助有效且不造成依賴或傷害"
+        ]
       },
       {
         "name": "尋找夥伴",
         "lore": "找到願意一起行動的可靠夥伴，必須說清楚要去哪裡找、如何開口、如何篩選，以及如何建立信任。",
-        "imageId": "🧭",
+        "imageId": "missions_17",
         "icon": "🧭",
         "iconAsset": "",
         "tokenIcon": "🧭",
-        "image": "",
+        "image": "../assets/icons/missions/missions_17.png?v=16085c4a19",
         "rarity": "B",
         "tags": [
           "合作",
           "招募",
           "信任"
         ],
-        "challenges": []
+        "challenges": [
+          "起步階段：明確說出目標與需要的夥伴",
+          "磨合階段：篩選能力、價值觀與可靠程度",
+          "長期階段：建立分工、信任與共同承擔機制"
+        ]
       },
       {
         "name": "跟人類談判",
         "lore": "和現代人類談判取得合作、資源或通行權，必須理解對方利益、恐懼、規則與可以交換的籌碼。",
-        "imageId": "🤝",
+        "imageId": "missions_18",
         "icon": "🤝",
         "iconAsset": "",
         "tokenIcon": "🤝",
-        "image": "",
+        "image": "../assets/icons/missions/missions_18.png?v=54c503d6a0",
         "rarity": "A",
         "tags": [
           "談判",
           "人類",
           "合作"
         ],
-        "challenges": []
+        "challenges": [
+          "起步階段：釐清利益、恐懼與談判底線",
+          "協商階段：提出可交換的籌碼並建立信任",
+          "長期階段：簽下可執行的協議並維持合作關係"
+        ]
       }
     ]
   },
@@ -5285,7 +5357,11 @@ window.DEBATE_DECKS = {
           "探索",
           "未知"
         ],
-        "challenges": []
+        "challenges": [
+          "降落初日：確認空氣與重力規則",
+          "探索第十天：建立可往返的安全路線",
+          "長期階段：與未知生物或文明建立共存方案"
+        ]
       },
       {
         "name": "遠古叢林",
@@ -5301,7 +5377,11 @@ window.DEBATE_DECKS = {
           "野外",
           "潮濕"
         ],
-        "challenges": []
+        "challenges": [
+          "進入第一天：找到水源並標記方向",
+          "深入第十天：穿越叢林並建立可防禦營地",
+          "長期階段：建立穩定補給線並安全離開"
+        ]
       },
       {
         "name": "炙熱沙漠",
@@ -5317,7 +5397,11 @@ window.DEBATE_DECKS = {
           "高溫",
           "野外"
         ],
-        "challenges": []
+        "challenges": [
+          "抵達第一天：找到遮蔽與可飲用水",
+          "第十天：安排夜間移動並保存補給",
+          "第三十天：找到綠洲、聚落或撤離路線"
+        ]
       },
       {
         "name": "無人島",
@@ -5333,7 +5417,11 @@ window.DEBATE_DECKS = {
           "求救",
           "長期"
         ],
-        "challenges": []
+        "challenges": [
+          "上島第一天：建立淡水與避雨處",
+          "第十天：製作工具並發出穩定求救訊號",
+          "第三十天：修復船筏或等到可靠救援"
+        ]
       },
       {
         "name": "極地冰原",
@@ -5349,7 +5437,11 @@ window.DEBATE_DECKS = {
           "極地",
           "低溫"
         ],
-        "challenges": []
+        "challenges": [
+          "極夜第一天：保住體溫並找到避風處",
+          "第十天：建立燃料與食物配給制度",
+          "第三十天：規劃穿越冰原或等待救援"
+        ]
       },
       {
         "name": "地下洞穴",
@@ -5365,7 +5457,11 @@ window.DEBATE_DECKS = {
           "地形",
           "封閉"
         ],
-        "challenges": []
+        "challenges": [
+          "深入第一天：建立照明、記號與退路",
+          "第十天：繪製主要通道並避開危險區",
+          "長期階段：找到出口或建立可持續據點"
+        ]
       },
       {
         "name": "廢棄醫院",
@@ -5381,7 +5477,11 @@ window.DEBATE_DECKS = {
           "醫療",
           "驚悚"
         ],
-        "challenges": []
+        "challenges": [
+          "進入第一天：確認安全區與可用醫療物資",
+          "第十天：建立隔離、照護與巡查制度",
+          "第三十天：修復醫院功能或安全撤離"
+        ]
       },
       {
         "name": "暴雨山區",
@@ -5397,7 +5497,11 @@ window.DEBATE_DECKS = {
           "暴雨",
           "失溫"
         ],
-        "challenges": []
+        "challenges": [
+          "暴雨第一天：找到不會落石的避難點",
+          "第十天：建立繩索路線並維持乾燥補給",
+          "第三十天：打通山路或找到下山通道"
+        ]
       },
       {
         "name": "太空船",
@@ -5413,7 +5517,11 @@ window.DEBATE_DECKS = {
           "封閉",
           "資源"
         ],
-        "challenges": []
+        "challenges": [
+          "啟動第一天：穩住氧氣、電力與艙體",
+          "第十天：修復關鍵系統並分配工作",
+          "第三十天：恢復航行或發出遠距求救"
+        ]
       },
       {
         "name": "海底基地",
@@ -5429,7 +5537,11 @@ window.DEBATE_DECKS = {
           "封閉",
           "高壓"
         ],
-        "challenges": []
+        "challenges": [
+          "下潛第一天：確認壓力艙與氧氣餘量",
+          "第十天：維持能源、食物與設備運作",
+          "第三十天：修復上浮系統或建立長期基地"
+        ]
       },
       {
         "name": "火山邊緣",
@@ -5445,7 +5557,11 @@ window.DEBATE_DECKS = {
           "災害",
           "地形"
         ],
-        "challenges": []
+        "challenges": [
+          "警報第一天：避開毒氣並確認撤離方向",
+          "第十天：預測爆發路線並建立安全區",
+          "第三十天：撤離至遠方或建立抗災據點"
+        ]
       },
       {
         "name": "中世紀城堡",
@@ -5461,7 +5577,11 @@ window.DEBATE_DECKS = {
           "防守",
           "封閉"
         ],
-        "challenges": []
+        "challenges": [
+          "進城第一天：取得食物、火源與安全房間",
+          "第十天：理解階級規則並取得通行權",
+          "第三十天：建立聯盟、守住城堡或尋找出路"
+        ]
       },
       {
         "name": "未來都市",
@@ -5477,7 +5597,11 @@ window.DEBATE_DECKS = {
           "科幻",
           "科技"
         ],
-        "challenges": []
+        "challenges": [
+          "接管第一天：確認能源、監控與通訊狀態",
+          "第十天：取得系統權限並建立離線備援",
+          "第三十天：讓城市恢復自治且避免全面監控"
+        ]
       },
       {
         "name": "巨型迷宮",
@@ -5493,7 +5617,11 @@ window.DEBATE_DECKS = {
           "地形",
           "迷失"
         ],
-        "challenges": []
+        "challenges": [
+          "入局第一天：標記起點、方向與可回頭路線",
+          "第十天：分工探索並保存完整地圖",
+          "第三十天：找到出口並帶領所有人離開"
+        ]
       },
       {
         "name": "鬧鬼校園",
@@ -5509,7 +5637,11 @@ window.DEBATE_DECKS = {
           "夜晚",
           "校園"
         ],
-        "challenges": []
+        "challenges": [
+          "入夜第一天：確認可防守教室與照明",
+          "第十天：找出校園異常規律並建立避險信號",
+          "第三十天：解開校園謎團或找到真正出口"
+        ]
       },
       {
         "name": "古代戰場",
@@ -5525,7 +5657,11 @@ window.DEBATE_DECKS = {
           "衝突",
           "野外"
         ],
-        "challenges": []
+        "challenges": [
+          "開戰第一天：辨識陣營並取得基本糧秣",
+          "第十天：穩住士氣、情報與防線",
+          "第三十天：促成停戰、取得勝利或安全撤離"
+        ]
       },
       {
         "name": "豪華郵輪",
@@ -5541,7 +5677,11 @@ window.DEBATE_DECKS = {
           "交通",
           "室內"
         ],
-        "challenges": []
+        "challenges": [
+          "登船第一天：確認艙位、食物與救生設備",
+          "第十天：處理階層衝突並掌握航線",
+          "第三十天：修復船隻、靠岸或組織撤離"
+        ]
       },
       {
         "name": "雲端城市",
@@ -5557,7 +5697,11 @@ window.DEBATE_DECKS = {
           "高空",
           "城市"
         ],
-        "challenges": []
+        "challenges": [
+          "升空第一天：適應稀薄空氣並找到能源來源",
+          "第十天：建立氣候預警與交通規則",
+          "第三十天：讓城市維持供氧並連回地面"
+        ]
       },
       {
         "name": "失控實驗室",
@@ -5573,7 +5717,11 @@ window.DEBATE_DECKS = {
           "危機",
           "室內"
         ],
-        "challenges": []
+        "challenges": [
+          "封鎖第一天：隔離未知物質並取得防護設備",
+          "第十天：解讀實驗紀錄、恢復供電",
+          "第三十天：安全封存危險物或完成撤離"
+        ]
       },
       {
         "name": "漂流木筏",
@@ -5589,7 +5737,11 @@ window.DEBATE_DECKS = {
           "求生",
           "限制"
         ],
-        "challenges": []
+        "challenges": [
+          "漂流第一天：固定自己與飲水，避免翻覆",
+          "第十天：製作集水與捕魚工具並校正方向",
+          "第三十天：找到航線、島嶼或可靠救援"
+        ]
       },
       {
         "name": "天星隕落",
@@ -5605,7 +5757,11 @@ window.DEBATE_DECKS = {
           "城市",
           "倒數"
         ],
-        "challenges": []
+        "challenges": [
+          "倒數第一天：判斷隕落範圍並找到安全區",
+          "第十天：建立互助網並保存重要物資",
+          "第三十天：完成撤離、重建家園或留下最後訊息"
+        ]
       },
       {
         "name": "原始部落",
@@ -5621,7 +5777,11 @@ window.DEBATE_DECKS = {
           "求生",
           "限制"
         ],
-        "challenges": []
+        "challenges": [
+          "相遇第一天：觀察部落規矩並避免誤會",
+          "第十天：用交換、語言或合作取得信任",
+          "第三十天：促成和平、融入部落或安全離開"
+        ]
       },
       {
         "name": "遊戲世界",
@@ -5637,7 +5797,11 @@ window.DEBATE_DECKS = {
           "求生",
           "限制"
         ],
-        "challenges": []
+        "challenges": [
+          "登入第一天：理解世界規則並取得初始裝備",
+          "第十天：組隊完成任務並擊敗區域首領",
+          "第三十天：選擇打倒魔王、改寫規則或回到現實"
+        ]
       }
     ]
   },

@@ -1,25 +1,25 @@
 ﻿牌組ID,牌組名稱,牌組圖示,卡牌名稱,說明,卡牌圖示,抽選池圖示,圖片,稀有度,標籤,三階段挑戰
 worlds,異境卡,◎,殭屍末日,城市秩序崩潰，街道危險且資源有限，任何聲響都可能帶來麻煩。,world_icon_zombie,🧟,worlds_Zombie.png,A,危機|城市|生存,生存第一天：尋找到安全且有水源的安全屋|生存第十天：建立移動方針且能拓展搜索能力|生存第三十天：尋求撤離方案或建立可庇護他人之處所
-worlds,異境卡,◎,神秘星球,空氣、重力與生物都不確定，探索者必須先判斷未知規則。,world_icon_mystery_planet,🪐,worlds_mysteryplanet.png,A,科幻|探索|未知,
-worlds,異境卡,◎,遠古叢林,潮濕、茂密、野生動物多，方向感與補給管理會被嚴重考驗。,world_icon_jungle,🌴,worlds_jungle.png,A,自然|野外|潮濕,
-worlds,異境卡,◎,炙熱沙漠,高溫、缺水、日夜溫差大，水源與遮蔽比力量更重要。,world_icon_desert,🏜️,worlds_desert .png,A,乾旱|高溫|野外,
-worlds,異境卡,◎,無人島,四面環海，資源有限，必須同時處理求生、訊號與長期等待。,world_icon_island,🏝️,worlds_uninhabited island.png,A,海島|求救|長期,
-worlds,異境卡,◎,極地冰原,低溫、強風、視線受阻，保暖與移動效率決定生死。,world_icon_ice,🧊,worlds_icesheet.png,A,寒冷|極地|低溫,
-worlds,異境卡,◎,地下洞穴,黑暗、狹窄、路線複雜，照明與方向判斷是核心問題。,world_icon_cave,🕳️,worlds_cave.png,A,黑暗|地形|封閉,
-worlds,異境卡,◎,廢棄醫院,物資可能豐富，但空間複雜且心理壓力很高。,world_icon_hospital,🏥,worlds_hospital.png,A,城市|醫療|驚悚,
-worlds,異境卡,◎,暴雨山區,道路濕滑、落石與失溫風險高，移動與避難都很困難。,world_icon_rain_mountain,⛈️,worlds_Villa.png,B,山地|暴雨|失溫,
-worlds,異境卡,◎,太空船,空間封閉、氧氣有限，任何小故障都可能變成大危機。,world_icon_spaceship,🚀,worlds_space shuttle.png,B,科幻|封閉|資源,
-worlds,異境卡,◎,海底基地,高壓、缺氧、撤離困難，外部環境本身就是威脅。,world_icon_undersea_base,🌊,worlds_Underwater.png,B,海洋|封閉|高壓,
-worlds,異境卡,◎,火山邊緣,高溫、毒氣與地形不穩，撤離速度與判斷非常重要。,world_icon_volcano,🌋,worlds_Ring of Fire.png,B,高溫|災害|地形,
-worlds,異境卡,◎,中世紀城堡,厚牆、密道與階級秩序並存，防守容易但資訊流動慢。,world_icon_castle,🏰,worlds_castle.png,B,歷史|防守|封閉,
-worlds,異境卡,◎,未來都市,科技高度發達，但監控、能源與系統故障都會影響行動。,world_icon_future_city,🌆,worlds_FutureCity.png,B,城市|科幻|科技,
-worlds,異境卡,◎,巨型迷宮,路線混亂、出口未知，記錄與團隊分工會比速度更可靠。,world_icon_maze,🌀,worlds_maze,B,推理|地形|迷失,
-worlds,異境卡,◎,鬧鬼校園,熟悉空間變得陌生，教室、操場與器材室都似乎有靈魂。,world_icon_haunted_school,👻,worlds_Abandoned Campus.png,A,日常|夜晚|校園,
-worlds,異境卡,◎,古代戰場,資源粗糙、衝突不斷，該注意己方的策略與士氣。,world_icon_battlefield,⚔️,worlds_Ancient battlefield.png,A,歷史|衝突|野外,
-worlds,異境卡,◎,豪華郵輪,空間巨大且漂浮海上，資源、階層與撤離問題交錯。,world_icon_cruise,🛳️,worlds_Cruise ship.png,B,海洋|交通|室內,
-worlds,異境卡,◎,雲端城市,稀薄的空氣與神秘科技，氣候的影響被嚴重放大。,world_icon_cloud_city,☁️,worlds_CloudCity.png,B,科幻|高空|城市,
-worlds,異境卡,◎,失控實驗室,未知物質、封鎖門與安全規範混在一起，知識與冷靜很重要。,world_icon_lab,🧪,worlds_laboratory.png,A,科學|危機|室內,
-worlds,異境卡,◎,漂流木筏,空間極小、物資有限、方向難控，任何物品都要發揮最大價值。,world_icon_raft,🛶,worlds_Raft.png,A,水域|求生|限制,
-worlds,異境卡,◎,天星隕落,最後的倒數時刻，有什麼能夠讓我們活著？或者更快樂？,world_icon_meteorite,🪨,worlds_meteorite.png,A,危機|城市|倒數,
-worlds,異境卡,◎,原始部落,鼓聲、敵意、人多勢眾，逃跑或者戰鬥還是和解都有機會。,world_icon_Clans,🔨,world_Clans.png,B,水域|求生|限制,
-worlds,異境卡,◎,遊戲世界,劍與魔法降臨，無數任務與魔王等著玩家挑戰。,world_icon_game,🎮,worlds_game.png,B,水域|求生|限制,
+worlds,異境卡,◎,神秘星球,空氣、重力與生物都不確定，探索者必須先判斷未知規則。,world_icon_mystery_planet,🪐,worlds_mysteryplanet.png,A,科幻|探索|未知,降落初日：確認空氣與重力規則|探索第十天：建立可往返的安全路線|長期階段：與未知生物或文明建立共存方案
+worlds,異境卡,◎,遠古叢林,潮濕、茂密、野生動物多，方向感與補給管理會被嚴重考驗。,world_icon_jungle,🌴,worlds_jungle.png,A,自然|野外|潮濕,進入第一天：找到水源並標記方向|深入第十天：穿越叢林並建立可防禦營地|長期階段：建立穩定補給線並安全離開
+worlds,異境卡,◎,炙熱沙漠,高溫、缺水、日夜溫差大，水源與遮蔽比力量更重要。,world_icon_desert,🏜️,worlds_desert .png,A,乾旱|高溫|野外,抵達第一天：找到遮蔽與可飲用水|第十天：安排夜間移動並保存補給|第三十天：找到綠洲、聚落或撤離路線
+worlds,異境卡,◎,無人島,四面環海，資源有限，必須同時處理求生、訊號與長期等待。,world_icon_island,🏝️,worlds_uninhabited island.png,A,海島|求救|長期,上島第一天：建立淡水與避雨處|第十天：製作工具並發出穩定求救訊號|第三十天：修復船筏或等到可靠救援
+worlds,異境卡,◎,極地冰原,低溫、強風、視線受阻，保暖與移動效率決定生死。,world_icon_ice,🧊,worlds_icesheet.png,A,寒冷|極地|低溫,極夜第一天：保住體溫並找到避風處|第十天：建立燃料與食物配給制度|第三十天：規劃穿越冰原或等待救援
+worlds,異境卡,◎,地下洞穴,黑暗、狹窄、路線複雜，照明與方向判斷是核心問題。,world_icon_cave,🕳️,worlds_cave.png,A,黑暗|地形|封閉,深入第一天：建立照明、記號與退路|第十天：繪製主要通道並避開危險區|長期階段：找到出口或建立可持續據點
+worlds,異境卡,◎,廢棄醫院,物資可能豐富，但空間複雜且心理壓力很高。,world_icon_hospital,🏥,worlds_hospital.png,A,城市|醫療|驚悚,進入第一天：確認安全區與可用醫療物資|第十天：建立隔離、照護與巡查制度|第三十天：修復醫院功能或安全撤離
+worlds,異境卡,◎,暴雨山區,道路濕滑、落石與失溫風險高，移動與避難都很困難。,world_icon_rain_mountain,⛈️,worlds_Villa.png,B,山地|暴雨|失溫,暴雨第一天：找到不會落石的避難點|第十天：建立繩索路線並維持乾燥補給|第三十天：打通山路或找到下山通道
+worlds,異境卡,◎,太空船,空間封閉、氧氣有限，任何小故障都可能變成大危機。,world_icon_spaceship,🚀,worlds_space shuttle.png,B,科幻|封閉|資源,啟動第一天：穩住氧氣、電力與艙體|第十天：修復關鍵系統並分配工作|第三十天：恢復航行或發出遠距求救
+worlds,異境卡,◎,海底基地,高壓、缺氧、撤離困難，外部環境本身就是威脅。,world_icon_undersea_base,🌊,worlds_Underwater.png,B,海洋|封閉|高壓,下潛第一天：確認壓力艙與氧氣餘量|第十天：維持能源、食物與設備運作|第三十天：修復上浮系統或建立長期基地
+worlds,異境卡,◎,火山邊緣,高溫、毒氣與地形不穩，撤離速度與判斷非常重要。,world_icon_volcano,🌋,worlds_Ring of Fire.png,B,高溫|災害|地形,警報第一天：避開毒氣並確認撤離方向|第十天：預測爆發路線並建立安全區|第三十天：撤離至遠方或建立抗災據點
+worlds,異境卡,◎,中世紀城堡,厚牆、密道與階級秩序並存，防守容易但資訊流動慢。,world_icon_castle,🏰,worlds_castle.png,B,歷史|防守|封閉,進城第一天：取得食物、火源與安全房間|第十天：理解階級規則並取得通行權|第三十天：建立聯盟、守住城堡或尋找出路
+worlds,異境卡,◎,未來都市,科技高度發達，但監控、能源與系統故障都會影響行動。,world_icon_future_city,🌆,worlds_FutureCity.png,B,城市|科幻|科技,接管第一天：確認能源、監控與通訊狀態|第十天：取得系統權限並建立離線備援|第三十天：讓城市恢復自治且避免全面監控
+worlds,異境卡,◎,巨型迷宮,路線混亂、出口未知，記錄與團隊分工會比速度更可靠。,world_icon_maze,🌀,worlds_maze,B,推理|地形|迷失,入局第一天：標記起點、方向與可回頭路線|第十天：分工探索並保存完整地圖|第三十天：找到出口並帶領所有人離開
+worlds,異境卡,◎,鬧鬼校園,熟悉空間變得陌生，教室、操場與器材室都似乎有靈魂。,world_icon_haunted_school,👻,worlds_Abandoned Campus.png,A,日常|夜晚|校園,入夜第一天：確認可防守教室與照明|第十天：找出校園異常規律並建立避險信號|第三十天：解開校園謎團或找到真正出口
+worlds,異境卡,◎,古代戰場,資源粗糙、衝突不斷，該注意己方的策略與士氣。,world_icon_battlefield,⚔️,worlds_Ancient battlefield.png,A,歷史|衝突|野外,開戰第一天：辨識陣營並取得基本糧秣|第十天：穩住士氣、情報與防線|第三十天：促成停戰、取得勝利或安全撤離
+worlds,異境卡,◎,豪華郵輪,空間巨大且漂浮海上，資源、階層與撤離問題交錯。,world_icon_cruise,🛳️,worlds_Cruise ship.png,B,海洋|交通|室內,登船第一天：確認艙位、食物與救生設備|第十天：處理階層衝突並掌握航線|第三十天：修復船隻、靠岸或組織撤離
+worlds,異境卡,◎,雲端城市,稀薄的空氣與神秘科技，氣候的影響被嚴重放大。,world_icon_cloud_city,☁️,worlds_CloudCity.png,B,科幻|高空|城市,升空第一天：適應稀薄空氣並找到能源來源|第十天：建立氣候預警與交通規則|第三十天：讓城市維持供氧並連回地面
+worlds,異境卡,◎,失控實驗室,未知物質、封鎖門與安全規範混在一起，知識與冷靜很重要。,world_icon_lab,🧪,worlds_laboratory.png,A,科學|危機|室內,封鎖第一天：隔離未知物質並取得防護設備|第十天：解讀實驗紀錄、恢復供電|第三十天：安全封存危險物或完成撤離
+worlds,異境卡,◎,漂流木筏,空間極小、物資有限、方向難控，任何物品都要發揮最大價值。,world_icon_raft,🛶,worlds_Raft.png,A,水域|求生|限制,漂流第一天：固定自己與飲水，避免翻覆|第十天：製作集水與捕魚工具並校正方向|第三十天：找到航線、島嶼或可靠救援
+worlds,異境卡,◎,天星隕落,最後的倒數時刻，有什麼能夠讓我們活著？或者更快樂？,world_icon_meteorite,🪨,worlds_meteorite.png,A,危機|城市|倒數,倒數第一天：判斷隕落範圍並找到安全區|第十天：建立互助網並保存重要物資|第三十天：完成撤離、重建家園或留下最後訊息
+worlds,異境卡,◎,原始部落,鼓聲、敵意、人多勢眾，逃跑或者戰鬥還是和解都有機會。,world_icon_Clans,🔨,world_Clans.png,B,水域|求生|限制,相遇第一天：觀察部落規矩並避免誤會|第十天：用交換、語言或合作取得信任|第三十天：促成和平、融入部落或安全離開
+worlds,異境卡,◎,遊戲世界,劍與魔法降臨，無數任務與魔王等著玩家挑戰。,world_icon_game,🎮,worlds_game.png,B,水域|求生|限制,登入第一天：理解世界規則並取得初始裝備|第十天：組隊完成任務並擊敗區域首領|第三十天：選擇打倒魔王、改寫規則或回到現實

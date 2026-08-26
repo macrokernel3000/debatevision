@@ -62,9 +62,10 @@
         return [`提出 ${name} 的一個用途。`, `說明 ${name} 的限制與補救。`, "比較它和另一件物品誰更有價值。"];
       }
       if (deckId === "roles") {
-        return ["說明這個身份的不可替代價值。", "主動承認一個弱點並化解。", "用一句話說服觀眾留下你。"];
+        return ["說明這個身份的不可替代價值。", "主動承認一個弱點並化解。", "用一句話說服觀眾留下你。"]; 
       }
       if (deckId === "worlds" || deckId === "locations") {
+        if (Array.isArray(context.challenges) && context.challenges.length) return context.challenges;
         return ["說明這個環境最關鍵的限制。", "列出可以繼續追問的線索。", "思考哪些資源在這裡會變得重要。"]; 
       }
       return ["把特性連回當前玩法。", "回答一個尖銳質疑。", "提出最終投票標準。"];
@@ -75,6 +76,7 @@
       return {
         ...card,
         hooks: build(card.name, card.deckId, card.rarity, {
+          challenges: card.challenges,
           environment: environmentName,
           environmentName,
           item: card.deckId === "items" ? card.name : "",
