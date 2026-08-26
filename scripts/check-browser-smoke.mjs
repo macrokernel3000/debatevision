@@ -1,5 +1,6 @@
 import { createServer } from "node:http";
 import { spawn } from "node:child_process";
+import { once } from "node:events";
 import { access, mkdtemp, readFile, rm, stat } from "node:fs/promises";
 import { extname, join, normalize, resolve } from "node:path";
 import { tmpdir } from "node:os";
@@ -76,6 +77,15 @@ async function waitFor(test, timeout = 5000) {
     await new Promise((resolveWait) => setTimeout(resolveWait, 80));
   }
   throw new Error("等待網站狀態逾時");
+}
+
+async function stopChrome(chrome) {
+  if (chrome.exitCode !== null) return;
+  chrome.kill();
+  await Promise.race([
+    once(chrome, "close"),
+    new Promise((resolve) => setTimeout(resolve, 3000))
+  ]);
 }
 
 async function run() {
@@ -177,7 +187,7 @@ async function run() {
     if (issues.length) throw new Error(`瀏覽器 smoke 失敗：\n- ${issues.join("\n- ")}`);
     console.log(`瀏覽器 smoke 通過：${sizes.length} 個尺寸 × ${modes.length} 個活動。`);
   } finally {
-    cdp?.close(); chrome.kill(); server.close(); await rm(profile, { recursive: true, force: true });
+    cdp?.close(); await stopChrome(chrome); server.close(); await rm(profile, { recursive: true, force: true });
   }
 }
 
