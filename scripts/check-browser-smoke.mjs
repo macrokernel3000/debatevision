@@ -116,8 +116,11 @@ async function run() {
           if (text("#timerDisplay") !== "00:00.0") problems.push("timer: did-not-reset");
         }
         click('[data-mode="card-dictionary"]');
+        localStorage.removeItem("debatevision-card-dictionary-presets");
         const name = document.querySelector("[data-dictionary-preset-name]");
-        const card = document.querySelector("[data-dictionary-card-key]") || document.querySelector("[data-dictionary-deck]");
+        const deck = document.querySelector("[data-dictionary-deck]");
+        deck?.click();
+        const card = document.querySelector("[data-dictionary-card-key]");
         if (!name || !card) problems.push("preset: controls-missing");
         else {
           name.value = "smoke-test";
