@@ -353,7 +353,8 @@
               ? `
                 <section class="metaphor-deck-group is-fixed-prefix" aria-label="固定前綴">
                   <strong class="metaphor-deck-group-title">前綴</strong>
-                  ${fixedMetaphorCardMarkup(fixedMetaphorPrefixCard(), "人生")}
+                  <label class="metaphor-life-lock"><input type="checkbox" data-metaphor-life-lock ${metaphor.lifePrefixLocked ? "checked" : ""} />固定抽到人生</label>
+                  ${metaphor.lifePrefixLocked ? fixedMetaphorCardMarkup(fixedMetaphorPrefixCard(), "人生") : metaphorDeckCardsMarkup("prefix", "概念卡", "concepts")}
                 </section>
                 <section class="metaphor-deck-group is-fixed-relation" aria-label="固定介係">
                   <strong class="metaphor-deck-group-title">介係</strong>

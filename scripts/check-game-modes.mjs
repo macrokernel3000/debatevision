@@ -81,6 +81,7 @@ function createContext(overrides = {}) {
     metaphorPrefixDeck: "items",
     metaphorSuffixDeck: "concepts",
     metaphorVariant: "abstract",
+    metaphorLifePrefixLocked: true,
     noEnvironment: false,
     salesNoConcept: false,
     salesVariant: "supply",
@@ -235,6 +236,19 @@ for (const metaphorVariant of ["concrete", "abstract", "free"]) {
     assert.equal(markedCards.length, 1, "人生版只消耗後綴卡");
     assert.ok(markedCards.every((value) => value.name !== "人生" && value.name !== "就像"));
   }
+}
+
+{
+  const { calls, ctx } = createContext({
+    activeSecondaryLibrary: "relations",
+    metaphorVariant: "concrete",
+    metaphorLifePrefixLocked: false,
+    metaphorPrefixDeck: "concepts",
+    metaphorSuffixDeck: "items"
+  });
+  const result = controllers.metaphorCompass.draw(ctx);
+  assert.equal(result.length, 3, "人生版可抽概念前綴");
+  assert.equal(calls.find(([name]) => name === "markDrawn")[1].length, 2, "解鎖人生後消耗前綴與後綴");
 }
 
 {

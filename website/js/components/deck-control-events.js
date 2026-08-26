@@ -75,6 +75,14 @@
         renderEmptyState();
         return;
       }
+      const lifeLock = event.target.closest("[data-metaphor-life-lock]");
+      if (lifeLock) {
+        metaphor.lifePrefixLocked = lifeLock.checked;
+        metaphor.currentCards = null;
+        syncMetaphorVariantDecks();
+        render();
+        return;
+      }
 
       const prefixDeck = event.target.closest("[data-metaphor-prefix-deck]");
       const suffixDeck = event.target.closest("[data-metaphor-suffix-deck]");

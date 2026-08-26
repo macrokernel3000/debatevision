@@ -3,7 +3,7 @@
 
   controllers.metaphorCompass = {
     draw(ctx) {
-      const fixedPrefix = ctx.metaphorVariant === "concrete" ? ctx.fixedMetaphorPrefixCard() : null;
+      const fixedPrefix = ctx.metaphorVariant === "concrete" && ctx.metaphorLifePrefixLocked ? ctx.fixedMetaphorPrefixCard() : null;
       const fixedRelation = ctx.metaphorVariant === "concrete" ? ctx.fixedMetaphorRelationCard() : null;
       const lockedPrefix = fixedPrefix || ctx.lockedResultCard?.("prefix", [ctx.metaphorPrefixDeck]);
       const lockedRelation = fixedRelation || ctx.lockedResultCard?.("relation", [ctx.activeSecondaryLibrary]);
