@@ -81,11 +81,11 @@ window.DEBATE_DECKS = {
       {
         "name": "當網紅",
         "lore": "在網路上建立影響力，必須決定人設、內容節奏、平台規則與公眾壓力。",
-        "imageId": "missions_06",
+        "imageId": "missions_06-v2",
         "icon": "📱",
         "iconAsset": "",
         "tokenIcon": "📱",
-        "image": "../assets/icons/missions/missions_06.png?v=9d4ab65007",
+        "image": "../assets/icons/missions/missions_06-v2.png?v=c74c0b8b65",
         "rarity": "B",
         "tags": [
           "媒體",
