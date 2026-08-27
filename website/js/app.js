@@ -1536,12 +1536,12 @@ document.addEventListener("click", (event) => {
     event.preventDefault();
     event.stopPropagation();
     const bucket = genericLockBucket();
-    if (bucket.locks.has("stage")) bucket.locks.delete("stage");
-    else bucket.locks.add("stage");
-    if (drawState.stageCard) bucket.cards.stage = drawState.stageCard;
+    if (bucket.locks.has("challenge")) bucket.locks.delete("challenge");
+    else bucket.locks.add("challenge");
+    if (drawState.stageCard) bucket.cards.challenge = drawState.stageCard;
     renderReelCard(drawState.stageCard);
-    const resultLock = cardGrid.querySelector('[data-generic-result-lock="stage"]');
-    const locked = bucket.locks.has("stage");
+    const resultLock = cardGrid.querySelector('[data-generic-result-lock="challenge"]');
+    const locked = bucket.locks.has("challenge");
     resultLock?.classList.toggle("is-locked", locked);
     resultLock?.setAttribute("aria-pressed", String(locked));
     resultLock?.setAttribute("aria-label", `${locked ? "取消鎖定" : "鎖定"}任務`);
