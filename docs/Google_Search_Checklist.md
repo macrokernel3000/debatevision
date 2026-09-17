@@ -2,10 +2,10 @@
 
 這份文件用來檢查 DebateVision / 辯語視界是否具備被 Google 搜尋收錄的基本條件。
 
-## 目前網站網址
+## 接線完成後的網站網址（狀態見 custom-domain.md）
 
 ```text
-https://macrokernel3000.github.io/debatevision/website/
+https://debatevision.kerneldebate.com/website/
 ```
 
 ## 已在專案內處理的條件
@@ -13,7 +13,7 @@ https://macrokernel3000.github.io/debatevision/website/
 - 首頁有明確標題：`辯語視界 DebateVision｜思辨教育活動抽卡工具`
 - 首頁有搜尋描述：說明這是思辨教育、辯論暖身、口語表達用的抽卡活動網站
 - 首頁允許搜尋引擎索引：`robots` 設為 `index, follow`
-- 首頁有 canonical：指向正式 GitHub Pages 網址
+- 首頁有 canonical：指向正式自訂網域網址
 - 首頁有 Open Graph 分享資訊
 - 首頁有 JSON-LD 結構化資料
 - 根目錄有 `sitemap.xml`
@@ -24,7 +24,7 @@ https://macrokernel3000.github.io/debatevision/website/
 1. 確認 GitHub Pages 可以公開開啟：
 
 ```text
-https://macrokernel3000.github.io/debatevision/website/
+https://debatevision.kerneldebate.com/website/
 ```
 
 2. 到 Google Search Console：
@@ -36,7 +36,7 @@ https://search.google.com/search-console
 3. 新增網址前置字元資源：
 
 ```text
-https://macrokernel3000.github.io/debatevision/
+https://debatevision.kerneldebate.com/
 ```
 
 4. 依 Google 指示完成驗證。
@@ -52,13 +52,13 @@ website/index.html
 5. 在 Search Console 提交 sitemap：
 
 ```text
-https://macrokernel3000.github.io/debatevision/sitemap.xml
+https://debatevision.kerneldebate.com/sitemap.xml
 ```
 
 6. 用「網址檢查」輸入：
 
 ```text
-https://macrokernel3000.github.io/debatevision/website/
+https://debatevision.kerneldebate.com/website/
 ```
 
 然後按「要求建立索引」。
@@ -70,33 +70,14 @@ https://macrokernel3000.github.io/debatevision/website/
 可以在 Google 搜尋：
 
 ```text
-site:macrokernel3000.github.io/debatevision
+site:debatevision.kerneldebate.com
 ```
 
 如果還沒有結果，不代表失敗，通常只是 Google 尚未爬取或尚未建立索引。
 
 ## GitHub Pages 注意事項
 
-這是 GitHub Pages 的專案頁面，實際網域是：
-
-```text
-macrokernel3000.github.io
-```
-
-專案可以放：
-
-```text
-/debatevision/sitemap.xml
-/debatevision/robots.txt
-```
-
-但搜尋引擎標準的全站 `robots.txt` 通常會看網域根目錄：
-
-```text
-https://macrokernel3000.github.io/robots.txt
-```
-
-所以最重要的是 Search Console 驗證、提交 sitemap、確保頁面公開可讀，以及讓其他公開頁面連到這個網站。
+接線完成後，網站使用 debatevision.kerneldebate.com；根目錄的 robots.txt 與 sitemap.xml 可直接由此子網域讀取。GitHub 繼續負責程式版本與靜態託管。
 
 ## 之後改網站時
 

@@ -220,10 +220,10 @@ docs/GitHub_Upload_Guide.md
 
 ## Google 搜尋收錄
 
-正式網址：
+預定正式網址（目前待 DNS 接線與發布，詳見 docs/custom-domain.md）：
 
 ```text
-https://macrokernel3000.github.io/debatevision/website/
+https://debatevision.kerneldebate.com/website/
 ```
 
 本專案已放入基本 SEO 資訊、`sitemap.xml` 與 `robots.txt`。但要讓 Google 更快知道這個網站，仍需要到 Google Search Console 驗證網站、提交 sitemap，並用網址檢查要求建立索引。

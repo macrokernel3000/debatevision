@@ -11,7 +11,7 @@ const sitemapPath = path.join(root, "sitemap.xml");
 const websiteSitemapPath = path.join(root, "website/sitemap.xml");
 const activitiesDir = path.join(root, "website/activities");
 const checkOnly = process.argv.includes("--check");
-const siteRoot = "https://macrokernel3000.github.io/debatevision";
+const siteRoot = "https://debatevision.kerneldebate.com";
 const appUrl = `${siteRoot}/website/`;
 
 const headers = {
@@ -80,6 +80,7 @@ function updateHomepage(source, seo, full = true) {
   html = replaceRequired(html, /<meta\s+name="description"[\s\S]*?\/>/, `<meta name="description" content="${escapeHtml(seo.description)}" />`, "description");
   html = replaceRequired(html, /<link\s+rel="canonical"[^>]*\/>/, `<link rel="canonical" href="${appUrl}" />`, "canonical");
   if (!full) return html;
+  html = replaceRequired(html, /<meta\s+property="og:url"[^>]*\/>/, `<meta property="og:url" content="${appUrl}" />`, "og:url");
   html = replaceRequired(html, /<meta\s+property="og:title"[^>]*\/>/, `<meta property="og:title" content="${escapeHtml(seo.title)}" />`, "og:title");
   html = replaceRequired(html, /<meta\s+property="og:description"[\s\S]*?\/>/, `<meta property="og:description" content="${escapeHtml(seo.description)}" />`, "og:description");
   html = replaceRequired(html, /<meta\s+property="og:image"[^>]*\/>/, `<meta property="og:image" content="${escapeHtml(absoluteImage(seo.image))}" />`, "og:image");

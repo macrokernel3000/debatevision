@@ -31,4 +31,4 @@
 
 ## 發布後
 
-將 `https://macrokernel3000.github.io/debatevision/sitemap.xml` 提交到 Google Search Console。內容更新後可以針對重要活動頁使用「網址檢查」要求重新建立索引。
+將 `https://debatevision.kerneldebate.com/sitemap.xml` 提交到 Google Search Console。內容更新後可以針對重要活動頁使用「網址檢查」要求重新建立索引。
