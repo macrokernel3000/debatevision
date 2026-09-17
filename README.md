@@ -220,7 +220,7 @@ docs/GitHub_Upload_Guide.md
 
 ## Google 搜尋收錄
 
-預定正式網址（目前待 DNS 接線與發布，詳見 docs/custom-domain.md）：
+正式網址（已於 2026-09-17 完成 DNS 接線、HTTPS 與上線驗證，詳見 docs/custom-domain.md）：
 
 ```text
 https://debatevision.kerneldebate.com/website/

@@ -1,14 +1,26 @@
 # 辯語視界子網域接線
 
-## 狀態：2026-09-17，準備完成，尚未切換正式站
+## 狀態：2026-09-17，正式上線完成
 
-- 目標入口：https://debatevision.kerneldebate.com/（自動進入 /website/）。
-- 目前入口：https://macrokernel3000.github.io/debatevision/website/。
-- 修改分支：setup/debatevision-custom-domain；正式發布仍是 main 根目錄。
-- 原官網 https://kerneldebate.com/ 使用獨立託管；本次不修改官網。
-- 本次檢查時，子網域不存在，GitHub Pages cname 為 null、HTTPS enforced 為 true。
-- 瀏覽器工具因本機 sandbox 啟動錯誤而不可用，尚未進入 Squarespace 或修改 DNS。
-- 此分支包含 CNAME、SEO 產生器、新網址產物及文件；DNS 完成前不要合併至 main。
+- 正式入口：https://debatevision.kerneldebate.com/（自動進入 /website/）。
+- 原 GitHub Pages 入口已轉址至新子網域。
+- 使用者已於 Squarespace 新增 debatevision CNAME，解析值為 macrokernel3000.github.io。
+- 設定分支 setup/debatevision-custom-domain 已 fast-forward 合併 main，發布版本 579c93a；正式發布來源為 main 根目錄。
+- GitHub Pages 狀態 built；自訂網域正確，憑證 approved，https_enforced=true。
+- 官網 https://kerneldebate.com/ 保留原託管與 DNS，本次未修改官網。
+- 瀏覽器工具原本無法啟動，後改用 Playwright CLI 成功完成公開網站實測。Squarespace DNS 由使用者操作完成。
+
+## 正式上線驗證
+
+- HTTPS 新入口自動進入 /website/，網站標題正確。
+- 瀏覽器實測異境求生抽卡成功，產生卡牌與 1 筆活動紀錄；沒有載入失敗圖片，console errors/warnings 均為 0。
+- 發布完成後重新載入，canonical 與 og:url 均為 https://debatevision.kerneldebate.com/website/。
+- 活動頁 /website/activities/item-survival/、/sitemap.xml、/robots.txt 皆 HTTP 200。
+- 原 GitHub Pages /debatevision/website/ 轉址後為新子網域 /website/，HTTP 200。
+- 官網首頁、/team/、/articles/ 均 HTTP 200，根網域 A 仍為 162.159.143.30、172.66.3.26。
+- 範圍限制：本次是網域接線，未重測全部玩法或手機尺寸；Google Search Console 新網址索引尚未提交。
+
+以下接線與回復步驟保留供維護參考，無需重複新增 DNS。
 
 ## 費用
 
@@ -59,7 +71,7 @@
 
 - https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site
 - https://support.squarespace.com/hc/en-us/articles/31119879125645-DNS-records-for-web-hosting
-## 此次準備驗證
+## 接線前準備驗證（歷史紀錄）
 
 - node scripts/build-seo.mjs：首頁與八個活動頁產生成功。
 - node scripts/build-seo.mjs --check：產物一致。
@@ -67,5 +79,5 @@
 - 在首頁、活動頁、產生器、robots 與 sitemap 搜尋舊完整網站網址：零匹配。
 - 補齊產生器對首頁 og:url 的同步，避免未來重建時漏更新分享網址。
 - 2026-09-17 HTTPS HEAD：官網首頁、/team/、/articles/，以及原辯語視界首頁均為 200。
-- 尚未驗證：新網域 HTTPS 與瀏覽器互動，因 DNS 未設定且瀏覽器工具無法啟動。發布後仍須完成前述驗收。
+- 接線前未驗證新網域 HTTPS 與瀏覽器互動；現已完成，結果見上方正式上線驗證。
 - Terra 唯讀 QA：網域與官網隔離設定正確；指出 robots 舊路徑殘留，已改為 Allow: /，並統一使用根目錄 sitemap。
