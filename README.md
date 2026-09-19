@@ -237,3 +237,7 @@ docs/Google_Search_Checklist.md
 ## 規格文件
 
 不要預先讀完整個 `docs/`。先讀 `AI_START_HERE.md`；需要定位資料流與檢查入口時讀 `docs/AI_Project_Map.md`，再依任務打開單一相關規格。
+
+## 卡片圖片載入最佳化
+
+新增或更換卡圖時，先產生 WebP，再更新網站資料並一起上傳。原圖會保留；完整指令與測試記錄見 [卡圖效能文件](docs/Card_Image_Performance_2026-09-19.md)。

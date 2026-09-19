@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
+import { statSync, existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { dirname, extname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -234,9 +234,15 @@ function imageIdFor(item) {
 
 function versionAssetReference(reference) {
   if (!reference?.startsWith("../assets/")) return reference || "";
-  const cleanReference = reference.replace(/[?#].*$/, "");
-  const assetPath = resolve(root, cleanReference.slice(3));
+  let cleanReference = reference.replace(/[?#].*$/, "");
+  let assetPath = resolve(root, cleanReference.slice(3));
   if (!existsSync(assetPath)) return reference;
+  // Keep original artwork; serve the smaller generated companion when available.
+  const webpPath = assetPath.replace(/\.(png|jpe?g)$/i, ".webp");
+  if (webpPath !== assetPath && existsSync(webpPath) && statSync(webpPath).size < statSync(assetPath).size) {
+    cleanReference = cleanReference.replace(/\.(png|jpe?g)$/i, ".webp");
+    assetPath = webpPath;
+  }
   const assetVersion = createHash("sha256").update(readFileSync(assetPath)).digest("hex").slice(0, 10);
   return `${cleanReference}?v=${assetVersion}`;
 }

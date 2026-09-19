@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
 from pathlib import Path
+from concurrent.futures import ThreadPoolExecutor
 from PIL import Image, ImageOps
 
 ROOT = Path(__file__).resolve().parents[1]
 TARGET_DIRS = [
     ROOT / "assets" / "backgrounds" / "modes",
+    ROOT / "assets" / "icons",
+    ROOT / "assets" / "cards",
+    ROOT / "assets" / "backgrounds" / "worlds",
+    ROOT / "assets" / "backgrounds" / "locations",
 ]
 SOURCE_EXTENSIONS = {".png", ".jpg", ".jpeg"}
 QUALITY = 82
@@ -19,7 +24,7 @@ def webp_path_for(source: Path) -> Path:
 
 
 def should_convert(source: Path, target: Path) -> bool:
-    return not target.exists() or source.stat().st_mtime > target.stat().st_mtime
+    return not target.exists() or target.stat().st_size == 0 or source.stat().st_mtime > target.stat().st_mtime
 
 
 def convert(source: Path) -> tuple[int, int] | None:
@@ -30,12 +35,16 @@ def convert(source: Path) -> tuple[int, int] | None:
     with Image.open(source) as image:
         if image.mode not in ("RGB", "RGBA"):
             image = image.convert("RGBA" if "A" in image.getbands() else "RGB")
-        image.save(target, "WEBP", quality=QUALITY, method=6)
+        temporary = target.with_suffix(".webp.tmp")
+        image.save(temporary, "WEBP", quality=QUALITY, method=4)
+        temporary.replace(target)
 
     return source.stat().st_size, target.stat().st_size
 
 
 def build_mobile_variants(source: Path) -> int:
+    if source.parent != ROOT / "assets" / "backgrounds" / "modes":
+        return 0
     mobile_dir = source.parent / "mobile"
     mobile_dir.mkdir(parents=True, exist_ok=True)
     generated = 0
@@ -48,7 +57,9 @@ def build_mobile_variants(source: Path) -> int:
             if not should_convert(source, target):
                 continue
             resized = ImageOps.fit(image, size, method=Image.Resampling.LANCZOS)
-            resized.save(target, "WEBP", quality=QUALITY, method=6)
+            temporary = target.with_suffix(".webp.tmp")
+            resized.save(temporary, "WEBP", quality=QUALITY, method=4)
+            temporary.replace(target)
             generated += 1
 
     return generated
@@ -60,21 +71,22 @@ def main() -> None:
     converted = 0
     mobile_generated = 0
 
-    for target_dir in TARGET_DIRS:
-        for source in sorted(target_dir.rglob("*")):
-            if not source.is_file() or source.suffix.lower() not in SOURCE_EXTENSIONS:
-                continue
-            result = convert(source)
-            if result is None:
-                mobile_generated += build_mobile_variants(source)
-            else:
+    sources = sorted({
+        source
+        for target_dir in TARGET_DIRS if target_dir.exists()
+        for source in target_dir.rglob("*")
+        if source.is_file() and source.suffix.lower() in SOURCE_EXTENSIONS
+    })
+    # Bound memory usage while encoding independent images.
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        for source, result in zip(sources, pool.map(convert, sources)):
+            if result is not None:
                 before, after = result
                 total_before += before
                 total_after += after
                 converted += 1
-                saved = before - after
-                print(f"{source.relative_to(ROOT)} -> {webp_path_for(source).relative_to(ROOT)} saved {saved / 1024:.1f} KB")
-                mobile_generated += build_mobile_variants(source)
+                print(f"{source.relative_to(ROOT)} saved {(before - after) / 1024:.1f} KB", flush=True)
+            mobile_generated += build_mobile_variants(source)
 
     if converted:
         print(f"Converted {converted} images. Saved {(total_before - total_after) / 1024 / 1024:.2f} MB.")
