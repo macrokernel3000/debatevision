@@ -39,3 +39,6 @@ node scripts/check-assets.mjs
 ## 回復
 
 以 git revert 回復本次程式、產物與新增 WebP 的提交，再推送 main 即恢復原圖載入方式。不要刪除原始 PNG，不需要更改 DNS 或官網。
+## 正式站驗證
+
+發布版本 3b5a543，GitHub Pages built。正式網站資料已指向 WebP；殭屍末日 WebP 實測 HTTP 200、155,522 bytes、下載 1,901ms（對照同次診斷原 PNG 9,047ms；不同請求時點，僅為觀察值，非固定速度保證）。正式抽卡另抽出叢林與防毒面具，圖片解碼成功，console error/warning 為 0。
